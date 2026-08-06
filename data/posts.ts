@@ -103,6 +103,514 @@ export const authors: Author[] = [
 
 export const posts: Post[] = [
   // ─── Published Enforcement Reports (past-dated, immediately live) ───────────
+  // Post-52 added 2026-08-06. Same date — visible on next ISR cycle.
+  {
+    id: 'post-52',
+    slug: 'fp-markets-eu-cysec-fine-cfd-retail-protection-2026',
+    title: 'FP Markets EU Fined 100,000 Euro by CySEC Over a Breach of the CFD Rules That Protect Retail Traders',
+    excerpt: 'CySEC fined First Prudential Markets, the Cyprus operator of FP Markets EU, 100,000 euro over a possible breach of article 42 of the European markets regulation and the CFD retail protection directive. The rules at the centre of this case are not obscure technicalities — they are the core safeguards between an ordinary trader and a catastrophic loss.',
+    category: 'news',
+    editorialType: 'Opinion',
+    author: authors[3], // Clarissa Penhallow — Investigative Markets Writer
+    publishedAt: '2026-08-06',
+    updatedAt: '2026-08-06',
+    featuredImage: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2026-08-06_FPMarketsEU_cover-SQHIAbEHXLayD7gy3yuSyPMWng9rvP.png',
+    imageAltText: 'CySEC fines FP Markets EU over CFD retail protection rules — BestForex.io Broker Watch.',
+    readingTime: '7 min read',
+    wordCount: 1100,
+    metaTitle: 'FP Markets EU Fined 100,000 Euro by CySEC in 2026 | BestForex.io',
+    metaDescription: 'CySEC fined FP Markets EU operator First Prudential Markets 100,000 euro in February 2026 over a breach of the CFD retail protection rules. Full detail.',
+    tags: ['FP Markets EU', 'First Prudential Markets', 'CySEC', 'Cyprus', 'EU', 'Fine', 'CFD', 'Retail Protection', 'MiFID', 'Enforcement', 'Broker Watch'],
+    isFeatured: true,
+    relatedBrokers: ['fp-markets'],
+    linkedSources: [
+      { label: 'CySEC — Public Decisions', url: 'https://www.cysec.gov.cy/en-GB/public-info/decisions/' },
+    ],
+    content: `
+<p>The Cyprus regulator has fined First Prudential Markets, the operator of the European arm of the well known broker FP Markets, 100 thousand euro over a breach of the very rules that are meant to protect retail traders from the risks of contracts for difference. The FP Markets EU fine was reached as a settlement and announced in February 2026.</p>
+
+<p>The Cyprus Securities and Exchange Commission reached the 100 thousand euro settlement with First Prudential Markets Ltd, which holds Cyprus investment firm licence number 371/18 and operates the fpmarkets.eu platform. The regulator pointed to a possible breach of article 42 of the European markets regulation and of paragraph 5 of the CySEC directive that governs how contracts for difference may be sold to retail clients.</p>
+
+<h2>What the CFD Retail Rules Actually Do</h2>
+
+<p>The rules at the centre of this case are not obscure technicalities. They are the core protections European regulators built specifically for retail CFD trading after years of heavy client losses. They cap leverage, force brokers to close positions before an account falls too deeply into the red, protect clients from losing more than they deposit, and restrict how these high risk products can be marketed and distributed. A breach of that framework goes to the heart of retail protection.</p>
+
+<p>That is why a settlement in this area matters more than the modest size of the number. When a regulator finds that a broker may have circumvented or failed to apply the very measures designed to limit retail harm, it is not a clerical slip. It is a question about whether the firm was operating within the guardrails that every European CFD provider is required to respect. First Prudential Markets settled the matter with CySEC rather than contest it, which closes the case without a full public finding of liability.</p>
+
+<h2>A Recurring Theme in Cyprus</h2>
+
+<p>The FP Markets EU case fits a clear pattern. Through 2025 and into 2026 CySEC has repeatedly pursued brokers over the CFD retail protection rules, from leverage and margin requirements to marketing and distribution. It is the single most active area of the regulator&apos;s enforcement against the retail trading sector, and it reflects how seriously European supervisors now treat any weakening of those safeguards. A broker that ends up settling in this space has been found, at the very least, to have fallen short of the standard.</p>
+
+<p>For a retail client, the practical read is straightforward. The protections around CFDs, the leverage caps and the negative balance rule and the rest, are the main thing standing between an ordinary trader and a catastrophic loss. When a broker is penalised over those exact rules, it is worth pausing over, whatever the brand&apos;s reputation elsewhere. The FP Markets name is well established, but its European entity has now been fined by its own regulator over the retail safeguards, and that belongs on the record.</p>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="bestforex-view-heading" class="rounded-xl border border-primary/30 bg-primary/5 px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-primary mb-3">BestForex.io View</p>
+  <h2 id="bestforex-view-heading" class="text-xl font-bold text-foreground mb-4">The Size of the Fine Is Beside the Point. The Subject of It Is Not.</h2>
+  <p class="text-foreground leading-relaxed mb-3">A 100 thousand euro settlement will not trouble a broker the size of FP Markets, and the firm settled rather than fight, so there is no full finding of liability. But the subject of the case is what makes it worth attention.</p>
+  <p class="text-foreground leading-relaxed mb-3">This is not a late report or a filing slip. It concerns the CFD retail protection rules, the leverage caps and the margin and negative balance safeguards that exist because so many retail traders lose money on these products. When a regulated European broker is penalised over those exact protections, the size of the fine is beside the point. The rules it touches are the ones that matter most to the person funding the account.</p>
+  <p class="text-foreground leading-relaxed font-medium">FP Markets EU remains licensed and regulated. But the settlement is on the record, and anyone deciding where to trade in Europe should read that record before opening an account.</p>
+</section>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="about-fpmarketseu-heading" class="rounded-xl border border-border bg-card px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">About the Company</p>
+  <h2 id="about-fpmarketseu-heading" class="text-xl font-bold text-foreground mb-4">About FP Markets EU (First Prudential Markets)</h2>
+  <div class="grid gap-4 sm:grid-cols-2 my-5">
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Regulator</p>
+      <p class="font-semibold text-foreground">CySEC (Cyprus)</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Jurisdiction</p>
+      <p class="font-semibold text-foreground">Cyprus (EU)</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Action Type</p>
+      <p class="font-semibold text-foreground">Settlement, CFD Retail Protection Breach</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Penalty</p>
+      <p class="font-semibold text-foreground">EUR 100,000</p>
+    </div>
+  </div>
+  <p class="text-foreground leading-relaxed mb-3">First Prudential Markets Ltd is the Cyprus authorised entity of FP Markets, a long established retail forex and CFD broker, holding Cyprus investment firm licence number 371/18 and operating the fpmarkets.eu platform under the supervision of the Cyprus Securities and Exchange Commission.</p>
+  <p class="text-foreground leading-relaxed">In February 2026 CySEC reached a 100 thousand euro settlement with the firm over a possible breach of article 42 of the European markets regulation and the CySEC directive governing the sale of contracts for difference to retail clients.</p>
+</section>
+
+<section aria-labelledby="faq-fpmarketseu-heading" class="my-8">
+  <h2 id="faq-fpmarketseu-heading" class="text-xl font-bold text-foreground mb-5">Frequently Asked Questions</h2>
+  <div class="space-y-4">
+    <div class="rounded-lg border border-border bg-card px-5 py-4">
+      <p class="font-semibold text-foreground mb-1">Is FP Markets EU regulated?</p>
+      <p class="text-muted-foreground text-sm leading-relaxed">Yes. First Prudential Markets Ltd, the European arm of FP Markets, holds Cyprus investment firm licence number 371/18 and is supervised by CySEC, which is also the regulator that fined it in 2026.</p>
+    </div>
+    <div class="rounded-lg border border-border bg-card px-5 py-4">
+      <p class="font-semibold text-foreground mb-1">Why was FP Markets EU fined?</p>
+      <p class="text-muted-foreground text-sm leading-relaxed">CySEC found a possible breach of the CFD retail protection rules, specifically article 42 of the European markets regulation and paragraph 5 of the relevant CySEC directive, and reached a 100 thousand euro settlement.</p>
+    </div>
+    <div class="rounded-lg border border-border bg-card px-5 py-4">
+      <p class="font-semibold text-foreground mb-1">How much was the FP Markets EU fine?</p>
+      <p class="text-muted-foreground text-sm leading-relaxed">The settlement was 100 thousand euro, announced in February 2026.</p>
+    </div>
+    <div class="rounded-lg border border-border bg-card px-5 py-4">
+      <p class="font-semibold text-foreground mb-1">Is FP Markets safe for traders?</p>
+      <p class="text-muted-foreground text-sm leading-relaxed">FP Markets remains a regulated broker, but its European entity settled with CySEC over the retail CFD protection rules. Weigh that alongside its wider record and compare it in our Best Forex Brokers in 2026 ranking.</p>
+    </div>
+  </div>
+</section>
+
+<p class="text-sm text-muted-foreground mt-8 pt-4 border-t"><em>Editor&apos;s note &amp; source: Factual points are drawn from the CySEC board decision and public announcement. Primary source: <a href="https://www.cysec.gov.cy/en-GB/public-info/decisions/" class="underline hover:text-foreground transition-colors" target="_blank" rel="noopener noreferrer">CySEC Public Decisions</a>. This article is not legal advice. Last updated: 6 August 2026.</em></p>
+    `,
+  },
+  // ─── Scheduled Enforcement Reports (staged; auto-publish on publishedAt) ────
+  // Posts 53–56 added 2026-08-06. Future dates — hidden until ISR picks them up.
+  {
+    id: 'post-56',
+    slug: 'itrade-global-cysec-licence-withdrawal-2025',
+    title: 'CySEC Withdraws Itrade Global Licence Two Years After a One Million Euro Fine Over Its Spanish Agent',
+    excerpt: "CySEC withdrew the licence of Itrade Global, the company behind retail trading brands TradedWell and InvestFW, in 2025 — two years after a one million euro fine over its Spanish tied agent. A licence renunciation looks tidy on its own. Read in full, it is the last chapter of a bad story.",
+    category: 'news',
+    editorialType: 'Opinion',
+    author: authors[3], // Clarissa Penhallow — Investigative Markets Writer
+    publishedAt: '2026-08-10',
+    updatedAt: '2026-08-10',
+    featuredImage: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2026-08-10_ItradeGlobal_cover-A13FFz8znAUIiEHDNIMlaa7WH6kAgy.png',
+    imageAltText: 'CySEC pulls Itrade Global licence after million euro Spain fine — BestForex.io Broker Watch.',
+    readingTime: '6 min read',
+    wordCount: 1050,
+    metaTitle: 'Itrade Global Licence Withdrawn by CySEC in 2025 | BestForex.io',
+    metaDescription: 'CySEC withdrew the licence of Itrade Global, operator of TradedWell and InvestFW, in 2025, two years after a one million euro fine over its Spanish tied agent.',
+    tags: ['Itrade Global', 'TradedWell', 'InvestFW', 'CySEC', 'Cyprus', 'EU', 'Licence Withdrawal', 'Enforcement', 'Broker Watch'],
+    isFeatured: true,
+    relatedBrokers: [],
+    linkedSources: [
+      { label: 'CySEC — Decision 99844', url: 'https://www.cysec.gov.cy/en-GB/public-info/decisions/99844/' },
+    ],
+    content: `
+<p>The Cyprus regulator has withdrawn the licence of Itrade Global, the company behind the retail trading brands TradedWell and InvestFW, closing the book on a broker that had already been hit with one of the larger fines the regulator has handed out. The Itrade Global licence withdrawal was decided in April 2025 and published in June.</p>
+
+<p>The Cyprus Securities and Exchange Commission withdrew the authorisation of Itrade Global (CY) Ltd after the company expressly asked to renounce it. On paper this is a voluntary exit. In practice it followed years of trouble. The TradedWell website had already stopped serving clients in January 2023, hiding behind a notice about an operational optimisation process, and its sister brand InvestFW had likewise wound down.</p>
+
+<h2>The One Million Euro Fine Behind It</h2>
+
+<p>The withdrawal cannot be read apart from what came before it. In 2023 CySEC fined Itrade Global one million euro for a series of violations connected to a tied agent operating in Spain. The regulator found that, through that agent, the firm failed to take proper steps to identify and manage a conflict of interest, did not act fairly, honestly and professionally in serving clients, and did not ensure that the information put in front of clients was fair, clear and not misleading.</p>
+
+<p>Those are not peripheral failings. Acting honestly, managing conflicts and telling clients the truth are the core obligations that a licence exists to enforce. A one million euro fine for failing them, followed two years later by the surrender of the licence itself, is the arc of a broker that lost the confidence of its regulator and then stepped out of the regime rather than continue under it.</p>
+
+<h2>Renunciation Is Not Redemption</h2>
+
+<p>Firms often prefer to renounce a licence rather than have it stripped, because a voluntary exit reads more cleanly than a forced one. But the substance here is plain. This is a broker that was fined a large sum for serious conduct failings through its Spanish agent, whose consumer facing brands went dark, and which then handed its authorisation back. For any client who dealt with TradedWell or InvestFW, the practical protections of a Cyprus licence are now gone, and the entity behind them has left the regulated European system.</p>
+
+<p>The Itrade Global story is a compact lesson in how these cases actually unfold. The dramatic moment, the one million euro fine, came first. The quiet moment, the licence withdrawal, came later and drew far less attention. But both belong to the same firm and the same failure. A prospective client scanning only the recent headlines might see a routine licence renunciation and miss the fine that sat behind it. The record has to be read as a whole.</p>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="bestforex-view-heading" class="rounded-xl border border-primary/30 bg-primary/5 px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-primary mb-3">BestForex.io View</p>
+  <h2 id="bestforex-view-heading" class="text-xl font-bold text-foreground mb-4">A Quiet Exit Is Not a Clean One.</h2>
+  <p class="text-foreground leading-relaxed mb-3">A licence renunciation looks tidy on its own, which is exactly why it should not be read on its own. Itrade Global did not simply decide Cyprus no longer suited it. It was fined one million euro in 2023 for conduct failings through a Spanish agent that went to the heart of what a licence protects — honesty, conflict management and fair information — its consumer brands TradedWell and InvestFW went dark, and only then did it hand the licence back.</p>
+  <p class="text-foreground leading-relaxed mb-3">The withdrawal is the last chapter of a bad story, not a neutral administrative step.</p>
+  <p class="text-foreground leading-relaxed font-medium">Anyone assessing a broker should learn to connect the quiet exit to the loud fine that preceded it, because the firms hope you will not.</p>
+</section>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="about-itradeglobal-heading" class="rounded-xl border border-border bg-card px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">About the Company</p>
+  <h2 id="about-itradeglobal-heading" class="text-xl font-bold text-foreground mb-4">About Itrade Global</h2>
+  <div class="grid gap-4 sm:grid-cols-2 my-5">
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Regulator</p>
+      <p class="font-semibold text-foreground">CySEC (Cyprus)</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Jurisdiction</p>
+      <p class="font-semibold text-foreground">Cyprus (EU)</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Action Type</p>
+      <p class="font-semibold text-foreground">CIF Licence Withdrawal (renunciation)</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Prior Penalty</p>
+      <p class="font-semibold text-foreground">EUR 1,000,000 (2023)</p>
+    </div>
+  </div>
+  <p class="text-foreground leading-relaxed mb-3">Itrade Global (CY) Ltd was a Cyprus investment firm that operated the retail forex and CFD trading brands TradedWell and InvestFW, supervised by the Cyprus Securities and Exchange Commission. In 2023 CySEC fined the firm one million euro over multiple violations connected to a tied agent in Spain, including failures to manage conflicts of interest and to provide fair and clear information to clients.</p>
+  <p class="text-foreground leading-relaxed">Its trading websites ceased serving clients in early 2023, and in 2025 CySEC withdrew its licence following the company&apos;s request to renounce it.</p>
+</section>
+
+<section aria-labelledby="faq-itradeglobal-heading" class="my-8">
+  <h2 id="faq-itradeglobal-heading" class="text-xl font-bold text-foreground mb-5">Frequently Asked Questions</h2>
+  <div class="space-y-4">
+    <div class="rounded-lg border border-border bg-card px-5 py-4">
+      <p class="font-semibold text-foreground mb-1">Is Itrade Global still regulated?</p>
+      <p class="text-muted-foreground text-sm leading-relaxed">No. CySEC withdrew Itrade Global&apos;s Cyprus licence in 2025 after the firm asked to renounce it, so it is no longer an authorised Cyprus broker.</p>
+    </div>
+    <div class="rounded-lg border border-border bg-card px-5 py-4">
+      <p class="font-semibold text-foreground mb-1">Why was Itrade Global fined one million euro?</p>
+      <p class="text-muted-foreground text-sm leading-relaxed">In 2023 CySEC fined the firm one million euro over violations connected to a tied agent in Spain, including failures to manage a conflict of interest and to give clients fair, clear and not misleading information.</p>
+    </div>
+    <div class="rounded-lg border border-border bg-card px-5 py-4">
+      <p class="font-semibold text-foreground mb-1">What happened to TradedWell and InvestFW?</p>
+      <p class="text-muted-foreground text-sm leading-relaxed">Both were retail trading brands of Itrade Global. TradedWell stopped serving clients in January 2023, and InvestFW wound down as well.</p>
+    </div>
+    <div class="rounded-lg border border-border bg-card px-5 py-4">
+      <p class="font-semibold text-foreground mb-1">Is Itrade Global safe for traders?</p>
+      <p class="text-muted-foreground text-sm leading-relaxed">No. The firm was fined heavily, its brands closed, and its licence has been withdrawn. Compare safer, active brokers in our Best Forex Brokers in 2026 ranking.</p>
+    </div>
+  </div>
+</section>
+
+<p class="text-sm text-muted-foreground mt-8 pt-4 border-t"><em>Editor&apos;s note &amp; source: Factual points are drawn from the CySEC board decision and public announcement. Primary source: <a href="https://www.cysec.gov.cy/en-GB/public-info/decisions/99844/" class="underline hover:text-foreground transition-colors" target="_blank" rel="noopener noreferrer">CySEC Decision 99844</a>. This article is not legal advice. Last updated: 10 August 2026.</em></p>
+    `,
+  },
+  {
+    id: 'post-55',
+    slug: 'colmex-pro-cysec-200000-settlement-2025',
+    title: 'Colmex Pro Pays 200,000 Euro to Settle a CySEC Case Spanning Authorisation, Conflicts and Client Disclosure',
+    excerpt: "CySEC reached a 200,000 euro settlement with CFD broker Colmex Pro in 2025 over authorisation, organisation, conflicts of interest and client disclosure failings found across a two-year supervisory review. When a regulator settles across four load-bearing compliance areas for a substantial sum, the shape of the case tells you more than the absence of an admission does.",
+    category: 'news',
+    editorialType: 'Opinion',
+    author: authors[6], // Beatrix Fairmont — Consumer Affairs Critic
+    publishedAt: '2026-08-09',
+    updatedAt: '2026-08-09',
+    featuredImage: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2026-08-09_ColmexPro_cover-epJDz6LkicTuwKcdBf219Dgdv9G54I.png',
+    imageAltText: 'Colmex Pro settles a 200 thousand euro case with CySEC — BestForex.io Broker Watch.',
+    readingTime: '7 min read',
+    wordCount: 1100,
+    metaTitle: 'Colmex Pro Settles With CySEC for 200,000 Euro | BestForex.io',
+    metaDescription: 'CySEC reached a 200,000 euro settlement with CFD broker Colmex Pro in 2025 over authorisation, organisation, conflicts of interest and client disclosure failings.',
+    tags: ['Colmex Pro', 'CySEC', 'Cyprus', 'EU', 'Settlement', 'EUR 200,000', 'Conflicts of Interest', 'Client Disclosure', 'CFD', 'Enforcement', 'Broker Watch'],
+    isFeatured: true,
+    relatedBrokers: ['colmex-pro'],
+    linkedSources: [
+      { label: 'CySEC — Public Decisions', url: 'https://www.cysec.gov.cy/en-GB/public-info/decisions/' },
+    ],
+    content: `
+<p>The Cyprus regulator has reached a 200 thousand euro settlement with the trading broker Colmex Pro over a cluster of possible compliance breaches uncovered in a lengthy supervisory review. The Colmex Pro CySEC settlement, announced in April 2025, closed a case that reached across several of the most important duties a regulated broker has.</p>
+
+<p>The Cyprus Securities and Exchange Commission based the settlement on a review covering the period from January 2021 to February 2023. The potential violations it identified spanned the firm&apos;s authorisation requirements as a Cyprus investment firm, its organisational standards, the way it managed conflicts of interest, and the information it disclosed to clients. Colmex Pro&apos;s chief executive said the agreement did not constitute an admission of wrongdoing and related to a historical compliance review.</p>
+
+<h2>Why the Breadth Matters</h2>
+
+<p>It is the breadth of this case, not any single item, that gives it weight. Authorisation, organisation, conflicts of interest and client disclosure are not narrow technical boxes. They are the pillars a regulated broker stands on. Authorisation defines what the firm may do at all. Organisation is whether it is run competently. Conflict management is whether it puts clients ahead of its own book. Disclosure is whether clients are told the truth. A settlement touching all four describes concerns about the foundations rather than the finish.</p>
+
+<p>The firm is right to note that a settlement is not an admission of wrongdoing, and that the review looked at a past period. Both points are fair and belong in the record. But a 200 thousand euro payment is not a nominal sum, and the regulator does not open a settlement of that size over a period spanning two years without having found something of substance. The absence of a formal admission does not erase the fact that the money changed hands.</p>
+
+<h2>A Historical Review With a Present Lesson</h2>
+
+<p>Historical is the word firms reach for when a case concerns conduct from an earlier period, and it is accurate here. But for a prospective client, history is exactly what a broker&apos;s record is made of. The question is never only what a firm is doing today. It is whether the firm has a pattern of falling short of the rules, because patterns tend to persist. A two year review that ends in a 200 thousand euro settlement across four core areas is the kind of history worth reading before opening an account.</p>
+
+<p>Colmex Pro remains a regulated Cyprus firm, and it resolved this matter in the ordinary way, by settlement. None of that is unusual. What a trader should take from it is the shape of the case. When a regulator settles for a substantial sum over authorisation, organisation, conflicts and disclosure all at once, it is describing a firm that, in the period reviewed, was not comfortably inside the lines on the things that matter most.</p>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="bestforex-view-heading" class="rounded-xl border border-primary/30 bg-primary/5 px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-primary mb-3">BestForex.io View</p>
+  <h2 id="bestforex-view-heading" class="text-xl font-bold text-foreground mb-4">The Shape of the Case Is What Counts.</h2>
+  <p class="text-foreground leading-relaxed mb-3">Colmex Pro settled, did not admit wrongdoing, and pointed out that the review looked at an earlier period — all of which is fair and on the record. But the shape of the case is what counts. A 200 thousand euro settlement covering authorisation, organisation, conflicts of interest and client disclosure, across a two year review, is not a footnote.</p>
+  <p class="text-foreground leading-relaxed mb-3">Those four areas are the load bearing walls of a regulated broker, and a regulator does not settle across all of them for a nominal reason.</p>
+  <p class="text-foreground leading-relaxed font-medium">A settlement is not a conviction. It is, however, a firm paying real money after its regulator found real problems, and that is worth a prospective client&apos;s attention.</p>
+</section>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="about-colmexpro-heading" class="rounded-xl border border-border bg-card px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">About the Company</p>
+  <h2 id="about-colmexpro-heading" class="text-xl font-bold text-foreground mb-4">About Colmex Pro</h2>
+  <div class="grid gap-4 sm:grid-cols-2 my-5">
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Regulator</p>
+      <p class="font-semibold text-foreground">CySEC (Cyprus)</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Jurisdiction</p>
+      <p class="font-semibold text-foreground">Cyprus (EU)</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Action Type</p>
+      <p class="font-semibold text-foreground">Settlement, Multiple Compliance Breaches</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Penalty</p>
+      <p class="font-semibold text-foreground">EUR 200,000</p>
+    </div>
+  </div>
+  <p class="text-foreground leading-relaxed mb-3">Colmex Pro Ltd is a Cyprus investment firm offering online trading in contracts for difference and related products to retail and professional clients, supervised by the Cyprus Securities and Exchange Commission.</p>
+  <p class="text-foreground leading-relaxed">In April 2025 CySEC announced a 200 thousand euro settlement following a supervisory review covering January 2021 to February 2023, which identified possible breaches of authorisation requirements, organisational standards, conflict of interest management and client disclosure obligations. The firm said the settlement was not an admission of wrongdoing.</p>
+</section>
+
+<section aria-labelledby="faq-colmexpro-heading" class="my-8">
+  <h2 id="faq-colmexpro-heading" class="text-xl font-bold text-foreground mb-5">Frequently Asked Questions</h2>
+  <div class="space-y-4">
+    <div class="rounded-lg border border-border bg-card px-5 py-4">
+      <p class="font-semibold text-foreground mb-1">Is Colmex Pro regulated?</p>
+      <p class="text-muted-foreground text-sm leading-relaxed">Yes. Colmex Pro Ltd is a Cyprus investment firm supervised by CySEC, which reached the 2025 settlement with it.</p>
+    </div>
+    <div class="rounded-lg border border-border bg-card px-5 py-4">
+      <p class="font-semibold text-foreground mb-1">How much was the Colmex Pro settlement?</p>
+      <p class="text-muted-foreground text-sm leading-relaxed">The settlement was 200 thousand euro, announced in April 2025, following a review covering January 2021 to February 2023.</p>
+    </div>
+    <div class="rounded-lg border border-border bg-card px-5 py-4">
+      <p class="font-semibold text-foreground mb-1">What did CySEC find at Colmex Pro?</p>
+      <p class="text-muted-foreground text-sm leading-relaxed">Possible breaches across authorisation requirements, organisational standards, conflict of interest management and client disclosure. The firm said the settlement was not an admission of wrongdoing.</p>
+    </div>
+    <div class="rounded-lg border border-border bg-card px-5 py-4">
+      <p class="font-semibold text-foreground mb-1">Is Colmex Pro safe for traders?</p>
+      <p class="text-muted-foreground text-sm leading-relaxed">Colmex Pro remains licensed, but it settled a substantial CySEC case across four core compliance areas. Weigh that and compare it in our Best Forex Brokers in 2026 ranking.</p>
+    </div>
+  </div>
+</section>
+
+<p class="text-sm text-muted-foreground mt-8 pt-4 border-t"><em>Editor&apos;s note &amp; source: Factual points are drawn from the CySEC board decision and public announcement. Primary source: <a href="https://www.cysec.gov.cy/en-GB/public-info/decisions/" class="underline hover:text-foreground transition-colors" target="_blank" rel="noopener noreferrer">CySEC Public Decisions</a>. This article is not legal advice. Last updated: 9 August 2026.</em></p>
+    `,
+  },
+  {
+    id: 'post-54',
+    slug: 'fxnet-cysec-225000-settlement-2025',
+    title: 'FxNet Pays 225,000 Euro to Settle With CySEC Over Compliance Failures Across Its Retail Trading Business',
+    excerpt: "CySEC secured a 225,000 euro settlement from FxNet (FXNET Limited), operator of EMS Brokers and NessFX, over compliance lapses found in a 2021 to 2022 review. It is not the firm's first penalty from the regulator — a pattern worth knowing about before funding an account.",
+    category: 'news',
+    editorialType: 'Opinion',
+    author: authors[3], // Clarissa Penhallow — Investigative Markets Writer
+    publishedAt: '2026-08-08',
+    updatedAt: '2026-08-08',
+    featuredImage: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2026-08-08_FxNet_cover-FrRirzlkijWgCjgf4G5u3L37EnfQLh.png',
+    imageAltText: 'CySEC hits FxNet with a 225 thousand euro settlement — BestForex.io Broker Watch.',
+    readingTime: '7 min read',
+    wordCount: 1100,
+    metaTitle: 'FxNet Fined 225,000 Euro by CySEC in 2025 | BestForex.io',
+    metaDescription: 'CySEC secured a 225,000 euro settlement from FxNet (FXNET Limited), operator of EMS Brokers and NessFX, over compliance lapses found in a 2021 to 2022 review.',
+    tags: ['FxNet', 'FXNET Limited', 'EMS Brokers', 'NessFX', 'CySEC', 'Cyprus', 'EU', 'Settlement', 'EUR 225,000', 'Enforcement', 'Broker Watch'],
+    isFeatured: true,
+    relatedBrokers: [],
+    linkedSources: [
+      { label: 'CySEC — Public Decisions', url: 'https://www.cysec.gov.cy/en-GB/public-info/decisions/' },
+    ],
+    content: `
+<p>The Cyprus regulator has secured a 225 thousand euro settlement from FxNet, one of the larger amounts it has extracted from a Cyprus broker in recent memory. The FxNet CySEC settlement was approved by the regulator&apos;s board and disclosed in November 2025, closing a case built on compliance failures found across the firm&apos;s retail trading business.</p>
+
+<p>FXNET Limited, the Limassol based company behind the trading brands EMS Brokers and NessFX, reached the settlement with the Cyprus Securities and Exchange Commission over shortcomings identified in regulatory reviews covering 2021 and 2022. The settlement spanned several core areas of how the firm ran itself and looked after clients. It is not the firm&apos;s first brush with the regulator. Back in 2019 CySEC fined it 60 thousand euro for earlier breaches.</p>
+
+<h2>A Repeat, and a Large One</h2>
+
+<p>Two features make this case stand out. The first is the size. At 225 thousand euro it is far above the small transaction reporting penalties that make up much of CySEC&apos;s routine enforcement, and it signals concerns of real substance rather than a technical lapse. The second is the history. A firm that was fined in 2019 and then settled a much larger case for conduct in 2021 and 2022 is not a one time offender. It is a firm the regulator has had to correct more than once.</p>
+
+<p>Settlements of this kind close a matter without a full contested finding of liability, which is often why firms take them. But a settlement is not an acquittal. The company pays a real sum, and the regulator records that it identified failures serious enough to warrant it. When the amount is this large and the areas touched are this broad, the settlement itself is the message.</p>
+
+<h2>Two Brands, One Company</h2>
+
+<p>As with many Cyprus firms, the names traders see are not the name on the licence. FXNET Limited is the regulated entity, while the platforms clients actually use are branded EMS Brokers and NessFX. A trader signing up to one of those brands would have little reason to connect it with a 225 thousand euro settlement against a company called FXNET Limited. That gap between the marketing brand and the licensed firm is exactly where a broker&apos;s regulatory history tends to hide.</p>
+
+<p>For a retail client, the lesson is to look past the brand to the entity behind it and to check that entity&apos;s record. A single large settlement, sitting on top of an earlier fine, is a pattern worth knowing about before funding an account. FxNet remains a licensed Cyprus firm, but its regulator has now penalised it twice, and the second time for a substantial sum.</p>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="bestforex-view-heading" class="rounded-xl border border-primary/30 bg-primary/5 px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-primary mb-3">BestForex.io View</p>
+  <h2 id="bestforex-view-heading" class="text-xl font-bold text-foreground mb-4">Two Strikes, and the Second One Expensive.</h2>
+  <p class="text-foreground leading-relaxed mb-3">A 225 thousand euro settlement is a serious number in the Cyprus context, well beyond the token reporting fines that fill much of the enforcement calendar. What sharpens it is that this is not FxNet&apos;s first correction. The firm was fined in 2019 and then settled a far larger case for conduct in 2021 and 2022, which describes a broker the regulator keeps having to bring back into line.</p>
+  <p class="text-foreground leading-relaxed mb-3">A settlement is not a confession, and the firm is entitled to close the matter this way. But the size of the payment and the breadth of the failures behind it tell you more than the absence of a formal admission does.</p>
+  <p class="text-foreground leading-relaxed font-medium">Two strikes, and the second one expensive, is a record worth checking before opening an account.</p>
+</section>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="about-fxnet-heading" class="rounded-xl border border-border bg-card px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">About the Company</p>
+  <h2 id="about-fxnet-heading" class="text-xl font-bold text-foreground mb-4">About FxNet (FXNET Limited)</h2>
+  <div class="grid gap-4 sm:grid-cols-2 my-5">
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Regulator</p>
+      <p class="font-semibold text-foreground">CySEC (Cyprus)</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Jurisdiction</p>
+      <p class="font-semibold text-foreground">Cyprus (EU)</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Action Type</p>
+      <p class="font-semibold text-foreground">Settlement, Compliance Failures</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Penalty</p>
+      <p class="font-semibold text-foreground">EUR 225,000 (+ EUR 60,000 in 2019)</p>
+    </div>
+  </div>
+  <p class="text-foreground leading-relaxed mb-3">FXNET Limited is a Limassol based Cyprus investment firm that operates the retail trading brands EMS Brokers and NessFX, offering leveraged forex and CFD products and supervised by the Cyprus Securities and Exchange Commission.</p>
+  <p class="text-foreground leading-relaxed">In November 2025 CySEC disclosed a 225 thousand euro settlement with the firm over compliance failures identified in regulatory reviews covering 2021 and 2022, following an earlier 60 thousand euro fine imposed in 2019.</p>
+</section>
+
+<section aria-labelledby="faq-fxnet-heading" class="my-8">
+  <h2 id="faq-fxnet-heading" class="text-xl font-bold text-foreground mb-5">Frequently Asked Questions</h2>
+  <div class="space-y-4">
+    <div class="rounded-lg border border-border bg-card px-5 py-4">
+      <p class="font-semibold text-foreground mb-1">Is FxNet regulated?</p>
+      <p class="text-muted-foreground text-sm leading-relaxed">Yes. FXNET Limited holds a Cyprus investment firm licence and is supervised by CySEC, which reached the 2025 settlement with it.</p>
+    </div>
+    <div class="rounded-lg border border-border bg-card px-5 py-4">
+      <p class="font-semibold text-foreground mb-1">How much did FxNet pay CySEC?</p>
+      <p class="text-muted-foreground text-sm leading-relaxed">FxNet paid a 225 thousand euro settlement, disclosed in November 2025, over compliance failures found in a 2021 to 2022 review. It was fined 60 thousand euro earlier, in 2019.</p>
+    </div>
+    <div class="rounded-lg border border-border bg-card px-5 py-4">
+      <p class="font-semibold text-foreground mb-1">What brands does FXNET Limited operate?</p>
+      <p class="text-muted-foreground text-sm leading-relaxed">It operates the retail trading brands EMS Brokers and NessFX.</p>
+    </div>
+    <div class="rounded-lg border border-border bg-card px-5 py-4">
+      <p class="font-semibold text-foreground mb-1">Is FxNet safe for traders?</p>
+      <p class="text-muted-foreground text-sm leading-relaxed">FxNet remains licensed, but it has now been penalised by CySEC twice, the second time for a large sum. Weigh that record and compare it in our Best Forex Brokers in 2026 ranking.</p>
+    </div>
+  </div>
+</section>
+
+<p class="text-sm text-muted-foreground mt-8 pt-4 border-t"><em>Editor&apos;s note &amp; source: Factual points are drawn from the CySEC board decision and public announcement. Primary source: <a href="https://www.cysec.gov.cy/en-GB/public-info/decisions/" class="underline hover:text-foreground transition-colors" target="_blank" rel="noopener noreferrer">CySEC Public Decisions</a>. This article is not legal advice. Last updated: 8 August 2026.</em></p>
+    `,
+  },
+  {
+    id: 'post-53',
+    slug: 'fxtm-forextime-fca-licence-surrender-2026',
+    title: 'FXTM Gives Up Its UK FCA Licence as ForexTime Pulls Back From the British Retail Market',
+    excerpt: 'Forex broker FXTM (ForexTime) is giving up its UK FCA licence in 2026, pulling back from the British retail market toward the UAE and Asia. The exit is voluntary — no misconduct alleged. But a UK FCA authorisation is one of the strongest credentials a retail forex broker can hold, and FXTM has now given it up, just as it gave up its Cyprus licence before.',
+    category: 'news',
+    editorialType: 'Opinion',
+    author: authors[6], // Beatrix Fairmont — Consumer Affairs Critic
+    publishedAt: '2026-08-07',
+    updatedAt: '2026-08-07',
+    featuredImage: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2026-08-07_FXTM_cover-A709RECreQjBpZIhGGp9vPtCWhysFq.png',
+    imageAltText: 'FXTM surrenders its UK FCA licence in a global retreat — BestForex.io Broker Watch.',
+    readingTime: '7 min read',
+    wordCount: 1100,
+    metaTitle: 'FXTM Gives Up Its UK FCA Licence in 2026 | BestForex.io',
+    metaDescription: 'Forex broker FXTM (ForexTime) is giving up its UK FCA licence in 2026, pulling back from the British retail market toward the UAE and Asia. What it means for clients.',
+    tags: ['FXTM', 'ForexTime', 'FCA', 'United Kingdom', 'Licence Surrender', 'UAE', 'Asia', 'Indonesia', 'Enforcement', 'Broker Watch'],
+    isFeatured: true,
+    relatedBrokers: ['fxtm'],
+    linkedSources: [
+      { label: 'FCA Register', url: 'https://register.fca.org.uk/' },
+    ],
+    content: `
+<p>FXTM, the forex and CFD broker better known to traders as ForexTime, is giving up its United Kingdom licence. The FXTM FCA licence surrender, reported in April 2026, is part of what the firm calls a global realignment of its priorities, away from the British retail market and toward the Gulf and Asia.</p>
+
+<p>The broker, owned by Andrey Dashin, concluded that the United Kingdom retail market is no longer its core growth area. It is instead gaining full brokerage status in the United Arab Emirates and has partnered with a local broker in Indonesia. The UK exit is voluntary. It is not a fine or a suspension, and there is no allegation of misconduct behind it.</p>
+
+<h2>Voluntary, But Not Without Consequence</h2>
+
+<p>It is only fair to state plainly what this is and is not. A firm is entitled to decide that a market no longer suits its strategy and to hand a licence back in an orderly way. There is no wrongdoing here. But for a client, the disappearance of a Tier one regulator from behind an account is not a neutral event. The oversight of the Financial Conduct Authority, and the client protections that come with a UK authorisation, do not follow the business to a lighter touch jurisdiction.</p>
+
+<p>This is a broker with a long history of shrinking its regulated European footprint. FXTM stopped offering services to retail clients under its Cyprus entity back in February 2021 and gave up that licence in 2023. The UK surrender continues the same direction of travel. Piece by piece, one of the best known retail forex brands has been stepping out of the strictest regulatory regimes it once held.</p>
+
+<h2>Where the Clients Go</h2>
+
+<p>The question that matters for traders is where their account ends up. When a broker leaves a market like the United Kingdom, the business rarely stops. It moves. In FXTM&apos;s case the destination is the United Arab Emirates and a partner in Indonesia, jurisdictions whose retail protections and leverage limits are not the same as those a UK client is used to. A familiar brand and a working platform can look unchanged while the regulator standing behind them changes completely.</p>
+
+<p>FXTM is a large, established name, and its exit is a strategic choice rather than a scandal. But it is also a clear example of a wider migration in retail forex, away from the heavily regulated centres of Europe and the United Kingdom and toward the Gulf and Asia. For a client who valued a UK licence specifically, the most important thing to check now is which entity holds the account and which regulator, if any, is watching it. The brand on the screen is not the same as the protection behind it.</p>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="bestforex-view-heading" class="rounded-xl border border-primary/30 bg-primary/5 px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-primary mb-3">BestForex.io View</p>
+  <h2 id="bestforex-view-heading" class="text-xl font-bold text-foreground mb-4">The Brand on the Screen Is Not the Same as the Protection Behind It.</h2>
+  <p class="text-foreground leading-relaxed mb-3">There is nothing improper in a broker handing back a licence it no longer wants, and FXTM is not accused of any wrongdoing here. What makes the move worth reporting is what it removes. A UK FCA authorisation is one of the strongest credentials a retail forex broker can hold, and FXTM has now given it up, just as it gave up its Cyprus licence before.</p>
+  <p class="text-foreground leading-relaxed mb-3">The business does not vanish — it relocates to the UAE and Asia, where the rules and the leverage limits are not the same.</p>
+  <p class="text-foreground leading-relaxed font-medium">For a trader the essential question after any exit like this is simple and rarely asked: which entity now holds my money, and who is regulating it?</p>
+</section>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="about-fxtm-heading" class="rounded-xl border border-border bg-card px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">About the Company</p>
+  <h2 id="about-fxtm-heading" class="text-xl font-bold text-foreground mb-4">About FXTM (ForexTime)</h2>
+  <div class="grid gap-4 sm:grid-cols-2 my-5">
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Regulator</p>
+      <p class="font-semibold text-foreground">FCA (United Kingdom)</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Jurisdiction</p>
+      <p class="font-semibold text-foreground">United Kingdom</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Action Type</p>
+      <p class="font-semibold text-foreground">Voluntary Licence Surrender</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Moving To</p>
+      <p class="font-semibold text-foreground">UAE + Asia (Indonesia)</p>
+    </div>
+  </div>
+  <p class="text-foreground leading-relaxed mb-3">FXTM, trading as ForexTime, is a retail forex and CFD broker owned by Andrey Dashin, offering leveraged trading across currencies, metals, indices and commodities to clients around the world. It previously held a Cyprus investment firm licence, which it gave up in 2023, and a United Kingdom licence from the Financial Conduct Authority.</p>
+  <p class="text-foreground leading-relaxed">In 2026 the firm decided to surrender its UK authorisation as part of a global realignment toward the United Arab Emirates and Asia.</p>
+</section>
+
+<section aria-labelledby="faq-fxtm-heading" class="my-8">
+  <h2 id="faq-fxtm-heading" class="text-xl font-bold text-foreground mb-5">Frequently Asked Questions</h2>
+  <div class="space-y-4">
+    <div class="rounded-lg border border-border bg-card px-5 py-4">
+      <p class="font-semibold text-foreground mb-1">Is FXTM still regulated in the UK?</p>
+      <p class="text-muted-foreground text-sm leading-relaxed">No. FXTM decided in 2026 to give up its United Kingdom FCA licence, pulling back from the British retail market. It remains regulated elsewhere, including new full brokerage status in the United Arab Emirates.</p>
+    </div>
+    <div class="rounded-lg border border-border bg-card px-5 py-4">
+      <p class="font-semibold text-foreground mb-1">Did FXTM do anything wrong?</p>
+      <p class="text-muted-foreground text-sm leading-relaxed">No. The UK exit is a voluntary strategic decision, not a fine or a finding of misconduct.</p>
+    </div>
+    <div class="rounded-lg border border-border bg-card px-5 py-4">
+      <p class="font-semibold text-foreground mb-1">Is FXTM safe now?</p>
+      <p class="text-muted-foreground text-sm leading-relaxed">FXTM is an established broker, but the UK protections tied to the FCA licence end with it. Clients should confirm which entity now holds their account and which regulator oversees it.</p>
+    </div>
+    <div class="rounded-lg border border-border bg-card px-5 py-4">
+      <p class="font-semibold text-foreground mb-1">Where is FXTM moving?</p>
+      <p class="text-muted-foreground text-sm leading-relaxed">The firm is focusing on the United Arab Emirates, where it is gaining full brokerage status, and on Asia, including a partnership with a broker in Indonesia.</p>
+    </div>
+  </div>
+</section>
+
+<p class="text-sm text-muted-foreground mt-8 pt-4 border-t"><em>Editor&apos;s note &amp; source: Factual points are drawn from the FCA Register and industry reporting. Primary source: <a href="https://register.fca.org.uk/" class="underline hover:text-foreground transition-colors" target="_blank" rel="noopener noreferrer">FCA Register</a>. This article is not legal advice. Last updated: 7 August 2026.</em></p>
+    `,
+  },
   // Post-51 added 2026-08-06. Past date — visible on next ISR cycle.
   {
     id: 'post-51',
@@ -1992,7 +2500,7 @@ export const posts: Post[] = [
     content: `
 <p>FXCM, once one of the largest retail forex brokers in the United States, was fined $7 million and forced out of the US market after regulators found it had secretly bet against its own customers while marketing a platform it promised carried no conflict of interest.</p>
 
-<p>The Commodity Futures Trading Commission's order, issued on 6 February 2017, settled fraud charges against Forex Capital Markets, LLC, its parent FXCM Holdings, and two founding partners: chief executive Dror "Drew" Niv and managing director William Ahdout. Alongside the penalty, FXCM, Niv, and Ahdout agreed to withdraw from CFTC registration and never to register again — a commitment that amounts to a permanent exit from the US forex industry.</p>
+<p>The Commodity Futures Trading Commission's order, issued on 6 February 2017, settled fraud charges against Forex Capital Markets, LLC, its parent FXCM Holdings, and two founding partners: chief executive Dror "Drew" Niv and managing director William Ahdout. Alongside the penalty, FXCM, Niv, and Ahdout agreed to withdraw from CFTC registration and never to register again �� a commitment that amounts to a permanent exit from the US forex industry.</p>
 
 <p>At the centre of the case was a marketing promise. FXCM sold its "No Dealing Desk" platform to retail forex customers on the claim that the firm had no conflict of interest with them. Customers were told their profits and losses had no impact on FXCM's bottom line, that FXCM acted merely as a credit intermediary, and that the real risk sat with independent banks and market makers providing liquidity. According to the CFTC, that was false.</p>
 
