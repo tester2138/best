@@ -103,6 +103,470 @@ export const authors: Author[] = [
 
 export const posts: Post[] = [
   // ─── Scheduled Enforcement Posts (future dates) ──────────────────────────────
+  // Posts 73–77 added 2026-08-06.
+  // All dated 2026-08-16 through 2026-08-20 — fully scheduled, live via ISR.
+  {
+    id: 'post-77',
+    slug: 'squaredfinancial-sq-sey-cysec-settlement-2025',
+    title: 'CySEC Settles With the Offshore Arm of SquaredFinancial Over Activity Linked to Cyprus',
+    excerpt: 'CySEC reached a 50,000 euro settlement with SQ Sey, the Seychelles entity behind SquaredFinancial\'s non-EU business, over authorisation concerns linked to Cyprus. A rare case of a European regulator reaching the offshore layer of a broker group.',
+    category: 'news',
+    editorialType: 'Opinion',
+    author: authors[6], // Beatrix Fairmont
+    publishedAt: '2026-08-20',
+    updatedAt: '2026-08-20',
+    featuredImage: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2026-08-20_SquaredFinancial_cover-URIhhP0JUq8dtKrLd50vhYJQdNPHpk.png',
+    imageAltText: 'CySEC enforcement documents on a desk with SquaredFinancial branding, a settlement notice and Seychelles licence in background — CySEC settles with SquaredFinancial offshore arm SQ Sey over Cyprus links. BestForex.io Broker Watch.',
+    readingTime: '7 min read',
+    wordCount: 1050,
+    metaTitle: 'SquaredFinancial Offshore Arm Settles With CySEC | BestForex.io',
+    metaDescription: 'CySEC reached a 50,000 euro settlement with SQ Sey, the Seychelles arm behind SquaredFinancial, in 2025 over authorisation concerns linked to Cyprus. What it means for traders.',
+    tags: ['SquaredFinancial', 'SQ Sey', 'CySEC', 'Cyprus', 'EU', 'Seychelles', 'Offshore', 'Settlement', 'Authorisation', 'CFD', 'Forex', 'Enforcement', 'Broker Watch'],
+    isFeatured: true,
+    relatedBrokers: [],
+    linkedSources: [
+      { label: 'CySEC — Public Decisions', url: 'https://www.cysec.gov.cy/en-GB/public-info/decisions/' },
+    ],
+    content: `
+<p>The Cyprus regulator has reached a 50 thousand euro settlement with SQ Sey, the offshore company behind the global business of the broker brand SquaredFinancial, closing a two-year investigation into activity linked to Cyprus. The SquaredFinancial CySEC settlement, announced in November 2025, is a fresh reminder that a European regulator can reach beyond its own licensed firms.</p>
+
+<p>SQ Sey Ltd operates the non-European Union business of SquaredFinancial and is licensed in the Seychelles as a securities dealer, not by CySEC. Even so, the Cyprus Securities and Exchange Commission investigated the company&apos;s compliance, over the period from October 2022 to September 2024, with the authorisation requirements of Cyprus investment services law. The matter was resolved with a 50 thousand euro payment under a mechanism that closes a case without publishing a full administrative ruling and without an admission of wrongdoing.</p>
+
+<h2>When an Offshore Arm Meets an EU Regulator</h2>
+
+<p>The interesting feature of this case is the reach. SquaredFinancial, like many broker groups, runs a European entity and a separate offshore arm for clients outside the European Union. SQ Sey is the offshore piece, licensed in the Seychelles. Ordinarily an offshore firm sits outside a European regulator&apos;s remit. Here, CySEC examined the offshore company&apos;s activity because of its links to Cyprus, and reached a settlement with it. That is a signal that the neat separation between a group&apos;s regulated European entity and its lighter offshore arm is not always as clean as it looks.</p>
+
+<p>The settlement was struck under a provision that lets the regulator resolve a case without a full public finding, where the company pays a sum into the state treasury and the proceedings stop. CySEC noted there was no admission of wrongdoing, which is fair and belongs in the record. But the regulator does not open a two-year investigation and settle it for nothing. The authorisation requirements it examined go to whether the firm&apos;s activity linked to Cyprus was properly permitted.</p>
+
+<h2>Why the Offshore Layer Matters to Clients</h2>
+
+<p>For retail traders, the offshore arm of a broker group is usually the part with the least protection. Offshore licences typically carry lighter rules and higher permitted leverage than a European authorisation, which is precisely why groups use them for clients outside the European Union. A settlement involving that offshore arm, reached with a European regulator over Cyprus links, is a useful reminder that the offshore layer is not a lawless zone but is also not the protected environment a European licence provides. Knowing which entity of a group actually holds your account has rarely mattered more.</p>
+
+<p>The SquaredFinancial case is quieter than a large fine or a collapse, but its lesson is sharp. Broker groups are often built from a regulated European face and a less protected offshore body, and clients are not always told which one they are dealing with. When even the offshore arm draws a settlement from a European regulator, the message is that the structure matters. Before funding any account, a trader should establish exactly which entity holds it and which regulator, if any, truly stands behind it.</p>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="bestforex-view-heading" class="rounded-xl border border-primary/30 bg-primary/5 px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-primary mb-3">BestForex.io View</p>
+  <h2 id="bestforex-view-heading" class="text-xl font-bold text-foreground mb-4">This Is a Fresh and Unusual Case, and Its Value Is in the Reach</h2>
+  <p class="text-foreground leading-relaxed mb-3">SQ Sey is the Seychelles-licensed offshore arm behind SquaredFinancial&apos;s non-European business &mdash; the kind of entity that normally sits outside a European regulator&apos;s remit. Yet CySEC investigated it for two years over its links to Cyprus and settled for 50 thousand euro, without a full public ruling and without an admission of wrongdoing.</p>
+  <p class="text-foreground leading-relaxed mb-3">The amount is small and the firm admitted nothing, both of which belong in the record. But the structure is the story. Broker groups routinely split themselves into a regulated European face and a lighter offshore body, and a client&apos;s protection depends entirely on which one holds the account.</p>
+  <p class="text-foreground leading-relaxed font-medium">When even the offshore arm draws a European settlement, that distinction is one every trader should insist on understanding.</p>
+</section>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="about-squaredfinancial-heading" class="rounded-xl border border-border bg-card px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">About the Company</p>
+  <h2 id="about-squaredfinancial-heading" class="text-xl font-bold text-foreground mb-4">About SquaredFinancial</h2>
+  <div class="grid gap-4 sm:grid-cols-2 my-5">
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Regulator</p>
+      <p class="font-semibold text-foreground">CySEC (Cyprus) — settlement only; SQ Sey licensed in Seychelles</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Offshore Entity</p>
+      <p class="font-semibold text-foreground">SQ Sey Ltd</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Action Type</p>
+      <p class="font-semibold text-foreground">Settlement, Authorisation Concerns</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Penalty</p>
+      <p class="font-semibold text-foreground">EUR 50,000</p>
+    </div>
+  </div>
+  <p class="text-foreground leading-relaxed mb-3">SQ Sey Ltd is the offshore company that operates the global, non-European Union business of the broker brand SquaredFinancial, licensed in the Seychelles as a securities dealer. In November 2025 the Cyprus Securities and Exchange Commission announced a 50 thousand euro settlement with the firm, closing a two-year investigation into its compliance, over the period from October 2022 to September 2024, with the authorisation requirements of Cyprus investment services law.</p>
+  <p class="text-foreground leading-relaxed">The settlement was reached without a full administrative ruling and without an admission of wrongdoing.</p>
+</section>
+
+<h2>Frequently Asked Questions</h2>
+
+<h3>Is SquaredFinancial regulated?</h3>
+<p>SquaredFinancial operates through more than one entity, including a European business and an offshore arm, SQ Sey, licensed in the Seychelles. In 2025 CySEC reached a settlement with the offshore arm over activity linked to Cyprus.</p>
+
+<h3>Why did CySEC settle with SQ Sey?</h3>
+<p>The regulator investigated the offshore company&apos;s compliance with authorisation requirements over its links to Cyprus, and closed the case with a 50 thousand euro settlement, without an admission of wrongdoing.</p>
+
+<h3>What is the difference between the European and offshore arms?</h3>
+<p>The European entity is authorised under stricter European rules, while the offshore arm is licensed in the Seychelles with lighter rules and typically higher leverage. The protections differ significantly.</p>
+
+<h3>Is SquaredFinancial safe for traders?</h3>
+<p>It depends heavily on which entity holds your account. Establish that first, and compare properly regulated brokers in our <a href="/brokers" class="text-primary underline underline-offset-2 hover:text-primary/80">Best Forex Brokers in 2026</a> ranking.</p>
+
+<p class="text-sm text-muted-foreground mt-8 pt-4 border-t"><em>Editor&apos;s note &amp; source: Factual points are drawn from the CySEC public decisions register. This article is not legal advice. Last updated: 20 August 2026.</em></p>
+    `,
+  },
+  {
+    id: 'post-76',
+    slug: 'royal-forex-roinvesting-cysec-settlements-licence',
+    title: 'ROInvesting Operator Royal Forex Settles With CySEC Twice, for 270,000 and 120,000 Euro, Before Handing Back Its Licence',
+    excerpt: 'CySEC settled with Royal Forex, the operator of ROInvesting, for 270,000 euro in 2020 and a further 120,000 euro later. After two substantial settlements the broker renounced its Cyprus licence. One settlement can be dismissed; two, before an exit, is a pattern.',
+    category: 'news',
+    editorialType: 'Opinion',
+    author: authors[3], // Clarissa Penhallow
+    publishedAt: '2026-08-19',
+    updatedAt: '2026-08-19',
+    featuredImage: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2026-08-19_RoyalForex_cover-1qjVEAiLCUPUj2zxs9ILgit7Mx9Fyd.png',
+    imageAltText: 'Two CySEC settlement certificates stacked on a compliance desk with ROInvesting and Royal Forex branding, a renounced Cyprus licence stamp in background — Royal Forex fined twice by CySEC then exits Cyprus. BestForex.io Broker Watch.',
+    readingTime: '7 min read',
+    wordCount: 1050,
+    metaTitle: 'ROInvesting Operator Royal Forex Fined Twice by CySEC | BestForex.io',
+    metaDescription: 'CySEC settled with Royal Forex, the operator of ROInvesting, for 270,000 euro and 120,000 euro before the broker renounced its Cyprus licence. Full breakdown of the two-settlement record.',
+    tags: ['ROInvesting', 'Royal Forex', 'CySEC', 'Cyprus', 'EU', 'Settlement', 'Licence Renunciation', 'CFD', 'Forex', 'Enforcement', 'Broker Watch'],
+    isFeatured: true,
+    relatedBrokers: ['roinvesting', 'royal-forex'],
+    linkedSources: [
+      { label: 'CySEC — Public Decisions', url: 'https://www.cysec.gov.cy/en-GB/public-info/decisions/93553/' },
+    ],
+    content: `
+<p>The Cyprus regulator settled with Royal Forex, the company behind the retail broker ROInvesting, not once but twice &mdash; first for 270 thousand euro and then for 120 thousand &mdash; before the firm handed back its Cyprus licence altogether. The Royal Forex CySEC settlements describe a broker that repeatedly resolved cases with its regulator and then left the regime.</p>
+
+<p>The Cyprus Securities and Exchange Commission first reached a 270 thousand euro settlement with Royal Forex Ltd in October 2020 over possible violations of Cyprus regulatory rules. Later it reached a further 120 thousand euro settlement with the same firm for any violation or possible violation of the local regulations. After the second settlement, Royal Forex and its ROInvesting brand renounced the Cyprus licence, and the authorisation was withdrawn.</p>
+
+<h2>Two Settlements Is a Pattern</h2>
+
+<p>One settlement can be explained away as a historical matter resolved and moved past. Two settlements with the same regulator, for substantial sums, is a pattern that is much harder to dismiss. It means the concerns did not end with the first resolution, and that the regulator had cause to open and settle a second case. When a broker appears twice in the settlement column, the more useful conclusion is not that each matter was closed, but that the firm kept returning.</p>
+
+<p>The amounts here are not trivial either. A 270 thousand euro settlement followed by a 120 thousand euro one totals close to 400 thousand euro paid to resolve regulatory concerns. That is a meaningful sum for a retail broker, and it reflects cases the regulator considered worth pursuing to settlement rather than waving through. Settlements avoid a full public finding of liability, which is often why firms accept them, but the money changing hands is real, and so are the concerns behind it.</p>
+
+<h2>Fined Twice, Then Gone</h2>
+
+<p>The ending is the familiar one. After the second settlement, Royal Forex renounced its Cyprus licence and ROInvesting left the regulated European system. The pattern &mdash; repeated settlements followed by a departure &mdash; mirrors other troubled firms in this market. For the clients who used ROInvesting, the European protections tied to the Cyprus licence are gone, and the entity behind the brand has exited the regime that had twice had cause to settle with it.</p>
+
+<p>The Royal Forex story is a clear example of why a single settlement should never be read alone. Taken one at a time, each of these cases could be described as a historical matter resolved. Taken together, and followed by the surrender of the licence, they describe a broker that repeatedly fell short and then left. A prospective client who checked only one settlement, or only the brand, would have missed the shape of it. The full record &mdash; two settlements and an exit &mdash; is the one that matters.</p>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="bestforex-view-heading" class="rounded-xl border border-primary/30 bg-primary/5 px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-primary mb-3">BestForex.io View</p>
+  <h2 id="bestforex-view-heading" class="text-xl font-bold text-foreground mb-4">Two Settlements, Close to 400,000 Euro, Then a Licence Handed Back</h2>
+  <p class="text-foreground leading-relaxed mb-3">Two settlements with CySEC &mdash; 270 thousand euro and then 120 thousand, close to 400 thousand euro in total &mdash; and then a licence handed back. That is the Royal Forex record behind the ROInvesting brand.</p>
+  <p class="text-foreground leading-relaxed mb-3">A single settlement can be brushed off as a resolved historical matter. Two, for substantial sums, is a firm that kept returning to its regulator, and the exit that followed is the natural end of that story. Settlements avoid a full finding of liability, but the money is real and so are the concerns.</p>
+  <p class="text-foreground leading-relaxed font-medium">For a trader, the lesson is to read the whole file, because one settlement understates a broker that was actually settling twice on the way out the door.</p>
+</section>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="about-roinvesting-heading" class="rounded-xl border border-border bg-card px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">About the Company</p>
+  <h2 id="about-roinvesting-heading" class="text-xl font-bold text-foreground mb-4">About ROInvesting</h2>
+  <div class="grid gap-4 sm:grid-cols-2 my-5">
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Regulator</p>
+      <p class="font-semibold text-foreground">CySEC (Cyprus) — licence renounced</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Operator</p>
+      <p class="font-semibold text-foreground">Royal Forex Ltd</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Action Type</p>
+      <p class="font-semibold text-foreground">Two Settlements Then Licence Renunciation</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Penalties</p>
+      <p class="font-semibold text-foreground">EUR 270,000 + EUR 120,000</p>
+    </div>
+  </div>
+  <p class="text-foreground leading-relaxed mb-3">Royal Forex Ltd was a Cyprus investment firm that operated the retail forex and CFD broker ROInvesting, supervised by the Cyprus Securities and Exchange Commission. In October 2020 CySEC reached a 270 thousand euro settlement with the firm over possible regulatory violations, and later reached a further 120 thousand euro settlement. After the second settlement, Royal Forex and ROInvesting renounced the Cyprus licence, which was withdrawn.</p>
+</section>
+
+<h2>Frequently Asked Questions</h2>
+
+<h3>Is ROInvesting still regulated?</h3>
+<p>No. Royal Forex, the operator of ROInvesting, renounced its Cyprus licence after two CySEC settlements, so ROInvesting is no longer a regulated Cyprus broker.</p>
+
+<h3>How many times did Royal Forex settle with CySEC?</h3>
+<p>Twice: a 270 thousand euro settlement in October 2020 and a further 120 thousand euro settlement later, over possible regulatory violations.</p>
+
+<h3>Why did ROInvesting lose its licence?</h3>
+<p>After the second settlement, Royal Forex renounced its Cyprus licence and the authorisation was withdrawn, ending ROInvesting&apos;s regulated status.</p>
+
+<h3>Is ROInvesting safe for traders?</h3>
+<p>No. Its operator settled with CySEC twice and then left the regime. Compare active, regulated brokers in our <a href="/brokers" class="text-primary underline underline-offset-2 hover:text-primary/80">Best Forex Brokers in 2026</a> ranking.</p>
+
+<p class="text-sm text-muted-foreground mt-8 pt-4 border-t"><em>Editor&apos;s note &amp; source: Factual points are drawn from the CySEC public decisions register. This article is not legal advice. Last updated: 19 August 2026.</em></p>
+    `,
+  },
+  {
+    id: 'post-75',
+    slug: 'trade-com-leadcapital-cysec-fine',
+    title: 'Trade.com Operator Leadcapital Markets Fined 30,000 Euro by CySEC Over Its Conduct Toward Clients in Romania',
+    excerpt: 'CySEC fined Leadcapital Markets, the operator of Trade.com, 30,000 euro over failing to act honestly and fairly toward its clients in Romania between 2016 and 2017. A small penalty attached to the largest conduct principle in regulation.',
+    category: 'news',
+    editorialType: 'Opinion',
+    author: authors[6], // Beatrix Fairmont
+    publishedAt: '2026-08-18',
+    updatedAt: '2026-08-18',
+    featuredImage: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2026-08-18_TradeCom_cover-RD2GMOviEppHDUQljiFdhUebu05ufD.png',
+    imageAltText: 'CySEC fine notice on a compliance desk with Trade.com branding, a regulatory document showing Romania highlighted on a European map — Trade.com operator fined 30,000 euro by CySEC over conduct in Romania. BestForex.io Broker Watch.',
+    readingTime: '6 min read',
+    wordCount: 950,
+    metaTitle: 'Trade.com Operator Fined 30,000 Euro by CySEC | BestForex.io',
+    metaDescription: 'CySEC fined Leadcapital Markets, the operator of Trade.com, 30,000 euro over failing to act honestly and fairly toward its clients in Romania. Full breakdown.',
+    tags: ['Trade.com', 'Leadcapital Markets', 'CySEC', 'Cyprus', 'EU', 'Romania', 'Fine', 'Honest and Fair Conduct', 'CFD', 'Forex', 'Enforcement', 'Broker Watch'],
+    isFeatured: true,
+    relatedBrokers: ['trade-com'],
+    linkedSources: [
+      { label: 'CySEC — Public Decisions', url: 'https://www.cysec.gov.cy/en-GB/public-info/decisions/' },
+    ],
+    content: `
+<p>The Cyprus regulator fined the operator of the retail broker Trade.com 30 thousand euro over the way it treated its clients in Romania, a small penalty attached to a large principle: whether a firm acted honestly and fairly toward the people it served. The Trade.com CySEC fine concerned conduct in one market over roughly a year.</p>
+
+<p>The Cyprus Securities and Exchange Commission imposed a 30 thousand euro administrative fine on Leadcapital Markets Ltd, which operates the Trade.com brand, for non-compliance with the requirement to act honestly and fairly toward clients. The conduct at issue involved the firm&apos;s Romanian clients between August 2016 and July 2017. A Cyprus investment firm passporting into another European market carries its home conduct duties with it, and the regulator found those duties were not met.</p>
+
+<h2>Honest and Fair Is the Baseline</h2>
+
+<p>The requirement to act honestly, fairly and professionally is the baseline duty of every regulated firm. It is deliberately broad, because it is meant to catch conduct that harms clients even when no more specific rule is broken. A fine for failing it, even a modest one, is a regulator saying the firm fell below the minimum standard of behaviour that every client is entitled to expect. That is not a paperwork matter. It is about how the firm actually treated people.</p>
+
+<p>The cross-border element is part of what makes the case instructive. Trade.com is a Cyprus firm, but the clients it failed here were in Romania. Under European rules, a firm that offers services across borders must still meet its conduct obligations everywhere it operates. A finding that it fell short in another country shows that a broker&apos;s behaviour is not always uniform across its markets, and that its home regulator will still hold it to account for conduct abroad.</p>
+
+<h2>A Small Fine, a Real Signal</h2>
+
+<p>Thirty thousand euro is at the lighter end of the enforcement scale, and it would be easy to overlook. That would be a mistake. The size of a fine reflects many things, including the scope and period of the conduct, not just its seriousness in principle. A penalty for failing the honest and fair standard, however small, is a documented finding that a firm did not treat a group of its clients as the rules require. For a prospective client, the existence of that finding matters more than its modest value.</p>
+
+<p>The Trade.com case makes a simple point that applies to every broker. The most basic promise a regulated firm makes is to act honestly and fairly toward its clients, and a fine for breaching that promise is worth knowing about regardless of the amount. Trade.com remains a working brand, and this is an older case in one market. But the record is the record, and a broker that has been penalised for failing the honest and fair standard has told you something about itself that no marketing can undo.</p>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="bestforex-view-heading" class="rounded-xl border border-primary/30 bg-primary/5 px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-primary mb-3">BestForex.io View</p>
+  <h2 id="bestforex-view-heading" class="text-xl font-bold text-foreground mb-4">Thirty Thousand Euro, the Largest Conduct Principle There Is</h2>
+  <p class="text-foreground leading-relaxed mb-3">Thirty thousand euro is a small fine, but the standard behind it is the largest one there is: the duty to act honestly and fairly toward clients. Leadcapital Markets, the operator of Trade.com, was fined by CySEC for failing that duty toward its clients in Romania over roughly a year.</p>
+  <p class="text-foreground leading-relaxed mb-3">The size reflects the scope and period, not the seriousness of the principle, which is the baseline every regulated firm must meet. The case is older and confined to one market, but a documented finding that a broker did not treat a group of clients honestly and fairly is exactly the kind of thing a careful trader should weigh.</p>
+  <p class="text-foreground leading-relaxed font-medium">Whatever the number attached to it, the principle is the one that cannot be qualified away.</p>
+</section>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="about-tradecom-heading" class="rounded-xl border border-border bg-card px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">About the Company</p>
+  <h2 id="about-tradecom-heading" class="text-xl font-bold text-foreground mb-4">About Trade.com</h2>
+  <div class="grid gap-4 sm:grid-cols-2 my-5">
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Regulator</p>
+      <p class="font-semibold text-foreground">CySEC (Cyprus)</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Operator</p>
+      <p class="font-semibold text-foreground">Leadcapital Markets Ltd</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Action Type</p>
+      <p class="font-semibold text-foreground">Fine, Honest and Fair Conduct</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Penalty</p>
+      <p class="font-semibold text-foreground">EUR 30,000</p>
+    </div>
+  </div>
+  <p class="text-foreground leading-relaxed mb-3">Leadcapital Markets Ltd is a Cyprus investment firm that operates the retail forex and CFD broker Trade.com, authorised and supervised by the Cyprus Securities and Exchange Commission. In January 2018 CySEC imposed a 30 thousand euro administrative fine on the firm for failing to act honestly and fairly toward its clients in Romania between August 2016 and July 2017.</p>
+</section>
+
+<h2>Frequently Asked Questions</h2>
+
+<h3>Is Trade.com regulated?</h3>
+<p>Yes. Trade.com is operated by Leadcapital Markets Ltd, a Cyprus investment firm supervised by CySEC, which fined it over its conduct in Romania.</p>
+
+<h3>Why was Trade.com&apos;s operator fined?</h3>
+<p>CySEC imposed a 30 thousand euro fine on Leadcapital Markets for failing to act honestly and fairly toward its clients in Romania between August 2016 and July 2017.</p>
+
+<h3>How much was the fine?</h3>
+<p>It was 30 thousand euro, imposed in January 2018.</p>
+
+<h3>Is Trade.com safe for traders?</h3>
+<p>Trade.com remains a working brand, but its operator was fined over the honest and fair conduct standard. Weigh that and compare brokers in our <a href="/brokers" class="text-primary underline underline-offset-2 hover:text-primary/80">Best Forex Brokers in 2026</a> ranking.</p>
+
+<p class="text-sm text-muted-foreground mt-8 pt-4 border-t"><em>Editor&apos;s note &amp; source: Factual points are drawn from the CySEC public decisions register. This article is not legal advice. Last updated: 18 August 2026.</em></p>
+    `,
+  },
+  {
+    id: 'post-74',
+    slug: 'ufx-reliantco-cysec-fine',
+    title: 'UFX Operator Reliantco Fined 95,000 Euro by CySEC for Failing to Act in Its Clients\' Best Interests',
+    excerpt: 'CySEC fined Reliantco Investments, the operator of UFX, 95,000 euro for failing to act in its clients\' best interests. Of all the duties a broker carries, this is the most fundamental — and a fine for breaching it is a finding about the character of the firm.',
+    category: 'news',
+    editorialType: 'Opinion',
+    author: authors[3], // Clarissa Penhallow
+    publishedAt: '2026-08-17',
+    updatedAt: '2026-08-17',
+    featuredImage: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2026-08-17_UFX_cover-nBLaguIwJ1VuZ0StqOv2gAtYq7qr1u.png',
+    imageAltText: 'CySEC fine notice on a compliance desk with UFX and Reliantco Investments branding, a 95,000 euro penalty document — UFX operator Reliantco fined by CySEC for failing clients\' best interests. BestForex.io Broker Watch.',
+    readingTime: '6 min read',
+    wordCount: 1000,
+    metaTitle: 'UFX Operator Fined 95,000 Euro by CySEC | BestForex.io',
+    metaDescription: 'CySEC fined Reliantco Investments, the operator of UFX, 95,000 euro for failing to act in its clients\' best interests. Here is what it means for traders.',
+    tags: ['UFX', 'Reliantco Investments', 'CySEC', 'Cyprus', 'EU', 'Fine', 'Best Interests', 'CFD', 'Forex', 'Enforcement', 'Broker Watch'],
+    isFeatured: true,
+    relatedBrokers: ['ufx'],
+    linkedSources: [
+      { label: 'CySEC — Public Decisions', url: 'https://www.cysec.gov.cy/en-GB/public-info/decisions/' },
+    ],
+    content: `
+<p>The Cyprus regulator fined the operator of the retail forex broker UFX 95 thousand euro for failing to act in the best interests of its own clients. The UFX CySEC fine went to the heart of the relationship between a broker and the people who trust it with their money &mdash; the basic duty to put the client first.</p>
+
+<p>The Cyprus Securities and Exchange Commission imposed a 95 thousand euro administrative fine on Reliantco Investments Ltd, the company that operated the UFX.com brand, over failings in acting in the best interests of its clients. It was not the firm&apos;s only encounter with the regulator, which had penalised it in an earlier matter as well. But the best interests failing is the one that cuts closest to what a broker is supposed to be.</p>
+
+<h2>The Best Interests Duty Is the Whole Deal</h2>
+
+<p>Of all the obligations a broker carries, the duty to act in the client&apos;s best interests is the most fundamental. Every other rule &mdash; on disclosure, on execution, on suitability &mdash; is really a way of giving that single duty teeth. When a regulator finds that a firm failed to act in its clients&apos; best interests, it is not describing a narrow technical breach. It is describing a failure at the level of purpose: a broker that was not, in the regulator&apos;s view, putting the people it served first.</p>
+
+<p>That is why a fine framed in these terms carries weight beyond its size. Ninety-five thousand euro is a real penalty, but the label on the case matters more than the number. A firm can be fined for a late report and still be broadly trustworthy. A firm found to have failed its clients&apos; best interests has been told, in the plainest language the rules offer, that it fell short on the thing that matters most.</p>
+
+<h2>An Older Case With a Timeless Lesson</h2>
+
+<p>This action dates back several years, and UFX has a long history in the retail forex market. But the nature of the failing does not age. The best interests duty is as central today as it was then, and a firm that was once found to have breached it has a record that a prospective client is entitled to know. Older enforcement is still enforcement, and the question it answers &mdash; did this broker put its clients first &mdash; is exactly the question a trader should be asking.</p>
+
+<p>For a retail client, the UFX case is a reminder to look past the age of a case to its substance. A fine for failing to act in clients&apos; best interests is one of the more serious findings a conduct regulator can make, whenever it was made. It speaks to the character of the firm rather than a single slip. In a market full of brokers competing on spreads and bonuses, the ones that have been penalised for failing the best interests duty deserve extra caution, and that record is public.</p>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="bestforex-view-heading" class="rounded-xl border border-primary/30 bg-primary/5 px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-primary mb-3">BestForex.io View</p>
+  <h2 id="bestforex-view-heading" class="text-xl font-bold text-foreground mb-4">The Most Important Duty a Broker Has, and a Fine for Breaking It</h2>
+  <p class="text-foreground leading-relaxed mb-3">The most important duty a broker has is to act in its clients&apos; best interests, and UFX operator Reliantco was fined 95 thousand euro by CySEC for failing exactly that. The amount is ordinary, but the label is not.</p>
+  <p class="text-foreground leading-relaxed mb-3">Every other rule in the book exists to enforce that one duty, so a finding that a firm breached it is a failure at the level of purpose, not paperwork. The case is several years old, but the best interests duty has not changed, and neither has the value of knowing that a broker was once found to have fallen short on it.</p>
+  <p class="text-foreground leading-relaxed font-medium">When a firm is penalised for not putting its clients first, that is character, not accident, and it is worth remembering.</p>
+</section>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="about-ufx-heading" class="rounded-xl border border-border bg-card px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">About the Company</p>
+  <h2 id="about-ufx-heading" class="text-xl font-bold text-foreground mb-4">About UFX</h2>
+  <div class="grid gap-4 sm:grid-cols-2 my-5">
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Regulator</p>
+      <p class="font-semibold text-foreground">CySEC (Cyprus)</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Operator</p>
+      <p class="font-semibold text-foreground">Reliantco Investments Ltd</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Action Type</p>
+      <p class="font-semibold text-foreground">Fine, Best Interests Failings</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Penalty</p>
+      <p class="font-semibold text-foreground">EUR 95,000</p>
+    </div>
+  </div>
+  <p class="text-foreground leading-relaxed mb-3">Reliantco Investments Ltd was a Cyprus investment firm that operated the retail forex and CFD broker UFX, known as UFX.com, supervised by the Cyprus Securities and Exchange Commission. In December 2017 CySEC imposed a 95 thousand euro administrative fine on the firm for failing to act in the best interests of its clients, following an earlier penalty in a separate matter.</p>
+</section>
+
+<h2>Frequently Asked Questions</h2>
+
+<h3>Is UFX regulated?</h3>
+<p>UFX was operated by Reliantco Investments Ltd, a Cyprus investment firm supervised by CySEC, which fined it over failing to act in its clients&apos; best interests.</p>
+
+<h3>Why was UFX fined?</h3>
+<p>CySEC imposed a 95 thousand euro fine on the operator, Reliantco Investments, for failing to act in the best interests of its clients.</p>
+
+<h3>How much was the UFX fine?</h3>
+<p>The administrative fine was 95 thousand euro, imposed in December 2017, following an earlier penalty in a separate matter.</p>
+
+<h3>Is UFX safe for traders?</h3>
+<p>UFX&apos;s operator was fined for failing the best interests duty, one of the most serious conduct findings. Weigh that and compare brokers in our <a href="/brokers" class="text-primary underline underline-offset-2 hover:text-primary/80">Best Forex Brokers in 2026</a> ranking.</p>
+
+<p class="text-sm text-muted-foreground mt-8 pt-4 border-t"><em>Editor&apos;s note &amp; source: Factual points are drawn from the CySEC public decisions register. This article is not legal advice. Last updated: 17 August 2026.</em></p>
+    `,
+  },
+  {
+    id: 'post-73',
+    slug: 'fxview-charlgate-cysec-settlement-2024',
+    title: 'Fxview Operator Charlgate Settles With CySEC for 50,000 Euro Over the Protection of Client Funds and Order Execution',
+    excerpt: 'CySEC reached a 50,000 euro settlement with Charlgate, the operator of Fxview, over the protection of client funds and order execution in 2024. These are the two areas where a broker\'s conduct most directly touches a trader\'s money.',
+    category: 'news',
+    editorialType: 'Opinion',
+    author: authors[6], // Beatrix Fairmont
+    publishedAt: '2026-08-16',
+    updatedAt: '2026-08-16',
+    featuredImage: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2026-08-16_Fxview_cover-DxxY79Zet6zCCMV4zrC4KYirz5qgtp.png',
+    imageAltText: 'CySEC settlement document on a compliance desk with Fxview and Charlgate branding, a 50,000 euro notice highlighting client funds and order execution — Fxview operator Charlgate settles with CySEC. BestForex.io Broker Watch.',
+    readingTime: '6 min read',
+    wordCount: 950,
+    metaTitle: 'Fxview Operator Settles With CySEC Over Client Funds | BestForex.io',
+    metaDescription: 'CySEC reached a 50,000 euro settlement with Charlgate, the operator of Fxview, over the protection of client funds and order execution in 2024. What it means for traders.',
+    tags: ['Fxview', 'Charlgate', 'CySEC', 'Cyprus', 'EU', 'Settlement', 'Client Funds', 'Order Execution', 'CFD', 'Forex', 'Enforcement', 'Broker Watch'],
+    isFeatured: true,
+    relatedBrokers: ['fxview'],
+    linkedSources: [
+      { label: 'CySEC — Public Decisions', url: 'https://www.cysec.gov.cy/en-GB/public-info/decisions/' },
+    ],
+    content: `
+<p>The Cyprus regulator has reached a 50 thousand euro settlement with Charlgate, the company behind the retail broker Fxview, over two of the most important duties a broker has: protecting client funds and executing orders properly. The Fxview CySEC settlement, from 2024, touches areas that go directly to a trader&apos;s money.</p>
+
+<p>The Cyprus Securities and Exchange Commission settled with Charlgate Ltd, the operator of Fxview, over possible violations of the Investment Services and Activities and Regulated Markets Law of 2017. The concerns centred on the protection of client funds and on order execution. The firm paid 50 thousand euro to close the matter.</p>
+
+<h2>Client Funds and Execution Are Not Ordinary Rules</h2>
+
+<p>The size of this settlement is modest, but the subject is anything but. The protection of client funds is the single most important obligation a broker has: keeping client money safe and separate so it can be returned on demand. Order execution is how a broker turns a client&apos;s instruction into a real trade, at a real price. A case that touches both is a case about the two points where a broker&apos;s conduct most directly affects a client&apos;s money. These are not back-office technicalities. They are the core of the relationship.</p>
+
+<p>That is why a 50 thousand euro settlement here deserves more weight than the number alone suggests. When a regulator raises concerns about how a firm protected client funds and executed orders, it is asking questions about the fundamentals. Charlgate settled the matter rather than contest it, which closes the case without a full public finding of liability, but the areas the regulator chose to examine are the ones that matter most.</p>
+
+<h2>The Brand and the Operator</h2>
+
+<p>As is typical, the brand traders deal with is Fxview, while the licensed company that settled is Charlgate. Charlgate acquired the fxview.com domain and launched the retail brand, and a client using Fxview would not necessarily connect it to a settlement recorded against a company called Charlgate. That separation between the consumer brand and the regulated operator is a running feature of the sector, and it is where the regulatory record tends to sit out of sight.</p>
+
+<p>Fxview remains a working brand, and a settlement is not a shutdown. But of all the areas a broker can be examined over, client fund protection and order execution are the two a prospective client should care about most. A settlement touching both, even a modest one, is worth weighing carefully. The safety of your money and the fairness of your fills are the whole point of choosing a broker, and a regulator has already had questions about them here.</p>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="bestforex-view-heading" class="rounded-xl border border-primary/30 bg-primary/5 px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-primary mb-3">BestForex.io View</p>
+  <h2 id="bestforex-view-heading" class="text-xl font-bold text-foreground mb-4">Fifty Thousand Euro, but the Subject Is the Opposite of Small</h2>
+  <p class="text-foreground leading-relaxed mb-3">Fifty thousand euro is a small settlement, but the subject is the opposite of small. Charlgate, the operator of Fxview, settled a CySEC case that touched the protection of client funds and order execution &mdash; the two points where a broker&apos;s conduct reaches a client&apos;s money most directly.</p>
+  <p class="text-foreground leading-relaxed mb-3">Fund protection is the promise that your money is safe and separate. Execution is the promise that your trades are done fairly. A regulator raising questions about both is asking about the fundamentals, not the paperwork. The firm settled without a full finding, but the areas examined are the ones that matter most.</p>
+  <p class="text-foreground leading-relaxed font-medium">That is reason enough for a careful trader to take note.</p>
+</section>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="about-fxview-heading" class="rounded-xl border border-border bg-card px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">About the Company</p>
+  <h2 id="about-fxview-heading" class="text-xl font-bold text-foreground mb-4">About Fxview</h2>
+  <div class="grid gap-4 sm:grid-cols-2 my-5">
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Regulator</p>
+      <p class="font-semibold text-foreground">CySEC (Cyprus)</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Operator</p>
+      <p class="font-semibold text-foreground">Charlgate Ltd</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Action Type</p>
+      <p class="font-semibold text-foreground">Settlement, Client Funds and Execution</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Penalty</p>
+      <p class="font-semibold text-foreground">EUR 50,000</p>
+    </div>
+  </div>
+  <p class="text-foreground leading-relaxed mb-3">Charlgate Ltd is a Cyprus investment firm that operates the retail forex and CFD broker Fxview, having acquired the fxview.com domain and launched the brand, and is supervised by the Cyprus Securities and Exchange Commission. In 2024 CySEC reached a 50 thousand euro settlement with the firm over possible violations of the Investment Services and Activities and Regulated Markets Law of 2017, centred on the protection of client funds and order execution.</p>
+</section>
+
+<h2>Frequently Asked Questions</h2>
+
+<h3>Is Fxview regulated?</h3>
+<p>Yes. Fxview is operated by Charlgate Ltd, a Cyprus investment firm supervised by CySEC, which reached the 2024 settlement with it.</p>
+
+<h3>Why did the operator of Fxview settle with CySEC?</h3>
+<p>Over possible violations concerning the protection of client funds and order execution. Charlgate paid a 50 thousand euro settlement to close the matter.</p>
+
+<h3>How much was the settlement?</h3>
+<p>It was 50 thousand euro, reached in 2024.</p>
+
+<h3>Is Fxview safe for traders?</h3>
+<p>Fxview remains a working brand, but its operator settled a CySEC case over client fund protection and execution, the areas that matter most. Weigh that and compare brokers in our <a href="/brokers" class="text-primary underline underline-offset-2 hover:text-primary/80">Best Forex Brokers in 2026</a> ranking.</p>
+
+<p class="text-sm text-muted-foreground mt-8 pt-4 border-t"><em>Editor&apos;s note &amp; source: Factual points are drawn from the CySEC public decisions register. This article is not legal advice. Last updated: 16 August 2026.</em></p>
+    `,
+  },
+  // ─── Scheduled Enforcement Posts (future dates) ──────────────────────────────
   // Posts 63–72 added 2026-08-06.
   // post-63 (FXTB) dated 2026-08-06 — published immediately (today).
   // Posts 64–72 dated 2026-08-07 through 2026-08-15 — scheduled, live via ISR.
