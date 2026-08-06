@@ -103,7 +103,931 @@ export const authors: Author[] = [
 
 export const posts: Post[] = [
   // ─── Scheduled Enforcement Posts (future dates) ──────────────────────────────
-  // Posts 73–77 added 2026-08-06.
+  // Posts 78–87 added 2026-08-06.
+  // AvaTrade (Belgium, Alberta, Israel unlicensed, Israel ad, Canada) +
+  // NAGA (CySEC, Financials, Qureshi, Merger, BaFin).
+  // 2026-08-07 and later — scheduled via seed endpoint.
+  {
+    id: 'post-87',
+    slug: 'avatrade-canada-provincial-warnings-not-registered',
+    title: 'Canadian Provinces Line Up to Warn Investors That AvaTrade Is Not Registered to Trade Locally',
+    excerpt: 'Saskatchewan, New Brunswick, Ontario, Quebec and British Columbia have warned investors that AvaTrade is not registered to trade in their provinces. What it means.',
+    category: 'news',
+    editorialType: 'Opinion',
+    author: authors[3], // Clarissa Penhallow
+    publishedAt: '2026-08-11',
+    updatedAt: '2026-08-11',
+    featuredImage: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2026-08-11_AvaTradeCanada_cover-u12HEIkIqSKKC1Gdm3z0Uv7XYgl3dD.png',
+    imageAltText: 'Canadian provinces warn that AvaTrade is not registered to trade locally — BestForex.io Broker Watch cover image',
+    readingTime: '7 min read',
+    wordCount: 1050,
+    metaTitle: 'Canadian Regulators Warn AvaTrade Is Not Registered | BestForex.io',
+    metaDescription: 'Saskatchewan, New Brunswick, Ontario, Quebec and British Columbia have warned investors that AvaTrade is not registered to trade in their provinces. What it means.',
+    tags: ['AvaTrade', 'Canada', 'CSA', 'Saskatchewan', 'Ontario', 'Quebec', 'British Columbia', 'Not Registered', 'Investor Warning', 'CFD', 'Forex', 'Enforcement', 'Broker Watch'],
+    isFeatured: true,
+    relatedBrokers: ['avatrade'],
+    linkedSources: [
+      { label: 'Canadian Securities Administrators — AvaTrade Alert', url: 'https://www.securities-administrators.ca/investor-alerts/avatrade-avatrade/' },
+    ],
+    content: `
+<p>Beyond the formal settlement AvaTrade reached with Alberta, a string of Canadian provinces have gone out of their way to warn investors about the same firm, telling the public plainly that AvaTrade is not registered to trade with them. The AvaTrade Canada warning story is less about a single penalty and more about a country&apos;s regulators repeatedly flagging the same broker.</p>
+
+<p>The warnings have come from several directions. Saskatchewan&apos;s regulator publicly cautioned residents not to give Ava Trade their money, noting the firm was not registered to trade in securities or derivatives in the province. New Brunswick placed AvaTrade Ltd, its website avatrade.com and an affiliated site on its caution list of firms not registered locally. Investor cautions have also come from Ontario, Quebec and British Columbia, and the Canadian Securities Administrators, the umbrella body for the provincial regulators, has carried an investor alert about the firm.</p>
+
+<h2>What a Warning List Actually Means</h2>
+
+<p>It is important to be precise about what these warnings say and do not say. They are not findings of fraud. What they establish is that, in each of these provinces, AvaTrade was not registered to trade with local residents. In Canada, securities registration is provincial, and a firm must be registered in a given province to solicit and serve investors there. A caution or warning list is the regulator telling the public that a specific firm has not met that requirement locally, and that dealing with it falls outside the protections registration provides.</p>
+
+<p>The significance is in the repetition. One province flagging a firm could be a technicality. Several provinces, plus the national umbrella body, independently warning about the same broker paints a consistent picture: a firm that was reaching Canadian investors across the country without the local registration each province requires. That is the same underlying issue that produced the Alberta settlement, seen from the vantage point of the other provinces that chose to warn rather than to settle.</p>
+
+<h2>A Regulated Broker, Warned in Canada</h2>
+
+<p>None of this erases the fact that AvaTrade is a properly regulated broker in a number of major jurisdictions. It does, however, sit awkwardly beside that status. A firm can hold respected licences abroad and still be the subject of investor warnings in a country where it is not registered, and AvaTrade is a clear example. For Canadian residents in particular, the message from their own regulators has been direct and repeated: this firm is not registered to trade with you here.</p>
+
+<p>The broad lesson is the one that runs through AvaTrade&apos;s Canadian history and through the sector generally. A broker&apos;s global regulation does not automatically extend to your country, and the clearest guide to whether a firm is authorised where you live is your own local regulator. When several provincial regulators and a national body all warn about the same broker, that is not noise. It is a coordinated signal, and for anyone in those provinces it is the most relevant fact about the firm, whatever its licences elsewhere.</p>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="bestforex-view-heading" class="rounded-xl border border-primary/30 bg-primary/5 px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-primary mb-3">BestForex.io View</p>
+  <h2 id="bestforex-view-heading" class="text-xl font-bold text-foreground mb-4">The Alberta Settlement Was the Formal Version of This Story. The Warning Lists Are the Rest of It.</h2>
+  <p class="text-foreground leading-relaxed mb-3">Saskatchewan, New Brunswick, Ontario, Quebec and British Columbia, plus the national umbrella body, have all told investors that AvaTrade is not registered to trade with them locally. None of that is a fraud finding, and AvaTrade remains a regulated broker in major markets &mdash; both of which belong in the record.</p>
+  <p class="text-foreground leading-relaxed mb-3">But when a whole run of a country&apos;s regulators independently warn about the same firm, the message is hard to miss.</p>
+  <p class="text-foreground leading-relaxed font-medium">Global regulation does not follow you home, and the regulator that matters most is the one where you actually live. In Canada, that regulator has said, repeatedly, that AvaTrade is not registered to deal with you.</p>
+</section>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="about-avatrade-heading-87" class="rounded-xl border border-border bg-card px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">About the Company</p>
+  <h2 id="about-avatrade-heading-87" class="text-xl font-bold text-foreground mb-4">About AvaTrade</h2>
+  <div class="grid gap-4 sm:grid-cols-2 my-5">
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Regulators</p>
+      <p class="font-semibold text-foreground">Central Bank of Ireland, ASIC, FSA Japan, FSCA, ADGM</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Jurisdiction</p>
+      <p class="font-semibold text-foreground">Canada (multiple provinces)</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Action Type</p>
+      <p class="font-semibold text-foreground">Investor Warnings, Not Registered</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Provinces</p>
+      <p class="font-semibold text-foreground">SK, NB, ON, QC, BC + CSA national alert</p>
+    </div>
+  </div>
+  <p class="text-foreground leading-relaxed">AvaTrade is a retail forex and CFD broker founded in 2006, regulated in several major jurisdictions. In Canada, where securities registration is provincial, regulators in Saskatchewan, New Brunswick, Ontario, Quebec and British Columbia, along with the Canadian Securities Administrators, have issued investor cautions noting that the firm is not registered to trade locally. The firm separately settled an unregistered trading case with the Alberta Securities Commission.</p>
+</section>
+
+<h2>Frequently Asked Questions</h2>
+
+<h3>Is AvaTrade registered in Canada?</h3>
+<p>No. Several Canadian provincial regulators, including Saskatchewan, New Brunswick, Ontario, Quebec and British Columbia, have warned that AvaTrade is not registered to trade with residents locally, and it settled a separate unregistered trading case in Alberta.</p>
+
+<h3>Do the Canadian warnings mean AvaTrade is a scam?</h3>
+<p>No. The warnings are not findings of fraud. They state that the firm is not registered to trade in those provinces, so dealing with it there falls outside local protections.</p>
+
+<h3>Is AvaTrade regulated elsewhere?</h3>
+<p>Yes. AvaTrade is regulated in several major jurisdictions, including the Central Bank of Ireland, ASIC and the Financial Services Agency of Japan. The Canadian warnings concern local registration, not those licences.</p>
+
+<h3>Is AvaTrade safe for traders?</h3>
+<p>It depends heavily on where you are. In Canada its own regulators have warned it is not registered. Always check local authorisation and compare brokers in our <a href="/brokers" class="text-primary underline underline-offset-2 hover:text-primary/80">Best Forex Brokers in 2026</a> ranking.</p>
+
+<p class="text-sm text-muted-foreground mt-8 pt-4 border-t"><em>Editor&apos;s note &amp; source: Factual points drawn from the Canadian Securities Administrators investor alerts database and provincial regulator caution lists. This article is not legal advice. Last updated: 11 August 2026.</em></p>
+    `,
+  },
+  {
+    id: 'post-86',
+    slug: 'naga-bafin-market-manipulation-examination-ipo',
+    title: 'Germany BaFin Examined NAGA for Market Manipulation After Its Shares Spiked and Fell Following the IPO',
+    excerpt: 'Germany\'s BaFin ran a market manipulation and insider trading analysis of NAGA after its shares spiked and fell following the 2017 IPO. The firm said it welcomed it.',
+    category: 'news',
+    editorialType: 'Opinion',
+    author: authors[6], // Beatrix Fairmont
+    publishedAt: '2026-08-11',
+    updatedAt: '2026-08-11',
+    featuredImage: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2026-08-11_NagaBaFin_cover-14uH7mNwiKLh5rQw1MkUgvXucZybAz.png',
+    imageAltText: 'Germany BaFin reviewed NAGA for market manipulation after post-IPO share spike — BestForex.io Broker Watch cover image',
+    readingTime: '7 min read',
+    wordCount: 1020,
+    metaTitle: 'BaFin Examined NAGA After Its Post-IPO Share Spike | BestForex.io',
+    metaDescription: 'Germany\'s BaFin ran a market manipulation and insider trading analysis of NAGA after its shares spiked and fell following the 2017 IPO. The firm said it welcomed it.',
+    tags: ['NAGA', 'BaFin', 'Germany', 'IPO', 'Market Manipulation', 'Insider Trading', 'Frankfurt', 'CySEC', 'Listed Broker', 'Enforcement', 'Broker Watch'],
+    isFeatured: true,
+    relatedBrokers: [],
+    linkedSources: [
+      { label: 'Business Insider DE — BaFin Untersuchung NAGA', url: 'https://www.businessinsider.de/gruenderszene/allgemein/bafin-untersuchung-fintech-naga/' },
+    ],
+    content: `
+<p>Germany&apos;s financial regulator has form with NAGA that goes back to the company&apos;s earliest days as a listed firm. Shortly after NAGA floated on the Frankfurt exchange, its shares spiked and then dropped sharply, and the regulator, BaFin, ran an analysis of the trading for signs of market manipulation and insider dealing. The NAGA BaFin episode is a reminder that a broker listed on a public market carries a second layer of oversight, over its own shares and reporting, not just its brokerage.</p>
+
+<p>The sequence in 2017 was striking. Ten days or so after a successful initial public offering, NAGA&apos;s stock had climbed to more than 14 euro before falling back sharply. That kind of rapid rise and fall is exactly what a market supervisor watches for, and BaFin conducted a routine analysis of the trading for market manipulation and insider dealing. NAGA said at the time that it supported and welcomed the review, stating it had no interest in high volatility in its shares.</p>
+
+<h2>Two Kinds of Oversight for a Listed Broker</h2>
+
+<p>It is worth understanding why a broker like NAGA sits under two regulators at once. Its brokerage is licensed and supervised in Cyprus by CySEC, which polices how it treats clients. But because the parent company is listed in Frankfurt, it is also subject to Germany&apos;s BaFin, which polices the integrity of its shares and the accuracy of its financial reporting. These are different jobs. One protects clients, the other protects investors and the market. A firm can be examined by either, and NAGA has drawn attention from both.</p>
+
+<p>To be fair, the 2017 examination was a routine market analysis rather than a finding of wrongdoing, and NAGA welcomed it. A sharp move in a newly listed share often prompts a look from the supervisor without any misconduct being established. Reported on its own, the episode is mild. Its significance is what it foreshadowed: a company whose life on the public market would later include a restatement of results, a departed auditor and delayed accounts, all matters that fall squarely within BaFin&apos;s remit.</p>
+
+<h2>Why the Market Layer Matters to Clients</h2>
+
+<p>For a client, the point is that a listed broker is watched not only for how it treats customers, but for how it behaves as a public company. Market manipulation reviews, reporting oversight and disclosure obligations are the tools that keep a listed firm honest with its investors, and problems there can be an early signal about the wider health and governance of the business. NAGA&apos;s later financial reporting troubles gave that market layer real relevance, and the 2017 examination was the first time BaFin looked closely at the company.</p>
+
+<p>Taken alone, a routine post-listing examination proves nothing, and it would be unfair to present it as more than it was. But it belongs in the fuller picture of a broker that has drawn regulatory attention on more than one front: a client protection settlement in Cyprus, financial reporting turmoil in Germany, and, at the very start, a market integrity look from BaFin. For a diligent client, the lesson is that the oversight of a listed broker is broad, and that the market regulator&apos;s view of the company is part of the record worth knowing.</p>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="bestforex-view-heading" class="rounded-xl border border-primary/30 bg-primary/5 px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-primary mb-3">BestForex.io View</p>
+  <h2 id="bestforex-view-heading" class="text-xl font-bold text-foreground mb-4">This Is the Mildest of NAGA&apos;s Regulatory Episodes, and It Should Be Labelled as Such</h2>
+  <p class="text-foreground leading-relaxed mb-3">In 2017, soon after its IPO, NAGA&apos;s shares spiked past 14 euro and fell back, and BaFin ran a routine market manipulation and insider dealing analysis, which NAGA welcomed. No wrongdoing was established, and on its own the episode is minor.</p>
+  <p class="text-foreground leading-relaxed mb-3">What makes it worth including is context. A listed broker is watched on two fronts &mdash; for how it treats clients and for how it behaves as a public company &mdash; and NAGA has since drawn scrutiny on both, including the financial reporting troubles that are BaFin&apos;s core concern.</p>
+  <p class="text-foreground leading-relaxed font-medium">The 2017 look was the opening chapter of that market oversight, not the whole story, but it is part of it.</p>
+</section>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="about-naga-heading-86" class="rounded-xl border border-border bg-card px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">About the Company</p>
+  <h2 id="about-naga-heading-86" class="text-xl font-bold text-foreground mb-4">About NAGA</h2>
+  <div class="grid gap-4 sm:grid-cols-2 my-5">
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Regulator</p>
+      <p class="font-semibold text-foreground">BaFin (Germany) — market oversight; CySEC (Cyprus) — brokerage</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Jurisdiction</p>
+      <p class="font-semibold text-foreground">Germany / Frankfurt Stock Exchange</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Action Type</p>
+      <p class="font-semibold text-foreground">Market Manipulation &amp; Insider Trading Analysis</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Outcome</p>
+      <p class="font-semibold text-foreground">Routine examination — no wrongdoing established</p>
+    </div>
+  </div>
+  <p class="text-foreground leading-relaxed">NAGA Group AG is a Hamburg-based, Frankfurt-listed financial technology company operating the NAGA social and copy trading platform and brokerage. Shortly after NAGA&apos;s 2017 initial public offering, its shares rose above 14 euro and then fell sharply, prompting BaFin to run a routine analysis of the trading for market manipulation and insider dealing &mdash; a review the company said it welcomed.</p>
+</section>
+
+<h2>Frequently Asked Questions</h2>
+
+<h3>Did BaFin investigate NAGA?</h3>
+<p>After NAGA&apos;s 2017 IPO, when its shares spiked and fell, BaFin ran a routine analysis of the trading for market manipulation and insider dealing. NAGA said it welcomed the review, and no wrongdoing was established.</p>
+
+<h3>Why is NAGA overseen by BaFin?</h3>
+<p>Because NAGA Group is listed on the Frankfurt Stock Exchange, its parent company is subject to BaFin&apos;s oversight of its shares and financial reporting, in addition to CySEC&apos;s supervision of its brokerage in Cyprus.</p>
+
+<h3>Was NAGA found guilty of market manipulation?</h3>
+<p>No. The 2017 examination was a routine market analysis, not a finding of wrongdoing. A sharp move in a new listing often prompts such a review without misconduct being established.</p>
+
+<h3>Is NAGA safe for traders?</h3>
+<p>NAGA is a listed, regulated broker that has drawn attention on several fronts over the years. Weigh the full picture and compare brokers in our <a href="/brokers" class="text-primary underline underline-offset-2 hover:text-primary/80">Best Forex Brokers in 2026</a> ranking.</p>
+
+<p class="text-sm text-muted-foreground mt-8 pt-4 border-t"><em>Editor&apos;s note &amp; source: Factual points drawn from Business Insider DE reporting on the BaFin examination and company statements. This article is not legal advice. Last updated: 11 August 2026.</em></p>
+    `,
+  },
+  {
+    id: 'post-85',
+    slug: 'avatrade-israel-atrade-misleading-video-fine',
+    title: 'Israel Fines AvaTrade Local Arm 150,000 Shekels Over a Misleading Promotional Video',
+    excerpt: "Israel's securities regulator fined AvaTrade's local arm ATrade 150,000 shekels over a misleading promotional video used in a marketing campaign. Here is the detail.",
+    category: 'news',
+    editorialType: 'Opinion',
+    author: authors[6], // Beatrix Fairmont
+    publishedAt: '2026-08-10',
+    updatedAt: '2026-08-10',
+    featuredImage: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2026-08-10_AvaTradeIsraelAd_cover-CgnpwgcuMiwSDC92KF7lFlXThDsAps.png',
+    imageAltText: 'Israel fines AvaTrade arm ATrade over a misleading promotional video — BestForex.io Broker Watch cover image',
+    readingTime: '6 min read',
+    wordCount: 950,
+    metaTitle: 'AvaTrade Israel Arm Fined Over Misleading Video Ad | BestForex.io',
+    metaDescription: "Israel's securities regulator fined AvaTrade's local arm ATrade 150,000 shekels over a misleading promotional video used in a marketing campaign. Here is the detail.",
+    tags: ['AvaTrade', 'ATrade', 'Israel', 'ISA', 'Misleading Advertising', 'Promotional Video', 'Fine', 'CFD', 'Forex', 'Enforcement', 'Broker Watch'],
+    isFeatured: true,
+    relatedBrokers: ['avatrade'],
+    linkedSources: [
+      { label: 'Israel Securities Authority', url: 'https://www.isa.gov.il/' },
+    ],
+    content: `
+<p>Israel&apos;s securities regulator fined AvaTrade&apos;s local arm 150 thousand shekels over a misleading promotional video the firm circulated as part of a marketing campaign. The AvaTrade misleading advert case is a small fine with an outsized lesson, because in retail trading the advertising is very often where the harm begins.</p>
+
+<p>The Israel Securities Authority, the ISA, imposed the 150 thousand shekel penalty, roughly 42 thousand US dollars, on AvaTrade&apos;s Israeli subsidiary, which operates under the brand ATrade, over a misleading video used to promote the business. It was one of more than one penalty the local arm drew from the ISA around this period, but this one turned specifically on how the firm advertised itself to the public.</p>
+
+<h2>Advertising Is Not a Side Issue</h2>
+
+<p>It is tempting to treat a fine over a promotional video as a minor branding slip. That underrates it. In retail forex and CFD trading, marketing is not decoration around the product. It is the mechanism that brings clients in, and misleading marketing is one of the most reliable ways to draw people into products they do not understand and often lose money in. Regulators police advertising in this sector so heavily precisely because the promise made in a video is frequently the first and most damaging step in the chain.</p>
+
+<p>A finding that a promotional video was misleading is therefore a finding about the front door of the business. It says that the impression the firm chose to give prospective clients did not match reality. Whatever the size of the fine, that is a statement about how the firm went about attracting people, and attraction is where the relationship between a broker and a retail client starts.</p>
+
+<h2>A Pattern of Local Penalties</h2>
+
+<p>The advertising fine did not stand alone. AvaTrade&apos;s Israeli arm drew several penalties from the ISA across 2016 to 2019, including a much larger fine over providing services it was not licensed to give, and a later fine for failing to comply with regulatory requirements. Seen together, the misleading video sits inside a broader picture of a local operation that the regulator repeatedly had cause to sanction. The advertising case is one strand of that, and it happens to be the strand closest to the ordinary consumer, who meets the firm through its marketing first.</p>
+
+<p>AvaTrade is a regulated broker across several major jurisdictions, and this is a specific, historical matter concerning its Israeli subsidiary&apos;s advertising. But the point generalises cleanly. The way a broker markets itself is a genuine signal, and a regulator finding that a firm&apos;s promotional video was misleading is a documented reason to treat its advertising with care. When you meet any broker through a slick video promising ease and profit, the AvaTrade case is a reminder that regulators have fined firms for exactly that kind of promise when it did not hold up.</p>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="bestforex-view-heading" class="rounded-xl border border-primary/30 bg-primary/5 px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-primary mb-3">BestForex.io View</p>
+  <h2 id="bestforex-view-heading" class="text-xl font-bold text-foreground mb-4">A Fine Over a Promotional Video Sounds Minor. In Retail Trading, Advertising Is Where the Harm Starts.</h2>
+  <p class="text-foreground leading-relaxed mb-3">The Israel Securities Authority found that AvaTrade&apos;s local arm circulated a misleading promotional video &mdash; a finding about the front door of the business, about the impression it chose to give the people it wanted to sign up.</p>
+  <p class="text-foreground leading-relaxed mb-3">Set beside the arm&apos;s other Israeli penalties, including a much larger one for unlicensed services, the video fine is one strand of a repeated local record.</p>
+  <p class="text-foreground leading-relaxed font-medium">AvaTrade is regulated across major markets, but the lesson is universal. Treat a broker&apos;s marketing as evidence, because regulators sometimes have to.</p>
+</section>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="about-atrade-heading-85" class="rounded-xl border border-border bg-card px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">About the Company</p>
+  <h2 id="about-atrade-heading-85" class="text-xl font-bold text-foreground mb-4">About ATrade (AvaTrade Israel)</h2>
+  <div class="grid gap-4 sm:grid-cols-2 my-5">
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Regulator</p>
+      <p class="font-semibold text-foreground">Israel Securities Authority (ISA)</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Jurisdiction</p>
+      <p class="font-semibold text-foreground">Israel</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Action Type</p>
+      <p class="font-semibold text-foreground">Fine, Misleading Advertising</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Penalty</p>
+      <p class="font-semibold text-foreground">NIS 150,000 (approx. USD 42,000)</p>
+    </div>
+  </div>
+  <p class="text-foreground leading-relaxed">AvaTrade is a retail forex and CFD broker founded in 2006, regulated in several major jurisdictions. Its Israeli subsidiary, operating under the brand ATrade, was fined 150 thousand shekels by the Israel Securities Authority over a misleading promotional video used in a marketing campaign, one of several penalties the local arm drew from the regulator between 2016 and 2019.</p>
+</section>
+
+<h2>Frequently Asked Questions</h2>
+
+<h3>Is AvaTrade regulated?</h3>
+<p>Yes. AvaTrade is regulated in several major jurisdictions. This advertising fine concerned its Israeli subsidiary, ATrade, in Israel.</p>
+
+<h3>Why was AvaTrade&apos;s local arm fined over a video?</h3>
+<p>The Israel Securities Authority found a promotional video the arm circulated was misleading, and imposed a 150 thousand shekel fine over it.</p>
+
+<h3>How much was the fine?</h3>
+<p>It was 150 thousand shekels, roughly 42 thousand US dollars.</p>
+
+<h3>Is AvaTrade safe for traders?</h3>
+<p>AvaTrade is broadly regulated, but its Israeli arm was fined over misleading advertising and other matters. Treat marketing with care and compare brokers in our <a href="/brokers" class="text-primary underline underline-offset-2 hover:text-primary/80">Best Forex Brokers in 2026</a> ranking.</p>
+
+<p class="text-sm text-muted-foreground mt-8 pt-4 border-t"><em>Editor&apos;s note &amp; source: Factual points drawn from Israel Securities Authority public records. This article is not legal advice. Last updated: 10 August 2026.</em></p>
+    `,
+  },
+  {
+    id: 'post-84',
+    slug: 'naga-capex-key-way-reverse-merger-2024',
+    title: 'CAPEX Owner Takes 75 Percent of NAGA in a Reverse Merger That Heavily Dilutes Existing Shareholders',
+    excerpt: "In 2024 Key Way Group, owner of CAPEX.com, took about 75 percent of NAGA in a reverse merger, issuing 170 million new shares and heavily diluting existing holders.",
+    category: 'news',
+    editorialType: 'Opinion',
+    author: authors[3], // Clarissa Penhallow
+    publishedAt: '2026-08-10',
+    updatedAt: '2026-08-10',
+    featuredImage: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2026-08-10_NagaMerger_cover-yijMDx2IEJJcoPUG4qANmVRk63yrGl.png',
+    imageAltText: 'CAPEX takes 75 percent of NAGA in a reverse merger — BestForex.io Broker Watch cover image',
+    readingTime: '7 min read',
+    wordCount: 1050,
+    metaTitle: 'CAPEX Takes 75 Percent of NAGA in Reverse Merger | BestForex.io',
+    metaDescription: 'In 2024 Key Way Group, owner of CAPEX.com, took about 75 percent of NAGA in a reverse merger, issuing 170 million new shares and heavily diluting existing holders.',
+    tags: ['NAGA', 'CAPEX', 'Key Way Group', 'Reverse Merger', 'Merger', 'Dilution', 'Frankfurt', 'Germany', 'Corporate Governance', 'Fintech', 'Enforcement', 'Broker Watch'],
+    isFeatured: true,
+    relatedBrokers: [],
+    linkedSources: [
+      { label: 'NAGA Group — Merger Announcement', url: 'https://group.naga.com/newsroom/the-naga-group-successfully-merges-with-key-way-group' },
+    ],
+    content: `
+<p>After a difficult stretch of losses and restructuring, NAGA effectively passed control of itself to a rival. In August 2024 the German listed fintech completed a merger with Key Way Group, the owner of the trading brand CAPEX.com, in a deal that left the CAPEX side owning roughly three quarters of the combined company. The NAGA CAPEX merger is best understood as a reverse merger, in which the smaller, healthier partner takes control of the larger, distressed one.</p>
+
+<p>Under the terms, shareholders of Key Way Group, led by Octavian Patrascu, were set to own about 75 percent of the merged entity, and NAGA issued roughly 170 million new shares to bring them in. The structure also included share options amounting to a fifth of the enlarged share capital and a zero coupon convertible bond of up to 8.2 million euro, while Patrascu contributed 15 million euro of fresh equity. The enlarged group was presented as a neo broker with around 1.5 million users across more than 100 countries, targeting several million euro of annual cost savings.</p>
+
+<h2>What a Reverse Merger Really Says</h2>
+
+<p>A merger framed as a partnership can obscure what actually happened. When existing shareholders of a listed company are diluted to a minority and a counterparty ends up with three quarters of the combined business, the plainer description is that the counterparty took control. For NAGA, which had spent the prior period posting heavy losses, restating accounts and losing its auditor, the deal reads less like an expansion and more like a rescue in which the price was control of the company.</p>
+
+<p>The issue of roughly 170 million new shares is the mechanical heart of that dilution. Every new share issued to bring in the CAPEX side reduced the proportion of the company owned by everyone who held NAGA before. Dilution on this scale is not a detail. It is a transfer of ownership, and existing holders emerged with a much smaller slice of a company now controlled by others. That is the reality beneath the language of synergy and scale.</p>
+
+<h2>Why Clients Should Care About Ownership</h2>
+
+<p>Ownership might seem like a question only for investors in the shares, but it matters to clients too. Who controls a broker shapes how it is run, whose interests drive decisions, and how durable the business is. A firm that had to hand three quarters of itself to a rival to secure its future is a firm whose recent past was fragile enough to require that. The merger may well strengthen the combined group, and larger scale can bring real benefits. But the route to it tells you where NAGA stood beforehand.</p>
+
+<p>The combined CAPEX and NAGA group may prove more solid than either was alone, and consolidation is common in a crowded brokerage market. But for anyone assessing NAGA, the terms of the deal are the tell. A listed broker that diluted its own shareholders to a minority and passed control to a counterparty was not negotiating from strength. It was resolving the pressure that the previous years of losses and restructuring had built up. Clients weighing the firm should read the merger as the resolution of that pressure, not as an unrelated growth story.</p>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="bestforex-view-heading" class="rounded-xl border border-primary/30 bg-primary/5 px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-primary mb-3">BestForex.io View</p>
+  <h2 id="bestforex-view-heading" class="text-xl font-bold text-foreground mb-4">Strip Away the Synergy Language and This Is a Rescue, Not a Growth Story</h2>
+  <p class="text-foreground leading-relaxed mb-3">The NAGA deal is a reverse merger in which Key Way Group, the owner of CAPEX.com, took about 75 percent of the combined company and NAGA issued around 170 million new shares to make it happen. After years of heavy losses, a restatement and a departed auditor, that is not the shape of an expansion from strength. It is the shape of a rescue whose price was control.</p>
+  <p class="text-foreground leading-relaxed mb-3">The enlarged group may be more durable, and that would be a good outcome.</p>
+  <p class="text-foreground leading-relaxed font-medium">But the terms tell you where NAGA stood, and diluting your own shareholders to a minority to bring in a rival is not where a healthy company usually finds itself.</p>
+</section>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="about-naga-heading-84" class="rounded-xl border border-border bg-card px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">About the Company</p>
+  <h2 id="about-naga-heading-84" class="text-xl font-bold text-foreground mb-4">About NAGA</h2>
+  <div class="grid gap-4 sm:grid-cols-2 my-5">
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Deal Type</p>
+      <p class="font-semibold text-foreground">Reverse Merger, Heavy Dilution</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Acquiror</p>
+      <p class="font-semibold text-foreground">Key Way Group (CAPEX.com) — ~75% control</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">New Shares Issued</p>
+      <p class="font-semibold text-foreground">~170 million</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Fresh Equity Injected</p>
+      <p class="font-semibold text-foreground">EUR 15 million</p>
+    </div>
+  </div>
+  <p class="text-foreground leading-relaxed">NAGA Group AG is a Hamburg-based, Frankfurt-listed financial technology company operating the NAGA social and copy trading platform and brokerage. In August 2024, after a period of heavy losses and restructuring, it completed a merger with Key Way Group Ltd, the owner of CAPEX.com and led by Octavian Patrascu. Under the deal the Key Way side was set to own about 75 percent of the merged entity, NAGA issued roughly 170 million new shares, and the enlarged group was presented as a neo broker serving around 1.5 million users across more than 100 countries.</p>
+</section>
+
+<h2>Frequently Asked Questions</h2>
+
+<h3>Who owns NAGA now?</h3>
+<p>After the 2024 merger, shareholders of Key Way Group, the owner of CAPEX.com, were set to own about 75 percent of the combined company, with the original NAGA holders diluted to a minority.</p>
+
+<h3>Was the NAGA deal a takeover?</h3>
+<p>It was structured as a merger but functioned as a reverse merger, in which the CAPEX side took control by ending up with roughly three quarters of the combined business.</p>
+
+<h3>How much dilution did NAGA shareholders face?</h3>
+<p>NAGA issued around 170 million new shares to bring in the Key Way side, heavily reducing the ownership proportion of existing NAGA shareholders.</p>
+
+<h3>Is NAGA safe for traders?</h3>
+<p>The merger may make the combined group more durable, but NAGA reached it after years of financial strain. Weigh that history and compare brokers in our <a href="/brokers" class="text-primary underline underline-offset-2 hover:text-primary/80">Best Forex Brokers in 2026</a> ranking.</p>
+
+<p class="text-sm text-muted-foreground mt-8 pt-4 border-t"><em>Editor&apos;s note &amp; source: Factual points drawn from the NAGA Group investor relations newsroom. This article is not legal advice. Last updated: 10 August 2026.</em></p>
+    `,
+  },
+  {
+    id: 'post-83',
+    slug: 'avatrade-israel-atrade-isa-unlicensed-services-fine',
+    title: 'Israel Fines AvaTrade Local Arm ATrade Half a Million Shekels for Providing Services It Was Not Licensed to Give',
+    excerpt: "Israel's securities regulator fined AvaTrade's local arm ATrade 500,000 shekels, plus a conditional fine, over providing services it was not licensed to give. Full detail.",
+    category: 'news',
+    editorialType: 'Opinion',
+    author: authors[3], // Clarissa Penhallow
+    publishedAt: '2026-08-09',
+    updatedAt: '2026-08-09',
+    featuredImage: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2026-08-09_AvaTradeIsrael_cover-s91rBwNaOyxeQsxBgV8vP80KJl22fd.png',
+    imageAltText: 'Israel fines AvaTrade arm ATrade for providing unlicensed services — BestForex.io Broker Watch cover image',
+    readingTime: '7 min read',
+    wordCount: 1050,
+    metaTitle: 'AvaTrade Israel Arm Fined Over Unlicensed Services | BestForex.io',
+    metaDescription: "Israel's securities regulator fined AvaTrade's local arm ATrade 500,000 shekels, plus a conditional fine, over providing services it was not licensed to give. Full detail.",
+    tags: ['AvaTrade', 'ATrade', 'Israel', 'ISA', 'Unlicensed Services', 'Fine', 'Conditional Fine', 'CFD', 'Forex', 'Enforcement', 'Broker Watch'],
+    isFeatured: true,
+    relatedBrokers: ['avatrade'],
+    linkedSources: [
+      { label: 'Israel Securities Authority', url: 'https://www.isa.gov.il/' },
+    ],
+    content: `
+<p>Israel&apos;s securities regulator fined AvaTrade&apos;s local arm half a million shekels, and set a further half a million aside as a conditional penalty, over the firm providing services to clients that it was not licensed to give. The AvaTrade Israel fine, imposed on the subsidiary that operates under the brand ATrade, went to the most basic question a regulator can ask: was the firm allowed to do what it was doing?</p>
+
+<p>The Israel Securities Authority, the ISA, imposed a 500 thousand shekel fine, roughly 141 thousand US dollars, on AvaTrade&apos;s Israeli subsidiary for regulatory infringements that ran from late 2016 through the first quarter of 2017. The regulator found that the local arm, which operates as ATrade, had given clients services it was not licensed to provide. Alongside the immediate fine, the ISA imposed a conditional fine of the same amount, payable if the firm breached similar rules again within two years.</p>
+
+<h2>Licensed to Do What, Exactly</h2>
+
+<p>Providing services without the licence to provide them is one of the cleaner breaches a regulator can find, and one of the more serious. A licence is not a general seal of approval. It permits specific activities, and stepping outside those permissions means operating in a space the regulator never authorised. When a firm gives clients services it is not licensed for, every protection tied to proper authorisation is put in question, because the activity itself was not sanctioned.</p>
+
+<p>The conditional fine is worth understanding, because it changes the nature of the penalty. By setting aside a second 500 thousand shekels payable on a repeat breach, the ISA was not just punishing past conduct. It was putting the firm on notice, with a concrete financial consequence attached, that a similar failing within two years would be treated more harshly. A conditional penalty is a regulator signalling that it does not consider the matter fully closed, but is watching for whether the behaviour returns.</p>
+
+<h2>Not the Only Israeli Fine</h2>
+
+<p>This was not an isolated encounter with the ISA. In August 2019 the same Israeli arm was fined again, 576 thousand shekels, roughly 153 thousand US dollars, for failing to comply with regulatory requirements. A firm that draws repeated fines from its local regulator over a span of years is not a firm with a single unlucky lapse. It is one whose compliance in that market the authority has had to correct more than once, which is a meaningful pattern for anyone assessing the broker.</p>
+
+<p>AvaTrade is a regulated group in a number of major jurisdictions, and the Israeli fines concern the conduct of its local subsidiary in one market. But the substance is not trivial. Providing unlicensed services, drawing a conditional penalty, and then being fined again two years later describes a local operation that repeatedly fell short of what its regulator required. For a prospective client, the useful takeaway is that a broker&apos;s behaviour can vary by market, and that the regulator closest to a given arm is often the one with the sharpest view of how it actually operates.</p>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="bestforex-view-heading" class="rounded-xl border border-primary/30 bg-primary/5 px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-primary mb-3">BestForex.io View</p>
+  <h2 id="bestforex-view-heading" class="text-xl font-bold text-foreground mb-4">Providing Services You Are Not Licensed to Provide Is About as Fundamental a Breach as a Regulator Finds</h2>
+  <p class="text-foreground leading-relaxed mb-3">The Israel Securities Authority fined AvaTrade&apos;s local arm half a million shekels for exactly that, with another half a million held in reserve as a conditional penalty. The conditional fine is the tell &mdash; it is a regulator saying it will be watching, and that a repeat will cost more.</p>
+  <p class="text-foreground leading-relaxed mb-3">And there was a later fine, another 576 thousand shekels in 2019, which turns a single lapse into a pattern.</p>
+  <p class="text-foreground leading-relaxed font-medium">AvaTrade is regulated across several major markets, but a local arm that keeps drawing fines from its home regulator is telling you something about how it operates where the oversight is closest.</p>
+</section>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="about-atrade-heading-83" class="rounded-xl border border-border bg-card px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">About the Company</p>
+  <h2 id="about-atrade-heading-83" class="text-xl font-bold text-foreground mb-4">About ATrade (AvaTrade Israel)</h2>
+  <div class="grid gap-4 sm:grid-cols-2 my-5">
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Regulator</p>
+      <p class="font-semibold text-foreground">Israel Securities Authority (ISA)</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Jurisdiction</p>
+      <p class="font-semibold text-foreground">Israel</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Action Type</p>
+      <p class="font-semibold text-foreground">Fine, Unlicensed Services</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Penalty</p>
+      <p class="font-semibold text-foreground">NIS 500,000 + conditional NIS 500,000</p>
+    </div>
+  </div>
+  <p class="text-foreground leading-relaxed">AvaTrade is a retail forex and CFD broker founded in 2006, regulated in several major jurisdictions. Its Israeli subsidiary, operating under the brand ATrade, was fined 500 thousand shekels by the Israel Securities Authority over providing services it was not licensed to give during 2016 and 2017, with a conditional fine of the same amount, and was fined a further 576 thousand shekels in August 2019 for failing to comply with regulatory requirements.</p>
+</section>
+
+<h2>Frequently Asked Questions</h2>
+
+<h3>Is AvaTrade regulated?</h3>
+<p>Yes. AvaTrade is regulated in several major jurisdictions. The Israeli fines concern the conduct of its local subsidiary, ATrade, in Israel.</p>
+
+<h3>Why did Israel fine AvaTrade&apos;s local arm?</h3>
+<p>The Israel Securities Authority found the arm had provided services it was not licensed to give during 2016 and 2017, and fined it 500 thousand shekels plus a conditional fine of the same amount.</p>
+
+<h3>Was AvaTrade&apos;s Israeli arm fined more than once?</h3>
+<p>Yes. Beyond the 500 thousand shekel fine and its conditional penalty, the Israeli arm was fined a further 576 thousand shekels in August 2019 for failing to comply with regulatory requirements.</p>
+
+<h3>Is AvaTrade safe for traders?</h3>
+<p>AvaTrade is broadly regulated, but its Israeli arm drew repeated fines from the local regulator. A broker&apos;s conduct can vary by market. Compare brokers in our <a href="/brokers" class="text-primary underline underline-offset-2 hover:text-primary/80">Best Forex Brokers in 2026</a> ranking.</p>
+
+<p class="text-sm text-muted-foreground mt-8 pt-4 border-t"><em>Editor&apos;s note &amp; source: Factual points drawn from Israel Securities Authority public records. This article is not legal advice. Last updated: 9 August 2026.</em></p>
+    `,
+  },
+  {
+    id: 'post-82',
+    slug: 'naga-cofounder-yasin-qureshi-cum-ex-conviction',
+    title: 'NAGA Cofounder Yasin Qureshi Is Sentenced Over the Cum Ex Tax Scandal Linked to His Earlier Bank',
+    excerpt: "NAGA cofounder Yasin Qureshi was sentenced in 2024 over the Cum Ex tax scandal, tied to his earlier role at Varengold Bank. He left NAGA in 2019. Full context.",
+    category: 'news',
+    editorialType: 'Opinion',
+    author: authors[6], // Beatrix Fairmont
+    publishedAt: '2026-08-09',
+    updatedAt: '2026-08-09',
+    featuredImage: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2026-08-09_NagaQureshi_cover-5WVrO8f4DMotHTEvt7ut2t6eyu3u3E.png',
+    imageAltText: 'NAGA cofounder Yasin Qureshi convicted in the Cum Ex scandal — BestForex.io Broker Watch cover image',
+    readingTime: '7 min read',
+    wordCount: 1050,
+    metaTitle: 'NAGA Cofounder Qureshi Convicted in Cum Ex Scandal | BestForex.io',
+    metaDescription: 'NAGA cofounder Yasin Qureshi was sentenced in 2024 over the Cum Ex tax scandal, tied to his earlier role at Varengold Bank. He left NAGA in 2019. Full context.',
+    tags: ['NAGA', 'Yasin Qureshi', 'Cum Ex', 'Tax Evasion', 'Varengold Bank', 'Germany', 'Bonn', 'Criminal Conviction', 'Enforcement', 'Broker Watch'],
+    isFeatured: true,
+    relatedBrokers: [],
+    linkedSources: [
+      { label: 'Börsen-Zeitung — Varengold Gründer Anklage', url: 'https://www.boersen-zeitung.de/banken-finanzen/varengold-gruender-auf-der-anklagebank' },
+    ],
+    content: `
+<p>One of the people who cofounded and led NAGA has been convicted in one of Germany&apos;s largest financial scandals. In 2024 a German court sentenced Yasin Qureshi, a NAGA cofounder and its former chief executive, to three years and two months in prison for serious tax evasion connected to the Cum Ex affair. The conduct at issue predates NAGA and relates to his earlier role at another firm, but the connection to a broker&apos;s founder is a matter of legitimate public interest.</p>
+
+<p>Qureshi cofounded NAGA in 2015 and served as chief executive of the group until April 2019, when he left the company. Before NAGA, he had been chief executive of Varengold Bank. It was in that earlier capacity that the conduct behind the conviction took place. The Cologne prosecutor accused him of involvement in four Cum Ex transactions in 2010 and 2011, through which the German treasury was defrauded of roughly 93 million euro in unjustified tax refunds. In 2024 the Bonn Regional Court convicted him of serious tax evasion and imposed the custodial sentence.</p>
+
+<h2>What Cum Ex Was</h2>
+
+<p>The Cum Ex scandal is one of the most damaging financial frauds in modern German history. In simplified terms, it involved trading shares around their dividend date in a way engineered to claim refunds of a tax that had only been paid once, or not at all, so that the state paid out the same money more than once. German courts have ruled the practice unlawful, and prosecutors have pursued bankers, traders and advisers across the industry. The sums lost to the treasury run into billions of euro, which is why the courts have handed down real prison sentences.</p>
+
+<p>It is important to be fair and precise about the boundaries of this case. The conviction concerns Qureshi&apos;s conduct at Varengold Bank in 2010 and 2011, years before NAGA existed. NAGA itself is not accused of involvement in Cum Ex, and Qureshi left the company in 2019. Nothing here is a finding against NAGA&apos;s brokerage or its current management. What it is, is a serious criminal conviction of a person who founded and ran the broker, over conduct in his prior career.</p>
+
+<h2>Why a Founder Record Belongs in the Picture</h2>
+
+<p>The reason this matters to a prospective client is due diligence, not guilt by association. When people decide whether to trust a broker, the character and history of the people who built and led it are legitimately part of the assessment. A cofounder and former chief executive being convicted of serious tax evasion in a landmark fraud scandal is exactly the kind of fact a careful person would want to know when weighing the firm, even where, as here, the conduct sits outside the company itself and in the past.</p>
+
+<p>None of this changes NAGA&apos;s current regulatory status, and it would be wrong to imply that it does. But adverse media on a broker fairly includes the documented history of its founders, stated accurately and in context. Yasin Qureshi cofounded and led NAGA, he left in 2019, and he was later convicted and sentenced to prison over Cum Ex conduct from his earlier role at Varengold Bank. Those are the facts, they are on the public record, and a diligent client is entitled to weigh them alongside everything else.</p>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="bestforex-view-heading" class="rounded-xl border border-primary/30 bg-primary/5 px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-primary mb-3">BestForex.io View</p>
+  <h2 id="bestforex-view-heading" class="text-xl font-bold text-foreground mb-4">This Is a Case That Has to Be Reported Carefully, Because Fairness Is the Whole Point</h2>
+  <p class="text-foreground leading-relaxed mb-3">Yasin Qureshi cofounded NAGA and ran it until 2019, and in 2024 a German court sentenced him to three years and two months in prison for serious tax evasion in the Cum Ex scandal. But the conduct was at Varengold Bank in 2010 and 2011, before NAGA existed, and NAGA itself is not accused of anything in the affair. So this is not a finding against the broker.</p>
+  <p class="text-foreground leading-relaxed mb-3">It is a serious criminal conviction of a person who founded and led it, over his earlier career.</p>
+  <p class="text-foreground leading-relaxed font-medium">For anyone doing real due diligence on a firm, the history of the people who built it is fair to weigh, provided it is stated accurately and in context. Here it is.</p>
+</section>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="about-naga-heading-82" class="rounded-xl border border-border bg-card px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">About the Company</p>
+  <h2 id="about-naga-heading-82" class="text-xl font-bold text-foreground mb-4">About NAGA</h2>
+  <div class="grid gap-4 sm:grid-cols-2 my-5">
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Court</p>
+      <p class="font-semibold text-foreground">Bonn Regional Court (Germany)</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Conviction</p>
+      <p class="font-semibold text-foreground">Serious Tax Evasion, Cum Ex</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Sentence</p>
+      <p class="font-semibold text-foreground">3 years 2 months imprisonment</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Conduct Predates NAGA</p>
+      <p class="font-semibold text-foreground">Yes — Varengold Bank, 2010–2011</p>
+    </div>
+  </div>
+  <p class="text-foreground leading-relaxed">NAGA Group AG is a Hamburg-based, Frankfurt-listed financial technology company. It was cofounded in 2015 by Yasin Qureshi, who served as chief executive until he left in April 2019. In 2024 the Bonn Regional Court sentenced him to three years and two months in prison for serious tax evasion connected to Cum Ex transactions in 2010 and 2011 during his time at Varengold Bank &mdash; conduct that predates NAGA and does not implicate the company itself.</p>
+</section>
+
+<h2>Frequently Asked Questions</h2>
+
+<h3>Was NAGA involved in the Cum Ex scandal?</h3>
+<p>No. The Cum Ex conduct concerned Yasin Qureshi&apos;s earlier role at Varengold Bank in 2010 and 2011, before NAGA existed. NAGA itself is not accused of involvement, and Qureshi left the company in 2019.</p>
+
+<h3>Who is Yasin Qureshi?</h3>
+<p>He cofounded NAGA in 2015 and was its chief executive until April 2019. Before NAGA he led Varengold Bank, where the conduct behind his conviction took place.</p>
+
+<h3>What was Qureshi convicted of?</h3>
+<p>In 2024 the Bonn Regional Court sentenced him to three years and two months in prison for serious tax evasion connected to four Cum Ex transactions in 2010 and 2011, which defrauded the German treasury of roughly 93 million euro.</p>
+
+<h3>Does this affect NAGA clients today?</h3>
+<p>It does not change NAGA&apos;s current regulatory status. It is background about a founder who left in 2019, offered as context for due diligence. Compare brokers in our <a href="/brokers" class="text-primary underline underline-offset-2 hover:text-primary/80">Best Forex Brokers in 2026</a> ranking.</p>
+
+<p class="text-sm text-muted-foreground mt-8 pt-4 border-t"><em>Editor&apos;s note &amp; source: Factual points drawn from Börsen-Zeitung and court reporting on the Bonn proceedings. This article is not legal advice. Last updated: 9 August 2026.</em></p>
+    `,
+  },
+  {
+    id: 'post-81',
+    slug: 'avatrade-alberta-securities-commission-settlement-2020',
+    title: 'AvaTrade Settles With Canada Alberta Regulator and Disgorges Its Revenue Over Unregistered CFD Trading',
+    excerpt: 'AvaTrade settled with the Alberta Securities Commission in 2020 over unregistered CFD trading, paying 30,000 dollars and disgorging 213,428 dollars in revenue.',
+    category: 'news',
+    editorialType: 'Opinion',
+    author: authors[6], // Beatrix Fairmont
+    publishedAt: '2026-08-08',
+    updatedAt: '2026-08-08',
+    featuredImage: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2026-08-08_AvaTradeAlberta_cover-S5mRksaYI3HigYyllEEMajZY8896J9.png',
+    imageAltText: 'AvaTrade settles with Alberta over unregistered CFD trading — BestForex.io Broker Watch cover image',
+    readingTime: '7 min read',
+    wordCount: 1050,
+    metaTitle: 'AvaTrade Settles With Alberta Over Unregistered CFDs | BestForex.io',
+    metaDescription: 'AvaTrade settled with the Alberta Securities Commission in 2020 over unregistered CFD trading, paying 30,000 dollars and disgorging 213,428 dollars in revenue.',
+    tags: ['AvaTrade', 'Alberta', 'ASC', 'Canada', 'Unregistered Trading', 'CFD', 'Settlement', 'Disgorgement', 'Enforcement', 'Broker Watch'],
+    isFeatured: true,
+    relatedBrokers: ['avatrade'],
+    linkedSources: [
+      { label: 'Alberta Securities Commission', url: 'https://www.asc.ca' },
+    ],
+    content: `
+<p>AvaTrade has settled with a Canadian securities regulator over years of unregistered trading, agreeing to pay a penalty and to hand back the revenue it earned from clients in the province of Alberta. The AvaTrade Alberta settlement, dated January 2020, closed a case built on the firm offering contracts for difference to Albertans without being registered to do so.</p>
+
+<p>The Alberta Securities Commission, the ASC, found that Ava Trade Ltd had opened and operated roughly 372 accounts for Alberta investors between May 2015 and August 2018, letting them trade contracts for difference through its online platforms while it was not registered in the province. Under the settlement, AvaTrade paid the ASC 30 thousand Canadian dollars and disgorged a further 213 thousand dollars, representing its net revenue from those trades less a 20 percent credit for cooperation.</p>
+
+<h2>Disgorgement Is the Telling Part</h2>
+
+<p>The most instructive element of this settlement is the disgorgement. A 30 thousand dollar penalty is a modest administrative fine. But requiring the firm to hand back the revenue it earned from the Alberta clients is a different kind of remedy. It reflects the principle that a firm should not keep the money it made from activity it was not permitted to carry out. Disgorging more than 200 thousand dollars of net revenue says the regulator viewed the entire Alberta business as something the firm had no right to be running.</p>
+
+<p>To its credit, AvaTrade cooperated, which earned it the 20 percent reduction, and it agreed to put things right: implementing controls to stop Alberta residents opening accounts, transferring its Canadian clients to a local broker, restricting Canadian traffic to its websites, and closing and liquidating its Canadian client accounts. The firm confirmed it had closed all of those accounts by November 2018. That cooperation is a genuine mitigating factor and belongs in the record alongside the breach.</p>
+
+<h2>Regulated Abroad, Unregistered in Alberta</h2>
+
+<p>This is the central tension of the case, and it is a common one for global brokers. AvaTrade is a regulated firm in a number of major jurisdictions. But holding licences abroad does not authorise a firm to solicit and serve clients in a Canadian province that requires its own registration. For three years, on the regulator&apos;s findings, AvaTrade did exactly that in Alberta, and the settlement is the price of unwinding it. Regulated somewhere is not the same as registered where the client actually lives.</p>
+
+<p>For a retail trader, the Alberta case carries a precise and useful lesson. When a broker advertises that it is regulated, the right follow-up question is: regulated where, and am I covered? A firm can be perfectly legitimate in its home markets and still be operating without permission in yours. AvaTrade settled, cooperated and cleaned up its Canadian business, which is to its credit, but the underlying fact remains that it served Alberta clients for years without the registration the province required.</p>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="bestforex-view-heading" class="rounded-xl border border-primary/30 bg-primary/5 px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-primary mb-3">BestForex.io View</p>
+  <h2 id="bestforex-view-heading" class="text-xl font-bold text-foreground mb-4">The Headline Number Is Small, but the Disgorgement Is the Point</h2>
+  <p class="text-foreground leading-relaxed mb-3">AvaTrade paid a 30 thousand dollar penalty and handed back more than 200 thousand dollars of net revenue it had earned from Alberta clients, because the Alberta regulator concluded it had been running that business without the registration the province required, for three years. To be fair to AvaTrade, it cooperated, took the cooperation credit, transferred its Canadian clients and shut the accounts &mdash; all of which is genuine mitigation.</p>
+  <p class="text-foreground leading-relaxed mb-3">But the shape of the remedy tells the story. Disgorging the revenue says the regulator viewed the whole Alberta operation as unauthorised.</p>
+  <p class="text-foreground leading-relaxed font-medium">Regulated in your home market is not the same as registered where your client lives, and that distinction is the one every trader should insist on.</p>
+</section>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="about-avatrade-heading-81" class="rounded-xl border border-border bg-card px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">About the Company</p>
+  <h2 id="about-avatrade-heading-81" class="text-xl font-bold text-foreground mb-4">About AvaTrade</h2>
+  <div class="grid gap-4 sm:grid-cols-2 my-5">
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Regulator</p>
+      <p class="font-semibold text-foreground">Alberta Securities Commission (ASC)</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Jurisdiction</p>
+      <p class="font-semibold text-foreground">Alberta, Canada</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Action Type</p>
+      <p class="font-semibold text-foreground">Settlement, Unregistered Trading</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Penalty</p>
+      <p class="font-semibold text-foreground">CAD 30,000 + CAD 213,428 disgorged</p>
+    </div>
+  </div>
+  <p class="text-foreground leading-relaxed">AvaTrade is a retail forex and CFD broker founded in 2006, regulated in several major jurisdictions. In a settlement dated January 2020, the Alberta Securities Commission found that its entity Ava Trade Ltd had operated roughly 372 accounts for Alberta investors between 2015 and 2018 without being registered in the province. The firm paid a 30 thousand Canadian dollar penalty, disgorged about 213 thousand dollars of revenue, and wound up its Canadian client accounts.</p>
+</section>
+
+<h2>Frequently Asked Questions</h2>
+
+<h3>Is AvaTrade regulated?</h3>
+<p>Yes. AvaTrade is regulated in several major jurisdictions. The Alberta case concerned the firm operating in a Canadian province where it was not registered, not its licences elsewhere.</p>
+
+<h3>Why did AvaTrade settle with the Alberta regulator?</h3>
+<p>The Alberta Securities Commission found it had operated roughly 372 accounts for Alberta investors between 2015 and 2018 without being registered in the province. AvaTrade settled in January 2020.</p>
+
+<h3>How much did AvaTrade pay?</h3>
+<p>It paid a 30 thousand Canadian dollar penalty and disgorged about 213 thousand dollars of net revenue, after a 20 percent credit for cooperation.</p>
+
+<h3>Is AvaTrade safe for traders?</h3>
+<p>AvaTrade is broadly regulated and cooperated with the ASC, but the case shows a licensed broker can still operate without local registration. Check authorisation in your jurisdiction and compare brokers in our <a href="/brokers" class="text-primary underline underline-offset-2 hover:text-primary/80">Best Forex Brokers in 2026</a> ranking.</p>
+
+<p class="text-sm text-muted-foreground mt-8 pt-4 border-t"><em>Editor&apos;s note &amp; source: Factual points drawn from the Alberta Securities Commission. This article is not legal advice. Last updated: 8 August 2026.</em></p>
+    `,
+  },
+  {
+    id: 'post-80',
+    slug: 'naga-group-2022-loss-auditor-restatement',
+    title: 'NAGA Group Posts a 37 Million Euro Loss for 2022 After Parting With Its Auditor and Restating Earlier Results',
+    excerpt: 'NAGA Group posted a 37 million euro loss for 2022, parted with auditor Ernst and Young, restated its 2021 results and filed late. What the turmoil means for clients.',
+    category: 'news',
+    editorialType: 'Opinion',
+    author: authors[3], // Clarissa Penhallow
+    publishedAt: '2026-08-08',
+    updatedAt: '2026-08-08',
+    featuredImage: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2026-08-08_NagaFinancials_cover-ifOg3Z4ZYheXVIBzSs2klAaDFmzvzV.png',
+    imageAltText: 'NAGA posts 37 million euro loss as its auditor departs — BestForex.io Broker Watch cover image',
+    readingTime: '7 min read',
+    wordCount: 1020,
+    metaTitle: 'NAGA Group Posts 37 Million Euro Loss for 2022 | BestForex.io',
+    metaDescription: 'NAGA Group posted a 37 million euro loss for 2022, parted with auditor Ernst and Young, restated its 2021 results and filed late. What the turmoil means for clients.',
+    tags: ['NAGA', 'Financial Results', 'Auditor', 'Ernst and Young', 'Restatement', 'Frankfurt', 'Germany', 'BaFin', 'Financial Health', 'Corporate Governance', 'Broker Watch'],
+    isFeatured: true,
+    relatedBrokers: [],
+    linkedSources: [
+      { label: 'NAGA Group — Investor Relations', url: 'https://group.naga.com/investor-relations/financial-reports' },
+    ],
+    content: `
+<p>The financial health of the broker behind a platform matters as much as its spreads, and by that measure NAGA Group had a difficult 2022. The German listed parent of the NAGA social trading brand posted a 37 million euro loss for the year, filed its accounts only after a lengthy delay, restated its earlier results, and parted ways with its auditor. For clients, a broker&apos;s own balance sheet is not an abstraction. It is part of the safety question.</p>
+
+<p>NAGA Group, the Hamburg-based, Frankfurt-listed fintech that operates the NAGA trading platform, reported a loss of around 37 million euro for 2022. It had not filed formal results since its half-year report for that year, and the delay followed a restatement of its 2021 figures and a decision to part company with its auditor, Ernst and Young, in September 2022. The company was heavily dependent on Europe for its brokerage revenue, with a large share of that coming from Germany alone.</p>
+
+<h2>When an Auditor Walks, Pay Attention</h2>
+
+<p>The departure of an auditor and the restatement of prior results are among the clearest warning signs in corporate life. An auditor exists to give investors confidence that a company&apos;s numbers can be trusted. When that relationship ends in the middle of a difficult period, and the previous year&apos;s figures have to be restated, it raises fair questions about how reliable the accounts were in the first place. Combined with a heavy loss and delayed filings, it points to a company whose financial reporting was under real strain.</p>
+
+<p>For a listed firm, these are not private matters. NAGA is quoted on the Frankfurt exchange and subject to German financial reporting oversight, which is precisely why a restatement and an auditor change draw scrutiny. The obligations that come with a public listing &mdash; timely accounts, reliable figures and proper disclosure &mdash; exist so that investors and, indirectly, clients can judge the health of the business. A year of delayed, restated accounts and a departed auditor is a year in which those assurances were shaken.</p>
+
+<h2>Why a Broker&apos;s Finances Are a Client Issue</h2>
+
+<p>It is worth being clear about why this matters to an ordinary trader, not just an investor in the shares. A broker holds client money and depends on being a going, solvent business to honour withdrawals and keep the platform running. When the parent company is posting large losses, restating results and losing its auditor, the natural question for a client is about the durability of the firm they have entrusted with their funds. Financial distress at the top of a broker group is not proof of danger to client money, but it is a legitimate reason to ask harder questions.</p>
+
+<p>NAGA continued to operate, and its Cyprus brokerage remained licensed, so this is a story of financial strain rather than collapse. But the combination is instructive. A 37 million euro loss, a restatement of the prior year, a departed auditor and late accounts together describe a broker group under serious financial pressure. For anyone choosing where to trade, the health of the company behind the platform belongs on the checklist, right next to regulation and cost, and NAGA in 2022 is a clear illustration of why.</p>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="bestforex-view-heading" class="rounded-xl border border-primary/30 bg-primary/5 px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-primary mb-3">BestForex.io View</p>
+  <h2 id="bestforex-view-heading" class="text-xl font-bold text-foreground mb-4">A Broker Is Only as Safe as the Company That Runs It</h2>
+  <p class="text-foreground leading-relaxed mb-3">NAGA Group&apos;s 2022 is worth reading. A 37 million euro loss, accounts filed only after a long delay, a restatement of the prior year&apos;s figures, and the departure of its auditor Ernst and Young add up to a year of serious financial and reporting strain at the parent of a heavily marketed trading brand.</p>
+  <p class="text-foreground leading-relaxed mb-3">None of it is proof of danger to client money, and the firm kept operating. But an auditor walking away and a restatement are among the loudest quiet signals in finance.</p>
+  <p class="text-foreground leading-relaxed font-medium">A client deciding where to keep funds should treat the financial health of the broker group as part of the safety question, not a separate one.</p>
+</section>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="about-naga-heading-80" class="rounded-xl border border-border bg-card px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">About the Company</p>
+  <h2 id="about-naga-heading-80" class="text-xl font-bold text-foreground mb-4">About NAGA</h2>
+  <div class="grid gap-4 sm:grid-cols-2 my-5">
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Regulator</p>
+      <p class="font-semibold text-foreground">BaFin (listing); CySEC (brokerage)</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Jurisdiction</p>
+      <p class="font-semibold text-foreground">Germany / Frankfurt Stock Exchange</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Action Type</p>
+      <p class="font-semibold text-foreground">Restatement, Auditor Departure, Heavy Loss</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">2022 Loss</p>
+      <p class="font-semibold text-foreground">EUR 37 million</p>
+    </div>
+  </div>
+  <p class="text-foreground leading-relaxed">NAGA Group AG is a Hamburg-based, Frankfurt-listed financial technology company that operates the NAGA social and copy trading platform and brokerage. For the 2022 financial year the company reported a loss of around 37 million euro, filed its results after a lengthy delay, restated its 2021 figures and parted ways with its auditor, Ernst and Young, in September 2022, during a period of significant financial strain. Its brokerage was heavily dependent on European, and particularly German, revenue.</p>
+</section>
+
+<h2>Frequently Asked Questions</h2>
+
+<h3>Is NAGA financially stable?</h3>
+<p>NAGA Group reported a 37 million euro loss for 2022, restated its 2021 results, filed late and parted with its auditor &mdash; a year of significant financial strain. It continued to operate, but its finances were under real pressure.</p>
+
+<h3>Why did NAGA part with its auditor?</h3>
+<p>NAGA parted ways with its auditor, Ernst and Young, in September 2022, during a period that also saw a restatement of its 2021 figures and delayed filing of its 2022 accounts.</p>
+
+<h3>Does NAGA&apos;s parent company loss affect clients?</h3>
+<p>A broker depends on being a solvent, going business to honour withdrawals and run its platform. Large parent losses are not proof of danger to client money, but they are a legitimate reason to ask harder questions.</p>
+
+<h3>Is NAGA safe for traders?</h3>
+<p>NAGA kept operating and its brokerage remained licensed, but 2022 was a year of serious financial strain. Weigh the health of the group and compare brokers in our <a href="/brokers" class="text-primary underline underline-offset-2 hover:text-primary/80">Best Forex Brokers in 2026</a> ranking.</p>
+
+<p class="text-sm text-muted-foreground mt-8 pt-4 border-t"><em>Editor&apos;s note &amp; source: Factual points drawn from the NAGA Group investor relations page and public financial disclosures. This article is not legal advice. Last updated: 8 August 2026.</em></p>
+    `,
+  },
+  {
+    id: 'post-79',
+    slug: 'avatrade-belgium-fsma-settlement',
+    title: 'AvaTrade Reaches an Agreed Settlement With Belgium Over Offering Products Without a Prospectus',
+    excerpt: "Belgium's FSMA reached an agreed settlement with AvaTrade's European arm over offering investment products without the required prospectus and unapproved marketing.",
+    category: 'news',
+    editorialType: 'Opinion',
+    author: authors[3], // Clarissa Penhallow
+    publishedAt: '2026-08-07',
+    updatedAt: '2026-08-07',
+    featuredImage: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2026-08-07_AvaTradeBelgium_cover-J7wVZnnt7QGj95i6EGk6DR1wKpfiOp.png',
+    imageAltText: "Belgium settles with AvaTrade over unapproved offers and marketing — BestForex.io Broker Watch cover image",
+    readingTime: '7 min read',
+    wordCount: 1000,
+    metaTitle: 'AvaTrade Settles With Belgium FSMA Over Prospectus | BestForex.io',
+    metaDescription: "Belgium's FSMA reached an agreed settlement with AvaTrade's European arm over offering investment products without the required prospectus and unapproved marketing.",
+    tags: ['AvaTrade', 'Belgium', 'FSMA', 'Prospectus', 'Settlement', 'Marketing', 'EU', 'CFD', 'Forex', 'Enforcement', 'Broker Watch'],
+    isFeatured: true,
+    relatedBrokers: ['avatrade'],
+    linkedSources: [
+      { label: 'FSMA — AvaTrade Settlement', url: 'https://www.fsma.be/en/news/agreed-settlement-ava-trade-eu-ltd-and-icfd-ltd' },
+    ],
+    content: `
+<p>Belgium&apos;s financial regulator has reached an agreed settlement with the European arm of AvaTrade over the way it offered investment products to Belgian clients. The AvaTrade Belgium FSMA settlement concerned two failings that go to the heart of how products may lawfully be sold to the public: offering them without the required prospectus, and marketing them without the regulator&apos;s approval.</p>
+
+<p>According to the Financial Services and Markets Authority, the FSMA, AVA TRADE EU Ltd offered investment instruments on Belgian territory without the requisite prospectus, and did not submit to the FSMA for approval any advertisement or other document relating to those public offers. The regulator reached an agreed settlement with the company over the matter. A second firm, iCFD Ltd, was named in the same settlement.</p>
+
+<h2>Why the Prospectus Rule Exists</h2>
+
+<p>The prospectus requirement is one of the oldest protections in securities law. Before a firm offers investment products to the public, it must publish an approved document setting out what the product is, how it works and what the risks are, so that investors can make an informed choice. Offering products without that approved prospectus removes a basic safeguard. The related duty to have marketing approved exists for the same reason: to stop the public being sold complex products on the strength of promotional material a regulator has never seen.</p>
+
+<p>It is fair to be precise about what this case is and is not. An agreed settlement is a negotiated resolution, not a court finding of fraud, and Belgium in this period was applying some of the strictest rules in Europe on how forex and CFD products could be marketed to retail clients. But the substance of the FSMA&apos;s concern is clear: products were offered and promoted to Belgian investors without the prospectus and marketing approvals the law required.</p>
+
+<h2>A Regulated Broker, a Local Failing</h2>
+
+<p>AvaTrade is a genuinely regulated broker in a number of major jurisdictions, and this case should be read in that context. It does not suggest the firm is unlicensed everywhere. What it shows is something narrower and still important: that in Belgium, the regulator found the firm had offered and marketed products without meeting local requirements, and resolved the matter by settlement. A broker holding licences elsewhere can still fall short of the rules in a specific market, and the FSMA acted on exactly that.</p>
+
+<p>For a retail client, the lesson is about jurisdiction. A broker being regulated in one country does not automatically mean it is authorised, or compliant, in another. The Belgian settlement is a reminder to check not just whether a broker is regulated somewhere, but whether it is properly authorised and compliant in the specific country where you are dealing with it. The rules a firm has to meet, and sometimes fails to meet, are local.</p>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="bestforex-view-heading" class="rounded-xl border border-primary/30 bg-primary/5 px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-primary mb-3">BestForex.io View</p>
+  <h2 id="bestforex-view-heading" class="text-xl font-bold text-foreground mb-4">This Is a Narrower Case Than a Fraud Finding, and It Deserves to Be Read as Exactly What It Is</h2>
+  <p class="text-foreground leading-relaxed mb-3">Belgium&apos;s FSMA reached an agreed settlement with AvaTrade&apos;s European arm over offering products without the required prospectus and marketing them without approval, at a time when Belgium was applying some of the toughest CFD marketing rules in Europe. AvaTrade is a regulated broker in several major jurisdictions, and this does not change that.</p>
+  <p class="text-foreground leading-relaxed mb-3">But it is a real regulatory settlement, and it makes a point every trader should absorb.</p>
+  <p class="text-foreground leading-relaxed font-medium">Being licensed in one country is not the same as being compliant in another, and the prospectus and marketing rules a firm skipped here exist precisely to protect the people being sold to.</p>
+</section>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="about-avatrade-heading-79" class="rounded-xl border border-border bg-card px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">About the Company</p>
+  <h2 id="about-avatrade-heading-79" class="text-xl font-bold text-foreground mb-4">About AvaTrade</h2>
+  <div class="grid gap-4 sm:grid-cols-2 my-5">
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Regulator</p>
+      <p class="font-semibold text-foreground">FSMA (Belgium)</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Jurisdiction</p>
+      <p class="font-semibold text-foreground">Belgium (EU)</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Action Type</p>
+      <p class="font-semibold text-foreground">Agreed Settlement, Prospectus &amp; Marketing</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Penalty</p>
+      <p class="font-semibold text-foreground">Agreed settlement (amount not published)</p>
+    </div>
+  </div>
+  <p class="text-foreground leading-relaxed">AvaTrade is a retail forex and CFD broker founded in 2006, regulated in several major jurisdictions including the Central Bank of Ireland, ASIC in Australia, the Financial Services Agency of Japan, South Africa&apos;s Financial Sector Conduct Authority, Abu Dhabi&apos;s regulator and the British Virgin Islands. Its European entity, AVA TRADE EU Ltd, reached an agreed settlement with Belgium&apos;s Financial Services and Markets Authority over offering investment products in Belgium without the requisite prospectus and without submitting the related marketing to the regulator for approval.</p>
+</section>
+
+<h2>Frequently Asked Questions</h2>
+
+<h3>Is AvaTrade regulated?</h3>
+<p>Yes. AvaTrade is a retail forex and CFD broker regulated in several major jurisdictions, including the Central Bank of Ireland, ASIC in Australia and the Financial Services Agency of Japan. The Belgian settlement concerned a specific local failing, not its licences elsewhere.</p>
+
+<h3>What did the FSMA find?</h3>
+<p>That AvaTrade&apos;s European arm offered investment products in Belgium without the required prospectus and did not submit the related marketing to the FSMA for approval. The regulator reached an agreed settlement over the matter.</p>
+
+<h3>Was AvaTrade fined by Belgium?</h3>
+<p>The matter was resolved through an agreed settlement with the FSMA rather than a contested penalty. It was a negotiated resolution, not a court finding of fraud.</p>
+
+<h3>Is AvaTrade safe for traders?</h3>
+<p>AvaTrade is broadly regulated, but this case shows a licensed broker can still fall short of local rules in a specific market. Always check authorisation in your own jurisdiction and compare brokers in our <a href="/brokers" class="text-primary underline underline-offset-2 hover:text-primary/80">Best Forex Brokers in 2026</a> ranking.</p>
+
+<p class="text-sm text-muted-foreground mt-8 pt-4 border-t"><em>Editor&apos;s note &amp; source: Factual points drawn from the FSMA public announcement on the agreed settlement with AVA TRADE EU Ltd and iCFD Ltd. This article is not legal advice. Last updated: 7 August 2026.</em></p>
+    `,
+  },
+  {
+    id: 'post-78',
+    slug: 'naga-markets-cysec-150000-settlement',
+    title: 'NAGA Markets Pays a 150,000 Euro Settlement to CySEC Over a Broad Sweep of Investor Protection Breaches',
+    excerpt: 'CySEC reached a 150,000 euro settlement with NAGA Markets Europe over breaches spanning authorisation, suitability, best execution and product intervention rules.',
+    category: 'news',
+    editorialType: 'Opinion',
+    author: authors[6], // Beatrix Fairmont
+    publishedAt: '2026-08-07',
+    updatedAt: '2026-08-07',
+    featuredImage: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2026-08-07_NagaCySEC_cover-UHpmNrBnlhCbtfHVXPhfSsXahank0m.png',
+    imageAltText: 'NAGA Markets pays 150,000 euro settlement to CySEC — BestForex.io Broker Watch cover image',
+    readingTime: '7 min read',
+    wordCount: 1050,
+    metaTitle: 'NAGA Markets Settles With CySEC for 150,000 Euro | BestForex.io',
+    metaDescription: 'CySEC reached a 150,000 euro settlement with NAGA Markets Europe over breaches spanning authorisation, suitability, best execution and product intervention rules.',
+    tags: ['NAGA', 'CySEC', 'Cyprus', 'EU', 'Settlement', 'Investor Protection', 'Suitability', 'Best Execution', 'Product Intervention', 'CFD', 'Forex', 'Enforcement', 'Broker Watch'],
+    isFeatured: true,
+    relatedBrokers: [],
+    linkedSources: [
+      { label: 'CySEC — Decision 95953', url: 'https://www.cysec.gov.cy/en-GB/public-info/decisions/95953/' },
+    ],
+    content: `
+<p>The Cyprus regulator has reached a 150 thousand euro settlement with NAGA Markets Europe, the licensed brokerage arm of the German listed fintech NAGA Group, over a broad sweep of possible breaches touching many of the core protections that exist for retail clients. The NAGA Markets CySEC settlement covers conduct from early 2021 to spring 2022.</p>
+
+<p>The Cyprus Securities and Exchange Commission took its decision in March 2023 and announced the settlement in December 2023. It found possible violations relating to NAGA&apos;s authorisation conditions, its organisational requirements, the information it provided to clients, the assessment of whether products were suitable and appropriate for them, the reporting it gave clients, the best execution of client orders, and the product intervention rules that limit how CFDs are sold to retail traders. NAGA Markets, which has held a Cyprus investment firm licence since 2013, paid the 150 thousand euro settlement.</p>
+
+<h2>A Settlement That Touches the Whole Client Journey</h2>
+
+<p>What stands out about this case is its breadth. The areas the regulator named are not scattered technicalities. Read in order, they track the entire relationship between a broker and a retail client. Authorisation and organisation are whether the firm is fit and properly run. Information, suitability and reporting are whether clients are told the truth, sold products that fit them, and kept properly informed. Best execution is whether their orders are handled fairly. Product intervention is whether the leverage and marketing limits that protect retail traders were respected. A settlement touching all of these is a settlement about the fundamentals, not the edges.</p>
+
+<p>A settlement under the Cyprus mechanism closes a case without a full public finding of liability, and the money goes to the state treasury rather than to the regulator. Firms often prefer this route because it avoids a contested ruling. But a 150 thousand euro payment across this many core areas is not a nominal gesture. The regulator does not open and settle a case spanning authorisation, suitability, best execution and product intervention over nothing. The breadth is the message.</p>
+
+<h2>The Broker Behind a Well Known Brand</h2>
+
+<p>NAGA is a well-known name in social and copy trading, marketed heavily across Europe, and its brokerage is run through NAGA Markets Europe under a Cyprus licence. A client drawn in by the NAGA brand and its social trading features would not necessarily know that the licensed entity behind it had settled a wide-ranging investor protection case with its regulator. That gap between a slick consumer brand and the compliance record of the entity underneath it is a running theme in this sector, and NAGA is a prominent example of it.</p>
+
+<p>NAGA Markets remains a licensed Cyprus firm, and a settlement is not a shutdown. But the shape of this one is worth a prospective client&apos;s attention. When a regulator settles for a substantial sum over authorisation, suitability, best execution and the retail protection rules all at once, it is describing a firm that fell short across the areas that matter most to an ordinary trader. The brand is well marketed. The record underneath it is what a careful client should actually read.</p>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="bestforex-view-heading" class="rounded-xl border border-primary/30 bg-primary/5 px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-primary mb-3">BestForex.io View</p>
+  <h2 id="bestforex-view-heading" class="text-xl font-bold text-foreground mb-4">The Number Is Ordinary. The List of Areas It Covers Is Not.</h2>
+  <p class="text-foreground leading-relaxed mb-3">Authorisation, organisation, client information, suitability, reporting, best execution and the product intervention rules amount to almost the entire span of what a retail client relies on, and CySEC settled with NAGA Markets across all of them for conduct in 2021 and 2022.</p>
+  <p class="text-foreground leading-relaxed mb-3">A settlement avoids a full finding, which is why firms take it, but a regulator does not reach for one this broad without having found real problems.</p>
+  <p class="text-foreground leading-relaxed font-medium">NAGA is a heavily marketed social trading brand, and this is the compliance record of the licensed firm behind it. Read the entity, not the advertising.</p>
+</section>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="about-naga-heading-78" class="rounded-xl border border-border bg-card px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">About the Company</p>
+  <h2 id="about-naga-heading-78" class="text-xl font-bold text-foreground mb-4">About NAGA Markets</h2>
+  <div class="grid gap-4 sm:grid-cols-2 my-5">
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Regulator</p>
+      <p class="font-semibold text-foreground">CySEC (Cyprus)</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Jurisdiction</p>
+      <p class="font-semibold text-foreground">Cyprus (EU)</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Action Type</p>
+      <p class="font-semibold text-foreground">Settlement, Multiple Investor Protection Breaches</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Penalty</p>
+      <p class="font-semibold text-foreground">EUR 150,000</p>
+    </div>
+  </div>
+  <p class="text-foreground leading-relaxed">NAGA Markets Europe Ltd is the Cyprus-based brokerage arm of NAGA Group, a German-listed financial technology company known for its social and copy trading platform, and holds a Cyprus investment firm licence granted in 2013. In a decision taken in March 2023 and announced in December 2023, the Cyprus Securities and Exchange Commission reached a 150 thousand euro settlement with the firm over possible breaches spanning authorisation conditions, organisational requirements, client information, suitability and appropriateness, client reporting, best execution and product intervention rules, under the Investment Services and Activities and Regulated Markets Law of 2017.</p>
+</section>
+
+<h2>Frequently Asked Questions</h2>
+
+<h3>Is NAGA regulated?</h3>
+<p>Yes. NAGA&apos;s brokerage, NAGA Markets Europe Ltd, holds a Cyprus investment firm licence and is supervised by CySEC, which reached the 2023 settlement with it.</p>
+
+<h3>Why did NAGA Markets settle with CySEC?</h3>
+<p>Over possible breaches spanning authorisation, organisation, client information, suitability, reporting, best execution and product intervention rules, for conduct between January 2021 and April 2022. It paid a 150 thousand euro settlement.</p>
+
+<h3>How much was the settlement?</h3>
+<p>It was 150 thousand euro, paid to the Cyprus state treasury under the settlement mechanism.</p>
+
+<h3>Is NAGA safe for traders?</h3>
+<p>NAGA Markets remains licensed, but it settled a wide-ranging CySEC case. Weigh that record and compare brokers in our <a href="/brokers" class="text-primary underline underline-offset-2 hover:text-primary/80">Best Forex Brokers in 2026</a> ranking.</p>
+
+<p class="text-sm text-muted-foreground mt-8 pt-4 border-t"><em>Editor&apos;s note &amp; source: Factual points drawn from the CySEC public decisions register, decision reference 95953. This article is not legal advice. Last updated: 7 August 2026.</em></p>
+    `,
+  },
+  // ─── Posts 73–77 added 2026-08-06 ────────────────────────────────────────────
   // All dated 2026-08-16 through 2026-08-20 — fully scheduled, live via ISR.
   {
     id: 'post-77',
