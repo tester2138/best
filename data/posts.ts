@@ -103,6 +103,794 @@ export const authors: Author[] = [
 
 export const posts: Post[] = [
   // ─── Scheduled Enforcement Posts (future dates) ──────────────────────────────
+  // Posts 63–72 added 2026-08-06.
+  // post-63 (FXTB) dated 2026-08-06 — published immediately (today).
+  // Posts 64–72 dated 2026-08-07 through 2026-08-15 — scheduled, live via ISR.
+  {
+    id: 'post-72',
+    slug: 'fxvc-finteractive-cysec-fine-licence-renounced',
+    title: 'FXVC Operator Finteractive Pays a 100,000 Euro Fine to CySEC, Then Renounces Its Cyprus Licence',
+    excerpt: 'CySEC fined FXVC operator Finteractive 100,000 euro over conduct and anti-money laundering shortcomings, and the broker then renounced its Cyprus licence. A fine followed by a voluntary exit is still a warning.',
+    category: 'news',
+    editorialType: 'Opinion',
+    author: authors[3], // Clarissa Penhallow
+    publishedAt: '2026-08-15',
+    updatedAt: '2026-08-15',
+    featuredImage: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2026-08-15_FXVC_cover-9v5bmqXm0aAIHTfzFyAbxwxrgd2s0d.png',
+    imageAltText: 'CySEC enforcement documents on a desk with FXVC branding in the background, a 100,000 euro fine notice and licence renunciation stamp — FXVC fined then renounces Cyprus licence. BestForex.io Broker Watch.',
+    readingTime: '6 min read',
+    wordCount: 950,
+    metaTitle: 'FXVC Fined 100,000 Euro by CySEC, Renounces Licence | BestForex.io',
+    metaDescription: 'CySEC fined FXVC operator Finteractive 100,000 euro over conduct and anti-money laundering shortcomings, and the broker then renounced its Cyprus licence. Full detail.',
+    tags: ['FXVC', 'Finteractive', 'CySEC', 'Cyprus', 'EU', 'Fine', 'Licence Renunciation', 'AML', 'CFD', 'Forex', 'Enforcement', 'Broker Watch'],
+    isFeatured: true,
+    relatedBrokers: [],
+    linkedSources: [
+      { label: 'CySEC — Public Decisions', url: 'https://www.cysec.gov.cy/en-GB/public-info/decisions/' },
+    ],
+    content: `
+<p>The Cyprus regulator fined the operator of the retail broker FXVC 100 thousand euro over shortcomings in its regulatory obligations, and the firm then gave up its Cyprus licence. The FXVC CySEC fine, imposed in May 2022, sat alongside the broker&apos;s decision to renounce the authorisation it had traded under.</p>
+
+<p>The Cyprus Securities and Exchange Commission fined Finteractive Ltd, which operated as FXVC, 100 thousand euro over shortcomings in the company&apos;s regulatory obligations. The violations related to the general principles of conduct that govern how a firm must behave, and to the requirements of the law on the prevention of money laundering and terrorist financing. Separately, the firm chose to renounce its Cyprus investment firm licence.</p>
+
+<h2>Conduct and Money Laundering Together</h2>
+
+<p>The pairing of failings in this case is worth noting. The general principles of conduct are the broad duties that require a firm to act honestly, fairly and in its clients&apos; interests. The money laundering rules are the controls that verify who clients are and keep the firm from being used to move illicit funds. A fine touching both is a regulator finding weakness in how the firm behaved toward clients and in how it guarded against financial crime at the same time. Neither is a minor category.</p>
+
+<p>CySEC was careful to note that FXVC&apos;s surrender of its licence was a voluntary decision by the company and did not itself arise from regulatory action. That distinction is fair and belongs in the record. But the 100 thousand euro fine did arise from the regulator&apos;s findings, and it is the substance of the case. A voluntary exit does not erase a penalty imposed for real shortcomings. It simply follows it.</p>
+
+<h2>What a Renounced Licence Leaves Behind</h2>
+
+<p>When FXVC handed back its Cyprus authorisation, the European protections that came with it went too. For any client who had dealt with the broker on the strength of its Cyprus licence, the framework they were relying on &mdash; the conduct rules, the oversight, the compensation arrangements &mdash; no longer applies to the exited entity. A firm that has been fined and has then left the regulated regime is not a firm a new client should be approaching on the basis of a licence it no longer holds.</p>
+
+<p>The FXVC case follows a pattern that recurs across Cyprus: a fine for conduct and money laundering shortcomings, and then a departure from the regime. The firm is entitled to leave voluntarily, and the regulator was right to say so. But for a prospective client, the useful facts are simple. FXVC was fined 100 thousand euro over how it behaved and how it guarded against financial crime, and it no longer holds the licence it once traded under. Both belong on the record, and both point the same way.</p>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="bestforex-view-heading" class="rounded-xl border border-primary/30 bg-primary/5 px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-primary mb-3">BestForex.io View</p>
+  <h2 id="bestforex-view-heading" class="text-xl font-bold text-foreground mb-4">A Fine for Conduct and Financial Crime Controls, Then a Voluntary Exit</h2>
+  <p class="text-foreground leading-relaxed mb-3">FXVC was fined 100 thousand euro by CySEC over two things that matter: the general principles of honest conduct toward clients and the controls that guard against money laundering. It then renounced its Cyprus licence.</p>
+  <p class="text-foreground leading-relaxed mb-3">The regulator fairly noted that the exit was voluntary and not itself an enforcement outcome, and that belongs in the record. But the fine was an enforcement outcome, imposed for real shortcomings, and a voluntary departure afterward does not undo it.</p>
+  <p class="text-foreground leading-relaxed font-medium">For a trader the takeaway is plain. This is a broker that was penalised over conduct and financial crime controls and then left the regulated system, and neither half of that is a reason to trust it with money.</p>
+</section>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="about-fxvc-heading" class="rounded-xl border border-border bg-card px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">About the Company</p>
+  <h2 id="about-fxvc-heading" class="text-xl font-bold text-foreground mb-4">About FXVC</h2>
+  <div class="grid gap-4 sm:grid-cols-2 my-5">
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Regulator</p>
+      <p class="font-semibold text-foreground">CySEC (Cyprus)</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">CIF Licence</p>
+      <p class="font-semibold text-foreground">238/14 (renounced)</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Action Type</p>
+      <p class="font-semibold text-foreground">Fine Then Voluntary Licence Renunciation</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Penalty</p>
+      <p class="font-semibold text-foreground">EUR 100,000</p>
+    </div>
+  </div>
+  <p class="text-foreground leading-relaxed mb-3">Finteractive Ltd, which operated as FXVC, was a Cyprus investment firm offering retail forex and CFD trading, supervised by the Cyprus Securities and Exchange Commission under licence 238/14. In May 2022 CySEC fined the firm 100 thousand euro over shortcomings in its regulatory obligations, related to the general principles of conduct and the law on preventing money laundering and terrorist financing.</p>
+  <p class="text-foreground leading-relaxed">The company subsequently renounced its Cyprus licence, which CySEC noted was a voluntary decision.</p>
+</section>
+
+<p class="text-sm text-muted-foreground mt-8 pt-4 border-t"><em>Editor&apos;s note &amp; source: Factual points are drawn from the CySEC public decisions register. This article is not legal advice. Last updated: 15 August 2026.</em></p>
+    `,
+  },
+  {
+    id: 'post-71',
+    slug: '101investing-fxbfi-cysec-fines-licence-withdrawn',
+    title: '101investing Operator FXBFI Fined by CySEC Twice, for 150,000 and 50,000 Euro, Before Losing Its Licence',
+    excerpt: 'CySEC fined FXBFI, the operator of 101investing, 150,000 euro in 2022 and a further 50,000 euro for AML failings in 2023, and later withdrew its licence. Two fines across different compliance failures before the licence goes.',
+    category: 'news',
+    editorialType: 'Opinion',
+    author: authors[6], // Beatrix Fairmont
+    publishedAt: '2026-08-14',
+    updatedAt: '2026-08-14',
+    featuredImage: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2026-08-14_101investing_cover-k7OPPxOmYS00LcHDkfha8Gla3YjBV9.png',
+    imageAltText: 'CySEC enforcement file stamped twice with fine notices for 101investing operator FXBFI, regulatory compliance documents and a withdrawn licence certificate — 101investing operator fined twice then loses licence. BestForex.io Broker Watch.',
+    readingTime: '6 min read',
+    wordCount: 1000,
+    metaTitle: '101investing Operator FXBFI Fined Twice by CySEC | BestForex.io',
+    metaDescription: 'CySEC fined FXBFI, the operator of 101investing, 150,000 euro in 2022 and 50,000 euro for AML failings in 2023, and later withdrew its licence. Full detail.',
+    tags: ['101investing', 'FXBFI', 'CySEC', 'Cyprus', 'EU', 'Fine', 'AML', 'Licence Withdrawal', 'CFD', 'Forex', 'Enforcement', 'Broker Watch'],
+    isFeatured: true,
+    relatedBrokers: [],
+    linkedSources: [
+      { label: 'CySEC — Public Decisions', url: 'https://www.cysec.gov.cy/en-GB/public-info/decisions/' },
+    ],
+    content: `
+<p>The Cyprus regulator fined FXBFI, the company behind the retail broker 101investing, twice within a year &mdash; first 150 thousand euro and then a further 50 thousand &mdash; before the firm ultimately lost its licence. The 101investing CySEC record is one of repeated correction ending in the removal of the broker from the regulated system.</p>
+
+<p>The Cyprus Securities and Exchange Commission first reached a 150 thousand euro settlement with FXBFI Broker Financial Invest Ltd in August 2022, over non-compliance with the authorisation conditions set out in the Cyprus directive that governs investment firms, including requirements around conflicts of interest and the information provided to clients. Less than a year later, in June 2023, the regulator imposed a further 50 thousand euro fine, this time for failing to meet anti-money laundering and counter terrorist financing requirements during a period spanning late 2020 and early 2021.</p>
+
+<h2>Two Different Kinds of Failure</h2>
+
+<p>What makes this pair of penalties telling is that they cover different territory. The first concerned authorisation conditions, conflicts of interest and client information &mdash; the everyday duties of running a fair investment firm. The second concerned anti-money laundering controls, the machinery that keeps a broker from being used to move dirty money and that verifies who its clients really are. Failing one is a problem. Failing both, in separate actions, points to weaknesses spread across the firm rather than confined to a single corner.</p>
+
+<p>A broker that is fined for its authorisation conditions and its financial crime controls within a single year is not a firm that made one unlucky error. It is a firm whose compliance the regulator had to correct more than once, on more than one front. That is precisely the sort of record that tends to precede more serious action, and in this case it did.</p>
+
+<h2>From Repeated Fines to a Lost Licence</h2>
+
+<p>FXBFI&apos;s licence was ultimately withdrawn, ending 101investing&apos;s life as a regulated Cyprus broker. The arc is familiar from other troubled firms: repeated penalties, then the removal of the authorisation itself. For the clients who used 101investing, the practical outcome is the same as in every such case. The protections that came with a Cyprus licence are gone, and the entity behind the brand has exited the regime that was supposed to hold it to account.</p>
+
+<p>The 101investing story is a compact illustration of how these cases build. It is rarely one dramatic event. More often it is a sequence: a fine here, another there, across different areas, until the pattern is undeniable and the licence goes. A prospective client who saw only the brand, or only one of the fines, would have missed the shape of it. The record only makes sense read in full, and read in full it is a clear warning.</p>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="bestforex-view-heading" class="rounded-xl border border-primary/30 bg-primary/5 px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-primary mb-3">BestForex.io View</p>
+  <h2 id="bestforex-view-heading" class="text-xl font-bold text-foreground mb-4">Two Fines, Two Different Failures, One Withdrawn Licence</h2>
+  <p class="text-foreground leading-relaxed mb-3">Two CySEC fines in under a year &mdash; 150 thousand euro over authorisation conditions and client duties, then 50 thousand over anti-money laundering controls &mdash; and finally a withdrawn licence. That is the FXBFI record behind the 101investing brand.</p>
+  <p class="text-foreground leading-relaxed mb-3">The two fines matter because they cover different ground: the everyday duties of a fair firm and the financial crime controls that protect client money. Together they point to weakness spread across the business. The licence loss at the end is the logical conclusion.</p>
+  <p class="text-foreground leading-relaxed font-medium">Read the whole sequence, because any single piece of it understates the problem.</p>
+</section>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="about-101investing-heading" class="rounded-xl border border-border bg-card px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">About the Company</p>
+  <h2 id="about-101investing-heading" class="text-xl font-bold text-foreground mb-4">About 101investing</h2>
+  <div class="grid gap-4 sm:grid-cols-2 my-5">
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Regulator</p>
+      <p class="font-semibold text-foreground">CySEC (Cyprus)</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Operator</p>
+      <p class="font-semibold text-foreground">FXBFI Broker Financial Invest Ltd</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Action Type</p>
+      <p class="font-semibold text-foreground">Two Fines Then Licence Withdrawal</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Penalties</p>
+      <p class="font-semibold text-foreground">EUR 150,000 + EUR 50,000</p>
+    </div>
+  </div>
+  <p class="text-foreground leading-relaxed mb-3">FXBFI Broker Financial Invest Ltd was a Cyprus investment firm that operated the retail forex and CFD broker 101investing, supervised by the Cyprus Securities and Exchange Commission. In August 2022 CySEC reached a 150 thousand euro settlement with the firm over authorisation conditions, conflicts of interest and client information, and in June 2023 fined it a further 50 thousand euro for anti-money laundering and counter terrorist financing failings.</p>
+  <p class="text-foreground leading-relaxed">The firm&apos;s licence was subsequently withdrawn.</p>
+</section>
+
+<p class="text-sm text-muted-foreground mt-8 pt-4 border-t"><em>Editor&apos;s note &amp; source: Factual points are drawn from the CySEC public decisions register. This article is not legal advice. Last updated: 14 August 2026.</em></p>
+    `,
+  },
+  {
+    id: 'post-70',
+    slug: 'magnum-fx-cysec-fine-licence-withdrawal',
+    title: 'Magnum FX Fined 150,000 Euro by CySEC Over Licence Conditions, Then Hands Back Its Cyprus Authorisation',
+    excerpt: 'CySEC fined Magnum FX 150,000 euro over authorisation and licence condition failings for 2019 to 2020, and the broker later renounced its Cyprus licence. A firm that struggled to hold the standard its licence required and ultimately left the regime.',
+    category: 'news',
+    editorialType: 'Opinion',
+    author: authors[3], // Clarissa Penhallow
+    publishedAt: '2026-08-13',
+    updatedAt: '2026-08-13',
+    featuredImage: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2026-08-13_MagnumFX_cover-O4e4KLzzRQfaKvBNjErMXUHyQ8qkCm.png',
+    imageAltText: 'CySEC fine notice on a compliance desk with Magnum FX branding, a withdrawn Cyprus licence certificate and FCA suspension records in background — Magnum FX fined 150,000 euro then hands back Cyprus licence. BestForex.io Broker Watch.',
+    readingTime: '6 min read',
+    wordCount: 950,
+    metaTitle: 'Magnum FX Fined 150,000 Euro by CySEC | BestForex.io',
+    metaDescription: 'CySEC fined Magnum FX 150,000 euro over authorisation and licence condition failings for 2019 to 2020, and the broker later renounced its Cyprus licence. Full breakdown.',
+    tags: ['Magnum FX', 'CySEC', 'FCA', 'Cyprus', 'EU', 'United Kingdom', 'Fine', 'Licence Renunciation', 'CFD', 'Forex', 'Enforcement', 'Broker Watch'],
+    isFeatured: true,
+    relatedBrokers: [],
+    linkedSources: [
+      { label: 'CySEC — Public Decisions', url: 'https://www.cysec.gov.cy/en-GB/public-info/decisions/' },
+    ],
+    content: `
+<p>The Cyprus regulator fined the retail broker Magnum FX 150 thousand euro over failures to meet the conditions of its own authorisation, and the firm later handed that authorisation back. The Magnum FX CySEC fine, paired with a matching penalty on another broker, was followed by the withdrawal of the firm&apos;s licence after a voluntary renunciation.</p>
+
+<p>The Cyprus Securities and Exchange Commission fined Magnum FX (Cyprus) Ltd 150 thousand euro over concerns that included meeting the requirements for its authorisation as a Cyprus investment firm and satisfying its operating licence conditions between January 2019 and July 2020. The penalty was one half of a 300 thousand euro pair of fines the regulator handed to two Cyprus brokers at the same time.</p>
+
+<h2>Failing the Conditions of Your Own Licence</h2>
+
+<p>The core of the case is licence conditions, and it is worth restating why that is serious. A Cyprus investment firm licence is granted on conditions the firm must keep meeting: capital, systems, governance and the terms of its authorisation among them. When a regulator finds that a firm failed to satisfy those conditions across an eighteen-month stretch, it is finding that the firm was not maintaining the standard it was licensed on. Everything a client relies on assumes those conditions are being met.</p>
+
+<p>Magnum FX also sits in a group of Cyprus brokers that had earlier been suspended at the request of the United Kingdom regulator. That cross-border history, combined with a home regulator fine over authorisation conditions, describes a firm that had drawn scrutiny from more than one direction. A 150 thousand euro penalty in that context is not an isolated stumble. It is part of a longer story of a broker under pressure.</p>
+
+<h2>Fine First, Exit Later</h2>
+
+<p>What happened next completes the picture. Magnum FX went on to renounce its Cyprus licence, and CySEC withdrew the authorisation. As with other firms that follow this path, a voluntary renunciation can look tidier than a forced removal, but the sequence is telling. A firm that is fined over its licence conditions and then hands the licence back has not simply moved on to other things. It has exited the regime under which it was penalised, taking the European protections its clients relied on with it.</p>
+
+<p>For a retail client, the Magnum FX arc is a familiar and instructive one. A fine over authorisation conditions, a history of cross-border scrutiny, and then a licence handed back. Each element is a signal, and together they describe a broker that struggled to hold the standard its licence required and ultimately left the regime.</p>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="bestforex-view-heading" class="rounded-xl border border-primary/30 bg-primary/5 px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-primary mb-3">BestForex.io View</p>
+  <h2 id="bestforex-view-heading" class="text-xl font-bold text-foreground mb-4">Fined Over Licence Conditions, Earlier Suspended by the FCA, Then Gone</h2>
+  <p class="text-foreground leading-relaxed mb-3">Magnum FX was fined 150 thousand euro for failing to meet the conditions of its own Cyprus licence over an eighteen-month period, sat among a group of brokers earlier suspended at the UK regulator&apos;s request, and then renounced its authorisation altogether.</p>
+  <p class="text-foreground leading-relaxed mb-3">A voluntary exit can look neater than a forced one, but the sequence &mdash; fine over licence conditions first and departure second &mdash; is the story.</p>
+  <p class="text-foreground leading-relaxed font-medium">Read the whole trajectory, and treat a penalty followed by an exit as exactly the warning it is.</p>
+</section>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="about-magnumfx-heading" class="rounded-xl border border-border bg-card px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">About the Company</p>
+  <h2 id="about-magnumfx-heading" class="text-xl font-bold text-foreground mb-4">About Magnum FX</h2>
+  <div class="grid gap-4 sm:grid-cols-2 my-5">
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Regulator</p>
+      <p class="font-semibold text-foreground">CySEC (Cyprus)</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Cross-Border</p>
+      <p class="font-semibold text-foreground">Earlier FCA suspension</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Action Type</p>
+      <p class="font-semibold text-foreground">Fine Then Licence Withdrawal</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Penalty</p>
+      <p class="font-semibold text-foreground">EUR 150,000</p>
+    </div>
+  </div>
+  <p class="text-foreground leading-relaxed mb-3">Magnum FX (Cyprus) Ltd was a Cyprus investment firm offering retail forex and CFD trading, authorised and supervised by the Cyprus Securities and Exchange Commission. In 2022 CySEC fined the firm 150 thousand euro over failings that included meeting its authorisation requirements and operating licence conditions between January 2019 and July 2020, part of a 300 thousand euro pair of fines on two Cyprus brokers.</p>
+  <p class="text-foreground leading-relaxed">The firm was earlier suspended at the request of the United Kingdom&apos;s Financial Conduct Authority, and later renounced its Cyprus licence, which CySEC withdrew.</p>
+</section>
+
+<p class="text-sm text-muted-foreground mt-8 pt-4 border-t"><em>Editor&apos;s note &amp; source: Factual points are drawn from the CySEC public decisions register. This article is not legal advice. Last updated: 13 August 2026.</em></p>
+    `,
+  },
+  {
+    id: 'post-69',
+    slug: 'f1-markets-cysec-fine-2022',
+    title: 'F1 Markets Fined 150,000 Euro by CySEC for Compliance Breaches After an Earlier Suspension at the FCA Request',
+    excerpt: 'CySEC fined retail forex broker F1 Markets 150,000 euro over compliance breaches in 2022, following an earlier suspension made at the request of the UK\'s FCA. A layered record across more than one jurisdiction.',
+    category: 'news',
+    editorialType: 'Opinion',
+    author: authors[6], // Beatrix Fairmont
+    publishedAt: '2026-08-12',
+    updatedAt: '2026-08-12',
+    featuredImage: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2026-08-12_F1Markets_cover-NnQDHAlFtVRrxn0IuwAJ8vbCJ401ai.png',
+    imageAltText: 'CySEC compliance fine documents alongside FCA suspension notice for F1 Markets, regulatory enforcement papers stacked on a desk — F1 Markets fined 150,000 euro by CySEC after earlier FCA suspension. BestForex.io Broker Watch.',
+    readingTime: '6 min read',
+    wordCount: 980,
+    metaTitle: 'F1 Markets Fined 150,000 Euro by CySEC | BestForex.io',
+    metaDescription: 'CySEC fined retail forex broker F1 Markets 150,000 euro over compliance breaches in 2022, following an earlier suspension made at the request of the UK\'s FCA. Full breakdown.',
+    tags: ['F1 Markets', 'CySEC', 'FCA', 'Cyprus', 'EU', 'United Kingdom', 'Fine', 'Compliance', 'CFD', 'Forex', 'Enforcement', 'Broker Watch'],
+    isFeatured: true,
+    relatedBrokers: [],
+    linkedSources: [
+      { label: 'CySEC — Public Decisions', url: 'https://www.cysec.gov.cy/en-GB/public-info/decisions/' },
+    ],
+    content: `
+<p>The Cyprus regulator has fined the retail forex broker F1 Markets 150 thousand euro over a set of compliance breaches, part of a pair of penalties it handed to two Cyprus brokers at the same time. The F1 Markets CySEC fine is notable not just for its size but for what came before it &mdash; a suspension made at the request of the United Kingdom regulator.</p>
+
+<p>The Cyprus Securities and Exchange Commission fined F1 Markets Ltd 150 thousand euro for several possible compliance violations. The penalty came alongside a matching fine for another Cyprus firm, together totalling 300 thousand euro in retail forex broker penalties. F1 Markets was one of the two names in that action.</p>
+
+<h2>A Suspension at the FCA Request</h2>
+
+<p>The more striking part of F1 Markets&apos; history is what happened earlier. CySEC had previously suspended the firm, along with several other Cyprus brokers, at the request of the United Kingdom&apos;s Financial Conduct Authority. When one regulator asks another to suspend a firm, it is a serious cross-border signal. It means concerns raised in one jurisdiction were considered grave enough to prompt action by the firm&apos;s home supervisor. The licences were later restored, but the episode is part of the record.</p>
+
+<p>Set against that background, a subsequent 150 thousand euro fine for compliance breaches reads as more than an isolated event. It is a firm that had already drawn the attention of a foreign regulator, had its licence suspended and restored, and then was penalised by its home regulator for further compliance failings. Each step on its own might be survivable. Together they describe a broker whose compliance has been repeatedly in question.</p>
+
+<h2>Reading a Layered Record</h2>
+
+<p>For a prospective client, the F1 Markets case shows why a broker&apos;s history has to be read as a whole rather than one headline at a time. A single fine, a single suspension, or a single restoration each tells only part of the story. Stacked together, they reveal a firm that has moved in and out of regulatory trouble across more than one jurisdiction. That layered record is far more informative than any single number, and it is exactly the kind of thing a careful trader should assemble before trusting a broker.</p>
+
+<p>F1 Markets continued to operate as a licensed Cyprus firm after these events, and none of this is an allegation of ongoing wrongdoing. But the pattern is the point. A broker that has been suspended at a foreign regulator&apos;s request and then fined at home for compliance breaches is not a firm with a clean, quiet record. In a crowded market, that history is a legitimate reason to choose more carefully, and to prefer brokers whose regulatory files are thin.</p>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="bestforex-view-heading" class="rounded-xl border border-primary/30 bg-primary/5 px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-primary mb-3">BestForex.io View</p>
+  <h2 id="bestforex-view-heading" class="text-xl font-bold text-foreground mb-4">The 150,000 Euro Fine Is Only Half the Story</h2>
+  <p class="text-foreground leading-relaxed mb-3">The other half is that CySEC had earlier suspended the firm at the request of the United Kingdom&apos;s FCA &mdash; a cross-border intervention that does not happen over trivial concerns. The licence was restored, but a home regulator fine for compliance breaches then followed.</p>
+  <p class="text-foreground leading-relaxed mb-3">Read in isolation, each event is survivable. Read together, they describe a broker that has repeatedly been in regulatory trouble across more than one jurisdiction.</p>
+  <p class="text-foreground leading-relaxed font-medium">That layered record is more revealing than any single penalty, and it is the kind of history a trader should assemble before trusting any firm with money.</p>
+</section>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="about-f1markets-heading" class="rounded-xl border border-border bg-card px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">About the Company</p>
+  <h2 id="about-f1markets-heading" class="text-xl font-bold text-foreground mb-4">About F1 Markets</h2>
+  <div class="grid gap-4 sm:grid-cols-2 my-5">
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Regulator</p>
+      <p class="font-semibold text-foreground">CySEC (Cyprus)</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Cross-Border</p>
+      <p class="font-semibold text-foreground">Earlier FCA-requested suspension</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Action Type</p>
+      <p class="font-semibold text-foreground">Fine, Compliance Breaches</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Penalty</p>
+      <p class="font-semibold text-foreground">EUR 150,000</p>
+    </div>
+  </div>
+  <p class="text-foreground leading-relaxed mb-3">F1 Markets Ltd is a Cyprus investment firm offering retail forex and CFD trading, authorised and supervised by the Cyprus Securities and Exchange Commission. It was previously suspended by CySEC at the request of the United Kingdom&apos;s Financial Conduct Authority, and its licence was later restored.</p>
+  <p class="text-foreground leading-relaxed">In 2022 CySEC fined the firm 150 thousand euro over several possible compliance violations, as part of a pair of penalties totalling 300 thousand euro imposed on two Cyprus brokers.</p>
+</section>
+
+<p class="text-sm text-muted-foreground mt-8 pt-4 border-t"><em>Editor&apos;s note &amp; source: Factual points are drawn from the CySEC public decisions register. This article is not legal advice. Last updated: 12 August 2026.</em></p>
+    `,
+  },
+  {
+    id: 'post-68',
+    slug: 'axiance-icc-intercertus-cysec-settlement',
+    title: 'Axiance Operator ICC Intercertus Capital Pays 100,000 Euro to CySEC Over How It Marketed CFDs to Retail Clients',
+    excerpt: 'CySEC reached a 100,000 euro settlement with ICC Intercertus Capital, the operator of Axiance, over the rules on marketing, distribution and sales of CFDs to retail clients. The way a broker sells is often the truest signal of how it will treat you.',
+    category: 'news',
+    editorialType: 'Opinion',
+    author: authors[3], // Clarissa Penhallow
+    publishedAt: '2026-08-11',
+    updatedAt: '2026-08-11',
+    featuredImage: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2026-08-11_Axiance_cover-3WegW9PhPn9MByD13ivCXvITPupH51.png',
+    imageAltText: 'CySEC settlement notice on a marketing compliance desk with Axiance brand materials, CFD distribution rulebook open — Axiance operator settles with CySEC for 100,000 euro over CFD marketing rules. BestForex.io Broker Watch.',
+    readingTime: '6 min read',
+    wordCount: 900,
+    metaTitle: 'Axiance Operator Settles With CySEC for 100,000 Euro | BestForex.io',
+    metaDescription: 'CySEC reached a 100,000 euro settlement with ICC Intercertus Capital, the operator of Axiance, over the rules on marketing, distribution and sales of CFDs to retail clients.',
+    tags: ['Axiance', 'ICC Intercertus Capital', 'CySEC', 'Cyprus', 'EU', 'Settlement', 'CFD Marketing', 'CFD', 'Forex', 'Enforcement', 'Broker Watch'],
+    isFeatured: true,
+    relatedBrokers: [],
+    linkedSources: [
+      { label: 'CySEC — Public Decisions', url: 'https://www.cysec.gov.cy/en-GB/public-info/decisions/' },
+    ],
+    content: `
+<p>The Cyprus regulator has reached a 100 thousand euro settlement with ICC Intercertus Capital, the company behind the retail broker Axiance, over the way it marketed and sold contracts for difference to retail clients. The Axiance CySEC settlement lands on one of the most sensitive areas in the whole retail trading rulebook.</p>
+
+<p>The Cyprus Securities and Exchange Commission settled with ICC Intercertus Capital over possible violations of its rules concerning the marketing, distribution and sales of CFDs to retail clients. Those rules, tightened across Europe after years of heavy retail losses, govern exactly how these high-risk products can be promoted and sold to ordinary people. The firm paid 100 thousand euro to close the matter.</p>
+
+<h2>Marketing Rules Exist Because Marketing Caused the Harm</h2>
+
+<p>It is worth being clear about why the marketing and distribution rules for CFDs are so strict. For years, aggressive promotion is precisely how retail clients were pulled into products most of them went on to lose money in. Regulators responded by restricting how CFDs can be advertised, what can be promised, and how they are distributed and sold. A settlement over those rules is therefore not a trivial matter. It touches the exact conduct the regime was built to control.</p>
+
+<p>A 100 thousand euro settlement does not, on its own, prove a specific harm to a specific client. But it records that the regulator had concerns serious enough about how Axiance was marketed and sold to open and resolve a case. In a sector where the front door &mdash; the advertising and the sales process &mdash; is where most damage begins, a settlement about that front door deserves attention rather than a shrug.</p>
+
+<h2>Axiance and the Company Behind It</h2>
+
+<p>The brand traders encounter is Axiance. The licensed company that settled with CySEC is ICC Intercertus Capital. As with so many Cyprus firms, the two names are not the same, and a client dealing with Axiance would not automatically know that its operator had settled a marketing and distribution case with the regulator. This gap between brand and licensed entity is a running theme, and it is exactly where a broker&apos;s regulatory history tends to sit unseen.</p>
+
+<p>Axiance remains a working brand, and a settlement is not a shutdown. But the subject of this case &mdash; how CFDs were marketed and sold to retail clients &mdash; is close to the heart of what makes retail trading risky in the first place. For a prospective client, a settlement in that area is worth more scrutiny than its modest size suggests. The way a broker sells to you is often the truest signal of how it will treat you, and a regulator has already had something to say about it here.</p>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="bestforex-view-heading" class="rounded-xl border border-primary/30 bg-primary/5 px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-primary mb-3">BestForex.io View</p>
+  <h2 id="bestforex-view-heading" class="text-xl font-bold text-foreground mb-4">A Settlement About the Front Door of the Business</h2>
+  <p class="text-foreground leading-relaxed mb-3">The CFD marketing and distribution rules exist because marketing and distribution are where retail clients got hurt, so a settlement about them is never truly minor. ICC Intercertus Capital, the operator of Axiance, paid 100 thousand euro to close a CySEC case about exactly that: how these high-risk products were promoted and sold to ordinary people.</p>
+  <p class="text-foreground leading-relaxed mb-3">The amount is modest and the firm settled without a full public finding. But the subject is the front door of the whole business &mdash; the advertising and the sales process &mdash; which is where most retail damage begins.</p>
+  <p class="text-foreground leading-relaxed font-medium">A trader should weigh a settlement about how a broker sells at least as heavily as one about back-office paperwork, because the selling is the part that reaches you.</p>
+</section>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="about-axiance-heading" class="rounded-xl border border-border bg-card px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">About the Company</p>
+  <h2 id="about-axiance-heading" class="text-xl font-bold text-foreground mb-4">About Axiance</h2>
+  <div class="grid gap-4 sm:grid-cols-2 my-5">
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Regulator</p>
+      <p class="font-semibold text-foreground">CySEC (Cyprus)</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Licensed Operator</p>
+      <p class="font-semibold text-foreground">ICC Intercertus Capital Ltd</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Action Type</p>
+      <p class="font-semibold text-foreground">Settlement, CFD Marketing Rules</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Penalty</p>
+      <p class="font-semibold text-foreground">EUR 100,000</p>
+    </div>
+  </div>
+  <p class="text-foreground leading-relaxed mb-3">ICC Intercertus Capital Ltd is a Cyprus investment firm that operates the retail forex and CFD broker Axiance, authorised and supervised by the Cyprus Securities and Exchange Commission. CySEC reached a 100 thousand euro settlement with the firm over possible violations of the rules governing the marketing, distribution and sales of contracts for difference to retail clients, and the company paid the amount to close the matter.</p>
+</section>
+
+<p class="text-sm text-muted-foreground mt-8 pt-4 border-t"><em>Editor&apos;s note &amp; source: Factual points are drawn from the CySEC public decisions register. This article is not legal advice. Last updated: 11 August 2026.</em></p>
+    `,
+  },
+  {
+    id: 'post-67',
+    slug: 'velos-global-markets-asic-licence-cancelled-2025',
+    title: 'ASIC Cancels the Australian Licence of CFD Broker Velos Global Markets After It Stopped Providing Services',
+    excerpt: 'ASIC cancelled the Australian financial services licence of CFD broker Velos Global Markets in 2025 after the firm stopped providing services under it from around May 2024. Regulated once is not the same as regulated now.',
+    category: 'news',
+    editorialType: 'Opinion',
+    author: authors[6], // Beatrix Fairmont
+    publishedAt: '2026-08-10',
+    updatedAt: '2026-08-10',
+    featuredImage: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2026-08-10_VelosGlobal_cover-JqV1HLiIJTUBKTOTmw3UNZmROMci6j.png',
+    imageAltText: 'ASIC licence cancellation notice on a desk with Velos Global Markets branding, an inactive trading terminal and a parked service status indicator — ASIC cancels Velos Global Markets licence after inactivity. BestForex.io Broker Watch.',
+    readingTime: '6 min read',
+    wordCount: 900,
+    metaTitle: 'Velos Global Markets Loses Its ASIC Licence in 2025 | BestForex.io',
+    metaDescription: 'ASIC cancelled the Australian financial services licence of CFD broker Velos Global Markets in 2025 after it stopped providing services under it. What it means for traders.',
+    tags: ['Velos Global Markets', 'ASIC', 'Australia', 'Licence Cancellation', 'CFD', 'Forex', 'Enforcement', 'Broker Watch'],
+    isFeatured: true,
+    relatedBrokers: [],
+    linkedSources: [
+      { label: 'ASIC', url: 'https://www.asic.gov.au/' },
+    ],
+    content: `
+<p>Australia&apos;s regulator has cancelled the financial services licence of Velos Global Markets, a contracts for difference broker, after the firm stopped actually providing the services its licence covered. The Velos Global Markets licence cancellation, made in September 2025, follows a period in which the firm had gone quiet, offering no services under its authorisation since around May 2024.</p>
+
+<p>The Australian Securities and Investments Commission, ASIC, cancelled the firm&apos;s Australian financial services licence on the basis that it had ceased to provide the financial services the licence authorised. Velos Global Markets had stopped offering any service under its licence from about May 2024, and the cancellation followed more than a year later. On its face this is a quieter kind of case than a fraud finding or a large fine. It still matters.</p>
+
+<h2>Why ASIC Targets Dormant Licences</h2>
+
+<p>Regulators have grown wary of firms that hold a licence but do little or nothing with it. A dormant authorisation is not harmless. It can sit on a register lending an air of legitimacy to a firm that is no longer meaningfully supervised in practice, and in the worst cases such shells can be revived or repurposed in ways that mislead clients. ASIC has made clear that a licence is a permission to conduct a live, supervised business, not a badge to be parked and displayed. When a firm stops using it, the regulator increasingly moves to cancel it.</p>
+
+<p>For Velos Global Markets specifically, the cancellation records that the firm was no longer operating as a licensed CFD business in Australia. There is a difference between a broker that is actively regulated and running, and one whose licence has been cancelled for inactivity. A client checking a register needs to know which they are looking at, because a cancelled licence offers no protection at all.</p>
+
+<h2>The Risk in a Parked Licence</h2>
+
+<p>The wider concern is what a dormant or cancelled licence can be used to suggest. Retail traders are often encouraged to check whether a broker is licensed, which is good advice. But a licence that has been cancelled, or one that is being displayed by a firm that no longer really operates under it, can create a false sense of security. The Velos case is a reminder that the status of a licence matters as much as its existence. Regulated once is not the same as regulated now.</p>
+
+<p>There is no suggestion here of the dramatic client harm seen in the worst broker collapses. But the Velos Global Markets cancellation carries a practical lesson that applies everywhere. When you check whether a broker is licensed, check the current status of that licence, not just whether a number exists. A cancelled authorisation means the firm is no longer a supervised business, and no marketing claim can put that protection back.</p>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="bestforex-view-heading" class="rounded-xl border border-primary/30 bg-primary/5 px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-primary mb-3">BestForex.io View</p>
+  <h2 id="bestforex-view-heading" class="text-xl font-bold text-foreground mb-4">Checking That a Broker Has a Licence Is Not Enough</h2>
+  <p class="text-foreground leading-relaxed mb-3">Velos Global Markets held an Australian licence, stopped providing services under it around May 2024, and had that licence cancelled by ASIC in 2025. Regulators are right to clear away dormant authorisations, because a parked licence can lend false legitimacy to a firm that is no longer really supervised.</p>
+  <p class="text-foreground leading-relaxed mb-3">For a trader, the takeaway is precise. Checking that a broker has a licence is not enough.</p>
+  <p class="text-foreground leading-relaxed font-medium">Check that the licence is current, because a cancelled one protects nobody, however impressive the number looks on a website.</p>
+</section>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="about-velosglobal-heading" class="rounded-xl border border-border bg-card px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">About the Company</p>
+  <h2 id="about-velosglobal-heading" class="text-xl font-bold text-foreground mb-4">About Velos Global Markets</h2>
+  <div class="grid gap-4 sm:grid-cols-2 my-5">
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Regulator</p>
+      <p class="font-semibold text-foreground">ASIC (Australia)</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Cancellation Date</p>
+      <p class="font-semibold text-foreground">September 2025</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Action Type</p>
+      <p class="font-semibold text-foreground">AFS Licence Cancelled, Inactivity</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Inactive Since</p>
+      <p class="font-semibold text-foreground">~May 2024</p>
+    </div>
+  </div>
+  <p class="text-foreground leading-relaxed mb-3">Velos Global Markets Pty Ltd was an Australian contracts for difference broker that held an Australian financial services licence authorising it to offer leveraged products to clients. It stopped providing services under that licence from around May 2024, and in September 2025 the Australian Securities and Investments Commission cancelled the licence on the basis that the firm had ceased to provide the financial services it authorised.</p>
+</section>
+
+<p class="text-sm text-muted-foreground mt-8 pt-4 border-t"><em>Editor&apos;s note &amp; source: Factual points are drawn from the ASIC public register. This article is not legal advice. Last updated: 10 August 2026.</em></p>
+    `,
+  },
+  {
+    id: 'post-66',
+    slug: 'jp-markets-fsca-fine-otc-derivatives',
+    title: 'FSCA Fines JP Markets 100,000 Rand for Letting Clients Trade CFDs It Was Not Properly Authorised to Offer',
+    excerpt: 'South Africa\'s FSCA fined forex broker JP Markets 100,000 rand for enabling clients to trade CFDs on forex, shares and indices without proper OTC derivatives authorisation. The question to ask any broker: are you actually authorised to sell me this?',
+    category: 'news',
+    editorialType: 'Opinion',
+    author: authors[3], // Clarissa Penhallow
+    publishedAt: '2026-08-09',
+    updatedAt: '2026-08-09',
+    featuredImage: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2026-08-09_JPMarkets_cover-LB6dSNfdNdLxv7V92wEz5v9WpTSfOF.png',
+    imageAltText: 'FSCA South Africa enforcement notice on a trading desk with JP Markets branding, OTC derivatives authorisation documents — JP Markets fined 100,000 rand for unauthorised CFD trading. BestForex.io Broker Watch.',
+    readingTime: '6 min read',
+    wordCount: 950,
+    metaTitle: 'JP Markets Fined R100,000 by South Africa FSCA | BestForex.io',
+    metaDescription: "South Africa's FSCA fined forex broker JP Markets 100,000 rand for enabling clients to trade CFDs on forex, shares and indices without proper OTC derivatives authorisation.",
+    tags: ['JP Markets', 'FSCA', 'South Africa', 'Fine', 'OTC Derivatives', 'Unauthorised', 'CFD', 'Forex', 'Enforcement', 'Broker Watch'],
+    isFeatured: true,
+    relatedBrokers: [],
+    linkedSources: [
+      { label: 'FSCA', url: 'https://www.fsca.co.za' },
+    ],
+    content: `
+<p>South Africa&apos;s financial regulator has fined the forex broker JP Markets 100 thousand rand for letting clients trade contracts for difference it was not properly authorised to offer. The JP Markets FSCA fine turned on a simple but fundamental question: whether the firm had the right permissions for the products it was actually selling.</p>
+
+<p>The Financial Sector Conduct Authority, the FSCA, found that JP Markets SA had contravened the rules governing over-the-counter derivatives trading. The firm enabled its clients to trade CFDs on forex pairs, shares and indices &mdash; leveraged products that sit squarely within the over-the-counter derivatives regime &mdash; without being suitably authorised to provide them. The regulator imposed a 100 thousand rand penalty.</p>
+
+<h2>Authorisation Defines What a Firm May Sell</h2>
+
+<p>The heart of this case is authorisation, and it is worth being precise about why that matters. A financial licence is not a general permission to do anything in the market. It authorises specific activities and specific products, under specific conditions. When a firm offers a product outside the scope of what it is authorised for, it is operating beyond its permission, and every protection that authorisation was meant to guarantee is put in doubt. Selling leveraged CFDs without the right derivatives authorisation is exactly that kind of overreach.</p>
+
+<p>It would be easy to treat a 100 thousand rand fine as small, and in pure money terms it is. But the nature of the breach is what counts. Offering the wrong products without the right authorisation is not a paperwork slip. It goes to whether clients were dealing with a firm that was permitted to sell them what it sold. The penalty is modest. The principle behind it is not.</p>
+
+<h2>A Broker With a Long Regulatory History</h2>
+
+<p>JP Markets is not a stranger to the South African regulator. It has been one of the larger retail forex names in the country and has a history of friction with the authorities over how it operates. Set against that background, a fine for offering CFDs without proper authorisation fits a broader pattern of a firm whose relationship with its regulator has been repeatedly tested. For clients, that history is part of the picture, and it is a matter of public record.</p>
+
+<p>The practical lesson from the JP Markets case is the one that runs through so much of this sector. The first question about any broker is not what its spreads are or what bonuses it offers. It is whether the firm is actually authorised to sell you the products it is promoting. A regulator fining a broker for offering CFDs without the right permission is answering that question in the clearest possible way, and a careful client should take the answer seriously.</p>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="bestforex-view-heading" class="rounded-xl border border-primary/30 bg-primary/5 px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-primary mb-3">BestForex.io View</p>
+  <h2 id="bestforex-view-heading" class="text-xl font-bold text-foreground mb-4">The Breach Behind the Fine Is Not Small at All</h2>
+  <p class="text-foreground leading-relaxed mb-3">A 100 thousand rand fine is small money, but the breach behind it is not small at all. JP Markets was found to have let clients trade leveraged CFDs on forex, shares and indices without being properly authorised to offer those over-the-counter derivatives. Authorisation is the whole point of a licence: it defines what a firm may sell and under what protections, and offering products outside it puts every one of those protections in doubt.</p>
+  <p class="text-foreground leading-relaxed mb-3">Set against JP Markets&apos; long and contested history with the South African regulator, the fine reads less like an isolated slip and more like another chapter.</p>
+  <p class="text-foreground leading-relaxed font-medium">The question to ask any broker is simple. Are you actually authorised to sell me this?</p>
+</section>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="about-jpmarkets-heading" class="rounded-xl border border-border bg-card px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">About the Company</p>
+  <h2 id="about-jpmarkets-heading" class="text-xl font-bold text-foreground mb-4">About JP Markets</h2>
+  <div class="grid gap-4 sm:grid-cols-2 my-5">
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Regulator</p>
+      <p class="font-semibold text-foreground">FSCA (South Africa)</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Fine Date</p>
+      <p class="font-semibold text-foreground">2023</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Action Type</p>
+      <p class="font-semibold text-foreground">Fine, Unauthorised OTC Derivatives</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Penalty</p>
+      <p class="font-semibold text-foreground">ZAR 100,000</p>
+    </div>
+  </div>
+  <p class="text-foreground leading-relaxed mb-3">JP Markets SA (Pty) Ltd is a South African online forex and CFD broker, one of the larger retail trading names in the country, supervised by the Financial Sector Conduct Authority. In 2023 the FSCA fined the firm 100 thousand rand for contravening the rules governing over-the-counter derivatives, after finding it had enabled clients to trade CFDs on forex pairs, shares and indices without being suitably authorised to offer those products.</p>
+</section>
+
+<p class="text-sm text-muted-foreground mt-8 pt-4 border-t"><em>Editor&apos;s note &amp; source: Factual points are drawn from the FSCA public register. This article is not legal advice. Last updated: 9 August 2026.</em></p>
+    `,
+  },
+  {
+    id: 'post-65',
+    slug: 'rockfort-markets-fma-licence-cancelled-2024',
+    title: 'New Zealand Cancels Rockfort Markets Derivatives Licence After Finding It Breached Eight Licence Obligations',
+    excerpt: "New Zealand's FMA cancelled Rockfort Markets' derivatives issuer licence in 2024 after the firm contravened eight of its licence obligations. Eight breaches is a pattern, not an accident.",
+    category: 'news',
+    editorialType: 'Opinion',
+    author: authors[6], // Beatrix Fairmont
+    publishedAt: '2026-08-08',
+    updatedAt: '2026-08-08',
+    featuredImage: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2026-08-08_RockfortMarkets_cover-GRQq6RFuv1plsMUe3O3KD9wiSw1tUC.png',
+    imageAltText: 'FMA New Zealand licence cancellation order on a regulatory desk with Rockfort Markets branding, eight breach violations listed — New Zealand cancels Rockfort Markets derivatives licence over eight breaches. BestForex.io Broker Watch.',
+    readingTime: '6 min read',
+    wordCount: 980,
+    metaTitle: 'Rockfort Markets Loses Its NZ Licence in 2024 | BestForex.io',
+    metaDescription: "New Zealand's FMA cancelled Rockfort Markets' derivatives issuer licence in 2024 after finding it contravened eight of its licence obligations. What it means for clients.",
+    tags: ['Rockfort Markets', 'FMA', 'New Zealand', 'Licence Cancellation', 'Derivatives', 'CFD', 'Forex', 'Enforcement', 'Broker Watch'],
+    isFeatured: true,
+    relatedBrokers: [],
+    linkedSources: [
+      { label: 'FMA New Zealand', url: 'https://www.fma.govt.nz/' },
+    ],
+    content: `
+<p>New Zealand&apos;s financial regulator has cancelled the licence of Rockfort Markets, a retail derivatives broker, after concluding that the firm had breached eight of the obligations attached to its licence. The Rockfort Markets licence cancellation, made in September 2024, is one of the clearer recent examples of a regulator deciding a broker could no longer be trusted to hold its authorisation.</p>
+
+<p>The Financial Markets Authority, the FMA, cancelled Rockfort Markets&apos; derivatives issuer licence after determining that the firm had contravened eight of its licence obligations. A derivatives issuer licence is what allows a firm to offer leveraged products such as forex and contracts for difference to retail clients in New Zealand. Losing it is the end of the firm&apos;s ability to operate in that market.</p>
+
+<h2>Eight Breaches Is a Pattern, Not an Accident</h2>
+
+<p>The number matters. A single breach of a licence obligation can happen to a firm that is broadly compliant but slips in one area. Eight separate contraventions is a different picture. It describes a firm that was falling short across many of the conditions its licence depended on, not one that made an isolated mistake. When a regulator counts breaches into the high single digits, it is usually documenting a systemic problem rather than an unlucky one.</p>
+
+<p>Licence obligations exist to keep a firm fit to hold client business: adequate systems, proper conduct, fair treatment, sound governance and honest reporting among them. Breaching eight of them at once suggests weakness spread across the firm. That is why the FMA did not simply issue a warning or a fine. It removed the licence &mdash; the strongest tool a conduct regulator has, reserved for firms it has concluded should not continue.</p>
+
+<h2>What Cancellation Means for Clients</h2>
+
+<p>For clients, a cancelled derivatives issuer licence is the moment the broker stops being a regulated New Zealand firm. It can no longer lawfully offer the leveraged products it was licensed for, take on new clients, or hold itself out as authorised. Anyone with an open account has to deal with the practical fallout of a firm exiting the regime, and the protections that came with the licence fall away as it does. A cancellation is not a slap on the wrist. It is the regulator closing the door.</p>
+
+<p>Rockfort Markets is a reminder that regulated does not mean permanently safe. A licence is only as good as the firm&apos;s continued compliance with the obligations behind it, and the FMA has shown it will strip that licence when the obligations are breached badly enough. For a retail trader, the practical lesson is to treat a licence cancellation as one of the strongest possible signals about a broker, stronger than any marketing claim, and to check a regulator&apos;s public actions before trusting any firm with money.</p>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="bestforex-view-heading" class="rounded-xl border border-primary/30 bg-primary/5 px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-primary mb-3">BestForex.io View</p>
+  <h2 id="bestforex-view-heading" class="text-xl font-bold text-foreground mb-4">Eight Breaches Is the Story</h2>
+  <p class="text-foreground leading-relaxed mb-3">Eight breaches of licence obligations is not a stumble &mdash; it is a pattern, and the FMA responded with the strongest tool it has: cancellation. A derivatives issuer licence is the permission that lets a firm sell leveraged forex and CFDs to New Zealand retail clients, and losing it ends the business.</p>
+  <p class="text-foreground leading-relaxed mb-3">One breach can be bad luck. Eight is a firm that was not keeping to the conditions its authorisation depended on.</p>
+  <p class="text-foreground leading-relaxed font-medium">Regulated status is not a permanent badge &mdash; it is a set of ongoing obligations. Read the regulator&apos;s actions, not the broker&apos;s advertising.</p>
+</section>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="about-rockfortmarkets-heading" class="rounded-xl border border-border bg-card px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">About the Company</p>
+  <h2 id="about-rockfortmarkets-heading" class="text-xl font-bold text-foreground mb-4">About Rockfort Markets</h2>
+  <div class="grid gap-4 sm:grid-cols-2 my-5">
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Regulator</p>
+      <p class="font-semibold text-foreground">FMA (New Zealand)</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Cancellation Date</p>
+      <p class="font-semibold text-foreground">September 2024</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Action Type</p>
+      <p class="font-semibold text-foreground">Derivatives Issuer Licence Cancelled</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Breaches Found</p>
+      <p class="font-semibold text-foreground">Eight licence obligations</p>
+    </div>
+  </div>
+  <p class="text-foreground leading-relaxed mb-3">Rockfort Markets Ltd was a New Zealand-based retail derivatives broker offering leveraged forex and contracts for difference to clients under a derivatives issuer licence from the Financial Markets Authority. In September 2024 the FMA cancelled that licence after determining the firm had contravened eight of its licence obligations, ending its authorisation to offer those products in New Zealand.</p>
+</section>
+
+<p class="text-sm text-muted-foreground mt-8 pt-4 border-t"><em>Editor&apos;s note &amp; source: Factual points are drawn from the FMA public register. This article is not legal advice. Last updated: 8 August 2026.</em></p>
+    `,
+  },
+  {
+    id: 'post-64',
+    slug: 'fxoro-mca-intelifunds-cysec-fine-2024',
+    title: 'FXORO Operator MCA Intelifunds Fined 360,000 Euro by CySEC Over Broad Breaches of Investment Law',
+    excerpt: 'CySEC fined MCA Intelifunds, the operator of forex broker FXORO, 360,000 euro over breaches of Cyprus investment law found in a 2022 inspection. The machinery that turns the law into practice was missing.',
+    category: 'news',
+    editorialType: 'Opinion',
+    author: authors[3], // Clarissa Penhallow
+    publishedAt: '2026-08-07',
+    updatedAt: '2026-08-07',
+    featuredImage: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2026-08-07_FXORO_cover-BCh9VHoAhrf3eD2QLfu4V0LgS604Zu.png',
+    imageAltText: 'CySEC administrative fine of 360,000 euro on compliance documents for MCA Intelifunds, FXORO brand visible on screen, investment law breach report from 2022 inspection — FXORO operator fined 360,000 euro by CySEC. BestForex.io Broker Watch.',
+    readingTime: '7 min read',
+    wordCount: 1050,
+    metaTitle: 'FXORO Operator Fined 360,000 Euro by CySEC in 2024 | BestForex.io',
+    metaDescription: 'CySEC fined MCA Intelifunds, the operator of forex broker FXORO, 360,000 euro over breaches of Cyprus investment law found in a 2022 inspection. Full breakdown.',
+    tags: ['FXORO', 'MCA Intelifunds', 'CySEC', 'Cyprus', 'EU', 'Fine', 'Investment Law', 'CFD', 'Forex', 'Enforcement', 'Broker Watch'],
+    isFeatured: true,
+    relatedBrokers: [],
+    linkedSources: [
+      { label: 'CySEC — Public Decisions', url: 'https://www.cysec.gov.cy/en-GB/public-info/decisions/' },
+    ],
+    content: `
+<p>The Cyprus regulator has fined MCA Intelifunds, the company behind the retail forex broker FXORO, 360 thousand euro &mdash; one of the larger single fines it has imposed on a Cyprus investment firm. The FXORO CySEC fine followed an inspection that exposed a spread of breaches of Cyprus investment law.</p>
+
+<p>The Cyprus Securities and Exchange Commission imposed a total administrative fine of 360 thousand euro on MCA Intelifunds Ltd, which operates under the FXORO brand, over violations of the Investment Services and Activities and Regulated Markets Law of 2017. The problems were detected during an inspection at the company in September 2022, and the penalty was announced in 2024. A portion of it, 80 thousand euro, was for the firm&apos;s failure to put adequate policies and procedures in place to ensure it complied with its obligations under the law.</p>
+
+<h2>Adequate Policies Are the Whole Point</h2>
+
+<p>That 80 thousand euro component is more revealing than it looks. The obligation to maintain adequate policies and procedures is the rule that makes every other rule work. It is how a firm turns the law into daily practice, and it is the mechanism a regulator relies on to trust that a broker will keep to the rules when nobody is watching. A finding that a firm lacked adequate policies is a finding that the system meant to keep it compliant was not there.</p>
+
+<p>The rest of the 360 thousand euro reflected a broader set of breaches uncovered in the same inspection. A total fine of this size is not the regulator picking at one small failing. It is the regulator concluding that the firm fell short across several of its obligations at once, seriously enough to justify a penalty far above the routine. For a Cyprus investment firm, a 360 thousand euro fine sits at the heavier end of the scale.</p>
+
+<h2>The Brand and the Company</h2>
+
+<p>As so often, the name traders know is FXORO, while the licensed company being fined is MCA Intelifunds. A client using the FXORO platform would not necessarily connect it to a 360 thousand euro penalty against a firm called MCA Intelifunds. That distance between the marketing brand and the regulated entity is a recurring feature of the sector, and it is where a broker&apos;s regulatory record quietly lives, out of the client&apos;s eyeline.</p>
+
+<p>FXORO remains a working brand, and a fine is a correction rather than a shutdown. But the size and breadth of this one matter. A 360 thousand euro penalty for breaches of investment law, including the absence of adequate compliance policies, is the kind of record a prospective client should weigh before funding an account. The lesson repeats across Cyprus: look past the brand to the licensed entity, and read what its regulator has already found.</p>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="bestforex-view-heading" class="rounded-xl border border-primary/30 bg-primary/5 px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-primary mb-3">BestForex.io View</p>
+  <h2 id="bestforex-view-heading" class="text-xl font-bold text-foreground mb-4">The Compliance Machinery Was Missing</h2>
+  <p class="text-foreground leading-relaxed mb-3">Three hundred and sixty thousand euro is a heavy fine by Cyprus standards, and the detail inside it is what makes it worth reading. Part of the penalty was specifically for failing to maintain adequate compliance policies and procedures &mdash; the failing beneath all the others, because it is the machinery that turns the law into practice.</p>
+  <p class="text-foreground leading-relaxed mb-3">When a regulator finds that machinery missing and fines across a spread of breaches on top, it is describing a firm that was not built to stay compliant.</p>
+  <p class="text-foreground leading-relaxed font-medium">FXORO is the brand, MCA Intelifunds is the company, and it is the company&apos;s record that a careful trader should be reading.</p>
+</section>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="about-fxoro-heading" class="rounded-xl border border-border bg-card px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">About the Company</p>
+  <h2 id="about-fxoro-heading" class="text-xl font-bold text-foreground mb-4">About FXORO</h2>
+  <div class="grid gap-4 sm:grid-cols-2 my-5">
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Regulator</p>
+      <p class="font-semibold text-foreground">CySEC (Cyprus)</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Licensed Operator</p>
+      <p class="font-semibold text-foreground">MCA Intelifunds Ltd</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Action Type</p>
+      <p class="font-semibold text-foreground">Fine, Investment Law Breaches</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Penalty</p>
+      <p class="font-semibold text-foreground">EUR 360,000</p>
+    </div>
+  </div>
+  <p class="text-foreground leading-relaxed mb-3">MCA Intelifunds Ltd is a Cyprus investment firm that operates the retail forex and CFD broker FXORO, authorised and supervised by the Cyprus Securities and Exchange Commission. In 2024 CySEC imposed a total administrative fine of 360 thousand euro on the firm over breaches of the Investment Services and Activities and Regulated Markets Law of 2017, identified during an inspection in September 2022, including 80 thousand euro for failing to maintain adequate compliance policies and procedures.</p>
+</section>
+
+<p class="text-sm text-muted-foreground mt-8 pt-4 border-t"><em>Editor&apos;s note &amp; source: Factual points are drawn from the CySEC public decisions register. This article is not legal advice. Last updated: 7 August 2026.</em></p>
+    `,
+  },
+  {
+    id: 'post-63',
+    slug: 'fxtb-forex-tb-fca-fine-2024',
+    title: 'FCA Fines FXTB 276,100 Pounds for Pressuring Clients Into CFDs and Giving Advice It Was Not Allowed to Give',
+    excerpt: 'The FCA fined CFD broker FXTB (Forex TB) 276,100 pounds in 2024 for pressuring clients into trading, unauthorised advice and false professional client status. A system designed to reach directly into clients\u2019 pockets.',
+    category: 'news',
+    editorialType: 'Opinion',
+    author: authors[6], // Beatrix Fairmont
+    publishedAt: '2026-08-06',
+    updatedAt: '2026-08-06',
+    featuredImage: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2026-08-06_FXTB_cover-lASZfc8m32FR0JQZCE6G22EDnz3wJ6.png',
+    imageAltText: 'FCA enforcement notice for FXTB with fine amount 276,100 pounds on a compliance desk, pressure sales tactics documents and a professional client reclassification form — FCA fines FXTB for pressuring clients and unauthorised advice. BestForex.io Broker Watch.',
+    readingTime: '7 min read',
+    wordCount: 1050,
+    metaTitle: 'FXTB Fined 276,100 Pounds by the FCA in 2024 | BestForex.io',
+    metaDescription: 'The FCA fined CFD broker FXTB (Forex TB) 276,100 pounds in 2024 for pressuring clients into trading, unauthorised advice and false professional client status.',
+    tags: ['FXTB', 'Forex TB', 'FCA', 'United Kingdom', 'Fine', 'Pressure Selling', 'Unauthorised Advice', 'Professional Client', 'CFD', 'Forex', 'Enforcement', 'Broker Watch'],
+    isFeatured: true,
+    relatedBrokers: [],
+    linkedSources: [
+      { label: 'FCA — FXTB Final Notice', url: 'https://www.fca.org.uk/news/press-releases/fca-fines-fxtb-unfair-customer-treatment-practices' },
+    ],
+    content: `
+<p>The UK regulator has fined the contracts for difference broker FXTB 276,100 pounds for treating its customers unfairly and for giving investment advice it was never authorised to give. The FXTB FCA fine, handed down in August 2024, describes a sales operation that pushed ordinary people into risky trading and bent the rules that were supposed to protect them.</p>
+
+<p>The Financial Conduct Authority found that Forex TB Limited, which traded as FXTB, pressured customers to put their money at risk through CFD trading. In some cases it encouraged them to borrow money from friends or family to fund their accounts. The firm also enabled customers to be classified as professional clients &mdash; a status that strips away key retail protections &mdash; by encouraging them to provide false information.</p>
+
+<h2>Manufacturing Professional Clients</h2>
+
+<p>That last point deserves to be understood clearly, because it is one of the most damaging tricks in the industry. Retail clients enjoy the strongest protections: leverage caps, negative balance protection, and clear risk warnings. Professional clients do not. By coaching customers to overstate their experience and wealth so they could be reclassified as professional, FXTB was in effect switching off the safety features that European and UK rules build around retail traders. The people affected were retail clients in every real sense. Only their paperwork said otherwise.</p>
+
+<p>The FCA did not treat this as a technicality. It found that FXTB failed to treat its customers fairly and provided advice without the authorisation to do so &mdash; a combination that put clients into unsuitable, high-risk positions while removing the protections that might have limited the damage. Encouraging people to borrow from family to fund speculative CFD trades is close to the definition of the conduct the rules exist to stop.</p>
+
+<h2>Why This Kind of Case Matters Most</h2>
+
+<p>Pressure selling, unauthorised advice and manufactured professional status are the three failings that hollow out retail accounts fastest, and FXTB was found to have combined all three. Unlike a late report or a paperwork settlement, this is conduct aimed directly at the client&apos;s money, and at the very protections designed to guard it. A fine of 276,100 pounds is a real penalty, but the more important output is the public finding of what the firm did.</p>
+
+<p>For a retail trader, the FXTB case is a checklist of warning signs to walk away from. If a broker or its representatives push you to deposit more, encourage you to borrow to trade, or suggest you can be reclassified as a professional client to unlock higher leverage, those are not opportunities. They are the exact behaviours a regulator has already punished. The protections you would be giving up are the ones that matter when the trades go wrong, and most retail CFD trades do.</p>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="bestforex-view-heading" class="rounded-xl border border-primary/30 bg-primary/5 px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-primary mb-3">BestForex.io View</p>
+  <h2 id="bestforex-view-heading" class="text-xl font-bold text-foreground mb-4">This Is Why the Retail Protections Exist</h2>
+  <p class="text-foreground leading-relaxed mb-3">FXTB did not trip over a reporting deadline. The FCA found it pressured customers into risky CFD trading, encouraged some to borrow from family to fund it, gave advice it was not authorised to give, and coached clients into a professional classification that stripped away their protections. Those are not separate slips. They are a system.</p>
+  <p class="text-foreground leading-relaxed mb-3">The 276,100 pound fine matters, but the lasting value is the public record of exactly how the harm was done.</p>
+  <p class="text-foreground leading-relaxed font-medium">Any trader who is urged to borrow to trade, or to reclassify as professional to unlock more leverage, is watching the FXTB playbook in real time &mdash; and the right response is to leave.</p>
+</section>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="about-fxtb-heading" class="rounded-xl border border-border bg-card px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">About the Company</p>
+  <h2 id="about-fxtb-heading" class="text-xl font-bold text-foreground mb-4">About FXTB</h2>
+  <div class="grid gap-4 sm:grid-cols-2 my-5">
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Regulator</p>
+      <p class="font-semibold text-foreground">FCA (United Kingdom)</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Fine Date</p>
+      <p class="font-semibold text-foreground">August 2024</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Action Type</p>
+      <p class="font-semibold text-foreground">Fine, Unfair Treatment &amp; Unauthorised Advice</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Penalty</p>
+      <p class="font-semibold text-foreground">GBP 276,100</p>
+    </div>
+  </div>
+  <p class="text-foreground leading-relaxed mb-3">Forex TB Limited, trading as FXTB, was a contracts for difference broker offering leveraged forex and CFD trading to retail clients, operating in the United Kingdom under the supervision of the Financial Conduct Authority. In August 2024 the FCA fined the firm 276,100 pounds for failing to treat customers fairly and for providing investment advice without authorisation, including pressuring clients to trade, encouraging some to borrow to fund accounts, and enabling customers to be classified as professional clients on the basis of false information.</p>
+</section>
+
+<p class="text-sm text-muted-foreground mt-8 pt-4 border-t"><em>Editor&apos;s note &amp; source: Factual points are drawn from the FCA public enforcement register. This article is not legal advice. Last updated: 6 August 2026.</em></p>
+    `,
+  },
+  // ─── Scheduled Enforcement Posts (future dates) ──────────────────────────────
   // Posts 57–62 added 2026-08-06. All dated 2026-08-11 through 2026-08-16 — will
   // become visible automatically as their published_at date arrives via ISR.
   {
@@ -2813,7 +3601,7 @@ export const posts: Post[] = [
 <section aria-labelledby="bestforex-view-heading" class="rounded-xl border border-primary/30 bg-primary/5 px-6 py-6 my-8">
   <p class="text-xs font-bold uppercase tracking-widest text-primary mb-3">BestForex.io View</p>
   <h2 id="bestforex-view-heading" class="text-xl font-bold text-foreground mb-4">What This Means for FOREX.com Clients</h2>
-  <p class="text-foreground leading-relaxed mb-3">The number that matters here is not the $700,000 fine. It is the gap between $2.84 million and $35,000. When a FOREX.com glitch created winners and losers, the firm moved decisively to reclaim the winnings and left the losers with almost nothing — and its chief executive signed off on it.</p>
+  <p class="text-foreground leading-relaxed mb-3">The number that matters here is not the $700,000 fine. It is the gap between $2.84 million and $35,000. When a FOREX.com glitch created winners and losers, the firm moved decisively to reclaim the winnings and left the losers with almost nothing �� and its chief executive signed off on it.</p>
   <p class="text-foreground leading-relaxed mb-3">The NFA found the whole exercise improper, and found that GAIN then gave the regulator an inaccurate account of it. A platform failure is the firm's risk to carry, not the customer's.</p>
   <p class="text-foreground leading-relaxed font-medium">For retail traders, the episode is a clean illustration of where a broker's instincts point under pressure. When choosing a broker, ask how it has handled its own execution errors — the answer says more than any spread table.</p>
 </section>
