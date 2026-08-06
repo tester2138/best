@@ -102,6 +102,511 @@ export const authors: Author[] = [
 ]
 
 export const posts: Post[] = [
+  // ─── Scheduled Enforcement Reports (staged; auto-publish on publishedAt) ────
+  // Posts 47–50 added 2026-08-06. Future dates — hidden until ISR picks them up.
+  {
+    id: 'post-50',
+    slug: 'triangleview-3anglefx-cysec-full-suspension-aml-governance',
+    title: 'CySEC Suspends 3anglefx Operator Triangleview in Full Over Money Laundering and Governance Failures',
+    excerpt: "The Cyprus regulator has suspended in full the licence of Triangleview Investments, the firm behind the retail trading brand 3anglefx, over money laundering failures and deficiencies in the way the company was run. It is not the first time this broker has been in the regulator's sights.",
+    category: 'news',
+    editorialType: 'News',
+    author: authors[3], // Clarissa Penhallow — Investigative Markets Writer
+    publishedAt: '2026-08-10',
+    updatedAt: '2026-08-10',
+    featuredImage: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2026-08-10_Triangleview_cover-r4Qj93GIFDYPUnKr3Czbq2VoWRNyBy.png',
+    imageAltText: 'Cyprus CySEC enforcement notice on a compliance desk, 3anglefx trading platform on screen behind, with governance audit files spread out — CySEC suspends Triangleview in full over AML and governance failures. BestForex.io Broker Watch.',
+    readingTime: '6 min read',
+    wordCount: 1050,
+    metaTitle: 'CySEC Suspends 3anglefx (Triangleview) in Full Over AML and Governance Failures',
+    metaDescription: "CySEC has suspended in full the licence of Triangleview Investments Ltd, operator of the retail trading brand 3anglefx, over anti-money laundering violations, board and management deficiencies, and organisational failures — not its first enforcement action.",
+    tags: ['Triangleview', '3anglefx', 'CySEC', 'Cyprus', 'EU', 'Full Suspension', 'AML', 'Governance', 'CFD', 'Forex', 'Enforcement', 'Broker Watch'],
+    isFeatured: true,
+    relatedBrokers: [],
+    linkedSources: [
+      { label: 'CySEC — Public Decisions', url: 'https://www.cysec.gov.cy/en-GB/public-info/decisions/' },
+    ],
+    content: `
+<p>The Cyprus regulator has suspended in full the licence of Triangleview Investments, the company behind the retail trading brand 3anglefx, over money laundering failures and deficiencies in the way the company was run. It is not the first time this broker has been in the regulator&apos;s sights.</p>
+
+<p>The Cyprus Securities and Exchange Commission suspended the firm&apos;s authorisation in full at a board meeting, citing violations of anti-money laundering rules, deficiencies in the requirements for the board and senior management, and failures to meet the organisational obligations that every Cyprus investment firm must satisfy. A full suspension is a serious step. It stops the firm operating while the regulator decides whether the underlying problems can be fixed.</p>
+
+<h2>Three Failures That Belong Together</h2>
+
+<p>The three areas the regulator named are not a random list. Anti-money laundering failures, board and management deficiencies, and organisational shortcomings tend to travel together, because they share a single root cause. A firm that is not properly governed at the top, and not properly organised underneath, is exactly the kind of firm that cannot run effective money laundering controls. Weak governance is the soil in which every other compliance failure grows.</p>
+
+<p>That is why supervisors treat a cluster like this as more serious than any one item alone. It is one thing for a well-run firm to miss a specific requirement. It is another for a regulator to find that the board, the management structure and the anti-money laundering systems are all deficient at the same time. The second picture describes a firm whose problems are structural rather than incidental.</p>
+
+<h2>A Repeat Visitor to the Regulator</h2>
+
+<p>Triangleview has a history with CySEC. The company was previously fined 50 thousand euro over issues relating to the protection of client funds. Client money protection is one of the most fundamental duties a broker has, and a fine for failing at it is not a minor footnote. Set against that earlier penalty, the later full suspension for money laundering and governance failures reads less like an isolated problem and more like a firm that has struggled with the basics of running a regulated brokerage for some time.</p>
+
+<p>This is where a pattern becomes the story. A single enforcement action can happen to almost any firm. A client fund protection fine followed later by a full suspension over governance and money laundering points to something more durable. Regulators keep records, and so should clients. A broker that keeps returning to the enforcement column is telling you something about itself.</p>
+
+<h2>What a Full Suspension Means for Clients</h2>
+
+<p>For anyone with an account at a suspended firm, the practical reality is stark. The broker cannot carry on normal business while the suspension is in force. The regulator has judged the concerns serious enough to halt operations rather than allow the firm to keep trading and hope for improvement. Whether the suspension is eventually lifted or hardens into a full withdrawal, as has happened to other Cyprus firms this year, the message to a prospective client is the same. A broker under full suspension for money laundering and governance failures is not a firm to be entrusting with new money.</p>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="bestforex-view-heading" class="rounded-xl border border-primary/30 bg-primary/5 px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-primary mb-3">BestForex.io View</p>
+  <h2 id="bestforex-view-heading" class="text-xl font-bold text-foreground mb-4">One Action Can Be Bad Luck. A Track Record Is Not.</h2>
+  <p class="text-foreground leading-relaxed mb-3">A full suspension for anti-money laundering failures, board and management deficiencies and organisational shortcomings is a regulator saying the problems run through the whole firm, not one corner of it. What makes the Triangleview case sharper is the history. This is a broker that had already been fined over the protection of client funds, and then returned to the enforcement column with a full suspension.</p>
+  <p class="text-foreground leading-relaxed mb-3">One action can be bad luck. A client money fine followed by a governance suspension is a track record.</p>
+  <p class="text-foreground leading-relaxed font-medium">Traders rarely check whether a broker has been here before. They should, because the firms that struggle with the basics tend to keep struggling with them, and the regulator&apos;s file is the clearest place to see it.</p>
+</section>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="about-triangleview-heading" class="rounded-xl border border-border bg-card px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">About the Company</p>
+  <h2 id="about-triangleview-heading" class="text-xl font-bold text-foreground mb-4">About 3anglefx (Triangleview)</h2>
+  <div class="grid gap-4 sm:grid-cols-2 my-5">
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Regulator</p>
+      <p class="font-semibold text-foreground">CySEC (Cyprus)</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Jurisdiction</p>
+      <p class="font-semibold text-foreground">Cyprus (EU)</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Action Type</p>
+      <p class="font-semibold text-foreground">Full Licence Suspension</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Prior Penalty</p>
+      <p class="font-semibold text-foreground">EUR 50,000 (client funds)</p>
+    </div>
+  </div>
+  <p class="text-foreground leading-relaxed mb-3">Triangleview Investments Ltd is a Cyprus-based investment firm operating the retail trading brand 3anglefx, offering leveraged foreign exchange and CFD products, supervised by the Cyprus Securities and Exchange Commission.</p>
+  <p class="text-foreground leading-relaxed">CySEC suspended its licence in full over anti-money laundering violations, board and management deficiencies, and organisational failures. The firm had earlier been fined EUR 50,000 over issues relating to the protection of client funds.</p>
+</section>
+
+<p class="text-sm text-muted-foreground mt-8 pt-4 border-t"><em>Editor&apos;s note &amp; source: Factual points are drawn from the CySEC board decision and public announcement. This article is not legal advice. Last updated: 10 August 2026.</em></p>
+    `,
+  },
+  {
+    id: 'post-49',
+    slug: 'afrimarkets-capital-fsca-licence-withdrawal-client-fund-misappropriation-banxso',
+    title: 'AfriMarkets Capital Stripped of Its South African Licence Over Misconduct and Client Fund Misappropriation',
+    excerpt: "South Africa's FSCA has permanently withdrawn the licence of AfriMarkets Capital after finding it materially broke the country's financial laws, including through the misappropriation of client funds. The firm denies wrongdoing. The case is closely tied to the far larger collapse of Banxso.",
+    category: 'news',
+    editorialType: 'News',
+    author: authors[6], // Beatrix Fairmont — Consumer Affairs Critic
+    publishedAt: '2026-08-09',
+    updatedAt: '2026-08-09',
+    featuredImage: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2026-08-09_AfriMarkets_cover-GIX004SbWXqOLuTDXeHBarHNuwiGu4.png',
+    imageAltText: 'FSCA licence withdrawal notice on the door of a locked South African trading firm, client fund audit files on the floor, AfriMarkets Capital branding visible — FSCA strips AfriMarkets licence over client fund misappropriation. BestForex.io Broker Watch.',
+    readingTime: '7 min read',
+    wordCount: 1100,
+    metaTitle: 'FSCA Strips AfriMarkets Capital Licence Over Client Fund Misappropriation',
+    metaDescription: "South Africa's FSCA has permanently withdrawn the FSP licence of AfriMarkets Capital after finding material contraventions of financial sector laws including client fund misappropriation, with the case closely linked to the collapse of broker Banxso.",
+    tags: ['AfriMarkets', 'AfriMarkets Capital', 'FSCA', 'South Africa', 'Licence Withdrawal', 'Client Fund Misappropriation', 'Banxso', 'CFD', 'Enforcement', 'Broker Watch'],
+    isFeatured: true,
+    relatedBrokers: ['banxso'],
+    linkedSources: [
+      { label: 'FSCA — Financial Sector Conduct Authority', url: 'https://www.fsca.co.za' },
+    ],
+    content: `
+<p>South Africa&apos;s financial regulator has permanently withdrawn the licence of AfriMarkets Capital, an online trading firm, after finding it had materially broken the country&apos;s financial laws, including through the misappropriation of client funds. The firm denies wrongdoing. The case is closely tied to the far larger collapse of the broker Banxso.</p>
+
+<p>The Financial Sector Conduct Authority, the FSCA, first provisionally withdrew AfriMarkets Capital&apos;s financial services provider licence, and then made that withdrawal final after an investigation. The regulator concluded that the firm had materially contravened various financial sector laws. AfriMarkets has rejected the findings and maintains that it did nothing wrong.</p>
+
+<h2>Shared Directors, Shared Model</h2>
+
+<p>What makes the AfriMarkets case more than a single firm&apos;s failure is its connection to Banxso. The FSCA identified AfriMarkets as sharing directorships and a business model with Banxso, the CFD broker that has since been fined more than 2 billion rand, referred for criminal investigation, and placed into final liquidation. When a regulator finds two firms with overlapping leadership and the same way of operating, action against one naturally draws scrutiny onto the other.</p>
+
+<p>This is a common structure in the murkier corners of retail trading. Related entities with shared people and shared methods can spread the same practices across more than one brand, so that pressure on a single licence does not stop the underlying business. Part of the value of the FSCA acting against both AfriMarkets and Banxso is that it addresses the network rather than just one node of it.</p>
+
+<h2>Client Fund Misappropriation Is the Red Line</h2>
+
+<p>Of all the findings a regulator can make against a broker, the misuse of client money is the most serious. The single most important obligation any firm holding retail funds has is to keep those funds safe and separate, available to be returned to the client on demand. When a regulator concludes that client money has been misappropriated, it is describing a failure at the very core of what a broker is supposed to do. Everything else — spreads, platforms, marketing — is secondary to whether the money is actually there.</p>
+
+<p>AfriMarkets disputes the findings, and that dispute is part of the record. But the FSCA did not stop at a provisional step. It investigated and then finalised the withdrawal on the basis that the firm had materially contravened the law. A final licence withdrawal grounded in client fund concerns is among the strongest signals a market conduct regulator can send about a firm.</p>
+
+<h2>A Network Under Pressure</h2>
+
+<p>The AfriMarkets and Banxso cases together illustrate why South Africa&apos;s regulator has become one of the most active in the world against retail trading firms. It has moved not just against individual brands but against connected groups of them, following the people and the money rather than the marketing. For retail clients, the lesson is to look past the brand on the website to the entity, the directors, and the track record behind it. Two names can hide one problem, and the problem is what matters.</p>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="bestforex-view-heading" class="rounded-xl border border-primary/30 bg-primary/5 px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-primary mb-3">BestForex.io View</p>
+  <h2 id="bestforex-view-heading" class="text-xl font-bold text-foreground mb-4">Brands Are Cheap. Directors and Business Models Are Not.</h2>
+  <p class="text-foreground leading-relaxed mb-3">A final licence withdrawal built on findings of client fund misappropriation is about as serious as market conduct enforcement gets, and AfriMarkets is now tied by the regulator to Banxso — a firm fined more than 2 billion rand and wound up as hopelessly insolvent. AfriMarkets denies wrongdoing, and that denial belongs in the record.</p>
+  <p class="text-foreground leading-relaxed mb-3">But the direction of the evidence is clear enough. The most useful thing a trader can take from this is that brands are cheap and interchangeable, while directors and business models are not.</p>
+  <p class="text-foreground leading-relaxed font-medium">When a regulator finds two firms sharing both, acting against one and not the other would have missed the point. The safety of client money is the only test that really counts, and it is the test these firms failed.</p>
+</section>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="about-afrimarkets-heading" class="rounded-xl border border-border bg-card px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">About the Company</p>
+  <h2 id="about-afrimarkets-heading" class="text-xl font-bold text-foreground mb-4">About AfriMarkets Capital</h2>
+  <div class="grid gap-4 sm:grid-cols-2 my-5">
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Regulator</p>
+      <p class="font-semibold text-foreground">FSCA (South Africa)</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Jurisdiction</p>
+      <p class="font-semibold text-foreground">South Africa</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Action Type</p>
+      <p class="font-semibold text-foreground">FSP Licence Withdrawal (final)</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Connected To</p>
+      <p class="font-semibold text-foreground">Banxso (shared directors)</p>
+    </div>
+  </div>
+  <p class="text-foreground leading-relaxed mb-3">AfriMarkets Capital (Pty) Ltd was a South African online trading provider offering leveraged products to retail clients, licensed as a financial services provider and supervised by the Financial Sector Conduct Authority.</p>
+  <p class="text-foreground leading-relaxed">The FSCA provisionally and then finally withdrew its licence after an investigation concluded it had materially contravened financial sector laws, including through the misappropriation of client funds, and identified it as sharing directorships and a business model with the broker Banxso. AfriMarkets denies wrongdoing.</p>
+</section>
+
+<p class="text-sm text-muted-foreground mt-8 pt-4 border-t"><em>Editor&apos;s note &amp; source: Factual points are drawn from the FSCA provisional and final licence withdrawal notices. This article is not legal advice. Last updated: 9 August 2026.</em></p>
+    `,
+  },
+  {
+    id: 'post-48',
+    slug: 'banxso-liquidation-fsca-fines-r2-billion-fake-celebrity-advertisements',
+    title: 'Banxso Placed Into Final Liquidation as South Africa Fines It and Its Directors More Than R2 Billion',
+    excerpt: "Banxso, the South African CFD broker at the centre of one of the country's largest retail trading scandals, has been placed into final liquidation. A court has declared the company hopelessly insolvent, the regulator has fined it and its directors more than 2 billion rand, and the matter has been referred to the police for criminal investigation.",
+    category: 'news',
+    editorialType: 'News',
+    author: authors[3], // Clarissa Penhallow — Investigative Markets Writer
+    publishedAt: '2026-08-08',
+    updatedAt: '2026-08-08',
+    featuredImage: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2026-08-08_Banxso_cover-FZLnvE6eIMM1iT0SOguWd29gNFy1tZ.png',
+    imageAltText: 'Cape High Court liquidation order on a desk next to a frozen Banxso trading terminal, FSCA enforcement documents stacked behind it, and seized laptops in the foreground — Banxso placed into final liquidation after R2 billion in FSCA fines. BestForex.io Broker Watch.',
+    readingTime: '8 min read',
+    wordCount: 1200,
+    metaTitle: 'Banxso Into Liquidation After R2 Billion FSCA Fines and Criminal Referral',
+    metaDescription: "Banxso (Pty) Ltd has been placed into final liquidation by the Cape High Court, declared hopelessly insolvent after the FSCA imposed R2 billion-plus fines on the firm and its directors and referred the matter for criminal investigation.",
+    tags: ['Banxso', 'FSCA', 'South Africa', 'Liquidation', 'R2 Billion Fine', 'Fake Celebrity Ads', 'Criminal Referral', 'CFD', 'Forex', 'Enforcement', 'Broker Watch'],
+    isFeatured: true,
+    relatedBrokers: ['banxso'],
+    linkedSources: [
+      { label: 'FSCA — Financial Sector Conduct Authority', url: 'https://www.fsca.co.za' },
+    ],
+    content: `
+<p>Banxso, the South African contracts for difference broker at the centre of one of the country&apos;s largest retail trading scandals, has been placed into final liquidation. A court has declared the company hopelessly insolvent, the regulator has fined it and its directors more than 2 billion rand, and the matter has been referred to the police for criminal investigation.</p>
+
+<p>The scale of this case sets it apart from an ordinary broker failure. The Financial Sector Conduct Authority, the FSCA, imposed penalties totalling more than 2 billion rand on Banxso and its directors and key individuals, and referred the matter to the South African Police Service for criminal investigation. On 2 March 2026 the Cape High Court placed Banxso into final liquidation, with the judge describing the company as factually and commercially hopelessly insolvent.</p>
+
+<h2>It Began With Fake Celebrity Advertisements</h2>
+
+<p>The way Banxso found its clients is central to the story. An investigation by the financial press found that the firm sourced customers through fake and fraudulent social media advertisements. Those advertisements misused the images of prominent public figures, presenting them as if they were endorsing automated trading platforms they had nothing to do with. Prospective clients who clicked believed they were following the lead of famous investors. They were following a fabrication.</p>
+
+<p>Fake endorsement advertising is one of the most damaging tactics in retail trading precisely because it works. It borrows the credibility of a trusted name to lure people who would never respond to a cold approach from an unknown broker. The people whose images were used never agreed to anything. The clients who were drawn in were sold a promise built on a lie before they ever placed a trade.</p>
+
+<h2>Frozen Accounts and a Suspended Licence</h2>
+
+<p>The regulatory pressure built in stages. In October 2024 the Financial Intelligence Centre placed a hold on seven Banxso bank accounts. The firm went to the Western Cape High Court to have the hold lifted, and the court refused, leaving the accounts frozen. The FSCA suspended and then moved to withdraw Banxso&apos;s licence, concerned about the risk of harm to clients and to the public. The regulator also raised allegations that Banxso had misled clients by continuing to allow trading while its licence was suspended.</p>
+
+<p>That last point is among the most serious. A suspended licence is a signal that a firm should not be taking client business. A broker that keeps letting clients trade anyway, while telling them its position with the regulator is fine, has crossed from compliance failure into something closer to deception of the very customers it is supposed to protect.</p>
+
+<h2>Liquidation, Raids and a Legal Fight</h2>
+
+<p>The end has been messy. After the Cape High Court ordered final liquidation, liquidators raided Banxso&apos;s offices and seized documents and laptops as they tried to trace what remained. The company&apos;s owner then launched a legal challenge that stalled the liquidation, prolonging the uncertainty for clients whose money is caught inside the collapse. For those clients, the combination of frozen accounts, an insolvent company, and a contested wind-down is close to the worst outcome a retail trader can face.</p>
+
+<p>Banxso is the clearest recent example of why the South African regulator has spent 2026 moving aggressively against retail trading firms. It shows the full arc — from fraudulent celebrity advertising at the front door to insolvency and a criminal referral at the back. Every stage of it was a warning, and the earliest warnings were the advertisements themselves.</p>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="bestforex-view-heading" class="rounded-xl border border-primary/30 bg-primary/5 px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-primary mb-3">BestForex.io View</p>
+  <h2 id="bestforex-view-heading" class="text-xl font-bold text-foreground mb-4">The Warning Was at the Very Start</h2>
+  <p class="text-foreground leading-relaxed mb-3">Banxso is what the worst version of this industry looks like when it runs its full course. Fake endorsements using the faces of people who never agreed to anything, clients lured in on that lie, accounts frozen, a licence suspended, more than 2 billion rand in penalties against the firm and its directors, a criminal referral, and finally a court declaring the company hopelessly insolvent and winding it up.</p>
+  <p class="text-foreground leading-relaxed mb-3">The single most important lesson is at the very start of the chain.</p>
+  <p class="text-foreground leading-relaxed font-medium">If a trading platform is advertised through a celebrity endorsement that looks too good to be true, it almost certainly is one, and no amount of later regulation will get a defrauded client&apos;s money back once the firm is insolvent.</p>
+</section>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="about-banxso-heading" class="rounded-xl border border-border bg-card px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">About the Company</p>
+  <h2 id="about-banxso-heading" class="text-xl font-bold text-foreground mb-4">About Banxso</h2>
+  <div class="grid gap-4 sm:grid-cols-2 my-5">
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Regulator</p>
+      <p class="font-semibold text-foreground">FSCA (South Africa)</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Jurisdiction</p>
+      <p class="font-semibold text-foreground">South Africa</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Action Type</p>
+      <p class="font-semibold text-foreground">R2bn+ Fines, Criminal Referral, Liquidation</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Court Order</p>
+      <p class="font-semibold text-foreground">Final Liquidation — 2 March 2026</p>
+    </div>
+  </div>
+  <p class="text-foreground leading-relaxed mb-3">Banxso (Pty) Ltd was a South African online broker offering leveraged contracts for difference to retail clients, supervised by the Financial Sector Conduct Authority. The firm sourced clients through fake celebrity endorsement advertisements on social media.</p>
+  <p class="text-foreground leading-relaxed">In 2024 the Financial Intelligence Centre froze several of its bank accounts and the FSCA suspended and moved to withdraw its licence. The regulator imposed penalties of more than 2 billion rand on the company and its directors and referred the matter to the police. On 2 March 2026 the Cape High Court placed Banxso into final liquidation.</p>
+</section>
+
+<p class="text-sm text-muted-foreground mt-8 pt-4 border-t"><em>Editor&apos;s note &amp; source: Factual points are drawn from the FSCA enforcement notices and the Cape High Court liquidation order of 2 March 2026. This article is not legal advice. Last updated: 8 August 2026.</em></p>
+    `,
+  },
+  {
+    id: 'post-47',
+    slug: 'forex24-cysec-transaction-reporting-failures-lydya-ltd',
+    title: 'CySEC Keeps Flagging Forex24 Over Regulatory Reports It Cannot File on Time or Correctly',
+    excerpt: "The Cyprus regulator has repeatedly penalised Forex24, a licensed foreign exchange and CFD broker, over its inability to file the regulatory reports every Cyprus investment firm is required to submit. The individual fines are small. The pattern behind them is the part worth reading.",
+    category: 'news',
+    editorialType: 'News',
+    author: authors[6], // Beatrix Fairmont — Consumer Affairs Critic
+    publishedAt: '2026-08-07',
+    updatedAt: '2026-08-07',
+    featuredImage: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2026-08-07_Forex24_cover-Pe55Vnd7UFmNQEBskzyu9a1WfbABrW.png',
+    imageAltText: 'CySEC compliance officer at a computer reviewing late transaction reports, Forex24 trading dashboard visible on a second screen, a stack of overdue regulatory filings on the desk — CySEC repeatedly flags Forex24 over missed regulatory reports. BestForex.io Broker Watch.',
+    readingTime: '6 min read',
+    wordCount: 950,
+    metaTitle: 'CySEC Keeps Flagging Forex24 (Lydya Ltd) Over Transaction Reporting Failures',
+    metaDescription: "CySEC has repeatedly penalised Forex24, operated by Lydya Ltd under CIF licence 300/16, over transaction reporting failures — a missed quarterly deadline and a submission that failed validation — in a pattern that raises wider questions about the firm's compliance.",
+    tags: ['Forex24', 'Lydya Ltd', 'CySEC', 'Cyprus', 'EU', 'Transaction Reporting', 'Regulatory Reporting', 'CFD', 'Forex', 'Enforcement', 'Broker Watch', 'CIF 300/16'],
+    isFeatured: true,
+    relatedBrokers: [],
+    linkedSources: [
+      { label: 'CySEC — Public Decisions', url: 'https://www.cysec.gov.cy/en-GB/public-info/decisions/' },
+    ],
+    content: `
+<p>The Cyprus regulator has repeatedly flagged Forex24, a licensed foreign exchange and CFD broker, over its inability to file the regulatory reports every Cyprus investment firm is required to submit. The individual penalties are tiny. The pattern behind them is the part worth reading.</p>
+
+<p>Forex24 and Forex24 Global are operated by Lydya Ltd, a Cyprus company that has held investment firm licence number 300/16 since 2016. The firm is required, like every licensed broker in Cyprus, to submit quarterly and annual datasets to the regulator through the Cyprus Securities and Exchange Commission&apos;s Transaction Reporting System. Those submissions are how the regulator sees what a broker is actually doing. Forex24 has struggled to make them.</p>
+
+<h2>Small Fines, Repeated Failures</h2>
+
+<p>The record is a series of small penalties for missed and failed reports. One of the firm&apos;s submissions failed validation, which prompted a penalty of EUR 850. An earlier fine of EUR 100 followed a missed deadline of 5 May for the statistical report covering the first quarter of 2025. Each amount is trivial. Taken together they describe a firm that keeps failing at one of the most basic obligations a regulated broker has: telling its regulator, on time and in the correct format, what it has been doing.</p>
+
+<p>It would be easy to dismiss penalties of this size as noise. That would be a mistake. Transaction reporting is not a courtesy a broker extends to its regulator. It is the primary way the regulator monitors the market, checks that a firm is operating within its permissions, and looks for signs of misconduct. A broker that cannot reliably file these reports is, in effect, a broker the regulator cannot reliably see.</p>
+
+<h2>Why Reporting Is a Window Into the Rest</h2>
+
+<p>There is a reason experienced supervisors treat reporting failures as more serious than their small fines suggest. Filing accurate data on time is one of the least demanding things a competent firm does. When a broker cannot manage even that, it raises a fair question about the state of the systems and controls behind it. The firms that struggle to hit a reporting deadline are frequently the firms whose wider compliance is thin, and regulators know it.</p>
+
+<p>That is the real signal in the Forex24 case. Nobody is alleging that client money has gone missing or that trades have been rigged. What the regulator has established, more than once, is that this broker cannot consistently meet a simple, mechanical obligation. For a retail client, that is not proof of harm, but it is a legitimate reason for caution. A firm that is repeatedly flagged for the easy things has not earned the benefit of the doubt on the hard ones.</p>
+
+<h2>The Value of Watching the Small Stuff</h2>
+
+<p>Most broker reviews ignore transaction reporting entirely, because it is unglamorous and the fines are small. Regulators do not ignore it, and neither should traders. A steady trickle of reporting penalties against the same firm is one of the clearest early indicators that a broker&apos;s back office is not in order. Forex24 has generated exactly that trickle. The amounts will never make a headline, but the pattern is a quiet warning for anyone paying attention.</p>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="bestforex-view-heading" class="rounded-xl border border-primary/30 bg-primary/5 px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-primary mb-3">BestForex.io View</p>
+  <h2 id="bestforex-view-heading" class="text-xl font-bold text-foreground mb-4">Small Fines Keep Happening to the Same Broker</h2>
+  <p class="text-foreground leading-relaxed mb-3">An EUR 850 penalty and a EUR 100 fine are not going to frighten anyone, and on their own they are close to meaningless. The point is that they keep happening to the same broker. Transaction reporting is the simplest promise a regulated firm makes — to tell its regulator what it is doing, on time and correctly — and Forex24 keeps breaking it.</p>
+  <p class="text-foreground leading-relaxed mb-3">That is not evidence of fraud, and we are not suggesting it is. It is evidence of a firm that cannot reliably do the basics, which is exactly the kind of thing that tends to sit next to bigger problems.</p>
+  <p class="text-foreground leading-relaxed font-medium">When a broker is repeatedly flagged for the easy obligations, that is reason enough to look harder at everything else.</p>
+</section>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="about-forex24-heading" class="rounded-xl border border-border bg-card px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">About the Company</p>
+  <h2 id="about-forex24-heading" class="text-xl font-bold text-foreground mb-4">About Forex24 (Lydya Ltd)</h2>
+  <div class="grid gap-4 sm:grid-cols-2 my-5">
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Regulator</p>
+      <p class="font-semibold text-foreground">CySEC (Cyprus)</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">CIF Licence</p>
+      <p class="font-semibold text-foreground">300/16 (since 2016)</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Action Type</p>
+      <p class="font-semibold text-foreground">Repeated Reporting Penalties</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Penalties</p>
+      <p class="font-semibold text-foreground">EUR 850 + EUR 100</p>
+    </div>
+  </div>
+  <p class="text-foreground leading-relaxed mb-3">Lydya Ltd is a Cyprus-based investment firm operating the retail trading brands Forex24 and Forex24 Global, holding Cyprus investment firm licence number 300/16 since 2016 and supervised by the Cyprus Securities and Exchange Commission.</p>
+  <p class="text-foreground leading-relaxed">In recent regulatory activity the firm has been penalised more than once over its transaction reporting, including a penalty after a submission failed validation and a fine after a missed deadline for a quarterly statistical report.</p>
+</section>
+
+<p class="text-sm text-muted-foreground mt-8 pt-4 border-t"><em>Editor&apos;s note &amp; source: Factual points are drawn from the CySEC public decisions register. This article is not legal advice. Last updated: 7 August 2026.</em></p>
+    `,
+  },
+  // ─── Published Enforcement Reports (past-dated or today, immediately live) ──
+  // Posts 45–46 added 2026-08-06. publishedAt on or before today — live now.
+  {
+    id: 'post-46',
+    slug: 'htfx-shuts-down-worldwide-cysec-fca-licences-lost-vanuatu',
+    title: 'HTFX Shuts Down Worldwide After Losing Its Cyprus and UK Licences and Retreating Offshore',
+    excerpt: "HTFX, a retail forex and CFD broker focused on the Far East, has ceased operations around the world. Its main website now shows only a parked domain, the visible end of a collapse that ran through two European regulators before the business finally went dark.",
+    category: 'news',
+    editorialType: 'News',
+    author: authors[3], // Clarissa Penhallow — Investigative Markets Writer
+    publishedAt: '2026-08-06',
+    updatedAt: '2026-08-06',
+    featuredImage: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2026-08-06_HTFX_cover-ZBxw7IPHNwiAXpPcZyNXTJrpW8Gbk1.png',
+    imageAltText: 'Parked domain page on a browser with HTFX branding faded in the background, CySEC and FCA licence withdrawal notices on a compliance desk, an empty Far East trading floor visible through glass — HTFX shuts down worldwide after losing EU and UK licences. BestForex.io Broker Watch.',
+    readingTime: '7 min read',
+    wordCount: 1100,
+    metaTitle: 'HTFX Shuts Down Worldwide After Losing CySEC and FCA Licences',
+    metaDescription: "HTFX, the retail forex and CFD broker focused on the Far East, has ceased operations worldwide after renouncing its CySEC licence and losing its FCA authorisation in April 2026, leaving only a parked domain in its wake.",
+    tags: ['HTFX', 'CySEC', 'FCA', 'Cyprus', 'United Kingdom', 'Vanuatu', 'Licence Withdrawal', 'Global Shutdown', 'CFD', 'Forex', 'Enforcement', 'Broker Watch'],
+    isFeatured: true,
+    relatedBrokers: [],
+    linkedSources: [
+      { label: 'CySEC — Public Decisions', url: 'https://www.cysec.gov.cy/en-GB/public-info/decisions/' },
+      { label: 'FCA Financial Services Register', url: 'https://register.fca.org.uk' },
+    ],
+    content: `
+<p>HTFX, a retail forex and CFD broker focused on the Far East, has ceased operations around the world. Its main website now shows only a parked domain, the visible end of a collapse that ran through two European regulators before the business finally went dark.</p>
+
+<p>The HTFX brand, founded in 2018, was built around three regulated and offshore pillars. It ran an FCA-authorised business in the United Kingdom aimed at professional and institutional clients, a Cyprus-authorised brokerage serving European clients, and an offshore retail operation based in Vanuatu that targeted traders across the greater Far East. In 2026 that structure came apart.</p>
+
+<h2>Two Licences Gone in a Single Year</h2>
+
+<p>The unwinding was quick. HTFX renounced its Cyprus investment firm licence earlier in 2026, and the Cyprus Securities and Exchange Commission confirmed the withdrawal. Its UK permissions ended as well, with the Financial Conduct Authority register showing the firm as no longer authorised from 10 April 2026. Losing the ability to operate under both a European and a UK regulator in the space of a few months leaves a broker without the two credentials that most reassure serious clients.</p>
+
+<p>What remained after that was the offshore business, the Vanuatu-based operation that served retail clients across the Far East. Offshore licences of that kind carry far less protection than a European or UK authorisation, and they are often the last thing standing when a broker&apos;s regulated footprint falls away. In HTFX&apos;s case even that has now gone. The offshore business appears to have been terminated too, with the main website taken down.</p>
+
+<h2>How a Retail Broker Actually Ends</h2>
+
+<p>HTFX is a clean illustration of a pattern that repeats across the retail forex industry. A firm builds a reassuring structure — a European licence here, a UK entity there, an offshore arm to reach the clients the regulated entities cannot. When the regulated pieces fall away, the offshore arm is left carrying clients who thought they were dealing with a properly supervised group. And when the offshore arm closes, those clients are left with a parked web page and very little recourse.</p>
+
+<p>The order in which the pieces failed is the tell. The European and UK licences went first, which is where the strongest client protections lived. The offshore business — the one with the least oversight and the most retail exposure — was the last to close. That is precisely the wrong order from the point of view of the ordinary trader, who is left most exposed at exactly the moment the supervised parts of the group have already disappeared.</p>
+
+<h2>The Lesson in a Parked Domain</h2>
+
+<p>A parked domain is a strangely final thing. There is no announcement, no orderly wind-down that the public can see, just a website that used to be a broker and is now a holding page. For the traders who funded accounts with HTFX believing its FCA and Cyprus credentials meant safety, the collapse is a hard reminder that a licence protects you only while it exists, and that the offshore layer many brokers rely on to reach retail clients is the layer least able to protect them when things go wrong.</p>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="bestforex-view-heading" class="rounded-xl border border-primary/30 bg-primary/5 px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-primary mb-3">BestForex.io View</p>
+  <h2 id="bestforex-view-heading" class="text-xl font-bold text-foreground mb-4">The Regulated Core Went First</h2>
+  <p class="text-foreground leading-relaxed mb-3">HTFX did not fail because of one dramatic scandal. It failed the way many retail brokers do — from the regulated core outward. The Cyprus licence went, the UK authorisation went, and the offshore Vanuatu arm carried on until it too shut and the website went to a parked page.</p>
+  <p class="text-foreground leading-relaxed mb-3">The people most exposed at the end were the Far East retail clients served by the least protected part of the group. The structure HTFX built — regulated entities for credibility and an offshore arm for reach — is common across the industry, and its collapse shows exactly who is left holding the risk when it unwinds.</p>
+  <p class="text-foreground leading-relaxed font-medium">A licence reassures only while it lasts, and an offshore layer reassures not at all.</p>
+</section>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="about-htfx-heading" class="rounded-xl border border-border bg-card px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">About the Company</p>
+  <h2 id="about-htfx-heading" class="text-xl font-bold text-foreground mb-4">About HTFX</h2>
+  <div class="grid gap-4 sm:grid-cols-2 my-5">
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Regulators</p>
+      <p class="font-semibold text-foreground">CySEC (Cyprus) + FCA (UK)</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Jurisdictions</p>
+      <p class="font-semibold text-foreground">Cyprus, United Kingdom, Vanuatu</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Action Type</p>
+      <p class="font-semibold text-foreground">Licence Loss &amp; Global Shutdown</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">FCA De-auth Date</p>
+      <p class="font-semibold text-foreground">10 April 2026</p>
+    </div>
+  </div>
+  <p class="text-foreground leading-relaxed mb-3">HTFX was a retail forex and CFD brokerage group founded in 2018 and focused on the Far East. At its peak it operated an FCA-authorised business in the United Kingdom for professional and institutional clients, a Cyprus-authorised brokerage for European clients, and an offshore retail operation based in Vanuatu.</p>
+  <p class="text-foreground leading-relaxed">In 2026 the group renounced its Cyprus licence, lost its UK authorisation with effect from 10 April 2026, and subsequently ceased operations worldwide, with its main website taken offline.</p>
+</section>
+
+<p class="text-sm text-muted-foreground mt-8 pt-4 border-t"><em>Editor&apos;s note &amp; source: Factual points are drawn from the CySEC public decisions register and the FCA Financial Services Register. This article is not legal advice. Last updated: 6 August 2026.</em></p>
+    `,
+  },
+  {
+    id: 'post-45',
+    slug: 'traders-trust-cysec-licence-renunciation-16-years-ttcm',
+    title: 'Traders Trust Hands Back Its Cyprus Licence After More Than Sixteen Years on the Register',
+    excerpt: "TTCM Traders Trust Capital Markets, a foreign exchange and CFD broker better known simply as Traders Trust, has had its Cyprus licence withdrawn after choosing to hand it back. The firm exits the Cyprus investment firm regime after more than sixteen years on the regulator's register.",
+    category: 'news',
+    editorialType: 'News',
+    author: authors[6], // Beatrix Fairmont — Consumer Affairs Critic
+    publishedAt: '2026-08-05',
+    updatedAt: '2026-08-05',
+    featuredImage: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2026-08-05_TradersTrust_cover-MBrqAfErOjiqeOpjLYdo6p73wHMGJA.png',
+    imageAltText: "CySEC authorisation withdrawal letter on a compliance desk, Traders Trust brand identity in the background, a 16-year anniversary marker on the wall — Traders Trust hands back Cyprus licence after 16 years. BestForex.io Broker Watch.",
+    readingTime: '6 min read',
+    wordCount: 1000,
+    metaTitle: 'Traders Trust (TTCM) Hands Back Cyprus Licence After 16 Years',
+    metaDescription: "TTCM Traders Trust Capital Markets Ltd has voluntarily renounced its Cyprus investment firm authorisation (CIF 107/09) after more than 16 years on the CySEC register, with the withdrawal confirmed by board decision of 14 May 2026.",
+    tags: ['Traders Trust', 'TTCM', 'CySEC', 'Cyprus', 'EU', 'Licence Renunciation', 'CIF Withdrawal', 'CFD', 'Forex', 'Broker Watch', 'CIF 107/09'],
+    isFeatured: true,
+    relatedBrokers: ['traderstrust'],
+    linkedSources: [
+      { label: 'CySEC — Public Decisions', url: 'https://www.cysec.gov.cy/en-GB/public-info/decisions/' },
+    ],
+    content: `
+<p>TTCM Traders Trust Capital Markets, a foreign exchange and CFD broker better known to traders simply as Traders Trust, has had its Cyprus licence withdrawn after choosing to hand it back. The firm exits the Cyprus investment firm regime after more than sixteen years on the regulator&apos;s register.</p>
+
+<p>The Cyprus Securities and Exchange Commission took the decision on 14 May 2026 and announced it on 9 June 2026, withdrawing Cyprus investment firm authorisation number 107/09. Unlike a suspension or a fine, this was a voluntary exit. The company expressly requested the renunciation of its licence, and the regulator gave effect to that request under the relevant provisions of Cyprus investment services law.</p>
+
+<h2>Voluntary Does Not Mean Painless</h2>
+
+<p>It is important to be fair about what this is. A voluntary renunciation is not a finding of misconduct. There is no allegation here of fraud, no penalty, no suspension. A firm is entitled to decide that operating as a Cyprus investment firm no longer makes commercial sense, and to hand its licence back in an orderly way. Many do, and 2026 has seen a steady stream of them leave the Cyprus regime.</p>
+
+<p>But voluntary does not mean without consequence for clients. When a broker gives up the licence it has traded under for sixteen years, the European regulatory framework that sat around a client&apos;s account goes with it. The oversight of a Tier 1 European regulator, the leverage limits, the conduct rules, the investor compensation arrangements — these are the things a Cyprus licence carries, and they do not survive the exit. A client who valued that framework has to look very carefully at what, if anything, replaces it.</p>
+
+<h2>Where the Business Goes Next</h2>
+
+<p>This is the real question behind almost every voluntary exit. Firms rarely leave a regulated market and simply stop. More often the business continues under a different entity in a different jurisdiction, frequently one with lighter rules and higher permitted leverage. The brand a client knows can carry on looking the same while the regulatory substance behind it changes completely. Traders Trust offered leveraged trading in forex, indices, commodities, metals, and shares, and the disappearance of the Cyprus licence says nothing about where those same products may now be offered from.</p>
+
+<p>For a retail client, that is the point to watch. The most important change when a broker renounces a European licence is not always visible on the trading platform. It is the quiet shift in which entity holds the account and which regulator, if any, stands behind it. A familiar name and a working login are not the same thing as continued European protection.</p>
+
+<h2>A Register That Keeps Shrinking</h2>
+
+<p>The Traders Trust exit is part of a broader thinning of the Cyprus investment firm register in 2026, as brokers weigh the cost of European compliance against the commercial appeal of lighter-touch jurisdictions. Each individual departure is lawful and orderly. The cumulative effect is a slow migration of retail forex and CFD business away from the European rulebook, one renounced licence at a time. Clients who assume a long-standing brand still carries its old regulatory weight may be the last to notice the change.</p>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="bestforex-view-heading" class="rounded-xl border border-primary/30 bg-primary/5 px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-primary mb-3">BestForex.io View</p>
+  <h2 id="bestforex-view-heading" class="text-xl font-bold text-foreground mb-4">The Brand Stays. The Protections Leave.</h2>
+  <p class="text-foreground leading-relaxed mb-3">There is nothing scandalous in a broker handing back a licence it no longer wants, and it would be wrong to imply otherwise about Traders Trust. What deserves attention is the pattern and what it costs clients. A sixteen-year-old Cyprus authorisation carried real European protections, and when a firm renounces it, those protections leave with it.</p>
+  <p class="text-foreground leading-relaxed mb-3">The business itself usually does not stop. It moves.</p>
+  <p class="text-foreground leading-relaxed font-medium">For a retail trader the essential question after any voluntary exit is not whether the platform still works, but which entity now holds the money and which regulator, if any, is watching it. The answer is often less reassuring than the familiar brand suggests.</p>
+</section>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="about-traderstrust-heading" class="rounded-xl border border-border bg-card px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">About the Company</p>
+  <h2 id="about-traderstrust-heading" class="text-xl font-bold text-foreground mb-4">About Traders Trust</h2>
+  <div class="grid gap-4 sm:grid-cols-2 my-5">
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Regulator</p>
+      <p class="font-semibold text-foreground">CySEC (Cyprus)</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">CIF Licence</p>
+      <p class="font-semibold text-foreground">107/09 (held 16+ years)</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Action Type</p>
+      <p class="font-semibold text-foreground">Voluntary Licence Renunciation</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">CySEC Decision Date</p>
+      <p class="font-semibold text-foreground">14 May 2026 (ann. 9 June 2026)</p>
+    </div>
+  </div>
+  <p class="text-foreground leading-relaxed mb-3">TTCM Traders Trust Capital Markets Ltd, known as Traders Trust, was a Cyprus-based foreign exchange and CFD broker offering leveraged trading in forex, indices, commodities, metals, and shares, authorised as Cyprus investment firm number 107/09 for more than sixteen years.</p>
+  <p class="text-foreground leading-relaxed">In 2026 the company requested the renunciation of its licence, and the Cyprus Securities and Exchange Commission withdrew its authorisation by a decision of 14 May 2026, announced on 9 June 2026.</p>
+</section>
+
+<p class="text-sm text-muted-foreground mt-8 pt-4 border-t"><em>Editor&apos;s note &amp; source: Factual points are drawn from the CySEC board decision of 14 May 2026 and the public announcement of 9 June 2026. This article is not legal advice. Last updated: 5 August 2026.</em></p>
+    `,
+  },
   // ─── Published Enforcement Reports (past-dated, immediately live) ───────────
   // Posts 40–44 added 2026-08-06. All publishedAt dates are in the past so
   // they become visible immediately on the next ISR cycle — no deploy required.
