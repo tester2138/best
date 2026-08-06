@@ -1,0 +1,60 @@
+import { query } from '@/lib/portal/db'
+import { LeadsClient, type Lead } from './leads-client'
+
+export const dynamic = 'force-dynamic'
+export const metadata = {
+  title: 'Claim leads · BestForex Portal',
+  robots: { index: false, follow: false },
+}
+
+interface Row {
+  id: string
+  full_name: string
+  work_email: string
+  message: string | null
+  status: 'new' | 'contacted' | 'assigned' | 'dismissed'
+  ip: string | null
+  created_at: string
+  brand_id: string | null
+  brand_name: string | null
+  brand_slug: string | null
+}
+
+export default async function LeadsPage() {
+  const rows = await query<Row>(
+    `select c.id, c.full_name, c.work_email, c.message, c.status, c.ip, c.created_at,
+            c.brand_id, b.name as brand_name, b.slug as brand_slug
+       from public.claim_requests c
+       left join public.brands b on b.id = c.brand_id
+      order by
+        case c.status when 'new' then 0 when 'contacted' then 1 else 2 end,
+        c.created_at desc`,
+  )
+
+  const leads: Lead[] = rows.map((r) => ({
+    id: r.id,
+    fullName: r.full_name,
+    workEmail: r.work_email,
+    message: r.message,
+    status: r.status,
+    createdAt: r.created_at,
+    brandName: r.brand_name,
+    brandSlug: r.brand_slug,
+  }))
+
+  const newCount = leads.filter((l) => l.status === 'new').length
+
+  return (
+    <div className="flex flex-col gap-6">
+      <div>
+        <h1 className="text-2xl font-semibold tracking-tight">Claim leads</h1>
+        <p className="mt-1 text-sm text-muted-foreground">
+          {leads.length === 0
+            ? 'No claim requests yet.'
+            : `${newCount} new · ${leads.length} total`}
+        </p>
+      </div>
+      <LeadsClient leads={leads} />
+    </div>
+  )
+}

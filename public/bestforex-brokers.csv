@@ -1,0 +1,1798 @@
+rank,name,slug,legalName,headquarters,country,regulators,dataQualityStage,verificationStatus,rating,minDeposit,spreadsFrom,platforms,websiteUrl
+1,BlueSuisse,bluesuisse,Blue Suisse Limited,Malta (with Germany office),Malta (with Germany office),MFSA (Malta),reviewed,sponsored,4.9,$500,Competitive,MetaTrader 4 | MetaTrader 5 | Trademaster | Mobile Apps,https://www.bluesuisse.com
+2,Saxo Bank,saxo-bank,Saxo Bank A/S,"Copenhagen, Denmark",Denmark,Danish FSA | FCA (UK) | MAS (Singapore) | ASIC (Australia),reviewed,sponsored,4.8,$0,Variable,SaxoInvestor | SaxoTrader | SaxoTraderPRO,https://www.home.saxo
+3,FOREX.com,forex-com,,,United States,,basic,unverified,4.2,,,,https://www.forex.com
+4,Dukascopy,dukascopy,,,Switzerland,,basic,unverified,4.3,,,,https://www.dukascopy.com
+5,Swissquote,swissquote,,,Switzerland,,basic,unverified,4.2,,,,https://www.swissquote.com
+6,Capital.com,capital-com,,,United Kingdom,,basic,unverified,4.3,,,,https://capital.com
+7,Eightcap,eightcap,,,Australia,,basic,unverified,4.2,,,,https://www.eightcap.com
+8,NinjaTrader,ninjatrader,,,United States,,basic,unverified,4.4,,,,https://ninjatrader.com
+9,Tastyfx,tastyfx,,,United States,,basic,unverified,3.1,,,,https://www.tastyfx.com
+10,Moneta Markets,moneta-markets,,,Australia,,basic,unverified,4.3,,,,https://www.monetamarkets.com
+11,Vantage,vantage,,,Australia,,basic,unverified,4.2,,,,https://www.vantagemarkets.com
+12,Fusion Markets,fusion-markets,,,Australia,,basic,unverified,4.2,,,,https://www.fusionmarkets.com
+13,Pepperstone,pepperstone,"Pepperstone Group Limited, Australian Company Number 147 055 703","Melbourne, Australia",Australia,FCA (UK) | ASIC (Australia) | CySEC (Cyprus) | DFSA (Dubai) | SCB (Bahamas) | CMA (Kenya),reviewed,verified,4.3,$0,0.0 pips,MetaTrader 4 | MetaTrader 5 | cTrader | TradingView,https://www.pepperstone.com
+14,IC Markets,ic-markets,International Capital Markets Pty Ltd (ACN 123289109) / Raw Trading Ltd (Seychelles) / IC Markets (EU) Ltd (Cyprus),"Sydney, Australia",Australia,ASIC (Australia) | CySEC (Cyprus) | FSA (Seychelles),reviewed,unverified,4.8,$200,0.0 pips,MetaTrader 4 | MetaTrader 5 | cTrader | TradingView,https://www.ic.com
+15,eToro,etoro,eToro (Europe) Ltd,"Limassol, Cyprus",Cyprus,CySEC (Cyprus) | FCA (UK) | ASIC (Australia),reviewed,unverified,4.8,$100,1 pip,eToro Platform | eToro Money,https://www.etoro.com
+16,ICE Futures,ice-futures,Intercontinental Exchange,"Atlanta, Georgia, USA",USA,CFTC (USA) | FCA (UK) | SEC (USA),reviewed,unverified,4.8,,,,https://www.ice.com
+17,Trading Technologies (TT),trading-technologies,Trading Technologies International,"Chicago, Illinois, USA",USA,,reviewed,unverified,4.7,,,TT Platform | TT Mobile | TT API | TT Surveillance | TT Score ML,https://www.tradingtechnologies.com
+18,DAS Trader,das-trader,Direct Access Software Inc.,"Las Vegas, Nevada, USA",USA,,reviewed,unverified,4.7,,,DAS Trader Pro | DAS ActiveWeb | DAS Mobile | DAS FIX/API | DAS MTS,https://dastrader.com
+19,Exness,exness,"Exness Group, operating through multiple regulated entities including Exness (SC) Ltd, Exness B.V., Exness (VG) Ltd, Forexite Ltd, Exness (Cy) Ltd and Exness (UK) Ltd","Limassol, Cyprus",Cyprus,FSA (Seychelles) | CBCS (Curaçao) | FSC (BVI) | FSC (Belize) | FSC (Mauritius) | FSCA (South Africa) | CMA (Kenya) | CySEC (Cyprus) | FCA (UK) | JSC (Jordan) | UAE CMA,reviewed,unverified,4.6,Varies by account type and region,"From 0.0 pips on Zero/Raw Spread, 0.1 pips on Pro, 0.2 pips on Standard",MetaTrader 4 | MetaTrader 5 | Exness Terminal | MetaTrader WebTerminal,https://www.exness.com
+20,Tradeweb,tradeweb,,"New York City, USA",USA,SEC (USA) | FINRA | FCA (UK) | MAS (Singapore),reviewed,unverified,4.6,,,,https://www.tradeweb.com
+21,Interactive Brokers,interactive-brokers,Interactive Brokers LLC,"Greenwich, Connecticut, USA",USA,SEC (USA) | FCA (UK) | ASIC (Australia) | MAS (Singapore) | SFC (Hong Kong),reviewed,unverified,4.5,$0,Institutional,Trader Workstation (TWS) | IBKR Mobile | Client Portal | IBKR GlobalTrader,https://www.interactivebrokers.com
+22,The Funded Trader,the-funded-trader,,"Texas, USA",USA,,reviewed,unverified,4.5,,,MetaTrader 4 | MetaTrader 5,https://thefundedtrader.com
+23,Audacity Capital,audacity-capital,,"London, United Kingdom",United Kingdom,,reviewed,unverified,4.5,,,MetaTrader 5,https://www.audacitycapital.co.uk
+24,GBE Prime,gbe-prime,,Germany,Germany,BaFin (Germany),reviewed,unverified,4.5,,,MetaTrader 4 | MetaTrader 5 | FIX API,https://gbeprime.com
+25,BGC Brokers,bgc-brokers,,"New York, USA",USA,SEC | FCA | MAS,reviewed,unverified,4.5,,,,https://www.bgcg.com
+26,Lucid Trading,lucid-trading,,United States,USA,,enriched,unverified,4.5,,,,https://lucidtrading.com
+27,Top One Trader,top-one-trader,,United States,USA,,enriched,unverified,4.5,,,,https://toponetrader.com
+28,Clear Street,clear-street,,"New York, USA",USA,FINRA (USA) | SEC (USA),reviewed,unverified,4.5,,,Clear Street Studio | API-first Platform,https://clearstreet.io
+29,SMB Capital,smb-capital,,"New York City, USA",USA,,reviewed,unverified,4.5,,,,https://www.smbcap.com
+30,MarketAxess,marketaxess,,"New York City, USA",USA,SEC (USA) | FINRA | FCA (UK),reviewed,unverified,4.5,,,MarketAxess Platform | Open Trading | CP+ AI Pricing,https://www.marketaxess.com
+31,Virtu Financial (ITG),virtu-itg,Virtu Financial Inc.,"New York City, USA",USA,SEC (USA) | FINRA | FCA (UK) | ASIC (Australia),reviewed,unverified,4.5,,,,https://www.virtu.com
+32,Instinet,instinet,Instinet Incorporated (Nomura Group),"New York City, USA",USA,SEC (USA) | FINRA | FCA (UK) | MAS (Singapore),reviewed,unverified,4.5,,,Instinet Newport EMS | CBX Dark Pool | BlockMatch | Nighthawk | Lynx Algo Suite,https://www.instinet.com
+33,Cboe Europe,cboe-europe,Cboe Europe Equities,"London, UK / Amsterdam, Netherlands",United Kingdom,FCA (UK) | AFM (Netherlands),enriched,unverified,4.5,,,,https://www.cboe.com
+34,Blue Guardian,blue-guardian,,,Unknown,,basic,unverified,4.5,,,,https://blueguardian.com
+35,FunderPro,funderpro,,,Unknown,,basic,unverified,4.5,,,,https://funderpro.com
+36,City Traders Imperium,city-traders-imperium,,,United Kingdom,,basic,unverified,4.5,,,,https://citytradersimperium.com
+37,Audacity Capital,audacity-capital,,,United Kingdom,,basic,unverified,4.5,,,,https://www.audacitycapital.co.uk
+38,Trade The Pool,trade-the-pool,,,Unknown,,basic,unverified,4.5,,,,https://tradethepool.com
+39,OneUp Trader,oneup-trader,,,United States,,basic,unverified,4.5,,,,https://www.oneuptrader.com
+40,Earn2Trade,earn2trade,,,United States,,basic,unverified,4.5,,,,https://www.earn2trade.com
+41,UProfit Trader,uprofit-trader,,,United States,,basic,unverified,4.5,,,,https://www.uprofittrader.com
+42,Leeloo Trading,leeloo-trading,,,United States,,basic,unverified,4.5,,,,https://www.leelootrading.com
+43,Bulenox,bulenox,,,Unknown,,basic,unverified,4.5,,,,https://bulenox.com
+44,Take Profit Trader,take-profit-trader,,,United States,,basic,unverified,4.5,,,,https://takeprofittrader.com
+45,MyFundedFutures,myfundedfutures,,,United States,,basic,unverified,4.5,,,,https://myfundedfutures.com
+46,TradeDay,tradeday,,,Unknown,,basic,unverified,4.5,,,,https://www.tradeday.com
+47,SurgeTrader,surgetrader,,,United States,,basic,unverified,4.5,,,,https://surgetrader.com
+48,Lux Trading Firm,lux-trading-firm,,,United Kingdom,,basic,unverified,4.5,,,,https://luxtradingfirm.com
+49,Bespoke Funding Program,bespoke-funding-program,,,Unknown,,basic,unverified,4.5,,,,https://bespokefundingprogram.com
+50,Funded Trading Plus,funded-trading-plus,,,United Kingdom,,basic,unverified,4.5,,,,https://fundedtradingplus.com
+51,The Funded Trader,the-funded-trader,,,Unknown,,basic,unverified,4.5,,,,https://thefundedtraderprogram.com
+52,Maven Trading,maven-trading,,,Unknown,,basic,unverified,4.5,,,,https://maventrading.com
+53,Goat Funded Trader,goat-funded-trader,,,Unknown,,basic,unverified,4.5,,,,https://goatfundedtrader.com
+54,RebelsFunding,rebelsfunding,,,Unknown,,basic,unverified,4.5,,,,https://www.rebelsfunding.com
+55,Funding Pips,funding-pips,,,UAE,,basic,unverified,4.5,,,,https://fundingpips.com
+56,Instant Funding,instant-funding,,,Unknown,,basic,unverified,4.5,,,,https://instantfunding.io
+57,CMC Markets,cmc-markets,CMC Markets plc,"London, UK",UK,FCA (UK) | ASIC (Australia) | MAS (Singapore) | BaFin (Germany),reviewed,unverified,4.4,$0,0.7 pips,Next Generation | MetaTrader 4,https://www.cmcmarkets.com
+58,TMGM,tmgm,Trademax Global Markets,"Sydney, Australia",Australia,ASIC (Australia) | VFSC (Vanuatu),reviewed,unverified,4.4,$100,0.0 pips,MetaTrader 4 | MetaTrader 5 | IRESS,https://www.tmgm.com
+59,Tickmill,tickmill,Tickmill Ltd,"London, UK",UK,FCA (UK) | CySEC (Cyprus) | FSA (Seychelles) | FSCA (South Africa),reviewed,unverified,4.4,$100,0.0 pips,MetaTrader 4 | MetaTrader 5 | Mobile Apps,https://www.tickmill.com
+60,XTB,xtb,X-Trade Brokers Dom Maklerski S.A.,"Warsaw, Poland",Poland,FCA (UK) | KNF (Poland) | CySEC (Cyprus) | IFSC (Belize),reviewed,unverified,4.4,$0,0.5 pips,xStation 5 | MetaTrader 4 | Mobile Apps,https://www.xtb.com
+61,FTMO,ftmo,,"Prague, Czech Republic",Czech Republic,,reviewed,unverified,4.4,,,MetaTrader 4 | MetaTrader 5 | cTrader | DXtrade,https://ftmo.com
+62,Tradeview Markets,tradeview-forex,,Cayman Islands,Cayman Islands,CIMA (Cayman) | Labuan FSA | MFSA (Malta) | FSC (Mauritius),reviewed,unverified,4.4,$100,0.0 pips,MetaTrader 4 | MetaTrader 5 | cTrader,https://www.tradeviewforex.com
+63,Marex,marex,,"London, United Kingdom",United Kingdom,FCA (UK) | CFTC (USA) | Multiple Global,reviewed,unverified,4.4,,,Marex Technology Platform | FIX API,https://www.marex.com
+64,Fintokei,fintokei,,"Prague, Czech Republic",Czech Republic,,enriched,unverified,4.4,,,MetaTrader 4 | MetaTrader 5 | TradingView | cTrader,https://www.fintokei.com
+65,Alpaca,alpaca,Alpaca Securities LLC,"San Mateo, California, USA",USA,FINRA (USA) | SEC (USA),reviewed,unverified,4.4,$0,Commission-free (stocks),Alpaca API | TradingView | Python SDK | REST API | FIX Protocol,https://alpaca.markets
+66,Trillium Trading,trillium-trading,,"New York City, USA",USA,,reviewed,unverified,4.4,,,,https://www.trlm.com
+67,CenterPoint Securities,centerpoint-securities,,USA,USA,FINRA | SEC (USA) | SIPC,reviewed,unverified,4.4,,"$0.001/share equities, $0.20/contract options",CenterPoint Desktop | CenterPoint Web | CenterPoint Mobile,https://centerpointsecurities.com
+68,Liquidnet,liquidnet,,"New York City, USA",USA,SEC (USA) | FINRA | FCA (UK) | MAS (Singapore),reviewed,unverified,4.4,,,,https://www.liquidnet.com
+69,Nadex,nadex,North American Derivatives Exchange,"Chicago, Illinois, USA",USA,CFTC (USA) | NFA (USA),reviewed,unverified,4.4,$250,,Nadex Platform | Mobile App,https://www.nadex.com
+70,Infinox,infinox,,,United Kingdom,,basic,unverified,4.4,,,,https://www.infinox.com
+71,GMI Markets,gmi-markets,,,Unknown,,basic,unverified,4.4,,,,https://www.gmimarkets.com
+72,M4Markets,m4markets,,,Unknown,,basic,unverified,4.4,,,,https://www.m4markets.com
+73,STARTRADER,startrader,,,Unknown,,basic,unverified,4.4,,,,https://www.startrader.com
+74,Doo Prime,doo-prime,,,Unknown,,basic,unverified,4.4,,,,https://www.dooprime.com
+75,Hantec Markets,hantec-markets,,,United Kingdom,,basic,unverified,4.4,,,,https://hmarkets.com
+76,PhillipCapital,phillipcapital,,,Singapore,,basic,unverified,4.4,,,,https://www.phillipcapital.com
+77,KCM Trade,kcm-trade,,,Unknown,,basic,unverified,4.4,,,,https://www.kcmtrade.com
+78,XS.com,xs-com,,,Unknown,,basic,unverified,4.4,,,,https://www.xs.com
+79,Trive,trive,,,Unknown,,basic,unverified,4.4,,,,https://www.trive.com
+80,Finalto,finalto,,,United Kingdom,,basic,unverified,4.4,,,,https://www.finalto.com
+81,MEX Atlantic,mex-atlantic,,,Unknown,,basic,unverified,4.4,,,,https://www.mexatlantic.com
+82,Windsor Brokers,windsor-brokers,,,Cyprus,,basic,unverified,4.4,,,,https://en.windsorbrokers.com
+83,Trade.com,trade-com,,,Cyprus,,basic,unverified,4.4,,,,https://www.trade.com
+84,Olymp Trade,olymp-trade,,,Unknown,,basic,unverified,4.4,,,,https://olymptrade.com
+85,IQ Option,iq-option,,,Cyprus,,basic,unverified,4.4,,,,https://iqoption.com
+86,Quotex,quotex,,,Unknown,,basic,unverified,4.4,,,,https://quotex.com
+87,Pocket Option,pocket-option,,,Unknown,,basic,unverified,4.4,,,,https://pocketoption.com
+88,Binomo,binomo,,,Unknown,,basic,unverified,4.4,,,,https://binomo.com
+89,Nadex,nadex,,,United States,,basic,unverified,4.4,,,,https://www.nadex.com
+90,Tastytrade,tastytrade,,,United States,,basic,unverified,4.4,,,,https://tastytrade.com
+91,TradeStation,tradestation,,,United States,,basic,unverified,4.4,,,,https://www.tradestation.com
+92,Charles Schwab,charles-schwab,,,United States,,basic,unverified,4.4,,,,https://www.schwab.com
+93,TD Ameritrade,td-ameritrade,,,United States,,basic,unverified,4.4,,,,https://www.tdameritrade.com
+94,Webull,webull,,,United States,,basic,unverified,4.4,,,,https://www.webull.com
+95,Firstrade,firstrade,,,United States,,basic,unverified,4.4,,,,https://www.firstrade.com
+96,Public.com,public-com,,,United States,,basic,unverified,4.4,,,,https://public.com
+97,Revolut Trading,revolut-trading,,,United Kingdom,,basic,unverified,4.4,,,,https://www.revolut.com
+98,Lightyear,lightyear,,,Estonia,,basic,unverified,4.4,,,,https://lightyear.com
+99,DEGIRO,degiro,,,Netherlands,,basic,unverified,4.4,,,,https://www.degiro.com
+100,Hargreaves Lansdown,hargreaves-lansdown,,,United Kingdom,,basic,unverified,4.4,,,,https://www.hl.co.uk
+101,AJ Bell,aj-bell,,,United Kingdom,,basic,unverified,4.4,,,,https://www.ajbell.co.uk
+102,FinecoBank,finecobank,,,Italy,,basic,unverified,4.4,,,,https://finecobank.co.uk
+103,JFD Brokers,jfd-brokers,,,Cyprus,,basic,unverified,4.4,,,,https://www.jfdbank.com
+104,WH SelfInvest,wh-selfinvest,,,Luxembourg,,basic,unverified,4.4,,,,https://www.whselfinvest.com
+105,LMAX Global,lmax-global,,,United Kingdom,,basic,unverified,4.4,,,,https://www.lmax.com
+106,Marex,marex,,,United Kingdom,,basic,unverified,4.4,,,,https://www.marex.com
+107,FTMO,ftmo,,,Czech Republic,,basic,unverified,4.4,,,,https://ftmo.com
+108,FundedNext,fundednext,,,UAE,,basic,unverified,4.4,,,,https://fundednext.com
+109,The5ers,the5ers,,,Israel,,basic,unverified,4.4,,,,https://the5ers.com
+110,Topstep,topstep,,,United States,,basic,unverified,4.4,,,,https://www.topstep.com
+111,Apex Trader Funding,apex-trader-funding,,,United States,,basic,unverified,4.4,,,,https://apextraderfunding.com
+112,E8 Markets,e8-markets,,,Unknown,,basic,unverified,4.4,,,,https://www.e8markets.com
+113,Alpha Capital Group,alpha-capital-group,,,United Kingdom,,basic,unverified,4.4,,,,https://alphacapitalgroup.uk
+114,AvaTrade,avatrade,AvaTrade Ltd,"Dublin, Ireland",Ireland,Central Bank of Ireland | ASIC | FSA Japan | FSCA South Africa | ADGM,reviewed,unverified,4.3,$100,0.6 pips,MetaTrader 4 | MetaTrader 5 | AvaTradeGO | AvaOptions | WebTrader,https://www.avatrade.com
+115,JustMarkets,justmarkets,JustMarkets Ltd,"Limassol, Cyprus",Cyprus,FSC (Mauritius) | CySEC (Cyprus),reviewed,unverified,4.3,$1,0.0 pips,MetaTrader 4 | MetaTrader 5,https://justmarkets.com
+116,FXTM,fxtm,ForexTime Limited,"Limassol, Cyprus",Cyprus,FCA (UK) | CySEC (Cyprus) | FSCA (South Africa) | FSC (Mauritius),reviewed,unverified,4.3,$10,0.0 pips,MetaTrader 4 | MetaTrader 5 | FXTM Trader App,https://www.fxtm.com
+117,Axi,axi,AxiCorp Financial Services Pty Ltd,"Sydney, Australia",Australia,ASIC (Australia) | FCA (UK) | DFSA (Dubai) | FSA (St Vincent),reviewed,unverified,4.3,$0,0.0 pips,MetaTrader 4 | Axi Mobile App,https://www.axi.com
+118,Admirals,admirals,Admiral Markets Group AS,"Tallinn, Estonia",Estonia,FCA (UK) | CySEC (Cyprus) | ASIC (Australia) | JSC (Jordan),reviewed,unverified,4.3,€1,0.0 pips,MetaTrader 4 | MetaTrader 5 | Admirals Web Trader | Mobile Apps,https://admirals.com
+119,BlackBull Markets,blackbull-markets,BlackBull Group Limited,"Auckland, New Zealand",New Zealand,FMA (New Zealand) | FSA (Seychelles),reviewed,unverified,4.3,$0,0.0 pips,MetaTrader 4 | MetaTrader 5 | cTrader | TradingView | BlackBull Shares,https://blackbull.com
+120,FP Markets,fp-markets,First Prudential Markets Pty Ltd,"Sydney, Australia",Australia,ASIC (Australia) | CySEC (Cyprus) | FSCA (South Africa) | FSA (St Vincent),reviewed,unverified,4.3,$100,0.0 pips,MetaTrader 4 | MetaTrader 5 | Iress | IRESS ViewPoint,https://www.fpmarkets.com
+121,Global Prime,global-prime,Global Prime Pty Ltd,"Sydney, Australia",Australia,ASIC (Australia) | VFSC (Vanuatu),reviewed,unverified,4.3,$0,0.0 pips,MetaTrader 4 | MT4 Web Terminal,https://globalprime.com
+122,Atmos Funded,atmos-funded,,International,International,,enriched,unverified,4.3,,,,https://atmosfunded.com
+123,Falcon Funded,falcon-funded,,International,International,,enriched,unverified,4.3,,,MetaTrader 5 | TradingView,https://falconfunded.com
+124,Ironbeam,ironbeam-futures,Ironbeam Inc.,"Chicago, Illinois, USA",USA,NFA (USA) | CFTC (USA) | CME Group (Clearing Member),reviewed,unverified,4.3,No minimum,,Ironbeam Advanced | TradingView | Web Platform | Mobile (iOS/Android),https://www.ironbeam.com
+125,Lightspeed Financial,lightspeed-financial,,USA,USA,FINRA | NFA (USA) | SIPC,reviewed,unverified,4.3,,$0.0010/share (15M+ monthly volume),Lightspeed Trader Pro | Sterling Trader Pro | Eze EMS | Web & Mobile,https://www.lightspeed.com
+126,FlexTrade,flextrade,,"Great Neck, New York, USA",USA,,enriched,unverified,4.3,,,FlexTRADER EMS | FlexOMS | FlexFX | FlexNOW,https://flextrade.com
+127,Sterling Trading Tech,sterling-trading-tech,,"New York City, USA",USA,,enriched,unverified,4.3,,,Sterling Trader Pro | Sterling Vol Trader | Sterling API,https://www.sterlingtradingtech.com
+128,Cantor Fitzgerald,cantor-fitzgerald,,"New York City, USA",USA,SEC (USA) | FINRA | FCA (UK),reviewed,unverified,4.3,,,,https://www.cantor.com
+129,easyMarkets,easymarkets,,,Cyprus,,basic,unverified,4.3,,,,https://www.easymarkets.com
+130,Libertex,libertex,,,Cyprus,,basic,unverified,4.3,,,,https://libertex.com
+131,HYCM,hycm,,,United Kingdom,,basic,unverified,4.3,,,,https://www.hycm.com
+132,FXPro,fxpro,,,Cyprus,,basic,unverified,4.3,,,,https://www.fxpro.com
+133,LCG,lcg,,,United Kingdom,,basic,unverified,4.3,,,,https://www.lcg.com
+134,GO Markets,go-markets,,,Australia,,basic,unverified,4.3,,,,https://www.gomarkets.com
+135,ATFX,atfx,,,United Kingdom,,basic,unverified,4.3,,,,https://www.atfx.com
+136,MultiBank Group,multibank-group,,,UAE,,basic,unverified,4.3,,,,https://multibankfx.com
+137,BDSwiss,bdswiss,,,Cyprus,,basic,unverified,4.3,,,,https://global.bdswiss.com
+138,Fibo Group,fibo-group,,,Cyprus,,basic,unverified,4.3,,,,https://www.fibogroup.com
+139,JustMarkets,justmarkets,,,Unknown,,basic,unverified,4.3,,,,https://justmarkets.com
+140,InstaForex,instaforex,,,Unknown,,basic,unverified,4.3,,,,https://www.instaforex.com
+141,LiteFinance,litefinance,,,Unknown,,basic,unverified,4.3,,,,https://www.litefinance.org
+142,Grand Capital,grand-capital,,,Unknown,,basic,unverified,4.3,,,,https://grandcapital.net
+143,NordFX,nordfx,,,Unknown,,basic,unverified,4.3,,,,https://nordfx.com
+144,IFC Markets,ifc-markets,,,Unknown,,basic,unverified,4.3,,,,https://www.ifcmarkets.com
+145,FXOpen,fxopen,,,Unknown,,basic,unverified,4.3,,,,https://www.fxopen.com
+146,Orbex,orbex,,,Cyprus,,basic,unverified,4.3,,,,https://www.orbex.com
+147,Alpari,alpari,,,Unknown,,basic,unverified,4.3,,,,https://alpari.com
+148,NAGA,naga,,,Germany,,basic,unverified,4.3,,,,https://naga.com
+149,Darwinex,darwinex,,,United Kingdom,,basic,unverified,4.3,,,,https://www.darwinex.com
+150,Trade Nation,trade-nation,,,United Kingdom,,basic,unverified,4.3,,,,https://tradenation.com
+151,ACY Securities,acy-securities,,,Australia,,basic,unverified,4.3,,,,https://acy.com
+152,VT Markets,vt-markets,,,Australia,,basic,unverified,4.3,,,,https://www.vtmarkets.com
+153,TMGM,tmgm,,,Australia,,basic,unverified,4.3,,,,https://www.tmgm.com
+154,PU Prime,pu-prime,,,Unknown,,basic,unverified,4.3,,,,https://www.puprime.com
+155,Key To Markets,key-to-markets,,,United Kingdom,,basic,unverified,4.3,,,,https://www.keytomarkets.com
+156,Skilling,skilling,,,Cyprus,,basic,unverified,4.3,,,,https://skilling.com
+157,TIOmarkets,tiomarkets,,,Unknown,,basic,unverified,4.3,,,,https://tiomarkets.com
+158,Tradeview Markets,tradeview-markets,,,Unknown,,basic,unverified,4.3,,,,https://www.tradeviewforex.com
+159,TeleTrade,teletrade,,,Cyprus,,basic,unverified,4.3,,,,https://www.teletrade.eu
+160,LegacyFX,legacyfx,,,Unknown,,basic,unverified,4.3,,,,https://www.legacyfx.com
+161,IronFX,ironfx,,,Cyprus,,basic,unverified,4.3,,,,https://www.ironfx.com
+162,FXDD,fxdd,,,Malta,,basic,unverified,4.3,,,,https://www.fxdd.com
+163,FXPrimus,fxprimus,,,Cyprus,,basic,unverified,4.3,,,,https://www.fxprimus.com
+164,Scope Markets,scope-markets,,,Unknown,,basic,unverified,4.3,,,,https://www.scopemarkets.com
+165,Zenfinex,zenfinex,,,Unknown,,basic,unverified,4.3,,,,https://www.zenfinex.com
+166,Equiti,equiti,,,UAE,,basic,unverified,4.3,,,,https://www.equiti.com
+167,ADSS,adss,,,UAE,,basic,unverified,4.3,,,,https://www.adss.com
+168,Amana,amana,,,UAE,,basic,unverified,4.3,,,,https://www.amanacapital.com
+169,CMS Prime,cms-prime,,,Unknown,,basic,unverified,4.3,,,,https://www.cmsprime.com
+170,Errante,errante,,,Unknown,,basic,unverified,4.3,,,,https://errante.com
+171,Plus500,plus500,"Plus500UK Ltd, Companies House number 07024970","Haifa, Israel and London, UK",UK,FCA (UK) | CySEC (Cyprus) | ASIC (Australia) | FMA (New Zealand) | FSCA (South Africa) | MAS (Singapore) | CIRO (Canada) | NFA/CFTC (USA),reviewed,unverified,4.2,$100,0.6 pips,Plus500 WebTrader | Plus500 App,https://www.plus500.com
+172,RoboForex,roboforex,RoboForex Ltd,"Belize City, Belize",Belize,FSC (Belize) | CySEC (Cyprus) via RoboMarkets,reviewed,unverified,4.2,$10,0.0 pips,MetaTrader 4 | MetaTrader 5 | cTrader | R StocksTrader,https://www.roboforex.com
+173,Doo Prime,doo-prime,Doo Prime Limited,"Dallas, USA (HQ) / Seychelles (trading entity)",USA (HQ) / Seychelles (trading entity),FCA (UK) | ASIC (Australia) | FSA (Seychelles) | FSC (Mauritius),reviewed,unverified,4.2,$100,0.1 pips,MetaTrader 4 | MetaTrader 5 | Doo Prime InTrade,https://dooprime.com
+174,ThinkMarkets,thinkmarkets,TF Global Markets Aust Pty Ltd,"Melbourne, Australia",Australia,ASIC (Australia) | FCA (UK) | FSA (Seychelles) | CIMA (Cayman Islands),reviewed,unverified,4.2,$0,0.0 pips,MetaTrader 4 | MetaTrader 5 | ThinkTrader,https://www.thinkmarkets.com
+175,MultiBank Group,multibank,MultiBank Group International Limited,"Dubai, UAE",UAE,ASIC (Australia) | FCA (UK) | BaFin (Germany) | VFSC (Vanuatu),reviewed,unverified,4.2,$50,0.0 pips,MetaTrader 4 | MetaTrader 5 | MEX MT4 | MEX MT5 | MEX Exchange,https://www.multibankfx.com
+176,Elites Funding,elites-funding,,,International,,reviewed,unverified,4.2,,,MetaTrader 4 | MetaTrader 5,https://elitesfunding.com
+177,Fullerton Markets,fullerton-markets,,New Zealand,New Zealand,FSA | VFSC,reviewed,unverified,4.2,,0.1 pips,MetaTrader 4 | MetaTrader 5 | FM App,https://www.fullertonmarkets.com
+178,Atlas Funded,atlas-funded,,International,International,,enriched,unverified,4.2,,,TradeLocker | MetaTrader 5 | Match-Trader,https://www.atlasfunded.com
+179,My Funded Trader,my-funded-trader,,International,International,,enriched,unverified,4.2,,,MetaTrader 4 | MetaTrader 5,https://myfundedtrader.com
+180,T3 Trading Group,t3-trading-group,,"New York City, USA",USA,SEC (USA) | FINRA | SIPC,reviewed,unverified,4.2,,,DAS Trader | Sterling Trader Pro | T3 VTF,https://www.t3trading.com
+181,Tradier Brokerage,tradier-brokerage,,"Charlotte, North Carolina, USA",USA,FINRA | SIPC,reviewed,unverified,4.2,,,Tradier Web | Tradier Pro | Tradier API | TradingView Connect,https://tradier.com
+182,Baird,baird-investments,Robert W. Baird & Co.,"Milwaukee, Wisconsin, USA",USA,SEC (USA) | FINRA | SIPC,enriched,unverified,4.2,,,,https://www.rwbaird.com
+183,Lark Funding,lark-funding,,,Unknown,,basic,unverified,4.2,,,,https://www.larkfunding.com
+184,TopTier Trader,toptier-trader,,,Unknown,,basic,unverified,4.2,,,,https://www.toptiertrader.com
+185,PipFarm,pipfarm,,,Unknown,,basic,unverified,4.2,,,,https://pipfarm.com
+186,BrightFunded,brightfunded,,,Unknown,,basic,unverified,4.2,,,,https://brightfunded.com
+187,AquaFunded,aquafunded,,,Unknown,,basic,unverified,4.2,,,,https://www.aquafunded.com
+188,Funded Peaks,funded-peaks,,,Unknown,,basic,unverified,4.2,,,,https://fundedpeaks.com
+189,HyroTrader,hyrotrader,,,Unknown,,basic,unverified,4.2,,,,https://www.hyrotrader.com
+190,Crypto Fund Trader,crypto-fund-trader,,,Unknown,,basic,unverified,4.2,,,,https://cryptofundtrader.com
+191,For Traders,for-traders,,,Unknown,,basic,unverified,4.2,,,,https://www.fortraders.com
+192,SabioTrade,sabiotrade,,,Unknown,,basic,unverified,4.2,,,,https://sabiotrade.com
+193,Tradeify,tradeify,,,Unknown,,basic,unverified,4.2,,,,https://tradeify.co
+194,TickTickTrader,tickticktrader,,,Unknown,,basic,unverified,4.2,,,,https://tickticktrader.com
+195,Elite Trader Funding,elite-trader-funding,,,Unknown,,basic,unverified,4.2,,,,https://elitetraderfunding.com
+196,FX2 Funding,fx2-funding,,,Unknown,,basic,unverified,4.2,,,,https://fx2funding.com
+197,Ment Funding,ment-funding,,,Unknown,,basic,unverified,4.2,,,,https://www.mentfunding.com
+198,Finotive Funding,finotive-funding,,,Unknown,,basic,unverified,4.2,,,,https://www.finotivefunding.com
+199,Leveled Up Society,leveled-up-society,,,Unknown,,basic,unverified,4.2,,,,https://www.leveledupsociety.com
+200,Skilled Funded Traders,skilled-funded-traders,,,Unknown,,basic,unverified,4.2,,,,https://skilledfundedtraders.com
+201,The Forex Funder,the-forex-funder,,,Unknown,,basic,unverified,4.2,,,,https://theforexfunder.com
+202,OANDA,oanda,,,United States,,basic,unverified,4.2,,,,https://www.oanda.com
+203,Interactive Brokers,interactive-brokers,,,United States,,basic,unverified,4.2,,,,https://www.interactivebrokers.com
+204,IC Markets,ic-markets,,,Australia,,basic,unverified,4.2,,,,https://www.icmarkets.com
+205,Exness,exness,,,Cyprus,,basic,unverified,4.2,,,,https://www.exness.com
+206,XTB,xtb,,,Poland,,basic,unverified,4.2,,,,https://www.xtb.com
+207,Trading 212,trading-212,,,United Kingdom,,basic,unverified,4.2,,,,https://www.trading212.com
+208,Admirals,admirals,,,Estonia,,basic,unverified,4.2,,,,https://admiralmarkets.com
+209,HFM,hfm,,,Cyprus,,basic,unverified,4.2,,,,https://www.hfm.com
+210,FXTM,fxtm,,,Cyprus,,basic,unverified,4.2,,,,https://www.forextime.com
+211,Tickmill,tickmill,,,United Kingdom,,basic,unverified,4.2,,,,https://www.tickmill.com
+212,FP Markets,fp-markets,,,Australia,,basic,unverified,4.2,,,,https://www.fpmarkets.com
+213,Axi,axi,,,Australia,,basic,unverified,4.2,,,,https://www.axi.com
+214,FBS,fbs,,,Cyprus,,basic,unverified,4.2,,,,https://fbs.com
+215,RoboForex,roboforex,,,Belize,,basic,unverified,4.2,,,,https://roboforex.com
+216,Octa,octa,,,Unknown,,basic,unverified,4.2,,,,https://www.octafx.com
+217,Deriv,deriv,,,Malta,,basic,unverified,4.2,,,,https://deriv.com
+218,BlackBull Markets,blackbull-markets,,,New Zealand,,basic,unverified,4.2,,,,https://blackbull.com
+219,ThinkMarkets,thinkmarkets,,,Australia,,basic,unverified,4.2,,,,https://www.thinkmarkets.com
+220,ActivTrades,activtrades,,,United Kingdom,,basic,unverified,4.2,,,,https://www.activtrades.com
+221,City Index,city-index,,,United Kingdom,,basic,unverified,4.2,,,,https://www.cityindex.com
+222,Markets.com,markets-com,,,Cyprus,,basic,unverified,4.2,,,,https://www.markets.com
+223,FBS,fbs,FBS Markets Inc,"Belize City, Belize",Belize,FSC (Belize) | CySEC (Cyprus) | ASIC (Australia),reviewed,unverified,4.1,$1,0.0 pips,MetaTrader 4 | MetaTrader 5 | FBS App,https://fbs.com
+224,Octa,octa,OctaFX Ltd,"Kingstown, St Vincent and the Grenadines",St Vincent and the Grenadines,FSC (St Vincent) | CySEC (Cyprus),reviewed,unverified,4.1,$25,0.2 pips,MetaTrader 4 | MetaTrader 5 | OctaTrader,https://www.octa.com
+225,NAGA,naga,NAGA Group AG,"Hamburg, Germany",Germany,"CySEC (Cyprus) | BaFin (Germany, listed)",reviewed,unverified,4.1,250€,0.3 pips,NAGA Platform | MetaTrader 5 | NAGA Mobile App,https://www.nagamarkets.com
+226,Deriv,deriv,Deriv Group Ltd,"Labuan, Malaysia (operational) / Malta (EU)",Malaysia (operational) / Malta (EU),MFSA (Malta) | VFSC (Vanuatu) | LFSA (Labuan) | FSC (BVI),reviewed,unverified,4.1,$5,0.5 pips,DTrader | MetaTrader 5 | Deriv X | SmartTrader | Deriv GO,https://deriv.com
+227,Libertex,libertex,Indication Investments Ltd,"Limassol, Cyprus",Cyprus,CySEC (Cyprus),reviewed,unverified,4.1,€100,0 pips,Libertex Platform | MetaTrader 4 | Mobile Apps,https://libertex.com
+228,Skilling,skilling,Skilling Ltd,"Limassol, Cyprus",Cyprus,CySEC (Cyprus) | FSA (Seychelles),reviewed,unverified,4.1,$100,0.0 pips,Skilling Trader | MetaTrader 4 | Skilling cTrader,https://skilling.com
+229,Equiti,equiti,Equiti Group Limited,"Dubai, UAE",UAE,FCA (UK) | FSA (Seychelles) | JSC (Jordan) | Central Bank of Armenia,reviewed,unverified,4.1,$500,0.1 pips,MetaTrader 4 | MetaTrader 5 | Equiti Mobile App,https://equiti.com
+230,HYCM,hycm,HYCM Capital Markets (UK) Limited,"London, UK",UK,FCA (UK) | CySEC (Cyprus) | DFSA (Dubai) | CIMA (Cayman Islands),reviewed,unverified,4.1,$100,0.2 pips,MetaTrader 4 | MetaTrader 5 | HYCM Mobile App,https://www.hycm.com
+231,VT Markets,vt-markets,Vantage International Group Limited,"Sydney, Australia",Australia,ASIC (Australia) | CIMA (Cayman Islands) | FSCA (South Africa),reviewed,unverified,4.1,$200,0.0 pips,MetaTrader 4 | MetaTrader 5 | VT Markets App | TradingView,https://www.vtmarkets.com
+232,Hantec Markets,hantec-markets,Hantec Markets Limited,"London, UK",UK,FCA (UK) | ASIC (Australia) | FSA (Jordan),reviewed,unverified,4.1,"$1,000",0.2 pips,MetaTrader 4,https://www.hantecmarkets.com
+233,RoboMarkets,robomarkets,RoboMarkets Ltd,"Limassol, Cyprus",Cyprus,CySEC (Cyprus),reviewed,unverified,4.1,€10,0.0 pips,MetaTrader 4 | MetaTrader 5 | cTrader | R StocksTrader,https://www.robomarkets.com
+234,ATC Brokers,atc-brokers,ATC Brokers Ltd,"London, UK",UK,FCA (UK) | CIMA (Cayman Islands),reviewed,unverified,4.1,"$5,000",0.1 pips,MetaTrader 4,https://www.atcbrokers.com
+235,ACY Securities,acy-securities,ACY Securities Pty Ltd,"Sydney, Australia",Australia,ASIC (Australia) | VFSC (Vanuatu),reviewed,unverified,4.1,$50,0.0 pips,MetaTrader 4 | MetaTrader 5,https://www.acysecurities.com.au
+236,FundedBull,funded-bull,,,International,,reviewed,unverified,4.1,,,cTrader | MatchTrader | DXTrade | TradeLocker,https://fundedbull.com
+237,Taurex (Zenfinex),taurex,,,International,Multi-Regulated,reviewed,unverified,4.1,$100,0.0 pips,MetaTrader 4 | MetaTrader 5 | Taurex App,https://www.zenfinex.com
+238,PT Monex Investindo (MIFX),monex-indonesia,,"Jakarta, Indonesia",Indonesia,BAPPEBTI (Indonesia),enriched,unverified,4.1,,,MetaTrader 4 | MetaTrader 5 | MIFX App,https://www.mifx.com
+239,Maverick Trading,maverick-trading,,"Evergreen, Colorado, USA",USA,,enriched,unverified,4.1,,,,https://mavericktrading.com
+240,Dorman Futures,dorman-trading,Dorman Trading LLC,"Chicago, Illinois, USA",USA,NFA (USA) | CFTC (USA),enriched,unverified,4.1,,,TT (Trading Technologies) | CQG | Rithmic | Advantage Trader,https://www.dormantrading.com
+241,Optimus Futures,optimus-futures,,"Boca Raton, Florida, USA",USA,NFA (USA) | CFTC (USA),enriched,unverified,4.1,,,NinjaTrader | Sierra Chart | MultiCharts | TradingView | Firetip | CQG,https://optimusfutures.com
+242,Marex Solutions,marex-solutions,Marex,"London, UK",United Kingdom,FCA (UK) | CFTC (USA) | NFA (USA) | MAS (Singapore),reviewed,unverified,4.1,,,Marex Platform | API Solutions,https://www.marex.com
+243,PaxForex,paxforex,,,Unknown,,basic,unverified,4.1,,,,https://paxforex.org
+244,Price Markets,price-markets,,,United Kingdom,,basic,unverified,4.1,,,,https://www.pricemarkets.com
+245,Rakuten Securities Australia,rakuten-securities-australia,,,Australia,,basic,unverified,4.1,,,,https://www.rakuten-sec.com.au
+246,RannForex,rannforex,,,Unknown,,basic,unverified,4.1,,,,https://rannforex.com
+247,Scandinavian Capital Markets,scandinavian-capital-markets,,,Sweden,,basic,unverified,4.1,,,,https://scandinavianmarkets.com
+248,Seacrest Markets,seacrest-markets,,,Unknown,,basic,unverified,4.1,,,,https://seacrestmarkets.com
+249,SGT Markets,sgt-markets,,,Unknown,,basic,unverified,4.1,,,,https://www.sgtmarkets.com
+250,Solid ECN,solid-ecn,,,Unknown,,basic,unverified,4.1,,,,https://solidecn.com
+251,SquaredFinancial,squared-financial,,,Cyprus,,basic,unverified,4.1,,,,https://www.squaredfinancial.com
+252,Switch Markets,switch-markets,,,Australia,,basic,unverified,4.1,,,,https://www.switchmarkets.com
+253,Taurex,taurex,,,Unknown,,basic,unverified,4.1,,,,https://www.tradetaurex.com
+254,Titan FX,titan-fx,,,Vanuatu,,basic,unverified,4.1,,,,https://titanfx.com
+255,TopFX,topfx,,,Cyprus,,basic,unverified,4.1,,,,https://www.topfx.com
+256,TrioMarkets,triomarkets,,,Unknown,,basic,unverified,4.1,,,,https://www.triomarkets.com
+257,Trade245,trade245,,,South Africa,,basic,unverified,4.1,,,,https://www.trade245.com
+258,TradersTrust,traderstrust,,,Cyprus,,basic,unverified,4.1,,,,https://traderstrust.com
+259,TradersWay,tradersway,,,Unknown,,basic,unverified,4.1,,,,https://www.tradersway.com
+260,Valutrades,valutrades,,,United Kingdom,,basic,unverified,4.1,,,,https://www.valutrades.com
+261,Veracity Markets,veracity-markets,,,Unknown,,basic,unverified,4.1,,,,https://www.veracitymarkets.com
+262,Vida Markets,vida-markets,,,Unknown,,basic,unverified,4.1,,,,https://www.vidamarkets.com
+263,XGLOBAL Markets,xglobal-markets,,,Unknown,,basic,unverified,4.1,,,,https://www.xglobalmarkets.com
+264,YaMarkets,yamarkets,,,Unknown,,basic,unverified,4.1,,,,https://www.yamarkets.com
+265,ZFX,zfx,,,Unknown,,basic,unverified,4.1,,,,https://www.zfx.com
+266,Zero Markets,zero-markets,,,Australia,,basic,unverified,4.1,,,,https://www.zeromarkets.com
+267,Blackridge Capital Management,blackridge-capital-management,,,Unknown,,basic,unverified,4.1,,,,https://www.blackridgecm.com
+268,CapitalBear,capitalbear,,,Unknown,,basic,unverified,4.1,,,,https://capitalbear.com
+269,Crib Markets,crib-markets,,,Unknown,,basic,unverified,4.1,,,,https://www.cribmarkets.com
+270,MatrixFX,matrixfx,,,Unknown,,basic,unverified,4.1,,,,https://www.matrixfx.com
+271,OpoFinance,opofinance,,,Unknown,,basic,unverified,4.1,,,,https://opofinance.com
+272,Optimus Futures,optimus-futures,,,United States,,basic,unverified,4.1,,,,https://optimusfutures.com
+273,AMP Futures,amp-futures,,,United States,,basic,unverified,4.1,,,,https://www.ampfutures.com
+274,Cannon Trading,cannon-trading,,,United States,,basic,unverified,4.1,,,,https://www.cannontrading.com
+275,GFF Brokers,gff-brokers,,,United States,,basic,unverified,4.1,,,,https://www.gffbrokers.com
+276,Dorman Trading,dorman-trading,,,United States,,basic,unverified,4.1,,,,https://www.dormantrading.com
+277,Blueberry Funded,blueberry-funded,,,Unknown,,basic,unverified,4.1,,,,https://blueberryfunded.com
+278,DNA Funded,dna-funded,,,Unknown,,basic,unverified,4.1,,,,https://dnafunded.com
+279,The Trading Pit,the-trading-pit,,,Unknown,,basic,unverified,4.1,,,,https://www.thetradingpit.com
+280,FXIFY,fxify,,,Unknown,,basic,unverified,4.1,,,,https://www.fxify.com
+281,My Forex Funds,my-forex-funds,,,Canada,,basic,unverified,4.1,,,,https://myforexfunds.com
+282,MyFundedFX,myfundedfx,,,Unknown,,basic,unverified,4.1,,,,https://myfundedfx.com
+283,Fidelcrest,fidelcrest,,,Unknown,,basic,unverified,4.1,,,,https://www.fidelcrest.com
+284,FTUK,ftuk,,,United Kingdom,,basic,unverified,4.1,,,,https://ftuk.com
+285,Traders With Edge,traders-with-edge,,,Unknown,,basic,unverified,4.1,,,,https://traderswithedge.com
+286,Smart Prop Trader,smart-prop-trader,,,Unknown,,basic,unverified,4.1,,,,https://smartproptrader.com
+287,True Forex Funds,true-forex-funds,,,Unknown,,basic,unverified,4.1,,,,https://www.trueforexfunds.com
+288,easyMarkets,easymarkets,Easy Forex Trading Ltd,"Limassol, Cyprus",Cyprus,CySEC (Cyprus) | ASIC (Australia) | FSA (Seychelles),reviewed,unverified,4,$25,0.9 pips,easyMarkets Platform | MetaTrader 4 | Mobile App,https://www.easymarkets.com
+289,Alpari,alpari,Alpari Limited,"Kingstown, St Vincent / Port Louis, Mauritius",Mauritius,SVGFSA (St Vincent) | FSC (Mauritius),reviewed,unverified,4,$5,0.0 pips,MetaTrader 4 | MetaTrader 5,https://www.alpari.com
+290,BDSwiss,bdswiss,BDS Markets,"Limassol, Cyprus",Cyprus,CySEC (Cyprus) | FSC (Mauritius) | FSA (Seychelles),reviewed,unverified,4,$10,0.0 pips,MetaTrader 4 | MetaTrader 5 | BDSwiss Platform,https://www.bdswiss.com
+291,Markets.com,markets-com,Safecap Investments Limited,"Limassol, Cyprus",Cyprus,CySEC (Cyprus) | ASIC (Australia) | FSA (Seychelles),reviewed,unverified,4,$100,1.2 pips,Markets.com Platform | MetaTrader 4 | Mobile App,https://www.markets.com
+292,FXGT,fxgt,Goldfinch Tech Inc,"Mahé, Seychelles",Seychelles,FSA (Seychelles) | FSC (Mauritius),reviewed,unverified,4,$50,0.0 pips,MetaTrader 4 | MetaTrader 5,https://fxgt.com
+293,LiteFinance,litefinance,LiteFinance Global LLC,"Kingstown, St Vincent",St Vincent,FSA (St Vincent) | CySEC (Cyprus),reviewed,unverified,4,$50,0.0 pips,MetaTrader 4 | MetaTrader 5 | LiteFinance Web Terminal,https://www.litefinance.org
+294,CFI Financial,cfi-financial,Capital Financial International Ltd,"London, UK",UK,FCA (UK) | CySEC (Cyprus) | DFSA (Dubai),reviewed,unverified,4,$100,0.3 pips,MetaTrader 4 | MetaTrader 5 | CFI Trading Platform,https://www.cfigroup.com
+295,Windsor Brokers,windsor-brokers,Windsor Brokers Ltd,"Limassol, Cyprus",Cyprus,CySEC (Cyprus) | FSA (Seychelles) | FSCA (South Africa),reviewed,unverified,4,$100,0.0 pips,MetaTrader 4 | MetaTrader 5 | WebTrader,https://www.windsorbrokers.com
+296,Eurotrader,eurotrader,Eurotrader Ltd,"Limassol, Cyprus",Cyprus,CySEC (Cyprus),reviewed,unverified,4,$100,0.4 pips,MetaTrader 5 | Eurotrader Mobile App,https://www.eurotrader.com
+297,T4Trade,t4trade,T4Trade Ltd,"Limassol, Cyprus",Cyprus,CySEC (Cyprus) | FSA (Seychelles),reviewed,unverified,4,$50,0.8 pips,MetaTrader 4 | MetaTrader 5 | T4Trade App,https://www.t4trade.com
+298,Squared Financial,squared-financial,Squared Financial Services Limited,"Limassol, Cyprus",Cyprus,CySEC (Cyprus) | FSCA (South Africa) | FSC (Mauritius),reviewed,unverified,4,$250,0.2 pips,MetaTrader 5 | Squared Financial App,https://squaredfinancial.com
+299,TopFX,topfx,TopFX Ltd,"Limassol, Cyprus",Cyprus,CySEC (Cyprus) | FSA (Seychelles),reviewed,unverified,4,$500,0.4 pips,MetaTrader 4 | MetaTrader 5 | cTrader,https://www.topfx.com
+300,GBE Brokers,gbe-brokers,GBE Prime Ltd,"Düsseldorf, Germany",Germany,BaFin (Germany) | CySEC (Cyprus),reviewed,unverified,4,€500,0.0 pips,MetaTrader 4 | MetaTrader 5,https://www.gbebrokers.com
+301,KVB PRIME,kvb-prime,,,International,,basic,unverified,4,,,MetaTrader 4 | MetaTrader 5,https://www.kvbprime.com
+302,Cannon Trading,cannon-trading-futures,,"Beverly Hills, California, USA",USA,NFA (USA) | CFTC (USA),enriched,unverified,4,,,E-Futures.com | Trade Navigator | NinjaTrader | MultiCharts | CQG,https://www.cannontrading.com
+303,RJO Futures,rjo-futures,R.J. O'Brien & Associates LLC,"Chicago, Illinois, USA",USA,NFA (USA) | CFTC (USA),enriched,unverified,4,,,RJO Global | TT (Trading Technologies) | CQG | NinjaTrader,https://www.rjobrien.com
+304,TradeZero,tradezero,,"Nassau, Bahamas",International,SCB (Bahamas),enriched,unverified,4,$500,Commission-free (basic),ZeroFree | ZeroPro | ZeroMobile | ZeroWeb,https://www.tradezero.co
+305,SpeedTrader,speedtrader,,USA,USA,FINRA | SEC (USA) | SIPC,enriched,unverified,4,,,DAS Trader Pro | SpeedTrader Pro | Mobile App,https://www.speedtrader.com
+306,Bursa Malaysia Derivatives,bursa-malaysia-derivatives,,"Kuala Lumpur, Malaysia",Malaysia,SC (Malaysia) | BNM (Malaysia),enriched,unverified,4,,,,https://www.bursamalaysia.com
+307,ADDX,addx,,Singapore,Singapore,MAS (Singapore),enriched,unverified,4,"$10,000",,,https://addx.co
+308,Emporium Capital,emporium-capital,,,Unknown,,basic,unverified,4,,,,https://emporiumcapital.com
+309,Eurotrader,eurotrader,,,Unknown,,basic,unverified,4,,,,https://www.eurotrader.com
+310,Fintana,fintana,,,Unknown,,basic,unverified,4,,,,https://www.fintana.com
+311,Forex4you,forex4you,,,Unknown,,basic,unverified,4,,,,https://www.forex4you.com
+312,ForexChief,forexchief,,,Unknown,,basic,unverified,4,,,,https://www.forexchief.com
+313,ForexMart,forexmart,,,Unknown,,basic,unverified,4,,,,https://www.forexmart.com
+314,Fortissio,fortissio,,,Unknown,,basic,unverified,4,,,,https://www.fortissio.com
+315,FXCC,fxcc,,,Cyprus,,basic,unverified,4,,,,https://www.fxcc.com
+316,FXCentrum,fxcentrum,,,Unknown,,basic,unverified,4,,,,https://www.fxcentrum.com
+317,FXChoice,fxchoice,,,Belize,,basic,unverified,4,,,,https://www.myfxchoice.com
+318,FXGiants,fxgiants,,,Unknown,,basic,unverified,4,,,,https://www.fxgiants.com
+319,FXGlory,fxglory,,,Unknown,,basic,unverified,4,,,,https://fxglory.com
+320,FXLift,fxlift,,,Unknown,,basic,unverified,4,,,,https://www.fxlift.com
+321,FXPesa,fxpesa,,,Kenya,,basic,unverified,4,,,,https://www.fxpesa.com
+322,FXSway,fxsway,,,Unknown,,basic,unverified,4,,,,https://fxsway.com
+323,FxGrow,fxgrow,,,Unknown,,basic,unverified,4,,,,https://fxgrow.com
+324,GBE Brokers,gbe-brokers,,,Cyprus,,basic,unverified,4,,,,https://gbebrokers.com
+325,Gerchik & Co,gerchik-co,,,Unknown,,basic,unverified,4,,,,https://gerchik.co
+326,GKFX Prime,gkfx-prime,,,Unknown,,basic,unverified,4,,,,https://www.gkfxprime.com
+327,Global GT,global-gt,,,Unknown,,basic,unverified,4,,,,https://globalgt.com
+328,Global Prime,global-prime,,,Australia,,basic,unverified,4,,,,https://www.globalprime.com
+329,GTCFX,gtcfx,,,Unknown,,basic,unverified,4,,,,https://www.gtcfx.com
+330,Hankotrade,hankotrade,,,Unknown,,basic,unverified,4,,,,https://hankotrade.com
+331,HeroFX,herofx,,,Unknown,,basic,unverified,4,,,,https://herofx.co
+332,Hugo's Way,hugos-way,,,Unknown,,basic,unverified,4,,,,https://hugosway.com
+333,ICM Capital,icm-capital,,,United Kingdom,,basic,unverified,4,,,,https://www.icmcapital.co.uk
+334,IEXS,iexs,,,Unknown,,basic,unverified,4,,,,https://www.iexsworld.com
+335,INGOT Brokers,ingot-brokers,,,Australia,,basic,unverified,4,,,,https://www.ingotbrokers.com
+336,Investizo,investizo,,,Unknown,,basic,unverified,4,,,,https://investizo.com
+337,iFOREX,iforex,,,Cyprus,,basic,unverified,4,,,,https://www.iforex.com
+338,Juno Markets,juno-markets,,,Unknown,,basic,unverified,4,,,,https://www.junomarkets.com
+339,KVB Prime,kvb-prime,,,Unknown,,basic,unverified,4,,,,https://www.kvbprime.com
+340,Land FX,land-fx,,,Unknown,,basic,unverified,4,,,,https://www.land-fx.com
+341,Lirunex,lirunex,,,Unknown,,basic,unverified,4,,,,https://www.lirunex.com
+342,LMFX,lmfx,,,Unknown,,basic,unverified,4,,,,https://www.lmfx.com
+343,LonghornFX,longhornfx,,,Unknown,,basic,unverified,4,,,,https://www.longhornfx.com
+344,LQDFX,lqdfx,,,Unknown,,basic,unverified,4,,,,https://www.lqdfx.com
+345,MTrading,mtrading,,,Unknown,,basic,unverified,4,,,,https://mtrading.com
+346,Milton Prime,milton-prime,,,Unknown,,basic,unverified,4,,,,https://miltonprime.com
+347,N1CM,n1cm,,,Unknown,,basic,unverified,4,,,,https://www.n1cm.com
+348,NPBFX,npbfx,,,Unknown,,basic,unverified,4,,,,https://www.npbfx.com
+349,Oqtima,oqtima,,,Unknown,,basic,unverified,4,,,,https://oqtima.com
+350,OspreyFX,ospreyfx,,,Unknown,,basic,unverified,4,,,,https://ospreyfx.com
+351,Ox Securities,ox-securities,,,Unknown,,basic,unverified,4,,,,https://www.oxsecurities.com
+352,Pacific Financial Derivatives,pacific-financial-derivatives,,,New Zealand,,basic,unverified,4,,,,https://www.pfd-nz.com
+353,IG,ig,"IG Markets Limited, FCA Registrar","London, UK",UK,FCA (UK) | ASIC (Australia) | BaFin (Germany) | CFTC (USA),reviewed,unverified,3.9,£250,1.0 pips,IG Platform | MetaTrader 4 | MetaTrader 5 | TradingView | ProRealTime,https://www.ig.com
+354,InstaForex,instaforex,InstaForex Group,"Kaliningrad, Russia / BVI",Russia / BVI,FSRA (BVI) | CySEC (Cyprus),reviewed,unverified,3.9,$1,0 pips (Eurica),MetaTrader 4 | MetaTrader 5 | InstaForex WebTrader,https://www.instaforex.com
+355,AMarkets,amarkets,AMarkets Ltd,"Mahé, Seychelles",Seychelles,FSA (Seychelles),reviewed,unverified,3.9,$100,0.0 pips,MetaTrader 4 | MetaTrader 5,https://amarkets.com
+356,Pacific Union,pacific-union,Pacific Union Prime Limited,"Port Louis, Mauritius",Mauritius,FSCA (South Africa) | FSC (Mauritius),reviewed,unverified,3.9,$25,0.0 pips,MetaTrader 4 | MetaTrader 5,https://www.pacificunion.com
+357,Fibo Group,fibo-group,FIBO Group Holdings Ltd,"Port Vila, Vanuatu",Vanuatu,VFSC (Vanuatu),reviewed,unverified,3.9,$1,0.0 pips,MetaTrader 4 | MetaTrader 5,https://www.fibogroup.com
+358,CFI Financial,cfi-financial,,Cyprus / UAE / Jordan,Cyprus,CySEC (Cyprus) | DFSA (Dubai) | JSC (Jordan),reviewed,unverified,3.9,$100,,MetaTrader 5 | TradingView | CFI Trader Evolution,https://www.cfifinancial.com
+359,ForecastEx,forecastex,ForecastEx LLC (Interactive Brokers),"Greenwich, Connecticut, USA",USA,CFTC (USA),enriched,unverified,3.9,,,,https://www.forecastex.com
+360,Phidias Propfirm,phidias-propfirm,,,Unknown,,basic,unverified,3.9,,,,https://phidiaspropfirm.com
+361,Propify,propify,,,Unknown,,basic,unverified,3.9,,,,https://propify.com
+362,Blue Edge Financial,blue-edge-financial,,,Unknown,,basic,unverified,3.9,,,,https://blueedgefinancial.com
+363,E-Fund Trader,e-fund-trader,,,Unknown,,basic,unverified,3.9,,,,https://efundtrader.com
+364,4XC,4xc,,,Unknown,,basic,unverified,3.9,,,,https://www.4xc.com
+365,AAATrade,aaatrade,,,Unknown,,basic,unverified,3.9,,,,https://www.aaatrade.com
+366,AccentForex,accentforex,,,Unknown,,basic,unverified,3.9,,,,https://accentforex.com
+367,AETOS,aetos,,,Australia,,basic,unverified,3.9,,,,https://www.aetoscg.com
+368,AMarkets,amarkets,,,Unknown,,basic,unverified,3.9,,,,https://www.amarkets.com
+369,Anzo Capital,anzo-capital,,,Unknown,,basic,unverified,3.9,,,,https://www.anzocapital.com
+370,Axiance,axiance,,,Unknown,,basic,unverified,3.9,,,,https://www.axiance.com
+371,Axon Markets,axon-markets,,,Unknown,,basic,unverified,3.9,,,,https://www.axonmarkets.com
+372,BCR,bcr,,,Australia,,basic,unverified,3.9,,,,https://www.bcrcorp.com.au
+373,BelleoFX,belleofx,,,Unknown,,basic,unverified,3.9,,,,https://www.belleofx.com
+374,Blackwell Global,blackwell-global,,,United Kingdom,,basic,unverified,3.9,,,,https://www.blackwellglobal.com
+375,Blaze Markets,blaze-markets,,,Unknown,,basic,unverified,3.9,,,,https://blazemarkets.com
+376,BMFN,bmfn,,,Unknown,,basic,unverified,3.9,,,,https://www.bmfn.com
+377,BoForex,boforex,,,Unknown,,basic,unverified,3.9,,,,https://boforex.com
+378,Bold Prime,bold-prime,,,Unknown,,basic,unverified,3.9,,,,https://boldprime.com
+379,BrightWin Securities,brightwin-securities,,,Unknown,,basic,unverified,3.9,,,,https://brightwinsec.com
+380,CA Markets,ca-markets,,,Unknown,,basic,unverified,3.9,,,,https://www.camarkets.com
+381,CAPEX.com,capex-com,,,Cyprus,,basic,unverified,3.9,,,,https://capex.com
+382,Capital Street FX,capital-street-fx,,,Unknown,,basic,unverified,3.9,,,,https://www.capitalstreetfx.com
+383,Capitalcore,capitalcore,,,Unknown,,basic,unverified,3.9,,,,https://www.capitalcore.com
+384,Capitalix,capitalix,,,Unknown,,basic,unverified,3.9,,,,https://www.capitalix.com
+385,CapitalXtend,capitalxtend,,,Unknown,,basic,unverified,3.9,,,,https://capitalxtend.com
+386,CedarFX,cedarfx,,,Unknown,,basic,unverified,3.9,,,,https://www.cedarfx.com
+387,CFI Financial,cfi-financial,,,Unknown,,basic,unverified,3.9,,,,https://cfifinancial.com
+388,CIBfx,cibfx,,,Unknown,,basic,unverified,3.9,,,,https://www.cibfx.com
+389,CMTrading,cmtrading,,,South Africa,,basic,unverified,3.9,,,,https://www.cmtrading.com
+390,CMS Financial,cms-financial,,,UAE,,basic,unverified,3.9,,,,https://www.cmsfinancial.ae
+391,Coinexx,coinexx,,,Unknown,,basic,unverified,3.9,,,,https://coinexx.com
+392,CornerTrader,cornertrader-broker,,,Switzerland,,basic,unverified,3.9,,,,https://www.cornertrader.ch
+393,CPT Markets,cpt-markets,,,Unknown,,basic,unverified,3.9,,,,https://www.cptmarkets.com
+394,DB Investing,db-investing,,,Unknown,,basic,unverified,3.9,,,,https://dbinvesting.com
+395,DeltaStock,deltastock,,,Bulgaria,,basic,unverified,3.9,,,,https://www.deltastock.com
+396,DIF Broker,dif-broker,,,Portugal,,basic,unverified,3.9,,,,https://www.difbroker.com
+397,Direct TT,direct-tt,,,Unknown,,basic,unverified,3.9,,,,https://www.directtt.com
+398,DNA Markets,dna-markets,,,Unknown,,basic,unverified,3.9,,,,https://www.dnamarkets.com
+399,Doto,doto,,,Unknown,,basic,unverified,3.9,,,,https://doto.com
+400,EC Markets,ec-markets,,,Unknown,,basic,unverified,3.9,,,,https://www.ecmarkets.com
+401,ECN.Broker,ecn-broker,,,Unknown,,basic,unverified,3.9,,,,https://ecn.broker
+402,EBC Financial Group,ebc-financial-group,,,Unknown,,basic,unverified,3.9,,,,https://www.ebc.com
+403,EGM Securities,egm-securities,,,Kenya,,basic,unverified,3.9,,,,https://www.egmsecurities.com
+404,ELANA Trading,elana-trading,,,Bulgaria,,basic,unverified,3.9,,,,https://www.elanatrading.com
+405,FXCM,fxcm,FXCM Group LLC,"London, UK",UK,FCA (UK) | CySEC (Cyprus) | ASIC (Australia),reviewed,unverified,3.8,£50,0.3 pips,Trading Station | MetaTrader 4 | TradingView | ZuluTrade,https://www.fxcm.com
+406,NordFX,nordfx,NordFX Ltd,"Port Vila, Vanuatu",Vanuatu,VFSC (Vanuatu),reviewed,unverified,3.8,$1,0.9 pips,MetaTrader 4,https://nordfx.com
+407,IronFX,ironfx,IronFX Global Limited,"Limassol, Cyprus",Cyprus,CySEC (Cyprus) | FSCA (South Africa) | FSC (Mauritius),reviewed,unverified,3.8,$100,0.0 pips,MetaTrader 4,https://www.ironfx.com
+408,ForexMart,forexmart,Tradefort Ltd,"Limassol, Cyprus",Cyprus,CySEC (Cyprus) | FSA (St Vincent),reviewed,unverified,3.8,$15,0.0 pips,MetaTrader 4 | MetaTrader 5,https://www.forexmart.com
+409,Weltrade,weltrade,Weltrade Ltd,"Mahé, Seychelles",Seychelles,FSA (Seychelles),reviewed,unverified,3.8,$0,0.0 pips,MetaTrader 4 | MetaTrader 5,https://www.weltrade.com
+410,FundingTraders,funding-traders,,,International,,reviewed,unverified,3.8,,,MetaTrader 4 | MetaTrader 5,https://fundingtraders.com
+411,Prop Number One,prop-number-one,,,International,,basic,unverified,3.8,,,MetaTrader 4 | MetaTrader 5,https://propnumberone.com
+412,Daniels Trading,daniels-trading,,"Chicago, Illinois, USA",USA,NFA (USA) | CFTC (USA),enriched,unverified,3.8,,,dtPro | CQG | TT (Trading Technologies) | NinjaTrader,https://www.danielstrading.com
+413,R.J. O'Brien,rj-obrien,,,USA,,basic,unverified,3.8,,,,https://www.rjobrien.com
+414,MB Trading,mb-trading,,,United States,,basic,unverified,3.8,,,,https://www.mbtrading.com
+415,FX Solutions,fx-solutions,,,Unknown,,basic,unverified,3.8,,,,https://www.fxsolutions.com
+416,GAIN Capital,gain-capital,,,United States,,basic,unverified,3.8,,,,https://www.gaincapital.com
+417,FastBrokers,fastbrokers,,,Unknown,,basic,unverified,3.8,,,,https://www.fastbrokers.com
+418,Varengold Bank FX,varengold-bank-fx,,,Germany,,basic,unverified,3.8,,,,https://www.varengold.de
+419,FXCM Pro,fxcm-pro,,,United States,,basic,unverified,3.8,,,,https://www.fxcm.com/pro
+420,CFH Clearing,cfh-clearing,,,United Kingdom,,basic,unverified,3.8,,,,https://www.cfh.com
+421,Advanced Markets,advanced-markets,,,United States,,basic,unverified,3.8,,,,https://advancedmarketsfx.com
+422,Saxo Markets UK,saxo-markets-uk,,,United Kingdom,,basic,unverified,3.8,,,,https://www.home.saxo/en-gb
+423,Phillip Nova,phillip-nova,,,Singapore,,basic,unverified,3.8,,,,https://www.phillipnova.com
+424,Straits Financial,straits-financial,,,Singapore,,basic,unverified,3.8,,,,https://www.straitsfinancial.com
+425,Ironbeam,ironbeam,,,United States,,basic,unverified,3.8,,,,https://www.ironbeam.com
+426,Generic Trade,generic-trade,,,United States,,basic,unverified,3.8,,,,https://generictrade.com
+427,Stage 5 Trading,stage-5-trading,,,United States,,basic,unverified,3.8,,,,https://stage5trading.com
+428,EdgeClear,edgeclear,,,United States,,basic,unverified,3.8,,,,https://edgeclear.com
+429,Discount Trading,discount-trading,,,United States,,basic,unverified,3.8,,,,https://www.discounttrading.com
+430,Tradovate,tradovate,,,United States,,basic,unverified,3.8,,,,https://www.tradovate.com
+431,RJ O'Brien,rj-obrien,,,United States,,basic,unverified,3.8,,,,https://www.rjobrien.com
+432,Advantage Futures,advantage-futures,,,United States,,basic,unverified,3.8,,,,https://www.advantagefutures.com
+433,Daniels Trading,daniels-trading,,,United States,,basic,unverified,3.8,,,,https://www.danielstrading.com
+434,ADMIS,admis,,,United States,,basic,unverified,3.8,,,,https://www.admis.com
+435,Wedbush Futures,wedbush-futures,,,United States,,basic,unverified,3.8,,,,https://www.wedbushfutures.com
+436,Optimus Flow,optimus-flow,,,United States,,basic,unverified,3.8,,,,https://optimusflow.app
+437,Bookmap,bookmap,,,Unknown,,basic,unverified,3.8,,,,https://bookmap.com
+438,Quantower,quantower,,,Unknown,,basic,unverified,3.8,,,,https://www.quantower.com
+439,MotiveWave,motivewave,,,Canada,,basic,unverified,3.8,,,,https://www.motivewave.com
+440,Sierra Chart,sierra-chart,,,Unknown,,basic,unverified,3.8,,,,https://www.sierrachart.com
+441,MultiCharts,multicharts,,,United States,,basic,unverified,3.8,,,,https://www.multicharts.com
+442,ATAS,atas,,,Unknown,,basic,unverified,3.8,,,,https://atas.net
+443,Hola Prime,hola-prime,,,Unknown,,basic,unverified,3.8,,,,https://holaprime.com
+444,Pip Traders Funding,pip-traders-funding,,,Unknown,,basic,unverified,3.8,,,,https://piptradersfunding.com
+445,MyFlashFunding,myflashfunding,,,Unknown,,basic,unverified,3.8,,,,https://myflashfunding.com
+446,Funding Traders,funding-traders,,,Unknown,,basic,unverified,3.8,,,,https://fundingtraders.com
+447,Ascendx Capital,ascendx-capital,,,Unknown,,basic,unverified,3.8,,,,https://ascendxcapital.com
+448,Direct Funded Trader,direct-funded-trader,,,Unknown,,basic,unverified,3.8,,,,https://directfundedtrader.com
+449,Breakout Prop,breakout-prop,,,Unknown,,basic,unverified,3.8,,,,https://breakoutprop.com
+450,TradeFundrr,tradefundrr,,,Unknown,,basic,unverified,3.8,,,,https://www.tradefundrr.com
+451,OneFunded,onefunded,,,Unknown,,basic,unverified,3.8,,,,https://onefunded.com
+452,FX Capital Funding,fx-capital-funding,,,Unknown,,basic,unverified,3.8,,,,https://fxcapitalfunding.com
+453,OFP Funding,ofp-funding,,,Unknown,,basic,unverified,3.8,,,,https://ofpfunding.com
+454,Prop Number One,prop-number-one,,,Unknown,,basic,unverified,3.8,,,,https://propnumberone.com
+455,TradingFunds,tradingfunds,,,Unknown,,basic,unverified,3.8,,,,https://tradingfunds.com
+456,NexGen Futures Trader,nexgen-futures-trader,,,Unknown,,basic,unverified,3.8,,,,https://nexgenfuturestrader.com
+457,Fast Track Trading,fast-track-trading,,,Unknown,,basic,unverified,3.8,,,,https://fasttracktrading.com
+458,FundingTicks,fundingticks,,,Unknown,,basic,unverified,3.8,,,,https://fundingticks.com
+459,OANDA,oanda,OANDA Corporation,"New York, USA",USA,CFTC/NFA (USA) | FCA (UK) | ASIC (Australia) | IIROC (Canada),reviewed,unverified,3.7,$0,0.6 pips,OANDA Trade | MetaTrader 4 | TradingView,https://www.oanda.com
+460,Fortrade,fortrade,,,United Kingdom,,basic,unverified,3.7,,,,https://www.fortrade.com
+461,UFX,ufx,,,Unknown,,basic,unverified,3.7,,,,https://www.ufx.com
+462,AAAFx,aaafx,,,Greece,,basic,unverified,3.7,,,,https://www.aaafx.com
+463,Investous,investous,,,Unknown,,basic,unverified,3.7,,,,https://www.investous.com
+464,Colmex Pro,colmex-pro,,,Cyprus,,basic,unverified,3.7,,,,https://www.colmexpro.com
+465,AGEA,agea,,,Unknown,,basic,unverified,3.7,,,,https://www.agea.com
+466,ClickTrades,clicktrades,,,Unknown,,basic,unverified,3.7,,,,https://www.clicktrades.com
+467,FXGT,fxgt,,,Unknown,,basic,unverified,3.7,,,,https://fxgt.com
+468,UnitedPips,unitedpips,,,Unknown,,basic,unverified,3.7,,,,https://www.unitedpips.com
+469,Absolute Markets,absolute-markets,,,Unknown,,basic,unverified,3.7,,,,https://www.absolutemarkets.com
+470,RaiseFX,raisefx,,,Unknown,,basic,unverified,3.7,,,,https://raisefx.com
+471,MYFX Markets,myfx-markets,,,Australia,,basic,unverified,3.7,,,,https://myfxmarkets.com
+472,Trade360,trade360,,,Cyprus,,basic,unverified,3.7,,,,https://www.trade360.com
+473,Vestle,vestle,,,Unknown,,basic,unverified,3.7,,,,https://www.vestle.com
+474,101Investing,101investing,,,Unknown,,basic,unverified,3.7,,,,https://www.101investing.com
+475,Brokereo,brokereo,,,Unknown,,basic,unverified,3.7,,,,https://www.brokereo.com
+476,ROInvesting,roinvesting,,,Unknown,,basic,unverified,3.7,,,,https://www.roinvesting.com
+477,InvestMarkets,investmarkets,,,Unknown,,basic,unverified,3.7,,,,https://www.investmarkets.com
+478,InvestFW,investfw,,,Unknown,,basic,unverified,3.7,,,,https://www.investfw.com
+479,TradeATF,tradeatf,,,Unknown,,basic,unverified,3.7,,,,https://www.tradeatf.com
+480,EuropeFX,europefx,,,Unknown,,basic,unverified,3.7,,,,https://europefx.com
+481,Finq.com,finq-com,,,Unknown,,basic,unverified,3.7,,,,https://www.finq.com
+482,Finexo,finexo,,,Unknown,,basic,unverified,3.7,,,,https://www.finexo.com
+483,EverFX,everfx,,,Unknown,,basic,unverified,3.7,,,,https://everfx.com
+484,FXVC,fxvc,,,Unknown,,basic,unverified,3.7,,,,https://www.fxvc.com
+485,EU Trade,eu-trade,,,Unknown,,basic,unverified,3.7,,,,https://www.eutrade.com
+486,Nobel500,nobel500,,,Unknown,,basic,unverified,3.7,,,,https://www.nobel500.com
+487,Globalix,globalix,,,Unknown,,basic,unverified,3.7,,,,https://www.globalix.com
+488,TradeFred,tradefred,,,Unknown,,basic,unverified,3.7,,,,https://www.tradefred.com
+489,XTrade,xtrade,,,Unknown,,basic,unverified,3.7,,,,https://www.xtrade.com
+490,Tradeo,tradeo,,,Unknown,,basic,unverified,3.7,,,,https://www.tradeo.com
+491,Brokerpoint,brokerpoint,,,Germany,,basic,unverified,3.7,,,,https://www.brokerpoint.de
+492,ViTrade,vitrade,,,Germany,,basic,unverified,3.7,,,,https://www.vitrade.de
+493,Smartbroker,smartbroker-de,,,Germany,,basic,unverified,3.7,,,,https://smartbroker.de
+494,flatex,flatex,,,Germany,,basic,unverified,3.7,,,,https://www.flatex.de
+495,Consorsbank,consorsbank,,,Germany,,basic,unverified,3.7,,,,https://www.consorsbank.de
+496,comdirect,comdirect,,,Germany,,basic,unverified,3.7,,,,https://www.comdirect.de
+497,S Broker,s-broker,,,Germany,,basic,unverified,3.7,,,,https://www.sbroker.de
+498,CapTrader,captrader,,,Germany,,basic,unverified,3.7,,,,https://www.captrader.com
+499,Lynx Broker,lynx-broker,,,Netherlands,,basic,unverified,3.7,,,,https://www.lynxbroker.com
+500,BUX,bux-broker,,,Netherlands,,basic,unverified,3.7,,,,https://getbux.com
+501,Swiss Forex Bank,swiss-forex-bank,,,Switzerland,,basic,unverified,3.7,,,,https://www.swissforexbank.com
+502,GCI Financial,gci-financial,,,Unknown,,basic,unverified,3.7,,,,https://www.gcitrading.com
+503,ACM Gold,acm-gold,,,South Africa,,basic,unverified,3.7,,,,https://www.acmgold.com
+504,MahiFX,mahifx,,,New Zealand,,basic,unverified,3.7,,,,https://mahifx.com
+505,FxPro,fxpro,FxPro Group Limited,"London, UK",UK,FCA (UK) | CySEC (Cyprus) | FSCA (South Africa) | SCB (Bahamas),reviewed,unverified,3.6,$100,0.6 pips,MetaTrader 4 | MetaTrader 5 | cTrader | FxPro App,https://www.fxpro.com
+506,MH Markets,mh-markets,,,Unknown,,basic,unverified,3.6,,,,https://www.mhmarkets.com
+507,WeTrade,wetrade,,,Unknown,,basic,unverified,3.6,,,,https://www.wetradefx.com
+508,NEEX,neex,,,Unknown,,basic,unverified,3.6,,,,https://www.neex.com
+509,Ultima Markets,ultima-markets-broker,,,Unknown,,basic,unverified,3.6,,,,https://www.ultimamarkets.com
+510,ATC Brokers,atc-brokers,,,United States,,basic,unverified,3.6,,,,https://atcbrokers.com
+511,FXFlat,fxflat,,,Germany,,basic,unverified,3.6,,,,https://www.fxflat.com
+512,EagleFX,eaglefx,,,Unknown,,basic,unverified,3.6,,,,https://www.eaglefx.com
+513,TeraFX,terafx,,,Unknown,,basic,unverified,3.6,,,,https://www.terafx.com
+514,RockGlobal Markets,rockglobal-markets,,,Unknown,,basic,unverified,3.6,,,,https://rockglobal.com
+515,26 Degrees Global Markets,26-degrees-global-markets,,,Unknown,,basic,unverified,3.6,,,,https://www.26degreesglobalmarkets.com
+516,RockFort Markets,rockfort-markets,,,New Zealand,,basic,unverified,3.6,,,,https://rockfortmarkets.com
+517,Gaitame.com,gaitame-com,,,Japan,,basic,unverified,3.6,,,,https://www.gaitame.com
+518,DMM FX,dmm-fx,,,Japan,,basic,unverified,3.6,,,,https://fx.dmm.com
+519,GMO Click Securities,gmo-click-securities,,,Japan,,basic,unverified,3.6,,,,https://www.click-sec.com
+520,Matsui Securities,matsui-securities,,,Japan,,basic,unverified,3.6,,,,https://www.matsui.co.jp
+521,Hirose Tusyo,hirose-tusyo,,,Japan,,basic,unverified,3.6,,,,https://hirose-fx.co.jp
+522,Monex,monex-japan,,,Japan,,basic,unverified,3.6,,,,https://www.monex.co.jp
+523,SBI FXTRADE,sbi-fxtrade,,,Japan,,basic,unverified,3.6,,,,https://www.sbifxt.co.jp
+524,Central Tanshi FX,central-tanshi-fx,,,Japan,,basic,unverified,3.6,,,,https://www.central-tanshifx.com
+525,GMO Gaika,gmo-gaika,,,Japan,,basic,unverified,3.6,,,,https://www.gaikaex.com
+526,FX Broadnet,fx-broadnet,,,Japan,,basic,unverified,3.6,,,,https://www.fxbroadnet.com
+527,Minna no FX,minna-no-fx,,,Japan,,basic,unverified,3.6,,,,https://min-fx.jp
+528,au Kabucom Securities,au-kabucom-securities,,,Japan,,basic,unverified,3.6,,,,https://kabu.com
+529,Moomoo,moomoo,,,United States,,basic,unverified,3.6,,,,https://www.moomoo.com
+530,Kwakol Markets,kwakol-markets,,,Unknown,,basic,unverified,3.6,,,,https://kwakolmarkets.com
+531,XBTFX,xbtfx,,,Unknown,,basic,unverified,3.6,,,,https://xbtfx.io
+532,AdroFx,adrofx,,,Unknown,,basic,unverified,3.6,,,,https://adrofx.com
+533,Swiss Markets,swiss-markets,,,Cyprus,,basic,unverified,3.6,,,,https://swissmarkets.com
+534,Gulf Brokers,gulf-brokers,,,UAE,,basic,unverified,3.6,,,,https://gulfbrokers.com
+535,FXCL,fxcl,,,Unknown,,basic,unverified,3.6,,,,https://www.fxclearing.com
+536,Forex.ee,forex-ee,,,Estonia,,basic,unverified,3.6,,,,https://www.forex.ee
+537,Uniglobe Markets,uniglobe-markets,,,Unknown,,basic,unverified,3.6,,,,https://uniglobemarkets.com
+538,FreshForex,freshforex-broker,,,Unknown,,basic,unverified,3.6,,,,https://freshforex.com
+539,MaxiMarkets,maximarkets,,,Unknown,,basic,unverified,3.6,,,,https://www.maximarkets.com
+540,FinmaxFX,finmaxfx,,,Unknown,,basic,unverified,3.6,,,,https://finmaxfx.com
+541,Kiexo,kiexo,,,Unknown,,basic,unverified,3.6,,,,https://kiexo.com
+542,StormGain,stormgain,,,Unknown,,basic,unverified,3.6,,,,https://stormgain.com
+543,T4Trade,t4trade,,,Unknown,,basic,unverified,3.6,,,,https://www.t4trade.com
+544,OneRoyal,oneroyal-broker,,,Unknown,,basic,unverified,3.6,,,,https://oneroyal.com
+545,Acetop,acetop,,,United Kingdom,,basic,unverified,3.6,,,,https://www.acetop.uk
+546,Fidelis Capital Markets,fidelis-capital-markets,,,Unknown,,basic,unverified,3.6,,,,https://www.fideliscm.com
+547,FXView,fxview,,,Unknown,,basic,unverified,3.6,,,,https://fxview.com
+548,IKON Finance,ikon-finance,,,Unknown,,basic,unverified,3.6,,,,https://ikonfinance.com
+549,NCM Investment,ncm-investment,,,Unknown,,basic,unverified,3.6,,,,https://www.ncminvest.com
+550,Alvexo,alvexo,,,Unknown,,basic,unverified,3.6,,,,https://www.alvexo.com
+551,ATFunded,atfunded,,,Unknown,,basic,unverified,3.5,,,,https://atfunded.com
+552,OANDA Prop Trader,oanda-prop-trader,,,United States,,basic,unverified,3.5,,,,https://www.oanda.com/prop-trader
+553,IC Funded,ic-funded,,,Australia,,basic,unverified,3.5,,,,https://www.icmarkets.com
+554,ThinkCapital,thinkcapital,,,Unknown,,basic,unverified,3.5,,,,https://www.thinkcapital.com
+555,FundedNext Futures,fundednext-futures,,,UAE,,basic,unverified,3.5,,,,https://fundednext.com
+556,Apex Investing Institute,apex-investing-institute,,,United States,,basic,unverified,3.5,,,,https://apexinvesting.com
+557,Blusky,blusky,,,Unknown,,basic,unverified,3.5,,,,https://blusky.pro
+558,Blue Forex Funds,blue-forex-funds,,,Unknown,,basic,unverified,3.5,,,,https://blueforexfunds.com
+559,BuoyTrade,buoytrade,,,Unknown,,basic,unverified,3.5,,,,https://buoytrade.com
+560,Capital Edge,capital-edge,,,Unknown,,basic,unverified,3.5,,,,https://capitaledge.com
+561,Central Funded Trader,central-funded-trader,,,Unknown,,basic,unverified,3.5,,,,https://centralfundedtrader.com
+562,City Funded,city-funded,,,Unknown,,basic,unverified,3.5,,,,https://cityfunded.com
+563,Elite Funded Trader,elite-funded-trader,,,Unknown,,basic,unverified,3.5,,,,https://elitefundedtrader.com
+564,Forex Capital Funds,forex-capital-funds,,,Unknown,,basic,unverified,3.5,,,,https://forexcapitalfunds.com
+565,Forex Prop Reviews,forex-prop-reviews,,,Unknown,,basic,unverified,3.5,,,,https://forexpropreviews.com
+566,Funded Academy,funded-academy,,,Unknown,,basic,unverified,3.5,,,,https://fundedacademy.com
+567,Funded Accounts,funded-accounts,,,Unknown,,basic,unverified,3.5,,,,https://fundedaccounts.com
+568,Funded Elite,funded-elite,,,Unknown,,basic,unverified,3.5,,,,https://fundedelite.com
+569,Funded Firm,funded-firm,,,Unknown,,basic,unverified,3.5,,,,https://fundedfirm.com
+570,Funded Squad,funded-squad,,,Unknown,,basic,unverified,3.5,,,,https://fundedsquad.com
+571,Funded Trader Markets,funded-trader-markets,,,Unknown,,basic,unverified,3.5,,,,https://fundedtradermarkets.com
+572,Funding Talent,funding-talent,,,Unknown,,basic,unverified,3.5,,,,https://fundingtalent.com
+573,Future Funded,future-funded,,,Unknown,,basic,unverified,3.5,,,,https://futurefunded.com
+574,Glow Node,glow-node,,,Unknown,,basic,unverified,3.5,,,,https://glownode.com
+575,GrandProp,grandprop,,,Unknown,,basic,unverified,3.5,,,,https://grandprop.com
+576,Instant Funding Pro,instant-funding-pro,,,Unknown,,basic,unverified,3.5,,,,https://instantfundingpro.com
+577,Level Up Funding,level-up-funding,,,Unknown,,basic,unverified,3.5,,,,https://levelupfunding.com
+578,My Forex Funds Pro,my-forex-funds-pro,,,Unknown,,basic,unverified,3.5,,,,https://myforexfundspro.com
+579,Next Step Funded,next-step-funded,,,Unknown,,basic,unverified,3.5,,,,https://nextstepfunded.com
+580,Prop Account,prop-account,,,Unknown,,basic,unverified,3.5,,,,https://propaccount.com
+581,Prop Trader Pro,prop-trader-pro,,,Unknown,,basic,unverified,3.5,,,,https://proptraderpro.com
+582,Rocket21,rocket21,,,Unknown,,basic,unverified,3.5,,,,https://rocket21challenge.com
+583,SuperFunded,superfunded,,,Unknown,,basic,unverified,3.5,,,,https://superfunded.com
+584,Traders Central Fund,traders-central-fund,,,Unknown,,basic,unverified,3.5,,,,https://traderscentral.com
+585,Headway,headway,,,Unknown,,basic,unverified,3.5,,,,https://headway.com
+586,Brisk Markets,brisk-markets,,,Unknown,,basic,unverified,3.5,,,,https://briskmarkets.com
+587,Sage FX,sage-fx,,,Unknown,,basic,unverified,3.5,,,,https://sagefx.com
+588,Dominion Markets,dominion-markets-broker,,,Unknown,,basic,unverified,3.5,,,,https://dominionmarkets.com
+589,KOT4X,kot4x,,,Unknown,,basic,unverified,3.5,,,,https://kot4x.com
+590,PrimeXBT,primexbt,,,Unknown,,basic,unverified,3.5,,,,https://primexbt.com
+591,Blueberry Markets,blueberry-markets,,,Australia,,basic,unverified,3.5,,,,https://blueberrymarkets.com
+592,AUS Global,aus-global,,,United Kingdom,,basic,unverified,3.5,,,,https://www.ausglobaluk.com
+593,CWG Markets,cwg-markets,,,Unknown,,basic,unverified,3.5,,,,https://www.cwgmarkets.com
+594,Decode Global,decode-global,,,Unknown,,basic,unverified,3.5,,,,https://decodefx.com
+595,DLS Markets,dls-markets,,,Unknown,,basic,unverified,3.5,,,,https://www.dlsmarkets.com
+596,FlowBank Pro,flowbank-pro,,,Switzerland,,basic,unverified,3.4,,,,https://www.flowbank.com
+597,Amega,amega,,,Unknown,,basic,unverified,3.4,,,,https://www.amega.finance
+598,Broker Jet,broker-jet,,,Unknown,,basic,unverified,3.4,,,,https://brokerjet.com
+599,Capex Invest,capex-invest,,,Unknown,,basic,unverified,3.4,,,,https://capex.com
+600,BUX Zero,bux-zero,,,Netherlands,,basic,unverified,3.4,,,,https://getbux.com
+601,Stake,stake,,,Australia,,basic,unverified,3.4,,,,https://hellostake.com
+602,Sharesies,sharesies,,,New Zealand,,basic,unverified,3.4,,,,https://www.sharesies.com
+603,Freetrade,freetrade,,,United Kingdom,,basic,unverified,3.4,,,,https://freetrade.io
+604,Scalable Capital,scalable-capital,,,Germany,,basic,unverified,3.4,,,,https://www.scalable.capital
+605,Trade Republic,trade-republic,,,Germany,,basic,unverified,3.4,,,,https://traderepublic.com
+606,Commerzbank Brokerage,commerzbank-brokerage,,,Germany,,basic,unverified,3.4,,,,https://www.commerzbank.de
+607,DKB Broker,dkb-broker,,,Germany,,basic,unverified,3.4,,,,https://www.dkb.de
+608,ING Germany Brokerage,ing-germany-brokerage,,,Germany,,basic,unverified,3.4,,,,https://www.ing.de
+609,Targobank Brokerage,targobank-brokerage,,,Germany,,basic,unverified,3.4,,,,https://www.targobank.de
+610,Smartbroker Plus,smartbroker-plus,,,Germany,,basic,unverified,3.4,,,,https://smartbrokerplus.de
+611,JustTrade,justtrade,,,Germany,,basic,unverified,3.4,,,,https://www.justtrade.com
+612,onvista bank,onvista-bank,,,Germany,,basic,unverified,3.4,,,,https://www.onvista-bank.de
+613,DEGIRO UK,degiro-uk,,,United Kingdom,,basic,unverified,3.4,,,,https://www.degiro.co.uk
+614,SaxoInvestor,saxoinvestor,,,Denmark,,basic,unverified,3.4,,,,https://www.home.saxo
+615,FXCM Markets,fxcm-markets,,,Unknown,,basic,unverified,3.4,,,,https://www.fxcm-markets.com
+616,FXCM EU,fxcm-eu,,,Cyprus,,basic,unverified,3.4,,,,https://www.fxcm.com/eu
+617,City Credit Capital,city-credit-capital,,,United Kingdom,,basic,unverified,3.4,,,,https://www.cccapital.co.uk
+618,GKFX,gkfx,,,Unknown,,basic,unverified,3.4,,,,https://www.gkfx.eu
+619,Finotec,finotec,,,Unknown,,basic,unverified,3.4,,,,https://www.finotec.com
+620,One Financial Markets,one-financial-markets,,,Unknown,,basic,unverified,3.4,,,,https://www.onefinancialmarkets.com
+621,London Capital Group Bahamas,lcg-bahamas,,,Bahamas,,basic,unverified,3.4,,,,https://www.lcg.com
+622,Currencies Direct,currencies-direct,,,United Kingdom,,basic,unverified,3.4,,,,https://www.currenciesdirect.com
+623,OFX,ofx,,,Australia,,basic,unverified,3.4,,,,https://www.ofx.com
+624,WorldFirst,worldfirst,,,United Kingdom,,basic,unverified,3.4,,,,https://www.worldfirst.com
+625,Ebury,ebury,,,United Kingdom,,basic,unverified,3.4,,,,https://www.ebury.com
+626,Monex Europe,monex-europe,,,United Kingdom,,basic,unverified,3.4,,,,https://www.monexeurope.com
+627,Argentex,argentex,,,United Kingdom,,basic,unverified,3.4,,,,https://www.argentex.com
+628,Moneycorp,moneycorp,,,United Kingdom,,basic,unverified,3.4,,,,https://www.moneycorp.com
+629,Kantox,kantox,,,United Kingdom,,basic,unverified,3.4,,,,https://www.kantox.com
+630,iBanFirst,ibanfirst,,,Belgium,,basic,unverified,3.4,,,,https://ibanfirst.com
+631,Corpay Cross Border,corpay-cross-border,,,United States,,basic,unverified,3.4,,,,https://www.corpay.com
+632,Equals Money,equals-money,,,United Kingdom,,basic,unverified,3.4,,,,https://equalsmoney.com
+633,Convera,convera,,,United States,,basic,unverified,3.4,,,,https://convera.com
+634,Western Union Business Solutions,western-union-business,,,United States,,basic,unverified,3.4,,,,https://business.westernunion.com
+635,Payoneer FX,payoneer-fx,,,United States,,basic,unverified,3.4,,,,https://www.payoneer.com
+636,Wise Business,wise-business,,,United Kingdom,,basic,unverified,3.4,,,,https://wise.com/business
+637,Airwallex,airwallex,,,Australia,,basic,unverified,3.4,,,,https://www.airwallex.com
+638,Revolut Business FX,revolut-business-fx,,,United Kingdom,,basic,unverified,3.4,,,,https://www.revolut.com/business
+639,Alpha FX,alpha-fx,,,United Kingdom,,basic,unverified,3.4,,,,https://alphagroup.com
+640,AudaCity Capital Funded Trader,audacity-capital-funded,,,United Kingdom,,basic,unverified,3.4,,,,https://www.audacitycapital.co.uk
+641,Marret Invest,marret-invest,,,Unknown,,basic,unverified,3.3,,,,https://marretinvest.com
+642,FXNovus,fxnovus,,,Unknown,,basic,unverified,3.3,,,,https://www.fxnovus.com
+643,Prime Codex,prime-codex,,,Unknown,,basic,unverified,3.3,,,,https://primecodex.com
+644,Tradear,tradear,,,Unknown,,basic,unverified,3.3,,,,https://www.tradear.com
+645,SmartFX,smartfx,,,Unknown,,basic,unverified,3.3,,,,https://smartfx.com
+646,TeleTrade DJ,teletrade-dj,,,Unknown,,basic,unverified,3.3,,,,https://www.teletrade.org
+647,IFCM Cyprus,ifcm-cyprus,,,Cyprus,,basic,unverified,3.3,,,,https://www.ifcmcyprus.com
+648,FreshForex Global,freshforex-global,,,Unknown,,basic,unverified,3.3,,,,https://freshforex.org
+649,MaxiTrade,maxitrade,,,Unknown,,basic,unverified,3.3,,,,https://maxitrade.com
+650,Grand Trade,grand-trade,,,Unknown,,basic,unverified,3.3,,,,https://grandtrade.exchange
+651,United Markets Capital,united-markets-capital,,,Unknown,,basic,unverified,3.3,,,,https://umarkets.com
+652,LexaTrade,lexatrade,,,Unknown,,basic,unverified,3.3,,,,https://www.lexatrade.com
+653,Finam Forex,finam-forex,,,Russia,,basic,unverified,3.3,,,,https://www.finamforex.ru
+654,BCS Forex,bcs-forex,,,Russia,,basic,unverified,3.3,,,,https://forex-bcs.ru
+655,Alfa Forex,alfa-forex,,,Russia,,basic,unverified,3.3,,,,https://alfaforex.ru
+656,VTB Forex,vtb-forex,,,Russia,,basic,unverified,3.3,,,,https://vtbforex.ru
+657,PSB Forex,psb-forex,,,Russia,,basic,unverified,3.3,,,,https://psbforex.ru
+658,Open Broker,open-broker,,,Russia,,basic,unverified,3.3,,,,https://open-broker.com
+659,Freedom Finance Global,freedom-finance-global,,,Kazakhstan,,basic,unverified,3.3,,,,https://ffin.global
+660,Geratsu,geratsu,,,Unknown,,basic,unverified,3.3,,,,https://geratsu.com
+661,Alpho,alpho,,,Unknown,,basic,unverified,3.3,,,,https://alpho.com
+662,Trust Capital TC,trust-capital-tc,,,Unknown,,basic,unverified,3.3,,,,https://www.trustcapitaltc.com
+663,NPB Invest,npb-invest,,,Unknown,,basic,unverified,3.3,,,,https://npbinvest.com
+664,Larson & Holz,larson-holz,,,Unknown,,basic,unverified,3.3,,,,https://www.lh-broker.com
+665,FinMarket,finmarket,,,Unknown,,basic,unverified,3.3,,,,https://finmarket.com
+666,ForexOptimum,forexoptimum,,,Unknown,,basic,unverified,3.3,,,,https://forexoptimum.com
+667,WForex,wforex,,,Unknown,,basic,unverified,3.3,,,,https://wforex.com
+668,Weltrade,weltrade,,,Unknown,,basic,unverified,3.3,,,,https://www.weltrade.com
+669,Forex Club Libertex Group,forex-club-libertex-group,,,Unknown,,basic,unverified,3.3,,,,https://www.fxclub.org
+670,TeleTrade Group,teletrade-group,,,Unknown,,basic,unverified,3.3,,,,https://www.teletrade.org
+671,TriumphFX,triumphfx,,,Unknown,,basic,unverified,3.3,,,,https://www.tfxi.com
+672,BCR Markets,bcr-markets,,,Australia,,basic,unverified,3.3,,,,https://www.bcrcorp.com.au
+673,Blue Suisse International,blue-suisse-international,,,Unknown,,basic,unverified,3.3,,,,https://bluesuisse.com
+674,EnviFX,envifx,,,Unknown,,basic,unverified,3.3,,,,https://envifx.com
+675,ProsperityFX,prosperityfx,,,Unknown,,basic,unverified,3.3,,,,https://prosperityfx.com
+676,KonohaFX,konohafx,,,Unknown,,basic,unverified,3.3,,,,https://konohafx.com
+677,FVP Trade,fvp-trade,,,Unknown,,basic,unverified,3.3,,,,https://fvptrade.com
+678,Exclusive Markets,exclusive-markets,,,Unknown,,basic,unverified,3.3,,,,https://www.exclusivemarkets.com
+679,IUX Markets,iux-markets,,,Unknown,,basic,unverified,3.3,,,,https://www.iuxmarkets.com
+680,XPro Markets,xpro-markets,,,Unknown,,basic,unverified,3.3,,,,https://www.xpromarkets.com
+681,Banxso,banxso,,,Unknown,,basic,unverified,3.3,,,,https://banxso.com
+682,Ultima Capital,ultima-capital,,,Unknown,,basic,unverified,3.3,,,,https://ultimacapital.com
+683,FXLive Capital,fxlive-capital,,,Unknown,,basic,unverified,3.3,,,,https://fxlivecapital.com
+684,HFM Kenya,hfm-kenya,,,Kenya,,basic,unverified,3.3,,,,https://www.hfm.com/ke
+685,Exinity,exinity,,,Unknown,,basic,unverified,3.3,,,,https://www.exinity.com
+686,zForex,zforex,Z Forex Capital Market LLC,Saint Vincent and the Grenadines,Saint Vincent and the Grenadines,MISA (Comoros),reviewed,unverified,3.2,$10,0.5 pips,MetaTrader 5 | cTrader,https://www.zforex.com
+687,HFM,hfm,HF Markets (Mauritius) Ltd (formerly HotForex),"Limassol, Cyprus (rebranded 2022)",Cyprus (rebranded 2022),FCA (UK) | CySEC (Cyprus) | DFSA (Dubai) | FSCA (South Africa) | FSC (Mauritius),reviewed,unverified,3.2,$0,0.0 pips,MetaTrader 4 | MetaTrader 5 | HFM App,https://www.hfm.com
+688,GO Markets,go-markets,"Go Markets Pty Ltd, ACN 081 864 039 and ABN 85 081 864 039, per the ASIC financial services register (AFSL 254963); the group also runs Go Markets Ltd in Cyprus under CySEC license 322/17, GO Markets Pty Ltd (MU) in Mauritius under FSC license GB19024896, and GO Markets International Ltd in Seychelles under FSA license SD043.","Melbourne, Australia",Australia,[object Object] | [object Object] | [object Object] | [object Object],reviewed,unverified,3.2,"No set minimum, $200 suggested","0.0 pips on GO Plus+, commission applies",MetaTrader 4 | MetaTrader 5 | cTrader | TradingView,https://www.gomarkets.com
+689,UOB Kay Hian,uob-kay-hian,,,Singapore,,basic,unverified,3.2,,,,https://www.uobkayhian.com
+690,KGI Securities Singapore,kgi-securities-singapore,,,Singapore,,basic,unverified,3.2,,,,https://www.kgieworld.sg
+691,Maybank Securities,maybank-securities,,,Singapore,,basic,unverified,3.2,,,,https://www.maybanktrade.com.sg
+692,OCBC Securities,ocbc-securities,,,Singapore,,basic,unverified,3.2,,,,https://www.iocbc.com
+693,CGS International Securities,cgs-international-securities,,,Singapore,,basic,unverified,3.2,,,,https://www.cgsi.com
+694,Gedik Yatirim,gedik-yatirim,,,Turkey,,basic,unverified,3.2,,,,https://www.gedik.com
+695,Info Yatirim,info-yatirim,,,Turkey,,basic,unverified,3.2,,,,https://www.infoyatirim.com
+696,Integral Yatirim,integral-yatirim,,,Turkey,,basic,unverified,3.2,,,,https://www.integralyatirim.com.tr
+697,GCM Yatirim,gcm-yatirim,,,Turkey,,basic,unverified,3.2,,,,https://www.gcmyatirim.com.tr
+698,ALB Yatirim,alb-yatirim,,,Turkey,,basic,unverified,3.2,,,,https://www.albyatirim.com.tr
+699,Ahlatci Yatirim,ahlatci-yatirim,,,Turkey,,basic,unverified,3.2,,,,https://www.ahlatciyatirim.com.tr
+700,Tacirler Yatirim,tacirler-yatirim,,,Turkey,,basic,unverified,3.2,,,,https://www.tacirler.com.tr
+701,QNB Invest,qnb-invest,,,Turkey,,basic,unverified,3.2,,,,https://www.qnbinvest.com.tr
+702,Garanti BBVA Yatirim,garanti-bbva-yatirim,,,Turkey,,basic,unverified,3.2,,,,https://www.garantibbvayatirim.com.tr
+703,Yapi Kredi Yatirim,yapi-kredi-yatirim,,,Turkey,,basic,unverified,3.2,,,,https://www.ykyatirim.com.tr
+704,Is Yatirim,is-yatirim,,,Turkey,,basic,unverified,3.2,,,,https://www.isyatirim.com.tr
+705,TEB Yatirim,teb-yatirim,,,Turkey,,basic,unverified,3.2,,,,https://www.tebyatirim.com.tr
+706,Deniz Yatirim,deniz-yatirim,,,Turkey,,basic,unverified,3.2,,,,https://www.denizyatirim.com
+707,Ak Yatirim,ak-yatirim,,,Turkey,,basic,unverified,3.2,,,,https://www.akyatirim.com.tr
+708,FlowBank,flowbank,,,Switzerland,,basic,unverified,3.2,,,,https://www.flowbank.com
+709,Swissco,swissco,,,Switzerland,,basic,unverified,3.2,,,,https://www.swissco.com
+710,Banque Cantonale Vaudoise Trading,bcv-trading,,,Switzerland,,basic,unverified,3.2,,,,https://www.bcv.ch
+711,Migros Bank Trading,migros-bank-trading,,,Switzerland,,basic,unverified,3.2,,,,https://www.migrosbank.ch
+712,PostFinance Trading,postfinance-trading,,,Switzerland,,basic,unverified,3.2,,,,https://www.postfinance.ch
+713,Cornertrader,cornertrader,,,Switzerland,,basic,unverified,3.2,,,,https://www.cornertrader.ch
+714,Banca Sella Trading,banca-sella-trading,,,Italy,,basic,unverified,3.2,,,,https://www.sella.it
+715,Directa SIM,directa-sim,,,Italy,,basic,unverified,3.2,,,,https://www.directa.it
+716,FinecoBank Italy,finecobank-italy,,,Italy,,basic,unverified,3.2,,,,https://finecobank.com
+717,Banco Invest,banco-invest,,,Portugal,,basic,unverified,3.2,,,,https://www.bancoinvest.pt
+718,Renta 4 Banco,renta-4-banco,,,Spain,,basic,unverified,3.2,,,,https://www.r4.com
+719,Openbank Broker,openbank-broker,,,Spain,,basic,unverified,3.2,,,,https://www.openbank.es
+720,Self Bank,self-bank,,,Spain,,basic,unverified,3.2,,,,https://www.selfbank.es
+721,Banco BiG,banco-big,,,Portugal,,basic,unverified,3.2,,,,https://www.big.pt
+722,XTB MENA,xtb-mena,,,UAE,,basic,unverified,3.2,,,,https://www.xtb.ae
+723,Noor Capital,noor-capital,,,UAE,,basic,unverified,3.2,,,,https://www.noorcapital.ae
+724,Century Financial,century-financial,,,UAE,,basic,unverified,3.2,,,,https://www.century.ae
+725,Orient Finance,orient-finance,,,Unknown,,basic,unverified,3.2,,,,https://www.orientfinance.com
+726,GCG Markets,gcg-markets,,,Unknown,,basic,unverified,3.2,,,,https://gcgmarkets.com
+727,Axiory,axiory,,,Belize,,basic,unverified,3.2,,,,https://www.axiory.com
+728,CPT International,cpt-international,,,Unknown,,basic,unverified,3.2,,,,https://www.cptinternational.com
+729,Dominion Markets Capital,dominion-markets-capital,,,Unknown,,basic,unverified,3.2,,,,https://dominionmarkets.com
+730,BizzTrade,bizztrade,,,Unknown,,basic,unverified,3.2,,,,https://bizztrade.com
+731,Royal,one-royal,,,Unknown,,basic,unverified,3.2,,,,https://www.oneroyal.com
+732,EverestsCM,everestscm,,,Unknown,,basic,unverified,3.2,,,,https://www.everestscm.com
+733,InvestAZ,investaz,,,Azerbaijan,,basic,unverified,3.2,,,,https://www.investaz.az
+734,TP ICAP (ICAP),tp-icap,,"London, United Kingdom",United Kingdom,FCA (UK) | SEC | Multiple Global,reviewed,unverified,3.1,,,,https://www.tpicap.com
+735,Kronos Research,kronos-research,,,Taiwan,,basic,unverified,3.1,,,,https://www.kronosresearch.com
+736,LedgerPrime,ledgerprime,,,United States,,basic,unverified,3.1,,,,https://www.ledgerprime.com
+737,Gravity Team,gravity-team,,,Unknown,,basic,unverified,3.1,,,,https://gravityteam.co
+738,Pulsar Trading Capital,pulsar-trading-capital,,,Unknown,,basic,unverified,3.1,,,,https://www.pulsartradingcap.com
+739,IS Prime,is-prime,,,United Kingdom,,basic,unverified,3.1,,,,https://www.isprimefx.com
+740,Sucden Financial,sucden-financial,,,United Kingdom,,basic,unverified,3.1,,,,https://www.sucdenfinancial.com
+741,StoneX,stonex,,,United States,,basic,unverified,3.1,,,,https://www.stonex.com
+742,Invast Global,invast-global,,,Australia,,basic,unverified,3.1,,,,https://www.invast.com.au
+743,Velocity Trade,velocity-trade,,,Canada,,basic,unverified,3.1,,,,https://www.velocitytrade.com
+744,Britannia Global Markets,britannia-global-markets,,,United Kingdom,,basic,unverified,3.1,,,,https://www.britanniagm.com
+745,GFI Group,gfi-group,,,United States,,basic,unverified,3.1,,,,https://www.gfigroup.com
+746,TP ICAP,tp-icap,,,United Kingdom,,basic,unverified,3.1,,,,https://www.tpicap.com
+747,Cboe FX,cboe-fx,,,United States,,basic,unverified,3.1,,,,https://www.cboe.com/fx
+748,360T,360t,,,Germany,,basic,unverified,3.1,,,,https://www.360t.com
+749,EBS,ebs,,,United States,,basic,unverified,3.1,,,,https://www.cmegroup.com/markets/ebs.html
+750,Currenex,currenex,,,United States,,basic,unverified,3.1,,,,https://www.currenex.com
+751,Integral,integral,,,United States,,basic,unverified,3.1,,,,https://www.integral.com
+752,FXSpotStream,fxspotstream,,,United States,,basic,unverified,3.1,,,,https://www.fxspotstream.com
+753,Scope Prime,scope-prime,,,Unknown,,basic,unverified,3.1,,,,https://www.scopeprime.com
+754,Match Prime Liquidity,match-prime-liquidity,,,Cyprus,,basic,unverified,3.1,,,,https://match-prime.com
+755,PrimeXM,primexm,,,Switzerland,,basic,unverified,3.1,,,,https://www.primexm.com
+756,Brokeree Solutions,brokeree-solutions,,,Estonia,,basic,unverified,3.1,,,,https://brokeree.com
+757,TraderEvolution Global,traderevolution-global,,,Ukraine,,basic,unverified,3.1,,,,https://traderevolution.com
+758,MetaQuotes,metaquotes,,,Cyprus,,basic,unverified,3.1,,,,https://www.metaquotes.net
+759,Spotware,spotware,,,Cyprus,,basic,unverified,3.1,,,,https://www.spotware.com
+760,Devexperts,devexperts,,,Germany,,basic,unverified,3.1,,,,https://devexperts.com
+761,CQG,cqg,,,United States,,basic,unverified,3.1,,,,https://www.cqg.com
+762,Rithmic,rithmic,,,United States,,basic,unverified,3.1,,,,https://www.rithmic.com
+763,Spreadex,spreadex,,,United Kingdom,,basic,unverified,3.1,,,,https://www.spreadex.com
+764,Spread Co,spread-co,,,United Kingdom,,basic,unverified,3.1,,,,https://www.spreadco.com
+765,Intertrader,intertrader,,,United Kingdom,,basic,unverified,3.1,,,,https://www.intertrader.com
+766,Core Spreads,core-spreads,,,United Kingdom,,basic,unverified,3.1,,,,https://www.corespreads.com
+767,Accendo Markets,accendo-markets,,,United Kingdom,,basic,unverified,3.1,,,,https://www.accendomarkets.com
+768,ForexTB,forextb,,,Unknown,,basic,unverified,3.1,,,,https://www.forextb.com
+769,BinaryCent,binarycent,,,Unknown,,basic,unverified,3.1,,,,https://www.binarycent.com
+770,Videforex,videforex,,,Unknown,,basic,unverified,3.1,,,,https://www.videforex.com
+771,RaceOption,raceoption,,,Unknown,,basic,unverified,3.1,,,,https://www.raceoption.com
+772,CloseOption,closeoption,,,Unknown,,basic,unverified,3.1,,,,https://www.closeoption.com
+773,Friedberg Direct,friedberg-direct,,,Canada,,basic,unverified,3.1,,,,https://www.friedbergdirect.com
+774,Questrade,questrade,,,Canada,,basic,unverified,3.1,,,,https://www.questrade.com
+775,Tiger Brokers,tiger-brokers,,,Singapore,,basic,unverified,3.1,,,,https://www.tigerbrokers.com
+776,NinjaTrader Brokerage,ninjatrader-brokerage,,,United States,,basic,unverified,3.1,,,,https://ninjatrader.com
+777,Phillip Futures,phillip-futures,,,Singapore,,basic,unverified,3.1,,,,https://www.phillipfutures.com.sg
+778,Teza Technologies,teza-technologies,,,United States,,basic,unverified,3,,,,https://www.tezatech.com
+779,Aquatic Capital,aquatic-capital,,,United States,,basic,unverified,3,,,,https://www.aquatic.com
+780,Qube Research & Technologies,qube-research-technologies,,,United Kingdom,,basic,unverified,3,,,,https://www.qrl.com
+781,Schonfeld Strategic Advisors,schonfeld-strategic-advisors,,,United States,,basic,unverified,3,,,,https://www.schonfeld.com
+782,Two Sigma,two-sigma,,,United States,,basic,unverified,3,,,,https://www.twosigma.com
+783,D. E. Shaw Group,de-shaw-group,,,United States,,basic,unverified,3,,,,https://www.deshaw.com
+784,PDT Partners,pdt-partners,,,United States,,basic,unverified,3,,,,https://www.pdtpartners.com
+785,WorldQuant,worldquant,,,United States,,basic,unverified,3,,,,https://www.worldquant.com
+786,G Research,g-research,,,United Kingdom,,basic,unverified,3,,,,https://www.gresearch.com
+787,Cubist Systematic Strategies,cubist-systematic-strategies,,,United States,,basic,unverified,3,,,,https://www.point72.com/cubist
+788,Point72,point72,,,United States,,basic,unverified,3,,,,https://www.point72.com
+789,Millennium Management,millennium-management,,,United States,,basic,unverified,3,,,,https://www.mlp.com
+790,Citadel,citadel-hedge-fund,,,United States,,basic,unverified,3,,,,https://www.citadel.com
+791,Balyasny Asset Management,balyasny-asset-management,,,United States,,basic,unverified,3,,,,https://www.bamfunds.com
+792,ExodusPoint,exoduspoint,,,United States,,basic,unverified,3,,,,https://www.exoduspoint.com
+793,BlueCrest Capital Management,bluecrest-capital-management,,,United Kingdom,,basic,unverified,3,,,,https://www.bluecrestcapital.com
+794,Brevan Howard,brevan-howard,,,United Kingdom,,basic,unverified,3,,,,https://www.brevanhoward.com
+795,Capula Investment Management,capula-investment-management,,,United Kingdom,,basic,unverified,3,,,,https://www.capulaglobal.com
+796,Man AHL,man-ahl,,,United Kingdom,,basic,unverified,3,,,,https://www.man.com/ahl
+797,Aspect Capital,aspect-capital,,,United Kingdom,,basic,unverified,3,,,,https://www.aspectcapital.com
+798,Campbell & Company,campbell-company,,,United States,,basic,unverified,3,,,,https://www.campbell.com
+799,AlphaGrep,alphagrep,,,India,,basic,unverified,3,,,,https://www.alphagrep.com
+800,Alphadyne Asset Management,alphadyne-asset-management,,,United States,,basic,unverified,3,,,,https://www.alphadyneam.com
+801,Engineers Gate,engineers-gate,,,United States,,basic,unverified,3,,,,https://www.engineersgate.com
+802,GTS,gts,,,United States,,basic,unverified,3,,,,https://www.gtsx.com
+803,Hard Eight Trading,hard-eight-trading,,,United States,,basic,unverified,3,,,,https://www.hardeight.com
+804,Marquette Partners,marquette-partners,,,United States,,basic,unverified,3,,,,https://www.marquettepartners.com
+805,3Red Partners,3red-partners,,,United States,,basic,unverified,3,,,,https://www.3redpartners.com
+806,B2C2,b2c2,,,United Kingdom,,basic,unverified,3,,,,https://www.b2c2.com
+807,Cumberland,cumberland,,,United States,,basic,unverified,3,,,,https://www.cumberland.io
+808,Wintermute,wintermute,,,United Kingdom,,basic,unverified,3,,,,https://www.wintermute.com
+809,GSR,gsr,,,Hong Kong,,basic,unverified,3,,,,https://www.gsr.io
+810,Amber Group,amber-group,,,Singapore,,basic,unverified,3,,,,https://www.ambergroup.io
+811,Auros,auros,,,Singapore,,basic,unverified,3,,,,https://www.auros.global
+812,Keyrock,keyrock,,,Belgium,,basic,unverified,3,,,,https://www.keyrock.com
+813,Flowdesk,flowdesk,,,France,,basic,unverified,3,,,,https://www.flowdesk.co
+814,Kairon Labs,kairon-labs,,,Belgium,,basic,unverified,3,,,,https://kaironlabs.com
+815,Caladan,caladan,,,Unknown,,basic,unverified,3,,,,https://www.caladan.xyz
+816,DV Chain,dv-chain,,,United States,,basic,unverified,3,,,,https://www.dvchain.co
+817,Enigma Securities,enigma-securities,,,United Kingdom,,basic,unverified,3,,,,https://www.enigma-securities.io
+818,QCP,qcp,,,Singapore,,basic,unverified,3,,,,https://www.qcp.capital
+819,XBTO,xbto,,,Bermuda,,basic,unverified,3,,,,https://www.xbto.com
+820,Efficient Frontier,efficient-frontier,,,Unknown,,basic,unverified,3,,,,https://www.efrontier.io
+821,FXON,fxon,,,Unknown,,basic,unverified,2.9,,,,https://www.fxon.com
+822,VCG Markets,vcg-markets,,,Unknown,,basic,unverified,2.9,,,,https://www.vcgmarkets.com
+823,Northstar Trader,northstar-trader,,,Unknown,,basic,unverified,2.9,,,,https://www.northstartrader.com
+824,Blueberry Funding,blueberry-funding,,,Unknown,,basic,unverified,2.9,,,,https://blueberryfunding.com
+825,Royal Funding Program,royal-funding-program,,,Unknown,,basic,unverified,2.9,,,,https://royalfundingprogram.com
+826,Jane Street,jane-street,,,United States,,basic,unverified,2.9,,,,https://www.janestreet.com
+827,Citadel Securities,citadel-securities,,,United States,,basic,unverified,2.9,,,,https://www.citadelsecurities.com
+828,Optiver,optiver,,,Netherlands,,basic,unverified,2.9,,,,https://optiver.com
+829,IMC Trading,imc-trading,,,Netherlands,,basic,unverified,2.9,,,,https://www.imc.com
+830,DRW,drw,,,United States,,basic,unverified,2.9,,,,https://drw.com
+831,Jump Trading,jump-trading,,,United States,,basic,unverified,2.9,,,,https://www.jumptrading.com
+832,Hudson River Trading,hudson-river-trading,,,United States,,basic,unverified,2.9,,,,https://www.hudsonrivertrading.com
+833,Susquehanna International Group,susquehanna-international-group,,,United States,,basic,unverified,2.9,,,,https://sig.com
+834,Akuna Capital,akuna-capital,,,United States,,basic,unverified,2.9,,,,https://akunacapital.com
+835,Flow Traders,flow-traders,,,Netherlands,,basic,unverified,2.9,,,,https://www.flowtraders.com
+836,Virtu Financial,virtu-financial,,,United States,,basic,unverified,2.9,,,,https://www.virtu.com
+837,Tower Research Capital,tower-research-capital,,,United States,,basic,unverified,2.9,,,,https://www.tower-research.com
+838,Five Rings,five-rings,,,United States,,basic,unverified,2.9,,,,https://fiverings.com
+839,Maven Securities,maven-securities,,,United Kingdom,,basic,unverified,2.9,,,,https://www.mavensecurities.com
+840,XTX Markets,xtx-markets,,,United Kingdom,,basic,unverified,2.9,,,,https://www.xtxmarkets.com
+841,Radix Trading,radix-trading,,,United States,,basic,unverified,2.9,,,,https://www.radixtrading.co
+842,Belvedere Trading,belvedere-trading,,,United States,,basic,unverified,2.9,,,,https://www.belvederetrading.com
+843,TransMarket Group,transmarket-group,,,United States,,basic,unverified,2.9,,,,https://www.transmarketgroup.com
+844,DV Trading,dv-trading,,,United States,,basic,unverified,2.9,,,,https://www.dvtrading.co
+845,Headlands Technologies,headlands-technologies,,,United States,,basic,unverified,2.9,,,,https://www.headlandstech.com
+846,Quantlab,quantlab,,,United States,,basic,unverified,2.9,,,,https://www.quantlab.com
+847,Allston Trading,allston-trading,,,United States,,basic,unverified,2.9,,,,https://www.allstontrading.com
+848,Geneva Trading,geneva-trading,,,United States,,basic,unverified,2.9,,,,https://www.genevatrading.com
+849,Group One Trading,group-one-trading,,,United States,,basic,unverified,2.9,,,,https://www.group1.com
+850,Valkyrie Trading,valkyrie-trading,,,United States,,basic,unverified,2.9,,,,https://www.valkyrietrading.com
+851,WH Trading,wh-trading,,,United States,,basic,unverified,2.9,,,,https://www.whtrading.com
+852,Wolverine Trading,wolverine-trading,,,United States,,basic,unverified,2.9,,,,https://www.wolve.com
+853,XR Trading,xr-trading,,,United States,,basic,unverified,2.9,,,,https://www.xrtrading.com
+854,Old Mission Capital,old-mission-capital,,,United States,,basic,unverified,2.9,,,,https://www.oldmissioncapital.com
+855,Volant Trading,volant-trading,,,United States,,basic,unverified,2.9,,,,https://www.volanttrading.com
+856,Gelber Group,gelber-group,,,United States,,basic,unverified,2.9,,,,https://www.gelbergroup.com
+857,Consolidated Trading,consolidated-trading,,,United States,,basic,unverified,2.9,,,,https://www.ctdtrading.com
+858,Simplex Trading,simplex-trading,,,United States,,basic,unverified,2.9,,,,https://www.simplextrading.com
+859,Chicago Trading Company,chicago-trading-company,,,United States,,basic,unverified,2.9,,,,https://www.chicagotrading.com
+860,Tibra Capital,tibra-capital,,,Australia,,basic,unverified,2.9,,,,https://www.tibra.com
+861,Eclipse Trading,eclipse-trading,,,United States,,basic,unverified,2.9,,,,https://www.eclipsetrading.com
+862,Vivienne Court Trading,vivienne-court-trading,,,Australia,,basic,unverified,2.9,,,,https://www.vivcourt.com
+863,Mako Trading,mako-trading,,,Unknown,,basic,unverified,2.9,,,,https://www.mako.com
+864,Da Vinci Derivatives,da-vinci-derivatives,,,Netherlands,,basic,unverified,2.9,,,,https://www.davincitrading.com
+865,GSA Capital,gsa-capital,,,United Kingdom,,basic,unverified,2.9,,,,https://www.gsacapital.com
+866,Infinox,infinox,"Infinox Capital Limited, Companies House number 06854853 in the UK, the FCA regulated entity of the Infinox Group, which also runs IX Capital Group Limited in the Bahamas, Infinox Limited in Mauritius, and the unregulated Infinox Global Limited in Anguilla","London, UK, plus a licensed entity in Nassau, Bahamas",Bahamas,[object Object] | [object Object] | [object Object] | [object Object] | [object Object],reviewed,unverified,2.8,$50,0.2 pips on the ECN account,MetaTrader 4 | MetaTrader 5 | IX Social,https://www.infinox.com
+867,Tanius Technology Group,tanius-technology,,USA,USA,,basic,unverified,2.8,,,,https://www.tanius.com
+868,Sirix Social,sirix-social,,,Unknown,,basic,unverified,2.8,,,,https://www.sirixtrader.com
+869,Acadian Asset Management,acadian-asset-management,,,United States,,basic,unverified,2.8,,,,https://www.acadian-asset.com
+870,Amplify Trading,amplify-trading,,,United Kingdom,,basic,unverified,2.8,,,,https://www.amplifytrading.com
+871,Arini,arini-capital,,,Unknown,,basic,unverified,2.8,,,,https://www.arinicapital.com
+872,Capstone Investment Advisors,capstone-investment-advisors,,,United States,,basic,unverified,2.8,,,,https://www.capstoneco.com
+873,Caxton Associates,caxton-associates,,,United States,,basic,unverified,2.8,,,,https://www.caxton.com
+874,Dymon Asia Capital,dymon-asia-capital,,,Singapore,,basic,unverified,2.8,,,,https://www.dymonasia.com
+875,Eisler Capital,eisler-capital,,,United Kingdom,,basic,unverified,2.8,,,,https://www.eislercapital.com
+876,High-Flyer Quant,high-flyer-quant,,,China,,basic,unverified,2.8,,,,https://www.high-flyer.cn
+877,J.P. Morgan Electronic Trading,jp-morgan-electronic-trading,,,United States,,basic,unverified,2.8,,,,https://www.jpmorgan.com
+878,Kershner Trading Group,kershner-trading-group,,,United States,,basic,unverified,2.8,,,,https://www.kershnertrading.com
+879,King Street Capital Management,king-street-capital-management,,,United States,,basic,unverified,2.8,,,,https://www.kingstreet.com
+880,LMR Partners,lmr-partners,,,United Kingdom,,basic,unverified,2.8,,,,https://www.lmrpartners.com
+881,Marshall Wace,marshall-wace,,,United Kingdom,,basic,unverified,2.8,,,,https://www.mwam.com
+882,Maven Investment Partners,maven-investment-partners,,,Unknown,,basic,unverified,2.8,,,,https://www.mavenip.com
+883,Mesirow Currency Management,mesirow-currency-management,,,United States,,basic,unverified,2.8,,,,https://www.mesirow.com
+884,Moore Capital Management,moore-capital-management,,,United States,,basic,unverified,2.8,,,,https://www.mcmfunds.com
+885,Optimas Capital,optimas-capital,,,Unknown,,basic,unverified,2.8,,,,https://www.optimascapital.com
+886,PanAgora Asset Management,panagora-asset-management,,,United States,,basic,unverified,2.8,,,,https://www.panagora.com
+887,Quest Partners,quest-partners,,,United States,,basic,unverified,2.8,,,,https://www.questpartnersllc.com
+888,Rokos Capital Management,rokos-capital-management,,,United Kingdom,,basic,unverified,2.8,,,,https://www.rokoscapital.com
+889,Squarepoint Capital,squarepoint-capital,,,United Kingdom,,basic,unverified,2.8,,,,https://www.squarepoint-capital.com
+890,Tanius Technology,tanius-technology,,,Unknown,,basic,unverified,2.8,,,,https://www.tanius.com
+891,Transtrend,transtrend,,,Netherlands,,basic,unverified,2.8,,,,https://www.transtrend.com
+892,Tudor Investment Corporation,tudor-investment-corporation,,,United States,,basic,unverified,2.8,,,,https://www.tudor.com
+893,Voleon Group,voleon-group,,,United States,,basic,unverified,2.8,,,,https://www.voleon.com
+894,Weiss Multi Strategy Advisers,weiss-multi-strategy-advisers,,,United States,,basic,unverified,2.8,,,,https://www.weissfunds.com
+895,XR Securities,xr-securities,,,Unknown,,basic,unverified,2.8,,,,https://www.xrsecurities.com
+896,Zais Group,zais-group,,,United States,,basic,unverified,2.8,,,,https://www.zaisgroup.com
+897,Global Trading Capital,global-trading-capital,,,Unknown,,basic,unverified,2.8,,,,https://globaltradingcapital.com
+898,ModMount,modmount,,,Unknown,,basic,unverified,2.8,,,,https://www.modmountltd.com
+899,TradeWill,tradewill,,,Unknown,,basic,unverified,2.8,,,,https://www.tradewill.com
+900,Elland Road Capital,elland-road-capital,,,Unknown,,basic,unverified,2.8,,,,https://www.ellandroadcapital.com
+901,Invest Ecapitals,invest-ecapitals,,,Unknown,,basic,unverified,2.8,,,,https://www.investecapitals.com
+902,Neom Markets,neom-markets,,,Unknown,,basic,unverified,2.8,,,,https://neommarkets.com
+903,FXRoad,fxroad,,,Unknown,,basic,unverified,2.8,,,,https://www.fxroad.com
+904,MarketsVox,marketsvox,,,Unknown,,basic,unverified,2.8,,,,https://www.marketsvox.com
+905,TradeEU Global,tradeeu-global,,,Unknown,,basic,unverified,2.8,,,,https://www.tradeeu.com
+906,FXORO,fxoro,,,Unknown,,basic,unverified,2.8,,,,https://www.fxoro.com
+907,IGM FX,igm-fx,,,Unknown,,basic,unverified,2.8,,,,https://www.igmfx.com
+908,Royal Forex,royal-forex,,,Unknown,,basic,unverified,2.8,,,,https://www.royalforex.com
+909,Sucden FX,sucden-fx,,,United Kingdom,,basic,unverified,2.8,,,,https://www.sucdenfinancial.com
+910,Valutrades Seychelles,valutrades-seychelles,,,Seychelles,,basic,unverified,2.8,,,,https://www.valutrades.sc
+911,XS Prime,xs-prime,,,Unknown,,basic,unverified,2.8,,,,https://www.xsprime.com
+912,XM,xm,"Trading Point of Financial Instruments Limited, Cyprus Registrar of Companies number HE251334","Limassol, Cyprus",Cyprus,CySEC (Cyprus) | FSC (Belize) | DFSA (UAE) | FSA (Seychelles),reviewed,unverified,2.7,$5,1.1 pips,MetaTrader 4 | MetaTrader 5 | XM App,https://www.xm.com
+913,In-Arabia,in-arabia,,,UAE,,basic,unverified,2.7,,,,https://www.in-arabia.com
+914,iTrade Capital Markets,itrade-capital-markets,,,Unknown,,basic,unverified,2.7,,,,https://www.itradecm.com
+915,Liquid Markets,liquid-markets,,,Unknown,,basic,unverified,2.7,,,,https://www.lqdmarkets.com
+916,Loyal Forex,loyal-forex,,,Unknown,,basic,unverified,2.7,,,,https://www.loyalforex.com
+917,Lucror FX,lucror-fx,,,Unknown,,basic,unverified,2.7,,,,https://www.lucrorfx.com
+918,MasterForex,masterforex-batch8,,,Unknown,,basic,unverified,2.7,,,,https://www.masterforex.com
+919,MAYZUS,mayzus,,,Unknown,,basic,unverified,2.7,,,,https://www.mayzus.com
+920,MBCFX,mbcfx,,,Unknown,,basic,unverified,2.7,,,,https://www.mbcfx.com
+921,MFFX,mffx,,,Unknown,,basic,unverified,2.7,,,,https://www.mffx.com
+922,MIG Bank,mig-bank,,,Switzerland,,basic,unverified,2.7,,,,https://www.migbank.com
+923,Millennium Penata Futures,millennium-penata-futures,,,Indonesia,,basic,unverified,2.7,,,,https://www.millenniumpenata.com
+924,N2 Capital Markets,n2-capital-markets,,,Unknown,,basic,unverified,2.7,,,,https://www.n2cm.com
+925,Nano4x,nano4x,,,Unknown,,basic,unverified,2.7,,,,https://www.nano4x.com
+926,NobleTrading,nobletrading,,,Unknown,,basic,unverified,2.7,,,,https://www.nobletrading.com
+927,NordMarkets,nordmarkets,,,Unknown,,basic,unverified,2.7,,,,https://www.nordmarkets.com
+928,Persepolis Capital Management,persepolis-capital-management,,,Unknown,,basic,unverified,2.7,,,,https://www.persepoliscm.com
+929,PFGFX,pfgfx,,,Unknown,,basic,unverified,2.7,,,,https://www.pfgfx.com
+930,Real Forex,real-forex,,,Unknown,,basic,unverified,2.7,,,,https://www.realforex.com
+931,Real Trade,real-trade,,,Latvia,,basic,unverified,2.7,,,,https://www.realtrade.lv
+932,Renesource Capital,renesource-capital,,,Latvia,,basic,unverified,2.7,,,,https://www.renesource.com
+933,RetailFX,retailfx,,,Unknown,,basic,unverified,2.7,,,,https://www.retailfx.com
+934,RFXT,rfxt,,,Unknown,,basic,unverified,2.7,,,,https://www.rfxt.com
+935,Shaw Markets,shaw-markets,,,Unknown,,basic,unverified,2.7,,,,https://www.shawmarkets.com
+936,Solidity Brokers,solidity-brokers,,,Unknown,,basic,unverified,2.7,,,,https://www.soliditybrokers.com
+937,Starfish FX,starfish-fx,,,Unknown,,basic,unverified,2.7,,,,https://www.starfishfx.com
+938,Sun Hung Kai Forex,sun-hung-kai-forex,,,Hong Kong,,basic,unverified,2.7,,,,https://www.shkdirect.com
+939,Sunbird FX,sunbird-fx,,,Unknown,,basic,unverified,2.7,,,,https://www.sunbirdfx.com
+940,Swiss International,swiss-international,,,Switzerland,,basic,unverified,2.7,,,,https://www.swissinternational.com
+941,TFIFX,tfifx,,,Unknown,,basic,unverified,2.7,,,,https://www.tfidirect.com
+942,TradersChoiceFX,traderschoicefx,,,Unknown,,basic,unverified,2.7,,,,https://www.traderschoicefx.com
+943,Valbury Capital,valbury-capital,,,United Kingdom,,basic,unverified,2.7,,,,https://www.valburycapital.com
+944,vPE Bank,vpe-bank,,,Germany,,basic,unverified,2.7,,,,https://www.vpeag.com
+945,VTLFOREX,vtlforex,,,Unknown,,basic,unverified,2.7,,,,https://www.vtlforex.com
+946,WCFTC,wcftc,,,Unknown,,basic,unverified,2.7,,,,https://www.wcftc.com
+947,WSBrokers,wsbrokers,,,Unknown,,basic,unverified,2.7,,,,https://www.wsbrokers.com
+948,xDirect,xdirect,,,Unknown,,basic,unverified,2.7,,,,https://www.xdirect.com
+949,XForex,xforex,,,Unknown,,basic,unverified,2.7,,,,https://www.xforex.com
+950,Ayondo,ayondo,,,Germany,,basic,unverified,2.7,,,,https://www.ayondo.com
+951,Collective2,collective2,,,United States,,basic,unverified,2.7,,,,https://collective2.com
+952,Currensee,currensee,,,United States,,basic,unverified,2.7,,,,https://www.currensee.com
+953,ForexCopy System,forexcopy-system,,,Unknown,,basic,unverified,2.7,,,,https://www.forexcopy.com
+954,ZuluTrade,zulutrade,,,Greece,,basic,unverified,2.7,,,,https://www.zulutrade.com
+955,MyDigiTrade,mydigitrade,,,Unknown,,basic,unverified,2.7,,,,https://www.mydigitrade.com
+956,Tradency,tradency,,,Israel,,basic,unverified,2.7,,,,https://www.tradency.com
+957,Mirror Trader,mirror-trader,,,Israel,,basic,unverified,2.7,,,,https://www.tradency.com
+958,AFX Capital,afx-capital,,,Unknown,,basic,unverified,2.6,,,,https://www.afxcapital.com
+959,AL Trade,al-trade,,,Unknown,,basic,unverified,2.6,,,,https://www.altrade.com
+960,Alpha Broking,alpha-broking,,,Australia,,basic,unverified,2.6,,,,https://www.alphabroking.com.au
+961,APEX FX Trading,apex-fx-trading,,,Unknown,,basic,unverified,2.6,,,,https://www.apexfxtrading.com
+962,Arab Financial Brokers,arab-financial-brokers,,,Kuwait,,basic,unverified,2.6,,,,https://www.afb.com.kw
+963,ATG Marketplex,atg-marketplex,,,Unknown,,basic,unverified,2.6,,,,https://www.atgmarketplex.com
+964,Atlantic FX,atlantic-fx,,,Unknown,,basic,unverified,2.6,,,,https://www.atlanticfx.com
+965,Baxter FX,baxter-fx,,,Unknown,,basic,unverified,2.6,,,,https://www.baxter-fx.com
+966,BeamFX,beamfx,,,Unknown,,basic,unverified,2.6,,,,https://www.beamfx.com
+967,BlackHorseFX,blackhorsefx,,,Unknown,,basic,unverified,2.6,,,,https://www.blackhorsefx.com
+968,BNFX,bnfx,,,Unknown,,basic,unverified,2.6,,,,https://www.bnfx.com
+969,Bulbrokers,bulbrokers,,,Unknown,,basic,unverified,2.6,,,,https://www.bulbrokers.com
+970,BulldogFX,bulldogfx,,,Unknown,,basic,unverified,2.6,,,,https://www.bulldogfx.com
+971,CIM Bank Trading,cim-bank-trading,,,Switzerland,,basic,unverified,2.6,,,,https://www.cimbanque.com
+972,CitiFX Pro,citifx-pro,,,United States,,basic,unverified,2.6,,,,https://www.citifxpro.com
+973,Citypoint Trading,citypoint-trading,,,Unknown,,basic,unverified,2.6,,,,https://www.citypointtrading.com
+974,CMS Forex,cms-forex,,,Unknown,,basic,unverified,2.6,,,,https://www.cmsfx.com
+975,DF Markets,df-markets,,,United Kingdom,,basic,unverified,2.6,,,,https://www.dfmarkets.co.uk
+976,Direct FX,direct-fx,,,Unknown,,basic,unverified,2.6,,,,https://www.directfx.com
+977,Divisa Capital,divisa-capital,,,Unknown,,basic,unverified,2.6,,,,https://www.divisacapital.com
+978,EuroBroker,eurobroker,,,Unknown,,basic,unverified,2.6,,,,https://www.eurobroker.com
+979,Exto Capital,exto-capital,,,Unknown,,basic,unverified,2.6,,,,https://www.extocapital.com
+980,FalcoFX,falcofx,,,Unknown,,basic,unverified,2.6,,,,https://www.falcofx.com
+981,FFI Forex and Futures International,ffi-forex-futures,,,Unknown,,basic,unverified,2.6,,,,https://www.ffifx.com
+982,FinOdds,finodds,,,Unknown,,basic,unverified,2.6,,,,https://www.finodds.com
+983,Forex FS,forex-fs,,,Unknown,,basic,unverified,2.6,,,,https://www.forexfs.com
+984,Forex Metal,forex-metal,,,Unknown,,basic,unverified,2.6,,,,https://www.forex-metal.com
+985,ForexMeta,forexmeta,,,Unknown,,basic,unverified,2.6,,,,https://www.forexmeta.com
+986,FOREXYARD,forexyard,,,Unknown,,basic,unverified,2.6,,,,https://www.forexyard.com
+987,FX Dealer,fx-dealer,,,Unknown,,basic,unverified,2.6,,,,https://www.fxdealer.com
+988,FX Financial Group,fx-financial-group,,,Unknown,,basic,unverified,2.6,,,,https://www.fxfg.com
+989,FXCBS,fxcbs,,,Unknown,,basic,unverified,2.6,,,,https://www.fxcbs.com
+990,FXCentral,fxcentral,,,Unknown,,basic,unverified,2.6,,,,https://www.fxcentral.net
+991,FXGM,fxgm,,,Unknown,,basic,unverified,2.6,,,,https://www.fxgm.com
+992,FXOptimax,fxoptimax,,,Unknown,,basic,unverified,2.6,,,,https://www.fxoptimax.com
+993,FXPIG,fxpig,,,Unknown,,basic,unverified,2.6,,,,https://www.fxpig.com
+994,FXSalt,fxsalt,,,Unknown,,basic,unverified,2.6,,,,https://www.fxsalt.com
+995,Gallant Capital Markets,gallant-capital-markets,,,Unknown,,basic,unverified,2.6,,,,https://www.gallantcapitalmarkets.com
+996,Gedamo Investments,gedamo-investments,,,Unknown,,basic,unverified,2.6,,,,https://www.gedamo.com
+997,GFT Markets,gft-markets,,,United Kingdom,,basic,unverified,2.6,,,,https://www.gftuk.com
+998,GTL Forex,gtl-forex,,,Unknown,,basic,unverified,2.6,,,,https://www.gtlforex.com
+999,IamFX,iamfx,,,Unknown,,basic,unverified,2.6,,,,https://www.iamfx.com
+1000,IBFX,ibfx,,,Unknown,,basic,unverified,2.6,,,,https://www.ibfx.com
+1001,Investment House International,investment-house-international,,,Unknown,,basic,unverified,2.6,,,,https://www.ihi.com
+1002,IK Trust,ik-trust,,,Unknown,,basic,unverified,2.6,,,,https://www.iktrust.com
+1003,Goldberg Forex Group,goldberg-forex-group,,,Unknown,,basic,unverified,2.5,,,,https://www.goldbergforex.com
+1004,Golder Markets,golder-markets,,,Unknown,,basic,unverified,2.5,,,,https://www.goldermarkets.com
+1005,Got Money FX,got-money-fx,,,Unknown,,basic,unverified,2.5,,,,https://www.gotmoneyfx.com
+1006,Halifax Online,halifax-online,,,Australia,,basic,unverified,2.5,,,,https://www.halifaxonline.com.au
+1007,Hanseatic Brokerhouse,hanseatic-brokerhouse,,,Germany,,basic,unverified,2.5,,,,https://www.hanseatic-brokerhouse.de
+1008,Hedefonline,hedefonline,,,Unknown,,basic,unverified,2.5,,,,https://www.hedefonline.com
+1009,HFX,hfx,,,Unknown,,basic,unverified,2.5,,,,https://www.hfx.com
+1010,High Street Networking,high-street-networking,,,Unknown,,basic,unverified,2.5,,,,https://www.highstreetnetworking.com
+1011,HMS Markets Luxembourg,hms-markets-luxembourg,,,Luxembourg,,basic,unverified,2.5,,,,https://www.hms.lu
+1012,Hudson Global Capital,hudson-global-capital,,,Unknown,,basic,unverified,2.5,,,,https://www.hudsonglobalcapital.com
+1013,Hupro FX,hupro-fx,,,Unknown,,basic,unverified,2.5,,,,https://www.huprofx.com
+1014,i Securities,i-securities,,,Japan,,basic,unverified,2.5,,,,https://www.isec.jp
+1015,IBC Group,ibc-group,,,Unknown,,basic,unverified,2.5,,,,https://www.ibcgroup.com
+1016,Iberia Forex,iberia-forex,,,Spain,,basic,unverified,2.5,,,,https://www.iberiaforex.com
+1017,ICM Brokers,icm-brokers,,,Unknown,,basic,unverified,2.5,,,,https://www.icmbrokers.com
+1018,Ideal World Forex,ideal-world-forex,,,Unknown,,basic,unverified,2.5,,,,https://www.idealworldforex.com
+1019,IFX Markets,ifx-markets,,,Unknown,,basic,unverified,2.5,,,,https://www.ifxmarkets.com
+1020,IGLR Investment,iglr-investment,,,Unknown,,basic,unverified,2.5,,,,https://www.iglr.com
+1021,IGTFX,igtfx,,,Unknown,,basic,unverified,2.5,,,,https://www.igtfx.com
+1022,IHFOREX,ihforex,,,Unknown,,basic,unverified,2.5,,,,https://www.ihforex.com
+1023,IjenFX,ijenfx,,,Unknown,,basic,unverified,2.5,,,,https://www.ijenfx.com
+1024,IKO Forex,iko-forex,,,Unknown,,basic,unverified,2.5,,,,https://www.ikofx.com
+1025,Ikon Global Markets,ikon-global-markets,,,Unknown,,basic,unverified,2.5,,,,https://www.ikongm.com
+1026,IncoNeon,inconeon,,,Unknown,,basic,unverified,2.5,,,,https://www.inconeon.com
+1027,InovaTrade,inovatrade,,,Unknown,,basic,unverified,2.5,,,,https://www.inovatrade.com
+1028,IntegralBank,integralbank,,,Unknown,,basic,unverified,2.5,,,,https://www.integralbank.com
+1029,IntegrityFX,integrityfx,,,Unknown,,basic,unverified,2.5,,,,https://www.integrityfx.com
+1030,Intel FX,intel-fx,,,Unknown,,basic,unverified,2.5,,,,https://www.intelfx.com
+1031,Interbank FX,interbank-fx,,,Unknown,,basic,unverified,2.5,,,,https://www.interbankfx.com
+1032,Intercore Financial,intercore-financial,,,Unknown,,basic,unverified,2.5,,,,https://www.intercorefinancial.com
+1033,InterForex,interforex,,,Unknown,,basic,unverified,2.5,,,,https://www.interforex.com
+1034,Internaxx Bank,internaxx-bank,,,Luxembourg,,basic,unverified,2.5,,,,https://www.internaxx.com
+1035,InvestorsEurope,investorseurope,,,Gibraltar,,basic,unverified,2.5,,,,https://www.investorseurope.com
+1036,InvestTechFX,investtechfx,,,Unknown,,basic,unverified,2.5,,,,https://www.investtechfx.com
+1037,IP Forex,ip-forex,,,Unknown,,basic,unverified,2.5,,,,https://www.ipforex.com
+1038,IS Trading,is-trading,,,Germany,,basic,unverified,2.5,,,,https://www.istrading.de
+1039,1LotSTP,1lotstp,,,Unknown,,basic,unverified,2.5,,,,https://www.1lotstp.com
+1040,1PipFix,1pipfix,,,Unknown,,basic,unverified,2.5,,,,https://www.1pipfix.com
+1041,4RunnerForex,4runnerforex,,,Unknown,,basic,unverified,2.5,,,,https://www.4runnerforex.com
+1042,4XDG,4xdg,,,Unknown,,basic,unverified,2.5,,,,https://www.4xdg.com
+1043,4XP,4xp,,,Unknown,,basic,unverified,2.5,,,,https://www.4xp.com
+1044,AAAECN,aaaecn,,,Unknown,,basic,unverified,2.5,,,,https://www.aaaecn.com
+1045,Abshire Smith,abshire-smith,,,Unknown,,basic,unverified,2.5,,,,https://www.abshire-smith.com
+1046,ACFX,acfx,,,Unknown,,basic,unverified,2.5,,,,https://www.acfx.com
+1047,AFB FX,afb-fx,,,Unknown,,basic,unverified,2.5,,,,https://www.afbfx.com
+1048,Forex Capital Inc,forex-capital-inc,,,Unknown,,basic,unverified,2.4,,,,https://www.forexcapital.com
+1049,Forex Day Trading,forex-day-trading,,,Unknown,,basic,unverified,2.4,,,,https://www.forexdaytrading.com
+1050,Forex EuroClub,forex-euroclub,,,Unknown,,basic,unverified,2.4,,,,https://www.forexeuroclub.com
+1051,Forex Ltd,forex-ltd,,,Unknown,,basic,unverified,2.4,,,,https://www.forexltd.com
+1052,FOREX MMCIS Group,forex-mmcis-group,,,Unknown,,basic,unverified,2.4,,,,https://www.forex-mmcis.com
+1053,Forex Trading First,forex-trading-first,,,Unknown,,basic,unverified,2.4,,,,https://www.forextradingfirst.com
+1054,Forex Trading Scout,forex-trading-scout,,,Unknown,,basic,unverified,2.4,,,,https://www.forextradingscout.com
+1055,FOREX Ukraine,forex-ukraine,,,Ukraine,,basic,unverified,2.4,,,,https://www.forexua.com
+1056,Forex WebTrader,forex-webtrader,,,Unknown,,basic,unverified,2.4,,,,https://www.forexwebtrader.com
+1057,forex47,forex47,,,Unknown,,basic,unverified,2.4,,,,https://www.forex47.com
+1058,FxPulp,fxpulp,,,Unknown,,basic,unverified,2.4,,,,https://www.fxpulp.com
+1059,Forex Arabia,forex-arabia,,,UAE,,basic,unverified,2.4,,,,https://www.forex-arabia.com
+1060,Forex AZ,forex-az,,,Unknown,,basic,unverified,2.4,,,,https://www.forex-az.com
+1061,Forex Broker Univell,forex-broker-univell,,,Unknown,,basic,unverified,2.4,,,,https://www.univellbroker.com
+1062,ForexChile,forexchile,,,Chile,,basic,unverified,2.4,,,,https://www.forexchile.cl
+1063,ForexCT,forexct,,,Unknown,,basic,unverified,2.4,,,,https://www.forexct.com
+1064,ForexElite,forexelite,,,Unknown,,basic,unverified,2.4,,,,https://www.forexelite.com
+1065,Forexite,forexite,,,Unknown,,basic,unverified,2.4,,,,https://www.forexite.com
+1066,ForexLine,forexline,,,Unknown,,basic,unverified,2.4,,,,https://www.forexline.com
+1067,ForInvest Group,forinvest-group,,,Unknown,,basic,unverified,2.4,,,,https://www.forinvestgroup.com
+1068,FrontStocks,frontstocks,,,Unknown,,basic,unverified,2.4,,,,https://www.frontstocks.com
+1069,FX Clearing,fx-clearing,,,Unknown,,basic,unverified,2.4,,,,https://www.fxclearing.com
+1070,Fx Dialogue,fx-dialogue,,,Unknown,,basic,unverified,2.4,,,,https://www.fxdialogue.com
+1071,Fx Direkt Bank,fx-direkt-bank,,,Germany,,basic,unverified,2.4,,,,https://www.fxdirekt.de
+1072,FX Grant,fx-grant,,,Unknown,,basic,unverified,2.4,,,,https://www.fxgrant.com
+1073,FXBEST,fxbest,,,Unknown,,basic,unverified,2.4,,,,https://www.fxbests.com
+1074,FxBroker,fxbroker,,,Unknown,,basic,unverified,2.4,,,,https://www.fxbroker.com
+1075,FXcast,fxcast,,,Unknown,,basic,unverified,2.4,,,,https://www.fxcast.com
+1076,FXCH,fxch,,,Unknown,,basic,unverified,2.4,,,,https://www.fxch.com
+1077,FxCompany,fxcompany,,,Unknown,,basic,unverified,2.4,,,,https://www.fxcompany.net
+1078,FXD24,fxd24,,,Unknown,,basic,unverified,2.4,,,,https://www.fxd24.com
+1079,FXM Broker Group,fxm-broker-group,,,Unknown,,basic,unverified,2.4,,,,https://www.fxm.com
+1080,FXTSwiss,fxtswiss,,,Switzerland,,basic,unverified,2.4,,,,https://www.fxtswiss.com
+1081,FxPrice,fxprice,,,Unknown,,basic,unverified,2.4,,,,https://www.fxprice.com
+1082,GainScope,gainscope,,,Unknown,,basic,unverified,2.4,,,,https://www.gainscope.com
+1083,Gbtrade International,gbtrade-international,,,Unknown,,basic,unverified,2.4,,,,https://www.gbtrade.com
+1084,Genforex,genforex,,,Unknown,,basic,unverified,2.4,,,,https://www.genforex.com
+1085,GET Financial,get-financial,,,Australia,,basic,unverified,2.4,,,,https://www.getfinancial.com.au
+1086,GFC Global Financial Contracts,gfc-global-financial-contracts,,,Unknown,,basic,unverified,2.4,,,,https://www.gfcmercados.com
+1087,Global Clearing Group,global-clearing-group,,,Unknown,,basic,unverified,2.4,,,,https://www.globalclearinggroup.com
+1088,Global Forex,global-forex,,,Unknown,,basic,unverified,2.4,,,,https://www.globalforex.com
+1089,Global Trading Stations,global-trading-stations,,,Unknown,,basic,unverified,2.4,,,,https://www.globaltradestations.com
+1090,GloCap Markets,glocap-markets,,,Unknown,,basic,unverified,2.4,,,,https://www.glocapmarkets.com
+1091,GO4X,go4x,,,Unknown,,basic,unverified,2.4,,,,https://www.go4x.com
+1092,Cobra Trading,cobra-trading,,USA,USA,FINRA | SEC (USA) | SIPC,enriched,unverified,2.3,,,DAS Trader Pro | Venom Trading Platform | Sterling Trader Pro,https://www.cobratrading.com
+1093,BrokerCreditService Cyprus,brokercreditservice-cyprus,,,Cyprus,,basic,unverified,2.3,,,,https://www.bcscyprus.com
+1094,Cambiste,cambiste,,,Unknown,,basic,unverified,2.3,,,,https://www.cambiste.com
+1095,Caya Capital Markets,caya-capital-markets,,,Unknown,,basic,unverified,2.3,,,,https://www.cayacapital.com
+1096,CFD Market,cfd-market,,,Unknown,,basic,unverified,2.3,,,,https://www.cfd-market.com
+1097,Everybody FX,everybody-fx,,,Unknown,,basic,unverified,2.3,,,,https://www.everybodyfx.com
+1098,Baron Forex,baron-forex,,,Unknown,,basic,unverified,2.3,,,,https://www.baronforex.com
+1099,Bearman Forex,bearman-forex,,,Unknown,,basic,unverified,2.3,,,,https://www.bearmanforex.com
+1100,Berkeley Bahamas,berkeley-bahamas,,,Bahamas,,basic,unverified,2.3,,,,https://www.berkeleybahamas.com
+1101,bforex,bforex,,,Unknown,,basic,unverified,2.3,,,,https://www.bforex.com
+1102,BPForex,bpforex,,,Unknown,,basic,unverified,2.3,,,,https://www.bpforex.com
+1103,Broco,broco,,,Unknown,,basic,unverified,2.3,,,,https://www.brocompany.com
+1104,Brokbusinessbank,brokbusinessbank,,,Unknown,,basic,unverified,2.3,,,,https://www.brokbusinessbank.com
+1105,BrokerCreditService Cyprus,brokercreditservice-cyprus,,,Cyprus,,basic,unverified,2.3,,,,https://www.bcscyprus.com
+1106,Cambiste,cambiste,,,Unknown,,basic,unverified,2.3,,,,https://www.cambiste.com
+1107,Cantor FX,cantor-fx,,,United States,,basic,unverified,2.3,,,,https://www.cantor.com
+1108,Capital Group LIFE,capital-group-life,,,Unknown,,basic,unverified,2.3,,,,https://www.forexmarketgates.com
+1109,Capital Standard Corporation,capital-standard-corporation,,,Unknown,,basic,unverified,2.3,,,,https://www.capitalstandard.com
+1110,Caya Capital Markets,caya-capital-markets,,,Unknown,,basic,unverified,2.3,,,,https://www.cayacapital.com
+1111,CFD Market,cfd-market,,,Unknown,,basic,unverified,2.3,,,,https://www.cfd-market.com
+1112,Cfx Intermediazioni,cfx-intermediazioni,,,Italy,,basic,unverified,2.3,,,,https://www.cfxintermediazioni.it
+1113,Charter FX,charter-fx,,,Unknown,,basic,unverified,2.3,,,,https://www.charterfx.com
+1114,CKFX,ckfx,,,Unknown,,basic,unverified,2.3,,,,https://www.ckfx.com
+1115,Cobra Trading,cobra-trading,,,United States,,basic,unverified,2.3,,,,https://www.cobratrading.com
+1116,Colosseum Financial Markets,colosseum-financial-markets,,,Czech Republic,,basic,unverified,2.3,,,,https://www.colosseum.cz
+1117,CompassFX,compassfx,,,Unknown,,basic,unverified,2.3,,,,https://www.compassfx.com
+1118,Corsa Capital Investments,corsa-capital-investments,,,Unknown,,basic,unverified,2.3,,,,https://www.corsacapital.com
+1119,Currency Trading USA,currency-trading-usa,,,United States,,basic,unverified,2.3,,,,https://www.currencytradingusa.com
+1120,DAB Bank,dab-bank,,,Germany,,basic,unverified,2.3,,,,https://www.dab-bank.de
+1121,Day Trade Austria,day-trade-austria,,,Austria,,basic,unverified,2.3,,,,https://www.daytradeaustria.com
+1122,dbFX,dbfx,,,Unknown,,basic,unverified,2.3,,,,https://www.dbfx.com
+1123,DCM Forex,dcm-forex,,,Unknown,,basic,unverified,2.3,,,,https://www.dcmforex.com
+1124,Dealing City,dealing-city,,,Unknown,,basic,unverified,2.3,,,,https://www.dealingcity.com
+1125,Dealing24,dealing24,,,Unknown,,basic,unverified,2.3,,,,https://www.dealing24.com
+1126,DfxTrade,dfxtrade,,,Unknown,,basic,unverified,2.3,,,,https://www.dfxtrade.com
+1127,DLC ForexTrade,dlc-forextrade,,,Unknown,,basic,unverified,2.3,,,,https://www.dlcforextrade.com
+1128,ECI Invest,eci-invest,,,Unknown,,basic,unverified,2.3,,,,https://www.eci-invest.com
+1129,ECN Market,ecn-market,,,Unknown,,basic,unverified,2.3,,,,https://www.ecnmarket.com
+1130,ECN Trade Capital Market,ecn-trade-capital-market,,,Unknown,,basic,unverified,2.3,,,,https://www.ecntrade.com
+1131,ECNpro,ecnpro,,,Unknown,,basic,unverified,2.3,,,,https://www.ecnpro.com
+1132,EFX Financial,efx-financial,,,Unknown,,basic,unverified,2.3,,,,https://www.efxfinancial.com
+1133,ElanFX,elanfx,,,Germany,,basic,unverified,2.3,,,,https://www.elanfx.de
+1134,Enfinium International,enfinium-international,,,Australia,,basic,unverified,2.3,,,,https://www.enfinium.com.au
+1135,Equilor Trader,equilor-trader,,,Hungary,,basic,unverified,2.3,,,,https://www.equilor.hu
+1136,EuroForex,euroforex,,,Italy,,basic,unverified,2.3,,,,https://www.euroforex.it
+1137,Everybody FX,everybody-fx,,,Unknown,,basic,unverified,2.3,,,,https://www.everybodyfx.com
+1138,FinForce,finforce,,,Unknown,,basic,unverified,2.3,,,,https://www.finforce.com
+1139,FinFx Trading,finfx-trading,,,Finland,,basic,unverified,2.3,,,,https://www.finfx.fi
+1140,finlot,finlot,,,Unknown,,basic,unverified,2.3,,,,https://www.finlot.com
+1141,Foremost Forex,foremost-forex,,,Unknown,,basic,unverified,2.3,,,,https://www.foremostforex.com
+1142,AFT FX,aft-fx,,,Unknown,,basic,unverified,2.2,,,,https://www.aftfx.com
+1143,ARK World Market,ark-world-market,,,Unknown,,basic,unverified,2.2,,,,https://www.arkworldmarket.com
+1144,Guide Investimentos,guide-investimentos,,,Brazil,,basic,unverified,2.2,,,,https://www.guide.com.br
+1145,Orama,orama,,,Brazil,,basic,unverified,2.2,,,,https://www.orama.com.br
+1146,CM Capital,cm-capital,,,Brazil,,basic,unverified,2.2,,,,https://www.cmcapital.com.br
+1147,Agora Investimentos,agora-investimentos,,,Brazil,,basic,unverified,2.2,,,,https://www.agorainvestimentos.com.br
+1148,Itau Corretora,itau-corretora,,,Brazil,,basic,unverified,2.2,,,,https://www.itaucorretora.com.br
+1149,Bradesco Corretora,bradesco-corretora,,,Brazil,,basic,unverified,2.2,,,,https://www.bradescocorretora.com.br
+1150,Santander Corretora,santander-corretora,,,Brazil,,basic,unverified,2.2,,,,https://www.santandercorretora.com.br
+1151,Banrisul Corretora,banrisul-corretora,,,Brazil,,basic,unverified,2.2,,,,https://www.banrisulcorretora.com.br
+1152,Warren Investimentos,warren-investimentos,,,Brazil,,basic,unverified,2.2,,,,https://warren.com.br
+1153,Avenue Securities,avenue-securities,,,Brazil,,basic,unverified,2.2,,,,https://avenue.us
+1154,Stake Brazil,stake-brazil,,,Brazil,,basic,unverified,2.2,,,,https://hellostake.com/br
+1155,Banchile Inversiones,banchile-inversiones,,,Chile,,basic,unverified,2.2,,,,https://ww2.banchileinversiones.cl
+1156,Renta 4 Chile,renta-4-chile,,,Chile,,basic,unverified,2.2,,,,https://www.renta4.cl
+1157,LarrainVial,larrainvial,,,Chile,,basic,unverified,2.2,,,,https://www.larrainvial.com
+1158,BICE Inversiones,bice-inversiones,,,Chile,,basic,unverified,2.2,,,,https://www.biceinversiones.cl
+1159,Scotia Corredora de Bolsa Chile,scotia-corredora-chile,,,Chile,,basic,unverified,2.2,,,,https://www.scotiabankchile.cl
+1160,GBM Mexico,gbm-mexico,,,Mexico,,basic,unverified,2.2,,,,https://gbm.com
+1161,Kuspit,kuspit,,,Mexico,,basic,unverified,2.2,,,,https://kuspit.com
+1162,Actinver,actinver,,,Mexico,,basic,unverified,2.2,,,,https://www.actinver.com
+1163,Vector Casa de Bolsa,vector-casa-de-bolsa,,,Mexico,,basic,unverified,2.2,,,,https://www.vector.com.mx
+1164,Monex Casa de Bolsa,monex-casa-de-bolsa,,,Mexico,,basic,unverified,2.2,,,,https://www.monex.com.mx
+1165,AB Forex Company,ab-forex-company,,,Unknown,,basic,unverified,2.2,,,,https://www.abforex.com
+1166,Ace Koeki,ace-koeki,,,Japan,,basic,unverified,2.2,,,,https://www.acekoeki.co.jp
+1167,actior,actior,,,Germany,,basic,unverified,2.2,,,,https://www.actior.de
+1168,Adrenalin Forex,adrenalin-forex,,,Unknown,,basic,unverified,2.2,,,,https://www.adrenalinforex.com
+1169,Advanced Financial Markets,advanced-financial-markets,,,Unknown,,basic,unverified,2.2,,,,https://www.afm.com
+1170,Advanced Futures,advanced-futures,,,Unknown,,basic,unverified,2.2,,,,https://www.advancedfutures.com
+1171,Advantage Traders Group,advantage-traders-group,,,Unknown,,basic,unverified,2.2,,,,https://www.advantagetraders.com
+1172,AFT FX,aft-fx,,,Unknown,,basic,unverified,2.2,,,,https://www.aftfx.com
+1173,AgenBolsa,agenbolsa,,,Unknown,,basic,unverified,2.2,,,,https://www.agenbolsa.com
+1174,Ajax Financial,ajax-financial,,,Unknown,,basic,unverified,2.2,,,,https://www.ajaxfinancial.com
+1175,Akforex,akforex,,,Unknown,,basic,unverified,2.2,,,,https://www.akforex.com
+1176,Akmos Trade,akmos-trade,,,Unknown,,basic,unverified,2.2,,,,https://www.akmos.com
+1177,Alipes Forex Trading Services,alipes-forex-trading-services,,,Unknown,,basic,unverified,2.2,,,,https://www.alipes.com
+1178,AM Financials,am-financials,,,Unknown,,basic,unverified,2.2,,,,https://www.amfinancials.com
+1179,AMIFOX Brokerhouse,amifox-brokerhouse,,,Unknown,,basic,unverified,2.2,,,,https://www.amifox.com
+1180,ARA Markets,ara-markets,,,Unknown,,basic,unverified,2.2,,,,https://www.aramarkets.com
+1181,Arab Forex Online,arab-forex-online,,,UAE,,basic,unverified,2.2,,,,https://www.arabforexonline.com
+1182,ARK World Market,ark-world-market,,,Unknown,,basic,unverified,2.2,,,,https://www.arkworldmarket.com
+1183,Askobid,askobid,,,Unknown,,basic,unverified,2.2,,,,https://www.askobid.com
+1184,AssistForex,assistforex,,,Unknown,,basic,unverified,2.2,,,,https://www.assistforex.com
+1185,Avivafx,avivafx,,,Unknown,,basic,unverified,2.2,,,,https://www.avivafx.com
+1186,AVS Carter,avs-carter,,,Unknown,,basic,unverified,2.2,,,,https://www.avscarter.com
+1187,Azurite Markets,azurite-markets,,,Unknown,,basic,unverified,2.2,,,,https://www.azuritemarkets.com
+1188,Bacera International,bacera-international,,,Australia,,basic,unverified,2.2,,,,https://www.bacera.com.au
+1189,DBS Vickers,dbs-vickers,,,Singapore,,basic,unverified,2.1,,,,https://www.dbsvickers.com
+1190,Lim & Tan Securities,lim-tan-securities,,,Singapore,,basic,unverified,2.1,,,,https://www.limtan.com.sg
+1191,FSMOne,fsmone,,,Singapore,,basic,unverified,2.1,,,,https://secure.fundsupermart.com
+1192,Saxo Capital Markets Singapore,saxo-capital-markets-singapore,,,Singapore,,basic,unverified,2.1,,,,https://www.home.saxo/en-sg
+1193,Tiger Brokers Singapore,tiger-brokers-singapore,,,Singapore,,basic,unverified,2.1,,,,https://www.tigerbrokers.com.sg
+1194,Futu Singapore,futu-singapore,,,Singapore,,basic,unverified,2.1,,,,https://www.moomoo.com/sg
+1195,Syfe Trade,syfe-trade,,,Singapore,,basic,unverified,2.1,,,,https://www.syfe.com
+1196,Endowus,endowus,,,Singapore,,basic,unverified,2.1,,,,https://endowus.com
+1197,Zerodha,zerodha,,,India,,basic,unverified,2.1,,,,https://zerodha.com
+1198,Upstox,upstox,,,India,,basic,unverified,2.1,,,,https://upstox.com
+1199,Angel One,angel-one,,,India,,basic,unverified,2.1,,,,https://www.angelone.in
+1200,Groww,groww,,,India,,basic,unverified,2.1,,,,https://groww.in
+1201,5paisa,5paisa,,,India,,basic,unverified,2.1,,,,https://www.5paisa.com
+1202,ICICI Direct,icici-direct,,,India,,basic,unverified,2.1,,,,https://www.icicidirect.com
+1203,HDFC Securities,hdfc-securities,,,India,,basic,unverified,2.1,,,,https://www.hdfcsec.com
+1204,Kotak Securities,kotak-securities,,,India,,basic,unverified,2.1,,,,https://www.kotaksecurities.com
+1205,Motilal Oswal,motilal-oswal,,,India,,basic,unverified,2.1,,,,https://www.motilaloswal.com
+1206,Sharekhan,sharekhan,,,India,,basic,unverified,2.1,,,,https://www.sharekhan.com
+1207,Axis Direct,axis-direct,,,India,,basic,unverified,2.1,,,,https://simplehai.axisdirect.in
+1208,IIFL Securities,iifl-securities,,,India,,basic,unverified,2.1,,,,https://www.indiainfoline.com
+1209,Geojit,geojit,,,India,,basic,unverified,2.1,,,,https://www.geojit.com
+1210,Alice Blue,alice-blue,,,India,,basic,unverified,2.1,,,,https://aliceblueonline.com
+1211,Fyers,fyers,,,India,,basic,unverified,2.1,,,,https://fyers.in
+1212,Samco Securities,samco-securities,,,India,,basic,unverified,2.1,,,,https://www.samco.in
+1213,Dhan,dhan,,,India,,basic,unverified,2.1,,,,https://dhan.co
+1214,Paytm Money,paytm-money,,,India,,basic,unverified,2.1,,,,https://www.paytmmoney.com
+1215,Edelweiss Broking,edelweiss-broking,,,India,,basic,unverified,2.1,,,,https://www.edelweiss.in
+1216,Nuvama,nuvama,,,India,,basic,unverified,2.1,,,,https://www.nuvama.com
+1217,Ventura Securities,ventura-securities,,,India,,basic,unverified,2.1,,,,https://www.ventura1.com
+1218,SMC Global,smc-global,,,India,,basic,unverified,2.1,,,,https://www.smcindiaonline.com
+1219,Mastertrust,mastertrust,,,India,,basic,unverified,2.1,,,,https://www.mastertrust.co.in
+1220,Choice Broking,choice-broking,,,India,,basic,unverified,2.1,,,,https://choiceindia.com
+1221,Religare Broking,religare-broking,,,India,,basic,unverified,2.1,,,,https://www.religareonline.com
+1222,Arihant Capital,arihant-capital,,,India,,basic,unverified,2.1,,,,https://www.arihantcapital.com
+1223,Anand Rathi,anand-rathi,,,India,,basic,unverified,2.1,,,,https://www.rathi.com
+1224,JM Financial Services,jm-financial-services,,,India,,basic,unverified,2.1,,,,https://www.jmfinancialservices.in
+1225,XP Investimentos,xp-investimentos,,,Brazil,,basic,unverified,2.1,,,,https://www.xpi.com.br
+1226,BTG Pactual Digital,btg-pactual-digital,,,Brazil,,basic,unverified,2.1,,,,https://www.btgpactualdigital.com
+1227,Rico Investimentos,rico-investimentos,,,Brazil,,basic,unverified,2.1,,,,https://www.rico.com.vc
+1228,Clear Corretora,clear-corretora,,,Brazil,,basic,unverified,2.1,,,,https://www.clear.com.br
+1229,Toro Investimentos,toro-investimentos,,,Brazil,,basic,unverified,2.1,,,,https://www.toroinvestimentos.com.br
+1230,Modalmais,modalmais,,,Brazil,,basic,unverified,2.1,,,,https://www.modalmais.com.br
+1231,NuInvest,nuinvest,,,Brazil,,basic,unverified,2.1,,,,https://www.nuinvest.com.br
+1232,Banco Inter Invest,banco-inter-invest,,,Brazil,,basic,unverified,2.1,,,,https://www.bancointer.com.br
+1233,Genial Investimentos,genial-investimentos-batch6,,,Brazil,,basic,unverified,2.1,,,,https://www.genialinvestimentos.com.br
+1234,Musashi Securities,musashi-securities,,,Japan,,basic,unverified,2,,,,https://www.musashi-sec.co.jp
+1235,Kokusai Securities,kokusai-securities,,,Japan,,basic,unverified,2,,,,https://www.sc.mufg.jp
+1236,Maybank Investment Bank,maybank-investment-bank,,,Malaysia,,basic,unverified,2,,,,https://www.maybank2u.com.my
+1237,Kenanga Investment Bank,kenanga-investment-bank,,,Malaysia,,basic,unverified,2,,,,https://www.kenanga.com.my
+1238,RHB Investment Bank,rhb-investment-bank,,,Malaysia,,basic,unverified,2,,,,https://www.rhbgroup.com
+1239,CGS CIMB Securities,cgs-cimb-securities,,,Malaysia,,basic,unverified,2,,,,https://www.cgscimb.com
+1240,Affin Hwang Investment Bank,affin-hwang-investment-bank,,,Malaysia,,basic,unverified,2,,,,https://www.affinhwang.com
+1241,Hong Leong Investment Bank,hong-leong-investment-bank,,,Malaysia,,basic,unverified,2,,,,https://www.hlib.com.my
+1242,Public Invest,public-invest,,,Malaysia,,basic,unverified,2,,,,https://www.publicinvestbank.com
+1243,UOB Kay Hian Malaysia,uob-kay-hian-malaysia,,,Malaysia,,basic,unverified,2,,,,https://www.uobkayhian.com.my
+1244,Phillip Securities Thailand,phillip-securities-thailand,,,Thailand,,basic,unverified,2,,,,https://www.poems.in.th
+1245,KGI Securities Thailand,kgi-securities-thailand,,,Thailand,,basic,unverified,2,,,,https://www.kgieworld.co.th
+1246,Maybank Securities Thailand,maybank-securities-thailand,,,Thailand,,basic,unverified,2,,,,https://www.maybank-ke.co.th
+1247,Bualuang Securities,bualuang-securities,,,Thailand,,basic,unverified,2,,,,https://www.bualuang.co.th
+1248,Krungsri Securities,krungsri-securities,,,Thailand,,basic,unverified,2,,,,https://www.krungsrisecurities.com
+1249,Finansia Syrus Securities,finansia-syrus-securities,,,Thailand,,basic,unverified,2,,,,https://www.fnsyrus.com
+1250,Yuanta Securities Thailand,yuanta-securities-thailand,,,Thailand,,basic,unverified,2,,,,https://www.yuanta.co.th
+1251,Asia Plus Securities,asia-plus-securities,,,Thailand,,basic,unverified,2,,,,https://www.asiaplus.co.th
+1252,Phillip Securities Indonesia,phillip-securities-indonesia,,,Indonesia,,basic,unverified,2,,,,https://www.poems.co.id
+1253,Mandiri Sekuritas,mandiri-sekuritas,,,Indonesia,,basic,unverified,2,,,,https://www.mandirisekuritas.co.id
+1254,Mirae Asset Sekuritas Indonesia,mirae-asset-sekuritas-indonesia,,,Indonesia,,basic,unverified,2,,,,https://www.miraeasset.co.id
+1255,BNI Sekuritas,bni-sekuritas,,,Indonesia,,basic,unverified,2,,,,https://www.bnisekuritas.co.id
+1256,Indo Premier Sekuritas,indo-premier-sekuritas,,,Indonesia,,basic,unverified,2,,,,https://www.indopremier.com
+1257,Maybank Sekuritas Indonesia,maybank-sekuritas-indonesia,,,Indonesia,,basic,unverified,2,,,,https://www.maybank-ke.co.id
+1258,Trimegah Sekuritas,trimegah-sekuritas,,,Indonesia,,basic,unverified,2,,,,https://www.trimegah.com
+1259,MNC Sekuritas,mnc-sekuritas,,,Indonesia,,basic,unverified,2,,,,https://www.mncsekuritas.id
+1260,Samuel Sekuritas,samuel-sekuritas,,,Indonesia,,basic,unverified,2,,,,https://www.samuel.co.id
+1261,Panin Sekuritas,panin-sekuritas,,,Indonesia,,basic,unverified,2,,,,https://www.pans.co.id
+1262,BCA Sekuritas,bca-sekuritas,,,Indonesia,,basic,unverified,2,,,,https://www.bcasekuritas.co.id
+1263,Phillip Securities Hong Kong,phillip-securities-hong-kong,,,Hong Kong,,basic,unverified,2,,,,https://www.poems.com.hk
+1264,Bright Smart Securities,bright-smart-securities,,,Hong Kong,,basic,unverified,2,,,,https://www.bsgroup.com.hk
+1265,Futu Securities International,futu-securities-international,,,Hong Kong,,basic,unverified,2,,,,https://www.futuhk.com
+1266,SoFi Hong Kong,sofi-hong-kong,,,Hong Kong,,basic,unverified,2,,,,https://www.sofi.hk
+1267,Chief Securities,chief-securities,,,Hong Kong,,basic,unverified,2,,,,https://www.chiefgroup.com.hk
+1268,Emperor Securities,emperor-securities,,,Hong Kong,,basic,unverified,2,,,,https://www.emperorcapital.com
+1269,Kingston Securities,kingston-securities,,,Hong Kong,,basic,unverified,2,,,,https://www.kingston.com.hk
+1270,Guotai Junan International,guotai-junan-international,,,Hong Kong,,basic,unverified,2,,,,https://www.gtjai.com
+1271,Haitong International,haitong-international,,,Hong Kong,,basic,unverified,2,,,,https://www.htisec.com
+1272,Orient Securities International,orient-securities-international,,,Hong Kong,,basic,unverified,2,,,,https://www.dfzq.com.hk
+1273,China Galaxy International,china-galaxy-international,,,Hong Kong,,basic,unverified,2,,,,https://www.chinastock.com.hk
+1274,Huatai International,huatai-international,,,Hong Kong,,basic,unverified,2,,,,https://www.htsc.com.hk
+1275,Zhongtai International,zhongtai-international,,,Hong Kong,,basic,unverified,2,,,,https://www.ztsc.com.hk
+1276,CICC Hong Kong,cicc-hong-kong,,,Hong Kong,,basic,unverified,2,,,,https://www.cicc.com
+1277,CLSA,clsa,,,Hong Kong,,basic,unverified,2,,,,https://www.clsa.com
+1278,PhillipCapital Singapore,phillipcapital-singapore,,,Singapore,,basic,unverified,2,,,,https://www.phillip.com.sg
+1279,SVS Securities,svs-securities,,,United Kingdom,,basic,unverified,1.9,,,,https://www.svssecurities.com
+1280,Panmure Gordon,panmure-gordon,,,United Kingdom,,basic,unverified,1.9,,,,https://www.panmure.com
+1281,Peel Hunt,peel-hunt,,,United Kingdom,,basic,unverified,1.9,,,,https://www.peelhunt.com
+1282,Numis Securities,numis-securities,,,United Kingdom,,basic,unverified,1.9,,,,https://www.numis.com
+1283,Liberum Capital,liberum-capital,,,United Kingdom,,basic,unverified,1.9,,,,https://www.liberum.com
+1284,Shore Capital Markets,shore-capital-markets,,,United Kingdom,,basic,unverified,1.9,,,,https://www.shorecapmarkets.co.uk
+1285,JMI Brokers,jmi-brokers,,,Unknown,,basic,unverified,1.9,,,,https://www.jmibrokers.com
+1286,Juno Markets Prime,juno-markets-prime,,,Unknown,,basic,unverified,1.9,,,,https://www.junomarkets.com
+1287,KAB Strategy,kab-strategy,,,Unknown,,basic,unverified,1.9,,,,https://www.kabonline.com
+1288,KGI Futures,kgi-futures,,,Taiwan,,basic,unverified,1.9,,,,https://www.kgifutures.com
+1289,KGI Asia,kgi-asia,,,Hong Kong,,basic,unverified,1.9,,,,https://www.kgieworld.com
+1290,KVB Kunlun,kvb-kunlun,,,Hong Kong,,basic,unverified,1.9,,,,https://www.kvbkunlun.com
+1291,KVB Global Capital,kvb-global-capital,,,Hong Kong,,basic,unverified,1.9,,,,https://www.kvbgc.com
+1292,London FX,london-fx,,,United Kingdom,,basic,unverified,1.9,,,,https://www.londonfx.com
+1293,Man Financial,man-financial,,,United Kingdom,,basic,unverified,1.9,,,,https://www.man.com
+1294,Mizuho Securities,mizuho-securities,,,Japan,,basic,unverified,1.9,,,,https://www.mizuho-sc.com
+1295,Money Partners,money-partners,,,Japan,,basic,unverified,1.9,,,,https://www.moneypartners.co.jp
+1296,Monecor London,monecor-london,,,United Kingdom,,basic,unverified,1.9,,,,https://www.monecor.com
+1297,NatWest Markets,natwest-markets,,,United Kingdom,,basic,unverified,1.9,,,,https://www.natwestmarkets.com
+1298,Nomura Securities,nomura-securities,,,Japan,,basic,unverified,1.9,,,,https://www.nomura.com
+1299,Okasan Online Securities,okasan-online-securities,,,Japan,,basic,unverified,1.9,,,,https://www.okasan-online.co.jp
+1300,Okasan Securities,okasan-securities,,,Japan,,basic,unverified,1.9,,,,https://www.okasan.co.jp
+1301,Phillip Securities Japan,phillip-securities-japan,,,Japan,,basic,unverified,1.9,,,,https://www.phillip.co.jp
+1302,Rakuten Securities Japan,rakuten-securities-japan,,,Japan,,basic,unverified,1.9,,,,https://www.rakuten-sec.co.jp
+1303,SBI Securities,sbi-securities,,,Japan,,basic,unverified,1.9,,,,https://www.sbisec.co.jp
+1304,SMBC Nikko Securities,smbc-nikko-securities,,,Japan,,basic,unverified,1.9,,,,https://www.smbcnikko.co.jp
+1305,Sony Bank FX,sony-bank-fx,,,Japan,,basic,unverified,1.9,,,,https://moneykit.net
+1306,Toyo Securities,toyo-securities,,,Japan,,basic,unverified,1.9,,,,https://www.toyo-sec.co.jp
+1307,Yutaka Trusty Securities,yutaka-trusty-securities,,,Japan,,basic,unverified,1.9,,,,https://www.yutaka-trusty.co.jp
+1308,Mitsubishi UFJ Morgan Stanley Securities,mitsubishi-ufj-morgan-stanley-securities,,,Japan,,basic,unverified,1.9,,,,https://www.sc.mufg.jp
+1309,Daiwa Securities,daiwa-securities,,,Japan,,basic,unverified,1.9,,,,https://www.daiwa.jp
+1310,Tokai Tokyo Securities,tokai-tokyo-securities,,,Japan,,basic,unverified,1.9,,,,https://www.tokaitokyo.co.jp
+1311,Fukuoka Financial Group Securities,fukuoka-financial-group-securities,,,Japan,,basic,unverified,1.9,,,,https://www.ffg-sec.co.jp
+1312,Matsui FX,matsui-fx,,,Japan,,basic,unverified,1.9,,,,https://fx.matsui.co.jp
+1313,PayPay Securities,paypay-securities,,,Japan,,basic,unverified,1.9,,,,https://www.paypay-sec.co.jp
+1314,LINE FX,line-fx,,,Japan,,basic,unverified,1.9,,,,https://line-fx.com
+1315,SBI Neotrade Securities,sbi-neotrade-securities,,,Japan,,basic,unverified,1.9,,,,https://www.sbineotrade.jp
+1316,GMO Coin FX,gmo-coin-fx,,,Japan,,basic,unverified,1.9,,,,https://coin.z.com
+1317,SBI VC Trade,sbi-vc-trade,,,Japan,,basic,unverified,1.9,,,,https://www.sbivc.co.jp
+1318,SBI Liquidity Market,sbi-liquidity-market,,,Japan,,basic,unverified,1.9,,,,https://www.sbilm.co.jp
+1319,Toyota Securities,toyota-securities,,,Japan,,basic,unverified,1.9,,,,https://www.toyota-sec.co.jp
+1320,Hirogin Securities,hirogin-securities,,,Japan,,basic,unverified,1.9,,,,https://www.hirogin-sec.co.jp
+1321,Kyokuto Securities,kyokuto-securities,,,Japan,,basic,unverified,1.9,,,,https://www.kyokuto-sec.co.jp
+1322,Ichiyoshi Securities,ichiyoshi-securities,,,Japan,,basic,unverified,1.9,,,,https://www.ichiyoshi.co.jp
+1323,Marusan Securities,marusan-securities,,,Japan,,basic,unverified,1.9,,,,https://www.marusan-sec.co.jp
+1324,Tadawul FX,tadawul-fx,,,Saudi Arabia,,basic,unverified,1.8,,,,https://www.tadawulfx.com
+1325,TemplerFX,templerfx,,,Unknown,,basic,unverified,1.8,,,,https://www.templerfx.com
+1326,RBS marketindex,rbs-marketindex,,,United Kingdom,,basic,unverified,1.8,,,,https://www.marketindex.com
+1327,ThinkForex,thinkforex,,,Australia,,basic,unverified,1.8,,,,https://www.thinkforex.com
+1328,Top Star Development,top-star-development,,,Unknown,,basic,unverified,1.8,,,,https://www.topstardev.com
+1329,Trade Club,trade-club,,,Unknown,,basic,unverified,1.8,,,,https://www.tradeclub.com
+1330,Trade Land FX,trade-land-fx,,,Unknown,,basic,unverified,1.8,,,,https://www.tradelandfx.com
+1331,Tradenext Global Markets,tradenext-global-markets,,,United Kingdom,,basic,unverified,1.8,,,,https://www.tradenext.co.uk
+1332,Trading Point,trading-point,,,Cyprus,,basic,unverified,1.8,,,,https://www.trading-point.com
+1333,trading-house.net,trading-house-net,,,Germany,,basic,unverified,1.8,,,,https://www.trading-house.net
+1334,Transworld Futures,transworld-futures,,,USA,,basic,unverified,1.8,,,,https://www.transworldfutures.com
+1335,Trendoks,trendoks,,,Unknown,,basic,unverified,1.8,,,,https://www.trendoks.com
+1336,Tycoon International Trading,tycoon-international-trading,,,Unknown,,basic,unverified,1.8,,,,https://www.tycoonintl.com
+1337,UFXBank,ufxbank,,,Cyprus,,basic,unverified,1.8,,,,https://www.ufxbank.com
+1338,UFXCM Group,ufxcm-group,,,Unknown,,basic,unverified,1.8,,,,https://www.ufxcm.com
+1339,United International Company,united-international-company,,,Unknown,,basic,unverified,1.8,,,,https://www.uicfx.com
+1340,UnicomTrade,unicomtrade,,,Unknown,,basic,unverified,1.8,,,,https://www.unicomtrade.com
+1341,Uni FX,uni-fx,,,Unknown,,basic,unverified,1.8,,,,https://www.uni-fx.com
+1342,Union Forex,union-forex,,,Unknown,,basic,unverified,1.8,,,,https://www.unionforex.com
+1343,Union Pacific Limited,union-pacific-limited,,,Unknown,,basic,unverified,1.8,,,,https://www.unionpacificlimited.com
+1344,United Markets Information Syndicate,united-markets-information-syndicate,,,Russia,,basic,unverified,1.8,,,,https://www.umis.ru
+1345,United World Capital,united-world-capital,,,Unknown,,basic,unverified,1.8,,,,https://www.uwcfx.com
+1346,UnitedForex,unitedforex,,,Unknown,,basic,unverified,1.8,,,,https://www.unitedforex.com
+1347,vCap FX,vcap-fx,,,Unknown,,basic,unverified,1.8,,,,https://www.vcapfx.com
+1348,Vinson Financials,vinson-financials,,,Cyprus,,basic,unverified,1.8,,,,https://www.vinsonfinancials.com
+1349,Westbury Capital,westbury-capital,,,Unknown,,basic,unverified,1.8,,,,https://www.westburycapital.com
+1350,WSD Financial,wsd-financial,,,New Zealand,,basic,unverified,1.8,,,,https://www.wsdfinancial.co.nz
+1351,Zecco Forex,zecco-forex,,,USA,,basic,unverified,1.8,,,,https://www.zecco.com
+1352,All Options International,all-options-international,,,Netherlands,,basic,unverified,1.8,,,,https://www.alloptions.com
+1353,BIP Trading,bip-trading,,,Unknown,,basic,unverified,1.8,,,,https://www.bip-trading.com
+1354,BNP Paribas Arbitrage,bnp-paribas-arbitrage,,,France,,basic,unverified,1.8,,,,https://globalmarkets.cib.bnpparibas
+1355,Morgan Stanley Institutional Securities,morgan-stanley-institutional-securities,,,USA,,basic,unverified,1.8,,,,https://www.morganstanley.com
+1356,Susquehanna International Securities,susquehanna-international-securities,,,USA,,basic,unverified,1.8,,,,https://sig.com
+1357,Aurel BGC,aurel-bgc,,,France,,basic,unverified,1.8,,,,https://www.aurel-bgc.com
+1358,HPC Trading,hpc-trading,,,Unknown,,basic,unverified,1.8,,,,https://www.hpc.com
+1359,Oddo Securities,oddo-securities,,,France,,basic,unverified,1.8,,,,https://www.oddo-bhf.com
+1360,Newedge,newedge,,,France,,basic,unverified,1.8,,,,https://www.newedge.com
+1361,ABN AMRO Clearing,abn-amro-clearing,,,Netherlands,,basic,unverified,1.8,,,,https://www.abnamroclearing.com
+1362,ADM Investor Services International,adm-investor-services-international,,,United Kingdom,,basic,unverified,1.8,,,,https://www.admisi.com
+1363,INTL FCStone Financial,intl-fcstone-financial,,,USA,,basic,unverified,1.8,,,,https://www.stonex.com
+1364,Marex Spectron,marex-spectron,,,United Kingdom,,basic,unverified,1.8,,,,https://www.marex.com
+1365,ED&F Man Capital Markets,edf-man-capital-markets,,,United Kingdom,,basic,unverified,1.8,,,,https://www.edfmancapital.com
+1366,INTL FCStone Markets,intl-fcstone-markets,,,USA,,basic,unverified,1.8,,,,https://www.stonex.com
+1367,Berkeley Futures,berkeley-futures,,,United Kingdom,,basic,unverified,1.8,,,,https://www.berkeleyfutures.com
+1368,NTB FX,ntb-fx,,,Unknown,,basic,unverified,1.7,,,,https://www.ntbfx.com
+1369,OKT FX,okt-fx,,,Unknown,,basic,unverified,1.7,,,,https://www.oktfx.com
+1370,Open E Cry,open-e-cry,,,USA,,basic,unverified,1.7,,,,https://www.openecry.com
+1371,Osiris FX,osiris-fx,,,Unknown,,basic,unverified,1.7,,,,https://www.osirisfx.com
+1372,Patria Forex,patria-forex,,,Czech Republic,,basic,unverified,1.7,,,,https://www.patriaforex.cz
+1373,PFGBEST,pfgbest,,,USA,,basic,unverified,1.7,,,,https://www.pfgbest.com
+1374,Phi Capital Management,phi-capital-management,,,Unknown,,basic,unverified,1.7,,,,https://www.phicapital.com
+1375,Pipfixed,pipfixed,,,Unknown,,basic,unverified,1.7,,,,https://www.pipfixed.com
+1376,PIPTRADE,piptrade,,,Unknown,,basic,unverified,1.7,,,,https://www.piptrade.com
+1377,Premier Investments FXPremier,premier-investments-fxpremier,,,Unknown,,basic,unverified,1.7,,,,https://www.fxpremier.com
+1378,PrimeDesk,primedesk,,,Unknown,,basic,unverified,1.7,,,,https://www.primedesk.com
+1379,ProfiForex,profiforex,,,Unknown,,basic,unverified,1.7,,,,https://www.profiforex.com
+1380,ProFinanceService,profinanceservice,,,Unknown,,basic,unverified,1.7,,,,https://www.profinanceservice.com
+1381,Providencial FX,providencial-fx,,,Unknown,,basic,unverified,1.7,,,,https://www.providencialfx.com
+1382,PSS Forex,pss-forex,,,Unknown,,basic,unverified,1.7,,,,https://www.pssforex.com
+1383,QTrade GmbH,qtrade-gmbh,,,Germany,,basic,unverified,1.7,,,,https://www.qtrade.de
+1384,Quant Securities,quant-securities,,,Australia,,basic,unverified,1.7,,,,https://www.quantsecurities.com.au
+1385,RBC Forex,rbc-forex,,,Russia,,basic,unverified,1.7,,,,https://www.rbcforex.ru
+1386,Real Stream Trading,real-stream-trading,,,Unknown,,basic,unverified,1.7,,,,https://www.realstreamtrading.com
+1387,Real Trade Group,real-trade-group,,,Latvia,,basic,unverified,1.7,,,,https://www.realtrade.lv
+1388,RestFX,restfx,,,Unknown,,basic,unverified,1.7,,,,https://www.restfx.com
+1389,Rietumu Trading,rietumu-trading,,,Latvia,,basic,unverified,1.7,,,,https://www.rietumu.com
+1390,Rinkost Financial Company,rinkost-financial-company,,,Russia,,basic,unverified,1.7,,,,https://www.rinkost.ru
+1391,Robbins Trading Company,robbins-trading-company,,,USA,,basic,unverified,1.7,,,,https://www.robbinstrading.com
+1392,RoyalCM,royalcm,,,Unknown,,basic,unverified,1.7,,,,https://www.royalcm.com
+1393,RTFX,rtfx,,,Unknown,,basic,unverified,1.7,,,,https://www.rtfx.com
+1394,Russian Dealing Center,russian-dealing-center,,,Russia,,basic,unverified,1.7,,,,https://www.rdc.ru
+1395,Securities Inc 121,securities-inc-121,,,Unknown,,basic,unverified,1.7,,,,https://www.121sec.com
+1396,Sembank,sembank,,,Russia,,basic,unverified,1.7,,,,https://www.sembank.ru
+1397,ServisInform,servisinform,,,Russia,,basic,unverified,1.7,,,,https://www.servisinform.ru
+1398,SetForex,setforex,,,Unknown,,basic,unverified,1.7,,,,https://www.setforex.com
+1399,Skyline Brokers,skyline-brokers,,,Unknown,,basic,unverified,1.7,,,,https://www.skylinebrokers.com
+1400,Smart Live Markets,smart-live-markets,,,Unknown,,basic,unverified,1.7,,,,https://www.smartlivemarkets.com
+1401,Smart Trade FX,smart-trade-fx,,,Unknown,,basic,unverified,1.7,,,,https://www.smarttradefx.com
+1402,SparenFX,sparenfx,,,Unknown,,basic,unverified,1.7,,,,https://www.sparenfx.com
+1403,Spot Trader,spot-trader,,,Unknown,,basic,unverified,1.7,,,,https://www.spottrader.com
+1404,STRATO Markets,strato-markets,,,Unknown,,basic,unverified,1.7,,,,https://www.stratomarkets.com
+1405,Sunbird Trading,sunbird-trading,,,Unknown,,basic,unverified,1.7,,,,https://www.sunbirdfx.com
+1406,SVSFX,svsfx,,,United Kingdom,,basic,unverified,1.7,,,,https://www.svsfx.com
+1407,Swiss Clearing & Trade Management,swiss-clearing-trade-management,,,Switzerland,,basic,unverified,1.7,,,,https://www.sctm.ch
+1408,Swiss e Trade,swiss-e-trade,,,Switzerland,,basic,unverified,1.7,,,,https://www.swissetrade.com
+1409,swissDirekt,swissdirekt,,,Switzerland,,basic,unverified,1.7,,,,https://www.swissdirekt.ch
+1410,Swistrade,swistrade,,,Switzerland,,basic,unverified,1.7,,,,https://www.swistrade.com
+1411,SystemForex,systemforex,,,Unknown,,basic,unverified,1.7,,,,https://www.systemforex.com
+1412,T & K Futures,t-k-futures,,,Unknown,,basic,unverified,1.7,,,,https://www.tkfutures.com
+1413,Ava FX,ava-fx,,,Ireland,,basic,unverified,1.6,,,,https://www.avafx.com
+1414,Black Stone Trading & Investment,black-stone-trading-investment,,,Unknown,,basic,unverified,1.6,,,,https://www.blackstonetrading.com
+1415,City Index Asia,city-index-asia,,,Singapore,,basic,unverified,1.6,,,,https://www.cityindexasia.com
+1416,CME Group,cme-group,,,USA,,basic,unverified,1.6,,,,https://www.cmegroup.com
+1417,Cortal Consors,cortal-consors,,,Germany,,basic,unverified,1.6,,,,https://www.cortalconsors.com
+1418,Delta Stock AD,delta-stock-ad,,,Bulgaria,,basic,unverified,1.6,,,,https://www.deltastock.com
+1419,Dorman FX,dorman-fx,,,USA,,basic,unverified,1.6,,,,https://www.dormantrading.com
+1420,dtFX,dtfx-daniels-trading,,,USA,,basic,unverified,1.6,,,,https://www.danielstrading.com
+1421,Easy Forex,easy-forex,,,Cyprus,,basic,unverified,1.6,,,,https://www.easy-forex.com
+1422,Forex Turkey,forex-turkey,,,Turkey,,basic,unverified,1.6,,,,https://www.forexturkey.com
+1423,ForexPark,forexpark,,,Unknown,,basic,unverified,1.6,,,,https://www.forexpark.com
+1424,Forex Trend,forex-trend,,,Unknown,,basic,unverified,1.6,,,,https://www.forex-trend.com
+1425,FX Solutions Australia,fx-solutions-australia,,,Australia,,basic,unverified,1.6,,,,https://www.fxsolutions.com.au
+1426,HY Markets,hy-markets,,,Unknown,,basic,unverified,1.6,,,,https://www.hymarkets.com
+1427,ISI Group,isi-group,,,USA,,basic,unverified,1.6,,,,https://www.isigroup.com
+1428,IWBank,iwbank,,,Italy,,basic,unverified,1.6,,,,https://www.iwbank.it
+1429,Kabu,kabu,,,Japan,,basic,unverified,1.6,,,,https://www.kabu.com
+1430,Keytrade Pro,keytrade-pro,,,Belgium,,basic,unverified,1.6,,,,https://www.keytradepro.com
+1431,Kharkov Dealing Center,kharkov-dealing-center,,,Ukraine,,basic,unverified,1.6,,,,https://www.ifcforex.com
+1432,Kiev Dealing Center,kiev-dealing-center,,,Ukraine,,basic,unverified,1.6,,,,https://www.kievforex.com
+1433,Lembex Financial Group,lembex-financial-group,,,Unknown,,basic,unverified,1.6,,,,https://www.lembex.com
+1434,Lionstone Investment Services,lionstone-investment-services,,,Unknown,,basic,unverified,1.6,,,,https://www.lionstone.co
+1435,Loyal Group Limited,loyal-group-limited,,,Unknown,,basic,unverified,1.6,,,,https://www.loyalgroup.com
+1436,MadaFX,madafx,,,Unknown,,basic,unverified,1.6,,,,https://www.madafx.com
+1437,Manduca Trading,manduca-trading,,,Unknown,,basic,unverified,1.6,,,,https://www.manducatrading.com
+1438,Mandus Invest,mandus-invest,,,Unknown,,basic,unverified,1.6,,,,https://www.mandusinvest.com
+1439,Marketiva,marketiva,,,Unknown,,basic,unverified,1.6,,,,https://www.marketiva.com
+1440,MercaForex,mercaforex,,,Unknown,,basic,unverified,1.6,,,,https://www.mercaforex.com
+1441,Mezan Trade,mezan-trade,,,Unknown,,basic,unverified,1.6,,,,https://www.mezantrade.com
+1442,MF Global FXA Securities,mf-global-fxa-securities,,,USA,,basic,unverified,1.6,,,,https://www.mfglobal.com
+1443,MF Global Markets,mf-global-markets,,,USA,,basic,unverified,1.6,,,,https://www.mfglobal.com
+1444,Mirus FX,mirus-fx,,,USA,,basic,unverified,1.6,,,,https://www.mirusfutures.com
+1445,Monex International Investments,monex-international-investments,,,USA,,basic,unverified,1.6,,,,https://www.monex.com
+1446,Murphy & Williams Financial Group,murphy-williams-financial-group,,,Unknown,,basic,unverified,1.6,,,,https://www.murphywilliams.com
+1447,MVP Financial,mvp-financial,,,Unknown,,basic,unverified,1.6,,,,https://www.mvpfinancial.com
+1448,NatWest Stockbrokers,natwest-stockbrokers,,,United Kingdom,,basic,unverified,1.6,,,,https://www.natweststockbrokers.com
+1449,Nefteprombank,nefteprombank,,,Russia,,basic,unverified,1.6,,,,https://www.nefteprombank.ru
+1450,New Era Financial Group,new-era-financial-group,,,Unknown,,basic,unverified,1.6,,,,https://www.newerafinancial.com
+1451,North West Financial Broker,north-west-financial-broker,,,Unknown,,basic,unverified,1.6,,,,https://www.nwfb.com
+1452,Norvik Bank,norvik-bank,,,Latvia,,basic,unverified,1.6,,,,https://www.norvik.eu
+1453,Prostocks,prostocks,,,India,,basic,unverified,1.5,,,,https://www.prostocks.com
+1454,SAS Online,sas-online,,,India,,basic,unverified,1.5,,,,https://www.sasonline.in
+1455,Wisdom Capital,wisdom-capital,,,India,,basic,unverified,1.5,,,,https://www.wisdomcapital.in
+1456,Tradejini,tradejini,,,India,,basic,unverified,1.5,,,,https://www.tradejini.com
+1457,Goodwill Wealth,goodwill-wealth,,,India,,basic,unverified,1.5,,,,https://www.gwcindia.in
+1458,Jainam Broking,jainam-broking,,,India,,basic,unverified,1.5,,,,https://www.jainam.in
+1459,Marwadi Shares,marwadi-shares,,,India,,basic,unverified,1.5,,,,https://www.marwadionline.com
+1460,Bonanza Portfolio,bonanza-portfolio,,,India,,basic,unverified,1.5,,,,https://www.bonanzaonline.com
+1461,LKP Securities,lkp-securities,,,India,,basic,unverified,1.5,,,,https://www.lkpsec.com
+1462,Monarch Networth Capital,monarch-networth-capital,,,India,,basic,unverified,1.5,,,,https://www.mnclgroup.com
+1463,Globe Capital,globe-capital,,,India,,basic,unverified,1.5,,,,https://www.globecapital.com
+1464,Master Capital Services,master-capital-services,,,India,,basic,unverified,1.5,,,,https://www.mastertrust.co.in
+1465,GEPL Capital,gepl-capital,,,India,,basic,unverified,1.5,,,,https://www.geplcapital.com
+1466,Hensex Securities,hensex-securities,,,India,,basic,unverified,1.5,,,,https://www.hensex.com
+1467,Zebu Trade,zebu-trade,,,India,,basic,unverified,1.5,,,,https://zebuetrade.com
+1468,Wallfort Financial Services,wallfort-financial-services,,,India,,basic,unverified,1.5,,,,https://www.wallfort.com
+1469,Ashika Stock Broking,ashika-stock-broking,,,India,,basic,unverified,1.5,,,,https://www.ashikagroup.com
+1470,Swastika Investmart,swastika-investmart,,,India,,basic,unverified,1.5,,,,https://www.swastika.co.in
+1471,Latin Securities,latin-securities,,,Argentina,,basic,unverified,1.5,,,,https://www.latinsecurities.com
+1472,Allaria Ledesma,allaria-ledesma,,,Argentina,,basic,unverified,1.5,,,,https://www.allaria.com.ar
+1473,SBS Trading,sbs-trading,,,Argentina,,basic,unverified,1.5,,,,https://www.sbs.com.ar
+1474,Inviu,inviu,,,Argentina,,basic,unverified,1.5,,,,https://www.inviu.com
+1475,Bulltick,bulltick,,,USA,,basic,unverified,1.5,,,,https://www.bulltick.com
+1476,XP Asset Management,xp-asset-management,,,Brazil,,basic,unverified,1.5,,,,https://www.xpasset.com.br
+1477,Nova Futura Investimentos,nova-futura-investimentos,,,Brazil,,basic,unverified,1.5,,,,https://www.novafutura.com.br
+1478,Terra Investimentos,terra-investimentos,,,Brazil,,basic,unverified,1.5,,,,https://www.terrainvestimentos.com.br
+1479,Ativa Investimentos,ativa-investimentos,,,Brazil,,basic,unverified,1.5,,,,https://www.ativainvestimentos.com.br
+1480,Planner Corretora,planner-corretora,,,Brazil,,basic,unverified,1.5,,,,https://www.planner.com.br
+1481,Spinelli Corretora,spinelli-corretora,,,Brazil,,basic,unverified,1.5,,,,https://www.spinelli.com.br
+1482,Elite Corretora,elite-corretora,,,Brazil,,basic,unverified,1.5,,,,https://www.eliteinvestimentos.com.br
+1483,Mirae Asset Brasil,mirae-asset-brasil,,,Brazil,,basic,unverified,1.5,,,,https://www.miraeasset.com.br
+1484,SLW Corretora,slw-corretora,,,Brazil,,basic,unverified,1.5,,,,https://www.slw.com.br
+1485,Futura Invest,futura-invest,,,Brazil,,basic,unverified,1.5,,,,https://www.futurainvest.com.br
+1486,Tullett Prebon Brasil,tullett-prebon-brasil,,,Brazil,,basic,unverified,1.5,,,,https://www.tullettprebon.com.br
+1487,Guide Investimentos Corretora,guide-investimentos-corretora,,,Brazil,,basic,unverified,1.5,,,,https://www.guide.com.br
+1488,Modal DTVM,modal-dtvm,,,Brazil,,basic,unverified,1.5,,,,https://www.modalmais.com.br
+1489,Genial Corretora,genial-corretora,,,Brazil,,basic,unverified,1.5,,,,https://www.genialinvestimentos.com.br
+1490,Advanced Currency Markets,advanced-currency-markets,,,Switzerland,,basic,unverified,1.5,,,,https://www.ac-markets.com
+1491,Alpari FS,alpari-fs,,,Saint Vincent and the Grenadines,,basic,unverified,1.5,,,,https://www.alpari.com
+1492,Alpari NZ,alpari-nz,,,New Zealand,,basic,unverified,1.5,,,,https://www.alpari.co.nz
+1493,Alpari UK,alpari-uk,,,United Kingdom,,basic,unverified,1.5,,,,https://www.alpari.co.uk
+1494,Alpari US,alpari-us,,,USA,,basic,unverified,1.5,,,,https://www.alpari-us.com
+1495,Alpha Capital Markets Ltd,alpha-capital-markets-ltd,,,Unknown,,basic,unverified,1.5,,,,https://www.alphacapitalmarkets.com
+1496,Pi Securities,pi-securities,,,Thailand,,basic,unverified,1.4,,,,https://www.pi.financial
+1497,Finansia HERO,finansia-hero,,,Thailand,,basic,unverified,1.4,,,,https://www.fnsyrus.com
+1498,PhillipCapital Thailand Futures,phillipcapital-thailand-futures,,,Thailand,,basic,unverified,1.4,,,,https://www.poems.in.th
+1499,AIRA Securities,aira-securities,,,Thailand,,basic,unverified,1.4,,,,https://www.aira.co.th
+1500,Globlex Securities,globlex-securities,,,Thailand,,basic,unverified,1.4,,,,https://www.globlex.co.th
+1501,Yuanta Futures Thailand,yuanta-futures-thailand,,,Thailand,,basic,unverified,1.4,,,,https://www.yuanta.co.th
+1502,RHB Securities Thailand,rhb-securities-thailand,,,Thailand,,basic,unverified,1.4,,,,https://www.rhbgroup.com
+1503,CGS International Thailand,cgs-international-thailand,,,Thailand,,basic,unverified,1.4,,,,https://www.cgsi.com
+1504,KGI Securities Indonesia,kgi-securities-indonesia,,,Indonesia,,basic,unverified,1.4,,,,https://www.kgieworld.co.id
+1505,CGS International Sekuritas Indonesia,cgs-international-sekuritas-indonesia,,,Indonesia,,basic,unverified,1.4,,,,https://www.cgsi.com
+1506,Sinarmas Sekuritas,sinarmas-sekuritas,,,Indonesia,,basic,unverified,1.4,,,,https://www.sinarmassekuritas.co.id
+1507,NH Korindo Sekuritas,nh-korindo-sekuritas,,,Indonesia,,basic,unverified,1.4,,,,https://www.nhsec.co.id
+1508,Phillip Sekuritas Indonesia,phillip-sekuritas-indonesia,,,Indonesia,,basic,unverified,1.4,,,,https://www.phillip.co.id
+1509,Korea Investment And Sekuritas Indonesia,korea-investment-sekuritas-indonesia,,,Indonesia,,basic,unverified,1.4,,,,https://www.kisi.co.id
+1510,Valbury Sekuritas Indonesia,valbury-sekuritas-indonesia,,,Indonesia,,basic,unverified,1.4,,,,https://www.valburysekuritas.co.id
+1511,Kiwoom Sekuritas Indonesia,kiwoom-sekuritas-indonesia,,,Indonesia,,basic,unverified,1.4,,,,https://www.kiwoom.co.id
+1512,Bahana Sekuritas,bahana-sekuritas,,,Indonesia,,basic,unverified,1.4,,,,https://www.bahanasekuritas.id
+1513,DBS Vickers Sekuritas Indonesia,dbs-vickers-sekuritas-indonesia,,,Indonesia,,basic,unverified,1.4,,,,https://www.dbsvickers.co.id
+1514,Danareksa Sekuritas,danareksa-sekuritas,,,Indonesia,,basic,unverified,1.4,,,,https://www.danareksa.co.id
+1515,Sucor Sekuritas,sucor-sekuritas,,,Indonesia,,basic,unverified,1.4,,,,https://www.sucorsekuritas.com
+1516,Yugen Bertumbuh Sekuritas,yugen-bertumbuh-sekuritas,,,Indonesia,,basic,unverified,1.4,,,,https://www.yugenbertumbuh.com
+1517,Lotus Andalan Sekuritas,lotus-andalan-sekuritas,,,Indonesia,,basic,unverified,1.4,,,,https://www.lotussekuritas.com
+1518,UOB Kay Hian Indonesia,uob-kay-hian-indonesia,,,Indonesia,,basic,unverified,1.4,,,,https://www.uobkayhian.co.id
+1519,Monex Investindo Futures,monex-investindo-futures,,,Indonesia,,basic,unverified,1.4,,,,https://www.mifx.com
+1520,MRG Mega Berjangka,mrg-mega-berjangka,,,Indonesia,,basic,unverified,1.4,,,,https://www.mrgfutures.co.id
+1521,Rifan Financindo Berjangka,rifan-financindo-berjangka,,,Indonesia,,basic,unverified,1.4,,,,https://www.rf-berjangka.com
+1522,Equityworld Futures,equityworld-futures,,,Indonesia,,basic,unverified,1.4,,,,https://www.ewfpro.com
+1523,Solid Gold Berjangka,solid-gold-berjangka,,,Indonesia,,basic,unverified,1.4,,,,https://www.sg-berjangka.com
+1524,Bestprofit Futures,bestprofit-futures,,,Indonesia,,basic,unverified,1.4,,,,https://www.bestprofit-futures.co.id
+1525,HFX International Berjangka,hfx-international-berjangka,,,Indonesia,,basic,unverified,1.4,,,,https://www.hfx.co.id
+1526,Topgrowth Futures,topgrowth-futures,,,Indonesia,,basic,unverified,1.4,,,,https://www.topgrowthfutures.co.id
+1527,Trijaya Pratama Futures,trijaya-pratama-futures,,,Indonesia,,basic,unverified,1.4,,,,https://www.trijayafutures.com
+1528,Phillip Futures Indonesia,phillip-futures-indonesia,,,Indonesia,,basic,unverified,1.4,,,,https://www.phillipfutures.co.id
+1529,Valbury Asia Futures,valbury-asia-futures,,,Indonesia,,basic,unverified,1.4,,,,https://www.valburyfutures.co.id
+1530,Kresna Futures,kresna-futures,,,Indonesia,,basic,unverified,1.4,,,,https://www.kresnafutures.com
+1531,Askap Futures,askap-futures,,,Indonesia,,basic,unverified,1.4,,,,https://www.askapfutures.com
+1532,Soegee Futures,soegee-futures,,,Indonesia,,basic,unverified,1.4,,,,https://www.soegeefutures.com
+1533,Gajah Tunggal Futures,gajah-tunggal-futures,,,Indonesia,,basic,unverified,1.4,,,,https://www.gtfutures.co.id
+1534,Agrodana Futures,agrodana-futures,,,Indonesia,,basic,unverified,1.4,,,,https://www.agrodana-futures.com
+1535,Trust Securities,trust-securities,,,India,,basic,unverified,1.4,,,,https://www.trustsecurities.com
+1536,Shriram Insight,shriram-insight,,,India,,basic,unverified,1.4,,,,https://www.shriraminsight.com
+1537,Aditya Birla Money,aditya-birla-money,,,India,,basic,unverified,1.4,,,,https://www.adityabirlamoney.com
+1538,Prabhudas Lilladher,prabhudas-lilladher,,,India,,basic,unverified,1.4,,,,https://www.plindia.com
+1539,Nirmal Bang,nirmal-bang,,,India,,basic,unverified,1.4,,,,https://www.nirmalbang.com
+1540,TradeSmart,tradesmart,,,India,,basic,unverified,1.4,,,,https://www.tradesmartonline.in
+1541,Hualong Securities,hualong-securities,,,China,,basic,unverified,1.3,,,,https://www.hlzq.com
+1542,Jianghai Securities,jianghai-securities,,,China,,basic,unverified,1.3,,,,https://www.jhzq.com.cn
+1543,Central China Securities,central-china-securities,,,China,,basic,unverified,1.3,,,,https://www.ccnew.com
+1544,First Capital Securities,first-capital-securities,,,China,,basic,unverified,1.3,,,,https://www.firstcapital.com.cn
+1545,China Merchants Securities,china-merchants-securities,,,China,,basic,unverified,1.3,,,,https://www.cmschina.com
+1546,Guoyuan Securities,guoyuan-securities,,,China,,basic,unverified,1.3,,,,https://www.gyzq.com.cn
+1547,Sealand Securities,sealand-securities,,,China,,basic,unverified,1.3,,,,https://www.sealandsec.com
+1548,Sinolink Securities,sinolink-securities,,,China,,basic,unverified,1.3,,,,https://www.gjzq.com.cn
+1549,Founder CIFCO Futures,founder-cifco-futures,,,China,,basic,unverified,1.3,,,,https://www.founderfu.com
+1550,CITIC Futures,citic-futures,,,China,,basic,unverified,1.3,,,,https://www.citicsf.com
+1551,Nanhua Futures,nanhua-futures,,,China,,basic,unverified,1.3,,,,https://www.nanhua.net
+1552,Yongan Futures,yongan-futures,,,China,,basic,unverified,1.3,,,,https://www.yafco.com
+1553,Galaxy Futures,galaxy-futures,,,China,,basic,unverified,1.3,,,,https://www.yhqh.com.cn
+1554,Huatai Futures,huatai-futures,,,China,,basic,unverified,1.3,,,,https://www.htfc.com
+1555,Guotai Junan Futures,guotai-junan-futures,,,China,,basic,unverified,1.3,,,,https://www.gtjaqh.com
+1556,SDIC Essence Futures,sdic-essence-futures,,,China,,basic,unverified,1.3,,,,https://www.essence.com.cn
+1557,Orient Futures,orient-futures,,,China,,basic,unverified,1.3,,,,https://www.orientfutures.com
+1558,Sucden Financial Asia,sucden-financial-asia,,,Singapore,,basic,unverified,1.3,,,,https://www.sucdenfinancial.com
+1559,ADM Investor Services,adm-investor-services,,,USA,,basic,unverified,1.3,,,,https://www.admis.com
+1560,Phillip Futures Singapore,phillip-futures-singapore,,,Singapore,,basic,unverified,1.3,,,,https://www.phillipfutures.com.sg
+1561,Straits Financial Futures,straits-financial-futures,,,Singapore,,basic,unverified,1.3,,,,https://www.straitsfinancial.com
+1562,Phillip Nova Futures,phillip-nova-futures,,,Singapore,,basic,unverified,1.3,,,,https://www.phillipnova.com
+1563,KGI Futures Singapore,kgi-futures-singapore,,,Singapore,,basic,unverified,1.3,,,,https://www.kgieworld.sg
+1564,UOB Bullion And Futures,uob-bullion-futures,,,Singapore,,basic,unverified,1.3,,,,https://www.uobgroup.com
+1565,OCBC Securities Futures,ocbc-securities-futures,,,Singapore,,basic,unverified,1.3,,,,https://www.iocbc.com
+1566,Maybank Futures,maybank-futures,,,Singapore,,basic,unverified,1.3,,,,https://www.maybanktrade.com.sg
+1567,CIMB Futures,cimb-futures,,,Singapore,,basic,unverified,1.3,,,,https://www.cimb.com
+1568,CGS International Futures,cgs-international-futures,,,Singapore,,basic,unverified,1.3,,,,https://www.cgsi.com
+1569,DBS Futures,dbs-futures,,,Singapore,,basic,unverified,1.3,,,,https://www.dbsvickers.com
+1570,Rakuten Trade,rakuten-trade-malaysia,,,Malaysia,,basic,unverified,1.3,,,,https://www.rakutentrade.my
+1571,Malacca Securities,malacca-securities,,,Malaysia,,basic,unverified,1.3,,,,https://www.mplusonline.com.my
+1572,TA Securities,ta-securities,,,Malaysia,,basic,unverified,1.3,,,,https://www.ta.com.my
+1573,Jupiter Securities,jupiter-securities,,,Malaysia,,basic,unverified,1.3,,,,https://www.jupiteronline.com.my
+1574,Mercury Securities,mercury-securities,,,Malaysia,,basic,unverified,1.3,,,,https://www.mercurysecurities.com.my
+1575,KAF Equities,kaf-equities,,,Malaysia,,basic,unverified,1.3,,,,https://www.kaf.com.my
+1576,Inter-Pacific Securities,inter-pacific-securities,,,Malaysia,,basic,unverified,1.3,,,,https://www.interpac.com.my
+1577,Apex Securities Malaysia,apex-securities-malaysia,,,Malaysia,,basic,unverified,1.3,,,,https://www.apexsecurities.com.my
+1578,BIMB Securities,bimb-securities,,,Malaysia,,basic,unverified,1.3,,,,https://www.bimbsec.com.my
+1579,Phillip Capital Malaysia,phillip-capital-malaysia,,,Malaysia,,basic,unverified,1.3,,,,https://www.poems.com.my
+1580,CGS International Malaysia,cgs-international-malaysia,,,Malaysia,,basic,unverified,1.3,,,,https://www.cgsi.com
+1581,AIS Futures,ais-futures,,,Thailand,,basic,unverified,1.3,,,,https://www.aisfutures.com
+1582,KT ZMICO Securities,kt-zmico-securities,,,Thailand,,basic,unverified,1.3,,,,https://www.krungsrisecurities.com
+1583,Trinity Securities,trinity-securities,,,Thailand,,basic,unverified,1.3,,,,https://www.trinitythai.com
+1584,KTZMICO,ktzmico,,,Thailand,,basic,unverified,1.3,,,,https://www.ktzmico.com
+1585,RockGlobal Securities,rockglobal-securities,,New Zealand,New Zealand,FMA (New Zealand),basic,unverified,1.2,,,,https://rockglobal.co.nz
+1586,Faida Investment Bank,faida-investment-bank,,"Nairobi, Kenya",Kenya,CMA (Kenya) | NSE,basic,unverified,1.2,,,,https://www.faidainvest.com
+1587,IH Securities Zimbabwe,ih-securities-zimbabwe,,"Harare, Zimbabwe",Zimbabwe,SECZ (Zimbabwe) | ZSE (Zimbabwe Stock Exchange),basic,unverified,1.2,,,,https://ihsecurities.com
+1588,African Alliance Securities,african-alliance-securities,,"Lagos, Nigeria",Nigeria,SEC (Nigeria) | NGX,basic,unverified,1.2,,,,https://www.africanalliance.com
+1589,GTI Securities,gti-securities,,"Lagos, Nigeria",Nigeria,SEC (Nigeria) | NGX,basic,unverified,1.2,,,,https://www.gtigroup.com
+1590,DLM Securities,dlm-securities,,"Lagos, Nigeria",Nigeria,SEC (Nigeria) | NGX,basic,unverified,1.2,,,,https://www.dlm.group
+1591,FSDH Securities,fsdh-securities,,"Lagos, Nigeria",Nigeria,SEC (Nigeria) | FMDQ | NGX,basic,unverified,1.2,,,,https://www.fsdhgroup.com
+1592,Greenwich Securities,greenwich-securities,,"Lagos, Nigeria",Nigeria,SEC (Nigeria) | NGX | FMDQ,basic,unverified,1.2,,,,https://www.gdl.com.ng
+1593,Anchoria Securities,anchoria-securities,,"Lagos, Nigeria",Nigeria,SEC (Nigeria) | NGX,basic,unverified,1.2,,,,https://www.anchoria.com
+1594,Globalview Capital,globalview-capital,,Africa,Africa,,basic,unverified,1.2,,,,https://globalviewcapital.com
+1595,AIB AXYS Africa,aib-axys-africa,,Africa,Africa,,basic,unverified,1.2,,,,https://aib-axysafrica.com
+1596,GIB Capital,gib-capital,,International,International,,basic,unverified,1.2,,,,https://www.gibcapitalgroup.com
+1597,EFE Securities,efe-securities,,Africa,Africa,,basic,unverified,1.2,,,,https://efesecurities.com
+1598,PAC Securities,pac-securities,,"Lagos, Nigeria",Nigeria,SEC (Nigeria) | NGX,basic,unverified,1.2,,,,https://www.pacsecurities.com
+1599,Farr Financial,farr-financial,,USA,USA,NFA (USA) | CFTC (USA),basic,unverified,1.2,,,,https://www.farrfinancial.com
+1600,Lakefront Futures,lakefront-futures,,"Chicago, Illinois, USA",USA,NFA (USA) | CFTC (USA),basic,unverified,1.2,,,,https://www.lakefrontfutures.com
+1601,FuturesOnline,futuresonline,,USA,USA,NFA (USA) | CFTC (USA),basic,unverified,1.2,,,,https://www.futuresonline.com
+1602,Sweet Futures,sweet-futures,,USA,USA,NFA (USA) | CFTC (USA),basic,unverified,1.2,,,,https://sweetfutures.com
+1603,EdgeProX,edgeprox,,USA,USA,,basic,unverified,1.2,,,,https://edgeprox.com
+1604,LedgerEdge,ledgeredge,,"London, UK",United Kingdom,FCA (UK),basic,unverified,1.2,,,,https://ledgeredge.com
+1605,MercariX,mercarix,,USA,USA,,basic,unverified,1.2,,,,https://www.mercarix.com
+1606,CITIC Securities,citic-securities,,,China,,basic,unverified,1.2,,,,https://www.cs.ecitic.com
+1607,China Securities Co,china-securities-co,,,China,,basic,unverified,1.2,,,,https://www.csc108.com
+1608,GF Securities,gf-securities,,,China,,basic,unverified,1.2,,,,https://www.gf.com.cn
+1609,Everbright Securities,everbright-securities,,,China,,basic,unverified,1.2,,,,https://www.ebscn.com
+1610,Industrial Securities,industrial-securities,,,China,,basic,unverified,1.2,,,,https://www.xyzq.com.cn
+1611,Founder Securities,founder-securities,,,China,,basic,unverified,1.2,,,,https://www.foundersc.com
+1612,Changjiang Securities,changjiang-securities,,,China,,basic,unverified,1.2,,,,https://www.95579.com
+1613,Shenwan Hongyuan Securities,shenwan-hongyuan-securities,,,China,,basic,unverified,1.2,,,,https://www.swhysc.com
+1614,Zheshang Securities,zheshang-securities,,,China,,basic,unverified,1.2,,,,https://www.stocke.com.cn
+1615,Soochow Securities,soochow-securities,,,China,,basic,unverified,1.2,,,,https://www.dwzq.com.cn
+1616,Caida Securities,caida-securities,,,China,,basic,unverified,1.2,,,,https://www.s10000.com
+1617,Huaxi Securities,huaxi-securities,,,China,,basic,unverified,1.2,,,,https://www.hx168.com.cn
+1618,Minsheng Securities,minsheng-securities,,,China,,basic,unverified,1.2,,,,https://www.mszq.com
+1619,Dongxing Securities,dongxing-securities,,,China,,basic,unverified,1.2,,,,https://www.dxzq.net
+1620,Western Securities,western-securities,,,China,,basic,unverified,1.2,,,,https://www.westsecu.com
+1621,Northeast Securities,northeast-securities,,,China,,basic,unverified,1.2,,,,https://www.nesc.cn
+1622,Guolian Securities,guolian-securities,,,China,,basic,unverified,1.2,,,,https://www.glsc.com.cn
+1623,Caitong Securities,caitong-securities,,,China,,basic,unverified,1.2,,,,https://www.ctsec.com
+1624,Guosen Securities,guosen-securities,,,China,,basic,unverified,1.2,,,,https://www.guosen.com.cn
+1625,Zhongyuan Securities,zhongyuan-securities,,,China,,basic,unverified,1.2,,,,https://www.ccnew.com
+1626,Huajin Securities,huajin-securities,,,China,,basic,unverified,1.2,,,,https://www.huajinsc.cn
+1627,Nanjing Securities,nanjing-securities,,,China,,basic,unverified,1.2,,,,https://www.njzq.com.cn
+1628,Chasing Securities,chasing-securities,,,China,,basic,unverified,1.2,,,,https://www.chasingsec.com
+1629,GKInvest,gkinvest,,Indonesia,Indonesia,BAPPEBTI (Indonesia),basic,unverified,1.1,,,MetaTrader 4,https://www.gkinvest.co.id
+1630,Kenanga Futures,kenanga-futures,,Malaysia,Malaysia,SC Malaysia,basic,unverified,1.1,,,MetaTrader 4,https://www.kenangafutures.com.my
+1631,Alpha Futures,alpha-futures,,United States,USA,,basic,unverified,1.1,,,,https://alphafutures.com
+1632,Maverick Currencies,maverick-currencies,,United States,USA,,basic,unverified,1.1,,,,https://maverickcurrencies.com
+1633,Blue Point Trading,blue-point-trading,,International,International,,basic,unverified,1.1,,,,https://bluepointtrading.com
+1634,Prop Trading Club,prop-trading-club,,International,International,,basic,unverified,1.1,,,,https://proptradingclub.com
+1635,Funded Engineer,funded-engineer,,International,International,,basic,unverified,1.1,,,,https://fundedengineer.com
+1636,Nexus Trader Funding,nexus-trader-funding,,International,International,,basic,unverified,1.1,,,,https://nexustraderfunding.com
+1637,Apex Capital Funding,apex-capital-funding,,International,International,,basic,unverified,1.1,,,,https://apexcapitalfunding.com
+1638,Nova Funding,nova-funding,,International,International,,basic,unverified,1.1,,,,https://novafunding.com
+1639,Trade Capital Funding,trade-capital-funding,,International,International,,basic,unverified,1.1,,,,https://tradecapitalfunding.com
+1640,Lark Funding Global,lark-funding-global,,International,International,,basic,unverified,1.1,,,,https://larkfunding.com
+1641,Swift Funding,swift-funding,,International,International,,basic,unverified,1.1,,,,https://swiftfunding.com
+1642,Crown Funded,crown-funded,,International,International,,basic,unverified,1.1,,,,https://crownfunded.com
+1643,Funded Edge,funded-edge,,International,International,,basic,unverified,1.1,,,,https://fundededge.com
+1644,Vault Markets Funding,vault-markets-funding,,International,International,,basic,unverified,1.1,,,,https://vaultmarketsfunding.com
+1645,The Trading Capital,the-trading-capital,,International,International,,basic,unverified,1.1,,,,https://thetradingcapital.com
+1646,Prime Funding Trader,prime-funding-trader,,International,International,,basic,unverified,1.1,,,,https://primefundingtrader.com
+1647,Peak Funded,peak-funded,,International,International,,basic,unverified,1.1,,,,https://peakfunded.com
+1648,Elite Funded,elite-funded,,International,International,,basic,unverified,1.1,,,,https://elitefunded.com
+1649,Global Funded Trader,global-funded-trader,,International,International,,basic,unverified,1.1,,,,https://globalfundedtrader.com
+1650,Funded Pro Trader,funded-pro-trader,,International,International,,basic,unverified,1.1,,,,https://fundedprotrader.com
+1651,Next Funded,next-funded,,International,International,,basic,unverified,1.1,,,,https://nextfunded.com
+1652,Bright Trading,bright-trading,,United States,USA,,basic,unverified,1.1,,,,https://brighttrading.com
+1653,Blue Capital Trading,blue-capital-trading,,International,International,,basic,unverified,1.1,,,,https://bluecapitaltrading.com
+1654,Keystone Trading Group,keystone-trading-group,,United States,USA,,basic,unverified,1.1,,,,https://keystonetradinggroup.com
+1655,Black Eagle Trading,black-eagle-trading,,International,International,,basic,unverified,1.1,,,,https://blackeagletrading.com
+1656,Genesis Trading Capital,genesis-trading-capital,,International,International,,basic,unverified,1.1,,,,https://genesistradingcapital.com
+1657,Toro Trading,toro-trading,,International,International,,basic,unverified,1.1,,,,https://torotrading.com
+1658,Green Chart Funding,green-chart-funding,,International,International,,basic,unverified,1.1,,,,https://greenchartfunding.com
+1659,Urban Forex Funding,urban-forex-funding,,International,International,,basic,unverified,1.1,,,,https://urbanforexfunding.com
+1660,Traders Global Group,traders-global-group,,International,International,,basic,unverified,1.1,,,,https://tradersglobalgroup.com
+1661,PropTradeTech,proptradetech,,International,International,,basic,unverified,1.1,,,,https://proptradetech.com
+1662,Acorn Derivatives Management,acorn-derivatives-management,,International,International,,basic,unverified,1.1,,,,https://acorndm.com
+1663,Graticule Asset Management Asia,graticule-asset-management,,Singapore,Singapore,,basic,unverified,1.1,,,,https://www.gam.com.sg
+1664,MIO Partners,mio-partners,,"New York, USA",USA,,basic,unverified,1.1,,,,https://www.mio.com
+1665,Ronin Capital,ronin-capital,,"Chicago, USA",USA,,basic,unverified,1.1,,,,https://www.ronincapital.com
+1666,Sun Trading,sun-trading,,"Chicago, USA",USA,,basic,unverified,1.1,,,,https://www.suntradingllc.com
+1667,Weatherstone Capital,weatherstone-capital,,"Colorado, USA",USA,,basic,unverified,1.1,,,,https://www.weatherstonecapital.com
+1668,Liberty Trading Group,liberty-trading-group,,United States,USA,NFA (USA) | CFTC (USA),basic,unverified,1.1,,,,https://libertytradinggroup.com
+1669,Firetip,firetip,,United States,USA,,basic,unverified,1.1,,,Firetip Platform,https://www.firetip.com
+1670,Infinity Futures,infinity-futures,,United States,USA,NFA (USA) | CFTC (USA),basic,unverified,1.1,,,,https://www.infinityfutures.com
+1671,Insignia Futures,insignia-futures,,United States,USA,NFA (USA) | CFTC (USA),basic,unverified,1.1,,,,https://www.insigniafutures.com
+1672,Linn & Associates,linn-and-associates,,"Chicago, Illinois, USA",USA,NFA (USA) | CFTC (USA),basic,unverified,1.1,,,,https://www.linnllc.com
+1673,Striker Securities,striker-securities,,"Chicago, Illinois, USA",USA,NFA (USA) | CFTC (USA),basic,unverified,1.1,,,,https://www.striker.com
+1674,Bespoke Funding,bespoke-funding,,,International,,basic,unverified,1,,,MetaTrader 4 | MetaTrader 5,https://bespokefundingprogram.com
+1675,Global Prop Trader,global-prop-trader,,,International,,basic,unverified,1,,,MetaTrader 4 | MetaTrader 5,https://globalproptrader.com
+1676,TradingFunds Global,trading-funds,,,International,,basic,unverified,1,,,MetaTrader 4 | MetaTrader 5,https://tradingfunds.com
+1677,Funded Nation,funded-nation,,,International,,basic,unverified,1,,,MetaTrader 4 | MetaTrader 5,https://fundednation.com
+1678,Alpha Funded,alpha-funded,,,International,,basic,unverified,1,,,MetaTrader 4 | MetaTrader 5,https://alphafunded.com
+1679,Fidelis Funding,fidelis-funding,,,International,,basic,unverified,1,,,MetaTrader 4 | MetaTrader 5,https://fidelisfunding.com
+1680,Funder Trading,funder-trading,,,International,,basic,unverified,1,,,MetaTrader 4 | MetaTrader 5,https://fundertrading.com
+1681,Trade The Matrix,trade-the-matrix,,,International,,basic,unverified,1,,,MetaTrader 4 | MetaTrader 5,https://tradethematrix.com
+1682,QuantTekel,quanttekel,,,International,,basic,unverified,1,,,MetaTrader 4 | MetaTrader 5,https://quanttekel.com
+1683,BlackShark Funded,blackshark-funded,,,International,,basic,unverified,1,,,MetaTrader 4 | MetaTrader 5,https://blacksharkfunded.com
+1684,Smart Funding Trader,smart-funding-trader,,,International,,basic,unverified,1,,,MetaTrader 4 | MetaTrader 5,https://smartfundingtrader.com
+1685,Apex Funded Trader,apex-funded-trader,,,International,,basic,unverified,1,,,MetaTrader 4 | MetaTrader 5,https://apexfundedtrader.com
+1686,Surge Funding,surge-funding,,,International,,basic,unverified,1,,,MetaTrader 4 | MetaTrader 5,https://surgefunding.com
+1687,Infinity Funded,infinity-funded,,,International,,basic,unverified,1,,,MetaTrader 4 | MetaTrader 5,https://infinityfunded.com
+1688,OnePro Global,onepro-global,,,International,,basic,unverified,1,,,MetaTrader 4 | MetaTrader 5,https://www.oneproglobal.com
+1689,Yadix,yadix,,,International,,basic,unverified,1,,,MetaTrader 4 | MetaTrader 5,https://www.yadix.com
+1690,FairMarkets,fair-markets,,,International,,basic,unverified,1,,,MetaTrader 4 | MetaTrader 5,https://fair.markets
+1691,Prima Markets,prima-markets,,,International,,basic,unverified,1,,,MetaTrader 4 | MetaTrader 5,https://primamarkets.com
+1692,Maxco Futures,maxco-futures,,Indonesia,Indonesia,BAPPEBTI (Indonesia),basic,unverified,1,,,MetaTrader 4,https://www.maxco.co.id
+1693,Didimax Berjangka,didimax,,Indonesia,Indonesia,BAPPEBTI (Indonesia),basic,unverified,1,,,MetaTrader 4,https://www.didimax.co.id
+1694,Java Global Futures,java-global-futures,,Indonesia,Indonesia,BAPPEBTI (Indonesia),basic,unverified,1,,,MetaTrader 4,https://www.javafx.co.id
+1695,Phillip Futures Malaysia,phillip-futures-malaysia,,"Kuala Lumpur, Malaysia",Malaysia,SC Malaysia | Bursa Malaysia,enriched,unverified,,,,MetaTrader 4 | POEMS,https://www.phillipfutures.com.my
+1696,Phillip Futures Hong Kong,phillip-futures-hk,,Hong Kong,Hong Kong,SFC (Hong Kong),enriched,unverified,,,,MetaTrader 4 | POEMS,https://www.phillip.com.hk
+1697,Haitong Futures Hong Kong,haitong-futures-hk,,Hong Kong,Hong Kong,SFC (Hong Kong),enriched,unverified,,,,Proprietary Platform,https://www.htisec.com
+1698,Tullett Prebon,tullett-prebon,,"London, United Kingdom",United Kingdom,FCA (UK),reviewed,unverified,,,,,https://www.tullettprebon.com
+1699,Tradition,tradition,,"Lausanne, Switzerland",Switzerland,FINMA (Switzerland) | FCA | SEC,reviewed,unverified,,,,,https://www.tradition.com
+1700,Toptier Futures,toptier-futures,,United States,USA,,enriched,unverified,,,,,https://toptierfutures.com
+1701,HRT Futures,hrt-futures,Hudson River Trading,"New York, USA",USA,,enriched,unverified,,,,,https://www.hrt.com
+1702,Bracebridge Capital,bracebridge-capital,,"Boston, Massachusetts, USA",USA,,enriched,unverified,,,,,https://www.bracebridgecapital.com
+1703,BlueMountain Capital,bluemountain-capital,,"New York, USA",USA,,enriched,unverified,,,,,https://www.bluemountaincapital.com
+1704,Quantitative Brokers,quantitative-brokers,,"New York, USA",USA,,enriched,unverified,,,,,https://www.quantitativebrokers.com
+1705,White Bay Group,white-bay-group,,Australia,Australia,,enriched,unverified,,,,,https://whitebaygroup.com
+1706,Blue Line Futures,blue-line-futures,,"Chicago, Illinois, USA",USA,NFA (USA) | CFTC (USA),enriched,unverified,,,,NinjaTrader | CQG | TradingView,https://www.bluelinefutures.com
+1707,DeCarley Trading,decarley-trading,,"Las Vegas, Nevada, USA",USA,NFA (USA) | CFTC (USA),enriched,unverified,,,,Sierra Chart | TT (Trading Technologies) | CQG,https://decarleytrading.com
+1708,Zaner Group,zaner-group,,"Chicago, Illinois, USA",USA,NFA (USA) | CFTC (USA),enriched,unverified,,,,Zaner360 | NinjaTrader | TradingView | CQG,https://www.zaner.com
+1709,ADM Investor Services Canada,admis-canada,ADM Investor Services International Ltd,"Chicago, USA (with Toronto office)",Canada,NFA (USA) | CFTC (USA) | FCA (UK) | IIROC (Canada),enriched,unverified,,,,ADM Trader | CQG | TT (Trading Technologies) | Bloomberg,https://www.admis.com
+1710,StoneX (FC Stone),stonex-merchant,StoneX Group Inc.,"New York, USA",USA,NFA (USA) | CFTC (USA) | FCA (UK) | ASIC (Australia) | CySEC (Cyprus),reviewed,unverified,,,,StoneX Platform | TT (Trading Technologies) | Bloomberg | CQG,https://www.stonex.com
+1711,DriveWealth,drivewealth,,"Chatham, New Jersey, USA",USA,FINRA (USA) | SEC (USA),enriched,unverified,,,,,https://drivewealth.com
+1712,SogoTrade,sogotrade,,"New York, USA",USA,FINRA (USA) | SEC (USA) | SIPC,enriched,unverified,,,,SogoTrade Platform | Mobile App,https://www.sogotrade.com
+1713,Firstrade Securities,firstrade-securities,,"Flushing, New York, USA",USA,FINRA (USA) | SEC (USA) | SIPC,enriched,unverified,,$0,Commission-free,Firstrade Platform | Mobile App | Firstrade Navigator,https://www.firstrade.com
+1714,Zacks Trade,zacks-trade,,"Chicago, Illinois, USA",USA,FINRA (USA) | SEC (USA) | SIPC,enriched,unverified,,,,Zacks Trade Platform (IB-powered) | Mobile App | Zacks Trade Pro,https://www.zackstrade.com
+1715,StoneX One,stonex-one,,"New York, USA",USA,FCA (UK) | CFTC (USA) | NFA (USA),enriched,unverified,,,,StoneX One Platform | Mobile App | MetaTrader 4,https://www.stonexone.com
+1716,Axos Invest,axos-invest,,"San Diego, California, USA",USA,FINRA (USA) | SEC (USA) | SIPC,enriched,unverified,,$0,Commission-free,Axos Invest Platform | Mobile App,https://www.axosinvest.com
+1717,OpenMarkets Australia,openmarkets-australia,,"Sydney, Australia",Australia,ASIC (Australia) | ASX (Australia),enriched,unverified,,,,OpenMarkets Platform | API,https://www.openmarkets.com.au
+1718,Saxo Australia,saxo-australia,Saxo Capital Markets (Australia) Pty Ltd,"Sydney, Australia",Australia,ASIC (Australia) | AFSL 280372,enriched,unverified,,AUD 500,,SaxoTraderGO | SaxoTraderPRO | SaxoInvestor | Mobile Apps,https://www.home.saxo/en-au
+1719,Pearler,pearler,,"Sydney, Australia",Australia,ASIC (Australia) | AFSL,enriched,unverified,,AUD $0,AUD $6.50 brokerage,Pearler Platform | Mobile App,https://pearler.com
+1720,Stake,stake-australia,Stake Invest Pty Ltd,"Sydney, Australia",Australia,ASIC (Australia) | AFSL 503734,enriched,unverified,,AUD $0,Commission-free (US stocks),Stake Platform | Mobile App (iOS/Android),https://hellostake.com/au
+1721,Tiger Brokers Australia,tiger-brokers-australia,,"Sydney, Australia",Australia,ASIC (Australia) | AFSL,enriched,unverified,,,,Tiger Trade App | Tiger Trade Desktop,https://www.tigerbrokers.com.au
+1722,CMC Invest Australia,cmc-invest-australia,,"Sydney, Australia",Australia,ASIC (Australia),enriched,unverified,,,$0 brokerage on ASX,CMC Invest Platform | Mobile App,https://www.cmcinvest.com
+1723,Sharesight,sharesight,,"Wellington, New Zealand",New Zealand,,enriched,unverified,,,,Sharesight Platform | Mobile App,https://www.sharesight.com
+1724,Direct Broking,direct-broking,,"Auckland, New Zealand",New Zealand,FMA (New Zealand) | ANZ Bank Group,enriched,unverified,,,,DirectBroking Platform | Mobile App,https://www.directbroking.co.nz
+1725,InvestNow,investnow,,"Auckland, New Zealand",New Zealand,FMA (New Zealand),enriched,unverified,,NZD $250,No transaction fees,InvestNow Platform | Mobile App,https://investnow.co.nz
+1726,Kernel Wealth,kernel-wealth,,"Auckland, New Zealand",New Zealand,FMA (New Zealand),enriched,unverified,,NZD $1,0.25% p.a. fund fee,Kernel Platform | Mobile App,https://kernelwealth.co.nz
+1727,Simplicity Investment Funds,simplicity-investment,,"Auckland, New Zealand",New Zealand,FMA (New Zealand),enriched,unverified,,,0.10% p.a. (KiwiSaver),Simplicity Platform,https://simplicity.kiwi
+1728,Kiwi Wealth,kiwi-wealth,,"Wellington, New Zealand",New Zealand,FMA (New Zealand),enriched,unverified,,,,Kiwi Wealth Platform | Mobile App,https://www.kiwiwealth.co.nz
+1729,Genghis Capital,genghis-capital,,"Nairobi, Kenya",Kenya,CMA (Kenya) | NSE (Nairobi Stock Exchange),enriched,unverified,,,,,https://genghis-capital.com
+1730,Dyer & Blair Investment Bank,dyer-and-blair,,"Nairobi, Kenya",Kenya,CMA (Kenya) | NSE (Nairobi Stock Exchange),enriched,unverified,,,,,https://dyerandblair.com
+1731,Old Mutual Securities,old-mutual-securities,Old Mutual Investment Group,"Nairobi, Kenya (African HQ)",Kenya,CMA (Kenya) | FSB (South Africa) | NSE,enriched,unverified,,,,,https://www.oldmutual.co.ke
+1732,EFG Hermes Kenya,efg-hermes-kenya,EFG Hermes Kenya Ltd,"Cairo, Egypt (Kenya office: Nairobi)",Kenya,CMA (Kenya) | FRA (Egypt) | FCA (UK) | NSE,enriched,unverified,,,,,https://efghermes.com
+1733,Renaissance Capital Africa,renaissance-capital-africa,Renaissance Capital,"London, UK (Africa: Lagos, Nairobi, Johannesburg)",South Africa,FCA (UK) | SEC (Nigeria) | CMA (Kenya) | JSE,enriched,unverified,,,,,https://www.rencap.com
+1734,CardinalStone Securities,cardinalstone-securities,,"Lagos, Nigeria",Nigeria,SEC (Nigeria) | NSE (Nigerian Stock Exchange) | FMDQ,enriched,unverified,,,,,https://www.cardinalstone.com
+1735,Meristem Securities,meristem-securities,,"Lagos, Nigeria",Nigeria,SEC (Nigeria) | NGX (Nigerian Exchange Group),enriched,unverified,,,,,https://www.meristemng.com
+1736,Chapel Hill Denham,chapel-hill-denham,,"Lagos, Nigeria",Nigeria,SEC (Nigeria) | NGX,enriched,unverified,,,,,https://www.chapelhilldenham.com
+1737,Afrinvest Securities,afrinvest-securities,,"Lagos, Nigeria",Nigeria,SEC (Nigeria) | NGX | FMDQ,enriched,unverified,,,,,https://www.afrinvest.com
+1738,ARM Securities,arm-securities,Asset & Resource Management Holding Company,"Lagos, Nigeria",Nigeria,SEC (Nigeria) | CBN | NGX,enriched,unverified,,,,,https://www.arm.com.ng
+1739,Stanbic IBTC Stockbrokers,stanbic-ibtc-stockbrokers,,"Lagos, Nigeria",Nigeria,SEC (Nigeria) | NGX | CBN,enriched,unverified,,,,Stanbic IBTC Stockbrokers App | Online Platform,https://www.stanbicibtcstockbrokers.com
+1740,FBNQuest Securities,fbnquest-securities,,"Lagos, Nigeria",Nigeria,SEC (Nigeria) | NGX | CBN,enriched,unverified,,,,,https://www.fbnquest.com
+1741,Cordros Securities,cordros-securities,,"Lagos, Nigeria",Nigeria,SEC (Nigeria) | NGX,enriched,unverified,,,,,https://www.cordros.com
+1742,Vetiva Capital,vetiva-capital,,"Lagos, Nigeria",Nigeria,SEC (Nigeria) | NGX,enriched,unverified,,,,,https://vetiva.com
+1743,Coronation Securities,coronation-securities,,"Lagos, Nigeria",Nigeria,SEC (Nigeria) | NGX,enriched,unverified,,,,,https://www.coronation.ng
+1744,Imara Capital,imara-capital,,Botswana,Botswana,NBFIRA (Botswana) | SECZ (Zimbabwe) | SEC (Zambia),enriched,unverified,,,,,https://www.imara.com
+1745,Rand Merchant Bank Nigeria,rand-merchant-bank-nigeria,RMB Nigeria,"Lagos, Nigeria",Nigeria,CBN | SEC (Nigeria) | NGX,enriched,unverified,,,,,https://www.rmb.com.ng
+1746,AfrAsia Capital Management,afrasia-capital,AfrAsia Bank Limited,"Port Louis, Mauritius",Mauritius,Bank of Mauritius | FSC (Mauritius),enriched,unverified,,,,,https://www.afrasiabank.com
+1747,United Capital Securities,united-capital-securities,,"Lagos, Nigeria",Nigeria,SEC (Nigeria) | NGX | CBN,enriched,unverified,,,,,https://www.unitedcapitalplcgroup.com
+1748,CSL Stockbrokers,csl-stockbrokers,,"Lagos, Nigeria",Nigeria,SEC (Nigeria) | NGX,enriched,unverified,,,,,https://www.cslstockbrokers.com
+1749,Securities Africa,securities-africa,,"Johannesburg, South Africa",South Africa,FSB (South Africa) | SEC (Various African jurisdictions),enriched,unverified,,,,,https://www.securitiesafrica.com
+1750,Seven Points Capital,seven-points-capital,,"New York City, USA",USA,,enriched,unverified,,,,,https://sevenpointscapital.com
+1751,Great Point Capital,great-point-capital,,"Chicago, Illinois, USA",USA,,enriched,unverified,,,,,https://www.greatpointcapital.com
+1752,Avatar Securities,avatar-securities,,"New York City, USA",USA,FINRA | SEC (USA),enriched,unverified,,,,,https://www.avatarsecurities.com
+1753,Chimera Securities,chimera-securities,,"New York City, USA",USA,FINRA | SEC (USA) | SIPC,enriched,unverified,,,,,https://www.chimerasecurities.com
+1754,Hold Brothers Capital,hold-brothers-capital,,"New York City, USA",USA,FINRA | SEC (USA),enriched,unverified,,,,,https://www.hold.com
+1755,Assent,assent-trading,,USA,USA,FINRA | SEC (USA),enriched,unverified,,,,,https://www.assent.com
+1756,Bluefin Trading,bluefin-trading,,"Chicago, Illinois, USA",USA,,enriched,unverified,,,,,https://www.bluefintrading.com
+1757,Cutler Group,cutler-group,,"Philadelphia, Pennsylvania, USA",USA,,enriched,unverified,,,,,https://www.cutler.com
+1758,TransAct Futures,transact-futures,,USA,USA,NFA (USA) | CFTC (USA),enriched,unverified,,,,TransAct AT Platform | API,https://www.transactfutures.com
+1759,Stage 5 Trading,stage5-trading,,USA,USA,NFA (USA) | CFTC (USA),enriched,unverified,,,,NinjaTrader | Rithmic,https://stage5trading.com
+1760,ChoiceTrade,choicetrade,,USA,USA,FINRA | SEC (USA) | SIPC,enriched,unverified,,,,ChoiceTrade Elite | Mobile App,https://www.choicetrade.com
+1761,TradeUP Securities,tradeup-securities,,USA,USA,FINRA | SEC (USA) | SIPC,enriched,unverified,,$0,Commission-free,TradeUP App | TradeUP Web,https://www.tradeup.com
+1762,Templum Markets,templum-markets,,"New York City, USA",USA,SEC (USA) | FINRA,enriched,unverified,,,,,https://www.templuminc.com
+1763,Takion Technologies,takion-technologies,,USA,USA,,enriched,unverified,,,,Takion Platform,https://www.takiontechnologies.com
+1764,RealTick (Eze EMS),realtick-eze,SS&C Eze,"Boston, Massachusetts, USA",USA,,enriched,unverified,,,,Eze EMS (RealTick) | Eze OMS | Eze Eclipse,https://www.realtick.com
+1765,Lime Trading,lime-trading,,"New York City, USA",USA,FINRA | SEC (USA) | SIPC,enriched,unverified,,,,Lime Platform | FIX API | REST API,https://www.limetrading.com
+1766,Wedbush Securities,wedbush-securities,,"Los Angeles, California, USA",USA,FINRA | SEC (USA) | SIPC,enriched,unverified,,,,,https://www.wedbush.com
+1767,Hilltop Securities,hilltop-securities,,"Dallas, Texas, USA",USA,FINRA | SEC (USA) | SIPC | MSRB,enriched,unverified,,,,,https://www.hilltopsecurities.com
+1768,Oppenheimer,oppenheimer-holdings,Oppenheimer Holdings Inc.,"New York City, USA",USA,SEC (USA) | FINRA | SIPC,enriched,unverified,,,,,https://www.oppenheimer.com
+1769,Piper Sandler,piper-sandler,,"Minneapolis, Minnesota, USA",USA,SEC (USA) | FINRA | SIPC,enriched,unverified,,,,,https://www.pipersandler.com
+1770,TD Cowen,cowen-td,TD Cowen,"New York City, USA",USA,SEC (USA) | FINRA | FCA (UK),enriched,unverified,,,,,https://www.cowen.com
+1771,Roth Capital Partners,roth-capital,,"Newport Beach, California, USA",USA,SEC (USA) | FINRA | SIPC,enriched,unverified,,,,,https://www.roth.com
+1772,KeyBanc Capital Markets,keybanc-capital,,"Cleveland, Ohio, USA",USA,SEC (USA) | FINRA | OCC,enriched,unverified,,,,,https://www.key.com
+1773,Stephens,stephens-inc,Stephens Inc.,"Little Rock, Arkansas, USA",USA,SEC (USA) | FINRA | SIPC,enriched,unverified,,,,,https://www.stephens.com
+1774,Seaport Global,seaport-global,,"New York City, USA",USA,SEC (USA) | FINRA,enriched,unverified,,,,,https://www.seaportglobal.com
+1775,BTIG,btig,,"New York City, USA",USA,SEC (USA) | FINRA | FCA (UK),enriched,unverified,,,,,https://www.btig.com
+1776,JonesTrading,jonestrading,,"New York City, USA",USA,SEC (USA) | FINRA,enriched,unverified,,,,,https://www.jonestrading.com
+1777,Cenkos Securities,cenkos-securities,,"London, UK",United Kingdom,FCA (UK) | LSE (London Stock Exchange),enriched,unverified,,,,,https://www.cenkos.com
+1778,Singer Capital Markets,singer-capital-markets,,"London, UK",United Kingdom,FCA (UK),enriched,unverified,,,,,https://www.singercm.com
+1779,Zeus Capital,zeus-capital,,"Manchester / London, UK",United Kingdom,FCA (UK),enriched,unverified,,,,,https://www.zeuscapital.co.uk
+1780,WH Ireland,wh-ireland,,"Manchester, UK",United Kingdom,FCA (UK),enriched,unverified,,,,,https://www.whirelandplc.com
+1781,Cavendish Capital Markets,cavendish-capital,,"London, UK",United Kingdom,FCA (UK),enriched,unverified,,,,,https://www.cavendish.com
+1782,Winterflood Securities,winterflood-securities,,"London, UK",United Kingdom,FCA (UK) | LSE,enriched,unverified,,,,,https://www.winterflood.com
+1783,J P Jenkins,jp-jenkins,,"London, UK",United Kingdom,FCA (UK),enriched,unverified,,,,,https://jpjenkins.com
+1784,Turquoise (LSEG),lse-turquoise,London Stock Exchange Group - Turquoise,"London, UK",United Kingdom,FCA (UK),enriched,unverified,,,,,https://www.lseg.com
+1785,Euronext FX,euronext-fx,,"Amsterdam, Netherlands",Netherlands,AFM (Netherlands) | AMF (France),enriched,unverified,,,,,https://www.euronextfx.com
+1786,SGX FX,sgx-fx,Singapore Exchange,Singapore,Singapore,MAS (Singapore),enriched,unverified,,,,,https://www.sgx.com
+1787,Bolsa Mexicana de Valores (BMV),bmv-mexico,,"Mexico City, Mexico",Mexico,CNBV (Mexico) | Banxico,enriched,unverified,,,,,https://www.bmv.com.mx
+1788,MATba ROFEX,matba-rofex,,"Buenos Aires / Rosario, Argentina",Argentina,CNV (Comision Nacional de Valores) | BCRA,enriched,unverified,,,,,https://www.matbarofex.com.ar
+1789,Bolsa de Santiago,bolsa-de-santiago,,"Santiago, Chile",Chile,CMF (Comision para el Mercado Financiero),enriched,unverified,,,,,https://www.bolsadesantiago.com
+1790,Bolsa de Valores de Colombia (BVC),bvc-colombia,,"Bogota, Colombia",Colombia,SFC (Superintendencia Financiera de Colombia),enriched,unverified,,,,,https://www.bvc.com.co
+1791,Dubai Financial Market (DFM),dfm,,"Dubai, UAE",UAE,SCA (UAE) | DFSA (Dubai Financial Services Authority),enriched,unverified,,,,,https://www.dfm.ae
+1792,Boursa Kuwait,boursa-kuwait,,"Kuwait City, Kuwait",Kuwait,CMA (Kuwait - Capital Markets Authority),enriched,unverified,,,,,https://www.boursakuwait.com.kw
+1793,MIAX Options,miax-options,Miami International Holdings,"Princeton, New Jersey, USA",USA,SEC (USA) | CFTC (USA),enriched,unverified,,,,,https://www.miaxglobal.com
+1794,MEMX,memx,Members Exchange,"New York City, USA",USA,SEC (USA) | FINRA,enriched,unverified,,,,,https://memx.com
+1795,tZERO,tzero,,"New York City, USA",USA,SEC (USA) | FINRA,enriched,unverified,,,,,https://www.tzero.com
+1796,Archax,archax,,"London, UK",United Kingdom,FCA (UK),enriched,unverified,,,,,https://www.archax.com
+1797,LedgerX,ledgerx,,"New York City, USA",USA,CFTC (USA),enriched,unverified,,,,,https://www.ledgerx.com
