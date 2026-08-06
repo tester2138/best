@@ -102,6 +102,93 @@ export const authors: Author[] = [
 ]
 
 export const posts: Post[] = [
+  // ─── Published Enforcement Reports (past-dated, immediately live) ───────────
+  // Post-51 added 2026-08-06. Past date — visible on next ISR cycle.
+  {
+    id: 'post-51',
+    slug: 'union-standard-asic-record-300-million-penalties-europefx-tradefx-cfd',
+    title: 'Federal Court Orders Record A$300 Million in Penalties Against Union Standard, EuropeFX and TradeFred Over CFD Misconduct',
+    excerpt: "Australia's markets regulator has secured the largest penalties in its history. A$300.2 million has been ordered against collapsed CFD issuer Union Standard International Group and its two former authorised representatives — EuropeFX and TradeFred — for systemic unconscionable conduct that deliberately targeted inexperienced and vulnerable clients.",
+    category: 'news',
+    editorialType: 'News',
+    author: authors[6], // Beatrix Fairmont — Consumer Affairs Critic
+    publishedAt: '2026-08-06',
+    updatedAt: '2026-08-06',
+    featuredImage: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2026-08-06_UnionStandard_cover-OfTL7VmpkLMTqdrkjX0rHwpSHo88Rq.png',
+    imageAltText: 'ASIC wins record 300 million dollar penalties over CFD misconduct — BestForex.io Broker Watch.',
+    readingTime: '8 min read',
+    wordCount: 1350,
+    metaTitle: 'ASIC Wins Record A$300 Million Against Union Standard, EuropeFX and TradeFred Over CFD Misconduct',
+    metaDescription: "Australia's Federal Court has ordered A$300.2 million in record civil penalties against Union Standard International Group, EuropeFX and TradeFred for systemic unconscionable conduct that exploited financially vulnerable retail clients between 2018 and 2020.",
+    tags: ['Union Standard', 'EuropeFX', 'TradeFred', 'ASIC', 'Australia', 'Record Penalty', 'A$300 Million', 'CFD', 'Unconscionable Conduct', 'Enforcement', 'Broker Watch', 'Maxi EFX Global', 'BrightAU Capital'],
+    isFeatured: true,
+    relatedBrokers: [],
+    linkedSources: [
+      { label: 'ASIC Media Release 26-117MR', url: 'https://www.asic.gov.au/about-asic/news-centre/find-a-media-release/2026-releases/26-117mr-federal-court-orders-record-300-million-penalties-in-asic-s-case-over-egregious-union-standard-and-cfd-operator-misconduct/' },
+    ],
+    content: `
+<p>Australia&apos;s markets regulator has secured the largest penalties in its history. On 12 June 2026 the Federal Court ordered a total of A$300.2 million against the collapsed contracts for difference issuer Union Standard International Group and its two former authorised representatives, the retail forex and CFD brands EuropeFX and TradeFred, for systemic unconscionable conduct between 2018 and 2020.</p>
+
+<p>Justice Wigney split the penalties three ways: A$156.7 million against Union Standard, A$114.1 million against Maxi EFX Global, which traded as EuropeFX, and A$29.4 million against BrightAU Capital, which traded as TradeFred. Customers of the two brands lost more than A$83 million. Union Standard was held liable as the Australian financial services licensee that authorised the other two firms to operate, and the court was explicit that a licensee cannot escape responsibility for what is done under its licence.</p>
+
+<h2>A Business Model Built on Client Losses</h2>
+
+<p>The conduct the court described was not a set of isolated errors. It was a business model. EuropeFX and TradeFred derived the bulk of their revenue directly from their customers&apos; trading losses, and in up to 95 to 99 percent of cases the firms profited when their clients lost. Account managers were paid incentives to pressure customers to deposit more money, and vulnerable investors were pushed to fund their trading through superannuation savings and credit cards. Customers were told the products suited their situation and their risk appetite. In reality most of them lost money.</p>
+
+<p>The judge did not soften his language. Justice Wigney found that the conduct of EuropeFX was, in his words, unquestionably egregious, deliberate and flagrant, and that the firm systematically exploited many vulnerable and financially naive customers for its own financial gain. He said he found it difficult to envisage a more serious case of contravening conduct.</p>
+
+<p>ASIC Chair Sarah Court said the penalties were the highest ever secured in connection with an ASIC matter, and warned that entities which profit from their clients&apos; losses will face serious consequences. She said the three firms operated business models that deliberately targeted inexperienced and vulnerable people, using aggressive sales tactics to pressure them into trading highly risky CFD products.</p>
+
+<h2>The Licensee Cannot Outsource Responsibility</h2>
+
+<p>There is a first in this case that matters well beyond the three firms. It is the first time a civil penalty has been imposed on an entity — Union Standard — for failing to ensure its financial services were provided efficiently, honestly and fairly, specifically by actively marketing and issuing its CFDs to customers in China when it knew, or ought to have known, that those customers risked breaching local law. The message to every licensed firm is blunt: a firm that lends its licence to someone else&apos;s sales operation owns what that operation does.</p>
+
+<h2>Part of Australia&apos;s Wider CFD Clampdown</h2>
+
+<p>The Union Standard penalties land in the middle of a wider regulatory drive. In the 2025 to 2026 financial year ASIC secured record court-ordered civil penalties, with CFD brokers among the biggest contributors. In January 2026 the regulator returned nearly A$40 million to more than 38,000 retail investors after a review of the whole CFD sector. In March 2026 it won a A$10 million penalty against Binance Australia Derivatives over onboarding failures. The product intervention order that caps leverage on CFDs sold to retail clients remains in force.</p>
+
+<p>Taken together, the direction is unmistakable. Australia has decided that the retail CFD model, as too many firms have run it, is a consumer protection problem rather than a legitimate market service.</p>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="bestforex-view-heading" class="rounded-xl border border-primary/30 bg-primary/5 px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-primary mb-3">BestForex.io View</p>
+  <h2 id="bestforex-view-heading" class="text-xl font-bold text-foreground mb-4">Three Hundred Million Dollars Is a Number Designed to Be Remembered.</h2>
+  <p class="text-foreground leading-relaxed mb-3">And it should be. What earns it is not the size of the collapse but the nature of the model: firms that made their money precisely when their customers lost theirs, and that pushed inexperienced investors toward superannuation savings and credit cards to keep the losses coming.</p>
+  <p class="text-foreground leading-relaxed mb-3">The sharpest part of this ruling is the finding against Union Standard itself. A licence is not a rubber stamp to be rented out to whoever wants to run a sales floor beneath it, and the court has now put a record price on pretending otherwise.</p>
+  <p class="text-foreground leading-relaxed font-medium">Traders should read this year&apos;s roll call of ASIC penalties as a map of the exact behaviour to avoid — because the firms that profit from your losses will always tell you the opposite.</p>
+</section>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="about-unionstandard-heading" class="rounded-xl border border-border bg-card px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">About the Companies</p>
+  <h2 id="about-unionstandard-heading" class="text-xl font-bold text-foreground mb-4">About Union Standard, EuropeFX and TradeFred</h2>
+  <div class="grid gap-4 sm:grid-cols-2 my-5">
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Regulator</p>
+      <p class="font-semibold text-foreground">ASIC (Australia)</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Jurisdiction</p>
+      <p class="font-semibold text-foreground">Australia</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Action Type</p>
+      <p class="font-semibold text-foreground">Record Civil Penalties</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Total Penalties</p>
+      <p class="font-semibold text-foreground">A$300.2 million</p>
+    </div>
+  </div>
+  <p class="text-foreground leading-relaxed mb-3">Union Standard International Group Pty Ltd was an Australian financial services licensee and CFD issuer that authorised two firms — Maxi EFX Global AU (trading as EuropeFX) and BrightAU Capital (trading as TradeFred) — to offer leveraged forex and CFD products to retail clients. Union Standard entered voluntary administration in July 2020 and ASIC cancelled its licence in September 2020.</p>
+  <p class="text-foreground leading-relaxed">On 12 June 2026 the Federal Court ordered A$300.2 million in total penalties against the three firms for systemic unconscionable conduct between 2018 and 2020 — the largest civil penalties in ASIC&apos;s history. Customers of EuropeFX and TradeFred lost more than A$83 million.</p>
+</section>
+
+<p class="text-sm text-muted-foreground mt-8 pt-4 border-t"><em>Editor&apos;s note &amp; source: Factual points are drawn from the Federal Court judgment of 12 June 2026 and ASIC media release 26-117MR. This article is not legal advice. Last updated: 6 August 2026.</em></p>
+    `,
+  },
   // ─── Scheduled Enforcement Reports (staged; auto-publish on publishedAt) ────
   // Posts 47–50 added 2026-08-06. Future dates — hidden until ISR picks them up.
   {
