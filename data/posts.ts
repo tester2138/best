@@ -102,6 +102,464 @@ export const authors: Author[] = [
 ]
 
 export const posts: Post[] = [
+  // ─── Scheduled Broker Watch Posts — 15 August 2026 ───────────────────────────
+  // Posts 88–92 added 2026-08-14. eToro/TradeZero, Revolut Cyprus crypto CEO,
+  // Plus500 BIFCI, Kraken Prop S&P 500, ASIC nine-broker review.
+  {
+    id: 'post-92',
+    slug: 'asic-nine-broker-review-warning',
+    title: 'ASIC Puts Nine Online Brokers on Notice Over Risky Products, Weak Onboarding and Sign Up Incentives',
+    excerpt: 'ASIC reviewed nine online brokers and found weak onboarding, thin disclosure and risky sign-up incentives. Interactive Brokers, Trading 212, Webull and Moomoo are all named.',
+    category: 'news',
+    editorialType: 'Opinion',
+    author: authors[3], // Clarissa Penhallow
+    publishedAt: '2026-08-15',
+    updatedAt: '2026-08-15',
+    featuredImage: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2026-08-15_ASIC_Nine_Brokers_cover-vcD3ljNNZvYLsvitHzodTsYu8JadTT.png',
+    imageAltText: 'ASIC puts nine online brokers on notice over risky products and weak onboarding — BestForex.io Broker Watch cover image',
+    readingTime: '7 min read',
+    wordCount: 1040,
+    metaTitle: 'ASIC Warning: Nine Online Brokers on Notice | BestForex.io',
+    metaDescription: 'ASIC reviewed nine online brokers and found weak onboarding, poor disclosure and risky incentives. What it means for our Best Forex Brokers in 2026 list.',
+    sourceName: 'ASIC',
+    tags: ['ASIC', 'Australia', 'Trading 212', 'Webull', 'Moomoo', 'Tiger Brokers', 'Interactive Brokers', 'tastytrade', 'Sharesies', 'Investor Warning', 'Product Governance', 'Onboarding', 'Broker Watch'],
+    isFeatured: true,
+    relatedBrokers: ['trading-212', 'webull', 'moomoo', 'tiger-brokers', 'tastytrade', 'interactive-brokers'],
+    linkedSources: [
+      { label: 'ASIC — 26-193MR ASIC warns retail investors about risky products offered by online brokers', url: 'https://www.asic.gov.au/about-asic/news-centre/find-a-media-release/2026-releases/26-193mr-asic-warns-retail-investors-about-risky-products-offered-by-online-brokers' },
+    ],
+    content: `
+<p>Australia&apos;s markets regulator has put nine retail trading platforms on notice. ASIC said on 13 August 2026 that its review of online brokers selling short dated exchange traded options, futures and fractional shares to retail clients found weak onboarding, thin disclosure and target market documents that did not do their job. The nine firms are Interactive Brokers Australia, Moomoo Securities Australia, Sharesies Australia, Stakeshop, tastytrade Australia, Tiger Brokers, Totality Wealth, Trading 212 and Webull Securities Australia.</p>
+
+<p>The review ran from March to June 2026 and focused on how these platforms sign clients up. What ASIC found will sound familiar to anyone who followed the CFD crackdowns of the past decade. Suitability questionnaires that barely changed from client to client. Screening tests that let applicants retry until they passed. Fractional share documents that never quite explained what the investor actually owns, what it costs, or whether the holding can be moved elsewhere.</p>
+
+<h2>Free Trades, Cash Vouchers and Airline Points</h2>
+
+<p>ASIC also went after the marketing. Several of the nine offered fee free or discounted trading, cash vouchers, cashback or airline reward points to get new clients dealing. The regulator&apos;s position is blunt: a sign up bonus has nothing to do with whether a leveraged option suits the person clicking the button, and it nudges people toward impulsive decisions. Commissioner Simone Constant kept it short: &ldquo;The products are complex but the responsibilities are simple.&rdquo;</p>
+
+<p>Constant had a line for investors too: &ldquo;If you do not understand how a product generates returns, or how your money is held, do not invest.&rdquo; The scoreboard so far reads like this. Five of the nine improved their practices during the review, two paused options onboarding while they fix their processes, one provider left Australia altogether, and ASIC says further enforcement is on the table for the rest.</p>
+
+<h2>What This Means Beyond Australia</h2>
+
+<p>This is the same regulator that capped CFD leverage in 2021 and has spent years suspending licences over product governance. The playbook is now moving from CFDs to the next generation of retail products, and the brands in scope this time are global. Trading 212, Webull, Moomoo, Tiger and Interactive Brokers all run large operations in Europe and Asia under other licences. When ASIC documents a weakness in Sydney, supervisors at the FCA and CySEC read about it in London and Limassol the same week.</p>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="bestforex-view-heading" class="rounded-xl border border-primary/30 bg-primary/5 px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-primary mb-3">BestForex.io View</p>
+  <h2 id="bestforex-view-heading" class="text-xl font-bold text-foreground mb-4">ASIC Just Did in Public What Most Regulators Do in Private Letters.</h2>
+  <p class="text-foreground leading-relaxed mb-3">It named all nine firms and described exactly how their onboarding fails, and that list includes some of the most downloaded trading apps in the world, not boiler rooms.</p>
+  <p class="text-foreground leading-relaxed mb-3">The era of growth hacking a brokerage with vouchers and airline points is closing, and platforms that treat suitability checks as a conversion funnel problem will keep meeting regulators in public.</p>
+  <p class="text-foreground leading-relaxed font-medium">Retail traders should read the review as a free due diligence report on their own broker.</p>
+</section>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="about-trading212-heading-92" class="rounded-xl border border-border bg-card px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">About the Company</p>
+  <h2 id="about-trading212-heading-92" class="text-xl font-bold text-foreground mb-4">About Trading 212</h2>
+  <div class="grid gap-4 sm:grid-cols-2 my-5">
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Regulator</p>
+      <p class="font-semibold text-foreground">ASIC (Australia), FCA, CySEC</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Jurisdiction</p>
+      <p class="font-semibold text-foreground">Australia | UK | EU</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Action Type</p>
+      <p class="font-semibold text-foreground">Thematic review, public warning</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Penalty</p>
+      <p class="font-semibold text-foreground">None yet | Further enforcement flagged</p>
+    </div>
+  </div>
+  <p class="text-foreground leading-relaxed">Trading 212 is a retail trading brand founded in Bulgaria in 2004 and now run from London, with FCA and CySEC regulated entities serving clients across the UK and Europe and an Australian arm, Trading 212 AU, that appeared in ASIC&apos;s review. The platform built its name on commission free stock dealing next to a CFD business and reports millions of client accounts. It was one of the nine providers examined, and ASIC did not announce a penalty against any individual firm in the review.</p>
+</section>
+
+<h2>Frequently Asked Questions</h2>
+
+<h3>Which brokers did ASIC review in 2026?</h3>
+<p>Interactive Brokers Australia, Moomoo Securities Australia, Sharesies Australia, Stakeshop, tastytrade Australia, Tiger Brokers, Totality Wealth, Trading 212 AU and Webull Securities Australia. The review covered March to June 2026.</p>
+
+<h3>What products is ASIC worried about?</h3>
+<p>Short dated exchange traded options, futures and fractional shares. The first two are leveraged, move fast and can lose more than the initial outlay, while fractional shares raise questions about ownership rights, costs and transferability that the reviewed disclosures often failed to answer.</p>
+
+<h3>Did ASIC fine any of the nine brokers?</h3>
+<p>No fines were announced with the review. Five firms improved their practices, two paused options onboarding to fix their processes, one left the Australian market, and ASIC has flagged possible enforcement against the remainder.</p>
+
+<h3>Is Trading 212 regulated in Australia?</h3>
+<p>Trading 212 AU appears in the review as one of the nine providers operating under ASIC supervision, so it sits inside the regulated system rather than offshore. The review still flagged industry wide gaps in onboarding and disclosure that apply across the group of nine. Compare regulated brokers in our <a href="/brokers" class="text-primary underline underline-offset-2 hover:text-primary/80">Best Forex Brokers in 2026</a> ranking.</p>
+
+<p class="text-sm text-muted-foreground mt-8 pt-4 border-t"><em>Editor&apos;s note &amp; source: Factual points drawn from ASIC media release 26-193MR. No findings of fraud were made against any firm named in the review. This article is not investment advice. Last updated: 15 August 2026.</em></p>
+    `,
+  },
+  {
+    id: 'post-91',
+    slug: 'kraken-prop-sp500-funded-trading',
+    title: 'Kraken Prop Adds the S&P 500 and Aims Its Funded Trading Machine at the Forex Prop Industry',
+    excerpt: 'Kraken Prop now offers S&P 500 funded accounts up to $200,000 with 5x leverage and $20 entry fees. The crypto giant is walking straight into the forex prop industry.',
+    category: 'news',
+    editorialType: 'Opinion',
+    author: authors[5], // Alistair Crowe
+    publishedAt: '2026-08-15',
+    updatedAt: '2026-08-15',
+    featuredImage: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2026-08-15_Kraken_Prop_cover-FR4bewQKJfFgn1dL7ogQlWnl0EG91I.png',
+    imageAltText: 'Kraken Prop takes its funded trading push beyond crypto with S&P 500 accounts — BestForex.io Broker Watch cover image',
+    readingTime: '7 min read',
+    wordCount: 1030,
+    metaTitle: 'Kraken Prop Adds S&P 500: Funded Trading Expands | BestForex.io',
+    metaDescription: 'Kraken Prop now offers S&P 500 funded accounts up to $200,000 with 5x leverage. What the crypto push into prop trading means for Best Forex Brokers in 2026.',
+    sourceName: 'Kraken',
+    tags: ['Kraken', 'Kraken Prop', 'Prop Trading', 'Funded Trading', 'S&P 500', 'Perpetuals', 'Crypto', 'Unregulated', 'Product Launch', 'Broker Watch'],
+    isFeatured: true,
+    relatedBrokers: [],
+    linkedSources: [
+      { label: 'Kraken Blog — Trade the S&P 500 on Kraken Prop', url: 'https://blog.kraken.com/product/prop/trade-the-sp500' },
+    ],
+    content: `
+<p>The biggest name in crypto wants funded traders next. Kraken added the S&amp;P 500 to its Kraken Prop program on 12 August 2026, the second traditional market on the platform after the Nasdaq 100, with commodities named as the next step. The product is a perpetual contract priced off an index oracle. It tracks the same 500 large cap US companies as the benchmark, never expires and never forces a rollover. Traders get up to 5x leverage and the market runs around the clock, weekends included.</p>
+
+<p>The program mechanics stay the same. Three evaluation tiers, Starter, Intermediate and Advanced, funded accounts from $5,000 to $200,000, and entry fees that start at $20. There are no consistency rules and no time limits, the daily loss cap sits at 3 percent, profit splits run between 80 and 90 percent, and payouts land in a Kraken wallet, typically within 24 hours. On paper it reads cleaner than much of the forex prop industry it is walking into.</p>
+
+<h2>Why Forex Prop Firms Should Worry</h2>
+
+<p>Consider what Kraken brings that a typical prop shop does not: a global consumer brand, its own wallet and payment rails, an exchange grade matching engine and a client base already comfortable with leverage. The classic forex prop firm sells a challenge, rents a platform and pushes payouts through processors that come and go. Kraken owns the whole stack. A $20 entry ticket and always open index trading is aimed squarely at the same young traders FTMO and its imitators spent five years cultivating.</p>
+
+<h2>The Regulation Question Nobody Answers</h2>
+
+<p>Here is the uncomfortable part. Kraken Prop is, by its own disclosure, an unregulated service. Most applicants fail their first evaluation, and evaluation fees are not refunded once trading begins. That is the standard prop industry model, and it is exactly the model regulators have started circling. The CFTC&apos;s long fight with My Forex Funds turned prop economics into a courtroom subject, and European supervisors have publicly questioned how funded trader schemes are sold. A brand of Kraken&apos;s size adopting the model does not settle that debate. It raises the stakes on the answer.</p>
+
+<p>For the funded trading industry this is the moment the moat gets shallow. Prop firms differentiated on payouts you could trust and platforms that stayed online. Kraken makes both table stakes. The survivors will be the shops that treat traders as clients rather than conversion metrics, publish real pass and payout statistics and get ahead of regulation instead of hiding from it. The rest will learn what happens to a middleman when the infrastructure company shows up.</p>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="bestforex-view-heading" class="rounded-xl border border-primary/30 bg-primary/5 px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-primary mb-3">BestForex.io View</p>
+  <h2 id="bestforex-view-heading" class="text-xl font-bold text-foreground mb-4">A Top Tier Exchange Launching Index Perpetuals for Funded Traders Tells You Two Things at Once.</h2>
+  <p class="text-foreground leading-relaxed mb-3">The prop model prints money, and the model still lives outside regulation. Kraken deserves credit for blunt disclosure &mdash; it says openly that most applicants fail and that fees are not refundable.</p>
+  <p class="text-foreground leading-relaxed mb-3">That honesty does not change the economics, which depend on a steady stream of hopefuls paying to try again.</p>
+  <p class="text-foreground leading-relaxed font-medium">Forex prop firms now face a competitor with deeper pockets, better rails and a bigger brand, and traders should put the same question to all of them, Kraken included: where does the revenue really come from?</p>
+</section>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="about-kraken-heading-91" class="rounded-xl border border-border bg-card px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">About the Company</p>
+  <h2 id="about-kraken-heading-91" class="text-xl font-bold text-foreground mb-4">About Kraken</h2>
+  <div class="grid gap-4 sm:grid-cols-2 my-5">
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Regulator</p>
+      <p class="font-semibold text-foreground">None | Kraken Prop is an unregulated service</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Jurisdiction</p>
+      <p class="font-semibold text-foreground">Global</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Action Type</p>
+      <p class="font-semibold text-foreground">Product expansion, S&amp;P 500 added</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Penalty</p>
+      <p class="font-semibold text-foreground">None | Product launch</p>
+    </div>
+  </div>
+  <p class="text-foreground leading-relaxed">Kraken is a US crypto exchange founded in 2011 that has grown into a group spanning spot and derivatives trading, payments and, since 2025, equities access. Kraken Prop is its funded trading arm, offering evaluations and funded accounts in crypto and now equity indices, with payouts made to Kraken wallets. The prop service is unregulated and sits apart from the licensed exchange activities the group runs in various jurisdictions.</p>
+</section>
+
+<h2>Frequently Asked Questions</h2>
+
+<h3>What did Kraken Prop just launch?</h3>
+<p>An S&amp;P 500 perpetual contract for funded traders, priced off an index oracle with no expiry and no forced rollover, tradable around the clock with up to 5x leverage. It joins the Nasdaq 100, and Kraken says commodities are next.</p>
+
+<h3>How much does Kraken Prop cost?</h3>
+<p>Evaluations start at $20 across three tiers, Starter, Intermediate and Advanced, with funded accounts from $5,000 to $200,000. Profit splits run between 80 and 90 percent and payouts arrive in a Kraken wallet, usually within 24 hours.</p>
+
+<h3>Is Kraken Prop regulated?</h3>
+<p>No. Kraken states plainly that the prop service is unregulated, that most applicants do not pass their first evaluation, and that evaluation fees are not refunded once trading begins.</p>
+
+<h3>Is this a threat to forex prop firms?</h3>
+<p>A direct one. It targets the same audience with a lower entry price, markets that never close and infrastructure the classic prop firms rent rather than own, from payment rails to the matching engine. Compare regulated alternatives in our <a href="/brokers" class="text-primary underline underline-offset-2 hover:text-primary/80">Best Forex Brokers in 2026</a> ranking.</p>
+
+<p class="text-sm text-muted-foreground mt-8 pt-4 border-t"><em>Editor&apos;s note &amp; source: Product details drawn from Kraken&apos;s own product announcement and disclosures. Funded trading evaluations carry non-refundable fees and most applicants do not pass. This article is not investment advice. Last updated: 15 August 2026.</em></p>
+    `,
+  },
+  {
+    id: 'post-90',
+    slug: 'plus500-bifci-bahamas-offshore',
+    title: 'Plus500 Joins the Bahamas CFD Club as Q2 Momentum Fades and the Offshore Trend Gathers Pace',
+    excerpt: 'Plus500 has joined BIFCI in the Bahamas days after posting record first half revenue and a softer second quarter. IC Markets, Pepperstone and Capital.com got there first.',
+    category: 'news',
+    editorialType: 'Opinion',
+    author: authors[4], // Reginald Thorne
+    publishedAt: '2026-08-15',
+    updatedAt: '2026-08-15',
+    featuredImage: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2026-08-15_Plus500_cover-uScYYl8tDnS7lFgetuaF6jYn6Sl62C.png',
+    imageAltText: 'Plus500 joins the Bahamas CFD club as growth cools — BestForex.io Broker Watch cover image',
+    readingTime: '7 min read',
+    wordCount: 1060,
+    metaTitle: 'Plus500 Bahamas Move: BIFCI Membership Explained | BestForex.io',
+    metaDescription: 'Plus500 Bahamas membership at BIFCI follows IC Markets, Pepperstone and Capital.com. What the offshore trend means for our Best Forex Brokers in 2026 list.',
+    sourceName: 'FX News Group',
+    tags: ['Plus500', 'Bahamas', 'BIFCI', 'Offshore', 'Securities Commission of The Bahamas', 'Leverage', 'Pepperstone', 'Capital.com', 'IC Markets', 'Trade Nation', 'Broker Watch'],
+    isFeatured: true,
+    relatedBrokers: ['plus500'],
+    linkedSources: [
+      { label: 'FX News Group — Plus500 jumps on the Bahamas CFD broker bandwagon, joining BIFCI', url: 'https://fxnewsgroup.com/forex-news/retail-forex/plus500-jumps-on-the-bahamas-cfd-broker-bandwagon-joining-bifci/' },
+    ],
+    content: `
+<p>Plus500 has joined the Bahamas Institute of FX and CFD Issuers, the industry body known as BIFCI, and it is in familiar company. FX News Group reported the membership on 13 August 2026, three days after the London listed broker published first half results showing record revenue and a second quarter that cooled. BIFCI&apos;s founders are Pepperstone, Capital.com and Trade Nation, and IC Markets signed up earlier in August. The club of big retail brands planting flags in Nassau is growing quickly.</p>
+
+<p>The results explain the timing. Half year revenue reached $462.9 million, up 12 percent on the year, and net income came in at $151.9 million, figures chief executive David Zruia described as a record for a first half. Look quarter by quarter and the picture changes. Q2 revenue fell 9 percent from Q1 to $220.8 million, EBITDA slipped 4 percent to $91.8 million, and the shares have been rough company for investors since a July trading update, down 24 percent at one point and roughly a third below their 52 week high.</p>
+
+<h2>What BIFCI Actually Is</h2>
+
+<p>BIFCI is a not for profit alliance of licensed forex and CFD firms in The Bahamas that works with the Securities Commission of The Bahamas on consumer protection, fair competition and industry standards. That is the official line. The practical read is simpler. The Bahamas offers brokers a workable licence with far higher leverage than the FCA, ESMA or ASIC allow, and the industry body exists to make the jurisdiction look respectable. Welcoming Plus500, BIFCI said the arrival of another leading global trading provider reflects the depth of the forex and CFD industry that has developed in The Bahamas.</p>
+
+<p>This is the part clients should watch. A trader who signs up under a Bahamas entity usually gives up the compensation schemes, leverage caps and negative balance rules that come with an FCA or CySEC account. The brokers know it. Offshore entities exist because a meaningful slice of clients will trade more, with more leverage, once the guardrails come off, and that slice is worth real revenue in a slowing quarter.</p>
+
+<h2>Five Big Brands, One Small Jurisdiction</h2>
+
+<p>Five recognisable names inside one Bahamas body in short order is not a coincidence, it is a strategy. Growth in the heavily regulated markets is mature and acquisition costs keep climbing &mdash; Plus500 paid an average of $1,283 to land each new customer in Q2. Offshore entities are where the margin lives. Regulators in London, Limassol and Sydney will eventually respond the way they always do, with warnings about which entity a client actually faces. Until then, expect more household names on the BIFCI members page.</p>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="bestforex-view-heading" class="rounded-xl border border-primary/30 bg-primary/5 px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-primary mb-3">BestForex.io View</p>
+  <h2 id="bestforex-view-heading" class="text-xl font-bold text-foreground mb-4">Nobody Joins a Bahamas Industry Body for the Conferences.</h2>
+  <p class="text-foreground leading-relaxed mb-3">Plus500 returning $182.5 million to shareholders while quarterly revenue cools tells you management believes the core business is mature, and mature businesses go looking for looser jurisdictions.</p>
+  <p class="text-foreground leading-relaxed mb-3">Our advice does not change: the brand on the app matters less than the entity on the account opening form, and clients routed to Nassau should understand exactly which protections they left behind.</p>
+  <p class="text-foreground leading-relaxed font-medium">The listed brokers have made offshore look respectable. That does not make it equivalent.</p>
+</section>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="about-plus500-heading-90" class="rounded-xl border border-border bg-card px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">About the Company</p>
+  <h2 id="about-plus500-heading-90" class="text-xl font-bold text-foreground mb-4">About Plus500</h2>
+  <div class="grid gap-4 sm:grid-cols-2 my-5">
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Regulator</p>
+      <p class="font-semibold text-foreground">FCA, CySEC, ASIC, DFSA | Securities Commission of The Bahamas</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Jurisdiction</p>
+      <p class="font-semibold text-foreground">The Bahamas</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Action Type</p>
+      <p class="font-semibold text-foreground">Joins BIFCI industry body</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Penalty</p>
+      <p class="font-semibold text-foreground">None | Membership move</p>
+    </div>
+  </div>
+  <p class="text-foreground leading-relaxed">Plus500 is a CFD and trading group founded in Israel in 2008 and listed on the London Stock Exchange. Its entities hold licences from the FCA, CySEC, ASIC and the DFSA in Dubai among others, and the group has been building non OTC lines such as futures and prediction markets in the United States. For the first half of 2026 it reported $462.9 million in revenue, $151.9 million in net income and a cash position above $860 million, alongside $182.5 million in announced buybacks and dividends.</p>
+</section>
+
+<h2>Frequently Asked Questions</h2>
+
+<h3>Is Plus500 regulated?</h3>
+<p>Yes, extensively. Group entities hold licences from the FCA in the UK, CySEC in Cyprus, ASIC in Australia and the DFSA in Dubai among others. The Bahamas connection sits alongside those licences, and the protections you get depend on which entity your account is opened with.</p>
+
+<h3>What is BIFCI?</h3>
+<p>The Bahamas Institute of FX and CFD Issuers, a not for profit alliance of licensed forex and CFD firms that works with the Securities Commission of The Bahamas. Its founders are Pepperstone, Capital.com and Trade Nation, with IC Markets and Plus500 joining in August 2026.</p>
+
+<h3>How did Plus500 perform in 2026 so far?</h3>
+<p>Record first half revenue of $462.9 million, up 12 percent on the year, with net income of $151.9 million. The second quarter was softer, with revenue down 9 percent from Q1 to $220.8 million and EBITDA down 4 percent to $91.8 million.</p>
+
+<h3>Does trading under a Bahamas entity change my protection?</h3>
+<p>Usually yes. Offshore entities typically offer higher leverage but sit outside schemes like the UK FSCS and outside ESMA style leverage caps, so the safety net is thinner if something goes wrong. Check the entity on your account form and compare brokers in our <a href="/brokers" class="text-primary underline underline-offset-2 hover:text-primary/80">Best Forex Brokers in 2026</a> ranking.</p>
+
+<p class="text-sm text-muted-foreground mt-8 pt-4 border-t"><em>Editor&apos;s note &amp; source: Factual points drawn from FX News Group reporting and Plus500&apos;s own first half 2026 results. The BIFCI membership is not a regulatory action against the firm. This article is not investment advice. Last updated: 15 August 2026.</em></p>
+    `,
+  },
+  {
+    id: 'post-89',
+    slug: 'revolut-cyprus-crypto-ceo-vasiliou',
+    title: 'Revolut Cyprus Crypto Unit Changes Hands as XM Veteran Georgios Vasiliou Replaces Founding CEO Costas Michael',
+    excerpt: 'Revolut has handed its MiCA licensed Cyprus crypto entity to a forex industry insider. Georgios Vasiliou spent 12 years at XM and five running Trading.com.',
+    category: 'news',
+    editorialType: 'Opinion',
+    author: authors[6], // Beatrix Fairmont
+    publishedAt: '2026-08-15',
+    updatedAt: '2026-08-15',
+    featuredImage: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2026-08-15_Revolut_cover-Xx1MvJ3SxbEK8Mf9Z5EN3ieXFQpPCP.png',
+    imageAltText: 'Revolut Cyprus crypto unit shakeup as XM veteran takes the helm — BestForex.io Broker Watch cover image',
+    readingTime: '6 min read',
+    wordCount: 990,
+    metaTitle: 'Revolut Cyprus Crypto Unit Gets XM Veteran CEO | BestForex.io',
+    metaDescription: 'Revolut Cyprus crypto unit has a new CEO from XM and Trading.com. What the reshuffle means for MiCA, CySEC and our Best Forex Brokers in 2026 ranking.',
+    sourceName: 'Finance Magnates',
+    tags: ['Revolut', 'Cyprus', 'CySEC', 'MiCA', 'Crypto', 'XM', 'Trading.com', 'Executive Moves', 'Georgios Vasiliou', 'Costas Michael', 'Broker Watch'],
+    isFeatured: true,
+    relatedBrokers: ['revolut-trading'],
+    linkedSources: [
+      { label: 'Finance Magnates — Former Trading.com CEO Georgios Vasiliou to head Revolut\'s Cyprus crypto unit', url: 'https://www.financemagnates.com/executives/former-tradingcom-ceo-georgios-vasiliou-to-head-revoluts-cyprus-crypto-unit/' },
+    ],
+    content: `
+<p>Revolut has handed its Cyprus crypto business to a forex industry insider. Georgios Vasiliou, who ran the Trading.com brand for five years and spent more than a decade inside XM Group before that, is the new chief executive of Revolut Digital Assets Europe Ltd, the MiCA licensed entity that sells crypto to Revolut customers across all 27 EEA states. He replaces Costas Michael, the founding chief executive, whose exit was first reported by FX News Group on 13 August 2026 and confirmed on his own LinkedIn page. Finance Magnates reported the Vasiliou appointment a day later.</p>
+
+<p>Michael is not a fintech lifer either. Before he joined Revolut in 2022 he spent four years as managing director of XTB Ltd, the Polish broker&apos;s Cyprus operation, with earlier stops at Leverate and TFI Markets. He built the Revolut unit from scratch, took it through one of the early Crypto Asset Service Provider authorisations CySEC granted under MiCA, and expanded it to retail and business clients in every EEA jurisdiction. He stays on as a board advisor. On LinkedIn he wrote: &ldquo;After more than four years as founding CEO of Revolut Digital Assets Europe, I&apos;m stepping down.&rdquo;</p>
+
+<h2>Why Revolut Keeps Hiring From Forex Brokers</h2>
+
+<p>Vasiliou&apos;s CV reads like a tour of the Cyprus trading industry. Twelve years at XM Group, starting on the dealing desk and working up through risk management, then five years running Trading.com, where he held the chief risk officer title before taking the top job. That is the profile Revolut wanted. Someone who has priced retail risk on a live dealing floor, not a payments executive learning derivatives on the job.</p>
+
+<h2>What the MiCA Deadline Has to Do With It</h2>
+
+<p>The timing matters. MiCA&apos;s grandfathering window closed in July 2026, so every crypto firm serving EEA clients now needs a full licence, and national regulators are watching the early licence holders closely. Revolut&apos;s Cyprus entity was among the first through CySEC&apos;s door. Putting a risk specialist in charge is a message aimed at the regulator as much as at the market.</p>
+
+<p>There is a wider story here too. Cyprus built its financial sector on CFD brokers, and those firms have become the talent pool for every fintech and crypto operator that lands on the island. When the largest neobank in Europe staffs its crypto arm with XM and XTB alumni, the line between the forex industry and mainstream fintech gets thinner. Expect more of these moves. MiCA compliance teams need people who have survived CySEC inspections, and brokers are where those people work.</p>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="bestforex-view-heading" class="rounded-xl border border-primary/30 bg-primary/5 px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-primary mb-3">BestForex.io View</p>
+  <h2 id="bestforex-view-heading" class="text-xl font-bold text-foreground mb-4">Revolut Did Not Hire a Crypto Evangelist. It Hired a Risk Manager Trained on a Forex Dealing Floor.</h2>
+  <p class="text-foreground leading-relaxed mb-3">That tells you where European crypto is heading. The forex industry spent two decades learning, often the hard way and in front of CySEC, how to run regulated retail speculation.</p>
+  <p class="text-foreground leading-relaxed mb-3">Fintechs are now buying that scar tissue one executive at a time.</p>
+  <p class="text-foreground leading-relaxed font-medium">Watch the next round of MiCA enforcement: the firms without broker DNA in their leadership will be the ones writing the cheques.</p>
+</section>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="about-revolut-heading-89" class="rounded-xl border border-border bg-card px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">About the Company</p>
+  <h2 id="about-revolut-heading-89" class="text-xl font-bold text-foreground mb-4">About Revolut</h2>
+  <div class="grid gap-4 sm:grid-cols-2 my-5">
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Regulator</p>
+      <p class="font-semibold text-foreground">CySEC, under the EU MiCA framework</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Jurisdiction</p>
+      <p class="font-semibold text-foreground">Cyprus | EEA</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Action Type</p>
+      <p class="font-semibold text-foreground">CEO change at Revolut Digital Assets Europe Ltd</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Penalty</p>
+      <p class="font-semibold text-foreground">None | Executive appointment</p>
+    </div>
+  </div>
+  <p class="text-foreground leading-relaxed">Revolut is a London based financial technology company founded in 2015 by Nikolay Storonsky and Vlad Yatsenko, and it reports more than 50 million customers worldwide. Its Cyprus entity, Revolut Digital Assets Europe Ltd, holds a Crypto Asset Service Provider authorisation from CySEC under the EU MiCA framework and serves retail and business clients across the EEA. The wider group has been pushing into trading products, including stocks and contracts for difference for European clients.</p>
+</section>
+
+<h2>Frequently Asked Questions</h2>
+
+<h3>Who runs Revolut&apos;s crypto business in Cyprus?</h3>
+<p>Georgios Vasiliou is chief executive of Revolut Digital Assets Europe Ltd as of August 2026. He took over from founding chief executive Costas Michael, who remains involved as a board advisor.</p>
+
+<h3>Is Revolut regulated for crypto in Europe?</h3>
+<p>Yes. Revolut Digital Assets Europe Ltd holds a Crypto Asset Service Provider authorisation granted by CySEC in Cyprus under the EU MiCA framework, which lets it serve clients in all 27 EEA jurisdictions from a single licence.</p>
+
+<h3>What is Georgios Vasiliou&apos;s background?</h3>
+<p>He spent 12 years at XM Group, moving from the dealing desk into risk management, then five years as chief executive of Trading.com, where he had earlier served as chief risk officer.</p>
+
+<h3>Why does Revolut hire executives from forex brokers?</h3>
+<p>Cyprus brokers have run regulated retail trading businesses under CySEC supervision for two decades, so their senior people arrive with the compliance and risk experience a MiCA licensed crypto firm needs from day one. See how Revolut compares in our <a href="/brokers" class="text-primary underline underline-offset-2 hover:text-primary/80">Best Forex Brokers in 2026</a> ranking.</p>
+
+<p class="text-sm text-muted-foreground mt-8 pt-4 border-t"><em>Editor&apos;s note &amp; source: Factual points drawn from Finance Magnates and FX News Group reporting and the executives&apos; own public statements. This is an executive appointment, not a regulatory action. This article is not investment advice. Last updated: 15 August 2026.</em></p>
+    `,
+  },
+  {
+    id: 'post-88',
+    slug: 'etoro-tradezero-acquisition-q2-2026',
+    title: 'eToro Beats Again and Buys TradeZero for Up to $231 Million in a Push for US Active Traders',
+    excerpt: 'eToro beat expectations for a third straight quarter, then agreed to buy US brokerage TradeZero for up to $231 million in cash and stock. The deal closes in 2027.',
+    category: 'news',
+    editorialType: 'Opinion',
+    author: authors[7], // Edmund Hartwell
+    publishedAt: '2026-08-15',
+    updatedAt: '2026-08-15',
+    featuredImage: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2026-08-15_eToro_cover-Jm81F1LJPbbs9gH5n60XrdAVBFXGBr.png',
+    imageAltText: 'eToro buys TradeZero in a 231 million dollar US push — BestForex.io Broker Watch cover image',
+    readingTime: '6 min read',
+    wordCount: 970,
+    metaTitle: 'eToro TradeZero Acquisition and Q2 2026 Beat | BestForex.io',
+    metaDescription: 'eToro TradeZero acquisition explained: the $231 million US deal, the Q2 2026 earnings beat, and where eToro sits in our Best Forex Brokers in 2026 ranking.',
+    sourceName: 'eToro Investor Relations',
+    tags: ['eToro', 'TradeZero', 'M&A', 'Q2 2026', 'Earnings', 'Nasdaq', 'US Expansion', 'Consolidation', 'Corporate Action', 'Broker Watch'],
+    isFeatured: true,
+    relatedBrokers: ['etoro'],
+    linkedSources: [
+      { label: 'eToro Investor Relations — eToro Reports Second Quarter 2026 Results', url: 'https://investors.etoro.com/news-releases/news-release-details/etoro-reports-second-quarter-2026-results' },
+    ],
+    content: `
+<p>eToro keeps making its case to Wall Street. The Israeli social trading firm reported second quarter results on 11 August 2026 that beat expectations for the third quarter in a row, then told investors it will buy TradeZero, a US brokerage built for active stock traders, in a cash and stock deal worth up to $231 million. The transaction is expected to close in the first half of 2027 and still needs regulatory approval.</p>
+
+<p>The quarter itself was solid rather than spectacular. Net contribution rose 9 percent to $229 million, GAAP net income jumped 77 percent to $53 million, and adjusted earnings came in at 68 cents per diluted share against 56 cents a year earlier. Funded accounts grew 18 percent to 4.28 million, assets under administration reached $19.2 billion, and the company is sitting on $1.2 billion in cash. That pile is what makes a $231 million acquisition easy to write.</p>
+
+<h2>Why TradeZero, and Why Now</h2>
+
+<p>TradeZero gives eToro something it has never had: a real foothold with US day traders. The target generated roughly $80 million in revenue over the trailing twelve months, which puts the price near 2.9 times revenue, and eToro expects the deal to add to profits in its first year. Chief executive Yoni Assia said the combination gives the firm a faster path to launching new products for US customers. In plain terms, eToro built its business on European and UK retail flow, and it knows the growth it promised the market lives in America.</p>
+
+<p>There is a pattern here. eToro closed two smaller purchases in the same quarter, Zengo and Bit2C, both aimed at crypto self custody. Add TradeZero and the shopping list reads like a map of where retail broking is heading: US equities, active traders and crypto infrastructure, stacked on top of the copy trading engine that made the brand famous. The firm now describes itself through four pillars, trading, investing, wealth management and neo banking, which is a long way from the CFD platform many forex traders first met.</p>
+
+<h2>What It Means for the Rest of the Industry</h2>
+
+<p>For the CFD industry the message is uncomfortable. Listed platforms with diversified revenue, eToro, Plus500, IG and Robinhood among them, are using public currency and cash to buy growth while private CFD brokers fight over the same mature markets. Consolidation has moved from rumor to routine. Expect the next bids to chase exactly what TradeZero has: a US licence, an active client base and technology that survives due diligence.</p>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="bestforex-view-heading" class="rounded-xl border border-primary/30 bg-primary/5 px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-primary mb-3">BestForex.io View</p>
+  <h2 id="bestforex-view-heading" class="text-xl font-bold text-foreground mb-4">Three Straight Beats and a Tidy Acquisition Is Exactly What a Newly Listed Broker Is Supposed to Deliver.</h2>
+  <p class="text-foreground leading-relaxed mb-3">eToro is delivering it. The part worth watching is the fine print. The deal does not close until the first half of 2027 and still needs regulators to say yes, which is a long runway for a partly stock funded price to wobble.</p>
+  <p class="text-foreground leading-relaxed mb-3">We also note what eToro did not dwell on: CFD trading, once the heart of the business, gets less and less airtime in the story it tells investors.</p>
+  <p class="text-foreground leading-relaxed font-medium">When a broker goes quiet about a product, the clients still using it should ask why.</p>
+</section>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="about-etoro-heading-88" class="rounded-xl border border-border bg-card px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">About the Company</p>
+  <h2 id="about-etoro-heading-88" class="text-xl font-bold text-foreground mb-4">About eToro</h2>
+  <div class="grid gap-4 sm:grid-cols-2 my-5">
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Regulator</p>
+      <p class="font-semibold text-foreground">FCA, CySEC, ASIC, US authorities</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Jurisdiction</p>
+      <p class="font-semibold text-foreground">United States | Global</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Action Type</p>
+      <p class="font-semibold text-foreground">Acquisition of TradeZero plus Q2 2026 results</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Penalty</p>
+      <p class="font-semibold text-foreground">None | Deal worth up to $231 million</p>
+    </div>
+  </div>
+  <p class="text-foreground leading-relaxed">eToro is a social trading platform founded in Israel in 2007 by Yoni Assia, Ronen Assia and David Ring. It listed on the Nasdaq in 2025 under the ticker ETOR and serves clients in more than 70 countries with stocks, ETFs, crypto and CFDs through entities regulated by the FCA, CySEC, ASIC and US authorities. As of mid 2026 the group reports 4.28 million funded accounts and $19.2 billion in assets under administration.</p>
+</section>
+
+<h2>Frequently Asked Questions</h2>
+
+<h3>What is eToro paying for TradeZero?</h3>
+<p>Up to $231 million in a mix of cash and stock. TradeZero generated about $80 million in revenue over the trailing twelve months, so the price works out near 2.9 times revenue, and eToro expects the deal to add to profits in its first year.</p>
+
+<h3>How did eToro perform in Q2 2026?</h3>
+<p>Net contribution of $229 million, up 9 percent on the year, GAAP net income of $53 million, up 77 percent, and adjusted diluted earnings of 68 cents per share. Funded accounts reached 4.28 million and assets under administration hit $19.2 billion.</p>
+
+<h3>Is eToro still a CFD broker?</h3>
+<p>Yes. CFDs remain part of the offer through entities regulated by the FCA, CySEC and ASIC, but the group increasingly presents itself as a multi asset platform built on trading, investing, wealth management and neo banking.</p>
+
+<h3>When does the TradeZero deal close?</h3>
+<p>eToro expects completion in the first half of 2027. The deal still needs regulatory approval, and the final value can move with closing conditions. See how eToro compares in our <a href="/brokers" class="text-primary underline underline-offset-2 hover:text-primary/80">Best Forex Brokers in 2026</a> ranking.</p>
+
+<p class="text-sm text-muted-foreground mt-8 pt-4 border-t"><em>Editor&apos;s note &amp; source: Financial figures drawn from eToro&apos;s own second quarter 2026 results release. The TradeZero transaction remains subject to regulatory approval and had not closed at the time of publication. This article is not investment advice. Last updated: 15 August 2026.</em></p>
+    `,
+  },
   // ─── Scheduled Enforcement Posts (future dates) ──────────────────────────────
   // Posts 78–87 added 2026-08-06.
   // AvaTrade (Belgium, Alberta, Israel unlicensed, Israel ad, Canada) +
@@ -6098,7 +6556,7 @@ export const posts: Post[] = [
       <p class="text-sm text-muted-foreground mt-8 pt-4 border-t"><em>Editor's note: Dinosaur Merchant Bank Limited is a UK-authorised broker-dealer regulated by the Financial Conduct Authority. The firm settled the FCA action in March 2026. The FCA's Final Notice is available through the FCA Register. BestForex.io has reached out to Dinosaur Merchant Bank for comment.</em></p>
     `
   },
-  // ─── End Broker Watch ─────────────────────�������������──────────��──────────────────────
+  // ─── End Broker Watch ─────────────────────�������������──────────��─────��────────────────
   {
     id: 'post-15',
     slug: 'etoro-ai-agents-grok-autopilot-trading',
