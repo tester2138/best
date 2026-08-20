@@ -95,8 +95,17 @@ const getPublicBrandRows = unstable_cache(loadPublicBrandRows, ['public-broker-o
   revalidate: 300,
 })
 
-function statusFromRow(row: PublicBrandRow | undefined): VerificationStatus {
-  return row?.verification_status === 'verified' ? 'verified' : 'unverified'
+function statusFromRow(
+  row: PublicBrandRow | undefined,
+  fallback: VerificationStatus,
+): VerificationStatus {
+  // A present DB row is authoritative. When the overlay is unavailable, keep
+  // the reviewed status shipped in the editorial catalogue rather than
+  // silently demoting every brand to unverified.
+  if (row) {
+    return row.verification_status === 'verified' ? 'verified' : 'unverified'
+  }
+  return fallback
 }
 
 function rowMap(rows: PublicBrandRow[]): Map<string, PublicBrandRow> {
@@ -110,9 +119,9 @@ function mergeDirectoryCompany(
   const row = rows.get(company.slug.toLowerCase())
   return {
     ...company,
-    verificationStatus: statusFromRow(row),
-    isSponsored: row?.is_sponsored ?? false,
-    isFeatured: row?.is_featured ?? false,
+    verificationStatus: statusFromRow(row, company.verificationStatus),
+    isSponsored: row?.is_sponsored ?? company.isSponsored,
+    isFeatured: row?.is_featured ?? company.isFeatured,
     websiteUrl: row?.website || company.websiteUrl,
     logoUrl: row?.logo_url || company.logoUrl,
     displayRank: row?.display_rank ?? undefined,
@@ -126,9 +135,9 @@ function mergeBroker(broker: Broker, rows: Map<string, PublicBrandRow>): Broker 
   const row = rows.get(broker.slug.toLowerCase())
   return {
     ...broker,
-    verificationStatus: statusFromRow(row),
-    isSponsored: row?.is_sponsored ?? false,
-    isFeatured: row?.is_featured ?? false,
+    verificationStatus: statusFromRow(row, broker.verificationStatus ?? 'unverified'),
+    isSponsored: row?.is_sponsored ?? broker.isSponsored,
+    isFeatured: row?.is_featured ?? broker.isFeatured,
     websiteUrl: row?.website || broker.websiteUrl,
     logoUrl: row?.logo_url || broker.logoUrl,
     // Apply the canonical CSV score to the broker rating
