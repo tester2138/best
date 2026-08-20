@@ -182,7 +182,7 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
                       {post.content && (
                         <>
                           <span className="text-xs text-muted-foreground">
-                            {readMinutes(post.content.split(/\s+/).length)} min read
+                            {readMinutes(post.content.split(/\s+/).length)}
                           </span>
                           <span className="text-xs text-muted-foreground">·</span>
                         </>

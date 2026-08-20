@@ -95,7 +95,22 @@ async function loadClaimedData(slug: string): Promise<ClaimedData | null> {
 }
 
 export function getClaimedData(slug: string): Promise<ClaimedData | null> {
-  return unstable_cache(() => loadClaimedData(slug), ['claimed-data', slug], {
-    tags: [`broker:${slug}`],
-  })()
+  return unstable_cache(
+    async () => {
+      // Callers already treat `null` as "not a claimed brand" and render the
+      // static editorial page, so a DB outage degrades to that same path
+      // instead of throwing into the route error boundary.
+      try {
+        return await loadClaimedData(slug)
+      } catch (err) {
+        const message = err instanceof Error ? err.message : String(err)
+        console.error(
+          `[claimed] brand data unavailable for ${slug}, serving static page — ${message}`,
+        )
+        return null
+      }
+    },
+    ['claimed-data', slug],
+    { tags: [`broker:${slug}`] },
+  )()
 }

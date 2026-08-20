@@ -9,18 +9,29 @@ async function loadPublicSections(slug: string): Promise<PublicSections> {
   // public_broker_sections is a VIEW filtered to is_claimed=true only.
   // Query broker_page_sections directly so unclaimed/bulk-imported brands
   // also get their sections loaded.
-  const rows = await query<{ section_key: SectionKey; published: Record<string, unknown> }>(
-    `SELECT s.section_key, s.published
-       FROM public.broker_page_sections s
-       JOIN public.brands b ON b.id = s.brand_id
-      WHERE b.slug = $1 AND s.published IS NOT NULL`,
-    [slug],
-  )
-  const sections: PublicSections = {}
-  for (const row of rows) {
-    sections[row.section_key] = row.published
+  // Portal-authored sections are additive enhancements to the static broker
+  // page, so a DB outage must degrade to "no extra sections" rather than
+  // taking the whole profile page down.
+  try {
+    const rows = await query<{ section_key: SectionKey; published: Record<string, unknown> }>(
+      `SELECT s.section_key, s.published
+         FROM public.broker_page_sections s
+         JOIN public.brands b ON b.id = s.brand_id
+        WHERE b.slug = $1 AND s.published IS NOT NULL`,
+      [slug],
+    )
+    const sections: PublicSections = {}
+    for (const row of rows) {
+      sections[row.section_key] = row.published
+    }
+    return sections
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err)
+    console.error(
+      `[public-sections] unavailable for ${slug}, serving static page — ${message}`,
+    )
+    return {}
   }
-  return sections
 }
 
 export const getPublicSections = (slug: string) =>

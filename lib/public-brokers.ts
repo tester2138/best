@@ -51,6 +51,22 @@ const PINNED_DIRECTORY_SLUGS = [
 const PINNED_HOMEPAGE_SLUGS = PINNED_DIRECTORY_SLUGS.slice(0, 5) as readonly string[]
 
 async function loadPublicBrandRows(): Promise<PublicBrandRow[]> {
+  // The DB only supplies an OVERLAY on top of the static editorial directory.
+  // Every merge helper below already tolerates a missing row, so if the
+  // database is unavailable (quota, cold start, network) we degrade to the
+  // static catalogue instead of throwing and tripping the error boundary.
+  try {
+    return await queryPublicBrandRows()
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err)
+    console.error(
+      `[public-brokers] brand overlay unavailable, serving static directory — ${message}`,
+    )
+    return []
+  }
+}
+
+async function queryPublicBrandRows(): Promise<PublicBrandRow[]> {
   return query<PublicBrandRow>(
     `select b.slug,
             b.website,
