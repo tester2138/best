@@ -33,21 +33,6 @@ function isLive(post: Post, now: number): boolean {
   return Number.isNaN(t) ? true : t <= now
 }
 
-/**
- * JS mirror of the Postgres tag-slug expression below (and of tagToSlug in
- * data/posts.ts). Kept local so the fallback path has no circular dependency
- * on the function-level exports of data/posts.ts.
- */
-function slugifyTagJs(tag: string): string {
-  return tag
-    .toLowerCase()
-    .replace(/[^\x00-\x7F]/g, '')
-    .replace(/[\s_]+/g, '-')
-    .replace(/[^a-z0-9-]/g, '')
-    .replace(/-{2,}/g, '-')
-    .replace(/^-+|-+$/g, '')
-}
-
 /** Static mirror of `WHERE published_at <= NOW() ORDER BY published_at DESC`. */
 function staticVisiblePosts(): Post[] {
   const now = Date.now()
@@ -419,89 +404,6 @@ export async function getPublishedAuthors(): Promise<Author[]> {
     () => {
       const activeSlugs = new Set(staticVisiblePosts().map((p) => p.author.slug))
       return authors.filter((a) => activeSlugs.has(a.slug))
-    },
-  )
-}
-
-/**
- * Slugify a raw tag string inside Postgres, matching the JS tagToSlug() logic.
- *
- * Approach (P1-263 null-byte fix):
- *   \x00-\x7F in a JS template literal → the JS engine evaluates \x00 as the
- *   actual null byte U+0000, which Neon rejects with "string contains embedded
- *   null". We therefore use Postgres POSIX character classes instead:
- *     [^[:ascii:]]  – strips every non-ASCII character (€, £, ¥, accented, …)
- *     [[:space:]_]  – matches whitespace and underscore for hyphen-collapse
- *   These patterns are pure ASCII text with no escape sequences, so they are
- *   safe to embed directly in a tagged-template SQL literal.
- */
-
-/** Inline SQL expression for tag → URL slug, referencing a column alias `t`. */
-const slugifyTag = (col: string) =>
-  `TRIM(BOTH '-' FROM REGEXP_REPLACE(REGEXP_REPLACE(REGEXP_REPLACE(LOWER(${col}), '[^[:ascii:]]', '', 'g'), '[[:space:]_]+', '-', 'g'), '[^a-z0-9-]', '', 'g'))`
-
-/** Posts carrying the given tag slug (lowercased + ASCII-only hyphenated). */
-export async function getPostsByTag(tagSlug: string): Promise<Post[]> {
-  return withFallback(
-    `getPostsByTag(${tagSlug})`,
-    async () => {
-      const rows = await sql`
-        SELECT
-          id, slug, title, excerpt, category, editorial_type,
-          author_name, author_slug, author_avatar, author_bio, author_role,
-          featured_image, image_alt_text, is_featured,
-          published_at, updated_at, reading_time, word_count,
-          meta_title, meta_description, tags, related_brokers, linked_sources
-        FROM public.posts
-        WHERE status = 'published' AND published_at <= NOW()
-          AND EXISTS (
-            SELECT 1 FROM unnest(tags) AS t
-            WHERE TRIM(BOTH '-' FROM REGEXP_REPLACE(REGEXP_REPLACE(REGEXP_REPLACE(LOWER(t), '[^[:ascii:]]', '', 'g'), '[[:space:]_]+', '-', 'g'), '[^a-z0-9-]', '', 'g')) = ${tagSlug}
-          )
-        ORDER BY published_at DESC
-      `
-      return rows.map(mapRow)
-    },
-    () =>
-      staticVisiblePosts().filter((p) =>
-        p.tags?.some((t) => slugifyTagJs(t) === tagSlug),
-      ),
-  )
-}
-
-/** All unique tag slugs with their label and published article count. */
-export async function getAllTags(): Promise<{ slug: string; label: string; count: number }[]> {
-  return withFallback(
-    'getAllTags',
-    async () => {
-      const rows = await sql`
-        SELECT
-          TRIM(BOTH '-' FROM REGEXP_REPLACE(REGEXP_REPLACE(REGEXP_REPLACE(LOWER(t), '[^[:ascii:]]', '', 'g'), '[[:space:]_]+', '-', 'g'), '[^a-z0-9-]', '', 'g')) AS slug,
-          t                           AS label,
-          COUNT(*)::int               AS count
-        FROM public.posts, unnest(tags) AS t
-        WHERE status = 'published' AND published_at <= NOW()
-        GROUP BY t
-        ORDER BY count DESC, t ASC
-      `
-      return rows.map((r: Record<string, unknown>) => ({
-        slug: r.slug as string,
-        label: r.label as string,
-        count: r.count as number,
-      }))
-    },
-    () => {
-      const counts = new Map<string, { slug: string; label: string; count: number }>()
-      for (const post of staticVisiblePosts()) {
-        for (const tag of post.tags ?? []) {
-          const existing = counts.get(tag)
-          if (existing) existing.count += 1
-          else counts.set(tag, { slug: slugifyTagJs(tag), label: tag, count: 1 })
-        }
-      }
-      return [...counts.values()]
-        .filter((t) => t.slug.length > 0)
-        .sort((a, b) => b.count - a.count || a.label.localeCompare(b.label))
     },
   )
 }

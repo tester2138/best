@@ -228,23 +228,6 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
               </>
             )}
           </div>
-          {/* Row 138: tags link to /news/tag/[tag] topic hubs so they carry
-              internal link equity and help crawlers discover related articles. */}
-          {post.tags && post.tags.length > 0 && (
-            <div className="mt-4 flex flex-wrap gap-2">
-              {post.tags.map((tag: string, idx: number) => (
-                <Link
-                  key={idx}
-                  href={`/news/tag/${encodeURIComponent(tag.toLowerCase().replace(/\s+/g, '-'))}`}
-                  className="inline-flex"
-                >
-                  <Badge variant="secondary" className="text-xs hover:bg-secondary/80 transition-colors cursor-pointer">
-                    {tag}
-                  </Badge>
-                </Link>
-              ))}
-            </div>
-          )}
         </div>
       </section>
 

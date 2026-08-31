@@ -8736,8 +8736,6 @@ export {
   getPostsByAuthor,
   getPostsByBrokerSlug,
   getPublishedAuthors,
-  getPostsByTag,
-  getAllTags,
 } from '@/lib/news-queries'
 
 // ─── isPublished (kept for backward compat with news-sitemap.xml) ────────────
@@ -8751,32 +8749,4 @@ export function isPublished(post: Post, now: number = Date.now()): boolean {
 // ─── Author lookup (sync — authors are static) ──────────────────────────────
 export function getAuthorBySlug(slug: string): Author | undefined {
   return authors.find(a => a.slug === slug)
-}
-
-// ─── Tag slug normalisation (sync — pure string transform) ──────────────────
-/**
- * Normalise a raw tag string to a pure-ASCII URL slug for /news/tag/[slug].
- *
- * Steps (P1-263 — euro-symbol redirect-loop fix):
- *  1. Strip every non-ASCII character (currency symbols €, £, ¥, etc., accents, etc.)
- *     so the slug is crawlable without percent-encoding and never self-redirects.
- *  2. Collapse whitespace / hyphens to a single hyphen.
- *  3. Trim leading/trailing hyphens.
- *
- * The DB queries in lib/news-queries.ts apply the same transformation via a
- * matching Postgres expression so tag lookups remain consistent.
- */
-export function tagToSlug(tag: string): string {
-  return tag
-    .toLowerCase()
-    // Replace non-ASCII characters with nothing (strips €, £, ¥, accents…)
-    .replace(/[^\x00-\x7F]/g, '')
-    // Collapse any run of whitespace or separators into a single hyphen
-    .replace(/[\s_]+/g, '-')
-    // Remove any character that isn't a-z, 0-9, or hyphen
-    .replace(/[^a-z0-9-]/g, '')
-    // Collapse multiple consecutive hyphens
-    .replace(/-{2,}/g, '-')
-    // Trim leading / trailing hyphens
-    .replace(/^-+|-+$/g, '')
 }
