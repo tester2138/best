@@ -102,6 +102,887 @@ export const authors: Author[] = [
 ]
 
 export const posts: Post[] = [
+  // ─── Scheduled Broker Watch Posts — 1 September 2026 ─────────────────────────
+  // Posts 103–112. Prop-firm and broker accountability set, all dated
+  // 2026-09-01 so the DB visibility gate releases them together on that date.
+  {
+    id: 'post-112',
+    slug: 'swissquote-shares-fall-h1-2026-crypto-guidance-cut',
+    title: 'Swissquote Shares Fall 12 Percent as Crypto Income Collapses and Full Year Guidance Is Cut',
+    excerpt: 'Swissquote shares dropped 12.86 percent after H1 2026 results showed crypto income down 66 percent and full year guidance cut, even as client assets hit a record 96.3 billion francs.',
+    category: 'news',
+    editorialType: 'Opinion',
+    author: authors[3], // Clarissa Penhallow
+    publishedAt: '2026-09-01',
+    updatedAt: '2026-09-01',
+    featuredImage: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2026-09-01_Swissquote_cover-xheERpa7XVmsS3ZMaUOaiOFPcTiBKM.png',
+    imageAltText: 'Swissquote shares sink as crypto income collapses — BestForex.io Broker Watch cover image',
+    readingTime: '6 min read',
+    wordCount: 950,
+    metaTitle: 'Swissquote Shares Fall 12% After H1 2026 | BestForex.io',
+    metaDescription: 'Swissquote shares dropped 12.86% after H1 2026 results showed crypto income down 66% and a cut full year guidance. What it means for traders.',
+    sourceName: 'Swissquote Investor Relations',
+    tags: ['Swissquote', 'FINMA', 'Switzerland', 'Earnings', 'H1 2026', 'Crypto Revenue', 'Guidance Cut', 'Client Assets', 'Broker Watch'],
+    isFeatured: true,
+    relatedBrokers: ['swissquote'],
+    linkedSources: [
+      { label: 'Swissquote — Investor Relations', url: 'https://www.swissquote.com/en/group/investor-relations' },
+    ],
+    content: `
+<p>Swissquote Bank shares fell 12.86 percent on 13 August 2026, closing near a 52 week low after the Swiss online bank published half year results that paired a headline record in client assets with a crypto trading business in freefall. The Zurich listed group, regulated by FINMA as a Swiss bank and securities dealer, reported net revenues of 364.2 million Swiss francs for the six months to 30 June 2026, up just 1.7 percent year on year, while income tied to crypto assets collapsed 66.2 percent to 14 million francs.</p>
+
+<p>Pre tax profit came in at 153.6 million francs, a margin above 50 percent that on its own would read as a strong half. What moved the share price was the swing beneath that number. Crypto trading had been one of Swissquote&apos;s fastest growing revenue lines through the prior cycle, and management had budgeted roughly 85 million francs of crypto related income for the full 2026 year. The actual run rate implied by the first half result is a small fraction of that figure, and the company revised its full year guidance down accordingly, now pointing to full year net revenue near 730 million francs and pre tax profit near 365 million francs.</p>
+
+<h2>What Happened to the Crypto Business</h2>
+
+<p>Swissquote does not break out exact trading volumes by asset class in its half year summary, but the size of the miss against an 85 million franc budget line points to a sharp pullback in client crypto trading activity during a period when digital asset prices were volatile and trading interest broadly cooled. The bank&apos;s own client asset total kept climbing regardless, reaching 96.3 billion francs, up 19.8 percent year on year and within reach of the 100 billion franc mark management had been promoting as a near term milestone. That total includes forex, equities and traditional banking balances alongside crypto holdings, so a strong headline number was always going to sit on top of a much weaker crypto segment once it was reported separately.</p>
+
+<h2>Is Swissquote Regulated</h2>
+
+<p>Swissquote Bank Ltd operates under a Swiss banking and securities dealer licence supervised by FINMA, and the group runs additional regulated entities serving clients outside Switzerland. None of that licensing is in question here, and nothing in the half year report points to a client money or custody problem. What the results show is a business mix problem: a broker that leaned into crypto as a growth driver during the last cycle is now absorbing what happens when that trade slows, and investors reacted to the guidance cut faster than the record asset headline could offset it.</p>
+
+<h2>Industry Implication</h2>
+
+<p>The pattern is not unique to Swissquote. A run of brokers built crypto access into their retail offering over the past three years to chase a client base that wanted both fiat and digital assets in one account, often pricing it as a high margin addition to a lower margin forex and CFD book. Swissquote&apos;s own numbers now show how quickly that additional revenue can evaporate when digital asset markets turn quiet, and how a broker&apos;s full year guidance, not its trailing client asset total, is the more honest measure of where the business is actually heading.</p>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="bestforex-view-heading" class="rounded-xl border border-primary/30 bg-primary/5 px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-primary mb-3">BestForex.io View</p>
+  <h2 id="bestforex-view-heading" class="text-xl font-bold text-foreground mb-4">A Twelve Percent Single Day Drop Is Not a Rounding Error.</h2>
+  <p class="text-foreground leading-relaxed mb-3">Burying a two thirds collapse in crypto income behind a headline about record client assets is the kind of framing BestForex.io exists to call out. Swissquote&apos;s core banking and multi asset franchise still generated a thin revenue increase and a healthy pre tax margin above fifty percent, so this is not a business in crisis.</p>
+  <p class="text-foreground leading-relaxed font-medium">It is, however, a business that leaned hard into digital asset trading during the last cycle and is now absorbing what happens when that trade turns. Traders choosing a broker partly for its crypto offering should treat the freshly cut full year guidance as the more honest number, not the client asset total the headlines led with.</p>
+</section>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="about-swissquote-heading-112" class="rounded-xl border border-border bg-card px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">About the Company</p>
+  <h2 id="about-swissquote-heading-112" class="text-xl font-bold text-foreground mb-4">About Swissquote</h2>
+  <div class="grid gap-4 sm:grid-cols-2 my-5">
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Regulator</p>
+      <p class="font-semibold text-foreground">FINMA</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Jurisdiction</p>
+      <p class="font-semibold text-foreground">Switzerland</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Action Type</p>
+      <p class="font-semibold text-foreground">Earnings report, guidance cut</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Penalty</p>
+      <p class="font-semibold text-foreground">Not applicable</p>
+    </div>
+  </div>
+  <p class="text-foreground leading-relaxed">Swissquote Bank Ltd is a Swiss online bank and trading platform founded in 1996 and listed on the SIX Swiss Exchange, offering foreign exchange, CFD, equities, crypto and banking services to retail and institutional clients. The bank is headquartered in Gland, Switzerland, and is regulated by FINMA as a licensed bank and securities dealer, with additional entities serving clients in other regions. As of the first half of 2026 it reported total client assets of 96.3 billion Swiss francs across its platform.</p>
+</section>
+
+<h2>Frequently Asked Questions</h2>
+
+<h3>Is Swissquote regulated?</h3>
+<p>Yes. Swissquote Bank Ltd is licensed as a bank and securities dealer by FINMA in Switzerland, and the wider group operates additional regulated entities for clients in other regions. The August 2026 share price move followed disappointing earnings, not a regulatory or licensing issue.</p>
+
+<h3>Why did Swissquote shares fall in August 2026?</h3>
+<p>Swissquote shares fell 12.86 percent on 13 August 2026 after half year results showed crypto related income down 66.2 percent to 14 million francs against a budgeted 85 million francs for the year, prompting management to cut its full year 2026 guidance even as total client assets rose to a record 96.3 billion francs.</p>
+
+<h3>Is Swissquote safe for traders?</h3>
+<p>Nothing in the half year report points to a client money or custody problem, and the FINMA banking licence remains in place. The concern is business mix rather than solvency. Compare regulated brokers in our <a href="/brokers" class="text-primary underline underline-offset-2 hover:text-primary/80">Best Forex Brokers in 2026</a> ranking.</p>
+
+<p class="text-sm text-muted-foreground mt-8 pt-4 border-t"><em>Editor&apos;s note &amp; source: Financial figures drawn from Swissquote&apos;s own half year 2026 results and investor relations disclosures. This is an earnings report, not a regulatory action. This article is not investment advice. Last updated: 1 September 2026.</em></p>
+    `,
+  },
+  {
+    id: 'post-111',
+    slug: 'tradeview-markets-fund-removal-complaints-cnmv-warning',
+    title: 'Tradeview Markets Faces Fresh Fund Removal Complaints Nine Years After a CNMV Warning',
+    excerpt: 'Tradeview Markets is generating fresh complaints alleging unauthorised fund removal and account closures nine years after Spain\u2019s CNMV named the firm as operating without authorisation.',
+    category: 'news',
+    editorialType: 'Opinion',
+    author: authors[6], // Beatrix Fairmont
+    publishedAt: '2026-09-01',
+    updatedAt: '2026-09-01',
+    featuredImage: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2026-09-01_TradeviewMarkets_cover-OruxkNwfFz7AUOrH452xafk8tQH9GO.png',
+    imageAltText: 'Tradeview faces fund removal complaints years after warning — BestForex.io Broker Watch cover image',
+    readingTime: '6 min read',
+    wordCount: 980,
+    metaTitle: 'Tradeview Markets Complaints and CNMV Warning | BestForex.io',
+    metaDescription: 'Tradeview Markets faces fresh fund removal complaints nine years after a CNMV warning. See the documented cases and what licences the firm actually holds.',
+    sourceName: 'El Asesor Financiero',
+    tags: ['Tradeview Markets', 'CNMV', 'Spain', 'Unauthorised Firm Warning', 'Cayman Islands', 'CIMA', 'MFSA', 'Labuan FSA', 'Client Complaints', 'Broker Watch'],
+    isFeatured: true,
+    relatedBrokers: [],
+    linkedSources: [
+      { label: 'El Asesor Financiero — CNMV warning list', url: 'https://elasesorfinanciero.com/cnmv-tradeview-grupo-securitas-integrated-markets-caamar-trisca-investments-chiringuitos-financieros/' },
+    ],
+    content: `
+<p>Tradeview Markets is generating a fresh cluster of complaints alleging unauthorised fund removal and account closures nine years after Spain&apos;s securities regulator, the Comision Nacional del Mercado de Valores, named the firm as operating without authorisation in the country. Spanish financial outlet El Asesor Financiero reported the CNMV warning against Tradeview alongside four other unauthorised firms, and WikiFX&apos;s regulator disclosure record dates the original Spanish warning to 30 October 2017. WikiFX&apos;s own risk assessment now carries a reduced score of 3.92 out of 10, citing a high volume of unresolved client complaints.</p>
+
+<p>The complaints documented on WikiFX describe a consistent pattern. One trader reports Tradeview left a shared communication channel used for transaction updates and unilaterally cancelled the account on 11 September, erasing transaction records and taking an account balance of 368,811.75 dollars. Another describes an account funded with 8,635.95 dollars that was wiped down to a negative balance of 19.78 dollars, with the full funded amount reported taken. A third describes being pressured to sign an agreement before being allowed to access remaining funds after an unauthorised deduction. WikiFX&apos;s page for the firm documents 15 separate exposure complaints in total covering fund seizures, account closures and withdrawal denials.</p>
+
+<h2>Is Tradeview Markets Regulated</h2>
+
+<p>Tradeview operates under a Cayman Islands CIMA licence, number 585163, along with a Malta MFSA entity and a Labuan FSA licence, and secured a UAE Securities and Commodities Authority licence in July 2025. None of those licences authorise the firm to solicit clients in Spain, which is what the 2017 CNMV warning addressed. A regulator naming a firm as unauthorised in a specific market does not necessarily mean the firm is unregulated everywhere, but it does mean Spanish residents dealing with Tradeview have no protection from the CNMV if a dispute arises, regardless of what licences the firm holds elsewhere.</p>
+
+<h2>Industry Implication</h2>
+
+<p>A nine year old regulator warning is easy for a broker to outlive in search results and easy for a prospective client to miss entirely. What has not aged is the underlying concern a warning like that exists to flag: clients dealing with a firm outside the jurisdiction that is actually trying to protect them. The fresh complaint pattern on WikiFX, dollar figures reported taken and accounts closed without explanation, is the kind of outcome a 2017 warning was trying to prevent, arriving in 2026 regardless.</p>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="bestforex-view-heading" class="rounded-xl border border-primary/30 bg-primary/5 px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-primary mb-3">BestForex.io View</p>
+  <h2 id="bestforex-view-heading" class="text-xl font-bold text-foreground mb-4">A 2017 Warning Does Not, on Its Own, Prove Anything About a Broker in 2026.</h2>
+  <p class="text-foreground leading-relaxed mb-3">What moves this from stale history to a live concern is that the specific harm Spain&apos;s regulator was warning about, dealing with a firm operating outside proper authorisation, shows up again in documented complaints filed this year. Tradeview holds real offshore licences and added a UAE licence as recently as last year, so this is not a firm with no regulatory footprint at all.</p>
+  <p class="text-foreground leading-relaxed font-medium">It is a firm whose footprint does not cover the jurisdiction its own regulator warning named, and clients outside that footprint are the ones filing the complaints.</p>
+</section>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="about-tradeview-heading-111" class="rounded-xl border border-border bg-card px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">About the Company</p>
+  <h2 id="about-tradeview-heading-111" class="text-xl font-bold text-foreground mb-4">About Tradeview Markets</h2>
+  <div class="grid gap-4 sm:grid-cols-2 my-5">
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Regulator</p>
+      <p class="font-semibold text-foreground">CNMV warning | CIMA, MFSA, Labuan FSA, SCA licences</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Jurisdiction</p>
+      <p class="font-semibold text-foreground">Spain warning | Cayman Islands base</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Action Type</p>
+      <p class="font-semibold text-foreground">Unauthorised firm warning</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Penalty</p>
+      <p class="font-semibold text-foreground">Not applicable</p>
+    </div>
+  </div>
+  <p class="text-foreground leading-relaxed">Tradeview Ltd, trading as Tradeview Markets, is a forex and CFD broker founded in 2004 by Timothy Furey. The firm holds a Cayman Islands Monetary Authority licence, a Malta MFSA entity, and a Labuan Financial Services Authority licence, and added a United Arab Emirates Securities and Commodities Authority licence in July 2025. Spain&apos;s securities regulator, the CNMV, issued a public warning in October 2017 stating Tradeview was not authorised to provide investment services in the country.</p>
+</section>
+
+<h2>Frequently Asked Questions</h2>
+
+<h3>Is Tradeview Markets regulated?</h3>
+<p>Tradeview holds a Cayman Islands CIMA licence, a Malta MFSA entity and a Labuan FSA licence, and added a UAE Securities and Commodities Authority licence in July 2025. Spain&apos;s CNMV separately warned in October 2017 that Tradeview was not authorised to provide investment services in Spain, and that warning remains on the regulator&apos;s public disclosure record.</p>
+
+<h3>What are the recent complaints against Tradeview Markets?</h3>
+<p>WikiFX documents 15 exposure complaints against Tradeview covering fund seizures, unexplained account deductions and account closures without explanation, including one report of an account balance of 368,811.75 dollars taken after the firm cancelled the account and erased transaction records.</p>
+
+<h3>Is Tradeview Markets legit?</h3>
+<p>Tradeview is an operating broker with genuine offshore licences, but it carries a standing CNMV unauthorised firm warning for Spain and a WikiFX risk score of 3.92 out of 10 citing unresolved complaints. Compare licensed alternatives in our <a href="/brokers" class="text-primary underline underline-offset-2 hover:text-primary/80">Best Forex Brokers in 2026</a> ranking.</p>
+
+<p class="text-sm text-muted-foreground mt-8 pt-4 border-t"><em>Editor&apos;s note &amp; source: Factual points drawn from El Asesor Financiero reporting on the CNMV warning list and WikiFX regulator disclosure and exposure records. Client complaints are third party allegations and remain unproven. This article is not investment advice. Last updated: 1 September 2026.</em></p>
+    `,
+  },
+  {
+    id: 'post-110',
+    slug: 'qt-funded-quant-tekel-payout-denial-pattern-2026',
+    title: 'QT Funded Traders Report a Pattern of Denied Payouts After Months of Profitable Trading',
+    excerpt: 'QT Funded, the trading name of Quant Tekel, faces a documented pattern of denied and delayed payouts across at least seven cases running from October 2025 through March 2026.',
+    category: 'news',
+    editorialType: 'Opinion',
+    author: authors[6], // Beatrix Fairmont
+    publishedAt: '2026-09-01',
+    updatedAt: '2026-09-01',
+    featuredImage: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2026-09-01_QTFunded_cover-NNbdEyIrQM6jK5MCuVzVNH1upVx2q3.png',
+    imageAltText: 'QT Funded traders report denied payouts after profits — BestForex.io Broker Watch cover image',
+    readingTime: '7 min read',
+    wordCount: 1020,
+    metaTitle: 'QT Funded Payout Denials Investigated 2026 | BestForex.io',
+    metaDescription: 'QT Funded traders report a pattern of denied and delayed payouts after hitting profit targets. See the documented cases before funding a challenge.',
+    sourceName: 'PropFirmGeeks',
+    tags: ['QT Funded', 'Quant Tekel', 'Prop Trading', 'Payout Denial', 'Saint Vincent and the Grenadines', 'FSCA', 'Unregulated', 'Funded Accounts', 'Broker Watch'],
+    isFeatured: true,
+    relatedBrokers: [],
+    linkedSources: [
+      { label: 'PropFirmGeeks — QT Funded payout rejection cases', url: 'https://propfirmgeeks.com/blogs/qt-funded-payout-rejection-crisis-why-traders-are-losing-funded-accounts-and-profits-in-2026' },
+    ],
+    content: `
+<p>QT Funded, the trading name of Quant Tekel, is facing a documented pattern of denied and delayed payouts running from October 2025 through March 2026, according to case files compiled by PropFirmGeeks and corroborated by threads on Forex Peace Army and Reddit. In one case a trader who cleared a five percent profit target waited more than ten days without an update. In another, a trader received a written approval email from the firm&apos;s own risk team, only to have live chat support disabled the next day and the account blocked entirely three days after that.</p>
+
+<p>The pattern repeats across at least seven separately documented cases. A trader denied a 33,000 dollar payout for holding four positions on GBPNZD under a layering rule saw that same rule quietly removed from the account type one month later. A second trader had 6,000 dollars in profit rejected over what the firm called one sided betting, despite providing evidence of stop losses and take profits on every trade, and was then banned from the firm&apos;s Discord server. A third trader with 22,000 dollars in combined profit across two payout requests had previously approved identity verification suddenly rejected, and the account was deactivated with no explanation given.</p>
+
+<h2>How QT Funded Is Structured</h2>
+
+<p>Quant Tekel operates through at least three linked entities. Quant Tekel LLC, registered in Saint Vincent and the Grenadines, holds the funded account contracts that traders actually sign. A UK registered company based in Canary Wharf, London, handles payment processing. A separate South African entity, Quant Tekel Pty Ltd, carries a Financial Sector Conduct Authority licence, but that licence covers a different regulated business line and does not extend to the funded account contracts issued through the Saint Vincent entity. Saint Vincent and the Grenadines does not licence or supervise forex or CFD trading firms, so the contract that actually governs a trader&apos;s payout carries no regulatory oversight at all.</p>
+
+<h2>Is QT Funded Legit</h2>
+
+<p>QT Funded markets itself as a global prop trading firm with more than 85,000 funded traders and advertises challenge fees from as little as 10.40 dollars. Trustpilot shows an aggregate rating of 3.9 out of 5 from more than 13,000 reviews, but roughly 16 percent of those reviews are one star, and the one star cluster is dominated by a single recurring complaint: a payout approved, promised, or nearly processed, followed by silence, a rule cited after the fact, or a blocked account. BestForex.io found no public statement from Quant Tekel or QT Funded leadership addressing the pattern directly; the only documented company response found was a technical note on how the firm calculates exposure.</p>
+
+<h2>Industry Implication</h2>
+
+<p>Funded trading firms sell a simple promise: trade a firm&apos;s capital, keep a share of the profit. That promise depends entirely on the firm actually paying out once a trader clears its own rules. QT Funded&apos;s case files show a recurring shortcut around that promise, a rule invoked after a profit target is hit rather than before, that leaves a trader with no real recourse in an industry that remains almost entirely self regulated. Traders evaluating any funded account provider should treat a firm&apos;s payout history, not its account price or profit split, as the number that actually matters.</p>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="bestforex-view-heading" class="rounded-xl border border-primary/30 bg-primary/5 px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-primary mb-3">BestForex.io View</p>
+  <h2 id="bestforex-view-heading" class="text-xl font-bold text-foreground mb-4">A Firm That Removes a Rule One Month After Using It to Deny a 33,000 Dollar Payout Is Showing Its Hand.</h2>
+  <p class="text-foreground leading-relaxed mb-3">QT Funded&apos;s structure, an unregulated Saint Vincent contract entity sitting behind a UK payment processor and a separately licenced South African affiliate, is built in a way that makes accountability hard to locate, and a pattern of approved payouts reversed by sudden account bans suggests that is no accident.</p>
+  <p class="text-foreground leading-relaxed font-medium">None of this means every QT Funded trader gets denied. It means the traders who do get denied have nowhere real to take the complaint, and that asymmetry is the entire problem with self regulated funded trading.</p>
+</section>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="about-qtfunded-heading-110" class="rounded-xl border border-border bg-card px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">About the Company</p>
+  <h2 id="about-qtfunded-heading-110" class="text-xl font-bold text-foreground mb-4">About QT Funded</h2>
+  <div class="grid gap-4 sm:grid-cols-2 my-5">
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Regulator</p>
+      <p class="font-semibold text-foreground">None for funded contracts | FSCA licence on separate entity</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Jurisdiction</p>
+      <p class="font-semibold text-foreground">Saint Vincent and the Grenadines</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Action Type</p>
+      <p class="font-semibold text-foreground">Payout denial pattern</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Penalty</p>
+      <p class="font-semibold text-foreground">Not applicable</p>
+    </div>
+  </div>
+  <p class="text-foreground leading-relaxed">Quant Tekel, trading as QT Funded, is a proprietary trading firm founded in 2023 that offers funded trading accounts to retail traders after a paid evaluation challenge. The firm operates through Quant Tekel LLC in Saint Vincent and the Grenadines, a UK registered payment entity in London, and a separately licenced South African affiliate, Quant Tekel Pty Ltd. QT Funded advertises more than 85,000 funded traders worldwide and challenge fees starting from 10.40 dollars.</p>
+</section>
+
+<h2>Frequently Asked Questions</h2>
+
+<h3>Is QT Funded regulated?</h3>
+<p>The Saint Vincent and the Grenadines entity that issues QT Funded&apos;s funded account contracts is not regulated for forex or CFD activity. A related South African entity, Quant Tekel Pty Ltd, holds a Financial Sector Conduct Authority licence, but that licence applies to a separate regulated business, not to the funded account contracts traders sign.</p>
+
+<h3>Is QT Funded legit?</h3>
+<p>QT Funded is an active, operating firm with tens of thousands of funded traders and an aggregate Trustpilot score of 3.9 out of 5. It is also the subject of a documented, recurring pattern of denied or delayed payouts, with roughly 16 percent of its Trustpilot reviews rating it one star and citing the same complaint. Traders should weigh that payout pattern against the firm&apos;s marketing claims before funding a challenge.</p>
+
+<h3>What should I do if QT Funded denies my payout?</h3>
+<p>Document every rule cited, every approval received and every support exchange in writing, then raise the matter with your payment provider and any consumer body in your own jurisdiction. Because the contract entity sits in Saint Vincent, there is no financial regulator to escalate to. Compare regulated alternatives in our <a href="/brokers" class="text-primary underline underline-offset-2 hover:text-primary/80">Best Forex Brokers in 2026</a> ranking.</p>
+
+<p class="text-sm text-muted-foreground mt-8 pt-4 border-t"><em>Editor&apos;s note &amp; source: Case details drawn from PropFirmGeeks case files corroborated by Forex Peace Army and Reddit threads. Individual trader accounts are third party allegations and remain unproven. No regulator has taken action against the firm. This article is not investment advice. Last updated: 1 September 2026.</em></p>
+    `,
+  },
+  {
+    id: 'post-109',
+    slug: 'fullerton-markets-out-of-business-2026',
+    title: 'Fullerton Markets Goes Dark as Forex Peace Army Marks the Broker Out of Business',
+    excerpt: 'Forex Peace Army marked Fullerton Markets out of business on 29 July 2026 after a quiet rebrand to Fullerverse left the original website inaccessible and support unresponsive.',
+    category: 'news',
+    editorialType: 'Opinion',
+    author: authors[3], // Clarissa Penhallow
+    publishedAt: '2026-09-01',
+    updatedAt: '2026-09-01',
+    featuredImage: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2026-09-01_FullertonMarkets_cover-fEw6CgcPzRBxuebJERCKX4fFnExLN9.png',
+    imageAltText: 'Fullerton Markets goes dark as support stops responding — BestForex.io Broker Watch cover image',
+    readingTime: '6 min read',
+    wordCount: 950,
+    metaTitle: 'Fullerton Markets Out of Business 2026 | BestForex.io',
+    metaDescription: 'Fullerton Markets has gone dark, marked out of business by Forex Peace Army after a quiet rebrand. See what happened and what clients report.',
+    sourceName: 'Forex Peace Army',
+    tags: ['Fullerton Markets', 'Fullerverse', 'Saint Vincent and the Grenadines', 'Ceased Operations', 'Offshore', 'Withdrawal Problems', 'Mario Singh', 'Broker Watch'],
+    isFeatured: true,
+    relatedBrokers: ['fullerton-markets'],
+    linkedSources: [
+      { label: 'Forex Peace Army — Fullerton Markets review', url: 'https://www.forexpeacearmy.com/forex-reviews/12632/fullerton-markets-review' },
+    ],
+    content: `
+<p>Forex Peace Army updated its Fullerton Markets listing on 29 July 2026 to mark the broker out of business, stating plainly that the website is down and the company seems to be out of business. TradersUnion, in a review last updated 28 May 2026, traces the same collapse to a rebrand: by the end of 2025 Fullerton Markets had transitioned to a brand called Fullerverse, after which the original Fullerton Markets website became inaccessible and customer support stopped responding to inquiries.</p>
+
+<p>Client reviews describe the practical effect. One trader wrote that both of the firm&apos;s websites are frozen and that the company does not answer emails, phone calls or messages sent through Telegram or WhatsApp. TradersUnion separately reports users unable to access their accounts or withdraw funds. Fullerton Markets carries a 2.565 star rating from 14 reviews on Forex Peace Army, with the most recent reviews concentrated on frozen accounts and unreachable support rather than trading conditions.</p>
+
+<h2>A Leadership Vacuum Before the Collapse</h2>
+
+<p>The operational breakdown followed a period of leadership turnover at the top of the firm. Fullerton Markets was founded in 2015 by Mario Singh, who stepped back from his role as Chairman in January 2026. Chief executive Rahul Sodhy, who joined from FXPrimus, had already left the firm at the end of 2024. Fullerton operated on offshore licensing out of Saint Vincent and the Grenadines without an independent regulator&apos;s oversight, and WikiFX has separately logged complaints alleging deleted profits and account balances flipped negative without explanation, predating the current shutdown pattern.</p>
+
+<h2>Industry Implication</h2>
+
+<p>A broker that quietly folds into a new brand while its original support channels go silent leaves existing clients holding accounts at a company that, for practical purposes, has stopped answering to them. That risk sits entirely with clients who signed up under the original name and had no say in, or clear notice of, the transition. For an offshore licensed broker with no home regulator standing behind client funds, an unresponsive support desk is not an inconvenience, it is the only recourse most clients had in the first place, now gone.</p>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="bestforex-view-heading" class="rounded-xl border border-primary/30 bg-primary/5 px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-primary mb-3">BestForex.io View</p>
+  <h2 id="bestforex-view-heading" class="text-xl font-bold text-foreground mb-4">Two Review Platforms, Updated Months Apart, Landed on the Same Conclusion.</h2>
+  <p class="text-foreground leading-relaxed mb-3">Forex Peace Army and TradersUnion are independently describing the same broker: unreachable, unresponsive, and apparently rebranded out from under its own clients. That is not a rumour, it is two platforms reaching the same finding from different angles.</p>
+  <p class="text-foreground leading-relaxed font-medium">Fullerton Markets ran for a decade under Mario Singh&apos;s name before this. Whatever Fullerverse turns out to be, clients who opened accounts as Fullerton Markets are the ones left trying to reach a company that stopped answering.</p>
+</section>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="about-fullerton-heading-109" class="rounded-xl border border-border bg-card px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">About the Company</p>
+  <h2 id="about-fullerton-heading-109" class="text-xl font-bold text-foreground mb-4">About Fullerton Markets</h2>
+  <div class="grid gap-4 sm:grid-cols-2 my-5">
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Regulator</p>
+      <p class="font-semibold text-foreground">None | Offshore registration only</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Jurisdiction</p>
+      <p class="font-semibold text-foreground">Saint Vincent and the Grenadines</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Action Type</p>
+      <p class="font-semibold text-foreground">Ceased operations</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Penalty</p>
+      <p class="font-semibold text-foreground">Not applicable</p>
+    </div>
+  </div>
+  <p class="text-foreground leading-relaxed">Fullerton Markets was a forex and CFD broker founded in 2015 by Mario Singh, operating on offshore licensing from Saint Vincent and the Grenadines without an independent home regulator. The firm&apos;s original chief executive, Rahul Sodhy, departed at the end of 2024, and Singh stepped back as Chairman in January 2026. By late 2025 the firm had reportedly transitioned toward a brand called Fullerverse, and Forex Peace Army marked the original Fullerton Markets listing out of business on 29 July 2026.</p>
+</section>
+
+<h2>Frequently Asked Questions</h2>
+
+<h3>Is Fullerton Markets still operating?</h3>
+<p>Forex Peace Army marked Fullerton Markets out of business on 29 July 2026, stating its website is down. TradersUnion reports the firm transitioned to a brand called Fullerverse by the end of 2025, after which the original website became inaccessible and support stopped responding to client inquiries.</p>
+
+<h3>Can I withdraw funds from Fullerton Markets?</h3>
+<p>Multiple client reviews report being unable to reach Fullerton Markets support through email, phone, Telegram or WhatsApp, and TradersUnion documents users unable to access accounts or withdraw funds. Clients with an open Fullerton Markets account should document all communication attempts and consult a financial dispute resource in their own jurisdiction.</p>
+
+<h3>Was Fullerton Markets regulated?</h3>
+<p>No independent home regulator supervised the firm. It operated on offshore registration from Saint Vincent and the Grenadines, which does not licence or supervise forex and CFD activity, so client funds were never covered by a compensation scheme. Compare regulated brokers in our <a href="/brokers" class="text-primary underline underline-offset-2 hover:text-primary/80">Best Forex Brokers in 2026</a> ranking.</p>
+
+<p class="text-sm text-muted-foreground mt-8 pt-4 border-t"><em>Editor&apos;s note &amp; source: Factual points drawn from Forex Peace Army and TradersUnion listings and client reviews. Client complaints are third party allegations and remain unproven. No regulator has taken formal action. This article is not investment advice. Last updated: 1 September 2026.</em></p>
+    `,
+  },
+  {
+    id: 'post-108',
+    slug: 'take-profit-trader-drawdown-rules-2026',
+    title: 'Take Profit Trader Rules Show the Drawdown Calculation Changes the Moment a Trader Gets Funded',
+    excerpt: 'Take Profit Trader\u2019s own help centre shows maximum trailing drawdown is measured end of day during the Test phase, then switches to intraday peak balance once an account is funded.',
+    category: 'news',
+    editorialType: 'Opinion',
+    author: authors[3], // Clarissa Penhallow
+    publishedAt: '2026-09-01',
+    updatedAt: '2026-09-01',
+    featuredImage: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2026-09-01_TakeProfitTrader_cover-ANX0eteQCNAJwZBfx5p08Se37IFInP.png',
+    imageAltText: 'Take Profit Trader drawdown tightens the day you get funded — BestForex.io Broker Watch cover image',
+    readingTime: '6 min read',
+    wordCount: 990,
+    metaTitle: 'Take Profit Trader Drawdown Rules 2026 | BestForex.io',
+    metaDescription: 'Take Profit Trader\u2019s own rules show the drawdown calculation switches from end of day to intraday the moment a trader gets funded. See the full numbers.',
+    sourceName: 'Take Profit Trader Help Centre',
+    tags: ['Take Profit Trader', 'Prop Trading', 'Trailing Drawdown', 'Funded Accounts', 'Profit Split', 'Florida', 'Rule Structure', 'Broker Watch'],
+    isFeatured: true,
+    relatedBrokers: ['take-profit-trader'],
+    linkedSources: [
+      { label: 'Take Profit Trader — PRO Account Rules', url: 'https://takeprofittraderhelp.zendesk.com/hc/en-us/articles/15171769361053-PRO-Account-Rules' },
+    ],
+    content: `
+<p>Take Profit Trader&apos;s own help center shows that the way it calculates maximum trailing drawdown is not the same before and after a trader gets funded. During the Test phase, the firm&apos;s documentation states the drawdown is measured only at the end of the trading day. On a twenty five thousand dollar account the maximum trailing drawdown is fifteen hundred dollars, so the floor starts at twenty three thousand five hundred dollars and only moves once a full day closes above the prior high.</p>
+
+<p>Once that same trader passes and moves to a funded PRO account, the company&apos;s own rules say the calculation switches to intraday, using peak balance that includes open, unrealized profit. On the identical twenty five thousand dollar structure, an open gain of one thousand dollars lifts the floor to twenty four thousand five hundred dollars immediately, before that trade is ever closed. A pullback that would have meant nothing on the Test account, because only the end of day print counted, can now trigger liquidation on a position that has not even been realized yet.</p>
+
+<h2>How the Two Phases Actually Differ</h2>
+
+<p>The published numbers scale with account size. A fifty thousand dollar account carries a two thousand dollar maximum drawdown, and a one hundred thousand dollar account carries three thousand dollars, both measured end of day during the Test and intraday once funded. Take Profit Trader&apos;s own documentation confirms the funded drawdown limit is fixed at whatever level the trader&apos;s account showed at the moment they passed, then holds steady from there. The mechanism is disclosed in writing. What is easy to miss is that a trader spends the entire evaluation building instincts around a rule that stops applying the day real money starts moving.</p>
+
+<h2>The Payout Speed Trade Off</h2>
+
+<p>Take Profit Trader pairs this structure with genuinely fast withdrawals. According to PropScorer&apos;s review, updated in July 2026, the firm offers withdrawal eligibility from the first funded day with no minimum number of profitable days required, and no separate consistency rule once an account is funded, unlike the evaluation stage. The same review puts the profit split at eighty percent, which it describes as the lowest among the firms in its top five, ten points under the tier standard and twenty points below Apex. Funded accounts also carry a ban on trading through specific major news events, a restriction that does not apply during the Test.</p>
+
+<h2>Industry Implication</h2>
+
+<p>None of this makes Take Profit Trader unusual among funded futures programs. What it does show is a pattern worth naming plainly: marketing language around trailing drawdown tends to describe the feature once, without flagging that the underlying calculation can change entirely between the paid evaluation and the funded account it leads to. A trader comparing prop firms on drawdown alone, without checking whether that drawdown is end of day or intraday once funded, is comparing two different products as if they were one.</p>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="bestforex-view-heading" class="rounded-xl border border-primary/30 bg-primary/5 px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-primary mb-3">BestForex.io View</p>
+  <h2 id="bestforex-view-heading" class="text-xl font-bold text-foreground mb-4">Nothing Here Is Hidden, and That Openness Deserves to Be Said Plainly.</h2>
+  <p class="text-foreground leading-relaxed mb-3">Take Profit Trader publishes both versions of the rule in its own help center. But publishing a rule and making sure a trader actually absorbs it are different things, and an evaluation that trains a trader&apos;s risk instincts on an end of day floor, then hands them an intraday floor the moment real capital is on the line, is a structural gap worth naming.</p>
+  <p class="text-foreground leading-relaxed font-medium">Pair that with the lowest profit split PropScorer records among its top five peers, and the fast, no minimum day payout starts to look less like pure generosity and more like the price of a drawdown rule that can close a funded account on a trade that never even got the chance to be realized.</p>
+</section>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="about-tpt-heading-108" class="rounded-xl border border-border bg-card px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">About the Company</p>
+  <h2 id="about-tpt-heading-108" class="text-xl font-bold text-foreground mb-4">About Take Profit Trader</h2>
+  <div class="grid gap-4 sm:grid-cols-2 my-5">
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Regulator</p>
+      <p class="font-semibold text-foreground">Not applicable | Simulated funded accounts</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Jurisdiction</p>
+      <p class="font-semibold text-foreground">United States, Florida</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Action Type</p>
+      <p class="font-semibold text-foreground">Disclosed rule structure</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Penalty</p>
+      <p class="font-semibold text-foreground">Not applicable</p>
+    </div>
+  </div>
+  <p class="text-foreground leading-relaxed">Take Profit Trader is a futures prop trading firm operated by TakeProfitTrader LLC, incorporated in Florida in March 2021 and based in Windermere, Florida, under founder and chief executive James M Sixsmith. The firm offers Test evaluation accounts followed by funded PRO accounts across several standard sizes, with an eighty percent profit split and payout eligibility from the first funded day.</p>
+</section>
+
+<h2>Frequently Asked Questions</h2>
+
+<h3>Does Take Profit Trader calculate drawdown the same way before and after funding?</h3>
+<p>No. During the Test phase the maximum trailing drawdown is calculated only at the end of the trading day. Once an account is funded on the PRO tier, the same drawdown is calculated intraday using peak balance, which includes open, unrealized profit.</p>
+
+<h3>What profit split does Take Profit Trader offer?</h3>
+<p>Take Profit Trader offers an eighty percent profit split on funded PRO accounts. PropScorer&apos;s July 2026 review lists this as the lowest split among the firms in its top five, alongside fast payout eligibility from the first funded day.</p>
+
+<h3>Is Take Profit Trader legit?</h3>
+<p>It is an operating US futures prop firm that publishes its rules openly, including both drawdown calculations, and offers withdrawal eligibility from the first funded day. The criticism here is about rule design and disclosure clarity, not misconduct. Compare firms in our <a href="/brokers" class="text-primary underline underline-offset-2 hover:text-primary/80">Best Forex Brokers in 2026</a> ranking.</p>
+
+<p class="text-sm text-muted-foreground mt-8 pt-4 border-t"><em>Editor&apos;s note &amp; source: Rule details drawn from Take Profit Trader&apos;s own published help centre documentation, with profit split and payout comparisons from PropScorer&apos;s July 2026 review. This is a disclosed rule structure, not a regulatory action. This article is not investment advice. Last updated: 1 September 2026.</em></p>
+    `,
+  },
+  {
+    id: 'post-107',
+    slug: 'maven-trading-non-disparagement-clause-fake-reviews-2026',
+    title: 'Maven Trading Bans Customers From Criticising It Online While Trustpilot Removes the Firm\u2019s Fake Reviews',
+    excerpt: 'Maven Trading\u2019s Section 14 terms forbid customers from defaming the firm on review sites, while Trustpilot separately flagged the profile and removed a number of fake reviews.',
+    category: 'news',
+    editorialType: 'Opinion',
+    author: authors[3], // Clarissa Penhallow
+    publishedAt: '2026-09-01',
+    updatedAt: '2026-09-01',
+    featuredImage: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2026-09-01_MavenTrading_cover-tvFEvCQ5ikhYdX06mnowRbvoKZynuz.png',
+    imageAltText: 'Maven Trading bans criticism as Trustpilot purges fake reviews — BestForex.io Broker Watch cover image',
+    readingTime: '6 min read',
+    wordCount: 1000,
+    metaTitle: 'Maven Trading Anti Criticism Clause 2026 | BestForex.io',
+    metaDescription: 'Maven Trading bans customers from criticising it online while Trustpilot removed the firm\u2019s fake reviews. See the exact contract language and payout terms.',
+    sourceName: 'Maven Trading Terms and Conditions',
+    tags: ['Maven Trading', 'Prop Trading', 'Non Disparagement Clause', 'Trustpilot', 'Fake Reviews', 'Payout Cap', 'Saint Lucia', 'UAE', 'Broker Watch'],
+    isFeatured: true,
+    relatedBrokers: ['maven-trading'],
+    linkedSources: [
+      { label: 'Maven Trading — Terms and Conditions', url: 'https://maventrading.com/terms-and-conditions' },
+    ],
+    content: `
+<p>Maven Trading&apos;s own Terms and Conditions forbid customers from criticising the company in public. Section 14, last amended 22 October 2025 and confirmed directly on Maven&apos;s live terms page, states: you agree also not to defame Maven LLC on social media and review sites, doing this will lead to account termination and further action when necessary. Around the same period, Trustpilot took the opposite kind of action against the same company. Independent tracker PropFirmApp documented a guideline breach notice on Maven&apos;s Trustpilot profile as of May 2026 reading breach of guidelines, Trustpilot removed a number of fake reviews for this company, after which the profile&apos;s total rating count stopped displaying publicly.</p>
+
+<p>Read together, the two facts describe a review record shaped from both directions. A funded trading contract that treats a negative review as grounds for account termination discourages real complaints from surfacing. A platform that had to remove fabricated reviews from the same firm shows the positive side of that record cannot be taken at face value either. Neither fact alone would be unusual in an industry that already runs on thin public oversight. Together, on one company, they describe a firm actively managing what the public sees rather than simply hoping for good reviews.</p>
+
+<h2>What the Payout Terms Actually Say</h2>
+
+<p>Maven advertises an 80 percent profit split and challenges starting from 15 dollars, but payouts are capped at 10,000 dollars per 10 business day cycle, and profits above that threshold are voided rather than carried forward to the next cycle, according to Maven&apos;s own published rules. A trader who clears a strong cycle can lose the excess outright rather than simply waiting longer to receive it, a structure that limits what Maven pays out regardless of how much a trader&apos;s account actually earned.</p>
+
+<h2>Where Is Maven Trading Registered</h2>
+
+<p>Maven&apos;s own marketing does not prominently disclose a single registered jurisdiction, and third party trackers disagree on the basics. One review site lists Maven&apos;s headquarters in Saint Lucia. Another cites a Dubai Silicon Oasis free zone registration in the United Arab Emirates. Maven is not a broker, holds no trading licence, and all funded accounts are simulated rather than live market positions, so the jurisdiction question determines what legal recourse, if any, a customer has when a dispute arises, and right now that answer depends on which secondhand source a trader happens to read.</p>
+
+<h2>Industry Implication</h2>
+
+<p>A non disparagement clause is not unusual in commercial contracts generally, but applying one to a retail facing product sold on Trustpilot ratings and social proof is a direct attempt to control the same review ecosystem the fake review removal shows the firm was already trying to influence. Traders researching any funded account provider should treat a suspiciously clean review profile, and a contract that punishes honest negative reviews, as two sides of the same warning sign rather than separate issues.</p>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="bestforex-view-heading" class="rounded-xl border border-primary/30 bg-primary/5 px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-primary mb-3">BestForex.io View</p>
+  <h2 id="bestforex-view-heading" class="text-xl font-bold text-foreground mb-4">A Company That Writes Account Termination Into Its Terms for Public Criticism Has Told You How It Manages Its Reputation.</h2>
+  <p class="text-foreground leading-relaxed mb-3">A company whose reviews Trustpilot had to clean out for being fake has shown what that management looks like in practice. BestForex.io does not need Maven&apos;s permission to report either fact, and Section 14 does not reach content published here.</p>
+  <p class="text-foreground leading-relaxed font-medium">Traders should read that clause literally: it exists to keep genuine complaints off review sites, not to protect Maven from false ones, and a firm confident in its payout record would not need it.</p>
+</section>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="about-maven-heading-107" class="rounded-xl border border-border bg-card px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">About the Company</p>
+  <h2 id="about-maven-heading-107" class="text-xl font-bold text-foreground mb-4">About Maven Trading</h2>
+  <div class="grid gap-4 sm:grid-cols-2 my-5">
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Regulator</p>
+      <p class="font-semibold text-foreground">None | No trading licence held</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Jurisdiction</p>
+      <p class="font-semibold text-foreground">Disputed, Saint Lucia or UAE</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Action Type</p>
+      <p class="font-semibold text-foreground">Non disparagement clause</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Penalty</p>
+      <p class="font-semibold text-foreground">Not applicable</p>
+    </div>
+  </div>
+  <p class="text-foreground leading-relaxed">Maven Trading, operated by Maven LLC, is a proprietary trading firm offering simulated funded trading challenges from 15 dollars with an advertised 80 percent profit split, active since 2022. The firm is not a licensed broker and holds no trading regulator authorisation. Third party sources give conflicting registration details, variously citing Saint Lucia and a Dubai Silicon Oasis free zone in the United Arab Emirates as the firm&apos;s base.</p>
+</section>
+
+<h2>Frequently Asked Questions</h2>
+
+<h3>Can I leave a negative review of Maven Trading?</h3>
+<p>Maven&apos;s own Terms and Conditions, Section 14, state that defaming Maven LLC on social media or review sites will lead to account termination and further action when necessary. The clause applies to Maven&apos;s own customers under its funded account contract and does not restrict independent reporting by outlets such as BestForex.io.</p>
+
+<h3>Is Maven Trading legit?</h3>
+<p>Maven Trading is an active, operating funded trading firm, but its Trustpilot profile carried a guideline breach notice as of May 2026 after the platform removed a number of fake reviews for the company. Maven also caps payouts at 10,000 dollars per 10 business day cycle, with any profit above that threshold voided rather than paid later.</p>
+
+<h3>What is Maven Trading&apos;s payout cap?</h3>
+<p>Payouts are capped at 10,000 dollars per 10 business day cycle. Profit above that threshold is voided rather than carried into the next cycle, according to Maven&apos;s own published rules. Compare firms in our <a href="/brokers" class="text-primary underline underline-offset-2 hover:text-primary/80">Best Forex Brokers in 2026</a> ranking.</p>
+
+<p class="text-sm text-muted-foreground mt-8 pt-4 border-t"><em>Editor&apos;s note &amp; source: Contract language quoted from Maven Trading&apos;s own published Terms and Conditions, with the Trustpilot guideline breach notice documented by PropFirmApp. No regulator has taken action against the firm. This article is not investment advice. Last updated: 1 September 2026.</em></p>
+    `,
+  },
+  {
+    id: 'post-106',
+    slug: 'earn2trade-pass-rate-withdrawal-data-2026',
+    title: 'Earn2Trade\u2019s Own Numbers Show Under 9 Percent Pass Their Evaluation and Fewer Than 1 in 5 Ever Withdraw',
+    excerpt: 'Earn2Trade published an 8.89 percent pass rate for 2025, while separate research found only around 18 percent of funded accounts recorded even one withdrawal that year.',
+    category: 'news',
+    editorialType: 'Opinion',
+    author: authors[6], // Beatrix Fairmont
+    publishedAt: '2026-09-01',
+    updatedAt: '2026-09-01',
+    featuredImage: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2026-09-01_Earn2Trade_cover-WwCVfVtQnFd5J3RIQpV09qCEpAciuF.png',
+    imageAltText: 'Earn2Trade data shows few traders ever get paid — BestForex.io Broker Watch cover image',
+    readingTime: '6 min read',
+    wordCount: 940,
+    metaTitle: 'Earn2Trade Pass Rate and Payout Data 2026 | BestForex.io',
+    metaDescription: 'Earn2Trade\u2019s own data shows an 8.89 percent pass rate and under 20 percent of funded accounts ever withdraw. See the full numbers before you pay a fee.',
+    sourceName: 'Lune',
+    tags: ['Earn2Trade', 'Prop Trading', 'Pass Rate', 'Withdrawal Rate', 'Funded Accounts', 'Profit Split', 'Disclosed Performance Data', 'Broker Watch'],
+    isFeatured: true,
+    relatedBrokers: ['earn2trade'],
+    linkedSources: [
+      { label: 'Lune — Earn2Trade rules and payouts guide', url: 'https://lunefi.com/blog/earn2trade-complete-guide-to-rules-and-payouts' },
+    ],
+    content: `
+<p>Earn2Trade&apos;s own published data shows an 8.89 percent pass rate across its evaluations in 2025, and separate research cited by trading platform Lune found that only 18.04 percent of Live accounts and 18.20 percent of LiveSim accounts recorded even one withdrawal that year. Put together, fewer than one in eleven traders who start an Earn2Trade evaluation pass it, and fewer than one in five of those who do reach a funded account ever actually withdraw money from it.</p>
+
+<p>The two figures answer different questions and both matter. The pass rate measures how hard the evaluation itself is to clear. The withdrawal rate measures something the marketing around funded trading rarely states plainly: even among traders who clear the evaluation and reach a funded account, most never take a payout at all, whether because the account fails a rule afterward, the trader stops trading, or profits never reach a withdrawable threshold. A prop firm can publish an honest pass rate and still leave the far larger question, what happens after passing, mostly untested in its own marketing.</p>
+
+<h2>How Earn2Trade Is Structured</h2>
+
+<p>Earn2Trade is an education and evaluation company rather than a funder in the traditional sense. Capital for funded accounts comes from trading partners including Helios Trading Partners, Appius Trading Limited and Kronos Proprietary Trading, and Earn2Trade&apos;s standard 80 to 20 profit split sits below the 90 to 10 split that has become the norm elsewhere in futures prop trading. The firm marks its tenth anniversary in 2026, having launched in 2016, and added Tradovate and TradingView platform support in March 2026.</p>
+
+<h2>Industry Implication</h2>
+
+<p>Pass rates and withdrawal rates are the two numbers that actually describe what a funded account evaluation sells, and almost no firm in this sector publishes both. Earn2Trade&apos;s willingness to put an 8.89 percent pass rate on the record is more transparent than the sector norm, and it is also a number that, read alongside an 18 percent withdrawal rate, describes an evaluation product where the large majority of paying customers never collect a payout. Traders comparing prop firms should ask for both figures before paying an evaluation fee, not just the profit split and the account size.</p>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="bestforex-view-heading" class="rounded-xl border border-primary/30 bg-primary/5 px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-primary mb-3">BestForex.io View</p>
+  <h2 id="bestforex-view-heading" class="text-xl font-bold text-foreground mb-4">Credit Where It Is Due: an 8.89 Percent Pass Rate Published in the Open Is More Honest Than Most of This Sector Manages.</h2>
+  <p class="text-foreground leading-relaxed mb-3">It lets a prospective trader do real math before paying a fee. That honesty makes the second number harder to ignore, not easier. An 18 percent withdrawal rate among funded accounts means the pass rate was never the real bottleneck, reaching a funded account and then actually getting paid from it is.</p>
+  <p class="text-foreground leading-relaxed font-medium">Earn2Trade did not have to publish either number. Having published one, it owes traders the full picture, not just the half that makes the evaluation look fair.</p>
+</section>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="about-earn2trade-heading-106" class="rounded-xl border border-border bg-card px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">About the Company</p>
+  <h2 id="about-earn2trade-heading-106" class="text-xl font-bold text-foreground mb-4">About Earn2Trade</h2>
+  <div class="grid gap-4 sm:grid-cols-2 my-5">
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Regulator</p>
+      <p class="font-semibold text-foreground">Not applicable | Education and evaluation provider</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Jurisdiction</p>
+      <p class="font-semibold text-foreground">United States</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Action Type</p>
+      <p class="font-semibold text-foreground">Disclosed performance data</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Penalty</p>
+      <p class="font-semibold text-foreground">Not applicable</p>
+    </div>
+  </div>
+  <p class="text-foreground leading-relaxed">Earn2Trade is a futures trading education and evaluation company founded in 2016, marking its tenth anniversary in 2026. The firm is not itself a funder; capital for funded LiveSim and Live accounts comes from trading partners including Helios Trading Partners, Appius Trading Limited and Kronos Proprietary Trading. Earn2Trade offers an 80 to 20 profit split and added Tradovate and TradingView platform support in March 2026.</p>
+</section>
+
+<h2>Frequently Asked Questions</h2>
+
+<h3>What is Earn2Trade&apos;s pass rate?</h3>
+<p>Earn2Trade published an 8.89 percent pass rate across its evaluations in 2025. Separate research cited by Lune found that only 18.04 percent of Live accounts and 18.20 percent of LiveSim accounts recorded at least one withdrawal that same year.</p>
+
+<h3>Does Earn2Trade fund accounts directly?</h3>
+<p>No. Earn2Trade is an education and evaluation company. Capital for funded accounts is provided by trading partners including Helios Trading Partners, Appius Trading Limited and Kronos Proprietary Trading, and the standard profit split is 80 to 20 in the trader&apos;s favour.</p>
+
+<h3>Is Earn2Trade legit?</h3>
+<p>Earn2Trade is an established evaluation provider that publishes its own pass rate, which is more transparent than most of the sector. The caution is commercial rather than conduct based: most paying customers never reach a payout. Compare firms in our <a href="/brokers" class="text-primary underline underline-offset-2 hover:text-primary/80">Best Forex Brokers in 2026</a> ranking.</p>
+
+<p class="text-sm text-muted-foreground mt-8 pt-4 border-t"><em>Editor&apos;s note &amp; source: Pass rate published by Earn2Trade, with withdrawal rate research cited by Lune. This is disclosed performance data, not a regulatory action. This article is not investment advice. Last updated: 1 September 2026.</em></p>
+    `,
+  },
+  {
+    id: 'post-105',
+    slug: 'bulenox-consistency-rule-payout-denial-2026',
+    title: 'Bulenox Publishes a 40 Percent Consistency Rule Then Reserves a Separate Power to Override It',
+    excerpt: 'Bulenox publishes a checkable 40 percent single day consistency rule, while Section 5.6 of its Master Agreement reserves a discretionary power to deny payouts that clear that math.',
+    category: 'news',
+    editorialType: 'Opinion',
+    author: authors[3], // Clarissa Penhallow
+    publishedAt: '2026-09-01',
+    updatedAt: '2026-09-01',
+    featuredImage: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2026-09-01_Bulenox_cover-2w9pdpUmmjPbiTdxDxEptcPDyoeC1J.png',
+    imageAltText: 'Bulenox published rule meets a hidden payout override — BestForex.io Broker Watch cover image',
+    readingTime: '6 min read',
+    wordCount: 990,
+    metaTitle: 'Bulenox Payout Denials Explained 2026 | BestForex.io',
+    metaDescription: 'Bulenox publishes a 40 percent consistency rule, then reserves a separate power to override it. See how the payout denial pattern actually works.',
+    sourceName: 'PropFirmCircle',
+    tags: ['Bulenox', 'Prop Trading', 'Consistency Rule', 'Payout Denial', 'Master Agreement', 'Delaware', 'Discretion', 'Broker Watch'],
+    isFeatured: true,
+    relatedBrokers: ['bulenox'],
+    linkedSources: [
+      { label: 'PropFirmCircle — Bulenox listing', url: 'https://propfirmcircle.com/unlisted-prop-firms/bulenox' },
+    ],
+    content: `
+<p>Bulenox, a futures focused funded trading firm registered in Wilmington, Delaware, publishes a straightforward consistency rule for traders requesting a payout from a Master Account: no single trading day may account for more than 40 percent of total profit. The formula is public and simple to check, best day profit divided by total profit, multiplied by 100. What Bulenox&apos;s marketing does not disclose is Section 5.6 of its Master Agreement, which gives the firm a separate, subjective power to deny a payout by classifying a large winning session as a flip, even when the published 40 percent math clears.</p>
+
+<p>The distinction matters because it moves the decision from an auditable calculation to a discretionary one. A trader with 10,000 dollars in total profit and a best day of 2,300 dollars passes the published rule at 23 percent. A trader whose best day reaches 4,500 dollars fails at 45 percent and can predict that denial in advance. Section 5.6 sits outside that math entirely: the firm can look at a session that technically clears 40 percent and still refuse payout by calling it unrepresentative of the trader&apos;s actual skill, a judgment traders have no way to see coming and no published threshold to check themselves against.</p>
+
+<h2>What Traders and Reviewers Say</h2>
+
+<p>PropFirmCircle, an independent prop firm directory, lists Bulenox as Not Recommended, writing that its vague flipping and consistency rules give the firm too much discretion to deny payouts, and pointing to opaque leadership since the firm&apos;s ownership and management team lack public visibility. Bulenox&apos;s Trustpilot profile, rated between 4.7 and 4.8 out of 5 from more than 1,300 reviews as of early 2026, still carries flipping denials as its most common negative theme, with reviewers describing payouts refused after the published math had already cleared.</p>
+
+<h2>The Master to Funded Transition</h2>
+
+<p>Bulenox&apos;s own help centre confirms a second discretionary layer sitting on top of the consistency rule. A trader becomes eligible for a Funded Account only after three successful Master Account payouts, and Bulenox states plainly that the transition is completed at Bulenox&apos;s discretion and is not automatic after the third payout. If a trader does not consent to whatever transition terms are offered, the firm&apos;s own language is direct: the applicable Master Account will be closed and no additional reward will be issued from that account. Two separate points in the payout process, the consistency review and the Funded transition, both end in the same place: a decision Bulenox alone controls, made after the trader has already done the work of clearing a published target.</p>
+
+<h2>Industry Implication</h2>
+
+<p>A published, checkable rule is only useful to a trader if it is the whole rule. Bulenox&apos;s case shows how a single disclosed threshold can create a false sense of predictability while a separate, undisclosed discretionary layer does the actual gatekeeping. That structure is not illegal in an industry with essentially no regulator standing behind funded account contracts, but it shifts real risk onto traders who have no way to price it in before they pay a challenge fee.</p>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="bestforex-view-heading" class="rounded-xl border border-primary/30 bg-primary/5 px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-primary mb-3">BestForex.io View</p>
+  <h2 id="bestforex-view-heading" class="text-xl font-bold text-foreground mb-4">Publishing One Clean, Checkable Number While Reserving an Unpublished Power to Override It Is a Specific Kind of Bad Faith.</h2>
+  <p class="text-foreground leading-relaxed mb-3">Bulenox can point out, correctly, that Section 5.6 is written into the Master Agreement traders accept, and that the Funded transition language sits in its help centre for anyone who reads it. That is a low bar. A rule that only shows up after a trader has already cleared the rule they were shown is not meaningful disclosure.</p>
+  <p class="text-foreground leading-relaxed font-medium">An independent directory calling the firm&apos;s leadership opaque on top of that is not a coincidence. Traders should read Section 5.6 before they read the marketing page, not after a payout gets denied.</p>
+</section>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="about-bulenox-heading-105" class="rounded-xl border border-border bg-card px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">About the Company</p>
+  <h2 id="about-bulenox-heading-105" class="text-xl font-bold text-foreground mb-4">About Bulenox</h2>
+  <div class="grid gap-4 sm:grid-cols-2 my-5">
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Regulator</p>
+      <p class="font-semibold text-foreground">None | Funded account contracts unsupervised</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Jurisdiction</p>
+      <p class="font-semibold text-foreground">United States, Delaware</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Action Type</p>
+      <p class="font-semibold text-foreground">Payout denial pattern</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Penalty</p>
+      <p class="font-semibold text-foreground">Not applicable</p>
+    </div>
+  </div>
+  <p class="text-foreground leading-relaxed">Bulenox LLC is a futures focused proprietary trading firm registered in Wilmington, Delaware, that sells evaluation challenges leading to Master and Funded trading accounts. The firm publishes a 40 percent single day consistency rule for payout eligibility and holds Trustpilot ratings between 4.7 and 4.8 out of 5 from more than 1,300 reviews as of early 2026. Bulenox&apos;s ownership and senior leadership are not publicly disclosed.</p>
+</section>
+
+<h2>Frequently Asked Questions</h2>
+
+<h3>What is Bulenox&apos;s consistency rule?</h3>
+<p>Bulenox requires that no single trading day account for more than 40 percent of a Master Account&apos;s total profit before it will approve a payout. The ratio is best day profit divided by total profit. Traders can calculate it themselves, but Bulenox separately reserves a discretionary power under Section 5.6 of its Master Agreement to deny a payout even when that published ratio passes.</p>
+
+<h3>Is Bulenox legit?</h3>
+<p>Bulenox is an active, operating futures prop firm with a Trustpilot rating between 4.7 and 4.8 out of 5. It has also been marked Not Recommended by the independent directory PropFirmCircle, which cites vague flipping rules and undisclosed ownership. Traders should read Section 5.6 of the Master Agreement and the Funded Account transition policy before paying for a challenge.</p>
+
+<h3>How do I get a Funded Account with Bulenox?</h3>
+<p>Eligibility requires three successful Master Account payouts, but Bulenox states the transition is completed at its own discretion and is not automatic. Declining the offered transition terms means the Master Account is closed with no further reward issued. Compare firms in our <a href="/brokers" class="text-primary underline underline-offset-2 hover:text-primary/80">Best Forex Brokers in 2026</a> ranking.</p>
+
+<p class="text-sm text-muted-foreground mt-8 pt-4 border-t"><em>Editor&apos;s note &amp; source: Rule and contract details drawn from Bulenox&apos;s own published rules, Master Agreement and help centre, with the Not Recommended assessment from PropFirmCircle. No regulator has taken action against the firm. This article is not investment advice. Last updated: 1 September 2026.</em></p>
+    `,
+  },
+  {
+    id: 'post-104',
+    slug: 'lux-trading-firm-withdrawal-review-2026',
+    title: 'Lux Trading Firm Calls Its Withdrawals Instant, an Independent Review Documents Monthly Waits and a Thirty Day Hold',
+    excerpt: 'Lux Trading Firm advertises instant withdrawals processed within hours, while an independent PROP NAVI review documents monthly requests at the Professional stage and a recurring thirty day hold complaint.',
+    category: 'news',
+    editorialType: 'Opinion',
+    author: authors[6], // Beatrix Fairmont
+    publishedAt: '2026-09-01',
+    updatedAt: '2026-09-01',
+    featuredImage: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2026-09-01_LuxTradingFirm_cover-56lh3l2Qw09ei0RFhmIMi044zbiOCn.png',
+    imageAltText: 'Lux Trading Firm calls withdrawals instant, reviews say otherwise — BestForex.io Broker Watch cover image',
+    readingTime: '6 min read',
+    wordCount: 1000,
+    metaTitle: 'Lux Trading Firm Withdrawal Review 2026 | BestForex.io',
+    metaDescription: 'Lux Trading Firm advertises instant withdrawals. An independent review documents monthly waits and a thirty day hold. See the full comparison.',
+    sourceName: 'PROP NAVI',
+    tags: ['Lux Trading Firm', 'Prop Trading', 'Withdrawal Delays', 'Marketing Claim Dispute', 'United Kingdom', 'Profit Split', 'Trustpilot', 'Broker Watch'],
+    isFeatured: true,
+    relatedBrokers: ['lux-trading-firm'],
+    linkedSources: [
+      { label: 'Lux Trading Firm — Rules of Engagement', url: 'https://luxtradingfirm.com/rules-of-engagement-3/' },
+    ],
+    content: `
+<p>Lux Trading Firm&apos;s own website advertises what it calls instant withdrawals, telling traders on its rules page that they can request a withdrawal at any time once your account balance is in profit. A separate page built around its fast payout account type goes further, promising that a withdrawal request is processed within hours and that funds hit your account the same business day. An independent review published by PROP NAVI on 31 July 2026 describes a different experience once a trader actually reaches that stage: withdrawals limited to monthly requests from the Professional stage onward, processing that takes three to five business days, and a complaint about a thirty day hold on funds before a withdrawal is paid, appearing repeatedly on the firm&apos;s own Trustpilot page.</p>
+
+<p>That Trustpilot page is not a fringe source. PROP NAVI&apos;s review puts the rating at roughly 3.8 stars across more than six hundred reviews as of the same date, and it is the volume behind that number that gives the thirty day complaint its weight. A single frustrated trader complaining about a slow payout is normal for any firm this size. A recurring, specific complaint about a fixed thirty day hold, sitting directly under a company that markets the word instant on its own site, is a pattern rather than an outlier.</p>
+
+<h2>What Instant Actually Means Once You Read the Rest of the Page</h2>
+
+<p>The conditions attached to Lux&apos;s own instant language are not hidden, but they are easy to miss on a first read. Withdrawal is only available once the account balance shows a profit, every open position has to be closed before a request goes through, and any profit withdrawn still counts toward the trader&apos;s ongoing profit target rather than being set aside as settled. For the firm&apos;s INSTA account type specifically, a withdrawal additionally requires the profit target to be reached with no rule violations on the account. None of that describes a genuinely on demand process once the monthly cadence PROP NAVI documents at the Professional stage is added on top.</p>
+
+<h2>A Profit Split That Is Not Even Stated Consistently</h2>
+
+<p>Lux&apos;s own rules of engagement page states an eighty percent profit split for traders, funding scaling up to ten million dollars, and a maximum drawdown fixed at six percent of the starting balance regardless of account growth. Evaluation fees, which range depending on account size, are refunded in full once a trader passes Stage One. PROP NAVI&apos;s review flags a separate inconsistency worth noting alongside the withdrawal gap: some of the firm&apos;s own materials state a seventy five percent split rather than eighty. Individually minor, the pattern is the same one running through the withdrawal claim: language that varies depending on which page a trader happens to land on.</p>
+
+<h2>Industry Implication</h2>
+
+<p>The word instant does heavy lifting across the funded account industry, and it rarely survives contact with a firm&apos;s actual operational cadence once a trader is far enough in to test it. Building one fast payout product, then letting broader marketing pages borrow that product&apos;s language for a process most traders will never actually experience, is exactly the gap that produces a repeated complaint pattern on a public review site rather than a single bad experience.</p>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="bestforex-view-heading" class="rounded-xl border border-primary/30 bg-primary/5 px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-primary mb-3">BestForex.io View</p>
+  <h2 id="bestforex-view-heading" class="text-xl font-bold text-foreground mb-4">Every Sentence Lux Trading Firm Publishes Is Defensible Read on Its Own.</h2>
+  <p class="text-foreground leading-relaxed mb-3">Read together, instant withdrawals, available at any time, plus a documented monthly cadence at the Professional stage and a recurring thirty day hold complaint sitting on the firm&apos;s own Trustpilot page, is not a firm inventing numbers. It is a firm letting its friendliest word do work its actual process does not consistently support.</p>
+  <p class="text-foreground leading-relaxed font-medium">A trader who reads the rules page and stops there is being set up to expect something the Professional stage has not been delivering, according to its own reviewers.</p>
+</section>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="about-lux-heading-104" class="rounded-xl border border-border bg-card px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">About the Company</p>
+  <h2 id="about-lux-heading-104" class="text-xl font-bold text-foreground mb-4">About Lux Trading Firm</h2>
+  <div class="grid gap-4 sm:grid-cols-2 my-5">
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Regulator</p>
+      <p class="font-semibold text-foreground">None | TPA industry member only</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Jurisdiction</p>
+      <p class="font-semibold text-foreground">United Kingdom</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Action Type</p>
+      <p class="font-semibold text-foreground">Marketing claim dispute</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Penalty</p>
+      <p class="font-semibold text-foreground">Not applicable</p>
+    </div>
+  </div>
+  <p class="text-foreground leading-relaxed">Lux Trading Firm is operated by Lux Trading Firm Ltd, a company registered in the United Kingdom under company number 13160991, incorporated on 27 January 2021 with its registered office in London. The firm offers staged evaluation programs with funding scaling up to ten million dollars, an eighty percent profit split according to its own rules page, and a maximum drawdown fixed at six percent of the starting balance. The firm states it does not carry out regulated financial activities and holds no license from a financial authority, describing itself instead as a member of TPA, an industry body rather than a government regulator.</p>
+</section>
+
+<h2>Frequently Asked Questions</h2>
+
+<h3>Does Lux Trading Firm really offer instant withdrawals?</h3>
+<p>Lux Trading Firm&apos;s own website describes withdrawals as instant and available at any time once an account is in profit. An independent review published by PROP NAVI on 31 July 2026 documents a different pattern once a trader reaches the Professional stage: monthly withdrawal requests, three to five business days of processing, and a recurring complaint about a thirty day fund hold on the firm&apos;s own Trustpilot page.</p>
+
+<h3>Is Lux Trading Firm regulated?</h3>
+<p>No. Lux Trading Firm states on its own site that it does not carry out regulated financial activities and holds no license from a financial authority. It describes itself as a member of TPA, an industry body rather than a government regulator.</p>
+
+<h3>What profit split does Lux Trading Firm offer?</h3>
+<p>The firm&apos;s rules of engagement page states an eighty percent split, though PROP NAVI notes some of the firm&apos;s own materials state seventy five percent instead. Compare firms in our <a href="/brokers" class="text-primary underline underline-offset-2 hover:text-primary/80">Best Forex Brokers in 2026</a> ranking.</p>
+
+<p class="text-sm text-muted-foreground mt-8 pt-4 border-t"><em>Editor&apos;s note &amp; source: Marketing claims quoted from Lux Trading Firm&apos;s own published pages, with withdrawal cadence and Trustpilot complaint patterns documented in PROP NAVI&apos;s 31 July 2026 review. No regulator has taken action against the firm. This article is not investment advice. Last updated: 1 September 2026.</em></p>
+    `,
+  },
+  {
+    id: 'post-103',
+    slug: 'myfundedfutures-ranking-compliance-history-2026',
+    title: 'MyFundedFutures Ranks First Among Futures Prop Firms After a 2024 Compliance Overhaul Forced By Regulators',
+    excerpt: 'MyFundedFutures topped PropScorer\u2019s August 2026 ranking of 49 futures prop firms with 126 million dollars paid across 56,937 payouts, following a compliance overhaul driven by its clearing partners.',
+    category: 'news',
+    editorialType: 'Opinion',
+    author: authors[6], // Beatrix Fairmont
+    publishedAt: '2026-09-01',
+    updatedAt: '2026-09-01',
+    featuredImage: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2026-09-01_MyFundedFutures_cover-IQTzDJmWhNheGB5fcV9SjnPpM2Pfzo.png',
+    imageAltText: 'MyFundedFutures tops the rankings after a compliance overhaul — BestForex.io Broker Watch cover image',
+    readingTime: '7 min read',
+    wordCount: 1010,
+    metaTitle: 'MyFundedFutures Review and Ranking 2026 | BestForex.io',
+    metaDescription: 'MyFundedFutures tops the 2026 futures prop firm rankings after a 2024 compliance overhaul forced by regulators. See the full payout record and history.',
+    sourceName: 'Finance Magnates',
+    tags: ['MyFundedFutures', 'Prop Trading', 'PropScorer', 'Payout Record', 'Compliance Overhaul', 'ComplianceAlpha', 'Delaware', 'Country Restrictions', 'Broker Watch'],
+    isFeatured: true,
+    relatedBrokers: ['myfundedfutures'],
+    linkedSources: [
+      { label: 'Finance Magnates — MyFundedFutures affiliate and country changes', url: 'https://www.financemagnates.com/forex/myfundedfutures-overhauls-affiliate-program-and-suspends-operations-in-over-20-countries/' },
+    ],
+    content: `
+<p>MyFundedFutures topped PropScorer&apos;s independently tracked ranking of 49 futures prop trading firms in August 2026 with a PropScore of 83 out of 100, edging ahead of Lucid Trading and Apex Trader Funding. The same tracker credits the firm with 126 million dollars paid across 56,937 individual payouts over the trailing 90 days, an average of 64 payouts and 142,000 dollars a day, which PropScorer describes as the deepest independently verifiable payout record it tracks across the sector.</p>
+
+<p>That current standing follows a compliance overhaul the firm did not choose voluntarily. In October 2024 MyFundedFutures blocked new account registrations from 21 countries including China, Nigeria, the Philippines, South Africa and the United Arab Emirates, citing restrictions imposed by the US registered futures commission merchants that clear its trades. CEO Matthew Leech said at the time that the firm had identified a list of countries that would never be approved to trade live under compliance and regulatory guidance from those clearing partners.</p>
+
+<h2>The Affiliate Cleanup</h2>
+
+<p>The same overhaul reached MyFundedFutures&apos;s affiliate programme. Affiliates who had not generated at least 50 individual trader deposits since launch lost access from 30 October 2024, with removal notices and a final payout for those below the threshold. Leech said the firm could not adequately monitor smaller affiliates it lacked a direct relationship with, and that MyFundedFutures remained responsible for how those affiliates advertised its products online, a responsibility that sits close to how BestForex.io&apos;s own referral and partner content is expected to represent the brokers it covers.</p>
+
+<h2>What Changed Since</h2>
+
+<p>By June 2025 MyFundedFutures and its sister firm Nortex Capital Partners had adopted ComplianceAlpha, a regulatory compliance platform built by ACA Group, adding market abuse surveillance, communication monitoring, centralised policy management and staff training. Philip Fried, the firm&apos;s regulatory compliance manager, said traders suffer when firms treat compliance as an afterthought and that the firm treats governance as a foundational pillar. Those upgrades, and the country restrictions before them, sit behind the payout numbers PropScorer is now tracking in real time.</p>
+
+<h2>Industry Implication</h2>
+
+<p>Funded trading remains a largely self policed industry, so a firm&apos;s own payout ledger, verified independently rather than self reported, is one of the few checks a trader can actually rely on. MyFundedFutures&apos;s current ranking is a genuine data point in its favour. It followed, rather than preceded, a period of geographic restrictions and affiliate discipline forced by the compliance requirements of the futures commission merchants it depends on, and that order of events is worth knowing before treating a live leaderboard position as the whole picture.</p>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="bestforex-view-heading" class="rounded-xl border border-primary/30 bg-primary/5 px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-primary mb-3">BestForex.io View</p>
+  <h2 id="bestforex-view-heading" class="text-xl font-bold text-foreground mb-4">MyFundedFutures Gets Credit for Something Most of This Sector Cannot Show: a Payout Record an Outside Tracker Can Verify.</h2>
+  <p class="text-foreground leading-relaxed mb-3">Not just a Trustpilot score the firm can influence with review requests. That is real, and it is rare enough in funded trading to be worth saying plainly. It is also true that the firm&apos;s current compliance posture was built after regulatory pressure through its clearing partners, not ahead of it, and that the affiliate cleanup happened only once Leech acknowledged the firm could not monitor who was promoting it.</p>
+  <p class="text-foreground leading-relaxed font-medium">A leaderboard position earned after the fact is still earned. Traders should just know which came first.</p>
+</section>
+
+<hr class="my-8 border-border" />
+
+<section aria-labelledby="about-mff-heading-103" class="rounded-xl border border-border bg-card px-6 py-6 my-8">
+  <p class="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">About the Company</p>
+  <h2 id="about-mff-heading-103" class="text-xl font-bold text-foreground mb-4">About MyFundedFutures</h2>
+  <div class="grid gap-4 sm:grid-cols-2 my-5">
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Regulator</p>
+      <p class="font-semibold text-foreground">None directly | FCM compliance requirements apply</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Jurisdiction</p>
+      <p class="font-semibold text-foreground">United States, Delaware</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Action Type</p>
+      <p class="font-semibold text-foreground">Compliance overhaul</p>
+    </div>
+    <div class="rounded-lg bg-background border border-border px-4 py-3">
+      <p class="text-xs text-muted-foreground uppercase tracking-wide mb-1">Penalty</p>
+      <p class="font-semibold text-foreground">Not applicable</p>
+    </div>
+  </div>
+  <p class="text-foreground leading-relaxed">MyFundedFutures is a futures focused proprietary trading firm founded in November 2023 and based in Dover, Delaware, part of the wider MyFundedFX group. The firm offers evaluation challenges leading to simulated funded accounts, with non refundable evaluation fees. Trustpilot shows a 4.9 out of 5 rating from more than 17,000 reviews, narrowing to 4.6 from 249 reviewers Trustpilot separately verifies.</p>
+</section>
+
+<h2>Frequently Asked Questions</h2>
+
+<h3>Is MyFundedFutures legit?</h3>
+<p>MyFundedFutures was independently ranked the top futures prop firm in August 2026 by PropScorer, which tracked 126 million dollars paid across 56,937 payouts over the prior 90 days. The firm also suspended new registrations from 21 countries in October 2024 and adopted a third party compliance platform, ComplianceAlpha, in June 2025 after regulatory pressure from the futures commission merchants that clear its trades.</p>
+
+<h3>Does MyFundedFutures operate in every country?</h3>
+<p>No. Since October 2024, MyFundedFutures has blocked new account registrations from 21 countries, including China, Nigeria, the Philippines, South Africa and the United Arab Emirates, citing compliance restrictions from the US registered futures commission merchants it uses to clear trades.</p>
+
+<h3>How much does MyFundedFutures pay out?</h3>
+<p>PropScorer tracked 126 million dollars across 56,937 payouts over the 90 days to August 2026, averaging 64 payouts and about 142,000 dollars a day, which it describes as the deepest independently verifiable payout record in the sector. Compare firms in our <a href="/brokers" class="text-primary underline underline-offset-2 hover:text-primary/80">Best Forex Brokers in 2026</a> ranking.</p>
+
+<p class="text-sm text-muted-foreground mt-8 pt-4 border-t"><em>Editor&apos;s note &amp; source: Ranking and payout figures from PropScorer&apos;s August 2026 tracking, with country restriction and affiliate programme details from Finance Magnates reporting and company statements. No regulator has taken enforcement action against the firm. This article is not investment advice. Last updated: 1 September 2026.</em></p>
+    `,
+  },
   // ─── Scheduled Broker Watch Posts — 16–17 August 2026 ────────────────────────
   // Posts 93–102 added 2026-08-14. Five per day across 16 and 17 August.
   {
