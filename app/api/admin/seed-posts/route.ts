@@ -16,7 +16,7 @@
  * Safe to re-run: INSERT … ON CONFLICT (slug) DO UPDATE refreshes existing rows.
  */
 
-import { posts as allPosts, authors } from '@/data/posts'
+import { posts as allPosts } from '@/data/posts'
 import { sql } from '@/lib/db'
 import type { NextRequest } from 'next/server'
 
@@ -66,6 +66,7 @@ export async function POST(req: NextRequest) {
           word_count,
           meta_title,
           meta_description,
+          source_name,
           tags,
           related_brokers,
           linked_sources,
@@ -89,8 +90,9 @@ export async function POST(req: NextRequest) {
           ${post.updatedAt ?? post.publishedAt},
           ${post.readingTime ?? null},
           ${(post as any).wordCount ?? null},
-          ${(post as any).metaTitle ?? null},
-          ${(post as any).metaDescription ?? null},
+          ${post.metaTitle ?? null},
+          ${post.metaDescription ?? null},
+          ${post.sourceName ?? null},
           ${post.tags ?? null},
           ${post.relatedBrokers ?? null},
           ${JSON.stringify(post.linkedSources ?? [])}::jsonb,
@@ -116,6 +118,7 @@ export async function POST(req: NextRequest) {
           word_count       = EXCLUDED.word_count,
           meta_title       = EXCLUDED.meta_title,
           meta_description = EXCLUDED.meta_description,
+          source_name      = EXCLUDED.source_name,
           tags             = EXCLUDED.tags,
           related_brokers  = EXCLUDED.related_brokers,
           linked_sources   = EXCLUDED.linked_sources,
@@ -131,16 +134,55 @@ export async function POST(req: NextRequest) {
     }
   }
 
-  const inserted = results.filter((r) => r.op === 'inserted').length
-  const updated = results.filter((r) => r.op === 'updated').length
-  const errors = results.filter((r) => r.op === 'error')
+  const inserted = results.filter((result) => result.op === 'inserted').length
+  const updated = results.filter((result) => result.op === 'updated').length
+  const errors = results.filter((result) => result.op === 'error')
+  const expectedSlugs = allPosts.map((post) => post.slug)
+  const duplicateSlugs = expectedSlugs.filter(
+    (slug, index) => expectedSlugs.indexOf(slug) !== index,
+  )
 
-  return Response.json({
-    total: allPosts.length,
-    inserted,
-    updated,
-    errors: errors.length,
-    errorDetails: errors,
-    results,
-  })
+  let missingSlugs: string[] = []
+  let unpublishedSlugs: string[] = []
+  let verificationError: string | undefined
+
+  try {
+    const inventory = await sql`
+      SELECT slug, status
+      FROM public.posts
+    `
+    const rowsBySlug = new Map(
+      inventory.map((row) => [row.slug as string, row.status as string | null]),
+    )
+    missingSlugs = expectedSlugs.filter((slug) => !rowsBySlug.has(slug))
+    unpublishedSlugs = expectedSlugs.filter(
+      (slug) => rowsBySlug.get(slug) !== 'published',
+    )
+  } catch (error) {
+    verificationError = error instanceof Error ? error.message : String(error)
+  }
+
+  const failed =
+    errors.length > 0 ||
+    duplicateSlugs.length > 0 ||
+    missingSlugs.length > 0 ||
+    unpublishedSlugs.length > 0 ||
+    Boolean(verificationError)
+
+  return Response.json(
+    {
+      total: allPosts.length,
+      inserted,
+      updated,
+      errors: errors.length,
+      errorDetails: errors,
+      verified: !failed,
+      duplicateSlugs: [...new Set(duplicateSlugs)],
+      missingSlugs,
+      unpublishedSlugs,
+      verificationError,
+      results,
+    },
+    { status: failed ? 500 : 200 },
+  )
 }

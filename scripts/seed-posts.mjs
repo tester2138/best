@@ -11,7 +11,6 @@
  * Requires POSTGRES_URL or DATABASE_URL in the environment (or .env.local).
  */
 
-import { createRequire } from 'module'
 import { readFileSync } from 'fs'
 import { resolve, dirname } from 'path'
 import { fileURLToPath } from 'url'
@@ -74,11 +73,10 @@ import { writeFileSync, unlinkSync } from 'fs'
 const tmpPath = resolve(projectRoot, '.seed-posts-tmp.mjs')
 writeFileSync(tmpPath, outputFiles[0].text)
 
-let posts, authors
+let posts
 try {
   const mod = await import(tmpPath)
   posts = mod.posts
-  authors = mod.authors
 } finally {
   try { unlinkSync(tmpPath) } catch {}
 }
@@ -99,7 +97,6 @@ for (const post of posts) {
   try {
     const result = await sql`
       INSERT INTO public.posts (
-        id,
         slug,
         title,
         excerpt,
@@ -120,12 +117,12 @@ for (const post of posts) {
         word_count,
         meta_title,
         meta_description,
+        source_name,
         tags,
         related_brokers,
         linked_sources,
         status
       ) VALUES (
-        ${post.id},
         ${post.slug},
         ${post.title},
         ${post.excerpt},
@@ -146,9 +143,10 @@ for (const post of posts) {
         ${post.wordCount ?? null},
         ${post.metaTitle ?? null},
         ${post.metaDescription ?? null},
+        ${post.sourceName ?? null},
         ${post.tags ?? null},
         ${post.relatedBrokers ?? null},
-        ${JSON.stringify(post.linkedSources ?? [])},
+        ${JSON.stringify(post.linkedSources ?? [])}::jsonb,
         'published'
       )
       ON CONFLICT (slug) DO UPDATE SET
@@ -169,9 +167,10 @@ for (const post of posts) {
         updated_at      = EXCLUDED.updated_at,
         reading_time    = EXCLUDED.reading_time,
         word_count      = EXCLUDED.word_count,
-        meta_title      = EXCLUDED.meta_title,
+        meta_title       = EXCLUDED.meta_title,
         meta_description = EXCLUDED.meta_description,
-        tags            = EXCLUDED.tags,
+        source_name      = EXCLUDED.source_name,
+        tags             = EXCLUDED.tags,
         related_brokers = EXCLUDED.related_brokers,
         linked_sources  = EXCLUDED.linked_sources,
         status          = EXCLUDED.status
@@ -190,5 +189,41 @@ for (const post of posts) {
   }
 }
 
-console.log(`\n[seed] Done. ${inserted} inserted, ${updated} updated, ${errors} errors out of ${posts.length} posts.`)
-if (errors > 0) process.exit(1)
+const expectedSlugs = posts.map((post) => post.slug)
+const duplicateSlugs = expectedSlugs.filter(
+  (slug, index) => expectedSlugs.indexOf(slug) !== index,
+)
+
+let missingSlugs = []
+let unpublishedSlugs = []
+let verificationError
+
+try {
+  const inventory = await sql`SELECT slug, status FROM public.posts`
+  const rowsBySlug = new Map(inventory.map((row) => [row.slug, row.status]))
+  missingSlugs = expectedSlugs.filter((slug) => !rowsBySlug.has(slug))
+  unpublishedSlugs = expectedSlugs.filter(
+    (slug) => rowsBySlug.get(slug) !== 'published',
+  )
+} catch (error) {
+  verificationError = error instanceof Error ? error.message : String(error)
+}
+
+const failed =
+  errors > 0 ||
+  duplicateSlugs.length > 0 ||
+  missingSlugs.length > 0 ||
+  unpublishedSlugs.length > 0 ||
+  Boolean(verificationError)
+
+console.log(
+  `\n[seed] Done. ${inserted} inserted, ${updated} updated, ${errors} errors out of ${posts.length} posts.`,
+)
+console.log(
+  `[seed] Inventory verification: ${failed ? 'FAILED' : 'passed'} (${posts.length - missingSlugs.length}/${posts.length} expected slugs present).`,
+)
+if (duplicateSlugs.length) console.error('[seed] Duplicate source slugs:', [...new Set(duplicateSlugs)])
+if (missingSlugs.length) console.error('[seed] Missing database slugs:', missingSlugs)
+if (unpublishedSlugs.length) console.error('[seed] Unpublished database slugs:', unpublishedSlugs)
+if (verificationError) console.error('[seed] Verification query failed:', verificationError)
+if (failed) process.exit(1)

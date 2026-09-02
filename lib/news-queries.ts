@@ -1,69 +1,30 @@
-/**
- * lib/news-queries.ts — Server-only Neon query helpers for news posts.
- *
- * All async post helpers live here (not in data/posts.ts) so that the `sql`
- * import from lib/db.ts appears at the top of a proper server module instead
- * of being buried inside the large static data file. This prevents Turbopack
- * from incorrectly bundling the Neon client into non-server contexts.
- *
- * Consumers import from @/data/posts as usual — posts.ts re-exports everything
- * from here, so no import paths need to change.
- *
- * Visibility rule: WHERE status = 'published' AND published_at <= NOW()
- * This means a post staged with a future date becomes live automatically when
- * the ISR revalidation fires (revalidate = 3600) after that date — no deploy.
- */
-
-import { sql } from '@/lib/db'
-import type { Post, Author } from '@/lib/types'
+import { cache } from 'react'
 import { authors, posts as staticPosts } from '@/data/posts'
+import { sql } from '@/lib/db'
+import {
+  isPostLive,
+  mergeVisiblePosts,
+  resolveVisiblePost,
+  type StoredPostRecord,
+} from '@/lib/news-archive'
+import type { Author, Post } from '@/lib/types'
 
-// ─── Resilience layer ────────────────────────────────────────────────────────
-// The DB is the source of truth for scheduling, but it can be unavailable
-// (Neon compute-quota 402, cold-start timeout, network blip). Previously any
-// such failure bubbled up through the page's RSC and tripped app/error.tsx,
-// taking down `/` and `/news` entirely. The in-repo `posts` array in
-// data/posts.ts is the canonical seed source and mirrors the DB contents, so
-// it is a faithful read-only fallback: readers still get the full archive with
-// the same visibility rule applied in JS instead of SQL.
-
-/** True once a post's scheduled publish time has arrived. */
-function isLive(post: Post, now: number): boolean {
-  const t = new Date(post.publishedAt).getTime()
-  return Number.isNaN(t) ? true : t <= now
+function toIsoString(value: unknown): string {
+  if (value instanceof Date) return value.toISOString()
+  return typeof value === 'string' ? value : ''
 }
 
-/** Static mirror of `WHERE published_at <= NOW() ORDER BY published_at DESC`. */
-function staticVisiblePosts(): Post[] {
-  const now = Date.now()
-  return staticPosts
-    .filter((p) => isLive(p, now))
-    .sort(
-      (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
-    )
-}
+function parseLinkedSources(value: unknown): Post['linkedSources'] {
+  if (Array.isArray(value)) return value as Post['linkedSources']
+  if (typeof value !== 'string') return undefined
 
-/**
- * Run a DB query, falling back to the static archive if the database errors.
- * Never throws — callers are React Server Components that must still render.
- */
-async function withFallback<T>(
-  label: string,
-  run: () => Promise<T>,
-  fallback: () => T,
-): Promise<T> {
   try {
-    return await run()
-  } catch (err) {
-    const message = err instanceof Error ? err.message : String(err)
-    console.error(
-      `[news-queries] ${label}: database unavailable, serving static archive — ${message}`,
-    )
-    return fallback()
+    const parsed = JSON.parse(value)
+    return Array.isArray(parsed) ? parsed : undefined
+  } catch {
+    return undefined
   }
 }
-
-// ─── DB row → Post mapper ────────────────────────────────────────────────────
 
 export function mapRow(row: Record<string, unknown>): Post {
   const authorBase: Author = {
@@ -73,10 +34,7 @@ export function mapRow(row: Record<string, unknown>): Post {
     bio: (row.author_bio as string | undefined) ?? undefined,
     role: (row.author_role as string | undefined) ?? undefined,
   }
-  // Merge with the full static author record so fields like `beat` and `sameAs`
-  // are always present without duplicating them in the DB.
-  const richAuthor = authors.find((a) => a.slug === authorBase.slug)
-  const author = richAuthor ? { ...richAuthor, ...authorBase } : authorBase
+  const richAuthor = authors.find((author) => author.slug === authorBase.slug)
 
   return {
     id: row.id as string,
@@ -86,15 +44,9 @@ export function mapRow(row: Record<string, unknown>): Post {
     content: (row.content as string | null) ?? undefined,
     category: row.category as Post['category'],
     editorialType: (row.editorial_type as Post['editorialType']) ?? undefined,
-    author,
-    publishedAt:
-      row.published_at instanceof Date
-        ? row.published_at.toISOString()
-        : (row.published_at as string),
-    updatedAt:
-      row.updated_at instanceof Date
-        ? row.updated_at.toISOString()
-        : (row.updated_at as string | undefined) ?? undefined,
+    author: richAuthor ? { ...richAuthor, ...authorBase } : authorBase,
+    publishedAt: toIsoString(row.published_at),
+    updatedAt: toIsoString(row.updated_at) || undefined,
     featuredImage: (row.featured_image as string | null) ?? undefined,
     imageAltText: (row.image_alt_text as string | null) ?? undefined,
     isFeatured: (row.is_featured as boolean) ?? false,
@@ -102,41 +54,73 @@ export function mapRow(row: Record<string, unknown>): Post {
     wordCount: (row.word_count as number | null) ?? undefined,
     metaTitle: (row.meta_title as string | null) ?? undefined,
     metaDescription: (row.meta_description as string | null) ?? undefined,
+    sourceName: (row.source_name as string | null) ?? undefined,
     tags: (row.tags as string[] | null) ?? undefined,
     relatedBrokers: (row.related_brokers as string[] | null) ?? undefined,
-    linkedSources:
-      (row.linked_sources as { label: string; url: string }[] | null) ?? undefined,
+    linkedSources: parseLinkedSources(row.linked_sources),
   }
 }
 
-// ─── Query helpers ───────────────────────────────────────────────────────────
-// All queries use the same visibility rule: status = 'published' AND
-// published_at <= NOW(). The database evaluates NOW() at query time — not at
-// build/bundle time — so ISR reruns pick up newly scheduled posts automatically.
+function mapRecord(row: Record<string, unknown>): StoredPostRecord {
+  return {
+    post: mapRow(row),
+    status: (row.status as string | null) ?? null,
+  }
+}
 
-/** Every post that is published and whose scheduled date has arrived. */
-export async function getVisiblePosts(): Promise<Post[]> {
-  return withFallback(
+function staticVisiblePosts(): Post[] {
+  const now = Date.now()
+  return staticPosts
+    .filter((post) => isPostLive(post, now))
+    .sort(
+      (a, b) =>
+        new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime() ||
+        a.slug.localeCompare(b.slug),
+    )
+}
+
+async function withFallback<T>(
+  label: string,
+  run: () => Promise<T>,
+  fallback: () => T,
+): Promise<T> {
+  try {
+    return await run()
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error)
+    console.error(
+      `[news-queries] ${label}: database unavailable, serving canonical archive — ${message}`,
+    )
+    return fallback()
+  }
+}
+
+const getMergedVisiblePosts = cache(async (): Promise<Post[]> =>
+  withFallback(
     'getVisiblePosts',
     async () => {
+      // Deliberately include every status. A draft or future DB row must block
+      // the static version of the same slug from becoming visible early.
       const rows = await sql`
         SELECT
           id, slug, title, excerpt, category, editorial_type,
           author_name, author_slug, author_avatar, author_bio, author_role,
-          featured_image, image_alt_text, is_featured,
+          featured_image, image_alt_text, is_featured, status,
           published_at, updated_at, reading_time, word_count,
-          meta_title, meta_description, tags, related_brokers, linked_sources
+          meta_title, meta_description, source_name, tags,
+          related_brokers, linked_sources
         FROM public.posts
-        WHERE status = 'published' AND published_at <= NOW()
-        ORDER BY published_at DESC
       `
-      return rows.map(mapRow)
+      return mergeVisiblePosts(rows.map(mapRecord), staticPosts)
     },
     staticVisiblePosts,
-  )
+  ),
+)
+
+export async function getVisiblePosts(): Promise<Post[]> {
+  return getMergedVisiblePosts()
 }
 
-/** Single post by slug — returns undefined (404) if not yet live. */
 export async function getPostBySlug(slug: string): Promise<Post | undefined> {
   return withFallback(
     `getPostBySlug(${slug})`,
@@ -145,112 +129,40 @@ export async function getPostBySlug(slug: string): Promise<Post | undefined> {
         SELECT
           id, slug, title, excerpt, content, category, editorial_type,
           author_name, author_slug, author_avatar, author_bio, author_role,
-          featured_image, image_alt_text, is_featured,
+          featured_image, image_alt_text, is_featured, status,
           published_at, updated_at, reading_time, word_count,
-          meta_title, meta_description, tags, related_brokers, linked_sources
+          meta_title, meta_description, source_name, tags,
+          related_brokers, linked_sources
         FROM public.posts
-        WHERE status = 'published' AND published_at <= NOW()
-          AND slug = ${slug}
+        WHERE slug = ${slug}
         LIMIT 1
       `
-      return rows.length ? mapRow(rows[0]) : undefined
+      const record = rows.length ? mapRecord(rows[0]) : undefined
+      return resolveVisiblePost(slug, record, staticPosts)
     },
-    () => staticVisiblePosts().find((p) => p.slug === slug),
+    () => staticVisiblePosts().find((post) => post.slug === slug),
   )
 }
 
 export async function getFeaturedPosts(): Promise<Post[]> {
-  return withFallback(
-    'getFeaturedPosts',
-    async () => {
-      const rows = await sql`
-        SELECT
-          id, slug, title, excerpt, category, editorial_type,
-          author_name, author_slug, author_avatar, author_bio, author_role,
-          featured_image, image_alt_text, is_featured,
-          published_at, updated_at, reading_time, word_count,
-          meta_title, meta_description, tags, related_brokers, linked_sources
-        FROM public.posts
-        WHERE status = 'published' AND published_at <= NOW()
-          AND is_featured = true
-        ORDER BY published_at DESC
-      `
-      return rows.map(mapRow)
-    },
-    () => staticVisiblePosts().filter((p) => p.isFeatured),
-  )
+  return (await getVisiblePosts()).filter((post) => post.isFeatured)
 }
 
 export async function getPostsByCategory(category: string): Promise<Post[]> {
-  return withFallback(
-    `getPostsByCategory(${category})`,
-    async () => {
-      const rows = await sql`
-        SELECT
-          id, slug, title, excerpt, category, editorial_type,
-          author_name, author_slug, author_avatar, author_bio, author_role,
-          featured_image, image_alt_text, is_featured,
-          published_at, updated_at, reading_time, word_count,
-          meta_title, meta_description, tags, related_brokers, linked_sources
-        FROM public.posts
-        WHERE status = 'published' AND published_at <= NOW()
-          AND category = ${category}
-        ORDER BY published_at DESC
-      `
-      return rows.map(mapRow)
-    },
-    () => staticVisiblePosts().filter((p) => p.category === category),
-  )
+  return (await getVisiblePosts()).filter((post) => post.category === category)
 }
 
 export async function getLatestPosts(count = 5): Promise<Post[]> {
-  return withFallback(
-    'getLatestPosts',
-    async () => {
-      const rows = await sql`
-        SELECT
-          id, slug, title, excerpt, category, editorial_type,
-          author_name, author_slug, author_avatar, author_bio, author_role,
-          featured_image, image_alt_text, is_featured,
-          published_at, updated_at, reading_time, word_count,
-          meta_title, meta_description, tags, related_brokers, linked_sources
-        FROM public.posts
-        WHERE status = 'published' AND published_at <= NOW()
-        ORDER BY published_at DESC
-        LIMIT ${count}
-      `
-      return rows.map(mapRow)
-    },
-    () => staticVisiblePosts().slice(0, count),
-  )
+  return (await getVisiblePosts()).slice(0, Math.max(0, count))
 }
 
-/** Google News discovery: visible stories published within the last 48 hours. */
 export async function getNewsSitemapPosts(): Promise<Post[]> {
-  return withFallback(
-    'getNewsSitemapPosts',
-    async () => {
-      const rows = await sql`
-        SELECT id, slug, title, published_at
-        FROM public.posts
-        WHERE status = 'published'
-          AND published_at <= NOW()
-          AND published_at >= NOW() - INTERVAL '48 hours'
-        ORDER BY published_at DESC
-        LIMIT 1000
-      `
-      return rows.map(mapRow)
-    },
-    () => {
-      const cutoff = Date.now() - 48 * 60 * 60 * 1000
-      return staticVisiblePosts()
-        .filter((p) => new Date(p.publishedAt).getTime() >= cutoff)
-        .slice(0, 1000)
-    },
-  )
+  const cutoff = Date.now() - 48 * 60 * 60 * 1000
+  return (await getVisiblePosts())
+    .filter((post) => new Date(post.publishedAt).getTime() >= cutoff)
+    .slice(0, 1000)
 }
 
-/** Canonical RSS feed: newest visible stories with complete article HTML. */
 export async function getRssFeedPosts(): Promise<Post[]> {
   return withFallback(
     'getRssFeedPosts',
@@ -259,151 +171,50 @@ export async function getRssFeedPosts(): Promise<Post[]> {
         SELECT
           id, slug, title, excerpt, content, category, editorial_type,
           author_name, author_slug, author_avatar, author_bio, author_role,
-          featured_image, image_alt_text, is_featured,
+          featured_image, image_alt_text, is_featured, status,
           published_at, updated_at, reading_time, word_count,
-          meta_title, meta_description, tags, related_brokers, linked_sources
+          meta_title, meta_description, source_name, tags,
+          related_brokers, linked_sources
         FROM public.posts
-        WHERE status = 'published' AND published_at <= NOW()
-        ORDER BY published_at DESC
-        LIMIT 50
       `
-      return rows.map(mapRow)
+      return mergeVisiblePosts(rows.map(mapRecord), staticPosts).slice(0, 50)
     },
     () => staticVisiblePosts().slice(0, 50),
   )
 }
 
 export async function getNewsPosts(): Promise<Post[]> {
-  return withFallback(
-    'getNewsPosts',
-    async () => {
-      const rows = await sql`
-        SELECT
-          id, slug, title, excerpt, category, editorial_type,
-          author_name, author_slug, author_avatar, author_bio, author_role,
-          featured_image, image_alt_text, is_featured,
-          published_at, updated_at, reading_time, word_count,
-          meta_title, meta_description, tags, related_brokers, linked_sources
-        FROM public.posts
-        WHERE status = 'published' AND published_at <= NOW()
-          AND category IN ('news', 'analysis')
-        ORDER BY published_at DESC
-      `
-      return rows.map(mapRow)
-    },
-    () =>
-      staticVisiblePosts().filter(
-        (p) => p.category === 'news' || p.category === 'analysis',
-      ),
+  return (await getVisiblePosts()).filter(
+    (post) => post.category === 'news' || post.category === 'analysis',
   )
 }
 
 export async function getBlogPosts(): Promise<Post[]> {
-  return withFallback(
-    'getBlogPosts',
-    async () => {
-      const rows = await sql`
-        SELECT
-          id, slug, title, excerpt, category, editorial_type,
-          author_name, author_slug, author_avatar, author_bio, author_role,
-          featured_image, image_alt_text, is_featured,
-          published_at, updated_at, reading_time, word_count,
-          meta_title, meta_description, tags, related_brokers, linked_sources
-        FROM public.posts
-        WHERE status = 'published' AND published_at <= NOW()
-          AND category IN ('education', 'guide', 'review')
-        ORDER BY published_at DESC
-      `
-      return rows.map(mapRow)
-    },
-    () =>
-      staticVisiblePosts().filter(
-        (p) =>
-          p.category === 'education' ||
-          p.category === 'guide' ||
-          p.category === 'review',
-      ),
+  return (await getVisiblePosts()).filter(
+    (post) =>
+      post.category === 'education' ||
+      post.category === 'guide' ||
+      post.category === 'review',
   )
 }
 
 export async function getPostsByAuthor(slug: string): Promise<Post[]> {
-  return withFallback(
-    `getPostsByAuthor(${slug})`,
-    async () => {
-      const rows = await sql`
-        SELECT
-          id, slug, title, excerpt, category, editorial_type,
-          author_name, author_slug, author_avatar, author_bio, author_role,
-          featured_image, image_alt_text, is_featured,
-          published_at, updated_at, reading_time, word_count,
-          meta_title, meta_description, tags, related_brokers, linked_sources
-        FROM public.posts
-        WHERE status = 'published' AND published_at <= NOW()
-          AND author_slug = ${slug}
-        ORDER BY published_at DESC
-      `
-      return rows.map(mapRow)
-    },
-    () => staticVisiblePosts().filter((p) => p.author.slug === slug),
-  )
+  return (await getVisiblePosts()).filter((post) => post.author.slug === slug)
 }
 
-/** Posts related to a broker by slug, title match, or tag match. */
 export async function getPostsByBrokerSlug(brokerSlug: string): Promise<Post[]> {
   const nameFromSlug = brokerSlug.replace(/-/g, ' ')
-  return withFallback(
-    `getPostsByBrokerSlug(${brokerSlug})`,
-    async () => {
-      const rows = await sql`
-        SELECT
-          id, slug, title, excerpt, category, editorial_type,
-          author_name, author_slug, author_avatar, author_bio, author_role,
-          featured_image, image_alt_text, is_featured,
-          published_at, updated_at, reading_time, word_count,
-          meta_title, meta_description, tags, related_brokers, linked_sources
-        FROM public.posts
-        WHERE status = 'published' AND published_at <= NOW()
-          AND (
-            related_brokers @> ARRAY[${brokerSlug}]::text[]
-            OR LOWER(title) LIKE ${'%' + nameFromSlug + '%'}
-            OR EXISTS (
-              SELECT 1 FROM unnest(tags) t
-              WHERE LOWER(t) LIKE ${'%' + nameFromSlug + '%'}
-            )
-          )
-        ORDER BY published_at DESC
-      `
-      return rows.map(mapRow)
-    },
-    () =>
-      staticVisiblePosts().filter(
-        (p) =>
-          p.relatedBrokers?.includes(brokerSlug) ||
-          p.title.toLowerCase().includes(nameFromSlug) ||
-          p.tags?.some((t) => t.toLowerCase().includes(nameFromSlug)),
-      ),
+  return (await getVisiblePosts()).filter(
+    (post) =>
+      post.relatedBrokers?.includes(brokerSlug) ||
+      post.title.toLowerCase().includes(nameFromSlug) ||
+      post.tags?.some((tag) => tag.toLowerCase().includes(nameFromSlug)),
   )
 }
 
-/** Authors who have at least one live published post. */
 export async function getPublishedAuthors(): Promise<Author[]> {
-  return withFallback(
-    'getPublishedAuthors',
-    async () => {
-      const rows = await sql`
-        SELECT DISTINCT author_slug
-        FROM public.posts
-        WHERE status = 'published' AND published_at <= NOW()
-          AND author_slug IS NOT NULL
-      `
-      const activeSlugs = new Set(
-        rows.map((r: Record<string, unknown>) => r.author_slug as string),
-      )
-      return authors.filter((a) => activeSlugs.has(a.slug))
-    },
-    () => {
-      const activeSlugs = new Set(staticVisiblePosts().map((p) => p.author.slug))
-      return authors.filter((a) => activeSlugs.has(a.slug))
-    },
+  const activeSlugs = new Set(
+    (await getVisiblePosts()).map((post) => post.author.slug),
   )
+  return authors.filter((author) => activeSlugs.has(author.slug))
 }
