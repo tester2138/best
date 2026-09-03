@@ -50,22 +50,6 @@ const PINNED_DIRECTORY_SLUGS = [
 /** Top 5 shown on the homepage widget */
 const PINNED_HOMEPAGE_SLUGS = PINNED_DIRECTORY_SLUGS.slice(0, 5) as readonly string[]
 
-async function loadPublicBrandRows(): Promise<PublicBrandRow[]> {
-  // The DB only supplies an OVERLAY on top of the static editorial directory.
-  // Every merge helper below already tolerates a missing row, so if the
-  // database is unavailable (quota, cold start, network) we degrade to the
-  // static catalogue instead of throwing and tripping the error boundary.
-  try {
-    return await queryPublicBrandRows()
-  } catch (err) {
-    const message = err instanceof Error ? err.message : String(err)
-    console.error(
-      `[public-brokers] brand overlay unavailable, serving static directory — ${message}`,
-    )
-    return []
-  }
-}
-
 async function queryPublicBrandRows(): Promise<PublicBrandRow[]> {
   return query<PublicBrandRow>(
     `select b.slug,
@@ -90,10 +74,24 @@ async function queryPublicBrandRows(): Promise<PublicBrandRow[]> {
   )
 }
 
-const getPublicBrandRows = unstable_cache(loadPublicBrandRows, ['public-broker-overlay-v2'], {
+const getCachedPublicBrandRows = unstable_cache(queryPublicBrandRows, ['public-broker-overlay-v3'], {
   tags: ['broker-directory'],
   revalidate: 300,
 })
+
+async function getPublicBrandRows(): Promise<PublicBrandRow[]> {
+  // Catch outside unstable_cache: a transient Neon failure must never be
+  // persisted as an empty overlay and replace the canonical master ranking.
+  try {
+    return await getCachedPublicBrandRows()
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err)
+    console.error(
+      `[public-brokers] brand overlay unavailable, serving static directory — ${message}`,
+    )
+    return []
+  }
+}
 
 function statusFromRow(
   row: PublicBrandRow | undefined,
@@ -154,6 +152,12 @@ function tier(company: Pick<DirectoryCompany, 'isSponsored' | 'verificationStatu
 /** Fallback rank for items without a DB display_rank: place at end */
 const RANK_FALLBACK = 999999
 
+function compareStableIdentity(a: DirectoryCompany, b: DirectoryCompany): number {
+  if (a.slug !== b.slug) return a.slug < b.slug ? -1 : 1
+  if (a.id === b.id) return 0
+  return a.id < b.id ? -1 : 1
+}
+
 export function rankPublicDirectory(companies: DirectoryCompany[]): DirectoryCompany[] {
   const retail = companies.filter((company) => isRetailEntityType(company.entityType))
   const bySlug = new Map(retail.map((company) => [company.slug, company]))
@@ -176,7 +180,10 @@ export function rankPublicDirectory(companies: DirectoryCompany[]): DirectoryCom
       const rb = (b as DirectoryCompany & { displayRank?: number }).displayRank ?? RANK_FALLBACK
       if (ra !== rb) return ra - rb
       // Tertiary: editorial rating descending
-      return (b.rating ?? 0) - (a.rating ?? 0)
+      const ratingDiff = (b.rating ?? 0) - (a.rating ?? 0)
+      if (ratingDiff !== 0) return ratingDiff
+      // Final: total deterministic order for ties and fallback data
+      return compareStableIdentity(a, b)
     })
 
   return [...pinned, ...rest]

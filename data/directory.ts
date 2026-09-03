@@ -29564,6 +29564,12 @@ function verificationTier(c: DirectoryCompany): number {
   return 2
 }
 
+function compareStableIdentity(a: DirectoryCompany, b: DirectoryCompany): number {
+  if (a.slug !== b.slug) return a.slug < b.slug ? -1 : 1
+  if (a.id === b.id) return 0
+  return a.id < b.id ? -1 : 1
+}
+
 export const rankedBrokers: DirectoryCompany[] = (() => {
   const retail = directoryCompanies.filter(c => isRetailEntityType(c.entityType))
   const bySlug = new Map(retail.map(c => [c.slug, c]))
@@ -29583,7 +29589,9 @@ export const rankedBrokers: DirectoryCompany[] = (() => {
     .sort((a, b) => {
       const tierDiff = verificationTier(a) - verificationTier(b)
       if (tierDiff !== 0) return tierDiff
-      return (b.rating ?? 0) - (a.rating ?? 0)
+      const ratingDiff = (b.rating ?? 0) - (a.rating ?? 0)
+      if (ratingDiff !== 0) return ratingDiff
+      return compareStableIdentity(a, b)
     })
 
   return [...pinned, ...rest]
@@ -29754,7 +29762,9 @@ export function searchDirectory(
         comparison = (b.rating || 0) - (a.rating || 0)
     }
     
-    return sortOrder === 'asc' ? -comparison : comparison
+    const directionalComparison = sortOrder === 'asc' ? -comparison : comparison
+    if (directionalComparison !== 0) return directionalComparison
+    return compareStableIdentity(a, b)
   })
   
   return results
