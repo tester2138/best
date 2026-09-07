@@ -93,9 +93,10 @@ function toAbsoluteImage(src?: string): string {
 function generateArticleSchema(post: Awaited<ReturnType<typeof getPostBySlug>>) {
   if (!post) return null
 
-  // T43: Google requires OpinionNewsArticle for opinion/editorial pieces.
-  // 'opinion' category will be populated via T28 category taxonomy.
-  const articleType = post.category === 'opinion' ? 'OpinionNewsArticle' : 'NewsArticle'
+  // Google requires OpinionNewsArticle for editorial pieces. Use the resolved
+  // editorial type so critic-desk posts remain correctly classified even when
+  // their archive category is "news".
+  const articleType = getEditorialType(post) === 'Opinion' ? 'OpinionNewsArticle' : 'NewsArticle'
 
   return {
     '@context': 'https://schema.org',
