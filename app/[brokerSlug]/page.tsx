@@ -1,5 +1,5 @@
 import { permanentRedirect, notFound } from 'next/navigation'
-import { getCompanyBySlug } from '@/data/directory'
+import { getPublicBrokerBySlug } from '@/lib/public-brokers'
 
 /**
  * Legacy redirect stub.
@@ -9,6 +9,11 @@ import { getCompanyBySlug } from '@/data/directory'
  * equity by issuing a permanent (308) redirect for every known broker slug.
  * Static routes (/news, /offers, /brokers, ...) are matched by Next.js before
  * this dynamic segment, so there is no collision risk. Unknown paths 404.
+ *
+ * Resolves slugs through the SAME merged catalogue the /brokers/{slug} page
+ * uses (data/directory.ts + data/brokers.ts + DB brand overlay), so any slug
+ * that has a live profile page also gets its root-level redirect. The earlier
+ * directory-only lookup 404'd for brokers.ts-only entries (e.g. /plus500).
  *
  * `dynamicParams` + empty `generateStaticParams` keeps this fully on-demand so
  * we don't pre-render thousands of redirect pages at build time.
@@ -28,9 +33,9 @@ export default async function LegacyBrokerRedirect({
   // Normalise to lowercase so /Plus500, /PLUS500, /plus500 all redirect to the
   // same canonical URL at /brokers/plus500.
   const normalisedSlug = brokerSlug.toLowerCase()
-  const company = getCompanyBySlug(normalisedSlug)
+  const broker = await getPublicBrokerBySlug(normalisedSlug)
 
-  if (!company) {
+  if (!broker) {
     notFound()
   }
 
