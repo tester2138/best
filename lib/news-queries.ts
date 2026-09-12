@@ -79,18 +79,39 @@ function staticVisiblePosts(): Post[] {
     )
 }
 
+// Circuit breaker: when Neon rejects requests (e.g. HTTP 402 data-transfer
+// quota), every retry burns quota/latency and spams the console. After a
+// quota-style failure we skip DB calls entirely for COOLDOWN_MS and serve the
+// canonical static archive, logging once instead of per-request.
+const COOLDOWN_MS = 5 * 60 * 1000
+let dbCooldownUntil = 0
+
+function isQuotaError(message: string): boolean {
+  return message.includes('402') || message.toLowerCase().includes('quota')
+}
+
 async function withFallback<T>(
   label: string,
   run: () => Promise<T>,
   fallback: () => T,
 ): Promise<T> {
+  if (Date.now() < dbCooldownUntil) {
+    return fallback()
+  }
   try {
     return await run()
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error)
-    console.error(
-      `[news-queries] ${label}: database unavailable, serving canonical archive — ${message}`,
-    )
+    if (isQuotaError(message)) {
+      dbCooldownUntil = Date.now() + COOLDOWN_MS
+      console.warn(
+        `[news-queries] ${label}: database quota exceeded, serving canonical archive from static data for ${COOLDOWN_MS / 1000}s — ${message}`,
+      )
+    } else {
+      console.error(
+        `[news-queries] ${label}: database unavailable, serving canonical archive — ${message}`,
+      )
+    }
     return fallback()
   }
 }
