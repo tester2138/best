@@ -6,6 +6,30 @@
 
 ---
 
+## Scheduled Content Pass — 17 September 2026
+
+Eight Broker Watch Opinion articles were prepared for automatic release at 00:00 UTC: The Funded Trader, Trading 212 and Transworld Futures on 25 September; and BUX, EdgeClear, FundedBull, GAIN Capital and Generic Trade on 26 September 2026.
+
+- SEO metadata: unique keyword-led titles of 45–51 characters and descriptions of 144–150 characters.
+- Content quality: supplied editorial copy preserved, 722–931 measured words per article, three or four reader FAQs, careful allegation and entity attribution, visible BestForex.io View and company-context sections, and editorial Opinion schema.
+- Discovery: unique slugs, exact internal broker-profile relationships where available, primary-source citations, descriptive social-image alt text, and all eight supplied Blob cover images returning HTTP 200.
+- Validation: TypeScript and all news archive tests passed; cited public sources returned HTTP 200, aside from Trustpilot pages that correctly reject automated checks with HTTP 403.
+- Publishing constraint: Neon remains blocked by data-transfer quota error 53000, so these posts use the existing static archive and publication-date gate until database seeding can be retried.
+
+---
+
+## Scheduled Content Pass — 16 September 2026
+
+Ten Broker Watch Opinion articles were prepared for automatic release at 00:00 UTC: Apex Trader Funding, Funded Trading Plus, Leeloo Trading, and TradeDay on 23 September; Atmos Funded, Funding Pips, IQ Option, and RebelsFunding on 24 September; and NinjaTrader and Optimus Flow on 25 September 2026.
+
+- SEO metadata: unique keyword-led titles of 41–50 characters and descriptions of 140–154 characters.
+- Content quality: 554–640 words per article, three reader FAQs, cautious allegation attribution, visible BestForex.io View and company-context sections, and editorial Opinion schema.
+- Discovery: unique slugs, exact internal broker-profile relationships, source citations, descriptive social-image alt text, and valid supplied Blob cover images (all returned HTTP 200).
+- Validation: TypeScript passed, all news archive tests passed, no duplicate post slugs were found, and browser checks confirmed future articles return 404 and remain absent from `/news` before release.
+- Publishing constraint: the Neon upsert and verification attempt remained blocked by HTTP 402 data-transfer quota. The static archive and date gate are ready, but production must receive this code before the scheduled dates; rerun `/api/admin/seed-posts` after Neon quota recovery to restore DB-backed no-deploy scheduling.
+
+---
+
 ## ✅ Remediation Pass #2 — COMPLETED 27 June 2026
 
 All actionable Audit #2 issues were fixed and verified (production build passes, 1,832 pages). Summary:
