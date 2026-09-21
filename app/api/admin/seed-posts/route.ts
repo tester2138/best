@@ -19,6 +19,8 @@
 import { posts as allPosts } from '@/data/posts'
 import { sql } from '@/lib/db'
 import type { NextRequest } from 'next/server'
+import { revalidateNewsSurfaces } from '@/lib/news-revalidation'
+import { scheduleNewsFeedUpdate } from '@/lib/news-websub'
 
 export const dynamic = 'force-dynamic'
 
@@ -160,6 +162,13 @@ export async function POST(req: NextRequest) {
     )
   } catch (error) {
     verificationError = error instanceof Error ? error.message : String(error)
+  }
+
+  if (!verificationError) {
+    revalidateNewsSurfaces()
+    if (inserted > 0 || updated > 0) {
+      scheduleNewsFeedUpdate()
+    }
   }
 
   const failed =

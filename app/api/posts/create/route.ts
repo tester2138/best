@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Pool } from '@neondatabase/serverless'
 import { scheduleNewsFeedUpdate } from '@/lib/news-websub'
+import { revalidateNewsSurfaces } from '@/lib/news-revalidation'
 
 export async function POST(request: NextRequest) {
   try {
@@ -33,8 +34,10 @@ export async function POST(request: NextRequest) {
         [title, slug, excerpt, content, category || 'General']
       )
 
+      const post = result.rows[0]
+      revalidateNewsSurfaces(typeof post?.slug === 'string' ? post.slug : undefined)
       scheduleNewsFeedUpdate()
-      return NextResponse.json({ data: result.rows[0] }, { status: 201 })
+      return NextResponse.json({ data: post }, { status: 201 })
     } finally {
       await client.release()
       await pool.end()

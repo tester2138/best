@@ -12,9 +12,9 @@ import { BarChart2, ChevronLeft, ChevronRight } from 'lucide-react'
 import type { Metadata } from 'next'
 import { SITE_URL } from '@/lib/site-config'
 
-// Scheduling: re-render hourly so future-dated posts appear on their date
-// without a deploy. Visibility is computed at render time via getVisiblePosts().
-export const revalidate = 3600
+// Scheduling: re-render frequently so future-dated posts appear close to their
+// release time without a deploy. Visibility is computed at render time.
+export const revalidate = 300
 
 // T59: paginate at 12 articles per page (balances content density with LCP).
 const ITEMS_PER_PAGE = 12

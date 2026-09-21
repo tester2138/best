@@ -108,12 +108,13 @@ export default async function RootLayout({
             to share the same connection pool — omitting it opens a redundant second slot. */}
         <link rel="preconnect" href="https://img.logo.dev" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://img.logo.dev" />
-        {/* T45: RSS autodiscovery — allows feed readers and Google Publisher Center
-            to detect the feed without manual submission. */}
+        {/* RSS autodiscovery for feed readers and generic feed consumers. Google
+            News now generates publication pages automatically rather than using
+            publisher-supplied RSS sections in Publisher Center. */}
         <link
           rel="alternate"
           type="application/rss+xml"
-          title={`${SITE_NAME} — Forex &amp; Trading News`}
+          title={`${SITE_NAME} — Forex & Trading News`}
           href={`${SITE_URL}/news/feed.xml`}
         />
         {/* Canonical site-representative image hint for Google Search snippet.

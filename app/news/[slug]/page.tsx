@@ -15,9 +15,10 @@ interface ArticlePageProps {
 }
 
 // Scheduling: getPostBySlug returns undefined for a post whose publishedAt is
-// still in the future, so a staged article 404s until its date. Re-rendering
-// hourly lets it go live automatically once the date arrives — no deploy.
-export const revalidate = 3600
+// still in the future, so a staged article 404s until its date. A five-minute
+// ISR window keeps publication and correction changes discoverable quickly
+// without making every request uncached.
+export const revalidate = 300
 
 export async function generateMetadata({ params }: ArticlePageProps): Promise<Metadata> {
   const { slug } = await params
@@ -285,6 +286,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
                 height={675}
                 className="w-full h-auto rounded-lg object-cover aspect-video"
                 priority
+                loading="eager"
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 896px"
               />
             ) : (

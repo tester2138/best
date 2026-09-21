@@ -13,9 +13,9 @@ interface AuthorPageProps {
   params: Promise<{ slug: string }>
 }
 
-// Scheduling: re-render hourly so an author's newly-scheduled articles appear
-// on their publish date. getPostsByAuthor only returns published posts.
-export const revalidate = 3600
+// Scheduling: re-render frequently so an author's newly scheduled articles
+// appear soon after their publish date. The query only returns published posts.
+export const revalidate = 300
 
 export async function generateStaticParams() {
   return (await getPublishedAuthors()).map((author) => ({ slug: author.slug }))
@@ -58,8 +58,7 @@ export default async function AuthorPage({ params }: AuthorPageProps) {
     ? author.beat
     : ['Forex trading', 'CFD brokers', 'Financial regulation', 'Retail trading']
 
-  const personSchema = {
-    '@context': 'https://schema.org',
+  const personEntity = {
     '@type': 'Person',
     '@id': `${url}#person`,
     name: author.name,
@@ -76,11 +75,19 @@ export default async function AuthorPage({ params }: AuthorPageProps) {
     ...(author.sameAs && author.sameAs.length > 0 && { sameAs: author.sameAs }),
   }
 
+  const profileSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ProfilePage',
+    '@id': `${url}#profile`,
+    url,
+    mainEntity: personEntity,
+  }
+
   return (
     <div className="bg-background">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(profileSchema) }}
       />
       <BreadcrumbSchema
         items={[

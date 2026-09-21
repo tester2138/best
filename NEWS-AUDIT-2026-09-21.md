@@ -1,7 +1,7 @@
 # BestForex.io News Article Audit — 2026-09-21
 
 **Scope:** 286 static news articles, including live and scheduled articles.
-**Audit clock:** 2026-09-21T12:00:00.000Z.
+**Audit clock:** 2026-09-21T14:35:00.000Z.
 **Route base:** http://localhost:3000.
 **Publication/share scope:** Post model exposes publication scheduling, but no share-state field; “published/shared or not” is therefore represented here by live versus scheduled status.
 
@@ -18,7 +18,8 @@
 - Live articles missing from paginated 'news': **0**
 - Future articles incorrectly linked from paginated 'news': **0**
 - Current news-sitemap entries: **10**
-- Google News technical-signal faults: **0**
+- Current RSS feed items: **50**
+- Google News discovery-signal faults: **0**
 
 No article route, featured-image, or archive-discovery failure was found in this static pass. Articles listed below need editorial/SEO review, not automatic deletion.
 
@@ -29,6 +30,8 @@ No article route, featured-image, or archive-discovery failure was found in this
 - Opinion and analysis posts use the standard NewsArticle type with a matching genre field and visible editorial label; straight reporting remains NewsArticle.
 - Article schema now includes linked author identity, publisher identity/logo, publication/modification dates, language, free-access status, image, and canonical main entity.
 - The News sitemap publication name now matches BestForex.io, stays limited to recent articles, and remains linked from robots.txt.
+- RSS autodiscovery remains available for feed readers, while publication writes invalidate the News pages, feed and sitemaps and notify WebSub.
+- Author pages expose ProfilePage markup, and category cards use valid non-nested crawlable links.
 - The paginated news archive has deterministic sorting and canonical normalization for out-of-range page parameters.
 - Legacy source attribution was added where the article already documented its source note, and headlines exceeding Google's 110-character guidance were shortened without changing their meaning.
 
@@ -49,7 +52,7 @@ No article route, featured-image, or archive-discovery failure was found in this
 - Duplicate slugs: - None
 - Duplicate IDs: - None
 
-### Google News technical signals
+### Google News discovery signals
 
 Live articles missing from the paginated 'news' archive (0):
 

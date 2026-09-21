@@ -3,6 +3,7 @@ import { getPosts, getPostCount } from '@/lib/queries'
 import { initializeDatabase } from '@/lib/db-init'
 import { sql } from '@/lib/db'
 import { scheduleNewsFeedUpdate } from '@/lib/news-websub'
+import { revalidateNewsSurfaces } from '@/lib/news-revalidation'
 
 export async function GET(request: NextRequest) {
   try {
@@ -67,6 +68,7 @@ export async function POST(request: NextRequest) {
       RETURNING *`
 
     const post = rows[0]
+    revalidateNewsSurfaces(typeof post?.slug === 'string' ? post.slug : undefined)
     scheduleNewsFeedUpdate()
     return NextResponse.json({ data: post }, { status: 201 })
   } catch (error) {

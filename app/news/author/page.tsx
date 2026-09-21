@@ -6,9 +6,9 @@ import { Breadcrumbs, BreadcrumbSchema } from '@/components/layout/breadcrumbs'
 import { getPublishedAuthors, getPostsByAuthor } from '@/data/posts'
 import { SITE_URL, SITE_NAME } from '@/lib/site-config'
 
-// Scheduling: re-render hourly so an author appears/updates once their first
+// Scheduling: re-render frequently so an author appears/updates soon after a
 // scheduled article goes live. Helpers only count published posts.
-export const revalidate = 3600
+export const revalidate = 300
 
 const title = `Our Editorial Team & Forex Analysts | ${SITE_NAME}`
 const description =

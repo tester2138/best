@@ -15,22 +15,42 @@ function escapeXml(value: string): string {
     .replace(/'/g, '&apos;')
 }
 
+function isoDate(value?: string): string | undefined {
+  if (!value) return undefined
+  const date = new Date(value)
+  return Number.isNaN(date.getTime()) ? undefined : date.toISOString()
+}
+
+function latestIsoDate(...values: Array<string | undefined>): string | undefined {
+  const dates = values.map(isoDate).filter((date): date is string => Boolean(date))
+  return dates.length
+    ? new Date(Math.max(...dates.map((date) => new Date(date).getTime()))).toISOString()
+    : undefined
+}
+
 export async function GET() {
   const posts = await getNewsSitemapPosts()
   const urls = posts
-    .map(
-      (post) => `  <url>
-    <loc>${SITE_URL}/news/${escapeXml(post.slug)}</loc>
+    .map((post) => {
+      const publicationDate = isoDate(post.publishedAt)
+      if (!publicationDate) return null
+
+      const lastModified = latestIsoDate(post.publishedAt, post.updatedAt) ?? publicationDate
+      const articleUrl = `${SITE_URL}/news/${post.slug}`
+      return `  <url>
+    <loc>${escapeXml(articleUrl)}</loc>
+    <lastmod>${lastModified}</lastmod>
     <news:news>
       <news:publication>
-        <news:name>${NEWS_PUBLICATION_NAME}</news:name>
+        <news:name>${escapeXml(NEWS_PUBLICATION_NAME)}</news:name>
         <news:language>en</news:language>
       </news:publication>
-      <news:publication_date>${new Date(post.publishedAt).toISOString()}</news:publication_date>
+      <news:publication_date>${publicationDate}</news:publication_date>
       <news:title>${escapeXml(post.title)}</news:title>
     </news:news>
-  </url>`,
-    )
+  </url>`
+    })
+    .filter((url): url is string => Boolean(url))
     .join('\n')
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
