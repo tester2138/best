@@ -214,7 +214,13 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
 
                     <div className="mt-4 flex items-center justify-between">
                       <span className="text-xs text-muted-foreground">
-                        By <span className="font-medium text-foreground">{post.author.name}</span>
+                        By{' '}
+                        <Link
+                          href={`/news/author/${post.author.slug}`}
+                          className="font-medium text-foreground hover:text-primary transition-colors"
+                        >
+                          {post.author.name}
+                        </Link>
                       </span>
                       <Link href={`/news/${post.slug}`}>
                         <Button variant="ghost" size="sm" className="text-primary hover:text-primary/90 -mr-2">

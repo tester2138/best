@@ -1,7 +1,7 @@
 import { existsSync } from 'node:fs'
 import { writeFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
-import { getEditorialType, posts } from '@/data/posts'
+import { posts } from '@/data/posts'
 import type { Post } from '@/lib/types'
 
 const auditNow = new Date(
@@ -80,10 +80,7 @@ function isoDate(value: string): string {
     : date.toISOString().replace(/\.\d{3}Z$/, 'Z')
 }
 
-function expectedArticleType(post: Post): string {
-  const editorialType = getEditorialType(post)
-  if (editorialType === 'Opinion') return 'OpinionNewsArticle'
-  if (editorialType === 'Analysis') return 'AnalysisNewsArticle'
+function expectedArticleType(): string {
   return 'NewsArticle'
 }
 
@@ -174,7 +171,7 @@ async function checkRoutes(): Promise<RouteResult[]> {
         if (!schema) {
           checks.push('missing NewsArticle JSON-LD')
         } else {
-          if (schema['@type'] !== expectedArticleType(post)) {
+          if (schema['@type'] !== expectedArticleType()) {
             checks.push(`unexpected article schema type: ${schema['@type'] || 'missing'}`)
           }
           if (schema.headline !== renderedHeadline) checks.push('schema headline does not match H1')
@@ -417,7 +414,7 @@ No article route, featured-image, or archive-discovery failure was found in this
 
 - Article HTML titles, visible H1s, Open Graph/Twitter titles, and NewsArticle headlines now use the same published headline.
 - Article pages show a clear UTC publication date and time in a crawlable <time> element.
-- Opinion and analysis posts use the matching OpinionNewsArticle or AnalysisNewsArticle type; straight reporting remains NewsArticle.
+- Opinion and analysis posts use the standard NewsArticle type with a matching genre field and visible editorial label; straight reporting remains NewsArticle.
 - Article schema now includes linked author identity, publisher identity/logo, publication/modification dates, language, free-access status, image, and canonical main entity.
 - The News sitemap publication name now matches BestForex.io, stays limited to recent articles, and remains linked from robots.txt.
 - The paginated news archive has deterministic sorting and canonical normalization for out-of-range page parameters.

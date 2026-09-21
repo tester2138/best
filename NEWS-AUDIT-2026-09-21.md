@@ -26,7 +26,7 @@ No article route, featured-image, or archive-discovery failure was found in this
 
 - Article HTML titles, visible H1s, Open Graph/Twitter titles, and NewsArticle headlines now use the same published headline.
 - Article pages show a clear UTC publication date and time in a crawlable <time> element.
-- Opinion and analysis posts use the matching OpinionNewsArticle or AnalysisNewsArticle type; straight reporting remains NewsArticle.
+- Opinion and analysis posts use the standard NewsArticle type with a matching genre field and visible editorial label; straight reporting remains NewsArticle.
 - Article schema now includes linked author identity, publisher identity/logo, publication/modification dates, language, free-access status, image, and canonical main entity.
 - The News sitemap publication name now matches BestForex.io, stays limited to recent articles, and remains linked from robots.txt.
 - The paginated news archive has deterministic sorting and canonical normalization for out-of-range page parameters.

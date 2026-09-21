@@ -126,10 +126,20 @@ export default async function CategoryArchivePage({
                   <p className="mt-2 line-clamp-3 text-sm text-muted-foreground leading-relaxed">
                     {post.excerpt}
                   </p>
-                  <div className="mt-4 flex items-center gap-2 text-xs text-muted-foreground">
+                  <div className="mt-4 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
                     {post.wordCount && post.wordCount > 0 && (
                       <span>{readMinutes(post.wordCount)}</span>
                     )}
+                    <span aria-hidden>·</span>
+                    <span>
+                      By{' '}
+                      <Link
+                        href={`/news/author/${post.author.slug}`}
+                        className="font-medium text-foreground hover:text-primary transition-colors"
+                      >
+                        {post.author.name}
+                      </Link>
+                    </span>
                     <span aria-hidden>·</span>
                     <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
                   </div>
