@@ -122,6 +122,28 @@ function hasPublicationTime(html: string, publishedAt: string): boolean {
   ).test(html)
 }
 
+async function fetchWithRetry(
+  url: string,
+  init?: RequestInit,
+  attempts = 2,
+): Promise<Response> {
+  let lastError: unknown
+
+  for (let attempt = 0; attempt < attempts; attempt++) {
+    try {
+      const response = await fetch(url, init)
+      if (response.status < 500 || attempt === attempts - 1) return response
+    } catch (error) {
+      lastError = error
+      if (attempt === attempts - 1) throw error
+    }
+
+    await new Promise((resolve) => setTimeout(resolve, 250))
+  }
+
+  throw lastError instanceof Error ? lastError : new Error(`Request failed: ${url}`)
+}
+
 async function mapWithConcurrency<T, R>(
   values: T[],
   worker: (value: T) => Promise<R>,
@@ -146,7 +168,7 @@ async function checkRoutes(): Promise<RouteResult[]> {
   return mapWithConcurrency(posts, async (post) => {
     const expected = isLive(post) ? 200 : 404
     try {
-      const response = await fetch(`${baseUrl}/news/${post.slug}`, {
+      const response = await fetchWithRetry(`${baseUrl}/news/${post.slug}`, {
         redirect: 'manual',
       })
       const checks: string[] = []
@@ -163,6 +185,9 @@ async function checkRoutes(): Promise<RouteResult[]> {
         else if (title !== renderedHeadline) checks.push('HTML title does not match H1')
         if (!html.includes(`canonical\" href=\"${siteUrl}/news/${post.slug}`)) {
           checks.push('missing or incorrect canonical')
+        }
+        if (/<meta[^>]+(?:name|property)=["'](?:robots|googlebot)["'][^>]+content=["'][^"']*noindex/i.test(html)) {
+          checks.push('article page is marked noindex')
         }
         if (!heading) checks.push('missing H1')
         if (!hasPublicationTime(html, post.publishedAt)) {
@@ -214,6 +239,7 @@ type DiscoveryResult = {
   linkedFuture: string[]
   sitemapChecks: string[]
   sitemapEntries: number
+  rssItems: number
 }
 
 const ARCHIVE_ITEMS_PER_PAGE = 12
@@ -230,7 +256,7 @@ async function checkDiscovery(): Promise<DiscoveryResult> {
     index === 0 ? `${baseUrl}/news` : `${baseUrl}/news?page=${index + 1}`,
   )
   const archiveHtml = await mapWithConcurrency(archiveUrls, async (url) => {
-    const response = await fetch(url, { redirect: 'manual' })
+    const response = await fetchWithRetry(url, { redirect: 'manual' })
     return response.status === 200 ? response.text() : Promise.resolve('')
   })
   const archiveSource = archiveHtml.join('\n')
@@ -244,13 +270,15 @@ async function checkDiscovery(): Promise<DiscoveryResult> {
 
   const sitemapChecks: string[] = []
   let sitemapEntries = 0
+  let rssItems = 0
   try {
     const response = await fetch(`${baseUrl}/news-sitemap.xml`, { redirect: 'manual' })
     if (response.status !== 200) {
       sitemapChecks.push(`news sitemap returned HTTP ${response.status}`)
     } else {
       const xml = await response.text()
-      sitemapEntries = (xml.match(/<news:news>/g) || []).length
+      const newsBlocks = [...xml.matchAll(/<news:news>([\s\S]*?)<\/news:news>/g)]
+      sitemapEntries = newsBlocks.length
       if (!xml.includes('xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"')) {
         sitemapChecks.push('news sitemap namespace is missing')
       }
@@ -258,15 +286,66 @@ async function checkDiscovery(): Promise<DiscoveryResult> {
         sitemapChecks.push('news sitemap publication name does not match the site publisher')
       }
       if (sitemapEntries > 1000) sitemapChecks.push('news sitemap exceeds 1,000 entries')
-      if (sitemapEntries > 0 && !xml.includes('<news:publication_date>')) {
-        sitemapChecks.push('news sitemap publication dates are missing')
-      }
+
+      const cutoff = Date.now() - 48 * 60 * 60 * 1000
+      newsBlocks.forEach(([, block]) => {
+        const publicationDate = block.match(/<news:publication_date>([^<]+)<\/news:publication_date>/)?.[1]
+        const title = block.match(/<news:title>([^<]+)<\/news:title>/)?.[1]
+        if (!publicationDate) {
+          sitemapChecks.push('news sitemap publication dates are missing')
+        } else {
+          const timestamp = new Date(publicationDate).getTime()
+          if (Number.isNaN(timestamp)) sitemapChecks.push('news sitemap contains an invalid publication date')
+          else if (timestamp < cutoff) sitemapChecks.push('news sitemap contains an article older than two days')
+        }
+        if (!title) sitemapChecks.push('news sitemap contains an article without a title')
+      })
     }
   } catch (error) {
     sitemapChecks.push(`news sitemap request failed: ${String(error)}`)
   }
 
-  return { missingLive, linkedFuture, sitemapChecks, sitemapEntries }
+  try {
+    const response = await fetch(`${baseUrl}/sitemap.xml`, { redirect: 'manual' })
+    if (response.status !== 200) {
+      sitemapChecks.push(`standard sitemap returned HTTP ${response.status}`)
+    } else if (!(await response.text()).includes('<urlset')) {
+      sitemapChecks.push('standard sitemap is missing its urlset')
+    }
+  } catch (error) {
+    sitemapChecks.push(`standard sitemap request failed: ${String(error)}`)
+  }
+
+  try {
+    const response = await fetch(`${baseUrl}/robots.txt`, { redirect: 'manual' })
+    if (response.status !== 200) {
+      sitemapChecks.push(`robots.txt returned HTTP ${response.status}`)
+    } else {
+      const robots = await response.text()
+      for (const sitemapUrl of [`${siteUrl}/sitemap.xml`, `${siteUrl}/news-sitemap.xml`]) {
+        if (!robots.includes(sitemapUrl)) sitemapChecks.push(`robots.txt does not reference ${sitemapUrl}`)
+      }
+    }
+  } catch (error) {
+    sitemapChecks.push(`robots.txt request failed: ${String(error)}`)
+  }
+
+  try {
+    const response = await fetch(`${baseUrl}/news/feed.xml`, { redirect: 'manual' })
+    if (response.status !== 200) {
+      sitemapChecks.push(`RSS feed returned HTTP ${response.status}`)
+    } else {
+      const rss = await response.text()
+      rssItems = (rss.match(/<item>/g) || []).length
+      if (!rss.includes('<rss version="2.0"')) sitemapChecks.push('RSS feed root element is missing')
+      if (!rss.includes(`rel="self" type="application/rss+xml"`)) sitemapChecks.push('RSS feed self link is missing')
+      if (livePosts.length > 0 && rssItems === 0) sitemapChecks.push('RSS feed contains no items despite live articles')
+    }
+  } catch (error) {
+    sitemapChecks.push(`RSS feed request failed: ${String(error)}`)
+  }
+
+  return { missingLive, linkedFuture, sitemapChecks, sitemapEntries, rssItems }
 }
 
 async function checkImages(): Promise<ImageResult[]> {
@@ -406,7 +485,8 @@ async function main(): Promise<void> {
 - Live articles missing from paginated 'news': **${discovery.missingLive.length}**
 - Future articles incorrectly linked from paginated 'news': **${discovery.linkedFuture.length}**
 - Current news-sitemap entries: **${discovery.sitemapEntries}**
-- Google News technical-signal faults: **${discovery.sitemapChecks.length}**
+- Current RSS feed items: **${discovery.rssItems}**
+- Google News discovery-signal faults: **${discovery.sitemapChecks.length}**
 
 No article route, featured-image, or archive-discovery failure was found in this static pass. Articles listed below need editorial/SEO review, not automatic deletion.
 
@@ -417,6 +497,8 @@ No article route, featured-image, or archive-discovery failure was found in this
 - Opinion and analysis posts use the standard NewsArticle type with a matching genre field and visible editorial label; straight reporting remains NewsArticle.
 - Article schema now includes linked author identity, publisher identity/logo, publication/modification dates, language, free-access status, image, and canonical main entity.
 - The News sitemap publication name now matches BestForex.io, stays limited to recent articles, and remains linked from robots.txt.
+- RSS autodiscovery remains available for feed readers, while publication writes invalidate the News pages, feed and sitemaps and notify WebSub.
+- Author pages expose ProfilePage markup, and category cards use valid non-nested crawlable links.
 - The paginated news archive has deterministic sorting and canonical normalization for out-of-range page parameters.
 - Legacy source attribution was added where the article already documented its source note, and headlines exceeding Google's 110-character guidance were shortened without changing their meaning.
 
@@ -437,7 +519,7 @@ ${imageFaults.length ? imageFaults.map((result) => `- \`${result.slug}\`: ${resu
 - Duplicate slugs: ${makeLists(duplicateSlugs)}
 - Duplicate IDs: ${makeLists(duplicateIds)}
 
-### Google News technical signals
+### Google News discovery signals
 
 Live articles missing from the paginated 'news' archive (${discovery.missingLive.length}):
 

@@ -4,9 +4,9 @@ import { directoryCompanies, rankedBrokers } from '@/data/directory'
 import { getVisiblePosts, getPublishedAuthors } from '@/data/posts'
 import { isIndexableBroker } from '@/lib/seo'
 
-// Scheduling: re-generate hourly so a staged article's URL only enters the
-// sitemap once it is actually live (never advertise a URL that still 404s).
-export const revalidate = 3600
+// Scheduling: re-generate frequently so a staged article's URL enters the
+// sitemap soon after it is live (never advertise a URL that still 404s).
+export const revalidate = 300
 
 // T10: /brokers pagination — each page is a distinct, indexable URL with its
 // own self-canonical. Page 1 = /brokers (no ?page=1 param). Pages 2..N carry

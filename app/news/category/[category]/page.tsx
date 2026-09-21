@@ -8,9 +8,9 @@ import { Badge } from '@/components/ui/badge'
 import { SITE_URL } from '@/lib/site-config'
 import { readMinutes } from '@/lib/utils'
 
-// Scheduling: re-render hourly so scheduled posts join their category archive
-// on their publish date. getPostsByCategory only returns published posts.
-export const revalidate = 3600
+// Scheduling: re-render frequently so scheduled posts join their category
+// archive close to their publish date. The query only returns published posts.
+export const revalidate = 300
 
 const CATEGORY_LABELS: Record<string, string> = {
   news: 'News',
@@ -64,7 +64,9 @@ export default async function CategoryArchivePage({
 }) {
   const { category } = await params
   const categoryPosts = (await getPostsByCategory(category)).sort(
-    (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
+    (a, b) =>
+      new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime() ||
+      a.slug.localeCompare(b.slug),
   )
 
   // No posts in this category -> 404 rather than a thin archive page.
@@ -101,12 +103,13 @@ export default async function CategoryArchivePage({
           <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {categoryPosts.map((post) => (
               <li key={post.slug}>
-                <Link
-                  href={`/news/${post.slug}`}
-                  className="group flex h-full flex-col overflow-hidden rounded-lg border border-border bg-card transition-colors hover:border-primary/40"
-                >
+                <div className="group flex h-full flex-col overflow-hidden rounded-lg border border-border bg-card transition-colors hover:border-primary/40">
                   {post.featuredImage && (
-                    <div className="relative aspect-[16/9] w-full overflow-hidden bg-muted">
+                    <Link
+                      href={`/news/${post.slug}`}
+                      className="relative block aspect-[16/9] w-full overflow-hidden bg-muted"
+                      aria-label={post.title}
+                    >
                       <Image
                         src={post.featuredImage}
                         alt={post.imageAltText ?? post.title}
@@ -114,37 +117,39 @@ export default async function CategoryArchivePage({
                         className="object-cover transition-transform duration-300 group-hover:scale-105"
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       />
-                    </div>
+                    </Link>
                   )}
                   <div className="flex flex-1 flex-col p-5">
-                  <Badge variant="outline" className="mb-3 w-fit capitalize text-xs">
-                    {label}
-                  </Badge>
-                  <h2 className="text-lg font-semibold leading-snug text-foreground group-hover:text-primary transition-colors text-pretty">
-                    {post.title}
-                  </h2>
-                  <p className="mt-2 line-clamp-3 text-sm text-muted-foreground leading-relaxed">
-                    {post.excerpt}
-                  </p>
-                  <div className="mt-4 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
-                    {post.wordCount && post.wordCount > 0 && (
-                      <span>{readMinutes(post.wordCount)}</span>
-                    )}
-                    <span aria-hidden>·</span>
-                    <span>
-                      By{' '}
-                      <Link
-                        href={`/news/author/${post.author.slug}`}
-                        className="font-medium text-foreground hover:text-primary transition-colors"
-                      >
-                        {post.author.name}
-                      </Link>
-                    </span>
-                    <span aria-hidden>·</span>
-                    <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
+                    <Badge variant="outline" className="mb-3 w-fit capitalize text-xs">
+                      {label}
+                    </Badge>
+                    <Link href={`/news/${post.slug}`}>
+                      <h2 className="text-lg font-semibold leading-snug text-foreground group-hover:text-primary transition-colors text-pretty">
+                        {post.title}
+                      </h2>
+                    </Link>
+                    <p className="mt-2 line-clamp-3 text-sm text-muted-foreground leading-relaxed">
+                      {post.excerpt}
+                    </p>
+                    <div className="mt-4 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+                      {post.wordCount && post.wordCount > 0 && (
+                        <span>{readMinutes(post.wordCount)}</span>
+                      )}
+                      <span aria-hidden>·</span>
+                      <span>
+                        By{' '}
+                        <Link
+                          href={`/news/author/${post.author.slug}`}
+                          className="font-medium text-foreground hover:text-primary transition-colors"
+                        >
+                          {post.author.name}
+                        </Link>
+                      </span>
+                      <span aria-hidden>·</span>
+                      <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
+                    </div>
                   </div>
-                  </div>
-                </Link>
+                </div>
               </li>
             ))}
           </ul>

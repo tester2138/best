@@ -1,6 +1,7 @@
 import { neon, NeonQueryFunction } from '@neondatabase/serverless'
 import type { GeneratedArticle } from './news-types'
 import { scheduleNewsFeedUpdate } from './news-websub'
+import { revalidateNewsSurfaces } from './news-revalidation'
 
 // Lazy initialization to avoid errors when database URL is not set at module load time
 let _sql: NeonQueryFunction<false, false> | null = null
@@ -315,6 +316,7 @@ export async function publishArticle(
       RETURNING id
     `
 
+    revalidateNewsSurfaces(article.slug)
     scheduleNewsFeedUpdate()
     return { success: true, id: result[0]?.id }
   } catch (error) {
