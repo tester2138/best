@@ -4,7 +4,7 @@ import { Badge } from '@/components/ui/badge'
 import { Breadcrumbs, BreadcrumbSchema } from '@/components/layout/breadcrumbs'
 import { NewsSidebar } from '@/components/news/news-sidebar'
 import Link from 'next/link'
-import { formatDate, readMinutes } from '@/lib/utils'
+import { readMinutes } from '@/lib/utils'
 import { getPostBySlug, getEditorialType } from '@/data/posts'
 import { ShareButtons } from './share-buttons'
 import { SITE_URL, SITE_NAME, SITE_LOGO, SITE_OG_IMAGE } from '@/lib/site-config'
@@ -30,25 +30,18 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
     }
   }
 
-  // Use SEO-optimized meta fields if available. Strip any pre-baked
-  // "| BestForex.io" brand suffix from the data so the root layout's title
-  // template (`%s | BestForex.io`) doesn't append it a second time.
-  // P2-268: cap the headline segment at 55 chars so the final rendered title
-  // (metaTitle + " | BestForex.io" ≈ 14 chars) stays within the ~70-char SERP
-  // display limit. The H1 on the page retains the full headline unchanged.
-  const RAW_TITLE_LIMIT = 55
-  const rawTitle = (post.metaTitle || post.title).replace(/\s*\|\s*BestForex\.io\s*$/i, '')
-  const metaTitle = rawTitle.length > RAW_TITLE_LIMIT
-    ? rawTitle.slice(0, RAW_TITLE_LIMIT).replace(/[\s,]+$/, '') + '…'
-    : rawTitle
+  // Google News recommends that the HTML title, visible headline, and
+  // structured-data headline agree. Keep the article's published headline
+  // intact rather than substituting a shortened SEO variant.
   const metaDescription = post.metaDescription || post.excerpt
+  const authorUrl = `${SITE_URL}/news/author/${post.author.slug}`
 
   return {
-    title: metaTitle,
+    title: { absolute: post.title },
     description: metaDescription,
-    authors: [{ name: post.author?.name || 'BestForex Editorial' }],
+    authors: [{ name: post.author.name, url: authorUrl }],
     openGraph: {
-      title: metaTitle,
+      title: post.title,
       description: metaDescription,
       type: 'article',
       publishedTime: toIsoDate(post.publishedAt),
@@ -64,7 +57,7 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
     },
     twitter: {
       card: 'summary_large_image',
-      title: metaTitle,
+      title: post.title,
       description: metaDescription,
       images: [post.featuredImage || SITE_OG_IMAGE],
     },
@@ -82,6 +75,29 @@ function toIsoDate(value: string): string {
   return d.toISOString().replace(/\.\d{3}Z$/, 'Z')
 }
 
+function formatPublicationDate(value: string): string {
+  const date = new Date(value)
+  if (Number.isNaN(date.getTime())) return value
+
+  const formattedDate = new Intl.DateTimeFormat('en-US', {
+    dateStyle: 'long',
+    timeZone: 'UTC',
+  }).format(date)
+  const formattedTime = new Intl.DateTimeFormat('en-US', {
+    timeStyle: 'short',
+    timeZone: 'UTC',
+  }).format(date)
+
+  return `${formattedDate} at ${formattedTime} UTC`
+}
+
+function isMeaningfullyUpdated(publishedAt: string, updatedAt?: string): boolean {
+  if (!updatedAt) return false
+  const published = new Date(publishedAt).getTime()
+  const updated = new Date(updatedAt).getTime()
+  return Number.isFinite(published) && Number.isFinite(updated) && updated > published
+}
+
 // Resolve a possibly-relative image path to an absolute URL on the canonical host.
 function toAbsoluteImage(src?: string): string {
   if (!src) return SITE_OG_IMAGE
@@ -93,10 +109,15 @@ function toAbsoluteImage(src?: string): string {
 function generateArticleSchema(post: Awaited<ReturnType<typeof getPostBySlug>>) {
   if (!post) return null
 
-  // Google requires OpinionNewsArticle for editorial pieces. Use the resolved
-  // editorial type so critic-desk posts remain correctly classified even when
-  // their archive category is "news".
-  const articleType = getEditorialType(post) === 'Opinion' ? 'OpinionNewsArticle' : 'NewsArticle'
+  // Classify opinion and analysis columns explicitly so Google does not have
+  // to infer that an editorial piece is not straight reporting.
+  const editorialType = getEditorialType(post)
+  const articleType = editorialType === 'Opinion'
+    ? 'OpinionNewsArticle'
+    : editorialType === 'Analysis'
+      ? 'AnalysisNewsArticle'
+      : 'NewsArticle'
+  const authorUrl = `${SITE_URL}/news/author/${post.author.slug}`
 
   return {
     '@context': 'https://schema.org',
@@ -106,34 +127,41 @@ function generateArticleSchema(post: Awaited<ReturnType<typeof getPostBySlug>>) 
     image: [toAbsoluteImage(post.featuredImage)],
     datePublished: toIsoDate(post.publishedAt),
     dateModified: toIsoDate(post.updatedAt || post.publishedAt),
-    author: post.author
-      ? {
-          '@type': 'Person',
-          name: post.author.name,
-          url: `${SITE_URL}/news/author/${post.author.slug}`,
-          ...(post.author.role && { jobTitle: post.author.role }),
-          ...(post.author.bio && { description: post.author.bio }),
-          ...(post.author.avatar && {
-            image: post.author.avatar.startsWith('http')
-              ? post.author.avatar
-              : `${SITE_URL}${post.author.avatar}`,
-          }),
-        }
-      : { '@type': 'Organization', name: SITE_NAME, url: SITE_URL },
+    author: {
+      '@type': 'Person',
+      name: post.author.name,
+      url: authorUrl,
+      ...(post.author.role && { jobTitle: post.author.role }),
+      ...(post.author.bio && { description: post.author.bio }),
+      ...(post.author.avatar && {
+        image: post.author.avatar.startsWith('http')
+          ? post.author.avatar
+          : `${SITE_URL}${post.author.avatar}`,
+      }),
+      ...(post.author.sameAs && post.author.sameAs.length > 0
+        ? { sameAs: post.author.sameAs }
+        : {}),
+    },
     publisher: {
       '@type': 'Organization',
+      '@id': `${SITE_URL}/#organization`,
       name: SITE_NAME,
+      url: SITE_URL,
       logo: {
         '@type': 'ImageObject',
-        url: SITE_LOGO
+        url: SITE_LOGO,
+        contentUrl: SITE_LOGO,
+        width: 1092,
+        height: 316,
       }
     },
+    inLanguage: 'en-US',
+    isAccessibleForFree: true,
     articleSection: post.category,
     mainEntityOfPage: {
       '@type': 'WebPage',
       '@id': `${SITE_URL}/news/${post.slug}`
     },
-    wordCount: post.wordCount || 0,
   }
 }
 
@@ -177,58 +205,65 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
       </div>
 
       {/* Article Header */}
-      <section className="border-b border-border py-12 sm:py-16">
+      <section className="border-b border-border py-12 sm:py-16" aria-labelledby="article-heading">
         <div className="container mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap items-center gap-3">
-            {(() => {
-              const editorialType = getEditorialType(post)
-              return editorialType !== 'News' ? (
-                <Badge className="bg-primary text-primary-foreground uppercase tracking-wide text-xs">
-                  {editorialType}
-                </Badge>
-              ) : null
-            })()}
-            <Badge variant="outline" className="capitalize">{post.category}</Badge>
-            <span className="text-sm text-muted-foreground">
-              {formatDate(new Date(post.publishedAt))}
-            </span>
-            {post.wordCount && post.wordCount > 0 && (
-              <span className="text-sm text-muted-foreground">
-                {readMinutes(post.wordCount)}
-              </span>
-            )}
-          </div>
-          <h1 className="text-balance mt-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
-            {post.title}
-          </h1>
-          <p className="mt-4 text-lg text-muted-foreground">
-            {post.excerpt}
-          </p>
-          <div className="mt-4 flex items-center gap-2 text-sm text-muted-foreground">
-            <span>By</span>
-            {post.author ? (
+          <header>
+            <div className="flex flex-wrap items-center gap-3">
+              {(() => {
+                const editorialType = getEditorialType(post)
+                return editorialType !== 'News' ? (
+                  <Badge className="bg-primary text-primary-foreground uppercase tracking-wide text-xs">
+                    {editorialType}
+                  </Badge>
+                ) : null
+              })()}
+              <Badge variant="outline" className="capitalize">{post.category}</Badge>
+              {post.wordCount && post.wordCount > 0 && (
+                <span className="text-sm text-muted-foreground">
+                  {readMinutes(post.wordCount)}
+                </span>
+              )}
+            </div>
+            <h1 id="article-heading" className="text-balance mt-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
+              {post.title}
+            </h1>
+            <p className="mt-4 text-lg text-muted-foreground">
+              {post.excerpt}
+            </p>
+            <div className="mt-4 flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
+              <span>By</span>
               <Link
                 href={`/news/author/${post.author.slug}`}
                 className="font-semibold text-foreground hover:text-primary transition-colors"
               >
                 {post.author.name}
               </Link>
-            ) : (
-              <span className="font-semibold text-foreground">BestForex Editorial</span>
-            )}
-            {post.author?.role && (
-              <>
-                <span>•</span>
-                <span>{post.author.role}</span>
-              </>
-            )}
-            {post.sourceName && (
-              <>
-                <span>•</span>
-                <span>Source: {post.sourceName}</span>
-              </>
-            )}
-          </div>
+              <span aria-hidden="true">•</span>
+              <time dateTime={toIsoDate(post.publishedAt)}>
+                Published {formatPublicationDate(post.publishedAt)}
+              </time>
+              {post.author.role && (
+                <>
+                  <span aria-hidden="true">•</span>
+                  <span>{post.author.role}</span>
+                </>
+              )}
+              {isMeaningfullyUpdated(post.publishedAt, post.updatedAt) && (
+                <>
+                  <span aria-hidden="true">•</span>
+                  <time dateTime={toIsoDate(post.updatedAt!)}>
+                    Updated {formatPublicationDate(post.updatedAt!)}
+                  </time>
+                </>
+              )}
+              {post.sourceName && (
+                <>
+                  <span aria-hidden="true">•</span>
+                  <span>Source: {post.sourceName}</span>
+                </>
+              )}
+            </div>
+          </header>
         </div>
       </section>
 

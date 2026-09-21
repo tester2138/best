@@ -1,9 +1,10 @@
 import { getNewsSitemapPosts } from '@/lib/news-queries'
-import { SITE_URL } from '@/lib/site'
+import { SITE_NAME, SITE_URL } from '@/lib/site'
 
 export const dynamic = 'force-dynamic'
 
-const NEWS_PUBLICATION_NAME = 'Best Forex News'
+// Google requires this to match the publication name used on the article pages.
+const NEWS_PUBLICATION_NAME = SITE_NAME
 
 function escapeXml(value: string): string {
   return value

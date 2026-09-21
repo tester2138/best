@@ -1,7 +1,7 @@
 import { existsSync } from 'node:fs'
 import { writeFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
-import { posts } from '@/data/posts'
+import { getEditorialType, posts } from '@/data/posts'
 import type { Post } from '@/lib/types'
 
 const auditNow = new Date(
@@ -47,21 +47,82 @@ function actualWordCount(post: Post): number {
 }
 
 function renderedMetaTitle(post: Post): string {
-  const raw = (post.metaTitle || post.title).replace(
-    /\s*\|\s*BestForex\.io\s*$/i,
-    '',
-  )
-  return raw.length > 55
-    ? `${raw.slice(0, 55).replace(/[\s,]+$/, '')}…`
-    : raw
+  return post.title
+}
+
+function decodeHtml(value: string): string {
+  return value
+    .replace(/&amp;/g, '&')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;|&apos;/g, "'")
+    .replace(/&#x([0-9a-f]+);/gi, (_, hex: string) => String.fromCodePoint(Number.parseInt(hex, 16)))
+    .replace(/&#(\d+);/g, (_, decimal: string) => String.fromCodePoint(Number.parseInt(decimal, 10)))
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
 }
 
 function htmlTitle(html: string): string | undefined {
-  return html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1]?.trim()
+  const title = html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1]
+  return title ? decodeHtml(title.trim()) : undefined
 }
 
-function hasH1(html: string): boolean {
-  return /<h1(?:\s|>)/i.test(html)
+function htmlHeading(html: string, tag: string): string | undefined {
+  const heading = html.match(new RegExp(`<${tag}[^>]*>([\\s\\S]*?)<\\/${tag}>`, 'i'))?.[1]
+  if (!heading) return undefined
+  const text = heading.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim()
+  return decodeHtml(text)
+}
+
+function isoDate(value: string): string {
+  const date = new Date(value)
+  return Number.isNaN(date.getTime())
+    ? value
+    : date.toISOString().replace(/\.\d{3}Z$/, 'Z')
+}
+
+function expectedArticleType(post: Post): string {
+  const editorialType = getEditorialType(post)
+  if (editorialType === 'Opinion') return 'OpinionNewsArticle'
+  if (editorialType === 'Analysis') return 'AnalysisNewsArticle'
+  return 'NewsArticle'
+}
+
+type ArticleSchema = {
+  '@type'?: string
+  headline?: string
+  datePublished?: string
+  dateModified?: string
+  author?: { url?: string; name?: string } | Array<{ url?: string; name?: string }>
+  publisher?: { name?: string; url?: string }
+  image?: string | string[]
+  mainEntityOfPage?: { '@id'?: string }
+}
+
+function extractArticleSchema(html: string): ArticleSchema | undefined {
+  const blocks = [...html.matchAll(/<script[^>]+type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)]
+  for (const block of blocks) {
+    try {
+      const parsed = JSON.parse(block[1]) as unknown
+      const candidates = Array.isArray(parsed) ? parsed : [parsed]
+      const article = candidates.find(
+        (item): item is ArticleSchema =>
+          !!item && typeof item === 'object' &&
+          (item as { '@type'?: unknown })['@type']?.toString().endsWith('NewsArticle') === true,
+      )
+      if (article) return article
+    } catch {
+      // Continue scanning other JSON-LD blocks.
+    }
+  }
+  return undefined
+}
+
+function hasPublicationTime(html: string, publishedAt: string): boolean {
+  const expected = isoDate(publishedAt)
+  return new RegExp(
+    `<time[^>]+datetime=["']${expected.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}["'][^>]*>[\\s\\S]*?Published`,
+    'i',
+  ).test(html)
 }
 
 async function mapWithConcurrency<T, R>(
@@ -95,13 +156,47 @@ async function checkRoutes(): Promise<RouteResult[]> {
 
       if (response.status === 200) {
         const html = await response.text()
-        if (!htmlTitle(html)) checks.push('missing HTML title')
+        const title = htmlTitle(html)
+        const heading = htmlHeading(html, 'h1')
+        const renderedHeadline = heading || post.title
+        const schema = extractArticleSchema(html)
+        const authorUrl = `${siteUrl}/news/author/${post.author.slug}`
+
+        if (!title) checks.push('missing HTML title')
+        else if (title !== renderedHeadline) checks.push('HTML title does not match H1')
         if (!html.includes(`canonical\" href=\"${siteUrl}/news/${post.slug}`)) {
           checks.push('missing or incorrect canonical')
         }
-        if (!hasH1(html)) checks.push('missing H1')
-        if (!html.includes('NewsArticle') && !html.includes('OpinionNewsArticle')) {
+        if (!heading) checks.push('missing H1')
+        if (!hasPublicationTime(html, post.publishedAt)) {
+          checks.push('missing visible publication date/time')
+        }
+        if (!schema) {
           checks.push('missing NewsArticle JSON-LD')
+        } else {
+          if (schema['@type'] !== expectedArticleType(post)) {
+            checks.push(`unexpected article schema type: ${schema['@type'] || 'missing'}`)
+          }
+          if (schema.headline !== renderedHeadline) checks.push('schema headline does not match H1')
+          if (schema.datePublished !== isoDate(post.publishedAt)) {
+            checks.push('schema datePublished is missing or inaccurate')
+          }
+          if (schema.dateModified !== isoDate(post.updatedAt || post.publishedAt)) {
+            checks.push('schema dateModified is missing or inaccurate')
+          }
+          const authors = Array.isArray(schema.author) ? schema.author : [schema.author]
+          if (!authors.some((author) => author?.url === authorUrl)) {
+            checks.push('schema author URL is missing or incorrect')
+          }
+          if (schema.publisher?.name !== 'BestForex.io') {
+            checks.push('schema publisher name is missing or incorrect')
+          }
+          if (!schema.image || (Array.isArray(schema.image) && schema.image.length === 0)) {
+            checks.push('schema image is missing')
+          }
+          if (schema.mainEntityOfPage?.['@id'] !== `${siteUrl}/news/${post.slug}`) {
+            checks.push('schema mainEntityOfPage is missing or incorrect')
+          }
         }
       }
 
@@ -115,6 +210,66 @@ async function checkRoutes(): Promise<RouteResult[]> {
       }
     }
   })
+}
+
+type DiscoveryResult = {
+  missingLive: string[]
+  linkedFuture: string[]
+  sitemapChecks: string[]
+  sitemapEntries: number
+}
+
+const ARCHIVE_ITEMS_PER_PAGE = 12
+
+function escapedRegExp(value: string): string {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+}
+
+async function checkDiscovery(): Promise<DiscoveryResult> {
+  const livePosts = posts.filter(isLive)
+  const futurePosts = posts.filter((post) => !isLive(post))
+  const totalPages = Math.max(1, Math.ceil(livePosts.length / ARCHIVE_ITEMS_PER_PAGE))
+  const archiveUrls = Array.from({ length: totalPages }, (_, index) =>
+    index === 0 ? `${baseUrl}/news` : `${baseUrl}/news?page=${index + 1}`,
+  )
+  const archiveHtml = await mapWithConcurrency(archiveUrls, async (url) => {
+    const response = await fetch(url, { redirect: 'manual' })
+    return response.status === 200 ? response.text() : Promise.resolve('')
+  })
+  const archiveSource = archiveHtml.join('\n')
+
+  const missingLive = livePosts
+    .filter((post) => !new RegExp(`/news/${escapedRegExp(post.slug)}(?:["?#])`).test(archiveSource))
+    .map((post) => post.slug)
+  const linkedFuture = futurePosts
+    .filter((post) => new RegExp(`/news/${escapedRegExp(post.slug)}(?:["?#])`).test(archiveSource))
+    .map((post) => post.slug)
+
+  const sitemapChecks: string[] = []
+  let sitemapEntries = 0
+  try {
+    const response = await fetch(`${baseUrl}/news-sitemap.xml`, { redirect: 'manual' })
+    if (response.status !== 200) {
+      sitemapChecks.push(`news sitemap returned HTTP ${response.status}`)
+    } else {
+      const xml = await response.text()
+      sitemapEntries = (xml.match(/<news:news>/g) || []).length
+      if (!xml.includes('xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"')) {
+        sitemapChecks.push('news sitemap namespace is missing')
+      }
+      if (!xml.includes('<news:name>BestForex.io</news:name>')) {
+        sitemapChecks.push('news sitemap publication name does not match the site publisher')
+      }
+      if (sitemapEntries > 1000) sitemapChecks.push('news sitemap exceeds 1,000 entries')
+      if (sitemapEntries > 0 && !xml.includes('<news:publication_date>')) {
+        sitemapChecks.push('news sitemap publication dates are missing')
+      }
+    }
+  } catch (error) {
+    sitemapChecks.push(`news sitemap request failed: ${String(error)}`)
+  }
+
+  return { missingLive, linkedFuture, sitemapChecks, sitemapEntries }
 }
 
 async function checkImages(): Promise<ImageResult[]> {
@@ -155,8 +310,11 @@ function makeLists(rows: string[]): string {
 }
 
 async function main(): Promise<void> {
-  const routes = await checkRoutes()
-  const images = await checkImages()
+  const [routes, images, discovery] = await Promise.all([
+    checkRoutes(),
+    checkImages(),
+    checkDiscovery(),
+  ])
   const slugCounts = new Map<string, number>()
   const idCounts = new Map<string, number>()
   for (const post of posts) {
@@ -216,6 +374,12 @@ async function main(): Promise<void> {
   const descriptionLong = posts
     .filter((post) => (post.metaDescription?.length || 0) > 160)
     .map((post) => `${post.slug} (${post.metaDescription?.length || 0} chars)`)
+  const headlineLong = posts
+    .filter((post) => post.title.length > 110)
+    .map((post) => `${post.slug} (${post.title.length} chars)`)
+  const dateOnly = posts
+    .filter((post) => !post.publishedAt.includes('T'))
+    .map((post) => post.slug)
   const noSources = posts
     .filter((post) => !post.linkedSources?.length)
     .map((post) => post.slug)
@@ -239,8 +403,22 @@ async function main(): Promise<void> {
 - Image faults: **${imageFaults.length}**
 - Missing required fields: **${missingRequired.length}**
 - Invalid publication dates: **${invalidDates.length}**
+- Live articles missing from paginated 'news': **${discovery.missingLive.length}**
+- Future articles incorrectly linked from paginated 'news': **${discovery.linkedFuture.length}**
+- Current news-sitemap entries: **${discovery.sitemapEntries}**
+- Google News technical-signal faults: **${discovery.sitemapChecks.length}**
 
-No article route or featured-image failure was found in this static pass. Articles listed below need editorial/SEO review, not automatic deletion.
+No article route, featured-image, or archive-discovery failure was found in this static pass. Articles listed below need editorial/SEO review, not automatic deletion.
+
+## Implemented Google News remediations
+
+- Article HTML titles, visible H1s, Open Graph/Twitter titles, and NewsArticle headlines now use the same published headline.
+- Article pages show a clear UTC publication date and time in a crawlable <time> element.
+- Opinion and analysis posts use the matching OpinionNewsArticle or AnalysisNewsArticle type; straight reporting remains NewsArticle.
+- Article schema now includes linked author identity, publisher identity/logo, publication/modification dates, language, free-access status, image, and canonical main entity.
+- The News sitemap publication name now matches BestForex.io, stays limited to recent articles, and remains linked from robots.txt.
+- The paginated news archive has deterministic sorting and canonical normalization for out-of-range page parameters.
+- Article copy, headlines, source records, and images were not edited in this technical pass.
 
 ## Blocking faults
 
@@ -258,6 +436,20 @@ ${imageFaults.length ? imageFaults.map((result) => `- \`${result.slug}\`: ${resu
 - Invalid publication dates: ${makeLists(invalidDates)}
 - Duplicate slugs: ${makeLists(duplicateSlugs)}
 - Duplicate IDs: ${makeLists(duplicateIds)}
+
+### Google News technical signals
+
+Live articles missing from the paginated 'news' archive (${discovery.missingLive.length}):
+
+${makeLists(discovery.missingLive)}
+
+Future articles linked before publication (${discovery.linkedFuture.length}):
+
+${makeLists(discovery.linkedFuture)}
+
+News sitemap checks (${discovery.sitemapChecks.length}):
+
+${makeLists(discovery.sitemapChecks)}
 
 ## SEO review queue
 
@@ -293,6 +485,14 @@ Meta description over 160 characters (${descriptionLong.length}):
 
 ${makeLists(descriptionLong)}
 
+Headlines over Google's 110-character guidance (${headlineLong.length}):
+
+${makeLists(headlineLong)}
+
+Publication dates supplied without an explicit time in source data (${dateOnly.length}):
+
+${makeLists(dateOnly)}
+
 ### Source attribution
 
 Articles without linked primary sources (${noSources.length}):
@@ -302,18 +502,21 @@ ${makeLists(noSources)}
 ## Validation notes
 
 - Live articles were expected to return HTTP 200; future articles were expected to return HTTP 404.
-- Live route HTML was checked for a title, canonical URL, H1, and NewsArticle/OpinionNewsArticle JSON-LD.
+- Live route HTML was checked for an exact title/H1 match, canonical URL, visible publication date/time, editorial NewsArticle schema type, author URL, publisher, image, and main entity.
+- Every live article was checked for a crawlable link from the paginated 'news' archive; future articles were checked for premature archive links.
+- The news sitemap was checked for the Google namespace, publication name, publication dates, and the 1,000-entry limit.
 - Remote covers were checked with HTTP HEAD and local covers with filesystem existence checks.
 - Neon inventory/status could not be included because the project returned HTTP 402 for data-transfer quota. This report therefore verifies the canonical static archive and date gate, not DB row status.
 - Trustpilot and similar third-party source URLs may reject automated requests; source-link availability is separate from article route/image validity.
 
 ## Review priority
 
-1. Fix any future route/image/required-field faults if they appear after rerun.
+1. Fix any future route/image/required-field or discovery faults if they appear after rerun.
 2. Review the ${wordUnder500.length} short articles first, especially live articles.
 3. Add or verify primary sources for the ${noSources.length} articles without linked sources.
-4. Normalize metadata lengths and declared word counts.
-5. Re-run after Neon quota recovery to compare static articles against DB status.
+4. Review the ${headlineLong.length} headlines over 110 characters; this requires an editorial headline decision and was not changed in this technical pass.
+5. Normalize metadata lengths and declared word counts.
+6. Re-run after Neon quota recovery to compare static articles against DB status.
 `
 
   const outputPath = resolve('NEWS-AUDIT-2026-09-21.md')

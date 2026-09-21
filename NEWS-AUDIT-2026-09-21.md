@@ -15,8 +15,22 @@
 - Image faults: **0**
 - Missing required fields: **0**
 - Invalid publication dates: **0**
+- Live articles missing from paginated 'news': **0**
+- Future articles incorrectly linked from paginated 'news': **0**
+- Current news-sitemap entries: **10**
+- Google News technical-signal faults: **0**
 
-No article route or featured-image failure was found in this static pass. Articles listed below need editorial/SEO review, not automatic deletion.
+No article route, featured-image, or archive-discovery failure was found in this static pass. Articles listed below need editorial/SEO review, not automatic deletion.
+
+## Implemented Google News remediations
+
+- Article HTML titles, visible H1s, Open Graph/Twitter titles, and NewsArticle headlines now use the same published headline.
+- Article pages show a clear UTC publication date and time in a crawlable <time> element.
+- Opinion and analysis posts use the matching OpinionNewsArticle or AnalysisNewsArticle type; straight reporting remains NewsArticle.
+- Article schema now includes linked author identity, publisher identity/logo, publication/modification dates, language, free-access status, image, and canonical main entity.
+- The News sitemap publication name now matches BestForex.io, stays limited to recent articles, and remains linked from robots.txt.
+- The paginated news archive has deterministic sorting and canonical normalization for out-of-range page parameters.
+- Article copy, headlines, source records, and images were not edited in this technical pass.
 
 ## Blocking faults
 
@@ -34,6 +48,20 @@ No article route or featured-image failure was found in this static pass. Articl
 - Invalid publication dates: - None
 - Duplicate slugs: - None
 - Duplicate IDs: - None
+
+### Google News technical signals
+
+Live articles missing from the paginated 'news' archive (0):
+
+- None
+
+Future articles linked before publication (0):
+
+- None
+
+News sitemap checks (0):
+
+- None
 
 ## SEO review queue
 
@@ -489,6 +517,308 @@ Meta description over 160 characters (64):
 - `etoro-ai-agents-grok-autopilot-trading (178 chars)`
 - `ig-trade-responsibly-3000-free-shares-incentive (166 chars)`
 
+Headlines over Google's 110-character guidance (10):
+
+- `generic-trade-review-clean-record-2026 (113 chars)`
+- `lux-trading-firm-withdrawal-review-2026 (115 chars)`
+- `avatrade-israel-atrade-isa-unlicensed-services-fine (112 chars)`
+- `royal-forex-roinvesting-cysec-settlements-licence (120 chars)`
+- `fxview-charlgate-cysec-settlement-2024 (116 chars)`
+- `axiance-icc-intercertus-cysec-settlement (111 chars)`
+- `hoch-capital-itrader-tradeatf-cysec-fine-licence (113 chars)`
+- `union-standard-asic-record-300-million-penalties-europefx-tradefx-cfd (121 chars)`
+- `saxo-bank-aml-fine-denmark-dkk-313-million-finanstilsynet (119 chars)`
+- `canaccord-genuity-fincen-80-million-bsa-penalty (111 chars)`
+
+Publication dates supplied without an explicit time in source data (286):
+
+- `traders-central-fund-review-acquisition-closed-accounts-2026`
+- `the-trading-capital-review-2026`
+- `swift-funding-metaquotes-metatrader-ban-2026`
+- `fidelcrest-review-shutdown-claims-2026`
+- `blueberry-funded-review-2026`
+- `proptradetech-review-zero-trust-score-hidden-ownership`
+- `prime-funding-trader-review-payout-denials-low-trust-score`
+- `nexus-trader-funding-review-name-confusion-complaints`
+- `global-funded-trader-review-unverified-payout-claims`
+- `funded-engineer-review-bankruptcy-unpaid-payouts`
+- `xtrade-review-cysec-fine-asic-license-cancelled`
+- `solid-ecn-review-fictitious-misa-license`
+- `lmfx-review-offshore-entities-no-regulator`
+- `larson-and-holz-review-amf-blacklist-no-regulator`
+- `ic-funded-review-payout-complaints-account-closures`
+- `iux-markets-review-withdrawal-complaints-2026`
+- `freshforex-review-unregulated-2026`
+- `forex4you-markets4you-review-2026`
+- `errante-review-complaints-leverage-2026`
+- `accentforex-pamm-complaint-review-2026`
+- `generic-trade-review-clean-record-2026`
+- `gain-capital-cftc-order-review-2026`
+- `fundedbull-closed-flag-review-2026`
+- `edgeclear-review-clean-record-2026`
+- `bux-afm-fine-inducements-ban-2026`
+- `transworld-futures-cftc-review-2026`
+- `trading-212-ombudsman-isa-transfer-review-2026`
+- `the-funded-trader-lawsuit-review-2026`
+- `optimus-flow-funded-program-disclosure-review-2026`
+- `ninjatrader-nfa-aml-fine-review-2026`
+- `rebelsfunding-payout-refusal-review-2026`
+- `iq-option-rbi-alert-list-review-2026`
+- `funding-pips-account-breach-review-2026`
+- `atmos-funded-risk-interview-payout-review-2026`
+- `tradeday-third-party-payout-complaint-2026`
+- `leeloo-trading-payout-cuts-complaints-2026`
+- `funded-trading-plus-service-acquisition-complaints-2026`
+- `apex-trader-funding-id-verification-complaints-2026`
+- `wetrade-capital-rating-distinct-award-brand-2026`
+- `madafx-domain-chinese-gambling-site-2026`
+- `funder-trading-educator-terms-review-2026`
+- `capital-com-cysec-fine-late-stor-reports-2026`
+- `ara-markets-asic-registration-not-found-2026`
+- `ncm-investment-licence-claims-unverified-2026`
+- `land-fx-mauritius-entity-licence-review-2026`
+- `hankotrade-cftc-red-list-rating-2026`
+- `fxoptimax-regulatory-attention-zero-reviews-2026`
+- `direct-tt-domain-real-trading-uk-warning-2026`
+- `tradefundrr-review-rating-payout-evidence-2026`
+- `kab-strategy-cysec-licence-withdrawal-2026`
+- `amega-complaints-mt5-funds-withdrawn-2026`
+- `hfx-domains-listed-for-sale-review-2026`
+- `blue-forex-funds-complaints-unpaid-accounts-2026`
+- `npb-markets-rating-suspended-funds-complaints-2026`
+- `vault-funder-review-conflicting-closure-status-2026`
+- `next-funded-domain-listed-for-sale-2026`
+- `trade-capital-funding-domain-sale-2026`
+- `investmarkets-complaints-trustpilot-rating-2026`
+- `elite-funded-offline-payout-complaints-2026`
+- `funded-pro-trader-review-complaints-2026`
+- `funded-edge-review-tracking-gate-2026`
+- `crown-funded-review-transparency-2026`
+- `adrofx-website-closed-withdrawal-complaints-2026`
+- `alphaapexcapital-apex-capital-funding-complaints-2026`
+- `fxpig-fraud-allegations-fxify-merger-2026`
+- `blue-guardian-review-rating-2026`
+- `forex-capital-funds-domain-sale-account-complaints-2026`
+- `nova-funding-shuts-down-payout-complaints-2026`
+- `fundingticks-shuts-down-retroactive-rule-backlash-2026`
+- `fundedelite-rating-suspended-ip-rule-complaints-2026`
+- `n1cm-rating-suspended-withdrawal-complaints-2026`
+- `audacity-capital-rating-suspended-drawdown-complaints-2026`
+- `cfi-financial-rating-suspended-stop-loss-complaints-2026`
+- `trade-com-rating-suspended-withdrawal-complaints-2026`
+- `the-trading-pit-rating-suspended-payout-complaints-2026`
+- `funderpro-rating-suspended-payout-complaints-2026`
+- `capex-com-withdrawal-complaints-2026`
+- `hycm-complaints-rating-2026`
+- `weltrade-rating-suspended-withdrawal-complaints-2026`
+- `nordfx-rbi-alert-list-warning-2026`
+- `fusion-markets-rbi-alert-list-warning-2026`
+- `fxpro-rating-suspended-withdrawal-complaints-2026`
+- `fxgt-profit-denied-rule-violation-complaints-2026`
+- `pu-prime-rating-suspended-profit-blocked-complaints-2026`
+- `instaforex-withdrawal-complaints-2026`
+- `startrader-withdrawal-complaints-march-2026`
+- `eightcap-rating-suspended-complaints-2026`
+- `windsor-brokers-ontario-warning-2026`
+- `moneta-markets-withdrawal-complaints-2026`
+- `go-markets-withheld-profits-complaints-2026`
+- `vt-markets-rating-suspended-fund-complaints-2026`
+- `exness-philippine-sec-warning-2026`
+- `fxtm-zero-spread-complaints-2026`
+- `lark-funding-payout-complaints-2026`
+- `roboforex-profit-reversal-complaints-2026`
+- `ifc-markets-withdrawal-fee-complaints-2026`
+- `teletrade-withdrawal-delay-complaints-2026`
+- `taurex-rating-suspended-profit-complaints-2026`
+- `darwinex-rating-suspended-risk-engine-complaints-2026`
+- `tickmill-rating-suspended-withdrawal-complaints-2026`
+- `activtrades-rating-suspended-profit-complaints-2026`
+- `tmgm-withheld-deposit-complaints-2026`
+- `fxprimus-withdrawal-complaints-2026`
+- `aquafunded-payout-drawdown-complaints-2026`
+- `uprofit-trader-daily-loss-limit-payout-complaints`
+- `fxdd-malta-license-surrender-2026`
+- `jfd-brokers-cysec-complaints-gbe-transfer-2026`
+- `falcon-funded-payout-complaints-2026`
+- `scope-markets-withdrawal-complaints-2026`
+- `tx3-funding-toptier-trader-complaints-2026`
+- `elite-trader-funding-payout-complaints-2026`
+- `brightfunded-kyc-slippage-complaints-2026`
+- `funded-nation-payout-complaints-unpaid`
+- `xtrend-speed-unverified-license-withdrawal-complaints`
+- `long-asia-mas-regulation-claim-withdrawal-complaints`
+- `the-forex-funder-payout-complaints-trustpilot`
+- `true-forex-funds-closed-financial-insolvency`
+- `crypto-fund-trader-trustpilot-suspended-payout-denied`
+- `warren-bowie-smith-scam-reports-withdrawal`
+- `funded-peaks-closed-exit-scam-complaints`
+- `headway-complaints-zeroed-balances-withdrawals`
+- `alpari-withdrawal-blocked-complaints`
+- `grand-capital-unauthorised-seychelles-fsa-warning`
+- `sabiotrade-trustpilot-payout-complaints`
+- `binomo-blocked-account-withdrawal-complaints`
+- `quotex-no-license-withheld-funds-complaints`
+- `pipfarm-unpaid-payout-trustpilot-breach`
+- `for-traders-payout-denied-trustpilot-breach`
+- `traders-with-edge-closed-payout-complaints`
+- `pocket-option-no-license-blocked-accounts`
+- `olymp-trade-offshore-license-complaints`
+- `prop-number-one-false-breach-notifications`
+- `gwfx-revoked-license-uk-office-review`
+- `elites-funding-closed-payout-complaints`
+- `squared-financial-cysec-license-withdrawal-complaints`
+- `naga-bonus-profit-withholding-complaints`
+- `paxforex-cftc-permanent-ban-review`
+- `ingot-brokers-profit-withdrawal-complaints`
+- `fx2-funding-payout-account-freeze-complaints`
+- `trive-asic-license-cancelled-cfd-review`
+- `orbex-eu-exit-cysec-license-complaints`
+- `conotoxia-cysec-license-withdrawn-governance-failures`
+- `thinkmarkets-wikifx-complaints-review`
+- `doo-prime-wikifx-office-review`
+- `robomarkets-cysec-settlement-cfd-marketing-2026`
+- `bdswiss-bafin-warning-withdrawal-complaints`
+- `hfm-philippines-sec-warning-profit-complaints`
+- `deriv-financial-commission-profit-dispute`
+- `octa-malaysia-central-bank-alert-list-wikifx-score`
+- `vantage-profit-reversal-suspicious-activity-clause`
+- `fbs-wikifx-complaint-blacklist-belize-office`
+- `oanda-nfa-fine-repeat-compliance-failures`
+- `xtb-knf-fine-cfd-client-assessment-violations`
+- `tradestation-ofac-settlement-sanctions-violations`
+- `the5ers-payout-dispute-bulk-trading-account-closure`
+- `alvexo-vpr-safe-financial-license-surrender-seychelles`
+- `t4trade-fca-warning-not-authorised-seychelles`
+- `finalto-clone-scam-fca-warning-victim`
+- `multibank-group-amf-blacklist-wikifx-complaints`
+- `justmarkets-wikifx-complaint-blacklist-score`
+- `usgfx-europefx-tradefred-asic-federal-court-penalty`
+- `atfx-atfunded-operations-pause-refunds`
+- `topstep-outages-trustpilot-update-2026`
+- `goat-funded-trader-profit-cap-trustpilot-2026`
+- `fintokei-propnavi-rating-correction-affiliate-2026`
+- `smart-prop-trader-closure-refund-complaints-2026`
+- `surgetrader-shutdown-match-trader-license-2026`
+- `e8-markets-trustpilot-rating-hidden-fake-reviews-2026`
+- `bespoke-funding-program-dissolved-fca-warning-2026`
+- `alpha-futures-ninjatrader-termination-payouts-2026`
+- `tradingfunds-ftuk-merger-prop-firm-2026`
+- `instant-funding-funded-trading-plus-acquisition-2026`
+- `lmax-group-five-billion-dollar-sale-2026`
+- `top-one-trader-rules-review-2026`
+- `tickticktrader-payout-delay-review-2026`
+- `fundednext-labs-rule-reversal-2026`
+- `atlas-funded-payout-review-2026`
+- `finotive-funding-burnley-sponsorship-2026`
+- `mex-atlantic-corporation-uae-warning-2026`
+- `lcg-ownership-change-flowbank-2026`
+- `admirals-infinox-estonia-license-2026`
+- `blackbull-markets-ipo-roadshow-2026`
+- `swissquote-shares-fall-h1-2026-crypto-guidance-cut`
+- `tradeview-markets-fund-removal-complaints-cnmv-warning`
+- `qt-funded-quant-tekel-payout-denial-pattern-2026`
+- `fullerton-markets-out-of-business-2026`
+- `take-profit-trader-drawdown-rules-2026`
+- `maven-trading-non-disparagement-clause-fake-reviews-2026`
+- `earn2trade-pass-rate-withdrawal-data-2026`
+- `bulenox-consistency-rule-payout-denial-2026`
+- `lux-trading-firm-withdrawal-review-2026`
+- `myfundedfutures-ranking-compliance-history-2026`
+- `fx-volumes-july-2026`
+- `mbx-pro-financial-commission`
+- `kraken-payward-q2-2026-results`
+- `pepperstone-cto-nigel-fernandes`
+- `axi-executive-departures`
+- `stonex-banco-travelex-acquisition`
+- `gfa-capital-markets-asic-suspension`
+- `equiti-al-wahda-sponsorship`
+- `ctrader-ai-agents-cli`
+- `xtb-systematic-internaliser`
+- `asic-nine-broker-review-warning`
+- `kraken-prop-sp500-funded-trading`
+- `plus500-bifci-bahamas-offshore`
+- `revolut-cyprus-crypto-ceo-vasiliou`
+- `etoro-tradezero-acquisition-q2-2026`
+- `avatrade-canada-provincial-warnings-not-registered`
+- `naga-bafin-market-manipulation-examination-ipo`
+- `avatrade-israel-atrade-misleading-video-fine`
+- `naga-capex-key-way-reverse-merger-2024`
+- `avatrade-israel-atrade-isa-unlicensed-services-fine`
+- `naga-cofounder-yasin-qureshi-cum-ex-conviction`
+- `avatrade-alberta-securities-commission-settlement-2020`
+- `naga-group-2022-loss-auditor-restatement`
+- `avatrade-belgium-fsma-settlement`
+- `naga-markets-cysec-150000-settlement`
+- `squaredfinancial-sq-sey-cysec-settlement-2025`
+- `royal-forex-roinvesting-cysec-settlements-licence`
+- `trade-com-leadcapital-cysec-fine`
+- `ufx-reliantco-cysec-fine`
+- `fxview-charlgate-cysec-settlement-2024`
+- `fxvc-finteractive-cysec-fine-licence-renounced`
+- `101investing-fxbfi-cysec-fines-licence-withdrawn`
+- `magnum-fx-cysec-fine-licence-withdrawal`
+- `f1-markets-cysec-fine-2022`
+- `axiance-icc-intercertus-cysec-settlement`
+- `velos-global-markets-asic-licence-cancelled-2025`
+- `jp-markets-fsca-fine-otc-derivatives`
+- `rockfort-markets-fma-licence-cancelled-2024`
+- `fxoro-mca-intelifunds-cysec-fine-2024`
+- `fxtb-forex-tb-fca-fine-2024`
+- `depaho-fxgm-cysec-fine-licence-suspension`
+- `hoch-capital-itrader-tradeatf-cysec-fine-licence`
+- `cfi-credit-financier-invest-cysec-aml-settlement-2022`
+- `begin-capital-markets-cysec-settlements-2022`
+- `general-capital-brokers-cysec-settlement-2022`
+- `exclusive-change-capital-cysec-settlement`
+- `fp-markets-eu-cysec-fine-cfd-retail-protection-2026`
+- `itrade-global-cysec-licence-withdrawal-2025`
+- `colmex-pro-cysec-200000-settlement-2025`
+- `fxnet-cysec-225000-settlement-2025`
+- `fxtm-forextime-fca-licence-surrender-2026`
+- `union-standard-asic-record-300-million-penalties-europefx-tradefx-cfd`
+- `triangleview-3anglefx-cysec-full-suspension-aml-governance`
+- `afrimarkets-capital-fsca-licence-withdrawal-client-fund-misappropriation-banxso`
+- `banxso-liquidation-fsca-fines-r2-billion-fake-celebrity-advertisements`
+- `forex24-cysec-transaction-reporting-failures-lydya-ltd`
+- `htfx-shuts-down-worldwide-cysec-fca-licences-lost-vanuatu`
+- `traders-trust-cysec-licence-renunciation-16-years-ttcm`
+- `conotoxia-cysec-licence-withdrawal-suspension`
+- `imermarket-invesacapital-fsca-provisional-licence-withdrawal-cfds`
+- `mixirite-fsca-provisional-licence-withdrawal-umarketpro-protea-markets`
+- `quicktrade-fsca-aml-fine-south-africa-710000-rand`
+- `saxo-bank-aml-fine-denmark-dkk-313-million-finanstilsynet`
+- `fxopen-au-asic-licence-cancellation-human-resources`
+- `prospero-markets-asic-licence-cancellation-money-laundering`
+- `xtrade-fca-licence-cancellation-vulnerable-clients-cfds`
+- `ic-markets-eu-cysec-fine-margin-circumvention-retail-cfds`
+- `trive-asic-licence-cancellation-cfd-deficiencies`
+- `ironfx-notesco-cysec-settlement-cfd-marketing`
+- `forex-com-nfa-fine-account-adjustments-platform-glitch`
+- `forex-ct-asic-20-million-penalty-unconscionable-conduct`
+- `oanda-cftc-fine-net-capital-dividends`
+- `etoro-sec-settlement-unregistered-crypto-broker`
+- `fxcm-cftc-fine-no-dealing-desk-fraud-us-exit`
+- `alvexo-operator-cysec-settlement-licence-withdrawal`
+- `infinox-fca-fine-mifir-transaction-reporting-failure`
+- `ic-markets-948-million-class-action-federal-court-australia`
+- `celsius-network-cftc-enforcement-report-2026`
+- `binance-australia-asic-10-million-penalty-retail-classification`
+- `darren-reynolds-fca-ban-british-steel-pension`
+- `myforexfunds-cftc-fraud-20-billion-freeze`
+- `canaccord-genuity-fincen-80-million-bsa-penalty`
+- `pictet-overseas-finra-aml-warning-ignored`
+- `blue-ocean-ats-finra-aml-overnight-trading`
+- `falconx-cftc-fine-unregistered-futures-commission-merchant`
+- `bluesky-wealth-frank-breuer-lifetime-ban-pension-fraud`
+- `dinosaur-merchant-bank-fca-fine-cfd-surveillance-failure`
+- `etoro-ai-agents-grok-autopilot-trading`
+- `ig-trade-responsibly-3000-free-shares-incentive`
+- `pepperstone-awards-vs-complaints-offshore-entity`
+- `plus500-prediction-markets-gamble-regulation`
+- `fxcm-stratos-jefferies-sale-long-fall`
+- `saxo-bank-42m-aml-fine-premium-myth`
+- `plus500-buyback-binge-capital-strength-or-illusion`
+
 ### Source attribution
 
 Articles without linked primary sources (18):
@@ -515,15 +845,18 @@ Articles without linked primary sources (18):
 ## Validation notes
 
 - Live articles were expected to return HTTP 200; future articles were expected to return HTTP 404.
-- Live route HTML was checked for a title, canonical URL, H1, and NewsArticle/OpinionNewsArticle JSON-LD.
+- Live route HTML was checked for an exact title/H1 match, canonical URL, visible publication date/time, editorial NewsArticle schema type, author URL, publisher, image, and main entity.
+- Every live article was checked for a crawlable link from the paginated 'news' archive; future articles were checked for premature archive links.
+- The news sitemap was checked for the Google namespace, publication name, publication dates, and the 1,000-entry limit.
 - Remote covers were checked with HTTP HEAD and local covers with filesystem existence checks.
 - Neon inventory/status could not be included because the project returned HTTP 402 for data-transfer quota. This report therefore verifies the canonical static archive and date gate, not DB row status.
 - Trustpilot and similar third-party source URLs may reject automated requests; source-link availability is separate from article route/image validity.
 
 ## Review priority
 
-1. Fix any future route/image/required-field faults if they appear after rerun.
+1. Fix any future route/image/required-field or discovery faults if they appear after rerun.
 2. Review the 79 short articles first, especially live articles.
 3. Add or verify primary sources for the 18 articles without linked sources.
-4. Normalize metadata lengths and declared word counts.
-5. Re-run after Neon quota recovery to compare static articles against DB status.
+4. Review the 10 headlines over 110 characters; this requires an editorial headline decision and was not changed in this technical pass.
+5. Normalize metadata lengths and declared word counts.
+6. Re-run after Neon quota recovery to compare static articles against DB status.

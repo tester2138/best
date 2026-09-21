@@ -20,13 +20,29 @@ export const revalidate = 3600
 const ITEMS_PER_PAGE = 12
 const BASE_URL = `${SITE_URL}/news`
 
+function parsePage(value?: string): number {
+  const parsed = Number.parseInt(value ?? '1', 10)
+  return Number.isFinite(parsed) ? Math.max(1, parsed) : 1
+}
+
+function sortPostsByDate<T extends { publishedAt: string; slug: string }>(posts: T[]): T[] {
+  return [...posts].sort(
+    (a, b) =>
+      new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime() ||
+      a.slug.localeCompare(b.slug),
+  )
+}
+
 interface NewsPageProps {
   searchParams: Promise<{ page?: string }>
 }
 
 export async function generateMetadata({ searchParams }: NewsPageProps): Promise<Metadata> {
   const { page: pageParam } = await searchParams
-  const page = Math.max(1, parseInt(pageParam ?? '1', 10))
+  const requestedPage = parsePage(pageParam)
+  const sortedPosts = sortPostsByDate(await getVisiblePosts())
+  const totalPages = Math.max(1, Math.ceil(sortedPosts.length / ITEMS_PER_PAGE))
+  const page = Math.min(requestedPage, totalPages)
   const isFirstPage = page === 1
 
   const title = isFirstPage
@@ -34,10 +50,6 @@ export async function generateMetadata({ searchParams }: NewsPageProps): Promise
     : `Forex & Trading News — Page ${page}`
 
   const canonical = isFirstPage ? BASE_URL : `${BASE_URL}?page=${page}`
-  const sortedPosts = (await getVisiblePosts()).sort(
-    (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
-  )
-  const totalPages = Math.ceil(sortedPosts.length / ITEMS_PER_PAGE)
 
   return {
     title,
@@ -69,15 +81,13 @@ const ALL_CATEGORIES = ['All', 'news', 'analysis', 'education', 'guide', 'review
 
 export default async function NewsPage({ searchParams }: NewsPageProps) {
   const { page: pageParam } = await searchParams
-  const currentPage = Math.max(1, parseInt(pageParam ?? '1', 10))
+  const currentPage = parsePage(pageParam)
 
   // Computed per request so scheduled posts join the list exactly on their date.
-  const sortedPosts = (await getVisiblePosts()).sort(
-    (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
-  )
+  const sortedPosts = sortPostsByDate(await getVisiblePosts())
   const availableCategories = new Set<string>(sortedPosts.map((p) => p.category))
 
-  const totalPages = Math.ceil(sortedPosts.length / ITEMS_PER_PAGE)
+  const totalPages = Math.max(1, Math.ceil(sortedPosts.length / ITEMS_PER_PAGE))
   const safePage = Math.min(currentPage, totalPages)
   const offset = (safePage - 1) * ITEMS_PER_PAGE
   const pagePosts = sortedPosts.slice(offset, offset + ITEMS_PER_PAGE)
