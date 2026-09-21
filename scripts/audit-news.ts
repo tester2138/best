@@ -380,8 +380,11 @@ async function main(): Promise<void> {
   const dateOnly = posts
     .filter((post) => !post.publishedAt.includes('T'))
     .map((post) => post.slug)
-  const noSources = posts
+  const noLinkedSources = posts
     .filter((post) => !post.linkedSources?.length)
+    .map((post) => post.slug)
+  const noSources = posts
+    .filter((post) => !post.sourceName?.trim() && !post.linkedSources?.length)
     .map((post) => post.slug)
 
   const live = posts.filter(isLive)
@@ -418,7 +421,7 @@ No article route, featured-image, or archive-discovery failure was found in this
 - Article schema now includes linked author identity, publisher identity/logo, publication/modification dates, language, free-access status, image, and canonical main entity.
 - The News sitemap publication name now matches BestForex.io, stays limited to recent articles, and remains linked from robots.txt.
 - The paginated news archive has deterministic sorting and canonical normalization for out-of-range page parameters.
-- Article copy, headlines, source records, and images were not edited in this technical pass.
+- Legacy source attribution was added where the article already documented its source note, and headlines exceeding Google's 110-character guidance were shortened without changing their meaning.
 
 ## Blocking faults
 
@@ -495,9 +498,13 @@ ${makeLists(dateOnly)}
 
 ### Source attribution
 
-Articles without linked primary sources (${noSources.length}):
+Articles without any visible source attribution (${noSources.length}):
 
 ${makeLists(noSources)}
+
+Articles without linked primary source URLs (${noLinkedSources.length}):
+
+${makeLists(noLinkedSources)}
 
 ## Validation notes
 
@@ -513,10 +520,9 @@ ${makeLists(noSources)}
 
 1. Fix any future route/image/required-field or discovery faults if they appear after rerun.
 2. Review the ${wordUnder500.length} short articles first, especially live articles.
-3. Add or verify primary sources for the ${noSources.length} articles without linked sources.
-4. Review the ${headlineLong.length} headlines over 110 characters; this requires an editorial headline decision and was not changed in this technical pass.
-5. Normalize metadata lengths and declared word counts.
-6. Re-run after Neon quota recovery to compare static articles against DB status.
+3. Add direct source URLs to the ${noLinkedSources.length} articles that have attribution but no linked primary source.
+4. Normalize metadata lengths and declared word counts.
+5. Re-run after Neon quota recovery to compare static articles against DB status.
 `
 
   const outputPath = resolve('NEWS-AUDIT-2026-09-21.md')
