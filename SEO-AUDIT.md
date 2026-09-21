@@ -6,6 +6,14 @@
 
 ---
 
+## Full News Article Audit — 21 September 2026
+
+A full static-archive audit covers all 286 articles, including 243 live articles and 43 scheduled articles. All expected live routes returned HTTP 200; all future routes returned HTTP 404. No route faults, broken featured images, duplicate slugs/IDs, invalid dates, or missing required article fields were found. Full review queue, including every affected slug, is recorded in [`NEWS-AUDIT-2026-09-21.md`](./NEWS-AUDIT-2026-09-21.md).
+
+SEO review queue: 79 article bodies measure under 500 words, 18 lack linked primary sources, 16 meta titles are under 45 characters, 69 exceed 60 characters, 11 meta descriptions are under 140 characters, and 64 exceed 160 characters. Neon inventory/status could not be compared because database requests remain blocked by HTTP 402 data-transfer quota.
+
+---
+
 ## Scheduled Content Pass — 17 September 2026
 
 Eight Broker Watch Opinion articles were prepared for automatic release at 00:00 UTC: The Funded Trader, Trading 212 and Transworld Futures on 25 September; and BUX, EdgeClear, FundedBull, GAIN Capital and Generic Trade on 26 September 2026.
