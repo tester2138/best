@@ -30,7 +30,7 @@ No article route, featured-image, or archive-discovery failure was found in this
 - Article schema now includes linked author identity, publisher identity/logo, publication/modification dates, language, free-access status, image, and canonical main entity.
 - The News sitemap publication name now matches BestForex.io, stays limited to recent articles, and remains linked from robots.txt.
 - The paginated news archive has deterministic sorting and canonical normalization for out-of-range page parameters.
-- Article copy, headlines, source records, and images were not edited in this technical pass.
+- Legacy source attribution was added where the article already documented its source note, and headlines exceeding Google's 110-character guidance were shortened without changing their meaning.
 
 ## Blocking faults
 
@@ -517,18 +517,9 @@ Meta description over 160 characters (64):
 - `etoro-ai-agents-grok-autopilot-trading (178 chars)`
 - `ig-trade-responsibly-3000-free-shares-incentive (166 chars)`
 
-Headlines over Google's 110-character guidance (10):
+Headlines over Google's 110-character guidance (0):
 
-- `generic-trade-review-clean-record-2026 (113 chars)`
-- `lux-trading-firm-withdrawal-review-2026 (115 chars)`
-- `avatrade-israel-atrade-isa-unlicensed-services-fine (112 chars)`
-- `royal-forex-roinvesting-cysec-settlements-licence (120 chars)`
-- `fxview-charlgate-cysec-settlement-2024 (116 chars)`
-- `axiance-icc-intercertus-cysec-settlement (111 chars)`
-- `hoch-capital-itrader-tradeatf-cysec-fine-licence (113 chars)`
-- `union-standard-asic-record-300-million-penalties-europefx-tradefx-cfd (121 chars)`
-- `saxo-bank-aml-fine-denmark-dkk-313-million-finanstilsynet (119 chars)`
-- `canaccord-genuity-fincen-80-million-bsa-penalty (111 chars)`
+- None
 
 Publication dates supplied without an explicit time in source data (286):
 
@@ -821,7 +812,11 @@ Publication dates supplied without an explicit time in source data (286):
 
 ### Source attribution
 
-Articles without linked primary sources (18):
+Articles without any visible source attribution (0):
+
+- None
+
+Articles without linked primary source URLs (18):
 
 - `xtrend-speed-unverified-license-withdrawal-complaints`
 - `long-asia-mas-regulation-claim-withdrawal-complaints`
@@ -856,7 +851,6 @@ Articles without linked primary sources (18):
 
 1. Fix any future route/image/required-field or discovery faults if they appear after rerun.
 2. Review the 79 short articles first, especially live articles.
-3. Add or verify primary sources for the 18 articles without linked sources.
-4. Review the 10 headlines over 110 characters; this requires an editorial headline decision and was not changed in this technical pass.
-5. Normalize metadata lengths and declared word counts.
-6. Re-run after Neon quota recovery to compare static articles against DB status.
+3. Add direct source URLs to the 18 articles that have attribution but no linked primary source.
+4. Normalize metadata lengths and declared word counts.
+5. Re-run after Neon quota recovery to compare static articles against DB status.

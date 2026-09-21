@@ -1,12 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  typescript: {
-    // NOTE (SEO audit #6): There are ~60 pre-existing type errors in non-SEO code
-    // paths (DB-backed Post fields, Blob SDK signatures, an API route handler type).
-    // Removing this flag now would fail the production build. Tracked as a deferred
-    // item in SEO-AUDIT-TRACKING.md — to be removed once those types are resolved.
-    ignoreBuildErrors: true,
-  },
   images: {
     // SEO audit #5/#42: image optimization re-enabled (was `unoptimized: true`).
     // Serves responsive AVIF/WebP for better LCP/CLS on image-heavy pages.
