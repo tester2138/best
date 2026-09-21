@@ -109,26 +109,28 @@ function toAbsoluteImage(src?: string): string {
 function generateArticleSchema(post: Awaited<ReturnType<typeof getPostBySlug>>) {
   if (!post) return null
 
-  // Classify opinion and analysis columns explicitly so Google does not have
-  // to infer that an editorial piece is not straight reporting.
+  // Google documents Article, NewsArticle, and BlogPosting as the supported
+  // article markup types. Keep the standard NewsArticle type for maximum
+  // compatibility, and expose opinion/analysis as a genre plus the visible
+  // editorial badge rather than relying on a custom subtype.
   const editorialType = getEditorialType(post)
-  const articleType = editorialType === 'Opinion'
-    ? 'OpinionNewsArticle'
-    : editorialType === 'Analysis'
-      ? 'AnalysisNewsArticle'
-      : 'NewsArticle'
   const authorUrl = `${SITE_URL}/news/author/${post.author.slug}`
+  const articleUrl = `${SITE_URL}/news/${post.slug}`
 
   return {
     '@context': 'https://schema.org',
-    '@type': articleType,
+    '@type': 'NewsArticle',
     headline: post.title,
     description: post.metaDescription || post.excerpt,
     image: [toAbsoluteImage(post.featuredImage)],
     datePublished: toIsoDate(post.publishedAt),
     dateModified: toIsoDate(post.updatedAt || post.publishedAt),
+    url: articleUrl,
+    genre: editorialType,
+    publishingPrinciples: `${SITE_URL}/editorial-policy`,
     author: {
       '@type': 'Person',
+      '@id': `${authorUrl}#person`,
       name: post.author.name,
       url: authorUrl,
       ...(post.author.role && { jobTitle: post.author.role }),
