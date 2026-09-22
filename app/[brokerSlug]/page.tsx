@@ -1,19 +1,22 @@
 import { permanentRedirect, notFound } from 'next/navigation'
-import { getPublicBrokerBySlug } from '@/lib/public-brokers'
+import { resolveLegacyBrokerSlug } from '@/lib/public-brokers'
 
 /**
  * Legacy redirect stub.
  *
  * Broker reviews moved from the site root (`/{slug}`) to the namespaced hub
  * (`/brokers/{slug}`) — see SEO audit #37/#38. This catch-all preserves link
- * equity by issuing a permanent (308) redirect for every known broker slug.
- * Static routes (/news, /offers, /brokers, ...) are matched by Next.js before
- * this dynamic segment, so there is no collision risk. Unknown paths 404.
+ * equity by issuing a permanent (308) redirect for every brand that has a
+ * live profile page. Static routes (/news, /offers, /brokers, ...) are matched
+ * by Next.js before this dynamic segment, so there is no collision risk.
+ * Unknown paths 404.
  *
- * Resolves slugs through the SAME merged catalogue the /brokers/{slug} page
- * uses (data/directory.ts + data/brokers.ts + DB brand overlay), so any slug
- * that has a live profile page also gets its root-level redirect. The earlier
- * directory-only lookup 404'd for brokers.ts-only entries (e.g. /plus500).
+ * Resolution mirrors the /brokers/{slug} page exactly: the full directory
+ * catalogue (data/directory.ts) OR the legacy broker catalogue
+ * (data/brokers.ts), checked statically with zero DB dependency so a Neon
+ * outage can never turn a pure redirect into a 500. Uppercase, spaces and
+ * percent-encoded variants (/Plus500, /PLUS500, /Plus%20500) all normalise to
+ * the same canonical target.
  *
  * `dynamicParams` + empty `generateStaticParams` keeps this fully on-demand so
  * we don't pre-render thousands of redirect pages at build time.
@@ -30,14 +33,11 @@ export default async function LegacyBrokerRedirect({
   params: Promise<{ brokerSlug: string }>
 }) {
   const { brokerSlug } = await params
-  // Normalise to lowercase so /Plus500, /PLUS500, /plus500 all redirect to the
-  // same canonical URL at /brokers/plus500.
-  const normalisedSlug = brokerSlug.toLowerCase()
-  const broker = await getPublicBrokerBySlug(normalisedSlug)
+  const canonicalSlug = await resolveLegacyBrokerSlug(brokerSlug)
 
-  if (!broker) {
+  if (!canonicalSlug) {
     notFound()
   }
 
-  permanentRedirect(`/brokers/${normalisedSlug}`)
+  permanentRedirect(`/brokers/${canonicalSlug}`)
 }
