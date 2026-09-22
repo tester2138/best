@@ -255,6 +255,70 @@ export async function getPublicBrokerBySlug(slug: string): Promise<Broker | unde
 }
 
 /**
+ * Legacy root-level URLs (/Plus500, /plus-500, /Plus%20500) must redirect to
+ * /brokers/{slug} for EVERY brand that has a live profile page. The profile
+ * route resolves a slug through the full directory catalogue (directory.ts)
+ * OR the legacy broker catalogue (brokers.ts), so this resolver must match
+ * that exact set — the ~1,700 directory-only brands included.
+ *
+ * Static sources are checked first with zero DB dependency: a pure redirect
+ * must never fail because of a Neon outage (the DB-backed catalog below is
+ * already error-safe, but we avoid touching it entirely for known slugs).
+ */
+const STATIC_PROFILE_SLUGS = new Set<string>([
+  ...editorialDirectory.map((company) => company.slug.toLowerCase()),
+  ...editorialBrokers.map((broker) => broker.slug.toLowerCase()),
+])
+
+export function normalizeLegacyBrokerSlug(rawSlug: string): string {
+  let slug = rawSlug.trim()
+  // Path params may still be percent-encoded (e.g. /Plus%20500). decodeURI can
+  // throw on malformed input, so fall back to the raw segment.
+  if (slug.includes('%')) {
+    try {
+      slug = decodeURIComponent(slug)
+    } catch {
+      // keep the raw segment
+    }
+  }
+  return slug.toLowerCase().replace(/^-+|-+$/g, '')
+}
+
+/**
+ * Candidate normalisations for a legacy slug, most-canonical first:
+ * 1. as-typed lowercase            → /plus500
+ * 2. whitespace/hyphens collapsed  → /saxo-bank, /saxo  bank
+ * 3. separators removed entirely   → /Plus 500, /plus--500 → plus500
+ */
+function legacySlugCandidates(rawSlug: string): string[] {
+  const base = normalizeLegacyBrokerSlug(rawSlug)
+  if (!base) return []
+  const collapsed = base.replace(/[\s-]+/g, '-').replace(/^-+|-+$/g, '')
+  const stripped = base.replace(/[\s-]+/g, '')
+  return [...new Set([base, collapsed, stripped].filter(Boolean))]
+}
+
+export async function resolveLegacyBrokerSlug(rawSlug: string): Promise<string | undefined> {
+  const candidates = legacySlugCandidates(rawSlug)
+  if (candidates.length === 0) return undefined
+
+  // Static sources first with zero DB dependency: a pure redirect must never
+  // fail because of a Neon outage.
+  for (const slug of candidates) {
+    if (STATIC_PROFILE_SLUGS.has(slug)) return slug
+  }
+
+  // Not in the editorial catalogues. Fall back to the DB-backed catalog
+  // (covers pinned directory-only entries); it resolves undefined on DB
+  // failure rather than throwing, so unknown/offline slugs 404 cleanly.
+  for (const slug of candidates) {
+    const broker = await getPublicBrokerBySlug(slug)
+    if (broker) return slug
+  }
+  return undefined
+}
+
+/**
  * P2-251: Guard against placeholder/N-A core fields appearing on homepage widgets.
  * A broker is "widget-eligible" when it has a real (non-placeholder) description
  * and at least one non-N/A core field. Basic stubs (e.g. Dukascopy before enrichment)
