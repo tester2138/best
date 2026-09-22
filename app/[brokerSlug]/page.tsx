@@ -23,6 +23,12 @@ import { resolveLegacyBrokerSlug } from '@/lib/public-brokers'
  */
 export const dynamicParams = true
 
+// Fully dynamic at request time. Without this, Next.js treats the route as
+// statically generatable (generateStaticParams is declared) and the runtime
+// permanentRedirect() bails out with DYNAMIC_SERVER_USAGE — surfacing as a
+// 500 in production only (dev never exercises the static-render path).
+export const dynamic = 'force-dynamic'
+
 export function generateStaticParams() {
   return []
 }
