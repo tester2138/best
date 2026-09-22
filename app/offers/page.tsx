@@ -43,8 +43,8 @@ export default function OffersPage() {
       <div className="bg-secondary/30 py-3">
         <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-            <AdSlot placementKey="horizontal-1" fluid />
-            <AdSlot placementKey="horizontal-2" fluid />
+            <AdSlot placementKey="horizontal-1" fluid priority />
+            <AdSlot placementKey="horizontal-2" fluid priority />
           </div>
         </div>
       </div>

@@ -17,6 +17,8 @@ interface AdSlotProps {
   fallback?: React.ReactNode
   /** When true the slot expands to fill its parent instead of using a fixed size */
   fluid?: boolean
+  /** Eager-load the creative — set on above-fold slots that are the LCP element */
+  priority?: boolean
 }
 
 // Only 2 banner sizes: 468x60 (horizontal) and 300x250 (square)
@@ -25,13 +27,16 @@ const sizeClasses: Record<AdSize, string> = {
   '300x250': 'w-[300px] h-[250px]'
 }
 
-// Height classes used in fluid mode — explicit height on mobile so stacked banners render
+// Fluid mode: banners always keep their native aspect ratio (height derives
+// from width), so the creative scales proportionally at every viewport instead
+// of being center-cropped by object-cover. Capped at the native creative size
+// so desktop renders it pixel-perfect at 1:1.
 const fluidHeightClasses: Record<AdSize, string> = {
-  '468x60': 'h-[72px] sm:h-[60px]',
-  '300x250': 'h-[250px]'
+  '468x60': 'w-full aspect-[468/60] sm:max-w-[468px]',
+  '300x250': 'w-full aspect-[300/250] sm:max-w-[300px]'
 }
 
-export function AdSlot({ placementKey, className, fallback, fluid = false }: AdSlotProps) {
+export function AdSlot({ placementKey, className, fallback, fluid = false, priority = false }: AdSlotProps) {
   const ad = getAdByPlacement(placementKey)
   
   // Show fallback placeholder if no ad found for this placement
@@ -42,7 +47,7 @@ export function AdSlot({ placementKey, className, fallback, fluid = false }: AdS
   }
   
   const containerClass = fluid
-    ? cn('relative w-full sm:flex-1 sm:w-auto', fluidHeightClasses[ad.desktopSize], className)
+    ? cn('relative', fluidHeightClasses[ad.desktopSize], className)
     : cn('relative inline-block', sizeClasses[ad.desktopSize], className)
 
   return (
@@ -66,6 +71,8 @@ export function AdSlot({ placementKey, className, fallback, fluid = false }: AdS
             src={ad.imageUrl}
             alt={ad.altText}
             fill
+            priority={priority}
+            loading={priority ? undefined : 'lazy'}
             className="object-cover"
             sizes={
               fluid
@@ -88,6 +95,8 @@ export function AdSlot({ placementKey, className, fallback, fluid = false }: AdS
             src={ad.imageUrl}
             alt={ad.altText}
             fill
+            priority={priority}
+            loading={priority ? undefined : 'lazy'}
             className="object-cover"
             sizes={
               fluid
