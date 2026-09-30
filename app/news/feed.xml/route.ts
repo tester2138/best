@@ -79,7 +79,7 @@ ${items}
   return new Response(xml, {
     headers: {
       'Content-Type': 'application/rss+xml; charset=utf-8',
-      'Cache-Control': 'public, max-age=0, s-maxage=60, stale-while-revalidate=60',
+      'Cache-Control': 'public, max-age=0, s-maxage=300, stale-while-revalidate=600',
       'X-Content-Type-Options': 'nosniff',
     },
   })

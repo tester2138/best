@@ -79,16 +79,28 @@ const getCachedPublicBrandRows = unstable_cache(queryPublicBrandRows, ['public-b
   revalidate: 300,
 })
 
+const QUOTA_RETRY_COOLDOWN_MS = 5 * 60 * 1000
+let quotaRetryAfter = 0
+
 async function getPublicBrandRows(): Promise<PublicBrandRow[]> {
   // Catch outside unstable_cache: a transient Neon failure must never be
   // persisted as an empty overlay and replace the canonical master ranking.
+  if (Date.now() < quotaRetryAfter) return []
+
   try {
     return await getCachedPublicBrandRows()
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err)
-    console.error(
-      `[public-brokers] brand overlay unavailable, serving static directory — ${message}`,
-    )
+    if (message.includes('402') || message.toLowerCase().includes('quota')) {
+      quotaRetryAfter = Date.now() + QUOTA_RETRY_COOLDOWN_MS
+      console.warn(
+        `[public-brokers] Neon quota exceeded; serving static directory and retrying after ${QUOTA_RETRY_COOLDOWN_MS / 1000}s — ${message}`,
+      )
+    } else {
+      console.error(
+        `[public-brokers] brand overlay unavailable, serving static directory — ${message}`,
+      )
+    }
     return []
   }
 }

@@ -188,15 +188,29 @@ export async function getRssFeedPosts(): Promise<Post[]> {
   return withFallback(
     'getRssFeedPosts',
     async () => {
+      // Keep every status row for visibility gates, but fetch full HTML only for
+      // the latest live feed candidates to avoid transferring the whole archive.
       const rows = await sql`
+        WITH rss_body_posts AS (
+          SELECT id
+          FROM public.posts
+          WHERE status = 'published'
+            AND published_at <= NOW()
+          ORDER BY published_at DESC, slug ASC
+          LIMIT 50
+        )
         SELECT
-          id, slug, title, excerpt, content, category, editorial_type,
-          author_name, author_slug, author_avatar, author_bio, author_role,
-          featured_image, image_alt_text, is_featured, status,
-          published_at, updated_at, reading_time, word_count,
-          meta_title, meta_description, source_name, tags,
-          related_brokers, linked_sources
-        FROM public.posts
+          post.id, post.slug, post.title, post.excerpt,
+          CASE WHEN rss_body_posts.id IS NOT NULL THEN post.content END AS content,
+          post.category, post.editorial_type,
+          post.author_name, post.author_slug, post.author_avatar,
+          post.author_bio, post.author_role,
+          post.featured_image, post.image_alt_text, post.is_featured, post.status,
+          post.published_at, post.updated_at, post.reading_time, post.word_count,
+          post.meta_title, post.meta_description, post.source_name, post.tags,
+          post.related_brokers, post.linked_sources
+        FROM public.posts AS post
+        LEFT JOIN rss_body_posts ON rss_body_posts.id = post.id
       `
       return mergeVisiblePosts(rows.map(mapRecord), staticPosts).slice(0, 50)
     },
