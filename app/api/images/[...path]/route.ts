@@ -1,5 +1,6 @@
 import { get } from '@vercel/blob'
 import { NextResponse } from 'next/server'
+import { getVerifiedBlobToken, resolveBlobStorageIdentity } from '@/lib/blob-storage-safety'
 
 export async function GET(
   request: Request,
@@ -9,10 +10,10 @@ export async function GET(
     const { path } = await params
     const blobPath = path.join('/')
 
-    // Fetch the blob from private storage using the v2 get() API
+    const identity = resolveBlobStorageIdentity()
     const result = await get(blobPath, {
-      token: process.env.BLOB_READ_WRITE_TOKEN,
-      access: 'private',
+      token: getVerifiedBlobToken(),
+      access: identity.environment === 'production' ? 'private' : 'public',
     })
 
     if (!result || result.statusCode === 304) {

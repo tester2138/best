@@ -3,19 +3,13 @@
  * Reads posts from data/posts.ts via the compiled bundle (transpiled by tsx).
  * Uses the DATABASE_URL from the environment.
  *
- * Usage: DATABASE_URL=... node --import tsx/esm scripts/run-seed.mjs
+ * Usage: VERCEL_ENV=development node --import tsx/esm scripts/run-seed.mjs
  * Or via the package.json script: pnpm seed-posts
  */
 
-import { neon } from '@neondatabase/serverless'
+import { resolveDatabaseTarget } from '../lib/database-safety.ts'
 
-const DATABASE_URL = process.env.DATABASE_URL || process.env.POSTGRES_URL
-if (!DATABASE_URL) {
-  console.error('DATABASE_URL not set')
-  process.exit(1)
-}
-
-const sql = neon(DATABASE_URL)
+resolveDatabaseTarget()
 
 // We can't easily import TypeScript from Node, so we use the seed API instead.
 // This script calls the running Next.js dev server's seed endpoint.

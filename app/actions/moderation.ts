@@ -8,6 +8,7 @@ import { audit } from '@/lib/audit'
 import { revalidateBrand } from '@/lib/portal/revalidate'
 import { sendEmail } from '@/lib/email/send'
 import { del } from '@vercel/blob'
+import { getVerifiedBlobToken } from '@/lib/blob-storage-safety'
 
 /**
  * Admin moderation actions (Blueprint Sections 16.2 / 16.3).
@@ -152,8 +153,9 @@ export async function rejectItem(raw: unknown) {
         [row.target_id],
       )
       if (asset?.public_url) {
+        const blobToken = getVerifiedBlobToken()
         try {
-          await del(asset.public_url)
+          await del(asset.public_url, { token: blobToken })
         } catch (err) {
           console.error('[v0] blob delete failed on media reject:', err)
         }

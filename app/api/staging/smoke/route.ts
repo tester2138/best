@@ -1,5 +1,6 @@
 import { del, put } from '@vercel/blob'
 import { NextResponse } from 'next/server'
+import { describeBlobStorageSetupError, getVerifiedBlobToken } from '@/lib/blob-storage-safety'
 import { sql, verifyDatabaseIdentity } from '@/lib/db'
 import { requireAdmin } from '@/lib/guards'
 
@@ -18,6 +19,7 @@ export async function POST() {
 
   let checkId: string | undefined
   let blobUrl: string | undefined
+  let blobToken: string | undefined
   let succeeded = false
   let cleanupFailed = false
 
@@ -36,9 +38,11 @@ export async function POST() {
       return NextResponse.json({ status: 'unavailable' }, { status: 404, headers: responseHeaders })
     }
 
-    if (!process.env.BLOB_READ_WRITE_TOKEN) {
+    try {
+      blobToken = getVerifiedBlobToken()
+    } catch (error) {
       return NextResponse.json(
-        { status: 'blocked', reason: 'isolated_blob_token_missing' },
+        { status: 'blocked', reason: describeBlobStorageSetupError(error) },
         { status: 503, headers: responseHeaders },
       )
     }
@@ -62,10 +66,10 @@ export async function POST() {
     const blob = await put(
       `staging-smoke/${identity.branchId}/${crypto.randomUUID()}.txt`,
       new Blob(['BestForex staging smoke check'], { type: 'text/plain' }),
-      { access: 'public', addRandomSuffix: false, contentType: 'text/plain' },
+      { access: 'public', addRandomSuffix: false, contentType: 'text/plain', token: blobToken },
     )
     blobUrl = blob.url
-    await del(blob.url)
+    await del(blob.url, { token: blobToken })
     blobUrl = undefined
     succeeded = true
   } catch (error) {
@@ -76,7 +80,11 @@ export async function POST() {
   } finally {
     if (blobUrl) {
       try {
-        await del(blobUrl)
+        if (!blobToken) {
+          cleanupFailed = true
+        } else {
+          await del(blobUrl, { token: blobToken })
+        }
       } catch {
         cleanupFailed = true
       }

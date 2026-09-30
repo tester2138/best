@@ -117,8 +117,7 @@ export function resolveDatabaseTarget(
     )
   }
 
-  const databaseVariable =
-    runtimeEnvironment === 'production' ? 'DATABASE_URL' : 'STAGING_DATABASE_URL'
+  const databaseVariable = 'DATABASE_URL'
   const connectionString = env[databaseVariable]
   if (!connectionString) {
     throw new Error(`${databaseVariable} is not configured for ${runtimeEnvironment}.`)

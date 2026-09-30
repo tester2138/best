@@ -24,7 +24,7 @@ test('accepts the provider-pinned pooled staging application URL', () => {
   const target = resolveDatabaseTarget({
     NODE_ENV: 'test',
     VERCEL_ENV: 'preview',
-      STAGING_DATABASE_URL: stagingUrl(STAGING_DATABASE_IDENTITY.pooledHost),
+      DATABASE_URL: stagingUrl(STAGING_DATABASE_IDENTITY.pooledHost),
   })
 
   assert.equal(target.environment, 'staging')
@@ -47,24 +47,24 @@ test('rejects Production database URLs from Preview and Development', () => {
         resolveDatabaseTarget({
           NODE_ENV: 'test',
           VERCEL_ENV: runtimeEnvironment,
-          STAGING_DATABASE_URL: stagingUrl(PRODUCTION_DATABASE_HOSTS[1]),
           DATABASE_URL: stagingUrl(PRODUCTION_DATABASE_HOSTS[1]),
+          STAGING_DATABASE_URL: stagingUrl(STAGING_DATABASE_IDENTITY.pooledHost),
         }),
       /production Neon endpoint is blocked/,
     )
   }
 })
 
-test('does not fall back to the Production URL in Preview or Development', () => {
+test('requires an environment-scoped DATABASE_URL in Preview and Development', () => {
   for (const runtimeEnvironment of ['preview', 'development'] as const) {
     assert.throws(
       () =>
         resolveDatabaseTarget({
           NODE_ENV: 'test',
           VERCEL_ENV: runtimeEnvironment,
-          DATABASE_URL: stagingUrl(PRODUCTION_DATABASE_HOSTS[1]),
+          STAGING_DATABASE_URL: stagingUrl(STAGING_DATABASE_IDENTITY.pooledHost),
         }),
-      /STAGING_DATABASE_URL is not configured/,
+      /DATABASE_URL is not configured/,
     )
   }
 })
@@ -86,7 +86,7 @@ test('rejects an unrelated PostgreSQL host from Preview', () => {
         resolveDatabaseTarget({
           NODE_ENV: 'test',
           VERCEL_ENV: 'preview',
-          STAGING_DATABASE_URL: stagingUrl('db.example.test'),
+          DATABASE_URL: stagingUrl('db.example.test'),
       }),
     /provider-pinned staging endpoint/,
   )

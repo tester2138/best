@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { resolveBlobStorageIdentity } from '@/lib/blob-storage-safety'
 import { verifyDatabaseIdentity } from '@/lib/db'
 
 export const runtime = 'nodejs'
@@ -16,6 +17,7 @@ export async function GET() {
 
   try {
     const identity = await verifyDatabaseIdentity()
+    const blobIdentity = resolveBlobStorageIdentity()
     if (identity.environment !== 'staging' || !identity.markerVerified) {
       return NextResponse.json(
         { status: 'blocked', reason: 'staging_identity_not_verified' },
@@ -37,7 +39,8 @@ export async function GET() {
           endpointId: identity.endpointId,
         },
         services: {
-          blobToken: process.env.BLOB_READ_WRITE_TOKEN ? 'configured' : 'missing',
+          blobToken: 'verified',
+          blobStoreId: blobIdentity.storeId,
           emailDelivery: 'disabled',
           emailTestSink: 'not_configured',
         },

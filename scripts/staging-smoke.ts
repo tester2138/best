@@ -1,5 +1,6 @@
 import { randomBytes, randomUUID } from 'node:crypto'
 import assert from 'node:assert/strict'
+import { STAGING_BLOB_STORE_ID, resolveBlobStorageIdentity } from '../lib/blob-storage-safety'
 import { STAGING_DATABASE_IDENTITY } from '../lib/database-safety'
 
 const adminEmail = 'preview-smoke-admin@bestforex.test'
@@ -17,6 +18,7 @@ type Preflight = {
   }
   services: {
     blobToken: string
+    blobStoreId: string
     emailDelivery: string
     emailTestSink: string
   }
@@ -119,7 +121,8 @@ async function main() {
   assert.equal(preflight.database.projectId, STAGING_DATABASE_IDENTITY.projectId)
   assert.equal(preflight.database.branchId, STAGING_DATABASE_IDENTITY.branchId)
   assert.equal(preflight.database.endpointId, STAGING_DATABASE_IDENTITY.endpointId)
-  assert.equal(preflight.services.blobToken, 'configured')
+  assert.equal(preflight.services.blobToken, 'verified')
+  assert.equal(preflight.services.blobStoreId, 'store_0RXGoQwheCWcRqT1')
   assert.equal(preflight.services.emailDelivery, 'disabled')
   assert.ok(process.env.DATABASE_URL, 'Pull the isolated Preview environment before running this suite.')
   assert.ok(process.env.BLOB_READ_WRITE_TOKEN, 'The isolated Preview Blob token is required.')
@@ -129,6 +132,9 @@ async function main() {
   process.env.BETTER_AUTH_URL = preview.origin
   process.env.ADMIN_EMAILS = adminEmail
   process.env.FORCE_PASSWORD_CHANGE = 'false'
+  const blobIdentity = resolveBlobStorageIdentity()
+  assert.equal(blobIdentity.environment, 'staging')
+  assert.equal(blobIdentity.storeId, STAGING_BLOB_STORE_ID)
 
   const [{ verifyDatabaseIdentity }, { auth }, { allowAccountCreation }, { query, queryOne }] =
     await Promise.all([

@@ -14,7 +14,18 @@ export type BlobStorageIdentity = {
 function resolveRuntimeEnvironment(
   env: NodeJS.ProcessEnv,
 ): BlobRuntimeEnvironment | undefined {
-  return env.VERCEL_ENV ?? (env.NODE_ENV === 'development' ? 'development' : undefined)
+  const environment =
+    env.VERCEL_ENV ?? (env.NODE_ENV === 'development' ? 'development' : undefined)
+
+  if (
+    environment === 'production' ||
+    environment === 'preview' ||
+    environment === 'development'
+  ) {
+    return environment
+  }
+
+  return undefined
 }
 
 export function resolveBlobStorageIdentity(
@@ -53,6 +64,15 @@ export function resolveBlobStorageIdentity(
   }
 
   return { environment, runtimeEnvironment, storeId, tokenConfigured: true }
+}
+
+export function getVerifiedBlobToken(env: NodeJS.ProcessEnv = process.env): string {
+  resolveBlobStorageIdentity(env)
+  const token = env.BLOB_READ_WRITE_TOKEN
+  if (!token) {
+    throw new Error('BLOB_READ_WRITE_TOKEN is not configured for this deployment environment.')
+  }
+  return token
 }
 
 export function createBlobTokenForTest(storeId: string): string {
