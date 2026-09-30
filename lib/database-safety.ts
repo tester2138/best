@@ -7,12 +7,20 @@ export const STAGING_DATABASE_IDENTITY = {
   databaseName: 'neondb',
 } as const
 
-const KNOWN_PRODUCTION_DATABASE_HOST =
-  'ep-lingering-star-aqcvhrip.c-8.us-east-1.aws.neon.tech'
+export const PRODUCTION_DATABASE_HOSTS = [
+  'ep-lingering-star-aqcvhrip.c-8.us-east-1.aws.neon.tech',
+  'ep-lingering-star-aqcvhrip-pooler.c-8.us-east-1.aws.neon.tech',
+] as const
+
+function isKnownProductionHost(host: string): boolean {
+  return (PRODUCTION_DATABASE_HOSTS as readonly string[]).includes(host)
+}
+
+export type RuntimeEnvironment = 'production' | 'preview' | 'development'
 
 export type DatabaseTarget = {
   environment: 'production' | 'staging'
-  runtimeEnvironment: 'production' | 'preview' | 'development'
+  runtimeEnvironment: RuntimeEnvironment
   connectionString: string
   host: string
   databaseName: string
@@ -25,6 +33,17 @@ export type StagingDatabaseMarker = {
   neon_endpoint_id: unknown
   database_name: unknown
   connected_database: unknown
+}
+
+export type VerifiedDatabaseIdentity = {
+  environment: 'production' | 'staging'
+  runtimeEnvironment: RuntimeEnvironment
+  host: string
+  databaseName: string
+  markerVerified: boolean
+  projectId?: string
+  branchId?: string
+  endpointId?: string
 }
 
 function parseDatabaseUrl(connectionString: string): URL {
@@ -58,6 +77,24 @@ export function assertStagingConnectionString(connectionString: string): URL {
   return url
 }
 
+export function assertStagingDatabaseMarker(
+  marker: StagingDatabaseMarker | undefined,
+): void {
+  if (
+    !marker ||
+    marker.environment !== STAGING_DATABASE_IDENTITY.environment ||
+    marker.neon_project_id !== STAGING_DATABASE_IDENTITY.projectId ||
+    marker.neon_branch_id !== STAGING_DATABASE_IDENTITY.branchId ||
+    marker.neon_endpoint_id !== STAGING_DATABASE_IDENTITY.endpointId ||
+    marker.database_name !== STAGING_DATABASE_IDENTITY.databaseName ||
+    marker.connected_database !== STAGING_DATABASE_IDENTITY.databaseName
+  ) {
+    throw new Error(
+      'Staging database access rejected: provider-pinned branch marker did not match.',
+    )
+  }
+}
+
 export function resolveDatabaseTarget(
   env: NodeJS.ProcessEnv = process.env,
 ): DatabaseTarget {
@@ -83,8 +120,10 @@ export function resolveDatabaseTarget(
   const databaseName = decodeURIComponent(url.pathname.replace(/^\//, ''))
 
   if (runtimeEnvironment === 'production') {
-    if (url.hostname === STAGING_DATABASE_IDENTITY.host) {
-      throw new Error('Production database access is blocked because DATABASE_URL points to staging.')
+    if (!isKnownProductionHost(url.hostname)) {
+      throw new Error(
+        'Production database access rejected: DATABASE_URL does not match the provider-pinned production host.',
+      )
     }
 
     return {
@@ -96,11 +135,13 @@ export function resolveDatabaseTarget(
     }
   }
 
-  assertStagingConnectionString(connectionString)
-
-  if (url.hostname === KNOWN_PRODUCTION_DATABASE_HOST) {
-    throw new Error('Preview and Development database access to the production Neon endpoint is blocked.')
+  if (isKnownProductionHost(url.hostname)) {
+    throw new Error(
+      'Preview and Development database access to the production Neon endpoint is blocked.',
+    )
   }
+
+  assertStagingConnectionString(connectionString)
 
   return {
     environment: 'staging',

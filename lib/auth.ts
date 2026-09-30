@@ -26,16 +26,69 @@ const ADMIN_EMAILS = (process.env.ADMIN_EMAILS ?? '')
 // Forced first-login password change (Blueprint Section 11.5). Default true.
 const FORCE_PASSWORD_CHANGE = (process.env.FORCE_PASSWORD_CHANGE ?? 'true') !== 'false'
 
+function exactOrigin(value?: string): string | undefined {
+  if (!value) return undefined
+  try {
+    return new URL(value.includes('://') ? value : `https://${value}`).origin
+  } catch {
+    return undefined
+  }
+}
+
+function resolveAuthBaseURL(): string {
+  const productionURL =
+    exactOrigin(process.env.VERCEL_PROJECT_PRODUCTION_URL) ??
+    exactOrigin(process.env.VERCEL_URL)
+  const deploymentURL = exactOrigin(process.env.VERCEL_URL)
+
+  if (process.env.VERCEL_ENV === 'production') {
+    return process.env.BETTER_AUTH_URL ?? productionURL ?? 'https://www.bestforex.io'
+  }
+
+  if (process.env.VERCEL_ENV === 'preview') {
+    return deploymentURL ?? exactOrigin(process.env.V0_RUNTIME_URL) ?? 'http://localhost:3000'
+  }
+
+  return (
+    exactOrigin(process.env.V0_RUNTIME_URL) ??
+    exactOrigin(process.env.V0_DEV_APP_URL) ??
+    exactOrigin(process.env.V0_BUILD_URL) ??
+    exactOrigin(process.env.V0_SANDBOX_URL) ??
+    deploymentURL ??
+    'http://localhost:3000'
+  )
+}
+
+function getTrustedOrigins(): string[] {
+  const origins = new Set<string>()
+  const add = (value?: string) => {
+    const origin = exactOrigin(value)
+    if (origin) origins.add(origin)
+  }
+
+  if (process.env.VERCEL_ENV === 'production') {
+    add(process.env.VERCEL_URL)
+    add(process.env.VERCEL_PROJECT_PRODUCTION_URL)
+    add(process.env.BETTER_AUTH_URL)
+  } else if (process.env.VERCEL_ENV === 'preview') {
+    add(process.env.VERCEL_URL)
+  } else {
+    add('http://localhost:3000')
+    add(process.env.VERCEL_URL)
+    add(process.env.V0_RUNTIME_URL)
+    add(process.env.V0_DEV_APP_URL)
+    add(process.env.V0_BUILD_URL)
+    add(process.env.V0_SANDBOX_URL)
+  }
+
+  add(resolveAuthBaseURL())
+  return [...origins]
+}
+
 export const auth = betterAuth({
   database: getPool(),
   secret: process.env.BETTER_AUTH_SECRET,
-  baseURL:
-    process.env.BETTER_AUTH_URL ??
-    (process.env.VERCEL_PROJECT_PRODUCTION_URL
-      ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-      : process.env.VERCEL_URL
-        ? `https://${process.env.VERCEL_URL}`
-        : process.env.V0_RUNTIME_URL),
+  baseURL: resolveAuthBaseURL(),
   emailAndPassword: {
     enabled: true,
     autoSignIn: false, // provisioning a broker must never create a session
@@ -47,13 +100,7 @@ export const auth = betterAuth({
       await sendEmail('password-reset', user.email, { link: url })
     },
   },
-  trustedOrigins: [
-    ...(process.env.V0_RUNTIME_URL ? [process.env.V0_RUNTIME_URL] : []),
-    ...(process.env.VERCEL_URL ? [`https://${process.env.VERCEL_URL}`] : []),
-    ...(process.env.VERCEL_PROJECT_PRODUCTION_URL
-      ? [`https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`]
-      : []),
-  ],
+  trustedOrigins: getTrustedOrigins(),
   session: {
     expiresIn: 60 * 60 * 24 * 7, // 7 days
     updateAge: 60 * 60 * 24, // 1 day
@@ -96,13 +143,14 @@ export const auth = betterAuth({
       },
     },
   },
-  advanced: {
-    // The v0 preview (vusercontent.net) and local dev both run inside a
-    // cross-origin iframe, so the session cookie must use SameSite=None;Secure
-    // to be stored by the browser. Safe in production too — HTTPS enforced.
-    defaultCookieAttributes: {
-      sameSite: 'none' as const,
-      secure: true,
-    },
-  },
+  ...(process.env.NODE_ENV === 'development'
+    ? {
+        advanced: {
+          defaultCookieAttributes: {
+            sameSite: 'none' as const,
+            secure: true,
+          },
+        },
+      }
+    : {}),
 })

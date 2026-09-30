@@ -43,12 +43,12 @@ export async function sendEmail(
   to: string,
   data: Record<string, unknown>,
 ): Promise<void> {
+  if (process.env.VERCEL_ENV !== 'production') return
+
   const t = TEMPLATES[template](data as never)
   const apiKey = process.env.BREVO_API_KEY
 
-  // No key configured — log and return so the calling flow still succeeds.
   if (!apiKey) {
-    console.log(`[v0] email (preview, not sent) -> ${to} [${template}] "${t.subject}"`)
     await logEmail(to, template, 'sent', null, { preview: true })
     return
   }
@@ -85,6 +85,8 @@ export async function sendEmail(
  * Dedup uses email_log rows written in the last hour that carry this brandId.
  */
 export async function adminDigestOnce(brandId: string, brandName: string): Promise<void> {
+  if (process.env.VERCEL_ENV !== 'production') return
+
   try {
     const row = await queryOne<{ n: string }>(
       `select count(*)::text as n from public.email_log

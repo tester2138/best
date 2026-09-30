@@ -19,6 +19,8 @@ const geistMono = Geist_Mono({
   variable: '--font-geist-mono'
 })
 
+const isProductionDeployment = process.env.VERCEL_ENV === 'production'
+
 export const metadata: Metadata = {
   title: {
     default: 'BestForex.io - Compare the Best Forex Brokers in 2026',
@@ -51,11 +53,11 @@ export const metadata: Metadata = {
     site: '@bestforexio',
   },
   robots: {
-    index: true,
-    follow: true,
+    index: isProductionDeployment,
+    follow: isProductionDeployment,
     googleBot: {
-      index: true,
-      follow: true,
+      index: isProductionDeployment,
+      follow: isProductionDeployment,
       'max-video-preview': -1,
       'max-image-preview': 'large',
       'max-snippet': -1
@@ -134,7 +136,7 @@ export default async function RootLayout({
           {children}
         </main>
         {!isBusiness && <Footer />}
-        {process.env.NODE_ENV === 'production' && <Analytics />}
+        {isProductionDeployment && <Analytics />}
       </body>
     </html>
   )

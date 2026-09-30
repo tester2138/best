@@ -1,10 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { seedDatabase } from '@/lib/db-seed'
+import { requireAdmin } from '@/lib/guards'
 
 // This is a one-time initialization endpoint - in production, use proper database migrations
 export async function POST(request: NextRequest) {
   try {
-    // Optional: Add authorization check here
+    await requireAdmin()
     const success = await seedDatabase()
 
     if (success) {

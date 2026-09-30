@@ -1,32 +1,93 @@
 import 'server-only'
 import { Pool, type PoolClient } from 'pg'
+import {
+  assertStagingDatabaseMarker,
+  resolveDatabaseTarget,
+  type StagingDatabaseMarker,
+} from '@/lib/database-safety'
 
 /**
  * Portal database access.
  *
- * The legacy site uses @neondatabase/serverless (HTTP) for its read-heavy
- * broker/news queries — that stays untouched. The portal needs a real `pg`
- * Pool because Better Auth manages users/sessions through one, and sharing a
- * single Pool keeps one connection and one source of truth (per the Neon +
- * Better Auth stack). All portal reads/writes go through this Pool with
- * parameterized queries — never string interpolation.
+ * Better Auth and all portal reads/writes share one pg Pool. Preview and
+ * development queries verify the provider-pinned staging marker before the
+ * first operation; the URL host is checked before the Pool is created.
  */
 
 declare global {
   // eslint-disable-next-line no-var
   var __portalPool: Pool | undefined
+  // eslint-disable-next-line no-var
+  var __portalPoolConnectionString: string | undefined
+}
+
+const STAGING_MARKER_QUERY = `
+  SELECT environment, neon_project_id, neon_branch_id, neon_endpoint_id,
+         database_name, current_database() AS connected_database
+  FROM public.preview_environment
+  WHERE id = 1
+`
+
+function createGuardedPool(connectionString: string): Pool {
+  const pool = new Pool({
+    connectionString,
+    max: 5,
+    idleTimeoutMillis: 30_000,
+  })
+  const rawQuery = pool.query.bind(pool)
+  const rawConnect = pool.connect.bind(pool)
+  let identityCheck: Promise<void> | null = null
+
+  function verifyIdentity(): Promise<void> {
+    const target = resolveDatabaseTarget()
+    if (target.environment === 'production') return Promise.resolve()
+
+    if (!identityCheck) {
+      identityCheck = rawQuery(STAGING_MARKER_QUERY)
+        .then((result) => {
+          assertStagingDatabaseMarker(
+            result.rows[0] as StagingDatabaseMarker | undefined,
+          )
+        })
+        .catch((error) => {
+          identityCheck = null
+          throw error
+        })
+    }
+    return identityCheck
+  }
+
+  const guardedQuery = ((...args: unknown[]) =>
+    verifyIdentity().then(() =>
+      (rawQuery as (...queryArgs: unknown[]) => unknown)(...args),
+    )) as Pool['query']
+  const guardedConnect = ((...args: unknown[]) =>
+    verifyIdentity().then(() =>
+      (rawConnect as (...connectArgs: unknown[]) => unknown)(...args),
+    )) as Pool['connect']
+
+  return new Proxy(pool, {
+    get(target, property) {
+      if (property === 'query') return guardedQuery
+      if (property === 'connect') return guardedConnect
+      const value = Reflect.get(target, property, target)
+      return typeof value === 'function' ? value.bind(target) : value
+    },
+  })
 }
 
 export function getPool(): Pool {
-  if (!process.env.DATABASE_URL) {
-    throw new Error('DATABASE_URL is not set — the portal database is unavailable.')
+  const target = resolveDatabaseTarget()
+  if (
+    global.__portalPool &&
+    global.__portalPoolConnectionString !== target.connectionString
+  ) {
+    throw new Error('Database connection configuration changed; restart the server process.')
   }
+
   if (!global.__portalPool) {
-    global.__portalPool = new Pool({
-      connectionString: process.env.DATABASE_URL,
-      max: 5,
-      idleTimeoutMillis: 30_000,
-    })
+    global.__portalPool = createGuardedPool(target.connectionString)
+    global.__portalPoolConnectionString = target.connectionString
   }
   return global.__portalPool
 }
@@ -51,8 +112,7 @@ export async function queryOne<T = Record<string, unknown>>(
 
 /**
  * Run a set of statements inside a single transaction. The callback receives a
- * dedicated client; the Pool client is always released. Used by version-safe
- * publish/save flows (optimistic locking) in Step 8.
+ * dedicated client; the Pool client is always released.
  */
 export async function withTransaction<T>(
   fn: (client: PoolClient) => Promise<T>,

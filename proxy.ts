@@ -5,6 +5,13 @@ import { getSessionCookie } from 'better-auth/cookies'
 // Static file extensions — skip normalisation for these paths.
 const STATIC_EXT = /\.(?:ico|png|jpg|jpeg|gif|svg|webp|woff|woff2|ttf|eot|css|js|map|txt|xml|json)$/i
 
+function applyDeploymentRobotsHeader(response: NextResponse): NextResponse {
+  if (process.env.VERCEL_ENV !== 'production') {
+    response.headers.set('X-Robots-Tag', 'noindex, nofollow, noarchive')
+  }
+  return response
+}
+
 export function proxy(request: NextRequest) {
   const url = request.nextUrl.clone()
   const { pathname } = url
@@ -27,7 +34,7 @@ export function proxy(request: NextRequest) {
     destination.protocol = 'https:'
     destination.hostname = 'www.bestforex.io'
     destination.port = ''
-    return NextResponse.redirect(destination, { status: 308 })
+    return applyDeploymentRobotsHeader(NextResponse.redirect(destination, { status: 308 }))
   }
 
   // ── /portal/* → /business/* permanent redirects (301) ────────────────────
@@ -37,7 +44,7 @@ export function proxy(request: NextRequest) {
     const dest = url.clone()
     dest.pathname = pathname.replace(/^\/portal/, '/business')
     dest.search = url.search
-    return NextResponse.redirect(dest, { status: 301 })
+    return applyDeploymentRobotsHeader(NextResponse.redirect(dest, { status: 301 }))
   }
 
   // ── Business Portal defense layer 1: session-cookie gate ─────────────────
@@ -63,9 +70,9 @@ export function proxy(request: NextRequest) {
         const dest = url.clone()
         dest.pathname = '/business'
         dest.search = ''
-        return NextResponse.redirect(dest)
+        return applyDeploymentRobotsHeader(NextResponse.redirect(dest))
       }
-      return res
+      return applyDeploymentRobotsHeader(res)
     }
 
     if (!hasSession) {
@@ -73,9 +80,9 @@ export function proxy(request: NextRequest) {
       loginUrl.pathname = '/business/login'
       loginUrl.search = ''
       loginUrl.searchParams.set('next', pathname)
-      return NextResponse.redirect(loginUrl)
+      return applyDeploymentRobotsHeader(NextResponse.redirect(loginUrl))
     }
-    return res
+    return applyDeploymentRobotsHeader(res)
   }
 
   // ── T02 + T12 + Row 174: 410 Gone ────────────────────────────────────────
@@ -98,7 +105,7 @@ export function proxy(request: NextRequest) {
     pathname.endsWith('/feed') ||
     pathname.endsWith('/feed/rss2')
   ) {
-    return new NextResponse(null, { status: 410 })
+    return applyDeploymentRobotsHeader(new NextResponse(null, { status: 410 }))
   }
 
   // ── T11: URL normalisation ─────────────────────────────────────────────────
@@ -107,7 +114,7 @@ export function proxy(request: NextRequest) {
     pathname.startsWith('/api/') ||
     STATIC_EXT.test(pathname)
   ) {
-    return NextResponse.next()
+    return applyDeploymentRobotsHeader(NextResponse.next())
   }
 
   let normalised = pathname
@@ -131,18 +138,18 @@ export function proxy(request: NextRequest) {
   if (pathname === '/brokers' && pageParam === '1') {
     url.pathname = '/brokers'
     url.searchParams.delete('page')
-    return NextResponse.redirect(url, { status: 301 })
+    return applyDeploymentRobotsHeader(NextResponse.redirect(url, { status: 301 }))
   }
 
   if (changed) {
     url.pathname = normalised
-    return NextResponse.redirect(url, { status: 301 })
+    return applyDeploymentRobotsHeader(NextResponse.redirect(url, { status: 301 }))
   }
 
   // Pass pathname to root layout for all non-redirected public routes.
   const res = NextResponse.next()
   res.headers.set('x-pathname', pathname)
-  return res
+  return applyDeploymentRobotsHeader(res)
 }
 
 export const config = {

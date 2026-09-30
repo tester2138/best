@@ -1,22 +1,7 @@
-import { neon, NeonQueryFunction } from '@neondatabase/serverless'
+import { sql } from './db'
 import type { GeneratedArticle } from './news-types'
 import { scheduleNewsFeedUpdate } from './news-websub'
 import { revalidateNewsSurfaces } from './news-revalidation'
-
-// Lazy initialization to avoid errors when database URL is not set at module load time
-let _sql: NeonQueryFunction<false, false> | null = null
-
-function getSql() {
-  if (!_sql) {
-    // Support both DATABASE_URL and POSTGRES_URL (Neon integration uses POSTGRES_URL)
-    const connectionString = process.env.DATABASE_URL || process.env.POSTGRES_URL
-    if (!connectionString) {
-      throw new Error('DATABASE_URL or POSTGRES_URL environment variable is not set')
-    }
-    _sql = neon(connectionString)
-  }
-  return _sql
-}
 
 /**
  * Check if an article with similar content already exists.
@@ -239,8 +224,6 @@ export async function publishArticle(
   featuredImageUrl: string
 ): Promise<{ success: boolean; id?: string; error?: string }> {
   try {
-    const sql = getSql()
-
     // ── Hard gate: reject articles without a valid featured image ──
     if (!featuredImageUrl || featuredImageUrl.trim() === '') {
       const message = `Rejected: article "${article.title}" has no featured image.`
