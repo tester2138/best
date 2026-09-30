@@ -57,11 +57,11 @@ function parseDatabaseUrl(connectionString: string): URL {
   try {
     url = new URL(connectionString)
   } catch {
-    throw new Error('DATABASE_URL is not a valid PostgreSQL URL.')
+    throw new Error('Database connection string is not a valid PostgreSQL URL.')
   }
 
   if (url.protocol !== 'postgres:' && url.protocol !== 'postgresql:') {
-    throw new Error('DATABASE_URL must use the PostgreSQL protocol.')
+    throw new Error('Database connection string must use the PostgreSQL protocol.')
   }
 
   return url
@@ -117,9 +117,11 @@ export function resolveDatabaseTarget(
     )
   }
 
-  const connectionString = env.DATABASE_URL
+  const databaseVariable =
+    runtimeEnvironment === 'production' ? 'DATABASE_URL' : 'STAGING_DATABASE_URL'
+  const connectionString = env[databaseVariable]
   if (!connectionString) {
-    throw new Error('DATABASE_URL is not configured for this deployment environment.')
+    throw new Error(`${databaseVariable} is not configured for ${runtimeEnvironment}.`)
   }
 
   const url = parseDatabaseUrl(connectionString)
