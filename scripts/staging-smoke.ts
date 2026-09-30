@@ -89,7 +89,8 @@ async function assertSession(
 async function signOut(previewOrigin: string, cookie: string): Promise<void> {
   const response = await fetch(`${previewOrigin}/api/auth/sign-out`, {
     method: 'POST',
-    headers: { cookie, origin: previewOrigin },
+    headers: { cookie, origin: previewOrigin, 'content-type': 'application/json' },
+    body: JSON.stringify({}),
   })
   assert.equal(response.ok, true, `Preview sign-out failed with HTTP ${response.status}.`)
 }
