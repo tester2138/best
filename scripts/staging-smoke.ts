@@ -98,7 +98,13 @@ async function main() {
   const previewUrl = process.argv[2]
   assert.ok(previewUrl, 'Pass the isolated Vercel Preview URL as the first argument.')
   const preview = new URL(previewUrl)
-  assert.equal(preview.protocol, 'https:', 'The staging smoke suite only targets an HTTPS Preview URL.')
+  const isLocalDevelopment =
+    preview.protocol === 'http:' && ['localhost', '127.0.0.1'].includes(preview.hostname)
+  assert.ok(
+    preview.protocol === 'https:' || isLocalDevelopment,
+    'Use an HTTPS Preview URL or an HTTP localhost Development URL.',
+  )
+  const expectedRuntimeEnvironment = isLocalDevelopment ? 'development' : 'preview'
   assert.notEqual(process.env.VERCEL_ENV, 'production', 'The smoke suite refuses Production.')
 
   const preflightResponse = await fetch(new URL('/api/staging/preflight', preview.origin), {
@@ -112,7 +118,7 @@ async function main() {
   )
   const preflight = (await preflightResponse.json()) as Preflight
   assert.equal(preflight.status, 'ready')
-  assert.equal(preflight.runtimeEnvironment, 'preview')
+  assert.equal(preflight.runtimeEnvironment, expectedRuntimeEnvironment)
   assert.equal(preflight.database.environment, 'staging')
   assert.equal(preflight.database.markerVerified, true)
   assert.equal(preflight.services.blobToken, 'verified')
@@ -121,9 +127,10 @@ async function main() {
   assert.ok(process.env.DATABASE_URL, 'Pull the isolated Preview environment before running this suite.')
   assert.ok(process.env.BLOB_READ_WRITE_TOKEN, 'The isolated Preview Blob token is required.')
 
-  process.env.VERCEL_ENV = 'preview'
+  process.env.VERCEL_ENV = expectedRuntimeEnvironment
   process.env.VERCEL_URL = preview.host
   process.env.BETTER_AUTH_URL = preview.origin
+  if (isLocalDevelopment) process.env.V0_RUNTIME_URL = preview.origin
   process.env.ADMIN_EMAILS = adminEmail
   process.env.FORCE_PASSWORD_CHANGE = 'false'
   const blobIdentity = resolveBlobStorageIdentity()
