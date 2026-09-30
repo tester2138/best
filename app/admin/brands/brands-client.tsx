@@ -39,6 +39,14 @@ export interface BrandRow {
   renewal_date: string | null
   member_email: string | null
   last_publish: string | null
+  verification_status: 'verified' | 'unverified'
+  is_sponsored: boolean
+  is_featured: boolean
+  display_rank: number | null
+  rating_score: number | string | null
+  is_duplicate: boolean
+  has_database_record: boolean
+  profile_href: string
 }
 
 function AccessPill({ row }: { row: BrandRow }) {
@@ -95,14 +103,23 @@ export function BrandsClient({ brands, canAssign }: { brands: BrandRow[]; canAss
             {filtered.map((b) => (
               <TableRow key={b.id}>
                 <TableCell>
-                  <div className="flex flex-col">
+                  <div className="flex flex-col gap-1">
                     <span className="font-medium">{b.name}</span>
                     <span className="text-xs text-muted-foreground">/{b.slug}</span>
+                    <div className="flex flex-wrap gap-1">
+                      {!b.has_database_record && <Badge variant="outline">Catalog only</Badge>}
+                      {b.is_sponsored && <Badge>Sponsored</Badge>}
+                      {b.is_featured && <Badge variant="secondary">Featured</Badge>}
+                      {b.is_duplicate && <Badge variant="destructive">Excluded duplicate</Badge>}
+                    </div>
                   </div>
                 </TableCell>
                 <TableCell>
                   <div className="flex items-center gap-2">
                     <AccessPill row={b} />
+                    <Badge variant={b.verification_status === 'verified' ? 'secondary' : 'outline'}>
+                      {b.verification_status}
+                    </Badge>
                     {b.is_claimed && <Badge variant="outline">Claimed</Badge>}
                   </div>
                 </TableCell>
@@ -121,10 +138,10 @@ export function BrandsClient({ brands, canAssign }: { brands: BrandRow[]; canAss
                 </TableCell>
                 <TableCell className="text-right">
                   <Link
-                    href={`/admin/brands/${b.id}`}
+                    href={b.profile_href}
                     className="text-sm font-medium text-primary hover:underline"
                   >
-                    Manage
+                    Edit profile
                   </Link>
                 </TableCell>
               </TableRow>

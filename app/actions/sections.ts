@@ -135,6 +135,9 @@ export async function publishSection(raw: unknown) {
     const clean = parsed.data as Record<string, unknown>
     if (input.sectionKey === 'about' && typeof clean.body === 'string')
       clean.body = sanitizeRich(clean.body)
+    if (input.sectionKey === 'company' && row.published?.admin_profile_overrides) {
+      clean.admin_profile_overrides = row.published.admin_profile_overrides
+    }
     validateSectionUrls(input.sectionKey, clean, brand)
 
     const settings = await queryOne<{ moderation_mode: string; banned_terms: string[] }>(
