@@ -2,7 +2,7 @@ import { notFound, permanentRedirect } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 import type { Metadata } from 'next'
-import { ExternalLink, Shield, Award, Calendar, Building, Globe, Check, AlertTriangle, Clock, Target, DollarSign, Percent, TrendingDown, Scale, CreditCard, RefreshCw } from 'lucide-react'
+import { ExternalLink, Shield, Award, Calendar, Building, Globe, Check, AlertTriangle, Clock, DollarSign, Percent, TrendingDown, RefreshCw } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
@@ -20,7 +20,10 @@ import { Breadcrumbs, BreadcrumbSchema } from '@/components/layout/breadcrumbs'
 import { AdSlot } from '@/components/ads/ad-slot'
 import { directoryCompanies, searchDirectory } from '@/data/directory'
 import { brokers } from '@/data/brokers'
+import { applyAdminProfileOverridesToSections } from '@/lib/admin-overrides'
 import {
+  directoryCompanyToBroker,
+  getPublicAdminProfileOverridesBySlug,
   getPublicBrokerBySlug,
   getPublicCompanyBySlug,
   getPublicDirectoryCompanies,
@@ -140,10 +143,11 @@ export default async function BrokerDetailPage({ params }: PageProps) {
     permanentRedirect(`/brokers/${normalisedSlug}`)
   }
 
-  const [company, legacyBroker, publicDirectory] = await Promise.all([
+  const [company, legacyBroker, publicDirectory, adminProfileOverrides] = await Promise.all([
     getPublicCompanyBySlug(normalisedSlug),
     getPublicBrokerBySlug(normalisedSlug),
     getPublicDirectoryCompanies(),
+    getPublicAdminProfileOverridesBySlug(normalisedSlug),
   ])
 
   if (!company && !legacyBroker) {
@@ -159,10 +163,16 @@ export default async function BrokerDetailPage({ params }: PageProps) {
     getPublicSections(normalisedSlug),
   ])
 
-  // Claimed brand sections take precedence over bulk-imported public sections.
-  const activeSections = Object.keys(claimed?.sections ?? {}).length > 0
+  // Claimed brand sections take precedence over bulk-imported sections; explicit
+  // admin profile values are layered last so they remain authoritative.
+  const merchantSections = Object.keys(claimed?.sections ?? {}).length > 0
     ? (claimed!.sections as typeof publicSections)
     : publicSections
+  const activeSections = applyAdminProfileOverridesToSections(
+    merchantSections as Record<string, unknown> | null,
+    adminProfileOverrides,
+    (company ?? legacyBroker ?? {}) as unknown as Record<string, unknown>,
+  ) as typeof publicSections
 
   const heroSection = activeSections?.hero as
     | { short_description?: string; founded_year?: number; hq_city?: string; tagline?: string }
@@ -174,7 +184,7 @@ export default async function BrokerDetailPage({ params }: PageProps) {
     | { items?: Array<{ q: string; a: string }> }
     | undefined
   const regulationSection = activeSections?.regulation as
-    | { regulators?: string[]; client_money?: string; compensation_scheme?: string; body?: string }
+    | { regulators?: string[]; client_money?: string; compensation_scheme?: string; body?: string; admin_summary?: string }
     | undefined
   const aboutSection = activeSections?.about as
     | { body?: string }
@@ -699,7 +709,7 @@ export default async function BrokerDetailPage({ params }: PageProps) {
               )}
 
               {/* Regulation — bulk-imported. Section data always takes priority. */}
-              {regulationSection && (regulationSection.regulators?.length || regulationSection.body || regulationSection.client_money) && (
+              {regulationSection && (regulationSection.regulators?.length || regulationSection.body || regulationSection.client_money || regulationSection.compensation_scheme || regulationSection.admin_summary) && (
                 <Card>
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
@@ -716,6 +726,9 @@ export default async function BrokerDetailPage({ params }: PageProps) {
                           </Badge>
                         ))}
                       </div>
+                    )}
+                    {regulationSection.admin_summary && (
+                      <p className="text-sm text-muted-foreground">{regulationSection.admin_summary}</p>
                     )}
                     {regulationSection.client_money && (
                       <p className="text-sm text-muted-foreground">{regulationSection.client_money}</p>
@@ -1177,7 +1190,7 @@ export default async function BrokerDetailPage({ params }: PageProps) {
               {company?.scores && <BrokerScoreBreakdown scores={company.scores} />}
               
               {/* Quick Facts */}
-              {company && <BrokerQuickFacts broker={company as any} />}
+              {company && <BrokerQuickFacts broker={company} />}
 
               {/* Best Brokers Top 10 */}
               <Card className="gap-3">
@@ -1341,27 +1354,11 @@ export default async function BrokerDetailPage({ params }: PageProps) {
             </h2>
             <div className="grid md:grid-cols-3 gap-6 items-stretch">
               {alternatives.map((altCompany, idx) => {
-                // Convert directory company to broker card format
-                const brokerFormat = brokers.find(b => b.id === altCompany.id) || {
-                  ...altCompany,
-                  badges: altCompany.badges || [],
-                  bestFor: altCompany.bestFor || [],
-                  regulators: altCompany.regulators || [],
-                  restrictedCountries: altCompany.restrictedCountries || [],
-                  platforms: altCompany.platforms || [],
-                  mobileApps: altCompany.mobileApps || [],
-                  accountTypes: altCompany.accountTypes || [],
-                  instruments: altCompany.instruments || [],
-                  depositMethods: altCompany.depositMethods || [],
-                  withdrawalMethods: altCompany.withdrawalMethods || [],
-                  bonuses: altCompany.bonuses || [],
-                  pros: altCompany.pros || [],
-                  cons: altCompany.cons || [],
-                  scores: altCompany.scores || { overall: 0, trustSafety: 0, tradingConditions: 0, platforms: 0, researchEducation: 0, customerService: 0, mobileTrading: 0 },
-                  seo: altCompany.seo || { metaTitle: '', metaDescription: '', h1: '' },
-                }
+                const brokerFormat =
+                  brokers.find((broker) => broker.id === altCompany.id) ??
+                  directoryCompanyToBroker(altCompany)
                 return (
-                  <BrokerCard key={altCompany.id} broker={brokerFormat as any} variant="compact" rank={idx + 1} />
+                  <BrokerCard key={altCompany.id} broker={brokerFormat} variant="compact" rank={idx + 1} />
                 )
               })}
             </div>

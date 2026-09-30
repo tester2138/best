@@ -23,8 +23,25 @@ function regString(reg: Broker['regulators'][number]): string {
   return typeof reg === 'string' ? reg : reg.authority
 }
 
+type BrokerQuickFactsData = Partial<
+  Pick<
+    Broker,
+    | 'minDeposit'
+    | 'spreadsFrom'
+    | 'maxLeverageRetail'
+    | 'headquarters'
+    | 'foundedYear'
+    | 'currencyPairs'
+    | 'commissions'
+    | 'withdrawalTime'
+    | 'inactivityFee'
+    | 'regulators'
+    | 'platforms'
+  >
+>
+
 interface BrokerQuickFactsProps {
-  broker: Broker
+  broker: BrokerQuickFactsData
   className?: string
 }
 

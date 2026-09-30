@@ -75,7 +75,7 @@ async function queryPublicBrandRows(): Promise<PublicBrandRow[]> {
   )
 }
 
-const getCachedPublicBrandRows = unstable_cache(queryPublicBrandRows, ['public-broker-overlay-v3'], {
+const getCachedPublicBrandRows = unstable_cache(queryPublicBrandRows, ['public-broker-overlay-v4'], {
   tags: ['broker-directory'],
   revalidate: 300,
 })
@@ -252,7 +252,18 @@ export async function getPublicCompanyBySlug(slug: string): Promise<DirectoryCom
   return companies.find((company) => company.slug === slug.toLowerCase())
 }
 
-function directoryCompanyToBroker(company: DirectoryCompany): Broker {
+/** Public catalog plus brands-row data, without admin overrides, for editor diffs. */
+export async function getPublicCompanyBaseBySlug(
+  slug: string,
+): Promise<DirectoryCompany | undefined> {
+  const normalizedSlug = slug.toLowerCase()
+  const company = editorialDirectory.find((entry) => entry.slug === normalizedSlug)
+  if (!company) return undefined
+  const { rows } = await getOverlayData()
+  return mergeDirectoryCompany(company, rows)
+}
+
+export function directoryCompanyToBroker(company: DirectoryCompany): Broker {
   return {
     id: company.id,
     slug: company.slug,
@@ -304,6 +315,22 @@ export async function getPublicBrokerCatalog(): Promise<Broker[]> {
 export async function getPublicBrokerBySlug(slug: string): Promise<Broker | undefined> {
   const catalog = await getPublicBrokerCatalog()
   return catalog.find((broker) => broker.slug === slug.toLowerCase())
+}
+
+/** Public catalog plus brands-row data, without admin overrides, for editor diffs. */
+export async function getPublicBrokerBaseBySlug(slug: string): Promise<Broker | undefined> {
+  const normalizedSlug = slug.toLowerCase()
+  const broker = editorialBrokers.find((entry) => entry.slug === normalizedSlug)
+  if (!broker) return undefined
+  const { rows } = await getOverlayData()
+  return mergeBroker(broker, rows)
+}
+
+export async function getPublicAdminProfileOverridesBySlug(
+  slug: string,
+): Promise<Record<string, unknown>> {
+  const { overrides } = await getOverlayData()
+  return overrides.get(slug.toLowerCase()) ?? {}
 }
 
 /**

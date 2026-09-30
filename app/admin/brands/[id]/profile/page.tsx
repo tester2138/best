@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { brokers as editorialBrokers } from '@/data/brokers'
 import { directoryCompanies as editorialDirectory } from '@/data/directory'
 import { applyOverrides } from '@/lib/admin-overrides'
+import { getPublicBrokerBaseBySlug, getPublicCompanyBaseBySlug } from '@/lib/public-brokers'
 import { hasGlobalStaffScope, requireStaff, requireStaffBrand } from '@/lib/guards'
 import { roleHasPermission } from '@/lib/staff-permissions'
 import { queryOne } from '@/lib/portal/db'
@@ -22,7 +23,6 @@ interface BrandsRow {
   is_duplicate: boolean
   needs_manual_review: boolean
   display_rank: number | null
-  rating_score: string | null
   brand_category: string | null
   brand_status: string | null
   regulator_tier: string | null
@@ -58,14 +58,20 @@ export default async function AdminBrokerProfilePage({
     if (!(await hasGlobalStaffScope(actor))) notFound()
   }
   const actor = await requireStaff('brokers:read')
-  const canManage = roleHasPermission(actor.role, 'brokers:manage')
+  const canManageProfile = roleHasPermission(actor.role, 'editorial:write')
+  const canManagePlacement = roleHasPermission(actor.role, 'brokers:manage')
 
-  const overrideRow = await queryOne<{ overrides: Record<string, unknown>; updated_at: string }>(
-    `select overrides, updated_at from public.admin_profile_overrides where slug = $1`,
-    [slug],
-  )
+  const [publicBase, overrideRow] = await Promise.all([
+    directoryHit
+      ? getPublicCompanyBaseBySlug(slug)
+      : getPublicBrokerBaseBySlug(slug),
+    queryOne<{ overrides: Record<string, unknown>; updated_at: string }>(
+      `select overrides, updated_at from public.admin_profile_overrides where slug = $1`,
+      [slug],
+    ),
+  ])
 
-  const base = catalogCompany ?? {}
+  const base = (publicBase ?? catalogCompany ?? {}) as Record<string, unknown>
   const values = applyOverrides(base, overrideRow?.overrides) as Record<string, unknown>
 
   const placement: PlacementState | null = brandRow
@@ -77,7 +83,6 @@ export default async function AdminBrokerProfilePage({
         is_duplicate: brandRow.is_duplicate,
         needs_manual_review: brandRow.needs_manual_review,
         display_rank: brandRow.display_rank,
-        rating_score: brandRow.rating_score != null ? Number(brandRow.rating_score) : null,
         brand_category: brandRow.brand_category,
         brand_status: brandRow.brand_status,
         regulator_tier: brandRow.regulator_tier,
@@ -110,6 +115,7 @@ export default async function AdminBrokerProfilePage({
       </div>
 
       <ProfileEditor
+        key={slug}
         slug={slug}
         displayName={displayName}
         hasPortalRecord={Boolean(brandRow)}
@@ -117,7 +123,8 @@ export default async function AdminBrokerProfilePage({
         values={values}
         overridesUpdatedAt={overrideRow?.updated_at ?? null}
         placement={placement}
-        canManage={canManage}
+        canManageProfile={canManageProfile}
+        canManagePlacement={canManagePlacement}
       />
     </div>
   )

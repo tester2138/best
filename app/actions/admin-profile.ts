@@ -8,8 +8,13 @@ import { validateOverridesPayload } from '@/lib/admin-overrides'
 import { audit } from '@/lib/audit'
 import { Err } from '@/lib/portal/result'
 import { run } from '@/lib/portal/result'
-import { query } from '@/lib/portal/db'
-import { requireStaff } from '@/lib/guards'
+import { query, queryOne } from '@/lib/portal/db'
+import {
+  assertStaffBrandScope,
+  hasGlobalStaffScope,
+  requireStaff,
+  type StaffActor,
+} from '@/lib/guards'
 
 /**
  * Admin-only broker profile controls. These actions intentionally bypass the
@@ -30,6 +35,21 @@ function assertKnownSlug(slug: string): string {
   return normalized
 }
 
+async function assertBrokerScope(actor: StaffActor, slug: string): Promise<void> {
+  if (actor.isSuperAdmin) return
+
+  const brand = await queryOne<{ id: string }>(
+    `select id from public.brands where slug = $1`,
+    [slug],
+  )
+  if (brand) {
+    await assertStaffBrandScope(actor, brand.id)
+    return
+  }
+
+  if (!(await hasGlobalStaffScope(actor))) throw new Err('Not found', 'not_found')
+}
+
 function revalidateBroker(slug: string): void {
   revalidateTag('broker-directory', 'max')
   revalidatePath(`/brokers/${slug}`)
@@ -45,8 +65,9 @@ const OverridesInput = z.object({
 export async function saveAdminProfileOverrides(raw: unknown) {
   return run(async () => {
     const input = OverridesInput.parse(raw)
-    const actor = await requireStaff('brokers:manage')
+    const actor = await requireStaff('editorial:write')
     const slug = assertKnownSlug(input.slug)
+    await assertBrokerScope(actor, slug)
     let overrides: Record<string, unknown>
     try {
       overrides = validateOverridesPayload(input.overrides)
@@ -74,8 +95,9 @@ export async function saveAdminProfileOverrides(raw: unknown) {
 export async function clearAdminProfileOverrides(raw: unknown) {
   return run(async () => {
     const input = z.object({ slug: z.string().min(1).max(200) }).parse(raw)
-    const actor = await requireStaff('brokers:manage')
+    const actor = await requireStaff('editorial:write')
     const slug = assertKnownSlug(input.slug)
+    await assertBrokerScope(actor, slug)
     await query(`delete from public.admin_profile_overrides where slug = $1`, [slug])
     await audit(actor, null, 'admin.profile.overrides', slug, { cleared: true })
     revalidateBroker(slug)
@@ -92,7 +114,6 @@ const PlacementInput = z.object({
   is_duplicate: z.boolean(),
   needs_manual_review: z.boolean(),
   display_rank: z.number().int().min(1).max(999999).nullable(),
-  rating_score: z.number().min(0).max(10).nullable(),
   brand_category: z.string().max(100).nullable(),
   brand_status: z.string().max(100).nullable(),
   regulator_tier: z.string().max(100).nullable(),
@@ -107,15 +128,16 @@ export async function saveAdminPlacement(raw: unknown) {
     const input = PlacementInput.parse(raw)
     const actor = await requireStaff('brokers:manage')
     const slug = assertKnownSlug(input.slug)
+    await assertBrokerScope(actor, slug)
     const name = input.name.trim().slice(0, 200)
     if (!name) throw new Err('Broker name is required', 'validation')
 
     await query(
       `insert into public.brands (slug, name, verification_status, is_sponsored, is_featured,
-                                  is_duplicate, needs_manual_review, display_rank, rating_score,
+                                  is_duplicate, needs_manual_review, display_rank,
                                   brand_category, brand_status, regulator_tier, internal_priority,
                                   internal_notes, verification_reviewed_at)
-       values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14,
+       values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13,
                case when $3 = 'verified' then now() else null end)
        on conflict (slug) do update set
          verification_status = excluded.verification_status,
@@ -124,7 +146,6 @@ export async function saveAdminPlacement(raw: unknown) {
          is_duplicate = excluded.is_duplicate,
          needs_manual_review = excluded.needs_manual_review,
          display_rank = excluded.display_rank,
-         rating_score = excluded.rating_score,
          brand_category = excluded.brand_category,
          brand_status = excluded.brand_status,
          regulator_tier = excluded.regulator_tier,
@@ -141,7 +162,6 @@ export async function saveAdminPlacement(raw: unknown) {
         input.is_duplicate,
         input.needs_manual_review,
         input.display_rank,
-        input.rating_score,
         input.brand_category,
         input.brand_status,
         input.regulator_tier,

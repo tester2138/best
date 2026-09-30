@@ -31,7 +31,6 @@ export interface PlacementState {
   is_duplicate: boolean
   needs_manual_review: boolean
   display_rank: number | null
-  rating_score: number | null
   brand_category: string | null
   brand_status: string | null
   regulator_tier: string | null
@@ -47,7 +46,8 @@ interface ProfileEditorProps {
   values: Record<string, unknown>
   overridesUpdatedAt: string | null
   placement: PlacementState | null
-  canManage: boolean
+  canManageProfile: boolean
+  canManagePlacement: boolean
 }
 
 type Values = Record<string, unknown>
@@ -58,18 +58,22 @@ interface FieldDef {
   path: string
   label: string
   hint?: string
+  min?: number
+  max?: number
+  step?: number
 }
 
 const TEXT_FIELDS: Record<string, FieldDef[]> = {
   company: [
+    { path: 'name', label: 'Public display name' },
     { path: 'legalName', label: 'Legal name' },
+    { path: 'logoUrl', label: 'Logo URL' },
     { path: 'websiteUrl', label: 'Website URL' },
     { path: 'affiliateUrl', label: 'Affiliate URL', hint: 'Leave empty for none' },
     { path: 'headquarters', label: 'Headquarters' },
     { path: 'country', label: 'Country' },
-    { path: 'foundedYear', label: 'Founded year' },
-    { path: 'entityType', label: 'Entity type', hint: 'forex_broker, cfd_broker, prop_firm, exchange…' },
-    { path: 'category', label: 'Category', hint: 'forex-broker, cfd-broker, prop-firm…' },
+    { path: 'category', label: 'Category', hint: 'forex-broker, cfd-broker, prop-firm, crypto-exchange, multi-asset' },
+    { path: 'entityType', label: 'Entity type', hint: 'forex_broker, cfd_broker, prop_firm, exchange, hedge_fund, bank_desk, clearing, investment_bank, prediction_market, other' },
     { path: 'dataQualityStage', label: 'Data quality stage', hint: 'basic, enriched, reviewed, claimed, featured' },
   ],
   trading: [
@@ -81,6 +85,7 @@ const TEXT_FIELDS: Record<string, FieldDef[]> = {
     { path: 'maxLeverageProfessional', label: 'Max leverage (professional)' },
     { path: 'withdrawalTime', label: 'Withdrawal time' },
     { path: 'inactivityFee', label: 'Inactivity fee' },
+    { path: 'bonusSummary', label: 'Bonus summary' },
   ],
   regulation: [{ path: 'regulationSummary', label: 'Regulation summary' }],
   review: [
@@ -88,9 +93,11 @@ const TEXT_FIELDS: Record<string, FieldDef[]> = {
     { path: 'reviewDate', label: 'Review date (ISO)' },
     { path: 'updateDate', label: 'Last updated (ISO)' },
   ],
-  ratings: [
-    { path: 'rating', label: 'Rating (0–10 scale used site-wide)' },
-    { path: 'ratingLabel', label: 'Rating label' },
+  ratings: [{ path: 'ratingLabel', label: 'Rating label' }],
+  metadata: [
+    { path: 'lastVerifiedAt', label: 'Last verified (ISO)' },
+    { path: 'lastUpdatedAt', label: 'Last updated (ISO)' },
+    { path: 'createdAt', label: 'Created at (ISO)' },
   ],
 }
 
@@ -99,8 +106,21 @@ const LONG_FIELDS: Record<string, FieldDef[]> = {
     { path: 'shortDescription', label: 'Short description' },
     { path: 'longDescription', label: 'Long description' },
   ],
-  regulation: [],
-  review: [{ path: 'reviewBody', label: 'Full review body (HTML-safe prose)' }],
+  review: [
+    { path: 'reviewBody', label: 'Full review body', hint: 'HTML is sanitized on the public profile; use headings, paragraphs, lists and links.' },
+  ],
+}
+
+const NUMBER_FIELDS: Record<string, FieldDef[]> = {
+  company: [{ path: 'foundedYear', label: 'Founded year', min: 1600, max: 2200, step: 1 }],
+  ratings: [
+    { path: 'rating', label: 'Editorial rating (0–10)', min: 0, max: 10, step: 0.1 },
+    { path: 'rank', label: 'Editorial rank', min: 1, max: 999999, step: 1 },
+  ],
+}
+
+const BOOLEAN_FIELDS: Record<string, FieldDef[]> = {
+  trading: [{ path: 'hasBonus', label: 'Has a current bonus or offer' }],
 }
 
 const LIST_FIELDS: Record<string, FieldDef[]> = {
@@ -114,34 +134,38 @@ const LIST_FIELDS: Record<string, FieldDef[]> = {
     { path: 'countriesServed', label: 'Countries served' },
     { path: 'restrictedCountries', label: 'Restricted countries' },
   ],
-  regulation: [{ path: 'regulators', label: 'Regulators' }],
   review: [
     { path: 'pros', label: 'Pros' },
     { path: 'cons', label: 'Cons' },
     { path: 'expandedPros', label: 'Expanded pros' },
     { path: 'expandedCons', label: 'Expanded cons' },
     { path: 'bestFor', label: 'Best for' },
-    { path: 'sourceUrls', label: 'Source URLs' },
   ],
+  metadata: [{ path: 'sourceUrls', label: 'Source URLs' }],
 }
 
 const JSON_FIELDS: Record<string, FieldDef[]> = {
   trading: [
-    { path: 'accountTypes', label: 'Account types', hint: '[{ name, minDeposit, spreadsFrom, commission, features[] }]' },
+    { path: 'accountTypes', label: 'Account types', hint: '[{ name, minDeposit, spreadsFrom, commission, leverage, features[] }]' },
     { path: 'testedSpreads', label: 'Tested spreads', hint: '[{ instrument, spread, tested }]' },
     { path: 'feesTable', label: 'Fees table', hint: '[{ instrument, spread, commission }]' },
     { path: 'platformBreakdown', label: 'Platform breakdown', hint: '[{ name, description }]' },
+    { path: 'propFirmDetails', label: 'Prop firm details', hint: 'Challenge, account-size, drawdown, trading-rule and refund details' },
+    { path: 'bonuses', label: 'Bonuses', hint: '[{ title, description, type, value, terms, code, expiresAt }]' },
   ],
-  review: [],
+  regulation: [
+    { path: 'regulators', label: 'Regulators', hint: 'Array of strings or { authority, country, licenseNumber } objects' },
+  ],
   faqs: [
-    { path: 'faqItems', label: 'FAQ items', hint: '[{ question, answer }] — feeds FAQ accordion + FAQPage schema' },
+    { path: 'faqItems', label: 'FAQ items', hint: '[{ question, answer }] — feeds the public FAQ accordion and FAQPage schema' },
   ],
   ratings: [
     {
       path: 'scores',
       label: 'Score components',
-      hint: '{ overall, trustSafety, tradingConditions, platforms, researchEducation, customerService, mobileTrading }',
+      hint: '{ overall, trustSafety, tradingConditions, platforms, researchEducation, customerService, mobileTrading } — each score 0–10',
     },
+    { path: 'trustpilot', label: 'Trustpilot data', hint: '{ score, totalReviews, oneStarPercentage? }' },
   ],
   seo: [
     {
@@ -152,7 +176,7 @@ const JSON_FIELDS: Record<string, FieldDef[]> = {
   ],
 }
 
-const TABS = ['company', 'trading', 'regulation', 'review', 'faqs', 'ratings', 'seo', 'placement']
+const TABS = ['company', 'trading', 'regulation', 'review', 'faqs', 'ratings', 'seo', 'metadata', 'placement']
 const TAB_LABELS: Record<string, string> = {
   company: 'Company',
   trading: 'Trading conditions',
@@ -161,6 +185,7 @@ const TAB_LABELS: Record<string, string> = {
   faqs: 'FAQs',
   ratings: 'Ratings & scores',
   seo: 'SEO',
+  metadata: 'Sources & dates',
   placement: 'Placement & ranking',
 }
 
@@ -232,6 +257,77 @@ function TextField({
   )
 }
 
+function NumberField({
+  def,
+  base,
+  values,
+  onChange,
+  disabled,
+}: {
+  def: FieldDef
+  base: Values
+  values: Values
+  onChange: (value: number | undefined) => void
+  disabled: boolean
+}) {
+  const raw = getPath(values, def.path)
+  return (
+    <Field>
+      <FieldLabel htmlFor={`f-${def.path}`}>
+        {def.label}
+        <OverrideBadge base={getPath(base, def.path)} value={raw} />
+      </FieldLabel>
+      <Input
+        id={`f-${def.path}`}
+        type="number"
+        min={def.min}
+        max={def.max}
+        step={def.step}
+        value={typeof raw === 'number' ? raw : ''}
+        disabled={disabled}
+        onChange={(event) => {
+          if (event.target.value === '') onChange(undefined)
+          else if (Number.isFinite(event.target.valueAsNumber)) onChange(event.target.valueAsNumber)
+        }}
+      />
+      {def.hint ? <FieldDescription>{def.hint}</FieldDescription> : null}
+    </Field>
+  )
+}
+
+function BooleanField({
+  def,
+  base,
+  values,
+  onChange,
+  disabled,
+}: {
+  def: FieldDef
+  base: Values
+  values: Values
+  onChange: (value: boolean) => void
+  disabled: boolean
+}) {
+  const raw = getPath(values, def.path)
+  return (
+    <Field orientation="horizontal">
+      <Switch
+        id={`f-${def.path}`}
+        checked={raw === true}
+        disabled={disabled}
+        onCheckedChange={onChange}
+      />
+      <div>
+        <FieldLabel htmlFor={`f-${def.path}`}>
+          {def.label}
+          <OverrideBadge base={getPath(base, def.path)} value={raw} />
+        </FieldLabel>
+        {def.hint ? <FieldDescription>{def.hint}</FieldDescription> : null}
+      </div>
+    </Field>
+  )
+}
+
 function LongField({
   def,
   base,
@@ -292,7 +388,14 @@ function ListField({
         rows={4}
         disabled={disabled}
         placeholder="One per line"
-        onChange={(e) => onChange(e.target.value.split('\n'))}
+        onChange={(event) =>
+          onChange(
+            event.target.value
+              .split('\n')
+              .map((entry) => entry.trim())
+              .filter(Boolean),
+          )
+        }
       />
       <FieldDescription>One entry per line.</FieldDescription>
     </Field>
@@ -303,18 +406,42 @@ function JsonField({
   def,
   base,
   values,
+  text,
+  onTextChange,
   onChange,
   disabled,
 }: {
   def: FieldDef
   base: Values
   values: Values
+  text: string
+  onTextChange: (text: string) => void
   onChange: (value: unknown, valid: boolean) => void
   disabled: boolean
 }) {
   const raw = getPath(values, def.path)
-  const [text, setText] = useState(() => (raw ? JSON.stringify(raw, null, 2) : ''))
-  const [error, setError] = useState<string | null>(null)
+  let error: string | null = null
+  if (text.trim() !== '') {
+    try {
+      JSON.parse(text)
+    } catch {
+      error = 'Invalid JSON — fix this field before saving.'
+    }
+  }
+
+  function handleTextChange(next: string) {
+    onTextChange(next)
+    if (next.trim() === '') {
+      onChange(undefined, true)
+      return
+    }
+    try {
+      onChange(JSON.parse(next), true)
+    } catch {
+      onChange(undefined, false)
+    }
+  }
+
   return (
     <Field data-invalid={error ? true : undefined}>
       <FieldLabel htmlFor={`f-${def.path}`}>
@@ -328,21 +455,7 @@ function JsonField({
         disabled={disabled}
         aria-invalid={error ? true : undefined}
         className="font-mono text-xs"
-        onChange={(e) => {
-          const next = e.target.value
-          setText(next)
-          if (next.trim() === '') {
-            setError(null)
-            onChange(undefined, true)
-            return
-          }
-          try {
-            onChange(JSON.parse(next), true)
-            setError(null)
-          } catch {
-            setError('Invalid JSON — not saved')
-          }
-        }}
+        onChange={(event) => handleTextChange(event.target.value)}
       />
       {error ? (
         <FieldDescription>{error}</FieldDescription>
@@ -363,7 +476,8 @@ export function ProfileEditor({
   values: initialValues,
   overridesUpdatedAt,
   placement: initialPlacement,
-  canManage,
+  canManageProfile,
+  canManagePlacement,
 }: ProfileEditorProps) {
   const router = useRouter()
   const [values, setValues] = useState<Values>(initialValues)
@@ -376,7 +490,6 @@ export function ProfileEditor({
       is_duplicate: false,
       needs_manual_review: false,
       display_rank: null,
-      rating_score: null,
       brand_category: null,
       brand_status: null,
       regulator_tier: null,
@@ -385,6 +498,8 @@ export function ProfileEditor({
     },
   )
   const [status, setStatus] = useState<string | null>(null)
+  const [jsonDrafts, setJsonDrafts] = useState<Record<string, string>>({})
+  const [invalidJsonPaths, setInvalidJsonPaths] = useState<Set<string>>(() => new Set())
   const [pending, startTransition] = useTransition()
 
   const overrideCount = useMemo(
@@ -392,12 +507,17 @@ export function ProfileEditor({
     [base, values],
   )
 
-  function runAction(fn: () => Promise<{ ok: boolean; error?: string }>, success: string) {
+  function runAction(
+    fn: () => Promise<{ ok: boolean; error?: string }>,
+    success: string,
+    onSuccess?: () => void,
+  ) {
     setStatus(null)
     startTransition(async () => {
       try {
         const result = await fn()
         if (result.ok) {
+          onSuccess?.()
           setStatus(success)
           router.refresh()
         } else {
@@ -410,6 +530,10 @@ export function ProfileEditor({
   }
 
   function saveOverrides() {
+    if (invalidJsonPaths.size > 0) {
+      setStatus('Fix invalid JSON fields before saving.')
+      return
+    }
     const payload = diffOverrides(base, values)
     runAction(
       () => saveAdminProfileOverrides({ slug, overrides: payload }),
@@ -420,9 +544,13 @@ export function ProfileEditor({
   function clearOverrides() {
     runAction(
       () => clearAdminProfileOverrides({ slug }),
-      'Overrides cleared — profile shows catalog content again.',
+      'Overrides cleared — profile shows its public base data again.',
+      () => {
+        setValues(base)
+        setJsonDrafts({})
+        setInvalidJsonPaths(new Set())
+      },
     )
-    setValues(initialValues)
   }
 
   function savePlacement() {
@@ -437,7 +565,6 @@ export function ProfileEditor({
           is_duplicate: placement.is_duplicate,
           needs_manual_review: placement.needs_manual_review,
           display_rank: placement.display_rank,
-          rating_score: placement.rating_score,
           brand_category: placement.brand_category,
           brand_status: placement.brand_status,
           regulator_tier: placement.regulator_tier,
@@ -452,9 +579,25 @@ export function ProfileEditor({
     def,
     base,
     values,
-    disabled: !canManage || pending,
+    disabled: !canManageProfile || pending,
     onChangeText: (v: string) => setValues((prev) => setPath(prev, def.path, v)),
   })
+
+  function getJsonText(path: string): string {
+    if (Object.prototype.hasOwnProperty.call(jsonDrafts, path)) return jsonDrafts[path]
+    const raw = getPath(values, path)
+    return raw === undefined ? '' : JSON.stringify(raw, null, 2) ?? ''
+  }
+
+  function updateJsonField(path: string, value: unknown, valid: boolean) {
+    setInvalidJsonPaths((current) => {
+      const next = new Set(current)
+      if (valid) next.delete(path)
+      else next.add(path)
+      return next
+    })
+    if (valid) setValues((prev) => setPath(prev, path, value))
+  }
 
   return (
     <div className="flex flex-col gap-4">
@@ -473,10 +616,14 @@ export function ProfileEditor({
               {overrideCount} override field{overrideCount === 1 ? '' : 's'}
             </Badge>
           ) : null}
-          <Button variant="outline" size="sm" disabled={!canManage || pending || overrideCount === 0} onClick={clearOverrides}>
+          <Button variant="outline" size="sm" disabled={!canManageProfile || pending || overrideCount === 0} onClick={clearOverrides}>
             Clear overrides
           </Button>
-          <Button size="sm" disabled={!canManage || pending} onClick={saveOverrides}>
+          <Button
+            size="sm"
+            disabled={!canManageProfile || pending || invalidJsonPaths.size > 0}
+            onClick={saveOverrides}
+          >
             Save profile overrides
           </Button>
         </div>
@@ -486,16 +633,28 @@ export function ProfileEditor({
           {status}
         </p>
       ) : null}
-      {!canManage ? (
+      {!canManageProfile && !canManagePlacement ? (
         <p className="text-sm text-muted-foreground">
-          Your role can view profiles but not edit them. Brokers:manage permission is required.
+          Your role can view broker profiles but cannot edit editorial data or placement.
+        </p>
+      ) : !canManageProfile ? (
+        <p className="text-sm text-muted-foreground">
+          Editorial profile fields require editorial:write. Your role can still manage placement.
+        </p>
+      ) : !canManagePlacement ? (
+        <p className="text-sm text-muted-foreground">
+          Placement controls require brokers:manage. Your role can still edit editorial profile fields.
         </p>
       ) : null}
 
       <Tabs defaultValue="company" className="gap-4">
-        <TabsList className="flex-wrap">
+        <TabsList className="grid h-auto w-full grid-cols-2 justify-start gap-1 p-1 sm:grid-cols-3 lg:grid-cols-5 xl:grid-cols-9">
           {TABS.map((tab) => (
-            <TabsTrigger key={tab} value={tab}>
+            <TabsTrigger
+              key={tab}
+              value={tab}
+              className="h-auto min-h-8 w-full flex-none whitespace-normal text-center leading-tight"
+            >
               {TAB_LABELS[tab]}
             </TabsTrigger>
           ))}
@@ -508,9 +667,9 @@ export function ProfileEditor({
                 <CardHeader>
                   <CardTitle>Placement &amp; ranking</CardTitle>
                   <CardDescription>
-                    Paid placement and directory ranking live in the brands table — separate from
-                    editorial ratings. Sponsored/featured flags drive directory pins and homepage
-                    widgets; display_rank orders the directory within each tier.
+                    Sponsored and featured are commercial visibility controls. Editorial ratings and
+                    score components live separately under Ratings &amp; scores; display_rank controls
+                    directory ordering within each tier.
                     {hasPortalRecord ? '' : ' Saving creates a portal record for this catalog-only broker.'}
                   </CardDescription>
                 </CardHeader>
@@ -522,7 +681,7 @@ export function ProfileEditor({
                         <Input
                           id="p-name"
                           value={placement.name}
-                          disabled={!canManage || pending}
+                          disabled={!canManagePlacement || pending}
                           onChange={(e) => setPlacement((p) => ({ ...p, name: e.target.value }))}
                         />
                       </Field>
@@ -531,7 +690,7 @@ export function ProfileEditor({
                         <Input
                           id="p-verification"
                           value={placement.verification_status}
-                          disabled={!canManage || pending}
+                          disabled={!canManagePlacement || pending}
                           onChange={(e) =>
                             setPlacement((p) => ({
                               ...p,
@@ -548,7 +707,7 @@ export function ProfileEditor({
                           type="number"
                           min={1}
                           value={placement.display_rank ?? ''}
-                          disabled={!canManage || pending}
+                          disabled={!canManagePlacement || pending}
                           onChange={(e) =>
                             setPlacement((p) => ({
                               ...p,
@@ -559,30 +718,11 @@ export function ProfileEditor({
                         <FieldDescription>Lower = higher prominence. Empty = end of list.</FieldDescription>
                       </Field>
                       <Field>
-                        <FieldLabel htmlFor="p-score">Rating score override</FieldLabel>
-                        <Input
-                          id="p-score"
-                          type="number"
-                          step="0.1"
-                          min={0}
-                          max={10}
-                          value={placement.rating_score ?? ''}
-                          disabled={!canManage || pending}
-                          onChange={(e) =>
-                            setPlacement((p) => ({
-                              ...p,
-                              rating_score: e.target.value === '' ? null : Number(e.target.value),
-                            }))
-                          }
-                        />
-                        <FieldDescription>Canonical editorial score applied to broker.rating.</FieldDescription>
-                      </Field>
-                      <Field>
                         <FieldLabel htmlFor="p-category">Brand category</FieldLabel>
                         <Input
                           id="p-category"
                           value={placement.brand_category ?? ''}
-                          disabled={!canManage || pending}
+                          disabled={!canManagePlacement || pending}
                           onChange={(e) => setPlacement((p) => ({ ...p, brand_category: e.target.value || null }))}
                         />
                       </Field>
@@ -591,7 +731,7 @@ export function ProfileEditor({
                         <Input
                           id="p-status"
                           value={placement.brand_status ?? ''}
-                          disabled={!canManage || pending}
+                          disabled={!canManagePlacement || pending}
                           onChange={(e) => setPlacement((p) => ({ ...p, brand_status: e.target.value || null }))}
                         />
                       </Field>
@@ -600,7 +740,7 @@ export function ProfileEditor({
                         <Input
                           id="p-tier"
                           value={placement.regulator_tier ?? ''}
-                          disabled={!canManage || pending}
+                          disabled={!canManagePlacement || pending}
                           onChange={(e) => setPlacement((p) => ({ ...p, regulator_tier: e.target.value || null }))}
                         />
                       </Field>
@@ -609,7 +749,7 @@ export function ProfileEditor({
                         <Input
                           id="p-priority"
                           value={placement.internal_priority ?? ''}
-                          disabled={!canManage || pending}
+                          disabled={!canManagePlacement || pending}
                           onChange={(e) => setPlacement((p) => ({ ...p, internal_priority: e.target.value || null }))}
                         />
                       </Field>
@@ -627,7 +767,7 @@ export function ProfileEditor({
                           <Switch
                             id={`p-${key}`}
                             checked={placement[key]}
-                            disabled={!canManage || pending}
+                            disabled={!canManagePlacement || pending}
                             onCheckedChange={(checked) => setPlacement((p) => ({ ...p, [key]: checked }))}
                           />
                           <FieldLabel htmlFor={`p-${key}`} className="font-normal">
@@ -642,12 +782,12 @@ export function ProfileEditor({
                         id="p-notes"
                         rows={3}
                         value={placement.internal_notes ?? ''}
-                        disabled={!canManage || pending}
+                        disabled={!canManagePlacement || pending}
                         onChange={(e) => setPlacement((p) => ({ ...p, internal_notes: e.target.value || null }))}
                       />
                     </Field>
                     <div>
-                      <Button size="sm" disabled={!canManage || pending} onClick={savePlacement}>
+                      <Button size="sm" disabled={!canManagePlacement || pending} onClick={savePlacement}>
                         Save placement
                       </Button>
                     </div>
@@ -679,6 +819,30 @@ export function ProfileEditor({
                         onChange={(v) => bind(def).onChangeText(v)}
                       />
                     ))}
+                    {(NUMBER_FIELDS[tab] ?? []).map((def) => (
+                      <NumberField
+                        key={def.path}
+                        def={def}
+                        base={base}
+                        values={values}
+                        disabled={!canManageProfile || pending}
+                        onChange={(value) =>
+                          setValues((prev) => setPath(prev, def.path, value))
+                        }
+                      />
+                    ))}
+                    {(BOOLEAN_FIELDS[tab] ?? []).map((def) => (
+                      <BooleanField
+                        key={def.path}
+                        def={def}
+                        base={base}
+                        values={values}
+                        disabled={!canManageProfile || pending}
+                        onChange={(value) =>
+                          setValues((prev) => setPath(prev, def.path, value))
+                        }
+                      />
+                    ))}
                     {(LIST_FIELDS[tab] ?? []).map((def) => (
                       <ListField
                         key={def.path}
@@ -689,8 +853,15 @@ export function ProfileEditor({
                     {(JSON_FIELDS[tab] ?? []).map((def) => (
                       <JsonField
                         key={def.path}
-                        {...bind(def)}
-                        onChange={(v) => setValues((prev) => setPath(prev, def.path, v))}
+                        def={def}
+                        base={base}
+                        values={values}
+                        text={getJsonText(def.path)}
+                        onTextChange={(text) =>
+                          setJsonDrafts((prev) => ({ ...prev, [def.path]: text }))
+                        }
+                        disabled={!canManageProfile || pending}
+                        onChange={(value, valid) => updateJsonField(def.path, value, valid)}
                       />
                     ))}
                   </FieldGroup>

@@ -48,6 +48,10 @@ export function LoginForm({ next }: { next?: string }) {
           ? await authClient.twoFactor.verifyBackupCode({ code })
           : await authClient.twoFactor.verifyTotp({ code, trustDevice: false })
         if (result.error) {
+          console.log('[v0] 2FA verification rejected', {
+            status: result.error.status,
+            code: result.error.code,
+          })
           setError('That verification code could not be accepted.')
           return
         }

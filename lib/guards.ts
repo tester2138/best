@@ -15,11 +15,6 @@ import type { Brand } from '@/types/portal'
  * brand id returned here. This is defense layer 2/3 (layer 1 is middleware).
  */
 
-const ADMIN_EMAILS = (process.env.ADMIN_EMAILS ?? '')
-  .split(',')
-  .map((s) => s.trim().toLowerCase())
-  .filter(Boolean)
-
 export interface SessionUser {
   id: string
   email: string
@@ -71,7 +66,7 @@ export async function requireStaff(permission: StaffPermission = 'dashboard:read
       `select u."twoFactorEnabled" as enabled,
               (select tf."createdAt"::text from public."twoFactor" tf
                 where tf."userId" = u.id and tf.verified = true limit 1) as factor_created_at,
-              (select s.created_at::text from public.session s
+              (select s."createdAt"::text from public.session s
                 where s.id = $2 and s."userId" = u.id limit 1) as session_created_at
          from public."user" u where u.id = $1`,
       [user.id, session.session.id],
@@ -94,13 +89,9 @@ export async function requireStaff(permission: StaffPermission = 'dashboard:read
   return { ...user, role, isSuperAdmin: role === 'super_admin' }
 }
 
-/** Resolve a staff actor and ensure the requested broker is within their scope. */
-export async function requireStaffBrand(
-  brandId: string,
-  permission: StaffPermission,
-): Promise<StaffActor> {
-  const actor = await requireStaff(permission)
-  if (actor.isSuperAdmin) return actor
+/** Assert that an already-authorized staff actor can access this broker. */
+export async function assertStaffBrandScope(actor: StaffActor, brandId: string): Promise<void> {
+  if (actor.isSuperAdmin) return
   const assignment = await queryOne<{ scope_mode: 'all' | 'selected' }>(
     `select scope_mode from public.staff_access where user_id = $1 and status = 'active'`,
     [actor.id],
@@ -112,6 +103,15 @@ export async function requireStaffBrand(
     )
     if (!scope) throw new Err('Not found', 'not_found')
   }
+}
+
+/** Resolve a staff actor and ensure the requested broker is within their scope. */
+export async function requireStaffBrand(
+  brandId: string,
+  permission: StaffPermission,
+): Promise<StaffActor> {
+  const actor = await requireStaff(permission)
+  await assertStaffBrandScope(actor, brandId)
   return actor
 }
 
