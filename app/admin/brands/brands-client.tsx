@@ -46,8 +46,8 @@ export interface BrandRow {
   rating_score: number | string | null
   is_duplicate: boolean
   has_database_record: boolean
-  profile_href: string
-}
+  profile_href?: string
+  }
 
 function AccessPill({ row }: { row: BrandRow }) {
   if (row.portal_locked) return <Badge variant="destructive">Locked</Badge>
@@ -138,7 +138,7 @@ export function BrandsClient({ brands, canAssign }: { brands: BrandRow[]; canAss
                 </TableCell>
                 <TableCell className="text-right">
                   <Link
-                    href={b.profile_href}
+                    href={b.profile_href ?? `/admin/brands/${b.has_database_record ? b.id : b.slug}/profile`}
                     className="text-sm font-medium text-primary hover:underline"
                   >
                     Edit profile

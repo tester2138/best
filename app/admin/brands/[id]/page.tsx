@@ -29,7 +29,6 @@ export default async function AdminBrandDetailPage({
 
   const brand = await queryOne<Brand>(`select * from public.brands where id = $1`, [id])
   if (!brand) notFound()
-  const canEditEditorial = roleHasPermission(actor.role, 'editorial:write')
 
   const [member, invitation, sections, activity] = await Promise.all([
     canManage || actor.isSuperAdmin ? queryOne<MemberInfo>(
@@ -95,7 +94,6 @@ export default async function AdminBrandDetailPage({
         sections={sectionStatus}
         activity={activity}
         canManage={canManage}
-        canEditEditorial={canEditEditorial}
       />
     </div>
   )

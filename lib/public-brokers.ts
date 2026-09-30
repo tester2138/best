@@ -4,6 +4,7 @@ import { unstable_cache } from 'next/cache'
 import { brokers as editorialBrokers } from '@/data/brokers'
 import { directoryCompanies as editorialDirectory } from '@/data/directory'
 import { query } from '@/lib/portal/db'
+import { applyOverrides } from '@/lib/admin-overrides'
 import { isRetailEntityType, type DirectoryCompany, type VerificationStatus } from '@/lib/directory-types'
 import type { Broker } from '@/lib/types'
 
@@ -79,16 +80,44 @@ const getCachedPublicBrandRows = unstable_cache(queryPublicBrandRows, ['public-b
   revalidate: 300,
 })
 
+interface AdminOverrideRow {
+  slug: string
+  overrides: Record<string, unknown>
+}
+
+async function queryAdminOverrides(): Promise<AdminOverrideRow[]> {
+  return query<AdminOverrideRow>(`select slug, overrides from public.admin_profile_overrides`)
+}
+
+const getCachedAdminOverrides = unstable_cache(queryAdminOverrides, ['admin-profile-overrides-v1'], {
+  tags: ['broker-directory'],
+  revalidate: 300,
+})
+
 const QUOTA_RETRY_COOLDOWN_MS = 5 * 60 * 1000
 let quotaRetryAfter = 0
 
-async function getPublicBrandRows(): Promise<PublicBrandRow[]> {
-  // Catch outside unstable_cache: a transient Neon failure must never be
-  // persisted as an empty overlay and replace the canonical master ranking.
-  if (Date.now() < quotaRetryAfter) return []
+/**
+ * Combined overlay: brands-row placement/verification data plus admin profile
+ * overrides, both keyed by slug. A transient Neon failure must never be
+ * persisted as an empty overlay and replace the canonical master ranking, so
+ * the catch lives outside unstable_cache.
+ */
+async function getOverlayData(): Promise<{
+  rows: Map<string, PublicBrandRow>
+  overrides: Map<string, Record<string, unknown>>
+}> {
+  if (Date.now() < quotaRetryAfter) return { rows: new Map(), overrides: new Map() }
 
   try {
-    return await getCachedPublicBrandRows()
+    const [rows, overrideRows] = await Promise.all([
+      getCachedPublicBrandRows(),
+      getCachedAdminOverrides(),
+    ])
+    return {
+      rows: rowMap(rows),
+      overrides: new Map(overrideRows.map((r) => [r.slug.toLowerCase(), r.overrides])),
+    }
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err)
     if (message.includes('402') || message.toLowerCase().includes('quota')) {
@@ -101,7 +130,7 @@ async function getPublicBrandRows(): Promise<PublicBrandRow[]> {
         `[public-brokers] brand overlay unavailable, serving static directory — ${message}`,
       )
     }
-    return []
+    return { rows: new Map(), overrides: new Map() }
   }
 }
 
@@ -125,9 +154,10 @@ function rowMap(rows: PublicBrandRow[]): Map<string, PublicBrandRow> {
 function mergeDirectoryCompany(
   company: DirectoryCompany,
   rows: Map<string, PublicBrandRow>,
+  overrides?: Map<string, Record<string, unknown>>,
 ): DirectoryCompany {
   const row = rows.get(company.slug.toLowerCase())
-  return {
+  const merged: DirectoryCompany = {
     ...company,
     verificationStatus: statusFromRow(row, company.verificationStatus),
     isSponsored: row?.is_sponsored ?? company.isSponsored,
@@ -139,11 +169,17 @@ function mergeDirectoryCompany(
     rating: row?.rating_score != null ? Number(row.rating_score) : company.rating,
     isDuplicate: row?.is_duplicate ?? false, // DB flag; no entries are currently duplicated
   }
+  // Admin profile overrides win over catalog + brands-row content fields.
+  return overrides ? applyOverrides(merged, overrides.get(company.slug.toLowerCase())) : merged
 }
 
-function mergeBroker(broker: Broker, rows: Map<string, PublicBrandRow>): Broker {
+function mergeBroker(
+  broker: Broker,
+  rows: Map<string, PublicBrandRow>,
+  overrides?: Map<string, Record<string, unknown>>,
+): Broker {
   const row = rows.get(broker.slug.toLowerCase())
-  return {
+  const merged: Broker = {
     ...broker,
     verificationStatus: statusFromRow(row, broker.verificationStatus ?? 'unverified'),
     isSponsored: row?.is_sponsored ?? broker.isSponsored,
@@ -153,6 +189,7 @@ function mergeBroker(broker: Broker, rows: Map<string, PublicBrandRow>): Broker 
     // Apply the canonical CSV score to the broker rating
     rating: row?.rating_score != null ? Number(row.rating_score) : broker.rating,
   }
+  return overrides ? applyOverrides(merged, overrides.get(broker.slug.toLowerCase())) : merged
 }
 
 function tier(company: Pick<DirectoryCompany, 'isSponsored' | 'verificationStatus'>): number {
@@ -202,8 +239,8 @@ export function rankPublicDirectory(companies: DirectoryCompany[]): DirectoryCom
 }
 
 export async function getPublicDirectoryCompanies(): Promise<DirectoryCompany[]> {
-  const rows = rowMap(await getPublicBrandRows())
-  return editorialDirectory.map((company) => mergeDirectoryCompany(company, rows))
+  const { rows, overrides } = await getOverlayData()
+  return editorialDirectory.map((company) => mergeDirectoryCompany(company, rows, overrides))
 }
 
 export async function getRankedPublicDirectory(): Promise<DirectoryCompany[]> {
@@ -238,12 +275,15 @@ function directoryCompanyToBroker(company: DirectoryCompany): Broker {
 }
 
 export async function getPublicBrokerCatalog(): Promise<Broker[]> {
-  const rows = rowMap(await getPublicBrandRows())
+  const { rows, overrides } = await getOverlayData()
   const directoryBySlug = new Map(
-    editorialDirectory.map((company) => [company.slug, mergeDirectoryCompany(company, rows)]),
+    editorialDirectory.map((company) => [
+      company.slug,
+      mergeDirectoryCompany(company, rows, overrides),
+    ]),
   )
   const catalog = editorialBrokers.map((broker) => {
-    const merged = mergeBroker(broker, rows)
+    const merged = mergeBroker(broker, rows, overrides)
     const directoryCompany = directoryBySlug.get(broker.slug)
     return directoryCompany
       ? {

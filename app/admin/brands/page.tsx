@@ -48,7 +48,7 @@ export default async function AdminBrandsPage() {
   const catalogOnly: BrandRow[] = globalScope
     ? [...catalogBySlug.entries()]
         .filter(([slug]) => !visibleSlugs.has(slug))
-        .map(([slug, company]) => ({
+        .map(([slug, company]): BrandRow => ({
           id: slug,
           slug,
           name: company.name,

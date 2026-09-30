@@ -41,6 +41,8 @@ export type AuditAction =
   | 'claim.status'
   | 'news.publish'
   | 'admin.section.edit'
+  | 'admin.profile.overrides'
+  | 'admin.placement.update'
   | 'enquiry.status'
   | 'staff.invite'
   | 'staff.access.update'
