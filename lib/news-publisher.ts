@@ -13,7 +13,6 @@ export async function isDuplicateArticle(
   slug?: string,
   content?: string
 ): Promise<boolean> {
-  const sql = getSql()
 
   // 1. Exact hash match (covers identical content regardless of age)
   const byHash = await sql`
@@ -317,7 +316,6 @@ export async function getRecentAutoArticles(limit: number = 10): Promise<Array<{
   slug: string
   publishedAt: string
 }>> {
-  const sql = getSql()
   const articles = await sql`
     SELECT id, title, slug, published_at
     FROM posts
@@ -341,7 +339,6 @@ export async function getArticleStats(): Promise<{
   todayCount: number
   weekCount: number
 }> {
-  const sql = getSql()
   const stats = await sql`
     SELECT 
       COUNT(*) FILTER (WHERE is_auto_generated = true) as total_auto,

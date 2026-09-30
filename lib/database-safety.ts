@@ -4,8 +4,14 @@ export const STAGING_DATABASE_IDENTITY = {
   branchId: 'br-dawn-credit-aqzydokc',
   endpointId: 'ep-raspy-snow-aqusk7qe',
   host: 'ep-raspy-snow-aqusk7qe.c-8.us-east-1.aws.neon.tech',
+  pooledHost: 'ep-raspy-snow-aqusk7qe-pooler.c-8.us-east-1.aws.neon.tech',
   databaseName: 'neondb',
 } as const
+
+export const STAGING_DATABASE_HOSTS = [
+  STAGING_DATABASE_IDENTITY.host,
+  STAGING_DATABASE_IDENTITY.pooledHost,
+] as const
 
 export const PRODUCTION_DATABASE_HOSTS = [
   'ep-lingering-star-aqcvhrip.c-8.us-east-1.aws.neon.tech',
@@ -66,7 +72,7 @@ export function assertStagingConnectionString(connectionString: string): URL {
   const databaseName = decodeURIComponent(url.pathname.replace(/^\//, ''))
 
   if (
-    url.hostname !== STAGING_DATABASE_IDENTITY.host ||
+    !(STAGING_DATABASE_HOSTS as readonly string[]).includes(url.hostname) ||
     databaseName !== STAGING_DATABASE_IDENTITY.databaseName
   ) {
     throw new Error(
