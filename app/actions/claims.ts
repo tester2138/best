@@ -3,7 +3,7 @@
 import { z } from 'zod'
 import { headers } from 'next/headers'
 import { run, Err } from '@/lib/portal/result'
-import { requireAdmin } from '@/lib/guards'
+import { requireStaff } from '@/lib/guards'
 import { query, queryOne } from '@/lib/portal/db'
 import { rateLimit } from '@/lib/rate'
 import { audit } from '@/lib/audit'
@@ -78,7 +78,7 @@ const StatusInput = z.object({
 export async function setClaimStatus(raw: unknown) {
   return run(async () => {
     const input = StatusInput.parse(raw)
-    const admin = await requireAdmin()
+    const admin = await requireStaff('leads:manage')
     const updated = await queryOne<{ id: string }>(
       `update public.claim_requests set status = $2 where id = $1 returning id`,
       [input.id, input.status],

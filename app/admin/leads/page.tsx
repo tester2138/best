@@ -1,4 +1,5 @@
 import { query } from '@/lib/portal/db'
+import { requireStaff } from '@/lib/guards'
 import { LeadsClient, type Lead } from './leads-client'
 
 export const dynamic = 'force-dynamic'
@@ -21,6 +22,7 @@ interface Row {
 }
 
 export default async function LeadsPage() {
+  await requireStaff('leads:read')
   const rows = await query<Row>(
     `select c.id, c.full_name, c.work_email, c.message, c.status, c.ip, c.created_at,
             c.brand_id, b.name as brand_name, b.slug as brand_slug

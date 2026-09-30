@@ -1,4 +1,5 @@
 import { query } from '@/lib/portal/db'
+import { requireStaff } from '@/lib/guards'
 import { ModerationClient, type QueueItem } from './moderation-client'
 
 export const dynamic = 'force-dynamic'
@@ -25,6 +26,7 @@ interface RawRow {
 }
 
 export default async function ModerationPage() {
+  const actor = await requireStaff('moderation:review')
   // Pending items oldest first, each enriched with the "current live" copy so
   // the client can render a before/after diff without extra round-trips.
   const rows = await query<RawRow>(
@@ -42,7 +44,15 @@ export default async function ModerationPage() {
        from public.moderation_queue q
        join public.brands b on b.id = q.brand_id
       where q.status = 'pending'
+        and ($1::boolean or exists (
+          select 1 from public.staff_access sa
+           where sa.user_id = $1::text and sa.status = 'active' and sa.scope_mode = 'all'
+        ) or exists (
+          select 1 from public.staff_brand_scopes sc
+           where sc.user_id = $1::text and sc.brand_id = q.brand_id
+        ))
       order by q.created_at asc`,
+    [actor.isSuperAdmin],
   )
 
   const items: QueueItem[] = rows.map((r) => ({

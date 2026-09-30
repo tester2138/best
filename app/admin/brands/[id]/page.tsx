@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { query, queryOne } from '@/lib/portal/db'
+import { requireStaffBrand } from '@/lib/guards'
 import { SECTION_LIST } from '@/lib/content/registry'
 import type { Brand } from '@/types/portal'
 import { BrandDetailClient, type MemberInfo, type SectionStatusRow } from './brand-detail-client'
@@ -22,6 +23,7 @@ export default async function AdminBrandDetailPage({
   params: Promise<{ id: string }>
 }) {
   const { id } = await params
+  await requireStaffBrand(id, 'brokers:read')
 
   const brand = await queryOne<Brand>(`select * from public.brands where id = $1`, [id])
   if (!brand) notFound()

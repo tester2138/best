@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { sql } from '@/lib/db'
-import { requireAdmin } from '@/lib/guards'
+import { requireStaff } from '@/lib/guards'
 import { scheduleNewsFeedUpdate } from '@/lib/news-websub'
 import { revalidateNewsSurfaces } from '@/lib/news-revalidation'
 
 export async function POST(request: NextRequest) {
   try {
-    await requireAdmin()
+    await requireStaff('editorial:write')
 
     const body = await request.json()
     const { title, slug, excerpt, content, category } = body

@@ -2,7 +2,7 @@
 
 import { z } from 'zod'
 import { run, Err } from '@/lib/portal/result'
-import { requireBrandMember, requireAdmin } from '@/lib/guards'
+import { requireBrandMember, requireStaffBrand } from '@/lib/guards'
 import { query, queryOne } from '@/lib/portal/db'
 import { zodFor } from '@/lib/content/schema'
 import { SECTION_KEYS, SECTIONS } from '@/lib/content/registry'
@@ -109,7 +109,7 @@ export async function publishSection(raw: unknown) {
   return run(async () => {
     const input = PublishInput.parse(raw)
     const actor = input.asAdmin
-      ? { ...(await requireAdmin()), brand: null as unknown as Brand }
+      ? { ...(await requireStaffBrand(input.brandId, 'editorial:write')), brand: null as unknown as Brand }
       : await requireBrandMember(input.brandId, { write: true })
 
     const brand = await queryOne<Brand>(`select * from public.brands where id = $1`, [
