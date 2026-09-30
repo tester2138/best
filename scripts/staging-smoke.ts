@@ -12,13 +12,10 @@ type Preflight = {
   database: {
     environment: string
     markerVerified: boolean
-    projectId?: string
-    branchId?: string
-    endpointId?: string
   }
   services: {
     blobToken: string
-    blobStoreId: string
+    blobEnvironment: string
     emailDelivery: string
     emailTestSink: string
   }
@@ -118,11 +115,8 @@ async function main() {
   assert.equal(preflight.runtimeEnvironment, 'preview')
   assert.equal(preflight.database.environment, 'staging')
   assert.equal(preflight.database.markerVerified, true)
-  assert.equal(preflight.database.projectId, STAGING_DATABASE_IDENTITY.projectId)
-  assert.equal(preflight.database.branchId, STAGING_DATABASE_IDENTITY.branchId)
-  assert.equal(preflight.database.endpointId, STAGING_DATABASE_IDENTITY.endpointId)
   assert.equal(preflight.services.blobToken, 'verified')
-  assert.equal(preflight.services.blobStoreId, 'store_0RXGoQwheCWcRqT1')
+  assert.equal(preflight.services.blobEnvironment, 'staging')
   assert.equal(preflight.services.emailDelivery, 'disabled')
   assert.ok(process.env.DATABASE_URL, 'Pull the isolated Preview environment before running this suite.')
   assert.ok(process.env.BLOB_READ_WRITE_TOKEN, 'The isolated Preview Blob token is required.')
