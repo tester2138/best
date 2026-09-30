@@ -23,14 +23,25 @@ import { sendEmail } from '@/lib/email/send'
 
 const FORCE_PASSWORD_CHANGE = (process.env.FORCE_PASSWORD_CHANGE ?? 'true') !== 'false'
 
-// Where a signed-in user belongs, based on role + must_change_password.
+// Where a signed-in user belongs, based on role, password state, and MFA state.
 async function destinationFor(userId: string): Promise<string> {
-  const prof = await queryOne<{ role: string; must_change_password: boolean }>(
-    `select role, must_change_password from public.profiles where id = $1`,
+  const prof = await queryOne<{
+    role: string
+    must_change_password: boolean
+    two_factor_enabled: boolean
+  }>(
+    `select p.role, p.must_change_password, u."twoFactorEnabled" as two_factor_enabled
+       from public.profiles p join public."user" u on u.id = p.id where p.id = $1`,
     [userId],
   )
   if (FORCE_PASSWORD_CHANGE && prof?.must_change_password) return '/business/set-password'
-  if (prof?.role === 'admin') return '/admin'
+  const staff = await queryOne<{ active: boolean }>(
+    `select exists(select 1 from public.staff_access where user_id = $1 and status = 'active') as active`,
+    [userId],
+  )
+  if (prof?.role === 'admin' || staff?.active) {
+    return prof?.two_factor_enabled ? '/admin' : '/business/security?required=1'
+  }
   return '/business'
 }
 
@@ -52,6 +63,9 @@ export async function login(form: FormData) {
       // yet — that caused it to return null and incorrectly throw "Invalid email
       // or password" even though the sign-in had succeeded.
       const signed = await auth.api.signInEmail({ body: { email, password }, headers: await headers() })
+      if ('twoFactorRedirect' in signed && signed.twoFactorRedirect) {
+        return { twoFactorRequired: true as const }
+      }
       if (!signed?.user?.id) throw new Err('Invalid email or password', 'forbidden')
       userId = signed.user.id
     } catch (e) {
@@ -66,6 +80,14 @@ export async function login(form: FormData) {
   // inside a useTransition callback. redirect() throws NEXT_REDIRECT which can
   // bubble out of startTransition as an unhandled error in Next.js 16.
   return result
+}
+
+export async function completeTwoFactorSignIn() {
+  return run(async () => {
+    const session = await auth.api.getSession({ headers: await headers() })
+    if (!session?.user?.id) throw new Err('Authentication could not be completed.', 'forbidden')
+    return { to: await destinationFor(session.user.id) }
+  })
 }
 
 export async function setPassword(form: FormData) {
@@ -104,7 +126,10 @@ export async function setPassword(form: FormData) {
     await sendEmail('password-changed', email, {})
   })
 
-  if (result.ok) redirect('/business')
+  if (result.ok) {
+    const session = await auth.api.getSession({ headers: await headers() })
+    redirect(session?.user?.id ? await destinationFor(session.user.id) : '/business/login')
+  }
   return result
 }
 

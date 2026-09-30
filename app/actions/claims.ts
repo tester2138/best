@@ -3,7 +3,7 @@
 import { z } from 'zod'
 import { headers } from 'next/headers'
 import { run, Err } from '@/lib/portal/result'
-import { requireStaff } from '@/lib/guards'
+import { requireStaff, requireStaffBrand } from '@/lib/guards'
 import { query, queryOne } from '@/lib/portal/db'
 import { rateLimit } from '@/lib/rate'
 import { audit } from '@/lib/audit'
@@ -78,13 +78,22 @@ const StatusInput = z.object({
 export async function setClaimStatus(raw: unknown) {
   return run(async () => {
     const input = StatusInput.parse(raw)
-    const admin = await requireStaff('leads:manage')
-    const updated = await queryOne<{ id: string }>(
-      `update public.claim_requests set status = $2 where id = $1 returning id`,
+    const actor = await requireStaff('leads:manage')
+    const current = await queryOne<{ brand_id: string; status: string }>(
+      `select brand_id, status from public.claim_requests where id = $1`,
+      [input.id],
+    )
+    if (!current) throw new Err('Lead not found', 'not_found')
+    await requireStaffBrand(current.brand_id, 'leads:manage')
+    const updated = await queryOne<{ id: string; status: string }>(
+      `update public.claim_requests set status = $2 where id = $1 returning id, status`,
       [input.id, input.status],
     )
     if (!updated) throw new Err('Lead not found', 'not_found')
-    await audit(admin, null, 'claim.received', input.id, { status: input.status })
+    await audit(actor, current.brand_id, 'claim.status', input.id, {
+      before: { status: current.status },
+      after: { status: updated.status },
+    })
     return {}
   })
 }

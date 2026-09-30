@@ -16,8 +16,11 @@ All `/admin` page reads and all privileged mutations validate the Better Auth se
 | `/admin/audit` | audit_log, brands | `audit:read`; CSV export is super-admin only |
 | `/admin/settings` | portal_settings | `settings:manage` (super admin only) |
 | `/admin/bulk-import` | brands, broker_page_sections, section_versions | super admin only |
+| `/business/security` | profiles, staff_access, public.user, public.twoFactor | signed-in super admin or active staff; required TOTP enrollment and recovery-code rotation |
 
-Public contact submissions use `/api/contact` → `contact_submissions`; public claim submissions use `submitClaim` → brands + claim_requests. Public broker rendering uses the static editorial catalog merged with brands/media overlays; public news uses `public.posts` with the static archive as its documented fallback; public live broker offers come only from `offers` with active dates; banner slots remain static house ads in `data/ads.ts` because there is no campaign/placement database yet.
+Public contact submissions use `/api/contact` → `contact_submissions` → `/admin/enquiries`. Public claim submissions use `submitClaim` → brands + claim_requests → `/admin/leads`. Public broker rendering merges the static editorial catalog with `brands` and `media_assets`; public news reads `public.posts` (with the documented static fallback); public offer campaigns render from active, date-valid rows in `offers`; banner slots remain static house ads in `data/ads.ts` because no campaign/placement database exists. There are no working admin routes yet for ratings, authors, education, media, ads, placements, newsletter, pages, analytics, or standalone offers, so those are intentionally omitted from navigation rather than exposed as placeholders.
+
+The dashboard counts live rows: draft/pending broker sections, new claims, brokers needing verification review (unverified or `brands.updated_at` older than 90 days), active/ending offers, open enquiries, and currently published posts. The stale-verification rule is a best-effort proxy because the current `brands` schema has no dedicated verification timestamp.
 
 ## Permission matrix
 
@@ -27,7 +30,7 @@ Public contact submissions use `/api/contact` → `contact_submissions`; public 
 | Editor / publisher | Read | Read in broker scope | Read / write | Review in broker scope | — | — | — | Read |
 | Commercial manager | Read | Read / manage in broker scope | — | — | Read / manage | — | — | Read |
 | Support / reviewer | Read | Read in broker scope | — | Review in broker scope | Read / manage | — | — | Read |
-| Analyst | Read | Read in broker scope | Read | — | Read | — | — | Read |
+| Analyst | Read | Read in broker scope | Read | — | — | — | — | Read |
 | Merchant | — | Assigned brand only via `/business` / `/portal` | Own editable fields only | — | — | — | — | — |
 
 Scores, rank, verification conclusions, public reviews and publication are not exposed as commercial-manager mutations. Staff role/scope updates and their high-impact lifecycle changes are audited; suspension and revocation delete all sessions for the target. TOTP secrets and backup codes are kept in Better Auth tables and never included in staff listing queries.

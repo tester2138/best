@@ -1,10 +1,10 @@
 'use server'
 
-import { randomBytes, randomUUID, createHash } from 'node:crypto'
+import { randomBytes, createHash } from 'node:crypto'
 import { z } from 'zod'
 import { headers } from 'next/headers'
 import { run, Err } from '@/lib/portal/result'
-import { requireAdmin } from '@/lib/guards'
+import { requireAdmin, requireStaff } from '@/lib/guards'
 import { query, queryOne, withTransaction } from '@/lib/portal/db'
 import { allowAccountCreation } from '@/lib/portal/creation-context'
 import { auth } from '@/lib/auth'
@@ -45,13 +45,19 @@ export async function inviteStaff(raw: unknown) {
       ...ScopeSchema.shape,
     }).parse(raw)
     const email = input.email.toLowerCase()
-    if (email === actor.email) throw new Err('You cannot grant staff access to your own account.', 'validation')
-    const existing = await queryOne<{ id: string }>(`select id from public.profiles where lower(email) = $1`, [email])
+    const adminEmails = (process.env.ADMIN_EMAILS ?? '').split(',').map((value) => value.trim().toLowerCase())
+    if (email === actor.email || adminEmails.includes(email)) {
+      throw new Err('This email cannot be granted delegated staff access.', 'validation')
+    }
+    const existing = await queryOne<{ id: string }>(
+      `select id from public.profiles where lower(email) = $1`,
+      [email],
+    )
     if (existing) throw new Err('An account already exists for this email. Ask a super admin to update its access.', 'validation')
     const brandIds = await assertValidScope(input.scopeMode, input.brandIds)
 
     const password = randomBytes(32).toString('base64url')
-    const created = await allowAccountCreation(() => auth.api.signUpEmail({
+    const created = await allowAccountCreation(async () => auth.api.signUpEmail({
       body: { email, password, name: input.fullName },
       headers: await headers(),
     }))
@@ -101,11 +107,11 @@ export async function updateStaffAccess(raw: unknown) {
     const target = await queryOne<{ role: string }>(`select role from public.profiles where id = $1`, [input.userId])
     if (!target) throw new Err('Staff account not found.', 'not_found')
     if (target.role === 'admin') throw new Err('Super admin access cannot be changed here.', 'validation')
-    const before = await queryOne<{ role: string; scope_mode: string }>(
-      `select role, scope_mode from public.staff_access where user_id = $1 and status <> 'revoked'`,
+    const before = await queryOne<{ role: string; scope_mode: string; status: string }>(
+      `select role, scope_mode, status from public.staff_access where user_id = $1`,
       [input.userId],
     )
-    if (!before) throw new Err('Active staff access not found.', 'not_found')
+    if (!before || before.status === 'revoked') throw new Err('Active staff access not found.', 'not_found')
     const brandIds = await assertValidScope(input.scopeMode, input.brandIds)
 
     await withTransaction(async (client) => {
@@ -141,48 +147,62 @@ export async function setStaffStatus(raw: unknown) {
     const target = await queryOne<{ role: string }>(`select role from public.profiles where id = $1`, [input.userId])
     if (!target) throw new Err('Staff account not found.', 'not_found')
     if (target.role === 'admin') throw new Err('Super admin access cannot be changed here.', 'validation')
-
-    const updated = await queryOne<{ status: string }>(
-      `update public.staff_access
-          set status = $2, suspended_at = case when $2 = 'suspended' then now() else null end,
-              updated_by = $3, updated_at = now()
-        where user_id = $1 returning status`,
-      [input.userId, input.status, actor.id],
+    const before = await queryOne<{ status: 'active' | 'suspended' | 'revoked' }>(
+      `select status from public.staff_access where user_id = $1`,
+      [input.userId],
     )
-    if (!updated) throw new Err('Staff access not found.', 'not_found')
-    if (input.status !== 'active') {
-      await query(`delete from public.session where "userId" = $1`, [input.userId])
+    if (!before) throw new Err('Staff access not found.', 'not_found')
+    if (before.status === 'revoked' && input.status === 'active') {
+      throw new Err('Revoked staff access cannot be restored. Create a new invitation.', 'validation')
     }
-    if (input.status === 'revoked') {
-      await query(`delete from public.staff_brand_scopes where user_id = $1`, [input.userId])
-      await query(
-        `update public.staff_invitations set status = 'revoked'
-          where lower(email) = (select lower(email) from public.profiles where id = $1)
-            and status = 'pending'`,
-        [input.userId],
+    if (before.status === input.status) return { ok: true }
+
+    await withTransaction(async (client) => {
+      const updated = await client.query(
+        `update public.staff_access
+            set status = $2, suspended_at = case when $2 = 'suspended' then now() else null end,
+                updated_by = $3, updated_at = now()
+          where user_id = $1`,
+        [input.userId, input.status, actor.id],
       )
-    }
-    await audit(actor, null, `staff.${input.status}`, input.userId, { sessionsInvalidated: input.status !== 'active' })
+      if (updated.rowCount !== 1) throw new Err('Staff access not found.', 'not_found')
+      if (input.status !== 'active') {
+        await client.query(`delete from public.session where "userId" = $1`, [input.userId])
+      }
+      if (input.status === 'revoked') {
+        await client.query(`delete from public.staff_brand_scopes where user_id = $1`, [input.userId])
+        await client.query(
+          `update public.staff_invitations set status = 'revoked'
+            where lower(email) = (select lower(email) from public.profiles where id = $1)
+              and status = 'pending'`,
+          [input.userId],
+        )
+      }
+    })
+    await audit(actor, null, `staff.${input.status}`, input.userId, {
+      before: { status: before.status },
+      after: { status: input.status },
+      sessionsInvalidated: input.status !== 'active',
+    })
     return { ok: true }
   })
 }
 
 export async function completeStaffMfaEnrollment() {
   return run(async () => {
-    const actor = await requireAdmin()
-    const enabled = await queryOne<{ two_factor_enabled: boolean }>(
-      `select "twoFactorEnabled" as two_factor_enabled from public."user" where id = $1`,
-      [actor.id],
-    )
-    if (!enabled?.two_factor_enabled) throw new Err('Verify your authenticator code before continuing.', 'validation')
+    const actor = await requireStaff('dashboard:read')
+    const session = await auth.api.getSession({ headers: await headers() })
+    if (!session?.session?.id) throw new Err('Sign in again to complete security setup.', 'forbidden')
     await query(
       `update public.staff_invitations set status = 'accepted', accepted_at = now()
-        where lower(email) = $1 and status = 'pending'`,
+        where lower(email) = $1 and status = 'pending' and expires_at > now()`,
       [actor.email],
     )
-    await audit(actor, null, 'staff.mfa.enrolled', actor.id, {})
+    await query(
+      `delete from public.session where "userId" = $1 and id <> $2`,
+      [actor.id, session.session.id],
+    )
+    await audit(actor, null, 'staff.mfa.enrolled', actor.id, { priorSessionsInvalidated: true })
     return { ok: true }
   })
 }
-
-export const createStaffInvitationId = () => randomUUID()

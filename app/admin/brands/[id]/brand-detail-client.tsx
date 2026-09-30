@@ -72,12 +72,14 @@ export function BrandDetailClient({
   invitation,
   sections,
   activity,
+  canManage,
 }: {
   brand: Brand
   member: MemberInfo | null
   invitation: InvitationInfo | null
   sections: SectionStatusRow[]
   activity: AuditRow[]
+  canManage: boolean
 }) {
   const router = useRouter()
   const [pending, startTransition] = useTransition()
@@ -120,13 +122,17 @@ export function BrandDetailClient({
       <Tabs defaultValue="overview">
         <TabsList>
           <TabsTrigger value="overview">Overview</TabsTrigger>
-          <TabsTrigger value="member">Member</TabsTrigger>
+          {canManage ? <TabsTrigger value="member">Member</TabsTrigger> : null}
           <TabsTrigger value="content">Content</TabsTrigger>
           <TabsTrigger value="activity">Activity</TabsTrigger>
         </TabsList>
 
         {/* ── Overview ─────────────────────────────────────────────── */}
         <TabsContent value="overview" className="mt-4 flex flex-col gap-4">
+          {!canManage ? (
+            <Card className="p-5 text-sm text-muted-foreground">This broker is read-only for your staff role.</Card>
+          ) : (
+            <>
           <Card className="flex items-center justify-between gap-4 p-5">
             <div>
               <div className="font-medium">Portal access</div>
@@ -230,10 +236,13 @@ export function BrandDetailClient({
               </Button>
             </div>
           </Card>
+            </>
+          )}
         </TabsContent>
 
-        {/* ── Member ───────────────────────────────────────────────── */}
-        <TabsContent value="member" className="mt-4">
+        {/* ── Member ─────────────────────────────────────────────────── */}
+        {canManage ? <TabsContent value="member" className="mt-4">
+
           <Card className="flex flex-col gap-4 p-5">
             {!member ? (
               <p className="text-sm text-muted-foreground">
@@ -309,7 +318,7 @@ export function BrandDetailClient({
               </>
             )}
           </Card>
-        </TabsContent>
+        </TabsContent> : null}
 
         {/* ── Content ──────────────────────────────────────────────── */}
         <TabsContent value="content" className="mt-4">

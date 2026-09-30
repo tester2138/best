@@ -188,7 +188,7 @@ export async function rejectItem(raw: unknown) {
 
 export async function bulkApproveClean() {
   return run(async () => {
-    await requireAdmin()
+    await requireStaff('moderation:review')
     const clean = await query<{ id: string }>(
       `select id from public.moderation_queue
         where status = 'pending' and (auto_flags = '[]'::jsonb or auto_flags is null)

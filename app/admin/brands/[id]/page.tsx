@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { query, queryOne } from '@/lib/portal/db'
 import { requireStaffBrand } from '@/lib/guards'
+import { roleHasPermission } from '@/lib/staff-permissions'
 import { SECTION_LIST } from '@/lib/content/registry'
 import type { Brand } from '@/types/portal'
 import { BrandDetailClient, type MemberInfo, type SectionStatusRow } from './brand-detail-client'
@@ -23,21 +24,22 @@ export default async function AdminBrandDetailPage({
   params: Promise<{ id: string }>
 }) {
   const { id } = await params
-  await requireStaffBrand(id, 'brokers:read')
+  const actor = await requireStaffBrand(id, 'brokers:read')
+  const canManage = roleHasPermission(actor.role, 'brokers:manage')
 
   const brand = await queryOne<Brand>(`select * from public.brands where id = $1`, [id])
   if (!brand) notFound()
 
   const [member, invitation, sections, activity] = await Promise.all([
-    queryOne<MemberInfo>(
+    canManage || actor.isSuperAdmin ? queryOne<MemberInfo>(
       `select m.user_id, p.email, p.full_name, p.must_change_password
          from public.brand_members m
          join public.profiles p on p.id = m.user_id
         where m.brand_id = $1
         limit 1`,
       [id],
-    ),
-    queryOne<{
+    ) : Promise.resolve(null),
+    canManage || actor.isSuperAdmin ? queryOne<{
       id: string
       status: string
       resend_count: number
@@ -50,7 +52,7 @@ export default async function AdminBrandDetailPage({
         order by created_at desc
         limit 1`,
       [id],
-    ),
+    ) : Promise.resolve(null),
     query<{ section_key: string; status: string; published_at: string | null }>(
       `select section_key, status, published_at
          from public.broker_page_sections where brand_id = $1`,
@@ -91,6 +93,7 @@ export default async function AdminBrandDetailPage({
         invitation={invitation}
         sections={sectionStatus}
         activity={activity}
+        canManage={canManage}
       />
     </div>
   )

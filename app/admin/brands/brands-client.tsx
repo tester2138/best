@@ -47,7 +47,7 @@ function AccessPill({ row }: { row: BrandRow }) {
   return <Badge>Active</Badge>
 }
 
-export function BrandsClient({ brands }: { brands: BrandRow[] }) {
+export function BrandsClient({ brands, canAssign }: { brands: BrandRow[]; canAssign: boolean }) {
   const [q, setQ] = useState('')
   const [open, setOpen] = useState(false)
 
@@ -69,7 +69,7 @@ export function BrandsClient({ brands }: { brands: BrandRow[] }) {
           className="max-w-xs"
           aria-label="Search brands"
         />
-        <Button onClick={() => setOpen(true)}>Assign a brand</Button>
+        {canAssign ? <Button onClick={() => setOpen(true)}>Assign a brand</Button> : null}
       </div>
 
       <div className="rounded-lg border border-border">

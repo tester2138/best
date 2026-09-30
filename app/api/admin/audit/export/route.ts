@@ -3,7 +3,8 @@ import { requireStaff } from '@/lib/guards'
 import { query } from '@/lib/portal/db'
 
 function cell(value: unknown): string {
-  const text = typeof value === 'string' ? value : JSON.stringify(value ?? '')
+  const raw = typeof value === 'string' ? value : JSON.stringify(value ?? '')
+  const text = /^[\t\r ]*[=+\-@]/.test(raw) ? `'${raw}` : raw
   return `"${text.replaceAll('"', '""').replace(/[\r\n]+/g, ' ')}"`
 }
 

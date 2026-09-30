@@ -38,7 +38,16 @@ export type AuditAction =
   | 'media.delete'
   | 'settings.update'
   | 'claim.received'
+  | 'claim.status'
+  | 'news.publish'
   | 'admin.section.edit'
+  | 'enquiry.status'
+  | 'staff.invite'
+  | 'staff.access.update'
+  | 'staff.active'
+  | 'staff.suspended'
+  | 'staff.revoked'
+  | 'staff.mfa.enrolled'
 
 export async function audit(
   actor: { id: string | null; email: string | null },

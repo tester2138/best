@@ -17,6 +17,7 @@ export interface StaffMember {
   status: 'active' | 'suspended' | 'revoked'
   scope_mode: 'all' | 'selected'
   mfa_enabled: boolean
+  scope_brand_ids: string[]
 }
 interface BrandOption { id: string; name: string }
 interface Invitation { id: string; email: string; role: StaffMember['role']; scope_mode: 'all' | 'selected'; status: string; expires_at: string }
@@ -36,7 +37,7 @@ export function StaffClient({ staff, brands, invitations, totalBrands }: { staff
   const [role, setRole] = useState<StaffMember['role']>('analyst')
   const [scopeMode, setScopeMode] = useState<'all' | 'selected'>('selected')
   const [selected, setSelected] = useState<string[]>([])
-  const [edits, setEdits] = useState<Record<string, { role: StaffMember['role']; scopeMode: 'all' | 'selected'; selected: string[] }>>(() => Object.fromEntries(staff.map((person) => [person.user_id, { role: person.role, scopeMode: person.scope_mode, selected: [] }])))
+  const [edits, setEdits] = useState<Record<string, { role: StaffMember['role']; scopeMode: 'all' | 'selected'; selected: string[] }>>(() => Object.fromEntries(staff.map((person) => [person.user_id, { role: person.role, scopeMode: person.scope_mode, selected: person.scope_brand_ids ?? [] }])))
 
   function refreshOn(result: { ok: boolean; error?: string }, success: string) {
     if (result.ok) { toast.success(success); router.refresh() }

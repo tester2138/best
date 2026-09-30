@@ -44,15 +44,15 @@ export default async function ModerationPage() {
        from public.moderation_queue q
        join public.brands b on b.id = q.brand_id
       where q.status = 'pending'
-        and ($1::boolean or exists (
+        and ($2::boolean or exists (
           select 1 from public.staff_access sa
-           where sa.user_id = $1::text and sa.status = 'active' and sa.scope_mode = 'all'
+           where sa.user_id = $1 and sa.status = 'active' and sa.scope_mode = 'all'
         ) or exists (
           select 1 from public.staff_brand_scopes sc
-           where sc.user_id = $1::text and sc.brand_id = q.brand_id
+           where sc.user_id = $1 and sc.brand_id = q.brand_id
         ))
       order by q.created_at asc`,
-    [actor.isSuperAdmin],
+    [actor.id, actor.isSuperAdmin],
   )
 
   const items: QueueItem[] = rows.map((r) => ({

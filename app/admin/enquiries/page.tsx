@@ -1,5 +1,6 @@
+import { notFound } from 'next/navigation'
 import { query } from '@/lib/portal/db'
-import { requireStaff } from '@/lib/guards'
+import { hasGlobalStaffScope, requireStaff } from '@/lib/guards'
 import { EnquiriesClient, type Enquiry } from './enquiries-client'
 
 export const dynamic = 'force-dynamic'
@@ -10,10 +11,12 @@ export default async function EnquiriesPage({
 }: {
   searchParams: Promise<{ q?: string; status?: string }>
 }) {
-  await requireStaff('leads:read')
+  const actor = await requireStaff('leads:read')
+  if (!(await hasGlobalStaffScope(actor))) notFound()
   const params = await searchParams
   const term = (params.q ?? '').trim().slice(0, 100)
-  const status = ['new', 'contacted', 'resolved', 'dismissed'].includes(params.status ?? '') ? params.status : ''
+  const requestedStatus = params.status ?? ''
+  const status = ['new', 'contacted', 'resolved', 'dismissed'].includes(requestedStatus) ? requestedStatus : ''
   const rows = await query<Enquiry>(
     `select id, intent, full_name, work_email, company, message, status, created_at
        from public.contact_submissions

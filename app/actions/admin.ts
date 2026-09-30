@@ -3,7 +3,7 @@
 import { z } from 'zod'
 import { headers } from 'next/headers'
 import { run, Err } from '@/lib/portal/result'
-import { requireAdmin } from '@/lib/guards'
+import { requireAdmin, requireStaffBrand } from '@/lib/guards'
 import { query, queryOne, withTransaction } from '@/lib/portal/db'
 import { auth } from '@/lib/auth'
 import { allowAccountCreation } from '@/lib/portal/creation-context'
@@ -218,7 +218,6 @@ export async function assignBrand(raw: unknown) {
  */
 export async function resendInvitation(invitationId: string) {
   return run(async () => {
-    const admin = await requireAdmin()
     const inv = await queryOne<{
       id: string
       brand_id: string
@@ -233,6 +232,7 @@ export async function resendInvitation(invitationId: string) {
       [invitationId],
     )
     if (!inv) throw new Err('Invitation not found', 'not_found')
+    const admin = await requireStaffBrand(inv.brand_id, 'brokers:manage')
     if (inv.resend_count >= 10) throw new Err('Resend limit reached', 'validation')
 
     const member = await queryOne<{ user_id: string }>(
@@ -277,9 +277,10 @@ export async function resendInvitation(invitationId: string) {
  * Remove a member's access, sign them out everywhere, and unclaim the brand
  * when no members remain (Blueprint Section 12.5).
  */
-export async function revokeMember(input: { brandId: string; userId: string }) {
+export async function revokeMember(raw: unknown) {
   return run(async () => {
-    const admin = await requireAdmin()
+    const input = z.object({ brandId: z.string().uuid(), userId: z.string().min(1) }).parse(raw)
+    const admin = await requireStaffBrand(input.brandId, 'brokers:manage')
     const brand = await queryOne<Brand>(`select * from public.brands where id = $1`, [
       input.brandId,
     ])
@@ -313,9 +314,10 @@ export async function revokeMember(input: { brandId: string; userId: string }) {
 }
 
 /** Pause / resume portal writes for a brand (Blueprint Section 12.5). */
-export async function setAccess(input: { brandId: string; access: 'active' | 'paused' }) {
+export async function setAccess(raw: unknown) {
   return run(async () => {
-    const admin = await requireAdmin()
+    const input = z.object({ brandId: z.string().uuid(), access: z.enum(['active', 'paused']) }).parse(raw)
+    const admin = await requireStaffBrand(input.brandId, 'brokers:manage')
     const brand = await queryOne<Brand>(`select * from public.brands where id = $1`, [
       input.brandId,
     ])
@@ -344,9 +346,10 @@ export async function setAccess(input: { brandId: string; access: 'active' | 'pa
 }
 
 /** Hard lock (abuse kill switch) — blocks writes, no public change. */
-export async function setLock(input: { brandId: string; locked: boolean }) {
+export async function setLock(raw: unknown) {
   return run(async () => {
-    const admin = await requireAdmin()
+    const input = z.object({ brandId: z.string().uuid(), locked: z.boolean() }).parse(raw)
+    const admin = await requireStaffBrand(input.brandId, 'brokers:manage')
     await query(`update public.brands set portal_locked = $2 where id = $1`, [
       input.brandId,
       input.locked,
@@ -357,9 +360,13 @@ export async function setLock(input: { brandId: string; locked: boolean }) {
 }
 
 /** Edit the official domains chip list (audited before/after). */
-export async function updateDomains(input: { brandId: string; domains: string[] }) {
+export async function updateDomains(raw: unknown) {
   return run(async () => {
-    const admin = await requireAdmin()
+    const input = z.object({
+      brandId: z.string().uuid(),
+      domains: z.array(z.string().trim().min(3).max(253)).max(10),
+    }).parse(raw)
+    const admin = await requireStaffBrand(input.brandId, 'brokers:manage')
     const before = await queryOne<{ official_domains: string[] }>(
       `select official_domains from public.brands where id = $1`,
       [input.brandId],

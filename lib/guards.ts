@@ -3,6 +3,7 @@ import { headers } from 'next/headers'
 import { auth } from '@/lib/auth'
 import { query, queryOne } from '@/lib/portal/db'
 import { Err } from '@/lib/portal/result'
+import { isMfaSessionFresh, roleHasPermission, type StaffPermission, type StaffRole } from '@/lib/staff-permissions'
 import type { Brand } from '@/types/portal'
 
 /**
@@ -25,44 +26,9 @@ export interface SessionUser {
   name: string | null
 }
 
-export type StaffRole =
-  | 'super_admin'
-  | 'editor_publisher'
-  | 'commercial_manager'
-  | 'support_reviewer'
-  | 'analyst'
-  | 'merchant'
-
-export type StaffPermission =
-  | 'dashboard:read'
-  | 'brokers:read'
-  | 'brokers:manage'
-  | 'editorial:read'
-  | 'editorial:write'
-  | 'moderation:review'
-  | 'leads:read'
-  | 'leads:manage'
-  | 'settings:manage'
-  | 'staff:manage'
-  | 'audit:read'
-  | 'audit:export'
-
 export interface StaffActor extends SessionUser {
   role: StaffRole
   isSuperAdmin: boolean
-}
-
-const ROLE_PERMISSIONS: Record<Exclude<StaffRole, 'super_admin' | 'merchant'>, readonly StaffPermission[]> = {
-  editor_publisher: ['dashboard:read', 'brokers:read', 'editorial:read', 'editorial:write', 'moderation:review', 'audit:read'],
-  commercial_manager: ['dashboard:read', 'brokers:read', 'brokers:manage', 'leads:read', 'leads:manage', 'audit:read'],
-  support_reviewer: ['dashboard:read', 'brokers:read', 'moderation:review', 'leads:read', 'leads:manage', 'audit:read'],
-  analyst: ['dashboard:read', 'brokers:read', 'editorial:read', 'leads:read', 'audit:read'],
-}
-
-function roleHasPermission(role: StaffRole, permission: StaffPermission): boolean {
-  if (role === 'super_admin') return true
-  if (role === 'merchant') return false
-  return ROLE_PERMISSIONS[role].includes(permission)
 }
 
 /** Any authenticated user. Throws `forbidden` when there is no session. */
@@ -77,20 +43,38 @@ export async function requireUser(): Promise<SessionUser> {
 }
 
 /**
- * Admin only. Env-listed admins self-promote on first authenticated hit
- * (bootstrap), mirroring the blueprint. Non-admins get an opaque `not_found`.
+ * Require an active staff role, the permission, and a session minted after the
+ * verified TOTP factor. Better Auth withholds a session during the sign-in
+ * challenge; the timestamp check also invalidates sessions created before MFA
+ * was enabled or replaced.
  */
 export async function requireStaff(permission: StaffPermission = 'dashboard:read'): Promise<StaffActor> {
-  const user = await requireUser()
-  const [profile, assignment, authUser] = await Promise.all([
+  const session = await auth.api.getSession({ headers: await headers() })
+  if (!session?.user) throw new Err('Not signed in', 'forbidden')
+  const user: SessionUser = {
+    id: session.user.id,
+    email: (session.user.email ?? '').toLowerCase(),
+    name: session.user.name ?? null,
+  }
+
+  const [profile, assignment, mfaState] = await Promise.all([
     queryOne<{ role: string }>(`select role from public.profiles where id = $1`, [user.id]),
     queryOne<{ role: Exclude<StaffRole, 'super_admin' | 'merchant'>; status: string; scope_mode: 'all' | 'selected' }>(
       `select role, status, scope_mode from public.staff_access where user_id = $1`,
       [user.id],
     ),
-    queryOne<{ two_factor_enabled: boolean }>(
-      `select "twoFactorEnabled" as two_factor_enabled from public."user" where id = $1`,
-      [user.id],
+    queryOne<{
+      enabled: boolean
+      factor_created_at: string | null
+      session_created_at: string | null
+    }>(
+      `select u."twoFactorEnabled" as enabled,
+              (select tf."createdAt"::text from public."twoFactor" tf
+                where tf."userId" = u.id and tf.verified = true limit 1) as factor_created_at,
+              (select s.created_at::text from public.session s
+                where s.id = $2 and s."userId" = u.id limit 1) as session_created_at
+         from public."user" u where u.id = $1`,
+      [user.id, session.session.id],
     ),
   ])
 
@@ -99,8 +83,11 @@ export async function requireStaff(permission: StaffPermission = 'dashboard:read
   else if (assignment?.status === 'active') role = assignment.role
 
   if (!role) throw new Err('Not found', 'not_found')
-  if (!authUser?.two_factor_enabled) {
+  if (!mfaState?.enabled) {
     throw new Err('Multi-factor authentication is required for staff access', 'forbidden')
+  }
+  if (!isMfaSessionFresh(mfaState.enabled, mfaState.factor_created_at, mfaState.session_created_at)) {
+    throw new Err('Sign in again and complete multi-factor authentication', 'forbidden')
   }
   if (!roleHasPermission(role, permission)) throw new Err('Not found', 'not_found')
 
@@ -126,6 +113,16 @@ export async function requireStaffBrand(
     if (!scope) throw new Err('Not found', 'not_found')
   }
   return actor
+}
+
+/** Whether a staff actor is explicitly allowed to read broker-unassigned contact submissions. */
+export async function hasGlobalStaffScope(actor: StaffActor): Promise<boolean> {
+  if (actor.isSuperAdmin) return true
+  const assignment = await queryOne<{ scope_mode: 'all' | 'selected' }>(
+    `select scope_mode from public.staff_access where user_id = $1 and status = 'active'`,
+    [actor.id],
+  )
+  return assignment?.scope_mode === 'all'
 }
 
 /** Legacy name retained for callers that explicitly require unrestricted super-admin access. */
