@@ -14,12 +14,11 @@
 import { randomUUID, createHmac } from 'node:crypto'
 import { Pool } from 'pg'
 
-// Direct file import: the better-auth exports map blocks subpath imports.
-async function loadHashPassword() {
-  const mod = await import(
-    new URL('../node_modules/better-auth/dist/crypto/password.mjs', import.meta.url).href
+// Direct file imports: the better-auth exports map blocks subpath imports.
+async function loadAuthCrypto() {
+  return import(
+    new URL('../node_modules/better-auth/dist/crypto/index.mjs', import.meta.url).href
   )
-  return mod.hashPassword as (pw: string) => Promise<string>
 }
 
 const EMAIL = 'staging-admin@bestforex.io'
@@ -64,8 +63,15 @@ if (process.argv.includes('--code')) {
 const pool = new Pool({ connectionString: process.env.DATABASE_URL })
 
 async function main() {
-  const hashPassword = await loadHashPassword()
+  const { hashPassword, symmetricEncrypt } = await loadAuthCrypto()
   const hashed = await hashPassword(PASSWORD)
+  // Better Auth stores the TOTP secret encrypted with the auth secret
+  // (symmetricEncrypt with key = BETTER_AUTH_SECRET, bare hex when no
+  // BETTER_AUTH_SECRETS array is configured).
+  const encryptedTotpSecret = await symmetricEncrypt({
+    key: process.env.BETTER_AUTH_SECRET!,
+    data: TOTP_SECRET_BASE32,
+  })
   const client = await pool.connect()
   try {
     await client.query('begin')
@@ -109,7 +115,7 @@ async function main() {
     await client.query(
       `insert into public."twoFactor" (id, "userId", secret, "backupCodes", verified, "failedVerificationCount", "createdAt", "updatedAt")
        values ($1, $2, $3, '[]', true, 0, now(), now())`,
-      [randomUUID(), userId, TOTP_SECRET_BASE32],
+      [randomUUID(), userId, encryptedTotpSecret],
     )
 
     await client.query('commit')
