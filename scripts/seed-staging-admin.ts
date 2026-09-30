@@ -1,0 +1,133 @@
+/**
+ * Seeds a staging-only staff admin for local/preview testing of the admin
+ * panel. NEVER run against production: it creates a real super-admin account
+ * with a known password and a known TOTP secret.
+ *
+ * Usage: pnpm exec tsx scripts/seed-staging-admin.ts
+ *
+ * Credentials (staging only):
+ *   email:    staging-admin@bestforex.io
+ *   password: StagingAdmin2026!x
+ *   TOTP:     secret printed below; compute codes with
+ *             `pnpm exec tsx scripts/seed-staging-admin.ts --code`
+ */
+import { randomUUID, createHmac } from 'node:crypto'
+import { Pool } from 'pg'
+
+// Direct file import: the better-auth exports map blocks subpath imports.
+async function loadHashPassword() {
+  const mod = await import(
+    new URL('../node_modules/better-auth/dist/crypto/password.mjs', import.meta.url).href
+  )
+  return mod.hashPassword as (pw: string) => Promise<string>
+}
+
+const EMAIL = 'staging-admin@bestforex.io'
+const PASSWORD = 'StagingAdmin2026!x'
+// Known base32 TOTP secret (staging only).
+const TOTP_SECRET_BASE32 = 'JBSWY3DPEHPK3PXPJBSWY3DPEHPK3PXP'
+
+function base32Decode(input: string): Buffer {
+  const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567'
+  let bits = 0
+  let value = 0
+  const out: number[] = []
+  for (const char of input.replace(/=+$/, '').toUpperCase()) {
+    const idx = alphabet.indexOf(char)
+    if (idx === -1) continue
+    value = (value << 5) | idx
+    bits += 5
+    if (bits >= 8) {
+      out.push((value >>> (bits - 8)) & 0xff)
+      bits -= 8
+    }
+  }
+  return Buffer.from(out)
+}
+
+function totpCode(secret: string, timeStep = Math.floor(Date.now() / 30000)): string {
+  const key = base32Decode(secret)
+  const counter = Buffer.alloc(8)
+  counter.writeUInt32BE(Math.floor(timeStep / 2 ** 32), 0)
+  counter.writeUInt32BE(timeStep % 2 ** 32, 4)
+  const digest = createHmac('sha1', key).update(counter).digest()
+  const offset = digest[digest.length - 1] & 0xf
+  const code = ((digest[offset] & 0x7f) << 24) | (digest[offset + 1] << 16) | (digest[offset + 2] << 8) | digest[offset + 3]
+  return String(code % 1_000_000).padStart(6, '0')
+}
+
+if (process.argv.includes('--code')) {
+  console.log(totpCode(TOTP_SECRET_BASE32))
+  process.exit(0)
+}
+
+const pool = new Pool({ connectionString: process.env.DATABASE_URL })
+
+async function main() {
+  const hashPassword = await loadHashPassword()
+  const hashed = await hashPassword(PASSWORD)
+  const client = await pool.connect()
+  try {
+    await client.query('begin')
+    const existing = await client.query<{ id: string }>(`select id from public."user" where email = $1`, [EMAIL])
+    let userId: string
+    if (existing.rows.length > 0) {
+      userId = existing.rows[0].id
+      await client.query(`update public."user" set "twoFactorEnabled" = true where id = $1`, [userId])
+      console.log(`[v0] reusing existing user ${userId}`)
+    } else {
+      userId = randomUUID()
+      await client.query(
+        `insert into public."user" (id, name, email, "emailVerified", "twoFactorEnabled", "createdAt", "updatedAt")
+         values ($1, $2, $3, false, true, now(), now())`,
+        [userId, 'Staging Admin', EMAIL],
+      )
+    }
+
+    // Password credential row (Better Auth account table, providerId=credential).
+    const account = await client.query(`select id from public.account where "userId" = $1 and "providerId" = 'credential'`, [userId])
+    if (account.rows.length === 0) {
+      await client.query(
+        `insert into public.account (id, "accountId", "providerId", "userId", password, "createdAt", "updatedAt")
+         values ($1, $2, 'credential', $3, $4, now(), now())`,
+        [randomUUID(), userId, userId, hashed],
+      )
+    } else {
+      await client.query(`update public.account set password = $2 where id = $1`, [account.rows[0].id, hashed])
+    }
+
+    // Super-admin profile.
+    await client.query(
+      `insert into public.profiles (id, email, full_name, role, must_change_password)
+       values ($1, $2, 'Staging Admin', 'admin', false)
+       on conflict (id) do update set role = 'admin', must_change_password = false`,
+      [userId, EMAIL],
+    )
+
+    // Verified TOTP factor with the known staging secret.
+    await client.query(`delete from public."twoFactor" where "userId" = $1`, [userId])
+    await client.query(
+      `insert into public."twoFactor" (id, "userId", secret, "backupCodes", verified, "failedVerificationCount", "createdAt", "updatedAt")
+       values ($1, $2, $3, '[]', true, 0, now(), now())`,
+      [randomUUID(), userId, TOTP_SECRET_BASE32],
+    )
+
+    await client.query('commit')
+    console.log('[v0] staging admin ready:')
+    console.log('[v0]   email:', EMAIL)
+    console.log('[v0]   password:', PASSWORD)
+    console.log('[v0]   totp secret:', TOTP_SECRET_BASE32)
+    console.log('[v0]   current code:', totpCode(TOTP_SECRET_BASE32))
+  } catch (err) {
+    await client.query('rollback')
+    throw err
+  } finally {
+    client.release()
+    await pool.end()
+  }
+}
+
+main().catch((err) => {
+  console.error('[v0] seed failed:', err)
+  process.exit(1)
+})
