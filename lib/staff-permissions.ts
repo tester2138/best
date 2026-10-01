@@ -20,17 +20,23 @@ export type StaffPermission =
   | 'audit:read'
   | 'audit:export'
 
-const ROLE_PERMISSIONS: Record<Exclude<StaffRole, 'super_admin' | 'merchant'>, readonly StaffPermission[]> = {
-  editor_publisher: ['dashboard:read', 'brokers:read', 'editorial:read', 'editorial:write', 'moderation:review', 'audit:read'],
-  commercial_manager: ['dashboard:read', 'brokers:read', 'brokers:manage', 'leads:read', 'leads:manage', 'audit:read'],
-  support_reviewer: ['dashboard:read', 'brokers:read', 'moderation:review', 'leads:read', 'leads:manage', 'audit:read'],
-  analyst: ['dashboard:read', 'brokers:read', 'editorial:read', 'audit:read'],
+const ADMIN_PERMISSIONS: Record<StaffPermission, true> = {
+  'dashboard:read': true,
+  'brokers:read': true,
+  'brokers:manage': true,
+  'editorial:read': true,
+  'editorial:write': true,
+  'moderation:review': true,
+  'leads:read': true,
+  'leads:manage': true,
+  'settings:manage': true,
+  'staff:manage': true,
+  'audit:read': true,
+  'audit:export': true,
 }
 
 export function roleHasPermission(role: StaffRole, permission: StaffPermission): boolean {
-  if (role === 'super_admin') return true
-  if (role === 'merchant') return false
-  return ROLE_PERMISSIONS[role].includes(permission)
+  return role !== 'merchant' && ADMIN_PERMISSIONS[permission]
 }
 
 export function isMfaSessionFresh(

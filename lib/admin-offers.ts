@@ -39,6 +39,6 @@ export async function listAdminOffers(actor: StaffActor): Promise<AdminOfferReco
            where b.slug = admin_offers.broker_id and sc.user_id = $2
         ))
       order by sort_order asc, created_at desc`,
-    [actor.isSuperAdmin, actor.id],
+    [actor.hasFullAccess, actor.id],
   )
 }

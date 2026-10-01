@@ -52,7 +52,7 @@ export default async function ModerationPage() {
            where sc.user_id = $1 and sc.brand_id = q.brand_id
         ))
       order by q.created_at asc`,
-    [actor.id, actor.isSuperAdmin],
+    [actor.id, actor.hasFullAccess],
   )
 
   const items: QueueItem[] = rows.map((r) => ({

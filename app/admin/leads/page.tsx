@@ -37,7 +37,7 @@ export default async function LeadsPage() {
       order by
         case c.status when 'new' then 0 when 'contacted' then 1 when 'converted' then 2 else 3 end,
         c.created_at desc`,
-    [actor.id, actor.isSuperAdmin],
+    [actor.id, actor.hasFullAccess],
   )
 
   const leads: Lead[] = rows.map((r) => ({
@@ -63,7 +63,7 @@ export default async function LeadsPage() {
             : `${newCount} new · ${leads.length} total`}
         </p>
       </div>
-      <LeadsClient leads={leads} canAssign={actor.isSuperAdmin} />
+      <LeadsClient leads={leads} canAssign={actor.hasFullAccess} />
     </div>
   )
 }

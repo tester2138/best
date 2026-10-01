@@ -139,7 +139,7 @@ export function BrandDetailClient({
         {/* ── Overview ─────────────────────────────────────────────── */}
         <TabsContent value="overview" className="mt-4 flex flex-col gap-4">
           {!canManage ? (
-            <Card className="p-5 text-sm text-muted-foreground">This broker is read-only for your staff role.</Card>
+            <Card className="p-5 text-sm text-muted-foreground">Your staff account does not have permission to manage this broker.</Card>
           ) : (
             <>
           <Card className="flex items-center justify-between gap-4 p-5">

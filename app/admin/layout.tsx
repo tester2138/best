@@ -15,7 +15,6 @@ const NAV: Array<{
   href: string
   label: string
   permission: StaffPermission
-  superAdminOnly?: boolean
   allScopeOnly?: boolean
 }> = [
   { href: '/admin', label: 'Dashboard', permission: 'dashboard:read' },
@@ -31,7 +30,7 @@ const NAV: Array<{
   { href: '/admin/audit', label: 'Audit log', permission: 'audit:read' },
   { href: '/admin/staff', label: 'Staff & access', permission: 'staff:manage' },
   { href: '/admin/settings', label: 'Settings', permission: 'settings:manage' },
-  { href: '/admin/bulk-import', label: 'Bulk import', permission: 'brokers:manage', superAdminOnly: true },
+  { href: '/admin/bulk-import', label: 'Bulk import', permission: 'brokers:manage' },
 ]
 
 export default async function AdminLayout({ children }: { children: ReactNode }) {
@@ -57,7 +56,6 @@ export default async function AdminLayout({ children }: { children: ReactNode })
   const globalScope = await hasGlobalStaffScope(actor)
   const visibleNav = NAV.filter(
     (item) =>
-      (!item.superAdminOnly || actor.isSuperAdmin) &&
       (!item.allScopeOnly || globalScope) &&
       roleHasPermission(actor.role, item.permission),
   )

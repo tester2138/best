@@ -53,7 +53,7 @@ export async function inviteStaff(raw: unknown) {
       `select id from public.profiles where lower(email) = $1`,
       [email],
     )
-    if (existing) throw new Err('An account already exists for this email. Ask a super admin to update its access.', 'validation')
+    if (existing) throw new Err('An account already exists for this email. Ask an administrator to review its access.', 'validation')
     const brandIds = await assertValidScope(input.scopeMode, input.brandIds)
     const settings = await queryOne<{ invitation_ttl_days: number }>(
       `select invitation_ttl_days from public.portal_settings where id = true`,
@@ -239,7 +239,7 @@ export async function completeStaffMfaEnrollment() {
         [actor.email],
       )
       if (expiredInvitation?.expired) {
-        throw new Err('Staff invitation expired. Ask a super admin to reissue it.', 'forbidden')
+        throw new Err('Staff invitation expired. Ask an administrator to reissue it.', 'forbidden')
       }
     }
     await query(

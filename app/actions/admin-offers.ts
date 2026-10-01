@@ -116,7 +116,7 @@ async function assertOfferBrokerScope(actor: StaffActor, brokerId: string): Prom
   if (!/^[a-z0-9-]+$/.test(slug) || !KNOWN_BROKER_SLUGS.has(slug)) {
     throw new Err('Unknown broker slug', 'validation')
   }
-  if (actor.isSuperAdmin) return slug
+  if (actor.hasFullAccess) return slug
 
   const brand = await queryOne<{ id: string }>(
     `select id from public.brands where slug = $1`,

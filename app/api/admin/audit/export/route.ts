@@ -9,8 +9,7 @@ function cell(value: unknown): string {
 }
 
 export async function GET(request: NextRequest) {
-  const actor = await requireStaff('audit:export')
-  if (!actor.isSuperAdmin) return NextResponse.json({ error: 'Not found' }, { status: 404 })
+  await requireStaff('audit:export')
   const params = request.nextUrl.searchParams
   const email = (params.get('actor') ?? '').trim().slice(0, 120)
   const action = (params.get('action') ?? '').trim().slice(0, 80)

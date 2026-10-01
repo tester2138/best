@@ -63,7 +63,7 @@ export default async function AdminDashboardPage() {
     select 1 from public.staff_brand_scopes sc
      where sc.user_id = $1 and sc.brand_id = b.id
   ))`
-  const scopeParams = [actor.id, actor.isSuperAdmin]
+  const scopeParams = [actor.id, actor.hasFullAccess]
   const [drafts, claims, verificationDue, activeCampaigns, endingOffers, openEnquiries, published, recent] = await Promise.all([
     canReview
       ? count(

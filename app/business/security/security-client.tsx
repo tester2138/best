@@ -131,7 +131,7 @@ export function SecurityClient({
           <CardHeader>
             <CardTitle>Staff access is paused</CardTitle>
             <CardDescription>
-              Your invitation expired before setup was completed. Ask a super admin to reissue it; access remains blocked until then.
+              Your invitation expired before setup was completed. Ask an administrator to reissue it; access remains blocked until then.
             </CardDescription>
           </CardHeader>
           <CardContent>

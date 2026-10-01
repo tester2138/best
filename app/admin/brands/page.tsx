@@ -25,7 +25,7 @@ export default async function AdminBrandsPage({
   const params = await searchParams
   const claimId = (params.claimId ?? '').trim()
   const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(claimId)
-  const initialClaim = actor.isSuperAdmin && isUuid
+  const initialClaim = actor.hasFullAccess && isUuid
     ? await queryOne<{
         id: string
         full_name: string
@@ -63,7 +63,7 @@ export default async function AdminBrandsPage({
            where sc.user_id = $1 and sc.brand_id = b.id
         ))
         order by b.claimed_at desc nulls last, b.name asc`,
-      [actor.id, actor.isSuperAdmin, roleHasPermission(actor.role, 'brokers:manage')],
+      [actor.id, actor.hasFullAccess, roleHasPermission(actor.role, 'brokers:manage')],
     ),
     hasGlobalStaffScope(actor),
   ])
@@ -127,7 +127,7 @@ export default async function AdminBrandsPage({
       </div>
       <BrandsClient
         brands={brands}
-        canAssign={actor.isSuperAdmin}
+        canAssign={actor.hasFullAccess}
         initialAssignment={initialAssignment}
       />
     </div>

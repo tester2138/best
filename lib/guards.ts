@@ -23,7 +23,7 @@ export interface SessionUser {
 
 export interface StaffActor extends SessionUser {
   role: StaffRole
-  isSuperAdmin: boolean
+  hasFullAccess: boolean
 }
 
 /** Any authenticated user. Throws `forbidden` when there is no session. */
@@ -93,7 +93,7 @@ export async function requireStaff(permission: StaffPermission = 'dashboard:read
 
   if (!role) throw new Err('Not found', 'not_found')
   if (role !== 'super_admin' && assignment?.invitation_expired) {
-    throw new Err('Staff invitation expired. Ask a super admin to reissue it.', 'forbidden')
+    throw new Err('Staff invitation expired. Ask an administrator to reissue it.', 'forbidden')
   }
   if (!mfaState?.enabled || mfaState.verified !== true) {
     throw new Err('Multi-factor authentication is required for staff access', 'forbidden')
@@ -103,12 +103,12 @@ export async function requireStaff(permission: StaffPermission = 'dashboard:read
   }
   if (!roleHasPermission(role, permission)) throw new Err('Not found', 'not_found')
 
-  return { ...user, role, isSuperAdmin: role === 'super_admin' }
+  return { ...user, role, hasFullAccess: true }
 }
 
-/** Assert that an already-authorized staff actor can access this broker. */
+/** Apply the actor's global or explicitly assigned broker scope. */
 export async function assertStaffBrandScope(actor: StaffActor, brandId: string): Promise<void> {
-  if (actor.isSuperAdmin) return
+  if (actor.hasFullAccess) return
   const assignment = await queryOne<{ scope_mode: 'all' | 'selected' }>(
     `select scope_mode from public.staff_access where user_id = $1 and status = 'active'`,
     [actor.id],
@@ -132,20 +132,15 @@ export async function requireStaffBrand(
   return actor
 }
 
-/** Whether a staff actor is explicitly allowed to read broker-unassigned contact submissions. */
+/** Active admin staff have global access, including broker-unassigned contacts. */
 export async function hasGlobalStaffScope(actor: StaffActor): Promise<boolean> {
-  if (actor.isSuperAdmin) return true
-  const assignment = await queryOne<{ scope_mode: 'all' | 'selected' }>(
-    `select scope_mode from public.staff_access where user_id = $1 and status = 'active'`,
-    [actor.id],
-  )
-  return assignment?.scope_mode === 'all'
+  return actor.hasFullAccess
 }
 
-/** Legacy name retained for callers that explicitly require unrestricted super-admin access. */
+/** Require an active staff account with full administrative access. */
 export async function requireAdmin(): Promise<StaffActor> {
   const actor = await requireStaff('settings:manage')
-  if (!actor.isSuperAdmin) throw new Err('Not found', 'not_found')
+  if (!actor.hasFullAccess) throw new Err('Not found', 'not_found')
   return actor
 }
 
