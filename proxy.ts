@@ -59,22 +59,14 @@ export function proxy(request: NextRequest) {
     // Forward pathname to the root layout so it can suppress Header/Footer.
     res.headers.set('x-pathname', pathname)
 
-    // Open (unauthenticated) auth pages.
+    // Open auth pages. The auth layout validates the full session and redirects
+    // authenticated users; a cookie-presence check here would loop for expired
+    // or malformed cookies by bouncing between /business and /business/login.
     const OPEN = ['/business/login', '/business/forgot-password', '/business/reset']
     const isOpen = OPEN.some((p) => pathname === p || pathname.startsWith(p + '/'))
+    if (isOpen) return applyDeploymentRobotsHeader(res)
 
     const hasSession = getSessionCookie(request)
-    if (isOpen) {
-      // A signed-in user hitting the login page is sent into the panel.
-      if (hasSession && pathname.startsWith('/business/login')) {
-        const dest = url.clone()
-        dest.pathname = '/business'
-        dest.search = ''
-        return applyDeploymentRobotsHeader(NextResponse.redirect(dest))
-      }
-      return applyDeploymentRobotsHeader(res)
-    }
-
     if (!hasSession) {
       const loginUrl = url.clone()
       loginUrl.pathname = '/business/login'
