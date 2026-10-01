@@ -11,6 +11,7 @@ import { getVisiblePosts, getEditorialType } from '@/data/posts'
 import { BarChart2, ChevronLeft, ChevronRight } from 'lucide-react'
 import type { Metadata } from 'next'
 import { SITE_URL } from '@/lib/site-config'
+import { getPublicCategories } from '@/lib/public-categories'
 
 // Scheduling: re-render frequently so future-dated posts appear close to their
 // release time without a deploy. Visibility is computed at render time.
@@ -77,15 +78,16 @@ const CATEGORY_COLORS: Record<string, string> = {
   review: 'bg-orange-50 text-orange-700 border-orange-200',
 }
 
-const ALL_CATEGORIES = ['All', 'news', 'analysis', 'education', 'guide', 'review']
-
 export default async function NewsPage({ searchParams }: NewsPageProps) {
   const { page: pageParam } = await searchParams
   const currentPage = parsePage(pageParam)
 
-  // Computed per request so scheduled posts join the list exactly on their date.
-  const sortedPosts = sortPostsByDate(await getVisiblePosts())
+  // Computed per request so scheduled posts and category edits join the archive promptly.
+  const [visiblePosts, categories] = await Promise.all([getVisiblePosts(), getPublicCategories()])
+  const sortedPosts = sortPostsByDate(visiblePosts)
   const availableCategories = new Set<string>(sortedPosts.map((p) => p.category))
+  const visibleCategories = categories.filter((category) => availableCategories.has(category.slug))
+  const categoryNames = new Map(categories.map((category) => [category.slug, category.name]))
 
   const totalPages = Math.max(1, Math.ceil(sortedPosts.length / ITEMS_PER_PAGE))
   const safePage = Math.min(currentPage, totalPages)
@@ -117,21 +119,14 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
 
           {/* Category filter pills — real crawlable links to archives */}
           <nav aria-label="News categories" className="mt-6 flex flex-wrap gap-2">
-            {ALL_CATEGORIES.map((cat) => {
-              const href = cat === 'All' ? '/news' : `/news/category/${cat}`
-              const hasPosts = cat === 'All' || availableCategories.has(cat)
-              if (!hasPosts) return null
-              return (
-                <Link key={cat} href={href}>
-                  <Badge
-                    variant="outline"
-                    className="capitalize text-xs px-3 py-1 hover:bg-primary/10 transition-colors"
-                  >
-                    {cat === 'All' ? 'All Articles' : cat}
-                  </Badge>
-                </Link>
-              )
-            })}
+            <Link href="/news">
+              <Badge variant="outline" className="text-xs px-3 py-1 hover:bg-primary/10 transition-colors">All Articles</Badge>
+            </Link>
+            {visibleCategories.map((category) => (
+              <Link key={category.slug} href={`/news/category/${category.slug}`}>
+                <Badge variant="outline" className="text-xs px-3 py-1 hover:bg-primary/10 transition-colors">{category.name}</Badge>
+              </Link>
+            ))}
           </nav>
         </div>
       </section>
@@ -186,7 +181,7 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
                           CATEGORY_COLORS[post.category] ?? 'bg-muted text-muted-foreground'
                         }`}
                       >
-                        {post.category}
+                        {categoryNames.get(post.category) ?? post.category}
                       </span>
                       {/* T20: computed read time */}
                       {post.content && (

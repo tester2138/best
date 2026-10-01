@@ -6,25 +6,15 @@ import { getPostsByCategory } from '@/data/posts'
 import { Breadcrumbs, BreadcrumbSchema } from '@/components/layout/breadcrumbs'
 import { Badge } from '@/components/ui/badge'
 import { SITE_URL } from '@/lib/site-config'
+import { getPublicCategories, getPublicCategoryLabel, STATIC_CATEGORY_LABELS } from '@/lib/public-categories'
 import { readMinutes } from '@/lib/utils'
 
 // Scheduling: re-render frequently so scheduled posts join their category
 // archive close to their publish date. The query only returns published posts.
 export const revalidate = 300
 
-const CATEGORY_LABELS: Record<string, string> = {
-  news: 'News',
-  opinion: 'Opinion',
-  analysis: 'Analysis',
-  education: 'Education',
-  guide: 'Guides',
-  review: 'Reviews',
-}
-
-// Static params for the known categories — keeps the route pre-renderable
-// while ISR ensures newly-populated categories appear after revalidation.
 export function generateStaticParams() {
-  return Object.keys(CATEGORY_LABELS).map((category) => ({ category }))
+  return Object.keys(STATIC_CATEGORY_LABELS).map((category) => ({ category }))
 }
 
 function formatDate(date: string) {
@@ -41,7 +31,7 @@ export async function generateMetadata({
   params: Promise<{ category: string }>
 }): Promise<Metadata> {
   const { category } = await params
-  const label = CATEGORY_LABELS[category] || category
+  const label = await getPublicCategoryLabel(category)
   const canonical = `${SITE_URL}/news/category/${category}`
 
   return {
@@ -63,18 +53,19 @@ export default async function CategoryArchivePage({
   params: Promise<{ category: string }>
 }) {
   const { category } = await params
-  const categoryPosts = (await getPostsByCategory(category)).sort(
-    (a, b) =>
-      new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime() ||
-      a.slug.localeCompare(b.slug),
-  )
+  const [categoryPosts, categories] = await Promise.all([
+    getPostsByCategory(category).then((posts) => posts.sort(
+      (a, b) =>
+        new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime() ||
+        a.slug.localeCompare(b.slug),
+    )),
+    getPublicCategories(),
+  ])
 
-  // No posts in this category -> 404 rather than a thin archive page.
-  if (categoryPosts.length === 0) {
-    notFound()
-  }
+  if (categoryPosts.length === 0) notFound()
 
-  const label = CATEGORY_LABELS[category] || category
+  const categoryRecord = categories.find((entry) => entry.slug === category)
+  const label = categoryRecord?.name ?? await getPublicCategoryLabel(category)
   const breadcrumbItems = [{ label: 'News', href: '/news' }, { label }]
 
   return (
@@ -93,7 +84,7 @@ export default async function CategoryArchivePage({
             {label}
           </h1>
           <p className="mt-4 max-w-2xl text-lg text-muted-foreground leading-relaxed">
-            {`Showing ${categoryPosts.length} ${categoryPosts.length === 1 ? 'article' : 'articles'} in ${label}.`}
+            {categoryRecord?.description || `Showing ${categoryPosts.length} ${categoryPosts.length === 1 ? 'article' : 'articles'} in ${label}.`}
           </p>
         </div>
       </section>

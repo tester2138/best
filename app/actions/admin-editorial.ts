@@ -75,6 +75,8 @@ function revalidateEditorialRoutes(slug?: string): void {
   revalidatePath('/news/category/[category]', 'page')
   revalidatePath('/news/author/[slug]', 'page')
   revalidatePath('/news/author', 'page')
+  revalidatePath('/news/[slug]', 'page')
+  revalidatePath('/about')
   revalidatePath('/sitemap.xml')
   revalidatePath('/news/feed.xml')
   if (slug) revalidatePath(`/news/${slug}`)

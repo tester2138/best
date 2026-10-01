@@ -23,6 +23,7 @@ const NAV: Array<{
   { href: '/admin/moderation', label: 'Moderation', permission: 'moderation:review' },
   { href: '/admin/leads', label: 'Claim leads', permission: 'leads:read' },
   { href: '/admin/enquiries', label: 'Merchant requests', permission: 'leads:read', allScopeOnly: true },
+  { href: '/admin/content', label: 'Editorial', permission: 'editorial:read' },
   { href: '/admin/news', label: 'News', permission: 'editorial:read' },
   { href: '/admin/audit', label: 'Audit log', permission: 'audit:read' },
   { href: '/admin/staff', label: 'Staff & access', permission: 'staff:manage' },

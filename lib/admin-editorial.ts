@@ -1,6 +1,8 @@
 import 'server-only'
 
 import { authors as staticAuthors, posts as staticPosts } from '@/data/posts'
+import { list } from '@vercel/blob'
+import { getVerifiedBlobToken } from '@/lib/blob-storage-safety'
 import { EDITORIAL_CONTENT_DEFAULTS } from '@/data/editorial-defaults'
 import type { Author, Post } from '@/lib/types'
 import type { EditorialContentEntry } from '@/lib/editorial-content'
@@ -36,6 +38,13 @@ export interface AdminSourceReference {
   label: string
   url: string
   primary: boolean
+}
+
+export interface AdminEditorialMedia {
+  url: string
+  pathname: string
+  size: number
+  uploadedAt: string
 }
 
 function toIsoString(value: unknown): string | null {
@@ -299,6 +308,19 @@ export async function getAdminCategories(): Promise<AdminCategory[]> {
 
 export async function getAdminCategory(slug: string): Promise<AdminCategory | undefined> {
   return (await getAdminCategories()).find((category) => category.slug === slug)
+}
+
+export async function getAdminEditorialMedia(): Promise<AdminEditorialMedia[]> {
+  const result = await list({ limit: 1_000, token: getVerifiedBlobToken() })
+  return result.blobs
+    .filter((blob) => /\.(?:png|jpe?g|webp|gif|avif)$/i.test(blob.pathname))
+    .map((blob) => ({
+      url: blob.url,
+      pathname: blob.pathname,
+      size: blob.size,
+      uploadedAt: blob.uploadedAt.toISOString(),
+    }))
+    .sort((a, b) => b.uploadedAt.localeCompare(a.uploadedAt) || a.pathname.localeCompare(b.pathname))
 }
 
 export async function getAdminSourceReferences(): Promise<AdminSourceReference[]> {

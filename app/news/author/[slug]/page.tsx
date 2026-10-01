@@ -6,7 +6,8 @@ import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Breadcrumbs, BreadcrumbSchema } from '@/components/layout/breadcrumbs'
-import { getAuthorBySlug, getPostsByAuthor, getPublishedAuthors, getEditorialType } from '@/data/posts'
+import { getPostsByAuthor, getPublishedAuthors, getEditorialType } from '@/data/posts'
+import { getAuthorBySlug } from '@/lib/news-queries'
 import { SITE_URL, SITE_NAME } from '@/lib/site-config'
 
 interface AuthorPageProps {
@@ -23,7 +24,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: AuthorPageProps): Promise<Metadata> {
   const { slug } = await params
-  const author = getAuthorBySlug(slug)
+  const author = await getAuthorBySlug(slug)
   if (!author) return { title: 'Author Not Found' }
 
   const url = `${SITE_URL}/news/author/${author.slug}`
@@ -46,7 +47,7 @@ export async function generateMetadata({ params }: AuthorPageProps): Promise<Met
 
 export default async function AuthorPage({ params }: AuthorPageProps) {
   const { slug } = await params
-  const author = getAuthorBySlug(slug)
+  const author = await getAuthorBySlug(slug)
   if (!author) notFound()
 
   const authorPosts = await getPostsByAuthor(slug)
