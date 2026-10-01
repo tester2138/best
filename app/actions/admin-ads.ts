@@ -6,7 +6,7 @@ import { z } from 'zod'
 import { audit } from '@/lib/audit'
 import { Err, run } from '@/lib/portal/result'
 import { query } from '@/lib/portal/db'
-import { requireStaff } from '@/lib/guards'
+import { hasGlobalStaffScope, requireStaff } from '@/lib/guards'
 import {
   AD_CAMPAIGN_PLACEMENTS,
   AD_CAMPAIGN_SIZES,
@@ -16,18 +16,28 @@ import {
 } from '@/lib/ad-campaign-types'
 
 /**
- * Admin banner campaign management. Staff with `brokers:manage` (commercial
- * managers and super admins) create, edit, schedule, pause and delete
+ * Admin banner campaign management. Globally scoped staff with `brokers:manage`
+ * (commercial managers and super admins) create, edit, schedule, pause and delete
  * campaigns. Public delivery is client-fetched from /api/ads/[placementKey],
  * so no public cache revalidation is needed here.
  */
+
+async function requireGlobalCampaignManager() {
+  const actor = await requireStaff('brokers:manage')
+  if (!(await hasGlobalStaffScope(actor))) throw new Err('Not found', 'not_found')
+  return actor
+}
+
+function isSafeSitePath(value: string): boolean {
+  return value.startsWith('/') && !value.startsWith('//') && !value.startsWith('/\\') && !value.includes('\\')
+}
 
 const UrlLike = z
   .string()
   .min(1)
   .max(2048)
   .refine(
-    (v) => v.startsWith('/') || /^https?:\/\//i.test(v),
+    (value) => isSafeSitePath(value) || /^https:\/\//i.test(value),
     'Must be a site path (/...) or an https:// URL',
   )
 
@@ -41,7 +51,7 @@ const IsoDate = z
 
 const CampaignInput = z
   .object({
-    id: z.string().uuid().nullable().optional(),
+    id: z.string().trim().min(1).max(160).nullable().optional(),
     placementKey: z.enum(AD_CAMPAIGN_PLACEMENTS),
     campaignName: z.string().trim().min(1).max(200),
     campaignType: z.enum(AD_CAMPAIGN_TYPES),
@@ -51,7 +61,7 @@ const CampaignInput = z
       .trim()
       .min(1)
       .max(2048)
-      .refine((v) => v.startsWith('/') || /^https?:\/\//i.test(v), {
+      .refine((value) => isSafeSitePath(value) || /^https:\/\//i.test(value), {
         message: 'Image must be a site path (/...) or an https:// URL',
       }),
     destinationUrl: UrlLike,
@@ -92,7 +102,7 @@ export type AdCampaignActionInput = z.input<typeof CampaignInput>
 export async function saveAdCampaign(raw: unknown) {
   return run(async () => {
     const input = CampaignInput.parse(raw)
-    const actor = await requireStaff('brokers:manage')
+    const actor = await requireGlobalCampaignManager()
     const id = input.id ?? randomUUID()
     const startsAt = input.startsAt ?? null
     const endsAt = input.endsAt ?? null
@@ -152,9 +162,9 @@ export async function saveAdCampaign(raw: unknown) {
 export async function setAdCampaignStatus(raw: unknown) {
   return run(async () => {
     const input = z
-      .object({ id: z.string().uuid(), status: z.enum(AD_CAMPAIGN_STATUSES) })
+      .object({ id: z.string().trim().min(1).max(160), status: z.enum(AD_CAMPAIGN_STATUSES) })
       .parse(raw)
-    const actor = await requireStaff('brokers:manage')
+    const actor = await requireGlobalCampaignManager()
     const result = await query(
       `update public.ad_campaigns
           set status = $2, updated_by = $3, updated_at = now()
@@ -173,8 +183,8 @@ export async function setAdCampaignStatus(raw: unknown) {
 
 export async function deleteAdCampaign(raw: unknown) {
   return run(async () => {
-    const input = z.object({ id: z.string().uuid() }).parse(raw)
-    const actor = await requireStaff('brokers:manage')
+    const input = z.object({ id: z.string().trim().min(1).max(160) }).parse(raw)
+    const actor = await requireGlobalCampaignManager()
     const result = await query(
       `delete from public.ad_campaigns where id = $1 returning id`,
       [input.id],

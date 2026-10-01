@@ -12,7 +12,7 @@ export default async function BusinessSecurityPage() {
   const session = await auth.api.getSession({ headers: await headers() })
   if (!session?.user) redirect('/business/login')
   const userId = session.user.id
-  const [profile, staff, account, factor] = await Promise.all([
+  const [profile, staff, account, factor, invitation] = await Promise.all([
     queryOne<{ role: string }>(`select role from public.profiles where id = $1`, [userId]),
     queryOne<{ active: boolean }>(
       `select exists(select 1 from public.staff_access where user_id = $1 and status = 'active') as active`,
@@ -24,6 +24,17 @@ export default async function BusinessSecurityPage() {
     ),
     queryOne<{ verified: boolean; created_at: string }>(
       `select verified, "createdAt"::text as created_at from public."twoFactor" where "userId" = $1`,
+      [userId],
+    ),
+    queryOne<{ expired: boolean }>(
+      `select exists (
+         select 1 from public.staff_invitations i
+         join public.profiles p on lower(p.email) = lower(i.email)
+         join public.staff_access sa on sa.user_id = p.id and sa.status = 'active'
+          where p.id = $1
+            and i.status in ('pending', 'expired')
+            and i.expires_at <= now()
+       ) as expired`,
       [userId],
     ),
   ])
@@ -45,6 +56,7 @@ export default async function BusinessSecurityPage() {
         mfaEnabled={mfaEnabled}
         setupPending={!!factor && !factor.verified}
         sessionFresh={sessionFresh}
+        invitationExpired={profile?.role !== 'admin' && invitation?.expired === true}
       />
     </main>
   )

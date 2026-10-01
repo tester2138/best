@@ -3,11 +3,21 @@
 import { useState, useTransition } from 'react'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog'
 import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { inviteStaff, setStaffStatus, updateStaffAccess } from '@/app/actions/staff'
+import { inviteStaff, reissueStaffInvitation, setStaffStatus, updateStaffAccess } from '@/app/actions/staff'
 
 export interface StaffMember {
   user_id: string
@@ -29,7 +39,7 @@ const ROLES: { id: StaffMember['role']; label: string }[] = [
   { id: 'analyst', label: 'Analyst · read-only' },
 ]
 
-export function StaffClient({ staff, brands, invitations, totalBrands }: { staff: StaffMember[]; brands: BrandOption[]; invitations: Invitation[]; totalBrands: number }) {
+export function StaffClient({ staff, brands, invitations, totalBrands, invitationTtlDays }: { staff: StaffMember[]; brands: BrandOption[]; invitations: Invitation[]; totalBrands: number; invitationTtlDays: number }) {
   const router = useRouter()
   const [pending, startTransition] = useTransition()
   const [email, setEmail] = useState('')
@@ -37,6 +47,7 @@ export function StaffClient({ staff, brands, invitations, totalBrands }: { staff
   const [role, setRole] = useState<StaffMember['role']>('analyst')
   const [scopeMode, setScopeMode] = useState<'all' | 'selected'>('selected')
   const [selected, setSelected] = useState<string[]>([])
+  const [reissueTarget, setReissueTarget] = useState<Invitation | null>(null)
   const [edits, setEdits] = useState<Record<string, { role: StaffMember['role']; scopeMode: 'all' | 'selected'; selected: string[] }>>(() => Object.fromEntries(staff.map((person) => [person.user_id, { role: person.role, scopeMode: person.scope_mode, selected: person.scope_brand_ids ?? [] }])))
 
   function refreshOn(result: { ok: boolean; error?: string }, success: string) {
@@ -61,6 +72,19 @@ export function StaffClient({ staff, brands, invitations, totalBrands }: { staff
   function changeStatus(person: StaffMember, status: StaffMember['status']) {
     startTransition(async () => refreshOn(await setStaffStatus({ userId: person.user_id, status }), status === 'active' ? 'Staff access restored' : 'Access removed and sessions invalidated'))
   }
+  function reissueInvite() {
+    if (!reissueTarget) return
+    startTransition(async () => {
+      const result = await reissueStaffInvitation({ id: reissueTarget.id })
+      if (result.ok) {
+        toast.success('Invitation reissued and new credentials emailed')
+        setReissueTarget(null)
+        router.refresh()
+      } else {
+        toast.error(result.error ?? 'Could not reissue the invitation')
+      }
+    })
+  }
   function updateEdit(id: string, patch: Partial<(typeof edits)[string]>) {
     setEdits((current) => ({ ...current, [id]: { ...current[id], ...patch } }))
   }
@@ -70,7 +94,7 @@ export function StaffClient({ staff, brands, invitations, totalBrands }: { staff
   return (
     <div className="flex flex-col gap-6">
       <div><h1 className="text-2xl font-semibold tracking-tight">Staff &amp; access</h1><p className="mt-1 text-sm text-muted-foreground">Role grants require TOTP. Suspensions and revocations invalidate active sessions.</p></div>
-      <Card className="p-5"><h2 className="text-lg font-semibold">Invite staff</h2><p className="mb-4 mt-1 text-sm text-muted-foreground">A random temporary password is sent once; first sign-in requires a password change and authenticator enrollment.</p><form onSubmit={submitInvite} className="flex flex-col gap-4">
+      <Card className="p-5"><h2 className="text-lg font-semibold">Invite staff</h2><p className="mb-4 mt-1 text-sm text-muted-foreground">Invitations expire after {invitationTtlDays} {invitationTtlDays === 1 ? 'day' : 'days'}. A random temporary password is sent once; first sign-in requires a password change and authenticator enrollment.</p><form onSubmit={submitInvite} className="flex flex-col gap-4">
         <div className="grid gap-3 sm:grid-cols-2"><label className="flex flex-col gap-1.5 text-sm">Full name<Input required minLength={2} maxLength={120} value={fullName} onChange={(event) => setFullName(event.target.value)} /></label><label className="flex flex-col gap-1.5 text-sm">Work email<Input required type="email" value={email} onChange={(event) => setEmail(event.target.value)} /></label></div>
         <div className="grid gap-3 sm:grid-cols-2"><label className="flex flex-col gap-1.5 text-sm">Role<select className="h-10 rounded-md border border-input bg-background px-3" value={role} onChange={(event) => setRole(event.target.value as StaffMember['role'])}>{ROLES.map((item) => <option key={item.id} value={item.id}>{item.label}</option>)}</select></label><label className="flex flex-col gap-1.5 text-sm">Broker scope<select className="h-10 rounded-md border border-input bg-background px-3" value={scopeMode} onChange={(event) => setScopeMode(event.target.value as 'all' | 'selected')}><option value="selected">Selected brokers</option><option value="all">All brokers</option></select></label></div>
         {scopeMode === 'selected' && brandPicker(selected, setSelected, 'Invite broker')}
@@ -84,7 +108,23 @@ export function StaffClient({ staff, brands, invitations, totalBrands }: { staff
           <div className="flex flex-wrap gap-2"><Button size="sm" disabled={pending || person.status === 'revoked'} onClick={() => save(person)}>Save role &amp; scope</Button>{person.status === 'active' ? <Button size="sm" variant="outline" disabled={pending} onClick={() => changeStatus(person, 'suspended')}>Suspend</Button> : <Button size="sm" variant="outline" disabled={pending || person.status === 'revoked'} onClick={() => changeStatus(person, 'active')}>Reactivate</Button>}{person.status !== 'revoked' && <Button size="sm" variant="destructive" disabled={pending} onClick={() => changeStatus(person, 'revoked')}>Revoke &amp; sign out</Button>}</div>
         </Card>
       })}</section>
-      <section className="flex flex-col gap-3"><h2 className="text-lg font-semibold">Invitations</h2>{invitations.length ? invitations.map((invitation) => <Card key={invitation.id} className="flex flex-wrap items-center justify-between gap-3 p-4"><div><p className="font-medium">{invitation.email}</p><p className="text-sm text-muted-foreground">{ROLES.find((item) => item.id === invitation.role)?.label} · {invitation.scope_mode === 'all' ? 'All brokers' : 'Selected brokers'}</p></div><Badge variant="outline">{invitation.status} · expires {new Date(invitation.expires_at).toLocaleDateString()}</Badge></Card>) : <Card className="p-6 text-sm text-muted-foreground">No pending or expired invitations.</Card>}</section>
+      <section className="flex flex-col gap-3"><h2 className="text-lg font-semibold">Invitations</h2>{invitations.length ? invitations.map((invitation) => <Card key={invitation.id} className="flex flex-wrap items-center justify-between gap-3 p-4"><div><p className="font-medium">{invitation.email}</p><p className="text-sm text-muted-foreground">{ROLES.find((item) => item.id === invitation.role)?.label} · {invitation.scope_mode === 'all' ? 'All brokers' : 'Selected brokers'}</p></div><div className="flex items-center gap-2"><Badge variant="outline">{invitation.status} · expires {new Date(invitation.expires_at).toLocaleDateString()}</Badge>{invitation.status === 'expired' && <Button size="sm" variant="outline" disabled={pending} onClick={() => setReissueTarget(invitation)}>Reissue</Button>}</div></Card>) : <Card className="p-6 text-sm text-muted-foreground">No pending or expired invitations.</Card>}</section>
+      <AlertDialog open={reissueTarget !== null} onOpenChange={(open) => !open && setReissueTarget(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Reissue this staff invitation?</AlertDialogTitle>
+            <AlertDialogDescription>
+              A new temporary password will be emailed to {reissueTarget?.email}. Their current sessions will be signed out, and the invitation will use the configured {invitationTtlDays}-day expiry.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel disabled={pending}>Cancel</AlertDialogCancel>
+            <AlertDialogAction disabled={pending} onClick={(event) => { event.preventDefault(); reissueInvite() }}>
+              Reissue invitation
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   )
 }

@@ -23,6 +23,8 @@ const NAV: Array<{
   { href: '/admin/moderation', label: 'Moderation', permission: 'moderation:review' },
   { href: '/admin/leads', label: 'Claim leads', permission: 'leads:read' },
   { href: '/admin/enquiries', label: 'Merchant requests', permission: 'leads:read', allScopeOnly: true },
+  { href: '/admin/advertising', label: 'Advertising', permission: 'brokers:manage', allScopeOnly: true },
+  { href: '/admin/offers', label: 'Offers', permission: 'brokers:manage' },
   { href: '/admin/content', label: 'Editorial', permission: 'editorial:read' },
   { href: '/admin/news', label: 'News', permission: 'editorial:read' },
   { href: '/admin/audit', label: 'Audit log', permission: 'audit:read' },
@@ -36,6 +38,9 @@ export default async function AdminLayout({ children }: { children: ReactNode })
   try {
     actor = await requireStaff('dashboard:read')
   } catch (error) {
+    if (error instanceof Err && error.message.startsWith('Staff invitation expired')) {
+      redirect('/business/security?invitation=expired')
+    }
     if (error instanceof Err && error.message.startsWith('Multi-factor')) {
       redirect('/business/security?required=1')
     }

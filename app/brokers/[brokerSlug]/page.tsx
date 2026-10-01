@@ -29,7 +29,7 @@ import {
   getPublicDirectoryCompanies,
   getPublicTopBrokers,
 } from '@/lib/public-brokers'
-import { getOffersByBroker } from '@/data/offers'
+import { getPublicOffersByBroker } from '@/lib/public-offers'
 import { getPostsByBrokerSlug } from '@/data/posts'
 import { formatDate } from '@/lib/utils'
 import { cn } from '@/lib/utils'
@@ -212,8 +212,8 @@ export default async function BrokerDetailPage({ params }: PageProps) {
   const isPropFirm = company?.category === 'prop-firm'
   const categoryLabel = company ? categoryLabels[company.category] || company.category : 'Forex Broker'
   
-  // Get offers if available
-  const brokerOffers = company?.id ? getOffersByBroker(company.id) : []
+  // Offers use the public slug as their stable broker key.
+  const brokerOffers = await getPublicOffersByBroker(normalisedSlug)
   
   // Rows 215+25: filter alternatives to SAME category AND same entityType bucket
   // (retail only). This prevents exchanges, hedge funds, investment banks and

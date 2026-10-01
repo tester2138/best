@@ -36,11 +36,20 @@ const CAMPAIGN_SELECT = `
     from public.ad_campaigns
 `
 
-/** All campaigns for the admin table. Throws on database errors. */
-export async function listAdCampaigns(): Promise<AdCampaignRecord[]> {
-  return query<AdCampaignRecord>(
-    `${CAMPAIGN_SELECT} order by placement_key asc, priority asc, created_at asc`,
-  )
+/** All campaigns and a database-clock snapshot for the admin table. */
+export async function listAdCampaigns(): Promise<{
+  campaigns: AdCampaignRecord[]
+  currentTimeMs: number
+}> {
+  const [campaigns, clock] = await Promise.all([
+    query<AdCampaignRecord>(
+      `${CAMPAIGN_SELECT} order by placement_key asc, priority asc, created_at asc`,
+    ),
+    queryOne<{ current_time_ms: string }>(
+      `select (extract(epoch from now()) * 1000)::bigint::text as current_time_ms`,
+    ),
+  ])
+  return { campaigns, currentTimeMs: Number(clock?.current_time_ms ?? 0) }
 }
 
 /**

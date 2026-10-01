@@ -54,23 +54,37 @@ export async function requireStaff(permission: StaffPermission = 'dashboard:read
 
   const [profile, assignment, mfaState] = await Promise.all([
     queryOne<{ role: string }>(`select role from public.profiles where id = $1`, [user.id]),
-    queryOne<{ role: Exclude<StaffRole, 'super_admin' | 'merchant'>; status: string; scope_mode: 'all' | 'selected' }>(
-      `select role, status, scope_mode from public.staff_access where user_id = $1`,
+    queryOne<{
+      role: Exclude<StaffRole, 'super_admin' | 'merchant'>
+      status: string
+      scope_mode: 'all' | 'selected'
+      invitation_expired: boolean
+    }>(
+      `select sa.role, sa.status, sa.scope_mode,
+              exists (
+                select 1 from public.staff_invitations i
+                join public.profiles p on lower(p.email) = lower(i.email)
+                 where p.id = sa.user_id
+                   and i.status in ('pending', 'expired')
+                   and i.expires_at <= now()
+              ) as invitation_expired
+         from public.staff_access sa where sa.user_id = $1`,
       [user.id],
     ),
     queryOne<{
       enabled: boolean
+      verified: boolean | null
       factor_created_at: string | null
-      session_created_at: string | null
     }>(
       `select u."twoFactorEnabled" as enabled,
-              (select tf."createdAt"::text from public."twoFactor" tf
-                where tf."userId" = u.id and tf.verified = true limit 1) as factor_created_at,
-              (select s."createdAt"::text from public.session s
-                where s.id = $2 and s."userId" = u.id limit 1) as session_created_at
-         from public."user" u where u.id = $1`,
-      [user.id, session.session.id],
+              tf.verified,
+              tf."createdAt"::text as factor_created_at
+         from public."user" u
+         left join public."twoFactor" tf on tf."userId" = u.id
+        where u.id = $1`,
+      [user.id],
     ),
+
   ])
 
   let role: StaffRole | null = null
@@ -78,10 +92,13 @@ export async function requireStaff(permission: StaffPermission = 'dashboard:read
   else if (assignment?.status === 'active') role = assignment.role
 
   if (!role) throw new Err('Not found', 'not_found')
-  if (!mfaState?.enabled) {
+  if (role !== 'super_admin' && assignment?.invitation_expired) {
+    throw new Err('Staff invitation expired. Ask a super admin to reissue it.', 'forbidden')
+  }
+  if (!mfaState?.enabled || mfaState.verified !== true) {
     throw new Err('Multi-factor authentication is required for staff access', 'forbidden')
   }
-  if (!isMfaSessionFresh(mfaState.enabled, mfaState.factor_created_at, mfaState.session_created_at)) {
+  if (!isMfaSessionFresh(mfaState.enabled, mfaState.factor_created_at, session.session.createdAt)) {
     throw new Err('Sign in again and complete multi-factor authentication', 'forbidden')
   }
   if (!roleHasPermission(role, permission)) throw new Err('Not found', 'not_found')

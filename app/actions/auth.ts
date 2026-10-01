@@ -34,11 +34,25 @@ async function destinationFor(userId: string): Promise<string> {
        from public.profiles p join public."user" u on u.id = p.id where p.id = $1`,
     [userId],
   )
-  if (FORCE_PASSWORD_CHANGE && prof?.must_change_password) return '/business/set-password'
-  const staff = await queryOne<{ active: boolean }>(
-    `select exists(select 1 from public.staff_access where user_id = $1 and status = 'active') as active`,
+  const staff = await queryOne<{ active: boolean; invitation_expired: boolean }>(
+    `select exists(
+              select 1 from public.staff_access
+               where user_id = $1 and status = 'active'
+            ) as active,
+            exists (
+              select 1 from public.staff_invitations i
+              join public.profiles p on lower(p.email) = lower(i.email)
+              join public.staff_access sa on sa.user_id = p.id and sa.status = 'active'
+               where p.id = $1
+                 and i.status in ('pending', 'expired')
+                 and i.expires_at <= now()
+            ) as invitation_expired`,
     [userId],
   )
+  if (prof?.role !== 'admin' && staff?.active && staff.invitation_expired) {
+    return '/business/security?invitation=expired'
+  }
+  if (FORCE_PASSWORD_CHANGE && prof?.must_change_password) return '/business/set-password'
   if (prof?.role === 'admin' || staff?.active) {
     return prof?.two_factor_enabled ? '/admin' : '/business/security?required=1'
   }

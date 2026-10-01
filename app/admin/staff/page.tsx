@@ -11,7 +11,7 @@ interface Invitation { id: string; email: string; role: StaffMember['role']; sco
 
 export default async function StaffPage() {
   await requireStaff('staff:manage')
-  const [staff, brands, invitations] = await Promise.all([
+  const [staff, brands, invitations, settings, selectableBrands] = await Promise.all([
     query<RawStaff>(
       `select p.id as user_id, p.email, p.full_name, sa.role, sa.status, sa.scope_mode,
               coalesce(array_agg(b.name order by b.name) filter (where b.id is not null), '{}') as scopes,
@@ -32,7 +32,18 @@ export default async function StaffPage() {
          from public.staff_invitations
         where status in ('pending', 'expired') order by created_at desc limit 100`,
     ),
+    queryOne<{ invitation_ttl_days: number }>(
+      `select invitation_ttl_days from public.portal_settings where id = true`,
+    ),
+    queryOne<{ count: string }>(`select count(*)::text as count from public.brands`),
   ])
-  const selectableBrands = await queryOne<{ count: string }>(`select count(*)::text as count from public.brands`)
-  return <StaffClient staff={staff} brands={brands} invitations={invitations} totalBrands={Number(selectableBrands?.count ?? 0)} />
+  return (
+    <StaffClient
+      staff={staff}
+      brands={brands}
+      invitations={invitations}
+      totalBrands={Number(selectableBrands?.count ?? 0)}
+      invitationTtlDays={settings?.invitation_ttl_days ?? 7}
+    />
+  )
 }

@@ -1,8 +1,18 @@
 'use client'
 
-import { useMemo, useState, useTransition } from 'react'
+import { useEffect, useMemo, useState, useTransition } from 'react'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -26,6 +36,7 @@ import { Label } from '@/components/ui/label'
 import {
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
   SelectTrigger,
   SelectValue,
@@ -56,7 +67,7 @@ interface CampaignForm {
   imageUrl: string
   destinationUrl: string
   altText: string
-  label: string
+  label: '' | 'Ad'
   desktopSize: string
   mobileSize: string
   priority: number
@@ -92,9 +103,8 @@ const STATUS_BADGE: Record<AdCampaignStatus | 'scheduled' | 'ended', { label: st
   archived: { label: 'Archived', variant: 'destructive' },
 }
 
-function displayState(campaign: AdCampaignRecord): AdCampaignStatus | 'scheduled' | 'ended' {
+function displayState(campaign: AdCampaignRecord, now: number): AdCampaignStatus | 'scheduled' | 'ended' {
   if (campaign.status !== 'active') return campaign.status
-  const now = Date.now()
   if (campaign.startsAt && new Date(campaign.startsAt).getTime() > now) return 'scheduled'
   if (campaign.endsAt && new Date(campaign.endsAt).getTime() < now) return 'ended'
   return 'active'
@@ -121,18 +131,26 @@ function formatSchedule(campaign: AdCampaignRecord): string {
 export function AdvertisingClient({
   campaigns,
   dbError,
+  initialNow,
 }: {
   campaigns: AdCampaignRecord[]
   dbError: boolean
+  initialNow: number
 }) {
   const router = useRouter()
   const [pending, startTransition] = useTransition()
   const [open, setOpen] = useState(false)
   const [form, setForm] = useState<CampaignForm>(EMPTY_FORM)
   const [saving, setSaving] = useState(false)
+  const [deleteTarget, setDeleteTarget] = useState<AdCampaignRecord | null>(null)
+  const [now, setNow] = useState(initialNow)
+
+  useEffect(() => {
+    const intervalId = window.setInterval(() => setNow(Date.now()), 60_000)
+    return () => window.clearInterval(intervalId)
+  }, [])
 
   const serving = useMemo(() => {
-    const now = Date.now()
     const map = new Map<string, AdCampaignRecord>()
     for (const c of campaigns) {
       if (c.status !== 'active') continue
@@ -142,7 +160,7 @@ export function AdvertisingClient({
       if (!current || c.priority < current.priority) map.set(c.placementKey, c)
     }
     return map
-  }, [campaigns])
+  }, [campaigns, now])
 
   function openCreate() {
     setForm(EMPTY_FORM)
@@ -201,6 +219,8 @@ export function AdvertisingClient({
       } else {
         toast.error(res.error ?? 'Could not save campaign')
       }
+    } catch {
+      toast.error('Could not save campaign. Check the dates and required fields.')
     } finally {
       setSaving(false)
     }
@@ -223,6 +243,7 @@ export function AdvertisingClient({
       const res = await deleteAdCampaign({ id })
       if (res.ok) {
         toast.success('Campaign deleted')
+        setDeleteTarget(null)
         router.refresh()
       } else {
         toast.error(res.error ?? 'Could not delete campaign')
@@ -241,7 +262,7 @@ export function AdvertisingClient({
             banner is shown.
           </p>
         </div>
-        <Button onClick={openCreate}>New campaign</Button>
+        <Button onClick={openCreate} disabled={dbError}>New campaign</Button>
       </div>
 
       {dbError && (
@@ -292,7 +313,7 @@ export function AdvertisingClient({
             </TableHeader>
             <TableBody>
               {campaigns.map((campaign) => {
-                const state = displayState(campaign)
+                const state = displayState(campaign, now)
                 return (
                   <TableRow key={campaign.id}>
                     <TableCell>
@@ -336,7 +357,7 @@ export function AdvertisingClient({
                             <DropdownMenuSeparator />
                             <DropdownMenuItem
                               className="text-destructive focus:text-destructive"
-                              onClick={() => remove(campaign.id)}
+                              onClick={() => setDeleteTarget(campaign)}
                             >
                               Delete
                             </DropdownMenuItem>
@@ -351,6 +372,29 @@ export function AdvertisingClient({
           </Table>
         </Card>
       )}
+
+      <AlertDialog open={deleteTarget !== null} onOpenChange={(isOpen) => !isOpen && setDeleteTarget(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Delete this campaign?</AlertDialogTitle>
+            <AlertDialogDescription>
+              {deleteTarget?.campaignName} will be permanently removed. The placement will fall back to its house banner unless another active campaign is serving.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel disabled={pending}>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              disabled={pending}
+              onClick={(event) => {
+                event.preventDefault()
+                if (deleteTarget) remove(deleteTarget.id)
+              }}
+            >
+              Delete campaign
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
 
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="max-h-[85vh] overflow-y-auto sm:max-w-2xl">
@@ -383,11 +427,13 @@ export function AdvertisingClient({
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  {AD_CAMPAIGN_PLACEMENTS.map((p) => (
-                    <SelectItem key={p} value={p}>
-                      {p}
-                    </SelectItem>
-                  ))}
+                  <SelectGroup>
+                    {AD_CAMPAIGN_PLACEMENTS.map((p) => (
+                      <SelectItem key={p} value={p}>
+                        {p}
+                      </SelectItem>
+                    ))}
+                  </SelectGroup>
                 </SelectContent>
               </Select>
             </div>
@@ -395,14 +441,38 @@ export function AdvertisingClient({
               <Label>Campaign type</Label>
               <Select
                 value={form.campaignType}
-                onValueChange={(v) => setField('campaignType', v as 'paid' | 'house')}
+                onValueChange={(value) => {
+                  const campaignType = value as 'paid' | 'house'
+                  setField('campaignType', campaignType)
+                  if (campaignType === 'paid') setField('label', 'Ad')
+                }}
               >
                 <SelectTrigger>
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="paid">Paid (labelled "Ad")</SelectItem>
-                  <SelectItem value="house">House (self-promo)</SelectItem>
+                  <SelectGroup>
+                    <SelectItem value="paid">Paid (labelled &quot;Ad&quot;)</SelectItem>
+                    <SelectItem value="house">House (self-promo)</SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="flex flex-col gap-2">
+              <Label>Disclosure label</Label>
+              <Select
+                value={form.label || 'none'}
+                disabled={form.campaignType === 'paid'}
+                onValueChange={(value) => setField('label', value === 'none' ? '' : 'Ad')}
+              >
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectItem value="Ad">Ad</SelectItem>
+                    <SelectItem value="none">No label (house only)</SelectItem>
+                  </SelectGroup>
                 </SelectContent>
               </Select>
             </div>
@@ -440,27 +510,34 @@ export function AdvertisingClient({
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  {AD_CAMPAIGN_SIZES.map((s) => (
-                    <SelectItem key={s} value={s}>
-                      {s}
-                    </SelectItem>
-                  ))}
+                  <SelectGroup>
+                    {AD_CAMPAIGN_SIZES.map((s) => (
+                      <SelectItem key={s} value={s}>
+                        {s}
+                      </SelectItem>
+                    ))}
+                  </SelectGroup>
                 </SelectContent>
               </Select>
             </div>
             <div className="flex flex-col gap-2">
               <Label>Mobile size</Label>
-              <Select value={form.mobileSize} onValueChange={(v) => setField('mobileSize', v)}>
+              <Select
+                value={form.mobileSize || 'none'}
+                onValueChange={(v) => setField('mobileSize', v === 'none' ? '' : v)}
+              >
                 <SelectTrigger>
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="none">Same as desktop</SelectItem>
-                  {AD_CAMPAIGN_SIZES.map((s) => (
-                    <SelectItem key={s} value={s}>
-                      {s}
-                    </SelectItem>
-                  ))}
+                  <SelectGroup>
+                    <SelectItem value="none">Same as desktop</SelectItem>
+                    {AD_CAMPAIGN_SIZES.map((s) => (
+                      <SelectItem key={s} value={s}>
+                        {s}
+                      </SelectItem>
+                    ))}
+                  </SelectGroup>
                 </SelectContent>
               </Select>
             </div>
@@ -481,11 +558,13 @@ export function AdvertisingClient({
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  {AD_CAMPAIGN_STATUSES.map((s) => (
-                    <SelectItem key={s} value={s}>
-                      {STATUS_BADGE[s].label}
-                    </SelectItem>
-                  ))}
+                  <SelectGroup>
+                    {AD_CAMPAIGN_STATUSES.map((s) => (
+                      <SelectItem key={s} value={s}>
+                        {STATUS_BADGE[s].label}
+                      </SelectItem>
+                    ))}
+                  </SelectGroup>
                 </SelectContent>
               </Select>
             </div>

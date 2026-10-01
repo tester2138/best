@@ -5,18 +5,25 @@ import { revalidatePath, revalidateTag } from 'next/cache'
 import { z } from 'zod'
 import { audit } from '@/lib/audit'
 import { Err, run } from '@/lib/portal/result'
-import { query } from '@/lib/portal/db'
-import { requireStaff } from '@/lib/guards'
+import { query, queryOne } from '@/lib/portal/db'
+import { assertStaffBrandScope, hasGlobalStaffScope, requireStaff, type StaffActor } from '@/lib/guards'
+import { brokers as editorialBrokers } from '@/data/brokers'
+import { directoryCompanies as editorialDirectory } from '@/data/directory'
+import {
+  ADMIN_OFFER_STATUSES,
+  ADMIN_OFFER_TYPES,
+} from '@/lib/admin-offer-types'
 
 /**
  * Admin offer (bonus/promotion) management. Staff with `brokers:manage`
- * manage the offers shown on /offers, the homepage strip and broker
+ * manage offers within their broker scope on /offers, the homepage strip and broker
  * profiles. Public pages are ISR-cached, so every mutation revalidates
  * the affected paths.
  */
 
-const OFFER_STATUSES = ['draft', 'active', 'paused', 'archived'] as const
-const OFFER_TYPES = ['deposit', 'no-deposit', 'cashback', 'rebate', 'other'] as const
+function isSafeSitePath(value: string): boolean {
+  return value.startsWith('/') && !value.startsWith('//') && !value.startsWith('/\\') && !value.includes('\\')
+}
 
 const IsoDate = z
   .string()
@@ -28,7 +35,7 @@ const IsoDate = z
 
 const OfferInput = z
   .object({
-    id: z.string().uuid().nullable().optional(),
+    id: z.string().trim().min(1).max(160).nullable().optional(),
     brokerId: z
       .string()
       .trim()
@@ -40,7 +47,7 @@ const OfferInput = z
       .string()
       .trim()
       .max(2048)
-      .refine((v) => v === '' || v.startsWith('/') || /^https?:\/\//i.test(v), {
+      .refine((v) => v === '' || isSafeSitePath(v) || /^https:\/\//i.test(v), {
         message: 'Logo must be a site path (/...) or an https:// URL',
       })
       .transform((v) => (v === '' ? null : v))
@@ -56,19 +63,19 @@ const OfferInput = z
       .transform((v) => (v === '' ? null : v))
       .nullable()
       .optional(),
-    type: z.enum(OFFER_TYPES),
+    type: z.enum(ADMIN_OFFER_TYPES),
     terms: z.string().trim().min(1).max(2000),
     affiliateUrl: z
       .string()
       .trim()
       .min(1)
       .max(2048)
-      .refine((v) => /^https?:\/\//i.test(v), 'Affiliate URL must be an https:// URL'),
+      .refine((v) => /^https:\/\//i.test(v), 'Affiliate URL must be an https:// URL'),
     isFeatured: z.boolean().default(false),
     isExclusive: z.boolean().default(false),
     startsAt: IsoDate,
     endsAt: IsoDate,
-    status: z.enum(OFFER_STATUSES),
+    status: z.enum(ADMIN_OFFER_STATUSES),
     sortOrder: z.number().int().min(0).max(999999).default(0),
   })
   .superRefine((data, ctx) => {
@@ -89,12 +96,38 @@ const OfferInput = z
 
 export type AdminOfferActionInput = z.input<typeof OfferInput>
 
-function revalidateOfferPaths(brokerId?: string): void {
+function revalidateOfferPaths(...brokerIds: Array<string | undefined>): void {
   revalidatePath('/offers')
   revalidatePath('/')
   revalidatePath('/admin/offers')
   revalidateTag('broker-directory', 'max')
-  if (brokerId) revalidatePath(`/brokers/${brokerId}`)
+  for (const brokerId of new Set(brokerIds.filter((id): id is string => Boolean(id)))) {
+    revalidatePath(`/brokers/${brokerId}`)
+  }
+}
+
+const KNOWN_BROKER_SLUGS = new Set([
+  ...editorialDirectory.map((broker) => broker.slug.toLowerCase()),
+  ...editorialBrokers.map((broker) => broker.slug.toLowerCase()),
+])
+
+async function assertOfferBrokerScope(actor: StaffActor, brokerId: string): Promise<string> {
+  const slug = brokerId.trim().toLowerCase()
+  if (!/^[a-z0-9-]+$/.test(slug) || !KNOWN_BROKER_SLUGS.has(slug)) {
+    throw new Err('Unknown broker slug', 'validation')
+  }
+  if (actor.isSuperAdmin) return slug
+
+  const brand = await queryOne<{ id: string }>(
+    `select id from public.brands where slug = $1`,
+    [slug],
+  )
+  if (!brand) {
+    if (await hasGlobalStaffScope(actor)) return slug
+    throw new Err('Not found', 'not_found')
+  }
+  await assertStaffBrandScope(actor, brand.id)
+  return slug
 }
 
 export async function saveAdminOffer(raw: unknown) {
@@ -102,10 +135,20 @@ export async function saveAdminOffer(raw: unknown) {
     const input = OfferInput.parse(raw)
     const actor = await requireStaff('brokers:manage')
     const id = input.id ?? randomUUID()
+    const brokerId = await assertOfferBrokerScope(actor, input.brokerId)
     const startsAt = input.startsAt ?? null
     const endsAt = input.endsAt ?? null
+    const previousRows = input.id
+      ? await query<{ broker_id: string }>(
+          'select broker_id from public.admin_offers where id = $1',
+          [id],
+        )
+      : []
+    if (previousRows[0]) {
+      await assertOfferBrokerScope(actor, previousRows[0].broker_id)
+    }
 
-    await query(
+    const savedRows = await query<{ id: string }>(
       `insert into public.admin_offers
          (id, broker_id, broker_name, broker_logo, title, description, value, code,
           type, terms, affiliate_url, is_featured, is_exclusive, starts_at, ends_at,
@@ -129,10 +172,12 @@ export async function saveAdminOffer(raw: unknown) {
          status = excluded.status,
          sort_order = excluded.sort_order,
          updated_by = excluded.updated_by,
-         updated_at = now()`,
+         updated_at = now()
+       where public.admin_offers.broker_id = $19
+       returning id`,
       [
         id,
-        input.brokerId,
+        brokerId,
         input.brokerName,
         input.brokerLogo ?? null,
         input.title,
@@ -149,14 +194,16 @@ export async function saveAdminOffer(raw: unknown) {
         input.status,
         input.sortOrder,
         actor.id,
+        previousRows[0]?.broker_id ?? null,
       ],
     )
+    if (savedRows.length === 0) throw new Err('Offer changed before it could be saved', 'not_found')
     await audit(actor, null, 'admin.offer.save', id, {
-      broker: input.brokerId,
+      broker: brokerId,
       title: input.title,
       status: input.status,
     })
-    revalidateOfferPaths(input.brokerId)
+    revalidateOfferPaths(brokerId, previousRows[0]?.broker_id)
     return { id }
   })
 }
@@ -164,15 +211,21 @@ export async function saveAdminOffer(raw: unknown) {
 export async function setAdminOfferStatus(raw: unknown) {
   return run(async () => {
     const input = z
-      .object({ id: z.string().uuid(), status: z.enum(OFFER_STATUSES) })
+      .object({ id: z.string().trim().min(1).max(160), status: z.enum(ADMIN_OFFER_STATUSES) })
       .parse(raw)
     const actor = await requireStaff('brokers:manage')
+    const current = await queryOne<{ broker_id: string }>(
+      `select broker_id from public.admin_offers where id = $1`,
+      [input.id],
+    )
+    if (!current) throw new Err('Offer not found', 'not_found')
+    await assertOfferBrokerScope(actor, current.broker_id)
     const rows = await query<{ broker_id: string }>(
       `update public.admin_offers
           set status = $2, updated_by = $3, updated_at = now()
-        where id = $1
+        where id = $1 and broker_id = $4
         returning broker_id`,
-      [input.id, input.status, actor.id],
+      [input.id, input.status, actor.id, current.broker_id],
     )
     if (rows.length === 0) throw new Err('Offer not found', 'not_found')
     await audit(actor, null, 'admin.offer.status', input.id, { status: input.status })
@@ -183,11 +236,17 @@ export async function setAdminOfferStatus(raw: unknown) {
 
 export async function deleteAdminOffer(raw: unknown) {
   return run(async () => {
-    const input = z.object({ id: z.string().uuid() }).parse(raw)
+    const input = z.object({ id: z.string().trim().min(1).max(160) }).parse(raw)
     const actor = await requireStaff('brokers:manage')
-    const rows = await query<{ broker_id: string }>(
-      `delete from public.admin_offers where id = $1 returning broker_id`,
+    const current = await queryOne<{ broker_id: string }>(
+      `select broker_id from public.admin_offers where id = $1`,
       [input.id],
+    )
+    if (!current) throw new Err('Offer not found', 'not_found')
+    await assertOfferBrokerScope(actor, current.broker_id)
+    const rows = await query<{ broker_id: string }>(
+      `delete from public.admin_offers where id = $1 and broker_id = $2 returning broker_id`,
+      [input.id, current.broker_id],
     )
     if (rows.length === 0) throw new Err('Offer not found', 'not_found')
     await audit(actor, null, 'admin.offer.delete', input.id)

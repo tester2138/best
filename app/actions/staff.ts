@@ -4,7 +4,7 @@ import { randomBytes, createHash } from 'node:crypto'
 import { z } from 'zod'
 import { headers } from 'next/headers'
 import { run, Err } from '@/lib/portal/result'
-import { requireAdmin, requireStaff } from '@/lib/guards'
+import { requireAdmin } from '@/lib/guards'
 import { query, queryOne, withTransaction } from '@/lib/portal/db'
 import { allowAccountCreation } from '@/lib/portal/creation-context'
 import { auth } from '@/lib/auth'
@@ -55,6 +55,10 @@ export async function inviteStaff(raw: unknown) {
     )
     if (existing) throw new Err('An account already exists for this email. Ask a super admin to update its access.', 'validation')
     const brandIds = await assertValidScope(input.scopeMode, input.brandIds)
+    const settings = await queryOne<{ invitation_ttl_days: number }>(
+      `select invitation_ttl_days from public.portal_settings where id = true`,
+    )
+    const expiresDays = settings?.invitation_ttl_days ?? 7
 
     const password = randomBytes(32).toString('base64url')
     const created = await allowAccountCreation(async () => auth.api.signUpEmail({
@@ -79,8 +83,8 @@ export async function inviteStaff(raw: unknown) {
       }
       await client.query(
         `insert into public.staff_invitations (email, token_hash, role, scope_mode, scope_brand_ids, invited_by, expires_at)
-         values ($1, $2, $3, $4, $5, $6, now() + interval '7 days')`,
-        [email, hashToken(invitationToken), input.role, input.scopeMode, brandIds, actor.id],
+         values ($1, $2, $3, $4, $5, $6, now() + ($7::integer * interval '1 day'))`,
+        [email, hashToken(invitationToken), input.role, input.scopeMode, brandIds, actor.id, expiresDays],
       )
     })
     await audit(actor, null, 'staff.invite', email, {
@@ -92,7 +96,7 @@ export async function inviteStaff(raw: unknown) {
       fullName: input.fullName,
       email,
       password,
-      expiresDays: 7,
+      expiresDays,
       loginUrl: `${process.env.NEXT_PUBLIC_SITE_URL ?? ''}/business/login`,
     })
     return { userId: created.user.id }
@@ -190,19 +194,150 @@ export async function setStaffStatus(raw: unknown) {
 
 export async function completeStaffMfaEnrollment() {
   return run(async () => {
-    const actor = await requireStaff('dashboard:read')
     const session = await auth.api.getSession({ headers: await headers() })
-    if (!session?.session?.id) throw new Err('Sign in again to complete security setup.', 'forbidden')
-    await query(
+    const userId = session?.user?.id
+    const sessionId = session?.session?.id
+    if (!userId || !sessionId) throw new Err('Sign in again to complete security setup.', 'forbidden')
+
+    const actor = await queryOne<{
+      id: string
+      email: string
+      role: string
+      staff_status: string | null
+      two_factor_enabled: boolean
+      factor_verified: boolean | null
+    }>(
+      `select p.id, lower(p.email) as email, p.role, sa.status as staff_status,
+              coalesce(u."twoFactorEnabled", false) as two_factor_enabled,
+              tf.verified as factor_verified
+         from public.profiles p
+         join public."user" u on u.id = p.id
+         left join public.staff_access sa on sa.user_id = p.id
+         left join public."twoFactor" tf on tf."userId" = p.id
+        where p.id = $1`,
+      [userId],
+    )
+    if (!actor || (actor.role !== 'admin' && actor.staff_status !== 'active')) {
+      throw new Err('Not found', 'not_found')
+    }
+    if (!actor.two_factor_enabled || actor.factor_verified !== true) {
+      throw new Err('Verify your authenticator before completing staff security setup.', 'forbidden')
+    }
+
+    const acceptedInvitations = await query<{ id: string }>(
       `update public.staff_invitations set status = 'accepted', accepted_at = now()
-        where lower(email) = $1 and status = 'pending' and expires_at > now()`,
+        where lower(email) = $1 and status = 'pending' and expires_at > now()
+        returning id`,
       [actor.email],
     )
+    if (actor.role !== 'admin' && acceptedInvitations.length === 0) {
+      const expiredInvitation = await queryOne<{ expired: boolean }>(
+        `select exists (
+           select 1 from public.staff_invitations
+            where lower(email) = $1 and status in ('pending', 'expired') and expires_at <= now()
+         ) as expired`,
+        [actor.email],
+      )
+      if (expiredInvitation?.expired) {
+        throw new Err('Staff invitation expired. Ask a super admin to reissue it.', 'forbidden')
+      }
+    }
     await query(
       `delete from public.session where "userId" = $1 and id <> $2`,
-      [actor.id, session.session.id],
+      [actor.id, sessionId],
     )
-    await audit(actor, null, 'staff.mfa.enrolled', actor.id, { priorSessionsInvalidated: true })
+    await audit({ id: actor.id, email: actor.email }, null, 'staff.mfa.enrolled', actor.id, {
+      priorSessionsInvalidated: true,
+    })
     return { ok: true }
   })
 }
+
+export async function reissueStaffInvitation(raw: unknown) {
+  return run(async () => {
+    const actor = await requireAdmin()
+    const input = z.object({ id: z.string().uuid() }).parse(raw)
+    const invitation = await queryOne<{
+      id: string
+      email: string
+      user_id: string
+      full_name: string | null
+      role: StaffMemberRole
+      scope_mode: 'all' | 'selected'
+      scope_brand_ids: string[]
+      access_status: string
+      expired: boolean
+    }>(
+      `select i.id, i.email, p.id as user_id, p.full_name, sa.role, sa.scope_mode,
+              coalesce(array_agg(sc.brand_id::text) filter (where sc.brand_id is not null), '{}') as scope_brand_ids,
+              sa.status as access_status,
+              i.expires_at <= now() as expired
+         from public.staff_invitations i
+         join public.profiles p on lower(p.email) = lower(i.email)
+         join public.staff_access sa on sa.user_id = p.id
+         left join public.staff_brand_scopes sc on sc.user_id = p.id
+        where i.id = $1 and i.status in ('pending', 'expired')
+        group by i.id, p.id, p.full_name, sa.role, sa.scope_mode, sa.status`,
+      [input.id],
+    )
+    if (!invitation || !invitation.expired) {
+      throw new Err('Only an expired pending invitation can be reissued.', 'validation')
+    }
+    if (invitation.access_status !== 'active') {
+      throw new Err('Reactivate staff access before reissuing this invitation.', 'validation')
+    }
+
+    const settings = await queryOne<{ invitation_ttl_days: number }>(
+      `select invitation_ttl_days from public.portal_settings where id = true`,
+    )
+    const expiresDays = settings?.invitation_ttl_days ?? 7
+    const password = randomBytes(32).toString('base64url')
+    const token = randomBytes(32).toString('base64url')
+    const context = await auth.$context
+    const passwordHash = await context.password.hash(password)
+
+    await withTransaction(async (client) => {
+      const credential = await client.query(
+        `update public.account set password = $2, "updatedAt" = now()
+          where "userId" = $1 and "providerId" = 'credential'`,
+        [invitation.user_id, passwordHash],
+      )
+      if (credential.rowCount !== 1) throw new Err('Staff password credential not found.', 'not_found')
+      await client.query(
+        `update public.profiles set must_change_password = true where id = $1`,
+        [invitation.user_id],
+      )
+      await client.query(`delete from public.session where "userId" = $1`, [invitation.user_id])
+      await client.query(
+        `update public.staff_access set updated_by = $2, updated_at = now() where user_id = $1`,
+        [invitation.user_id, actor.id],
+      )
+      const updated = await client.query(
+        `update public.staff_invitations
+            set token_hash = $2, role = $4, scope_mode = $5, scope_brand_ids = $6,
+                invited_by = $3, status = 'pending', accepted_at = null,
+                expires_at = now() + ($7::integer * interval '1 day')
+          where id = $1 and status in ('pending', 'expired')`,
+        [input.id, hashToken(token), actor.id, invitation.role, invitation.scope_mode, invitation.scope_brand_ids, expiresDays],
+      )
+      if (updated.rowCount !== 1) throw new Err('Invitation changed before it could be reissued.', 'not_found')
+    })
+
+    await audit(actor, null, 'staff.invite', invitation.email, {
+      reissued: true,
+      expiresDays,
+      role: invitation.role,
+      scopeMode: invitation.scope_mode,
+    })
+    await sendEmail('staff-invitation', invitation.email, {
+      fullName: invitation.full_name || invitation.email,
+      email: invitation.email,
+      password,
+      expiresDays,
+      loginUrl: `${process.env.NEXT_PUBLIC_SITE_URL ?? ''}/business/login`,
+    })
+    return { ok: true }
+  })
+}
+
+type StaffMemberRole = 'editor_publisher' | 'commercial_manager' | 'support_reviewer' | 'analyst'

@@ -25,7 +25,9 @@ export interface AdCampaignRecord {
   imageUrl: string
   destinationUrl: string
   altText: string
+  label: '' | 'Ad'
   desktopSize: AdCampaignSize
+
   mobileSize: AdCampaignSize | null
   priority: number
   status: AdCampaignStatus
@@ -43,6 +45,7 @@ export interface AdCampaignInput {
   imageUrl: string
   destinationUrl: string
   altText: string
+  label: '' | 'Ad'
   desktopSize: AdCampaignSize
   mobileSize: AdCampaignSize | null
   priority: number

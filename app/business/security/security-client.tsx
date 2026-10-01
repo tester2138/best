@@ -30,11 +30,13 @@ export function SecurityClient({
   mfaEnabled: initialMfaEnabled,
   setupPending,
   sessionFresh,
+  invitationExpired,
 }: {
   email: string
   mfaEnabled: boolean
   setupPending: boolean
   sessionFresh: boolean
+  invitationExpired: boolean
 }) {
   const router = useRouter()
   const [password, setPassword] = useState('')
@@ -117,6 +119,28 @@ export function SecurityClient({
   }
 
   const manualSecret = enrollment ? secretFromUri(enrollment.totpURI) : ''
+
+  if (invitationExpired) {
+    return (
+      <div className="flex flex-col gap-6">
+        <header>
+          <p className="text-sm font-medium text-primary">BestForex.io staff</p>
+          <h1 className="mt-2 text-balance text-3xl font-semibold tracking-tight">Invitation expired</h1>
+        </header>
+        <Card>
+          <CardHeader>
+            <CardTitle>Staff access is paused</CardTitle>
+            <CardDescription>
+              Your invitation expired before setup was completed. Ask a super admin to reissue it; access remains blocked until then.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Button onClick={signOutForReauthentication} disabled={pending}>Sign out</Button>
+          </CardContent>
+        </Card>
+      </div>
+    )
+  }
 
   return (
     <div className="flex flex-col gap-6">

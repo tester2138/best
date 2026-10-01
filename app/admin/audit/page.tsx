@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { query } from '@/lib/portal/db'
-import { requireStaff } from '@/lib/guards'
+import { hasGlobalStaffScope, requireStaff } from '@/lib/guards'
 import { roleHasPermission } from '@/lib/staff-permissions'
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -21,6 +21,7 @@ interface AuditRow {
 
 export default async function AuditPage({ searchParams }: { searchParams: Promise<{ actor?: string; action?: string; from?: string; to?: string }> }) {
   const actor = await requireStaff('audit:read')
+  const globalScope = await hasGlobalStaffScope(actor)
   const filters = await searchParams
   const actorFilter = (filters.actor ?? '').trim().slice(0, 120)
   const action = (filters.action ?? '').trim().slice(0, 80)
@@ -33,8 +34,12 @@ export default async function AuditPage({ searchParams }: { searchParams: Promis
         and ($2::text = '' or a.action = $2)
         and ($3::date is null or a.created_at >= $3::date)
         and ($4::date is null or a.created_at < $4::date + interval '1 day')
+        and ($5::boolean or exists (
+          select 1 from public.staff_brand_scopes sc
+           where sc.user_id = $6 and sc.brand_id = a.brand_id
+        ))
       order by a.created_at desc limit 250`,
-    [actorFilter, action, from || null, to || null],
+    [actorFilter, action, from || null, to || null, globalScope, actor.id],
   )
   const exportQuery = new URLSearchParams({ actor: actorFilter, action, from, to })
   const canExport = roleHasPermission(actor.role, 'audit:export')
