@@ -29,6 +29,11 @@ export default async function AdminLoginPage({
           This account does not have access to the admin console. Sign in with an active staff account.
         </p>
       ) : null}
+      {error === 'invitation-expired' ? (
+        <p role="alert" className="rounded-lg border border-border bg-muted p-3 text-sm leading-relaxed">
+          This staff invitation has expired. Ask an administrator to reissue it.
+        </p>
+      ) : null}
 
       <LoginForm surface="admin" next={next} />
 

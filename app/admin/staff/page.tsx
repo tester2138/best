@@ -15,13 +15,11 @@ export default async function StaffPage() {
     query<RawStaff>(
       `select p.id as user_id, p.email, p.full_name, sa.role, sa.status, sa.scope_mode,
               coalesce(array_agg(b.name order by b.name) filter (where b.id is not null), '{}') as scopes,
-              coalesce(array_agg(sc.brand_id::text order by b.name) filter (where sc.brand_id is not null), '{}') as scope_brand_ids,
-              coalesce(u."twoFactorEnabled", false) as mfa_enabled
+              coalesce(array_agg(sc.brand_id::text order by b.name) filter (where sc.brand_id is not null), '{}') as scope_brand_ids
          from public.staff_access sa join public.profiles p on p.id = sa.user_id
          left join public.staff_brand_scopes sc on sc.user_id = sa.user_id
          left join public.brands b on b.id = sc.brand_id
-         left join public."user" u on u.id = p.id
-        group by p.id, sa.user_id, sa.role, sa.status, sa.scope_mode, u."twoFactorEnabled"
+        group by p.id, sa.user_id, sa.role, sa.status, sa.scope_mode
         order by p.full_name nulls last, p.email`,
     ),
     query<BrandOption>(`select id, name from public.brands order by name`),

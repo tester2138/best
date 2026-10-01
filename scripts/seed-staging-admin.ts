@@ -1,17 +1,15 @@
 /**
  * Seeds a staging-only staff admin for local/preview testing of the admin
  * panel. NEVER run against production: it creates a real super-admin account
- * with a known password and a known TOTP secret.
+ * with a known password.
  *
  * Usage: pnpm exec tsx scripts/seed-staging-admin.ts
  *
  * Credentials (staging only):
  *   email:    staging-admin@bestforex.io
  *   password: StagingAdmin2026!x
- *   TOTP:     secret printed below; compute codes with
- *             `pnpm exec tsx scripts/seed-staging-admin.ts --code`
  */
-import { randomUUID, createHmac } from 'node:crypto'
+import { randomUUID } from 'node:crypto'
 import { Pool } from 'pg'
 
 // Direct file imports: the better-auth exports map blocks subpath imports.
@@ -23,37 +21,12 @@ async function loadAuthCrypto() {
 
 const EMAIL = 'staging-admin@bestforex.io'
 const PASSWORD = 'StagingAdmin2026!x'
-// Known staging TOTP secret.
-const TOTP_SECRET = 'JBSWY3DPEHPK3PXPJBSWY3DPEHPK3PXP'
-
-function totpCode(secret: string, timeStep = Math.floor(Date.now() / 30000)): string {
-  const key = Buffer.from(secret, 'utf8')
-  const counter = Buffer.alloc(8)
-  counter.writeUInt32BE(Math.floor(timeStep / 2 ** 32), 0)
-  counter.writeUInt32BE(timeStep % 2 ** 32, 4)
-  const digest = createHmac('sha1', key).update(counter).digest()
-  const offset = digest[digest.length - 1] & 0xf
-  const code = ((digest[offset] & 0x7f) << 24) | (digest[offset + 1] << 16) | (digest[offset + 2] << 8) | digest[offset + 3]
-  return String(code % 1_000_000).padStart(6, '0')
-}
-
-if (process.argv.includes('--code')) {
-  console.log(totpCode(TOTP_SECRET))
-  process.exit(0)
-}
 
 const pool = new Pool({ connectionString: process.env.DATABASE_URL })
 
 async function main() {
-  const { hashPassword, symmetricEncrypt } = await loadAuthCrypto()
+  const { hashPassword } = await loadAuthCrypto()
   const hashed = await hashPassword(PASSWORD)
-  // Better Auth stores the TOTP secret encrypted with the auth secret
-  // (symmetricEncrypt with key = BETTER_AUTH_SECRET, bare hex when no
-  // BETTER_AUTH_SECRETS array is configured).
-  const encryptedTotpSecret = await symmetricEncrypt({
-    key: process.env.BETTER_AUTH_SECRET!,
-    data: TOTP_SECRET,
-  })
   const client = await pool.connect()
   try {
     await client.query('begin')
@@ -61,13 +34,13 @@ async function main() {
     let userId: string
     if (existing.rows.length > 0) {
       userId = existing.rows[0].id
-      await client.query(`update public."user" set "twoFactorEnabled" = true where id = $1`, [userId])
+      await client.query(`update public."user" set "twoFactorEnabled" = false where id = $1`, [userId])
       console.log(`[v0] reusing existing user ${userId}`)
     } else {
       userId = randomUUID()
       await client.query(
         `insert into public."user" (id, name, email, "emailVerified", "twoFactorEnabled", "createdAt", "updatedAt")
-         values ($1, $2, $3, false, true, now(), now())`,
+         values ($1, $2, $3, false, false, now(), now())`,
         [userId, 'Staging Admin', EMAIL],
       )
     }
@@ -92,20 +65,12 @@ async function main() {
       [userId, EMAIL],
     )
 
-    // Verified TOTP factor with the known staging secret.
     await client.query(`delete from public."twoFactor" where "userId" = $1`, [userId])
-    await client.query(
-      `insert into public."twoFactor" (id, "userId", secret, "backupCodes", verified, "failedVerificationCount", "createdAt", "updatedAt")
-       values ($1, $2, $3, '[]', true, 0, now(), now())`,
-      [randomUUID(), userId, encryptedTotpSecret],
-    )
 
     await client.query('commit')
     console.log('[v0] staging admin ready:')
     console.log('[v0]   email:', EMAIL)
     console.log('[v0]   password:', PASSWORD)
-    console.log('[v0]   totp secret:', TOTP_SECRET)
-    console.log('[v0]   current code:', totpCode(TOTP_SECRET))
   } catch (err) {
     await client.query('rollback')
     throw err

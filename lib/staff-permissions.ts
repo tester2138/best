@@ -38,14 +38,3 @@ const ADMIN_PERMISSIONS: Record<StaffPermission, true> = {
 export function roleHasPermission(role: StaffRole, permission: StaffPermission): boolean {
   return role !== 'merchant' && ADMIN_PERMISSIONS[permission]
 }
-
-export function isMfaSessionFresh(
-  enabled: boolean,
-  verifiedFactorCreatedAt: Date | string | null,
-  sessionCreatedAt: Date | string | null,
-): boolean {
-  if (!enabled || !verifiedFactorCreatedAt || !sessionCreatedAt) return false
-  const factorTime = new Date(verifiedFactorCreatedAt).getTime()
-  const sessionTime = new Date(sessionCreatedAt).getTime()
-  return Number.isFinite(factorTime) && Number.isFinite(sessionTime) && sessionTime >= factorTime
-}

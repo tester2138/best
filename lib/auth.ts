@@ -1,6 +1,5 @@
 import { betterAuth } from 'better-auth'
 import { nextCookies } from 'better-auth/next-js'
-import { twoFactor } from 'better-auth/plugins/two-factor'
 import { getPool, query } from '@/lib/portal/db'
 import { isAccountCreationAllowed } from '@/lib/portal/creation-context'
 import { sendEmail } from '@/lib/email/send'
@@ -113,16 +112,8 @@ export const auth = betterAuth({
     storage: 'database',
   },
   // Lets server actions (actions/auth.ts) set/clear the session cookie when
-  // they call auth.api.signInEmail / signOut. Must be the last plugin.
-  plugins: [
-    twoFactor({
-      issuer: 'BestForex.io',
-      totpOptions: { digits: 6, period: 30, window: 1 },
-      twoFactorCookieMaxAge: 300,
-      accountLockout: { enabled: true, maxFailedAttempts: 5, durationSeconds: 900 },
-    }),
-    nextCookies(),
-  ],
+  // they call auth.api.signInEmail / signOut.
+  plugins: [nextCookies()],
   databaseHooks: {
     user: {
       create: {

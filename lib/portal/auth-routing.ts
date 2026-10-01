@@ -7,7 +7,6 @@ export const AUTH_SURFACE_PATHS: Record<
     login: string
     forgotPassword: string
     reset: string
-    security: string
     setPassword: string
   }
 > = {
@@ -16,7 +15,6 @@ export const AUTH_SURFACE_PATHS: Record<
     login: '/admin/login',
     forgotPassword: '/admin/forgot-password',
     reset: '/admin/reset',
-    security: '/admin/security',
     setPassword: '/admin/set-password',
   },
   business: {
@@ -24,7 +22,6 @@ export const AUTH_SURFACE_PATHS: Record<
     login: '/business/login',
     forgotPassword: '/business/forgot-password',
     reset: '/business/reset',
-    security: '/business/security',
     setPassword: '/business/set-password',
   },
 }
@@ -63,7 +60,6 @@ export function isAuthSurfaceFlowPath(surface: AuthSurface, pathname: string): b
     paths.login,
     paths.forgotPassword,
     paths.reset,
-    paths.security,
     paths.setPassword,
   ].some((path) => isPathOrDescendant(pathname, path))
 }

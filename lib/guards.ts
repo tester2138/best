@@ -3,7 +3,7 @@ import { headers } from 'next/headers'
 import { auth } from '@/lib/auth'
 import { query, queryOne } from '@/lib/portal/db'
 import { Err } from '@/lib/portal/result'
-import { isMfaSessionFresh, roleHasPermission, type StaffPermission, type StaffRole } from '@/lib/staff-permissions'
+import { roleHasPermission, type StaffPermission, type StaffRole } from '@/lib/staff-permissions'
 import type { Brand } from '@/types/portal'
 
 /**
@@ -14,6 +14,8 @@ import type { Brand } from '@/types/portal'
  * of them before touching data, and every brand-scoped query filters by the
  * brand id returned here. This is defense layer 2/3 (layer 1 is middleware).
  */
+
+const FORCE_PASSWORD_CHANGE = (process.env.FORCE_PASSWORD_CHANGE ?? 'true') !== 'false'
 
 export interface SessionUser {
   id: string
@@ -38,10 +40,8 @@ export async function requireUser(): Promise<SessionUser> {
 }
 
 /**
- * Require an active staff role, the permission, and a session minted after the
- * verified TOTP factor. Better Auth withholds a session during the sign-in
- * challenge; the timestamp check also invalidates sessions created before MFA
- * was enabled or replaced.
+ * Require an active staff role, the requested permission, and a changed
+ * password when first-login password changes are enabled.
  */
 export async function requireStaff(permission: StaffPermission = 'dashboard:read'): Promise<StaffActor> {
   const session = await auth.api.getSession({ headers: await headers() })
@@ -52,8 +52,11 @@ export async function requireStaff(permission: StaffPermission = 'dashboard:read
     name: session.user.name ?? null,
   }
 
-  const [profile, assignment, mfaState] = await Promise.all([
-    queryOne<{ role: string }>(`select role from public.profiles where id = $1`, [user.id]),
+  const [profile, assignment] = await Promise.all([
+    queryOne<{ role: string; must_change_password: boolean }>(
+      `select role, must_change_password from public.profiles where id = $1`,
+      [user.id],
+    ),
     queryOne<{
       role: Exclude<StaffRole, 'super_admin' | 'merchant'>
       status: string
@@ -71,20 +74,6 @@ export async function requireStaff(permission: StaffPermission = 'dashboard:read
          from public.staff_access sa where sa.user_id = $1`,
       [user.id],
     ),
-    queryOne<{
-      enabled: boolean
-      verified: boolean | null
-      factor_created_at: string | null
-    }>(
-      `select u."twoFactorEnabled" as enabled,
-              tf.verified,
-              tf."createdAt"::text as factor_created_at
-         from public."user" u
-         left join public."twoFactor" tf on tf."userId" = u.id
-        where u.id = $1`,
-      [user.id],
-    ),
-
   ])
 
   let role: StaffRole | null = null
@@ -95,11 +84,8 @@ export async function requireStaff(permission: StaffPermission = 'dashboard:read
   if (role !== 'super_admin' && assignment?.invitation_expired) {
     throw new Err('Staff invitation expired. Ask an administrator to reissue it.', 'forbidden')
   }
-  if (!mfaState?.enabled || mfaState.verified !== true) {
-    throw new Err('Multi-factor authentication is required for staff access', 'forbidden')
-  }
-  if (!isMfaSessionFresh(mfaState.enabled, mfaState.factor_created_at, session.session.createdAt)) {
-    throw new Err('Sign in again and complete multi-factor authentication', 'forbidden')
+  if (FORCE_PASSWORD_CHANGE && profile?.must_change_password) {
+    throw new Err('Password change required before staff access.', 'forbidden')
   }
   if (!roleHasPermission(role, permission)) throw new Err('Not found', 'not_found')
 

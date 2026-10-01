@@ -192,67 +192,6 @@ export async function setStaffStatus(raw: unknown) {
   })
 }
 
-export async function completeStaffMfaEnrollment() {
-  return run(async () => {
-    const session = await auth.api.getSession({ headers: await headers() })
-    const userId = session?.user?.id
-    const sessionId = session?.session?.id
-    if (!userId || !sessionId) throw new Err('Sign in again to complete security setup.', 'forbidden')
-
-    const actor = await queryOne<{
-      id: string
-      email: string
-      role: string
-      staff_status: string | null
-      two_factor_enabled: boolean
-      factor_verified: boolean | null
-    }>(
-      `select p.id, lower(p.email) as email, p.role, sa.status as staff_status,
-              coalesce(u."twoFactorEnabled", false) as two_factor_enabled,
-              tf.verified as factor_verified
-         from public.profiles p
-         join public."user" u on u.id = p.id
-         left join public.staff_access sa on sa.user_id = p.id
-         left join public."twoFactor" tf on tf."userId" = p.id
-        where p.id = $1`,
-      [userId],
-    )
-    if (!actor || (actor.role !== 'admin' && actor.staff_status !== 'active')) {
-      throw new Err('Not found', 'not_found')
-    }
-    if (!actor.two_factor_enabled || actor.factor_verified !== true) {
-      throw new Err('Verify your authenticator before completing staff security setup.', 'forbidden')
-    }
-
-    const acceptedInvitations = await query<{ id: string }>(
-      `update public.staff_invitations set status = 'accepted', accepted_at = now()
-        where lower(email) = $1 and status = 'pending' and expires_at > now()
-        returning id`,
-      [actor.email],
-    )
-    if (actor.role !== 'admin' && acceptedInvitations.length === 0) {
-      const expiredInvitation = await queryOne<{ expired: boolean }>(
-        `select exists (
-           select 1 from public.staff_invitations
-            where lower(email) = $1 and status in ('pending', 'expired') and expires_at <= now()
-         ) as expired`,
-        [actor.email],
-      )
-      if (expiredInvitation?.expired) {
-        throw new Err('Staff invitation expired. Ask an administrator to reissue it.', 'forbidden')
-      }
-    }
-    await query(
-      `delete from public.session where "userId" = $1 and id <> $2`,
-      [actor.id, sessionId],
-    )
-    await audit({ id: actor.id, email: actor.email }, null, 'staff.mfa.enrolled', actor.id, {
-      priorSessionsInvalidated: true,
-    })
-    return { ok: true }
-  })
-}
-
 export async function reissueStaffInvitation(raw: unknown) {
   return run(async () => {
     const actor = await requireAdmin()

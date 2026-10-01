@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import { isMfaSessionFresh, roleHasPermission, type StaffPermission, type StaffRole } from './staff-permissions'
+import { roleHasPermission, type StaffPermission, type StaffRole } from './staff-permissions'
 
 const permissions: StaffPermission[] = [
   'dashboard:read', 'brokers:read', 'brokers:manage', 'editorial:read', 'editorial:write',
@@ -33,15 +33,6 @@ test('every admin staff role has full permissions and merchants have none', () =
   for (const permission of permissions) {
     assert.equal(roleHasPermission('merchant', permission), false, permission)
   }
-})
-
-test('MFA freshness rejects pre-enrollment sessions and invalid timestamps', () => {
-  const factor = '2026-09-30T12:00:00.000Z'
-  assert.equal(isMfaSessionFresh(true, factor, '2026-09-30T11:59:59.000Z'), false)
-  assert.equal(isMfaSessionFresh(true, factor, '2026-09-30T12:00:00.000Z'), true)
-  assert.equal(isMfaSessionFresh(false, factor, '2026-09-30T12:00:01.000Z'), false)
-  assert.equal(isMfaSessionFresh(true, factor, null), false)
-  assert.equal(isMfaSessionFresh(true, 'invalid', '2026-09-30T12:00:01.000Z'), false)
 })
 
 const roles: StaffRole[] = ['super_admin', 'editor_publisher', 'commercial_manager', 'support_reviewer', 'analyst', 'merchant']
