@@ -1,4 +1,16 @@
 import Link from 'next/link'
+import {
+  Activity,
+  ArrowUpRight,
+  BookOpen,
+  FileText,
+  Inbox,
+  Megaphone,
+  ShieldCheck,
+  Tag,
+  Users,
+  type LucideIcon,
+} from 'lucide-react'
 import { query, queryOne } from '@/lib/portal/db'
 import { hasGlobalStaffScope, requireStaff } from '@/lib/guards'
 import { roleHasPermission } from '@/lib/staff-permissions'
@@ -133,37 +145,61 @@ export default async function AdminDashboardPage() {
     ...(canReadEditorial ? [{ label: 'Published content', value: published, href: '/admin/news' }] : []),
   ]
 
-  return (
-    <div className="flex flex-col gap-8">
-      <div>
-        <h1 className="text-2xl font-semibold tracking-tight">Dashboard</h1>
-        <p className="mt-1 text-sm text-muted-foreground">Live operational overview</p>
-      </div>
+  const statIcons: Record<string, LucideIcon> = {
+    'Pending drafts': FileText,
+    'New broker claims': Users,
+    'Verification review due': ShieldCheck,
+    'Active paid campaigns': Megaphone,
+    'Offers ending within 7 days': Tag,
+    'Open enquiries': Inbox,
+    'Published content': BookOpen,
+  }
 
-      <section aria-label="Operational metrics" className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+  return (
+    <div className="flex flex-col gap-9">
+      <header className="admin-page-heading">
+        <p className="admin-eyebrow">Operations</p>
+        <h1 className="text-2xl font-semibold tracking-tight">Dashboard</h1>
+        <p className="text-sm text-muted-foreground">Live operational overview</p>
+      </header>
+
+      <section aria-label="Operational metrics" className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
         {stats.map((stat) => {
-          const content = (
-            <Card className="h-full p-5 transition-colors hover:bg-muted/50">
-              <div className="text-3xl font-semibold tabular-nums">{stat.value}</div>
-              <div className="mt-1 text-sm text-muted-foreground">{stat.label}</div>
-            </Card>
+          const Icon = statIcons[stat.label] ?? Activity
+          return (
+            <Link key={stat.label} href={stat.href} className="admin-metric-link">
+              <Card className="admin-metric-card h-full p-5 sm:p-6">
+                <div className="flex items-start justify-between gap-4">
+                  <div className="admin-metric-value text-4xl font-semibold tabular-nums">{stat.value}</div>
+                  <span className="admin-metric-icon">
+                    <Icon aria-hidden="true" className="size-5" />
+                  </span>
+                </div>
+                <div className="mt-5 flex items-center justify-between gap-3">
+                  <span className="admin-metric-label">{stat.label}</span>
+                  <ArrowUpRight aria-hidden="true" className="admin-metric-arrow size-4" />
+                </div>
+              </Card>
+            </Link>
           )
-          return <Link key={stat.label} href={stat.href}>{content}</Link>
         })}
       </section>
 
-      <section aria-labelledby="activity-heading">
-        <h2 id="activity-heading" className="mb-3 text-sm font-semibold">Recent activity</h2>
-        <Card className="divide-y divide-border">
+      <section aria-labelledby="activity-heading" className="flex flex-col gap-3">
+        <div className="flex items-center justify-between gap-4">
+          <h2 id="activity-heading" className="text-lg font-semibold">Recent activity</h2>
+          <p className="text-sm text-muted-foreground">Latest {recent.length} events</p>
+        </div>
+        <Card className="admin-activity-list divide-y divide-border">
           {recent.length === 0 ? <div className="p-4 text-sm text-muted-foreground">No activity yet.</div> : null}
           {recent.map((row) => (
-            <div key={row.id} className="flex flex-wrap items-center justify-between gap-4 p-4 text-sm">
-              <div className="flex min-w-0 flex-col">
-                <span className="font-medium">{row.action}</span>
-                {row.target ? <span className="truncate text-muted-foreground">{row.target}</span> : null}
+            <div key={row.id} className="admin-activity-row flex flex-wrap items-center justify-between gap-4">
+              <div className="flex min-w-0 flex-col gap-1">
+                <span className="admin-activity-event text-sm">{row.action}</span>
+                {row.target ? <span className="break-words text-sm text-muted-foreground">{row.target}</span> : null}
               </div>
-              <div className="flex flex-col items-end text-xs text-muted-foreground">
-                <span>{row.actor_email ?? 'system'}</span>
+              <div className="admin-activity-meta flex min-w-0 flex-col items-end text-sm">
+                <span className="max-w-full break-all">{row.actor_email ?? 'system'}</span>
                 <time dateTime={row.created_at}>{new Date(row.created_at).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' })}</time>
               </div>
             </div>

@@ -118,13 +118,14 @@ export default async function AdminBrandsPage({
   }))
 
   return (
-    <div className="flex flex-col gap-6">
-      <div>
+    <div className="flex flex-col gap-7">
+      <header className="admin-page-heading">
+        <p className="admin-eyebrow">Directory</p>
         <h1 className="text-2xl font-semibold tracking-tight">Broker directory</h1>
-        <p className="mt-1 text-sm text-muted-foreground">
+        <p className="text-sm text-muted-foreground">
           {brands.length.toLocaleString()} broker profiles, including catalog entries not yet provisioned in the portal.
         </p>
-      </div>
+      </header>
       <BrandsClient
         brands={brands}
         canAssign={actor.hasFullAccess}
