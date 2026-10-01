@@ -29,8 +29,10 @@ test('open auth routes stay within their own surface', () => {
   assert.equal(isAuthSurfaceOpenPath('admin', '/business/login'), false)
   assert.equal(isAuthSurfaceOpenPath('business', '/business/login'), true)
   assert.equal(isAuthSurfaceOpenPath('business', '/admin/login'), false)
-  assert.equal(isAuthSurfaceFlowPath('admin', '/admin/security'), true)
+  assert.equal(isAuthSurfaceFlowPath('admin', '/admin/set-password'), true)
   assert.equal(isAuthSurfaceFlowPath('business', '/business/set-password'), true)
+  assert.equal(isAuthSurfaceFlowPath('admin', '/admin/security'), false)
+  assert.equal(isAuthSurfaceFlowPath('business', '/business/security'), false)
   assert.equal(isAuthSurfaceFlowPath('admin', '/business/security'), false)
 })
 

@@ -55,13 +55,10 @@ export default async function AdminLayout({ children }: { children: ReactNode })
     actor = await requireStaff('dashboard:read')
   } catch (error) {
     if (error instanceof Err && error.message.startsWith('Staff invitation expired')) {
-      redirect('/admin/security?invitation=expired')
+      redirect('/admin/login?error=invitation-expired')
     }
-    if (error instanceof Err && error.message.startsWith('Multi-factor')) {
-      redirect('/admin/security?required=1')
-    }
-    if (error instanceof Err && error.message.startsWith('Sign in again')) {
-      redirect('/admin/security?reauth=1')
+    if (error instanceof Err && error.message.startsWith('Password change required')) {
+      redirect('/admin/set-password')
     }
     if (error instanceof Err && error.message === 'Not signed in') {
       const next = pathname.startsWith('/admin/') ? pathname : '/admin'

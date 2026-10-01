@@ -30,7 +30,7 @@ import {
 
 const FORCE_PASSWORD_CHANGE = (process.env.FORCE_PASSWORD_CHANGE ?? 'true') !== 'false'
 
-// Where a signed-in user belongs, based on role, password state, and MFA state.
+// Where a signed-in user belongs, based on role, invitation status, and password state.
 async function destinationFor(
   userId: string,
   surface: AuthSurface = 'business',
@@ -39,10 +39,10 @@ async function destinationFor(
   const prof = await queryOne<{
     role: string
     must_change_password: boolean
-    two_factor_enabled: boolean
+    email: string
   }>(
-    `select p.role, p.must_change_password, u."twoFactorEnabled" as two_factor_enabled
-       from public.profiles p join public."user" u on u.id = p.id where p.id = $1`,
+    `select role, must_change_password, lower(email) as email
+       from public.profiles where id = $1`,
     [userId],
   )
   const staff = await queryOne<{ active: boolean; invitation_expired: boolean }>(
@@ -69,10 +69,17 @@ async function destinationFor(
   const destinationSurface = getPostLoginAuthSurface(surface, hasStaffAccess)
   const paths = AUTH_SURFACE_PATHS[destinationSurface]
   if (prof?.role !== 'admin' && staff?.active && staff.invitation_expired) {
-    return `${paths.security}?invitation=expired`
+    return `${paths.login}?error=invitation-expired`
   }
   if (FORCE_PASSWORD_CHANGE && prof?.must_change_password) return paths.setPassword
-  if (hasStaffAccess && !prof?.two_factor_enabled) return `${paths.security}?required=1`
+  if (hasStaffAccess && prof?.role !== 'admin' && prof?.email) {
+    await query(
+      `update public.staff_invitations
+          set status = 'accepted', accepted_at = now()
+        where lower(email) = $1 and status = 'pending' and expires_at > now()`,
+      [prof.email],
+    )
+  }
   if (surface === 'admin') return getSafeAuthNextPath('admin', next)
   return paths.home
 }
@@ -97,9 +104,6 @@ export async function login(form: FormData) {
       // yet — that caused it to return null and incorrectly throw "Invalid email
       // or password" even though the sign-in had succeeded.
       const signed = await auth.api.signInEmail({ body: { email, password }, headers: await headers() })
-      if ('twoFactorRedirect' in signed && signed.twoFactorRedirect) {
-        return { twoFactorRequired: true as const }
-      }
       if (!signed?.user?.id) throw new Err('Invalid email or password', 'forbidden')
       userId = signed.user.id
     } catch (e) {
@@ -114,15 +118,6 @@ export async function login(form: FormData) {
   // inside a useTransition callback. redirect() throws NEXT_REDIRECT which can
   // bubble out of startTransition as an unhandled error in Next.js 16.
   return result
-}
-
-export async function completeTwoFactorSignIn(surfaceValue: AuthSurface = 'business', next?: string) {
-  return run(async () => {
-    const session = await auth.api.getSession({ headers: await headers() })
-    if (!session?.user?.id) throw new Err('Authentication could not be completed.', 'forbidden')
-    const surface = getAuthSurface(surfaceValue)
-    return { to: await destinationFor(session.user.id, surface, next) }
-  })
 }
 
 export async function setPassword(form: FormData) {
@@ -141,6 +136,7 @@ export async function setPassword(form: FormData) {
     const session = await auth.api.getSession({ headers: await headers() })
     if (!session?.user) throw new Err('Not signed in', 'forbidden')
     const userId = session.user.id
+    const sessionId = session.session.id
     const email = (session.user.email ?? '').toLowerCase()
 
     // Update the credential password via Better Auth's internal adapter (same
@@ -157,6 +153,10 @@ export async function setPassword(form: FormData) {
       `update public.invitations set status = 'accepted'
        where email = $1 and status = 'sent'`,
       [email],
+    )
+    await query(
+      `delete from public.session where "userId" = $1 and id <> $2`,
+      [userId, sessionId],
     )
     await audit({ id: userId, email }, null, 'auth.password.set')
     await sendEmail('password-changed', email, {})

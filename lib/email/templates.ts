@@ -73,7 +73,7 @@ export const TEMPLATES = {
         p('<strong>Email</strong>') + code(escapeHtml(d.email)) +
         p('<strong>Temporary password</strong>') + code(escapeHtml(d.password)) +
         button(escapeHtml(d.loginUrl), 'Sign in to BestForex.io') +
-        p(`You must change this password and enroll an authenticator before staff access is enabled. This invitation expires in ${d.expiresDays} days.`),
+        p(`You must change this password before staff access is enabled. This invitation expires in ${d.expiresDays} days.`),
     ),
   }),
   'brand-added': (d: { brandName: string }) => ({
