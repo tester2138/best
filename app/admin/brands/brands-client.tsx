@@ -101,15 +101,22 @@ export function BrandsClient({
   return (
     <div className="flex flex-col gap-4">
       <div className="admin-directory-toolbar">
-        <div className="admin-directory-search">
-          <Search aria-hidden="true" className="admin-directory-search-icon size-4" />
-          <Input
-            value={q}
-            onChange={(e) => setQ(e.target.value)}
-            placeholder="Search by name or slug"
-            className="admin-directory-search-input"
-            aria-label="Search brands"
-          />
+        <div className="admin-directory-toolbar-main">
+          <div className="admin-directory-search">
+            <Search aria-hidden="true" className="admin-directory-search-icon size-4" />
+            <Input
+              value={q}
+              onChange={(e) => setQ(e.target.value)}
+              placeholder="Search by name or slug"
+              className="admin-directory-search-input"
+              aria-label="Search brokers by name or slug"
+            />
+          </div>
+          <p className="admin-directory-result-count" role="status" aria-live="polite">
+            <span className="admin-directory-result-number">{filtered.length.toLocaleString()}</span>
+            {filtered.length === 1 ? ' broker' : ' brokers'}
+            {filtered.length === brands.length ? ' shown' : ` of ${brands.length.toLocaleString()} total`}
+          </p>
         </div>
         {canAssign ? (
           <Button onClick={openManualAssignment}>
@@ -239,10 +246,7 @@ function AssignDialog({
   useEffect(() => {
     if (selected) return
     if (debounceRef.current) clearTimeout(debounceRef.current)
-    if (term.trim().length < 2) {
-      setResults([])
-      return
-    }
+    if (term.trim().length < 2) return
     debounceRef.current = setTimeout(() => {
       searchCatalogAction(term).then((res) => {
         if (res.ok && res.data) setResults(res.data)
@@ -349,8 +353,10 @@ function AssignDialog({
               value={term}
               disabled={Boolean(initial?.claimRequestId)}
               onChange={(e) => {
-                setTerm(e.target.value)
+                const nextTerm = e.target.value
+                setTerm(nextTerm)
                 setSelected(null)
+                if (nextTerm.trim().length < 2) setResults([])
               }}
               placeholder="Search by name or slug"
               autoComplete="off"

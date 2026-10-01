@@ -6,12 +6,18 @@ import {
   ArrowUpRight,
   BookOpen,
   Building2,
+  ChevronDown,
   ChevronRight,
   ClipboardCheck,
   ClipboardList,
+  FileText,
+  FolderOpen,
+  Image,
   LayoutDashboard,
+  Link2,
   Mail,
   Megaphone,
+  Menu,
   Newspaper,
   PanelTop,
   Settings2,
@@ -32,11 +38,20 @@ import '../business/portal-theme.css'
 import './admin-theme.css'
 
 export const metadata = {
-  title: 'Admin · BestForex Portal',
+  title: 'Admin Console · BestForex.io',
   robots: { index: false, follow: false },
 }
 
-type NavigationSection = 'Overview' | 'Directory' | 'Operations' | 'Editorial' | 'Administration'
+type NavigationSection = 'Overview' | 'Directory' | 'Operations' | 'Growth' | 'Content studio' | 'Administration'
+
+const SECTION_ORDER: NavigationSection[] = [
+  'Overview',
+  'Directory',
+  'Operations',
+  'Growth',
+  'Content studio',
+  'Administration',
+]
 
 type AdminNavItem = {
   href: string
@@ -54,11 +69,16 @@ const NAV: AdminNavItem[] = [
   { href: '/admin/moderation', label: 'Moderation', permission: 'moderation:review', section: 'Operations', icon: ShieldCheck },
   { href: '/admin/leads', label: 'Claim leads', permission: 'leads:read', section: 'Operations', icon: ClipboardCheck },
   { href: '/admin/enquiries', label: 'Merchant requests', permission: 'leads:read', section: 'Operations', icon: Mail, allScopeOnly: true },
-  { href: '/admin/advertising', label: 'Advertising', permission: 'brokers:manage', section: 'Operations', icon: Megaphone, allScopeOnly: true },
-  { href: '/admin/site-banners', label: 'Site banners', permission: 'brokers:manage', section: 'Operations', icon: PanelTop, allScopeOnly: true },
-  { href: '/admin/offers', label: 'Offers', permission: 'brokers:manage', section: 'Operations', icon: Tag },
-  { href: '/admin/content', label: 'Editorial', permission: 'editorial:read', section: 'Editorial', icon: BookOpen },
-  { href: '/admin/news', label: 'News', permission: 'editorial:read', section: 'Editorial', icon: Newspaper },
+  { href: '/admin/offers', label: 'Offers', permission: 'brokers:manage', section: 'Growth', icon: Tag },
+  { href: '/admin/advertising', label: 'Advertising', permission: 'brokers:manage', section: 'Growth', icon: Megaphone, allScopeOnly: true },
+  { href: '/admin/site-banners', label: 'Site banners', permission: 'brokers:manage', section: 'Growth', icon: PanelTop, allScopeOnly: true },
+  { href: '/admin/content', label: 'Editorial', permission: 'editorial:read', section: 'Content studio', icon: BookOpen },
+  { href: '/admin/news', label: 'News', permission: 'editorial:read', section: 'Content studio', icon: Newspaper },
+  { href: '/admin/authors', label: 'Authors', permission: 'editorial:read', section: 'Content studio', icon: Users },
+  { href: '/admin/categories', label: 'Categories', permission: 'editorial:read', section: 'Content studio', icon: FolderOpen },
+  { href: '/admin/learning', label: 'Learn & glossary', permission: 'editorial:read', section: 'Content studio', icon: FileText },
+  { href: '/admin/sources', label: 'Sources', permission: 'editorial:read', section: 'Content studio', icon: Link2 },
+  { href: '/admin/media', label: 'Media library', permission: 'editorial:read', section: 'Content studio', icon: Image },
   { href: '/admin/audit', label: 'Audit log', permission: 'audit:read', section: 'Administration', icon: ClipboardList },
   { href: '/admin/staff', label: 'Staff & access', permission: 'staff:manage', section: 'Administration', icon: Users },
   { href: '/admin/settings', label: 'Settings', permission: 'settings:manage', section: 'Administration', icon: Settings2 },
@@ -99,7 +119,7 @@ export default async function AdminLayout({ children }: { children: ReactNode })
 
   if (isAuthSurfaceFlowPath('admin', pathname)) {
     return (
-      <div className="portal-theme min-h-screen bg-background text-foreground">
+      <div className="portal-theme admin-auth-shell min-h-screen bg-background text-foreground">
         {children}
         <Toaster />
       </div>
@@ -135,7 +155,7 @@ export default async function AdminLayout({ children }: { children: ReactNode })
   const currentPath = pathname.split('?')[0] || '/admin'
   const activeNav = visibleNav.find((item) => isActiveNavItem(item, currentPath))
   const activePageLabel = activeNav?.label ?? 'Workspace'
-  const navSections = (['Overview', 'Directory', 'Operations', 'Editorial', 'Administration'] as const)
+  const navSections = SECTION_ORDER
     .map((section) => ({
       label: section,
       items: visibleNav.filter((item) => item.section === section),
@@ -144,13 +164,13 @@ export default async function AdminLayout({ children }: { children: ReactNode })
 
   return (
     <div className="admin-app-shell flex min-h-screen bg-background text-foreground">
-      <aside className="admin-sidebar hidden shrink-0 flex-col lg:sticky lg:top-0 lg:flex lg:h-screen lg:w-72" aria-label="Admin sidebar">
+      <aside className="admin-sidebar hidden shrink-0 flex-col lg:sticky lg:top-0 lg:flex lg:h-screen lg:w-64 xl:w-72" aria-label="Admin sidebar">
         <div className="admin-sidebar-brand">
           <Link href="/admin" className="admin-brand" aria-label="BestForex Admin dashboard">
             <span className="admin-brand-mark"><LayoutDashboard aria-hidden="true" className="size-5" /></span>
             <span className="admin-brand-copy">
               <span className="admin-brand-name">BestForex</span>
-              <span className="admin-brand-caption">ADMIN CONSOLE</span>
+              <span className="admin-brand-caption">ADMIN WORKSPACE</span>
             </span>
           </Link>
         </div>
@@ -180,7 +200,7 @@ export default async function AdminLayout({ children }: { children: ReactNode })
         <header className="admin-topbar sticky top-0 z-20">
           <div className="admin-topbar-desktop hidden items-center justify-between gap-6 lg:flex">
             <nav aria-label="Admin breadcrumb" className="admin-page-context">
-              <span>Admin workspace</span>
+              <span className="admin-page-context-root">Workspace</span>
               <ChevronRight aria-hidden="true" className="size-4" />
               <span aria-current="page"><strong>{activePageLabel}</strong></span>
             </nav>
@@ -201,17 +221,40 @@ export default async function AdminLayout({ children }: { children: ReactNode })
                 <ArrowUpRight aria-hidden="true" className="size-4" />
               </Link>
             </div>
-            <nav aria-label="Admin navigation" className="admin-mobile-nav">
-              {visibleNav.map((item) => (
-                <AdminNavLink key={item.href} item={item} pathname={currentPath} mobile />
-              ))}
-            </nav>
+            <div className="admin-mobile-context-row">
+              <nav aria-label="Admin breadcrumb" className="admin-page-context">
+                <span className="admin-page-context-root">Workspace</span>
+                <ChevronRight aria-hidden="true" className="size-4" />
+                <span aria-current="page"><strong>{activePageLabel}</strong></span>
+              </nav>
+              <details className="admin-mobile-menu">
+                <summary className="admin-mobile-menu-trigger">
+                  <Menu aria-hidden="true" className="size-4" />
+                  <span>Menu</span>
+                  <ChevronDown aria-hidden="true" className="admin-mobile-menu-chevron size-4" />
+                </summary>
+                <div className="admin-mobile-menu-panel">
+                  <nav aria-label="Admin navigation" className="admin-mobile-nav">
+                    {navSections.map((section) => (
+                      <section key={section.label} className="admin-nav-section">
+                        <h2 className="admin-nav-section-label">{section.label}</h2>
+                        <div className="admin-nav-group">
+                          {section.items.map((item) => (
+                            <AdminNavLink key={item.href} item={item} pathname={currentPath} mobile />
+                          ))}
+                        </div>
+                      </section>
+                    ))}
+                  </nav>
+                </div>
+              </details>
+            </div>
           </div>
         </header>
 
-        <div className="admin-content mx-auto w-full max-w-screen-2xl flex-1 px-5 py-7 sm:px-8 sm:py-9 xl:px-10">
+        <main className="admin-content mx-auto w-full max-w-screen-2xl flex-1 px-5 py-7 sm:px-8 sm:py-9 xl:px-10">
           {children}
-        </div>
+        </main>
       </div>
       <Toaster />
     </div>
