@@ -56,7 +56,7 @@ export default async function AdminBrandDetailPage({
   const catalogCompany: Record<string, unknown> | undefined = directoryHit ?? brokerHit
 
   const [member, invitation, sections, activity, publicBase, overrideRow] = await Promise.all([
-    canManage || actor.isSuperAdmin ? queryOne<MemberInfo>(
+    canManage || actor.hasFullAccess ? queryOne<MemberInfo>(
       `select m.user_id, p.email, p.full_name, p.must_change_password
          from public.brand_members m
          join public.profiles p on p.id = m.user_id
@@ -64,7 +64,7 @@ export default async function AdminBrandDetailPage({
         limit 1`,
       [id],
     ) : Promise.resolve(null),
-    canManage || actor.isSuperAdmin ? queryOne<{
+    canManage || actor.hasFullAccess ? queryOne<{
       id: string
       status: string
       resend_count: number

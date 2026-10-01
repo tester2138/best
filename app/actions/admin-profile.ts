@@ -36,7 +36,7 @@ function assertKnownSlug(slug: string): string {
 }
 
 async function assertBrokerScope(actor: StaffActor, slug: string): Promise<void> {
-  if (actor.isSuperAdmin) return
+  if (actor.hasFullAccess) return
 
   const brand = await queryOne<{ id: string }>(
     `select id from public.brands where slug = $1`,

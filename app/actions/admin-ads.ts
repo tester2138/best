@@ -16,9 +16,9 @@ import {
 } from '@/lib/ad-campaign-types'
 
 /**
- * Admin banner campaign management. Globally scoped staff with `brokers:manage`
- * (commercial managers and super admins) create, edit, schedule, pause and delete
- * campaigns. Public delivery is client-fetched from /api/ads/[placementKey],
+ * Admin banner campaign management. Active staff with `brokers:manage` can create,
+ * edit, schedule, pause and delete campaigns. Public delivery is client-fetched
+ * from /api/ads/[placementKey],
  * so no public cache revalidation is needed here.
  */
 

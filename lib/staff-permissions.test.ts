@@ -15,21 +15,23 @@ test('super admin has every declared permission and merchant has none', () => {
   }
 })
 
-test('analyst is read-only and cannot access lead contact records or export audit data', () => {
-  assert.equal(roleHasPermission('analyst', 'dashboard:read'), true)
-  assert.equal(roleHasPermission('analyst', 'brokers:read'), true)
-  assert.equal(roleHasPermission('analyst', 'editorial:read'), true)
-  assert.equal(roleHasPermission('analyst', 'audit:read'), true)
-  for (const permission of ['brokers:manage', 'editorial:write', 'moderation:review', 'leads:read', 'leads:manage', 'settings:manage', 'staff:manage', 'audit:export'] as const) {
-    assert.equal(roleHasPermission('analyst', permission), false, permission)
-  }
-})
+test('every admin staff role has full permissions and merchants have none', () => {
+  const adminRoles: StaffRole[] = [
+    'super_admin',
+    'editor_publisher',
+    'commercial_manager',
+    'support_reviewer',
+    'analyst',
+  ]
 
-test('commercial staff can manage brokers and leads but cannot change editorial conclusions', () => {
-  assert.equal(roleHasPermission('commercial_manager', 'brokers:manage'), true)
-  assert.equal(roleHasPermission('commercial_manager', 'leads:manage'), true)
-  for (const permission of ['editorial:write', 'moderation:review', 'settings:manage', 'staff:manage'] as const) {
-    assert.equal(roleHasPermission('commercial_manager', permission), false, permission)
+  for (const role of adminRoles) {
+    for (const permission of permissions) {
+      assert.equal(roleHasPermission(role, permission), true, `${role}:${permission}`)
+    }
+  }
+
+  for (const permission of permissions) {
+    assert.equal(roleHasPermission('merchant', permission), false, permission)
   }
 })
 
