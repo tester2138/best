@@ -1,5 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  experimental: {
+    serverActions: {
+      bodySizeLimit: '5mb',
+    },
+  },
   images: {
     // SEO audit #5/#42: image optimization re-enabled (was `unoptimized: true`).
     // Serves responsive AVIF/WebP for better LCP/CLS on image-heavy pages.

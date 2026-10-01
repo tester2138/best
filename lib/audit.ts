@@ -51,6 +51,8 @@ export type AuditAction =
   | 'admin.campaign.save'
   | 'admin.campaign.status'
   | 'admin.campaign.delete'
+  | 'admin.site_banner.save'
+  | 'admin.site_banner.upload'
   | 'admin.offer.save'
   | 'admin.offer.status'
   | 'admin.offer.delete'

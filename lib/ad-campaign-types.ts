@@ -53,3 +53,13 @@ export interface AdCampaignInput {
   startsAt: string | null
   endsAt: string | null
 }
+
+export interface SiteBannerSettings {
+  placementKey: AdPlacementKey
+  campaignName: string
+  brandName: string
+  imageUrl: string
+  destinationUrl: string
+  altText: string
+  desktopSize: AdCampaignSize
+}
