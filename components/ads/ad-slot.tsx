@@ -2,9 +2,21 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
+import useSWR from 'swr'
 import { cn } from '@/lib/utils'
 import { getAdByPlacement } from '@/data/ads'
-import type { AdPlacementKey, AdSize } from '@/lib/types'
+import type { AdPlacement, AdPlacementKey, AdSize } from '@/lib/types'
+
+/**
+ * Live campaign delivery: the slot renders the static house banner on first
+ * paint (no layout shift, no hydration mismatch), then swaps to the campaign
+ * currently serving in `ad_campaigns` once /api/ads resolves. When the API is
+ * unavailable or returns no campaign, the static banner stays.
+ */
+const adFetcher = async (url: string): Promise<{ ad: AdPlacement | null } | null> => {
+  const res = await fetch(url)
+  return res.ok ? res.json() : null
+}
 
 /** True when the URL is a same-site path (internal link). */
 function isInternal(url: string): boolean {
@@ -37,7 +49,12 @@ const fluidHeightClasses: Record<AdSize, string> = {
 }
 
 export function AdSlot({ placementKey, className, fallback, fluid = false, priority = false }: AdSlotProps) {
-  const ad = getAdByPlacement(placementKey)
+  const { data } = useSWR<{ ad: AdPlacement | null } | null>(
+    `/api/ads/${placementKey}`,
+    adFetcher,
+    { revalidateOnFocus: false, dedupingInterval: 60_000 },
+  )
+  const ad = data?.ad ?? getAdByPlacement(placementKey)
   
   // Show fallback placeholder if no ad found for this placement
   if (!ad) {
