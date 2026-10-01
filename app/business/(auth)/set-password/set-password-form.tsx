@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
 import { setPassword } from '@/app/actions/auth'
+import type { AuthSurface } from '@/lib/portal/auth-routing'
 
 function scorePassword(v: string): { ok: boolean; hint: string } {
   const checks = [/[a-z]/.test(v), /[A-Z]/.test(v), /\d/.test(v), v.length >= 12]
@@ -17,7 +18,7 @@ function scorePassword(v: string): { ok: boolean; hint: string } {
   return { ok, hint: ok ? 'Looks good' : `Needs ${missing.join(', ')}` }
 }
 
-export function SetPasswordForm() {
+export function SetPasswordForm({ surface = 'business' }: { surface?: AuthSurface }) {
   const [pw, setPw] = useState('')
   const [confirm, setConfirm] = useState('')
   const [error, setError] = useState<string | null>(null)
@@ -41,6 +42,7 @@ export function SetPasswordForm() {
 
   return (
     <form action={onSubmit} className="mt-6 flex flex-col gap-4">
+      <input type="hidden" name="surface" value={surface} />
       <div className="flex flex-col gap-1.5">
         <Label htmlFor="password" className="text-[13px] font-medium">
           New password

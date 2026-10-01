@@ -11,15 +11,21 @@ import { queryOne } from '@/lib/portal/db'
  * form pane (right) on white. Stacks on mobile with a compact hero band.
  */
 export default async function AuthLayout({ children }: { children: React.ReactNode }) {
-  const session = await auth.api.getSession({ headers: await headers() })
+  const requestHeaders = await headers()
+  const pathname = requestHeaders.get('x-pathname') ?? requestHeaders.get('next-url') ?? ''
+  const session = await auth.api.getSession({ headers: requestHeaders })
   if (session?.user?.id) {
     const prof = await queryOne<{ role: string; must_change_password: boolean }>(
       `select role, must_change_password from public.profiles where id = $1`,
       [session.user.id],
     )
-    if (prof?.must_change_password) redirect('/business/set-password')
-    else if (prof?.role === 'admin') redirect('/admin')
-    else redirect('/business')
+    if (prof?.must_change_password) {
+      if (pathname !== '/business/set-password') redirect('/business/set-password')
+    } else if (prof?.role === 'admin') {
+      redirect('/admin')
+    } else {
+      redirect('/business')
+    }
   }
   return (
     <main className="flex min-h-screen flex-col lg:flex-row">

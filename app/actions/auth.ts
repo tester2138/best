@@ -11,6 +11,13 @@ import { rateLimit } from '@/lib/rate'
 import { verifyTurnstile } from '@/lib/turnstile'
 import { audit } from '@/lib/audit'
 import { sendEmail } from '@/lib/email/send'
+import {
+  AUTH_SURFACE_PATHS,
+  getAuthSurface,
+  getPostLoginAuthSurface,
+  getSafeAuthNextPath,
+  type AuthSurface,
+} from '@/lib/portal/auth-routing'
 
 /**
  * Auth server actions (Blueprint Section 11.6, adapted to Better Auth).
@@ -24,7 +31,11 @@ import { sendEmail } from '@/lib/email/send'
 const FORCE_PASSWORD_CHANGE = (process.env.FORCE_PASSWORD_CHANGE ?? 'true') !== 'false'
 
 // Where a signed-in user belongs, based on role, password state, and MFA state.
-async function destinationFor(userId: string): Promise<string> {
+async function destinationFor(
+  userId: string,
+  surface: AuthSurface = 'business',
+  next?: unknown,
+): Promise<string> {
   const prof = await queryOne<{
     role: string
     must_change_password: boolean
@@ -49,20 +60,29 @@ async function destinationFor(userId: string): Promise<string> {
             ) as invitation_expired`,
     [userId],
   )
+
+  const hasStaffAccess = prof?.role === 'admin' || staff?.active === true
+  if (surface === 'admin' && !hasStaffAccess) {
+    throw new Err('This account does not have access to the admin console.', 'forbidden')
+  }
+
+  const destinationSurface = getPostLoginAuthSurface(surface, hasStaffAccess)
+  const paths = AUTH_SURFACE_PATHS[destinationSurface]
   if (prof?.role !== 'admin' && staff?.active && staff.invitation_expired) {
-    return '/business/security?invitation=expired'
+    return `${paths.security}?invitation=expired`
   }
-  if (FORCE_PASSWORD_CHANGE && prof?.must_change_password) return '/business/set-password'
-  if (prof?.role === 'admin' || staff?.active) {
-    return prof?.two_factor_enabled ? '/admin' : '/business/security?required=1'
-  }
-  return '/business'
+  if (FORCE_PASSWORD_CHANGE && prof?.must_change_password) return paths.setPassword
+  if (hasStaffAccess && !prof?.two_factor_enabled) return `${paths.security}?required=1`
+  if (surface === 'admin') return getSafeAuthNextPath('admin', next)
+  return paths.home
 }
 
 export async function login(form: FormData) {
   const result = await run(async () => {
     const email = z.string().email().parse(form.get('email')).toLowerCase()
     const password = z.string().min(1).parse(form.get('password'))
+    const surface = getAuthSurface(form.get('surface'))
+    const next = form.get('next')
     const ip = (await headers()).get('x-forwarded-for')?.split(',')[0] ?? 'unknown'
     if (!(await rateLimit('login', `${ip}:${email}`)).ok)
       throw new Err('Too many attempts. Try again in 15 minutes.', 'rate_limited')
@@ -87,7 +107,7 @@ export async function login(form: FormData) {
       throw e
     }
 
-    return { to: await destinationFor(userId) }
+    return { to: await destinationFor(userId, surface, next) }
   })
 
   // Return the redirect destination to the client instead of calling redirect()
@@ -96,15 +116,17 @@ export async function login(form: FormData) {
   return result
 }
 
-export async function completeTwoFactorSignIn() {
+export async function completeTwoFactorSignIn(surfaceValue: AuthSurface = 'business', next?: string) {
   return run(async () => {
     const session = await auth.api.getSession({ headers: await headers() })
     if (!session?.user?.id) throw new Err('Authentication could not be completed.', 'forbidden')
-    return { to: await destinationFor(session.user.id) }
+    const surface = getAuthSurface(surfaceValue)
+    return { to: await destinationFor(session.user.id, surface, next) }
   })
 }
 
 export async function setPassword(form: FormData) {
+  const surface = getAuthSurface(form.get('surface'))
   const result = await run(async () => {
     const pw = z
       .string()
@@ -142,7 +164,23 @@ export async function setPassword(form: FormData) {
 
   if (result.ok) {
     const session = await auth.api.getSession({ headers: await headers() })
-    redirect(session?.user?.id ? await destinationFor(session.user.id) : '/business/login')
+    const paths = AUTH_SURFACE_PATHS[surface]
+    let destination = paths.login
+    if (session?.user?.id) {
+      try {
+        destination = await destinationFor(session.user.id, surface)
+      } catch (error) {
+        if (
+          surface !== 'admin' ||
+          !(error instanceof Err) ||
+          !error.message.startsWith('This account does not have access')
+        ) {
+          throw error
+        }
+        destination = `${paths.login}?error=access-denied`
+      }
+    }
+    redirect(destination)
   }
   return result
 }
@@ -150,6 +188,7 @@ export async function setPassword(form: FormData) {
 export async function requestReset(form: FormData) {
   return run(async () => {
     const email = z.string().email().parse(form.get('email')).toLowerCase()
+    const surface = getAuthSurface(form.get('surface'))
     if (!(await rateLimit('passwordReset', email)).ok)
       throw new Err('Too many requests', 'rate_limited')
 
@@ -159,7 +198,7 @@ export async function requestReset(form: FormData) {
       await auth.api.requestPasswordReset({
         body: {
           email,
-          redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL ?? ''}/business/reset`,
+          redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL ?? ''}${AUTH_SURFACE_PATHS[surface].reset}`,
         },
         headers: await headers(),
       })

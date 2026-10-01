@@ -5,8 +5,15 @@ import { useRouter } from 'next/navigation'
 import { Loader2 } from 'lucide-react'
 import { login, completeTwoFactorSignIn } from '@/app/actions/auth'
 import { authClient } from '@/lib/auth-client'
+import type { AuthSurface } from '@/lib/portal/auth-routing'
 
-export function LoginForm({ next }: { next?: string }) {
+export function LoginForm({
+  next,
+  surface = 'business',
+}: {
+  next?: string
+  surface?: AuthSurface
+}) {
   const [error, setError] = useState<string | null>(null)
   const [pending, startTransition] = useTransition()
   const [twoFactorRequired, setTwoFactorRequired] = useState(false)
@@ -55,7 +62,7 @@ export function LoginForm({ next }: { next?: string }) {
           setError('That verification code could not be accepted.')
           return
         }
-        const completed = await completeTwoFactorSignIn()
+        const completed = await completeTwoFactorSignIn(surface, next)
         if (!completed.ok) {
           setError(completed.error ?? 'Authentication could not be completed.')
           return
@@ -73,6 +80,7 @@ export function LoginForm({ next }: { next?: string }) {
 
   return (
     <form action={onSubmit} className="mt-9 flex flex-col gap-4">
+      <input type="hidden" name="surface" value={surface} />
       {next ? <input type="hidden" name="next" value={next} /> : null}
 
       {!twoFactorRequired ? (
