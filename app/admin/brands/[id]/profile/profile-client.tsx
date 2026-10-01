@@ -38,7 +38,7 @@ export interface PlacementState {
   internal_notes: string | null
 }
 
-interface ProfileEditorProps {
+export interface ProfileEditorProps {
   slug: string
   displayName: string
   hasPortalRecord: boolean

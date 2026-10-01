@@ -6,7 +6,6 @@ import { toast } from 'sonner'
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
 import { Badge } from '@/components/ui/badge'
 import { Switch } from '@/components/ui/switch'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
@@ -29,6 +28,7 @@ import {
   revokeMember,
 } from '@/app/actions/admin'
 import type { Brand, ActionResult } from '@/types/portal'
+import { ProfileEditor, type ProfileEditorProps } from './profile/profile-client'
 
 export interface MemberInfo {
   user_id: string
@@ -73,6 +73,7 @@ export function BrandDetailClient({
   sections,
   activity,
   canManage,
+  profile,
 }: {
   brand: Brand
   member: MemberInfo | null
@@ -80,6 +81,7 @@ export function BrandDetailClient({
   sections: SectionStatusRow[]
   activity: AuditRow[]
   canManage: boolean
+  profile: ProfileEditorProps | null
 }) {
   const router = useRouter()
   const [pending, startTransition] = useTransition()
@@ -122,6 +124,7 @@ export function BrandDetailClient({
       <Tabs defaultValue="overview">
         <TabsList>
           <TabsTrigger value="overview">Overview</TabsTrigger>
+          <TabsTrigger value="brand-information">Brand information</TabsTrigger>
           {canManage ? <TabsTrigger value="member">Member</TabsTrigger> : null}
           <TabsTrigger value="content">Content</TabsTrigger>
           <TabsTrigger value="activity">Activity</TabsTrigger>
@@ -237,6 +240,16 @@ export function BrandDetailClient({
             </div>
           </Card>
             </>
+          )}
+        </TabsContent>
+
+        <TabsContent value="brand-information" className="mt-4">
+          {profile ? (
+            <ProfileEditor {...profile} />
+          ) : (
+            <Card className="p-5 text-sm text-muted-foreground">
+              This brand does not have a public directory profile to edit yet.
+            </Card>
           )}
         </TabsContent>
 
