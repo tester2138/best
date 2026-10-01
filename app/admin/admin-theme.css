@@ -1,0 +1,543 @@
+.admin-app-shell {
+  --background: #f4f7f5;
+  --foreground: #18251f;
+  --card: #ffffff;
+  --card-foreground: #18251f;
+  --popover: #ffffff;
+  --popover-foreground: #18251f;
+  --primary: #087d5c;
+  --primary-foreground: #ffffff;
+  --secondary: color-mix(in srgb, var(--foreground) 5%, var(--card));
+  --secondary-foreground: var(--foreground);
+  --muted: color-mix(in srgb, var(--background) 60%, var(--card));
+  --muted-foreground: #65736c;
+  --accent: color-mix(in srgb, var(--primary) 9%, var(--card));
+  --accent-foreground: var(--primary);
+  --border: color-mix(in srgb, var(--foreground) 10%, var(--card));
+  --input: color-mix(in srgb, var(--foreground) 16%, var(--card));
+  --ring: var(--primary);
+  --radius: 0.9rem;
+
+  min-height: 100vh;
+  background: var(--background);
+  color: var(--foreground);
+  color-scheme: light;
+  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+  letter-spacing: -0.01em;
+}
+
+.admin-sidebar {
+  background: var(--foreground);
+  color: var(--card);
+}
+
+.admin-sidebar-brand {
+  display: flex;
+  min-height: 5.5rem;
+  align-items: center;
+  border-bottom: 1px solid rgb(255 255 255 / 10%);
+  padding: 1.25rem 1.5rem;
+}
+
+.admin-brand,
+.admin-mobile-brand {
+  display: inline-flex;
+  min-width: 0;
+  align-items: center;
+  gap: 0.875rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+.admin-brand-mark {
+  display: grid;
+  width: 2.5rem;
+  height: 2.5rem;
+  flex: none;
+  place-items: center;
+  border-radius: 0.875rem;
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
+
+.admin-brand-copy {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.admin-brand-name {
+  font-size: 1rem;
+  font-weight: 650;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
+
+.admin-brand-caption {
+  color: rgb(255 255 255 / 62%);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  line-height: 1.2;
+}
+
+.admin-sidebar-nav {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.35rem 1rem 1rem;
+  scrollbar-color: rgb(255 255 255 / 24%) transparent;
+  scrollbar-width: thin;
+}
+
+.admin-nav-section + .admin-nav-section {
+  margin-top: 1.5rem;
+}
+
+.admin-nav-section-label {
+  margin: 0 0 0.55rem;
+  padding: 0 0.75rem;
+  color: rgb(255 255 255 / 56%);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.admin-nav-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.admin-nav-link {
+  display: flex;
+  min-height: 2.625rem;
+  align-items: center;
+  gap: 0.75rem;
+  border-radius: 0.8rem;
+  padding: 0.625rem 0.75rem;
+  color: rgb(255 255 255 / 74%);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  line-height: 1.35;
+  text-decoration: none;
+  transition: background-color 160ms ease, color 160ms ease, transform 160ms ease;
+}
+
+.admin-nav-link:hover {
+  background: rgb(255 255 255 / 9%);
+  color: var(--card);
+}
+
+.admin-nav-link.is-active {
+  background: var(--primary);
+  color: var(--primary-foreground);
+  font-weight: 600;
+}
+
+.admin-nav-link:focus-visible,
+.admin-sidebar-business-link:focus-visible,
+.admin-topbar-business-link:focus-visible,
+.admin-mobile-portal-link:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+}
+
+.admin-sidebar .admin-nav-link:focus-visible {
+  outline-color: var(--card);
+}
+
+.admin-sidebar-footer {
+  border-top: 1px solid rgb(255 255 255 / 10%);
+  padding: 1rem;
+}
+
+.admin-sidebar-business-link,
+.admin-topbar-business-link,
+.admin-mobile-portal-link {
+  display: inline-flex;
+  min-height: 2.625rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  border-radius: 0.8rem;
+  padding: 0.625rem 0.75rem;
+  color: inherit;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.35;
+  text-decoration: none;
+  transition: background-color 160ms ease, color 160ms ease;
+}
+
+.admin-sidebar-business-link {
+  width: 100%;
+  justify-content: flex-start;
+  color: rgb(255 255 255 / 78%);
+}
+
+.admin-sidebar-business-link:hover {
+  background: rgb(255 255 255 / 9%);
+  color: var(--card);
+}
+
+.admin-topbar {
+  border-bottom: 1px solid var(--border);
+  background: color-mix(in srgb, var(--card) 92%, transparent);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.admin-topbar-desktop {
+  min-height: 4.25rem;
+  padding: 0 2rem;
+}
+
+.admin-page-context {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--muted-foreground);
+  font-size: 0.9375rem;
+}
+
+.admin-page-context strong {
+  color: var(--foreground);
+  font-weight: 600;
+}
+
+.admin-topbar-business-link {
+  color: var(--muted-foreground);
+}
+
+.admin-topbar-business-link:hover,
+.admin-mobile-portal-link:hover {
+  background: var(--accent);
+  color: var(--primary);
+}
+
+.admin-content h1 {
+  color: var(--foreground);
+  font-size: clamp(1.75rem, 2.2vw, 2rem);
+  font-weight: 650;
+  letter-spacing: -0.045em;
+  line-height: 1.15;
+}
+
+.admin-content h2 {
+  color: var(--foreground);
+  letter-spacing: -0.025em;
+}
+
+.admin-content p {
+  line-height: 1.55;
+}
+
+.admin-content .text-xs {
+  font-size: 0.875rem;
+  line-height: 1.45;
+}
+
+.admin-eyebrow {
+  margin: 0 0 0.55rem;
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.admin-page-heading p:last-child {
+  margin-top: 0.6rem;
+  color: var(--muted-foreground);
+}
+
+.admin-app-shell [data-slot="card"] {
+  border-color: var(--border);
+  border-radius: 1rem;
+  background: var(--card);
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--foreground) 7%, transparent);
+}
+
+.admin-app-shell [data-slot="button"] {
+  border-radius: 0.75rem;
+  font-weight: 600;
+}
+
+.admin-app-shell [data-slot="badge"] {
+  padding: 0.25rem 0.625rem;
+  font-size: 0.875rem;
+  line-height: 1.25;
+}
+
+.admin-app-shell [data-slot="input"],
+.admin-app-shell textarea,
+.admin-app-shell select {
+  border-color: var(--input);
+  border-radius: 0.75rem;
+  background-color: var(--card);
+}
+
+.admin-app-shell [data-slot="table-container"] {
+  scrollbar-color: var(--input) transparent;
+}
+
+.admin-app-shell [data-slot="table"] {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.admin-app-shell [data-slot="table-header"] {
+  background: var(--muted);
+}
+
+.admin-app-shell [data-slot="table-head"] {
+  height: auto;
+  padding: 0.875rem 1rem;
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.admin-app-shell [data-slot="table-cell"] {
+  padding: 0.9rem 1rem;
+}
+
+.admin-app-shell [data-slot="table-row"] {
+  transition: background-color 150ms ease;
+}
+
+.admin-app-shell [data-slot="table-row"]:hover {
+  background: color-mix(in srgb, var(--primary) 4%, var(--card));
+}
+
+.admin-metric-link {
+  display: block;
+  height: 100%;
+  border-radius: 1rem;
+  text-decoration: none;
+}
+
+.admin-metric-card {
+  min-height: 9rem;
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.admin-metric-link:hover .admin-metric-card {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--primary) 28%, var(--border));
+  box-shadow: 0 10px 24px color-mix(in srgb, var(--foreground) 9%, transparent);
+}
+
+.admin-metric-link:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--primary) 42%, transparent);
+  outline-offset: 3px;
+}
+
+.admin-metric-value {
+  color: var(--foreground);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+
+.admin-metric-label {
+  color: var(--muted-foreground);
+  font-size: 0.9375rem;
+  font-weight: 550;
+  line-height: 1.4;
+}
+
+.admin-metric-icon {
+  display: grid;
+  width: 2.75rem;
+  height: 2.75rem;
+  flex: none;
+  place-items: center;
+  border-radius: 0.875rem;
+  background: var(--accent);
+  color: var(--primary);
+}
+
+.admin-metric-arrow {
+  flex: none;
+  color: var(--muted-foreground);
+  transition: color 160ms ease, transform 160ms ease;
+}
+
+.admin-metric-link:hover .admin-metric-arrow {
+  transform: translate(2px, -2px);
+  color: var(--primary);
+}
+
+.admin-activity-list {
+  overflow: hidden;
+}
+
+.admin-activity-row {
+  min-height: 5rem;
+  padding: 1rem 1.25rem;
+  transition: background-color 150ms ease;
+}
+
+.admin-activity-row:hover {
+  background: color-mix(in srgb, var(--background) 75%, var(--card));
+}
+
+.admin-activity-event {
+  color: var(--foreground);
+  font-weight: 600;
+}
+
+.admin-activity-meta {
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+  line-height: 1.45;
+}
+
+.admin-directory-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  background: var(--card);
+  padding: 1rem;
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--foreground) 5%, transparent);
+}
+
+.admin-directory-search {
+  position: relative;
+  width: min(100%, 28rem);
+}
+
+.admin-directory-search-icon {
+  position: absolute;
+  top: 50%;
+  left: 0.9rem;
+  transform: translateY(-50%);
+  color: var(--muted-foreground);
+  pointer-events: none;
+}
+
+.admin-app-shell .admin-directory-search-input {
+  height: 2.75rem;
+  padding-left: 2.7rem;
+}
+
+.admin-table-surface {
+  overflow: hidden;
+  border-color: var(--border);
+  border-radius: 1rem;
+  background: var(--card);
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--foreground) 5%, transparent);
+}
+
+.admin-topbar-mobile {
+  background: var(--card);
+}
+
+.admin-mobile-brand-row {
+  display: flex;
+  min-height: 4.25rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.625rem 1rem;
+}
+
+.admin-mobile-brand {
+  color: var(--foreground);
+  gap: 0.625rem;
+}
+
+.admin-mobile-brand .admin-brand-mark {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.75rem;
+}
+
+.admin-mobile-brand-suffix {
+  color: var(--muted-foreground);
+  font-weight: 500;
+}
+
+.admin-mobile-portal-link {
+  min-height: 2.5rem;
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+}
+
+.admin-mobile-nav {
+  display: flex;
+  gap: 0.35rem;
+  overflow-x: auto;
+  padding: 0 0.875rem 0.75rem;
+  scrollbar-width: none;
+}
+
+.admin-mobile-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.admin-nav-link-mobile {
+  flex: none;
+  min-height: 2.5rem;
+  gap: 0.5rem;
+  border: 1px solid transparent;
+  border-radius: 0.75rem;
+  padding: 0.55rem 0.75rem;
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+}
+
+.admin-nav-link-mobile:hover,
+.admin-nav-link-mobile.is-active {
+  background: var(--accent);
+  color: var(--primary);
+}
+
+.admin-nav-link-mobile.is-active {
+  border-color: color-mix(in srgb, var(--primary) 14%, transparent);
+}
+
+@media (max-width: 639px) {
+  .admin-content {
+    padding-top: 1.5rem;
+    padding-bottom: 2rem;
+  }
+
+  .admin-directory-toolbar {
+    align-items: stretch;
+  }
+
+  .admin-directory-search {
+    width: 100%;
+  }
+
+  .admin-activity-row {
+    align-items: flex-start;
+    padding: 1rem;
+  }
+
+  .admin-activity-meta {
+    align-items: flex-start;
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .admin-app-shell *,
+  .admin-app-shell *::before,
+  .admin-app-shell *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}

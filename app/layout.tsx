@@ -94,7 +94,7 @@ export default async function RootLayout({
   const isBusiness = pathname.startsWith('/business') || pathname.startsWith('/admin')
 
   return (
-    <html lang="en" className={`${inter.variable} ${geistMono.variable}`}>
+    <html lang="en" className={`${inter.variable} ${geistMono.variable} bg-background`}>
       <head>
         {/* Row 181: inline the minimal above-fold paint tokens so the header
             and hero render without waiting for the full stylesheet bundle.

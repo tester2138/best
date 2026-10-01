@@ -3,6 +3,7 @@
 import { useState, useMemo, useTransition, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { Search, UserPlus } from 'lucide-react'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -99,18 +100,26 @@ export function BrandsClient({
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex items-center justify-between gap-4">
-        <Input
-          value={q}
-          onChange={(e) => setQ(e.target.value)}
-          placeholder="Search by name or slug"
-          className="max-w-xs"
-          aria-label="Search brands"
-        />
-        {canAssign ? <Button onClick={openManualAssignment}>Assign a brand</Button> : null}
+      <div className="admin-directory-toolbar">
+        <div className="admin-directory-search">
+          <Search aria-hidden="true" className="admin-directory-search-icon size-4" />
+          <Input
+            value={q}
+            onChange={(e) => setQ(e.target.value)}
+            placeholder="Search by name or slug"
+            className="admin-directory-search-input"
+            aria-label="Search brands"
+          />
+        </div>
+        {canAssign ? (
+          <Button onClick={openManualAssignment}>
+            <UserPlus data-icon="inline-start" />
+            Assign a brand
+          </Button>
+        ) : null}
       </div>
 
-      <div className="rounded-lg border border-border">
+      <div className="admin-table-surface rounded-lg border border-border">
         <Table>
           <TableHeader>
             <TableRow>
