@@ -27,6 +27,7 @@ const NAV: Array<{
   { href: '/admin/leads', label: 'Claim leads', permission: 'leads:read' },
   { href: '/admin/enquiries', label: 'Merchant requests', permission: 'leads:read', allScopeOnly: true },
   { href: '/admin/advertising', label: 'Advertising', permission: 'brokers:manage', allScopeOnly: true },
+  { href: '/admin/site-banners', label: 'Site banners', permission: 'brokers:manage', allScopeOnly: true },
   { href: '/admin/offers', label: 'Offers', permission: 'brokers:manage' },
   { href: '/admin/content', label: 'Editorial', permission: 'editorial:read' },
   { href: '/admin/news', label: 'News', permission: 'editorial:read' },

@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useMemo, useState, useTransition } from 'react'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 import {
@@ -257,12 +258,16 @@ export function AdvertisingClient({
         <div>
           <h1 className="text-2xl font-semibold tracking-tight">Advertising</h1>
           <p className="mt-1 text-sm text-muted-foreground">
-            Banner campaigns for the four site placements. The highest-priority
-            active campaign serves each placement; otherwise the static house
-            banner is shown.
+            Manage scheduled campaigns here. The four fixed site banners are edited separately;
+            an active campaign can temporarily take over a placement.
           </p>
         </div>
-        <Button onClick={openCreate} disabled={dbError}>New campaign</Button>
+        <div className="flex flex-wrap gap-2">
+          <Button asChild variant="outline">
+            <Link href="/admin/site-banners">Manage site banners</Link>
+          </Button>
+          <Button onClick={openCreate} disabled={dbError}>New campaign</Button>
+        </div>
       </div>
 
       {dbError && (
@@ -282,10 +287,10 @@ export function AdvertisingClient({
             <Card key={placement} className="flex flex-col gap-1 p-4">
               <span className="font-mono text-xs text-muted-foreground">{placement}</span>
               <span className="text-sm font-medium">
-                {live ? live.campaignName : 'House banner (static)'}
+                {live ? live.campaignName : 'Site banner fallback'}
               </span>
               <span className="text-xs text-muted-foreground">
-                {live ? live.brandName : 'Advertise with BestForex.io'}
+                {live ? live.brandName : 'Managed in Site banners'}
               </span>
             </Card>
           )
@@ -294,8 +299,8 @@ export function AdvertisingClient({
 
       {campaigns.length === 0 && !dbError ? (
         <Card className="p-10 text-center text-sm text-muted-foreground">
-          No campaigns yet. Create the first one to take over a placement from
-          the static house banners.
+          No campaigns yet. Create the first one to temporarily take over a
+          placement from its saved site banner.
         </Card>
       ) : (
         <Card>

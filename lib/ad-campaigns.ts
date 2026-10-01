@@ -1,16 +1,19 @@
 import 'server-only'
 import { query, queryOne } from '@/lib/portal/db'
 import { getAdByPlacement } from '@/data/ads'
-import type {
-  AdCampaignRecord,
-  AdCampaignStatus,
+import {
+  AD_CAMPAIGN_PLACEMENTS,
+  type AdCampaignRecord,
+  type AdCampaignStatus,
+  type SiteBannerSettings,
 } from '@/lib/ad-campaign-types'
 import type { AdPlacement, AdPlacementKey } from '@/lib/types'
 
 /**
  * Banner campaign data access.
  *
- * Admin reads list every campaign; public delivery resolves the single
+ * The campaign manager lists scheduled campaigns separately from the four
+ * fixed site-banner fallbacks. Public delivery resolves the single
  * highest-priority in-window active campaign per placement. Public reads
  * swallow database errors and fall back to the static house banners in
  * `data/ads.ts`, so a missing table or a Neon outage can never break a page.
@@ -43,13 +46,67 @@ export async function listAdCampaigns(): Promise<{
 }> {
   const [campaigns, clock] = await Promise.all([
     query<AdCampaignRecord>(
-      `${CAMPAIGN_SELECT} order by placement_key asc, priority asc, created_at asc`,
+      `${CAMPAIGN_SELECT}
+        where id <> all($1::text[])
+        order by placement_key asc, priority asc, created_at asc`,
+      [[...AD_CAMPAIGN_PLACEMENTS]],
     ),
     queryOne<{ current_time_ms: string }>(
       `select (extract(epoch from now()) * 1000)::bigint::text as current_time_ms`,
     ),
   ])
   return { campaigns, currentTimeMs: Number(clock?.current_time_ms ?? 0) }
+}
+
+const SITE_BANNER_FALLBACK_NAMES: Record<AdPlacementKey, string> = {
+  'horizontal-1': 'House banner 468x60 #1',
+  'horizontal-2': 'House banner 468x60 #2',
+  'square-1': 'House banner 300x250 #1',
+  'square-2': 'House banner 300x250 #2',
+}
+
+export function getFallbackSiteBannerSettings(): SiteBannerSettings[] {
+  return AD_CAMPAIGN_PLACEMENTS.map((placementKey) => {
+    const ad = getAdByPlacement(placementKey)
+    if (!ad) throw new Error(`Static banner fallback is missing for ${placementKey}.`)
+    return {
+      placementKey,
+      campaignName: SITE_BANNER_FALLBACK_NAMES[placementKey],
+      brandName: ad.brandName,
+      imageUrl: ad.imageUrl,
+      destinationUrl: ad.destinationUrl,
+      altText: ad.altText,
+      desktopSize: ad.desktopSize,
+    }
+  })
+}
+
+/** Fixed fallback banners are edited separately from scheduled campaigns. */
+export async function listSiteBannerSettings(): Promise<SiteBannerSettings[]> {
+  const rows = await query<AdCampaignRecord>(
+    `${CAMPAIGN_SELECT}
+      where id = any($1::text[])
+        and campaign_type = 'house'`,
+    [[...AD_CAMPAIGN_PLACEMENTS]],
+  )
+  const saved = new Map(rows.map((row) => [row.placementKey, row]))
+  const fallbacks = new Map(
+    getFallbackSiteBannerSettings().map((banner) => [banner.placementKey, banner]),
+  )
+
+  return AD_CAMPAIGN_PLACEMENTS.map((placementKey) => {
+    const campaign = saved.get(placementKey)
+    if (!campaign) return fallbacks.get(placementKey)!
+    return {
+      placementKey,
+      campaignName: campaign.campaignName,
+      brandName: campaign.brandName,
+      imageUrl: campaign.imageUrl,
+      destinationUrl: campaign.destinationUrl,
+      altText: campaign.altText,
+      desktopSize: campaign.desktopSize,
+    }
+  })
 }
 
 /**

@@ -88,7 +88,8 @@ export default async function AdminDashboardPage() {
     canManageOffers && globalScope
       ? optionalCount(
           `select count(*)::text as n from public.ad_campaigns
-            where status = 'active'
+            where campaign_type = 'paid'
+              and status = 'active'
               and (starts_at is null or starts_at <= now())
               and (ends_at is null or ends_at >= now())`,
         )
@@ -126,7 +127,7 @@ export default async function AdminDashboardPage() {
     ...(canReview ? [{ label: 'Pending drafts', value: drafts, href: '/admin/moderation' }] : []),
     ...(canReadLeads ? [{ label: 'New broker claims', value: claims, href: '/admin/leads' }] : []),
     { label: 'Verification review due', value: verificationDue, href: '/admin/brands' },
-    ...(activeCampaigns !== null ? [{ label: 'Active banner campaigns', value: activeCampaigns, href: '/admin/advertising' }] : []),
+    ...(activeCampaigns !== null ? [{ label: 'Active paid campaigns', value: activeCampaigns, href: '/admin/advertising' }] : []),
     ...(endingOffers !== null ? [{ label: 'Offers ending within 7 days', value: endingOffers, href: '/admin/offers' }] : []),
     ...(canReadLeads && globalScope ? [{ label: 'Open enquiries', value: openEnquiries, href: '/admin/enquiries' }] : []),
     ...(canReadEditorial ? [{ label: 'Published content', value: published, href: '/admin/news' }] : []),
