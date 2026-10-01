@@ -68,4 +68,3 @@ GRANT UPDATE (
 ) ON TABLE public.brands TO bestforex_preview_runtime;
 
 GRANT SELECT ON TABLE public.brands TO bestforex_preview_runtime;
-GRANT USAGE, SELECT ON SEQUENCE public.brands_id_seq TO bestforex_preview_runtime;

@@ -2,6 +2,7 @@ CREATE TABLE IF NOT EXISTS public.ad_campaigns (
   id TEXT PRIMARY KEY,
   placement_key TEXT NOT NULL CHECK (placement_key IN ('horizontal-1', 'horizontal-2', 'square-1', 'square-2')),
   campaign_name TEXT NOT NULL,
+  campaign_type TEXT NOT NULL DEFAULT 'paid' CHECK (campaign_type IN ('paid', 'house')),
   brand_name TEXT NOT NULL,
   image_url TEXT NOT NULL,
   destination_url TEXT NOT NULL,
@@ -57,13 +58,13 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.ad_campaigns TO bestforex_p
 GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.admin_offers TO bestforex_preview_runtime;
 
 INSERT INTO public.ad_campaigns (
-  id, placement_key, campaign_name, brand_name, image_url, destination_url, alt_text,
+  id, placement_key, campaign_name, campaign_type, brand_name, image_url, destination_url, alt_text,
   label, desktop_size, mobile_size, priority, status
 ) VALUES
-  ('horizontal-1', 'horizontal-1', 'House banner 468x60 #1', 'Advertise with BestForex.io', '/ads/banner-468x60-1.jpg', '/media-kit', 'Advertise with BestForex.io — Reach active forex traders', '', '468x60', '468x60', 1, 'active'),
-  ('horizontal-2', 'horizontal-2', 'House banner 468x60 #2', 'Advertise with BestForex.io', '/ads/banner-468x60-2.jpg', '/media-kit', 'Grow your forex brand — Advertise with BestForex.io', '', '468x60', '468x60', 1, 'active'),
-  ('square-1', 'square-1', 'House banner 300x250 #1', 'Advertise with BestForex.io', '/ads/banner-300x250-1.jpg', '/media-kit', 'Advertise with BestForex.io — Media kit and ad inventory', '', '300x250', '300x250', 1, 'active'),
-  ('square-2', 'square-2', 'House banner 300x250 #2', 'Advertise with BestForex.io', '/ads/banner-300x250-2.jpg', '/media-kit', 'Reach 1.5M+ forex traders — Advertise on BestForex.io', '', '300x250', '300x250', 1, 'active')
+  ('horizontal-1', 'horizontal-1', 'House banner 468x60 #1', 'house', 'Advertise with BestForex.io', '/ads/banner-468x60-1.jpg', '/media-kit', 'Advertise with BestForex.io — Reach active forex traders', '', '468x60', '468x60', 1, 'active'),
+  ('horizontal-2', 'horizontal-2', 'House banner 468x60 #2', 'house', 'Advertise with BestForex.io', '/ads/banner-468x60-2.jpg', '/media-kit', 'Grow your forex brand — Advertise with BestForex.io', '', '468x60', '468x60', 1, 'active'),
+  ('square-1', 'square-1', 'House banner 300x250 #1', 'house', 'Advertise with BestForex.io', '/ads/banner-300x250-1.jpg', '/media-kit', 'Advertise with BestForex.io — Media kit and ad inventory', '', '300x250', '300x250', 1, 'active'),
+  ('square-2', 'square-2', 'House banner 300x250 #2', 'house', 'Advertise with BestForex.io', '/ads/banner-300x250-2.jpg', '/media-kit', 'Reach 1.5M+ forex traders — Advertise on BestForex.io', '', '300x250', '300x250', 1, 'active')
 ON CONFLICT (id) DO NOTHING;
 
 INSERT INTO public.admin_offers (
