@@ -20,6 +20,7 @@ const NAV: Array<{
 }> = [
   { href: '/admin', label: 'Dashboard', permission: 'dashboard:read' },
   { href: '/admin/brands', label: 'Brokers', permission: 'brokers:read' },
+  { href: '/admin/featured-brokers', label: 'Featured brokers', permission: 'settings:manage' },
   { href: '/admin/moderation', label: 'Moderation', permission: 'moderation:review' },
   { href: '/admin/leads', label: 'Claim leads', permission: 'leads:read' },
   { href: '/admin/enquiries', label: 'Merchant requests', permission: 'leads:read', allScopeOnly: true },

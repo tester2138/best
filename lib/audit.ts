@@ -54,6 +54,7 @@ export type AuditAction =
   | 'admin.offer.save'
   | 'admin.offer.status'
   | 'admin.offer.delete'
+  | 'admin.featured_brokers.update'
   | 'enquiry.status'
   | 'staff.invite'
   | 'staff.access.update'

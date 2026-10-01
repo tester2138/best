@@ -5,6 +5,7 @@ import { brokers as editorialBrokers } from '@/data/brokers'
 import { directoryCompanies as editorialDirectory } from '@/data/directory'
 import { query } from '@/lib/portal/db'
 import { applyOverrides } from '@/lib/admin-overrides'
+import { getHomepageFeaturedBrokerSlugs } from '@/lib/homepage-featured-brokers'
 import { isRetailEntityType, type DirectoryCompany, type VerificationStatus } from '@/lib/directory-types'
 import type { Broker } from '@/lib/types'
 
@@ -434,12 +435,26 @@ export async function getPublicTopBrokers(count = 5): Promise<Broker[]> {
 }
 
 export async function getPublicFeaturedBrokers(count = 2): Promise<Broker[]> {
-  const catalog = await getPublicBrokerCatalog()
+  const [slugs, catalog] = await Promise.all([
+    getHomepageFeaturedBrokerSlugs(),
+    getPublicBrokerCatalog(),
+  ])
   const bySlug = new Map(catalog.map((broker) => [broker.slug, broker]))
-  return ['saxo-bank', 'capital-com']
+  const missingSlugs = new Set(slugs.filter((slug) => !bySlug.has(slug)))
+
+  if (missingSlugs.size > 0) {
+    const companies = await getPublicDirectoryCompanies()
+    for (const company of companies) {
+      if (missingSlugs.has(company.slug)) {
+        bySlug.set(company.slug, directoryCompanyToBroker(company))
+      }
+    }
+  }
+
+  return slugs
+    .slice(0, count)
     .flatMap((slug) => {
       const broker = bySlug.get(slug)
       return broker ? [broker] : []
     })
-    .slice(0, count)
 }
