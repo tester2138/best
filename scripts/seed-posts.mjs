@@ -6,14 +6,15 @@
  * rows are refreshed (content edits pick up) and missing rows are inserted.
  *
  * Run from the project root:
- *   node --experimental-vm-modules scripts/seed-posts.mjs
+ *   VERCEL_ENV=development node --experimental-vm-modules scripts/seed-posts.mjs
  *
- * Requires POSTGRES_URL or DATABASE_URL in the environment (or .env.local).
+ * Requires an explicit VERCEL_ENV and its environment-scoped DATABASE_URL.
  */
 
 import { readFileSync } from 'fs'
 import { resolve, dirname } from 'path'
 import { fileURLToPath } from 'url'
+import { resolveDatabaseTarget } from '../lib/database-safety.ts'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const projectRoot = resolve(__dirname, '..')
@@ -37,11 +38,7 @@ try {
 }
 
 // ─── Connect to Neon ────────────────────────────────────────────────────────
-const connectionString = process.env.POSTGRES_URL || process.env.DATABASE_URL
-if (!connectionString) {
-  console.error('[seed] ERROR: POSTGRES_URL or DATABASE_URL environment variable is not set')
-  process.exit(1)
-}
+const { connectionString } = resolveDatabaseTarget()
 
 const { neon } = await import('@neondatabase/serverless')
 const sql = neon(connectionString)

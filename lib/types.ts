@@ -177,6 +177,8 @@ export type Post = {
   wordCount?: number
   /** Primary source name for attribution display. */
   sourceName?: string
+  /** Primary source URL when a single primary citation is supplied. */
+  sourceUrl?: string
   readingTime?: string
   tags?: string[]
   /** T50: Broker slugs this article covers — used by getPostsByBrokerSlug. */

@@ -8,6 +8,7 @@ import { readMinutes } from '@/lib/utils'
 import { getPostBySlug, getEditorialType } from '@/data/posts'
 import { ShareButtons } from './share-buttons'
 import { SITE_URL, SITE_NAME, SITE_LOGO, SITE_OG_IMAGE } from '@/lib/site-config'
+import { getPublicCategoryLabel } from '@/lib/public-categories'
 import type { Metadata } from 'next'
 
 interface ArticlePageProps {
@@ -107,7 +108,7 @@ function toAbsoluteImage(src?: string): string {
 }
 
 // NewsArticle JSON-LD — Google News structured-data requirements.
-function generateArticleSchema(post: Awaited<ReturnType<typeof getPostBySlug>>) {
+function generateArticleSchema(post: Awaited<ReturnType<typeof getPostBySlug>>, categoryLabel: string) {
   if (!post) return null
 
   // Google documents Article, NewsArticle, and BlogPosting as the supported
@@ -160,7 +161,7 @@ function generateArticleSchema(post: Awaited<ReturnType<typeof getPostBySlug>>) 
     },
     inLanguage: 'en-US',
     isAccessibleForFree: true,
-    articleSection: post.category,
+    articleSection: categoryLabel,
     mainEntityOfPage: {
       '@type': 'WebPage',
       '@id': `${SITE_URL}/news/${post.slug}`
@@ -176,7 +177,12 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     notFound()
   }
 
-  const articleSchema = generateArticleSchema(post)
+  const articleSources = [
+    ...(post.sourceUrl ? [{ label: post.sourceName || 'Primary source', url: post.sourceUrl }] : []),
+    ...(post.linkedSources ?? []).filter((source) => source.url !== post.sourceUrl),
+  ]
+  const categoryLabel = await getPublicCategoryLabel(post.category)
+  const articleSchema = generateArticleSchema(post, categoryLabel)
 
   return (
     <div className="bg-background">
@@ -220,7 +226,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
                   </Badge>
                 ) : null
               })()}
-              <Badge variant="outline" className="capitalize">{post.category}</Badge>
+              <Badge variant="outline">{categoryLabel}</Badge>
               {post.wordCount && post.wordCount > 0 && (
                 <span className="text-sm text-muted-foreground">
                   {readMinutes(post.wordCount)}
@@ -357,13 +363,12 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
               </aside>
             )}
 
-            {/* T54: Linked sources — rendered when linkedSources field is populated */}
-            {post.linkedSources && post.linkedSources.length > 0 && (
+            {articleSources.length > 0 && (
               <div className="mt-10 border-t border-border pt-6">
                 <h3 className="text-sm font-semibold text-foreground mb-3 uppercase tracking-wide">Sources</h3>
                 <ol className="space-y-1 list-decimal list-inside">
-                  {post.linkedSources.map((src, idx) => (
-                    <li key={idx} className="text-sm text-muted-foreground">
+                  {articleSources.map((src, idx) => (
+                    <li key={`${src.url}:${idx}`} className="text-sm text-muted-foreground">
                       <a
                         href={src.url}
                         target="_blank"

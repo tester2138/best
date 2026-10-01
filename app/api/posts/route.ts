@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getPosts, getPostCount } from '@/lib/queries'
 import { initializeDatabase } from '@/lib/db-init'
 import { sql } from '@/lib/db'
+import { requireStaff } from '@/lib/guards'
 import { scheduleNewsFeedUpdate } from '@/lib/news-websub'
 import { revalidateNewsSurfaces } from '@/lib/news-revalidation'
 
@@ -50,6 +51,7 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
+    await requireStaff('editorial:write')
     await initializeDatabase()
 
     const body = await request.json()

@@ -2,13 +2,25 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
+import useSWR from 'swr'
 import { cn } from '@/lib/utils'
 import { getAdByPlacement } from '@/data/ads'
-import type { AdPlacementKey, AdSize } from '@/lib/types'
+import type { AdPlacement, AdPlacementKey, AdSize } from '@/lib/types'
+
+/**
+ * Live campaign delivery: the slot renders the static house banner on first
+ * paint (no layout shift, no hydration mismatch), then swaps to the campaign
+ * currently serving in `ad_campaigns` once /api/ads resolves. When the API is
+ * unavailable or returns no campaign, the static banner stays.
+ */
+const adFetcher = async (url: string): Promise<{ ad: AdPlacement | null } | null> => {
+  const res = await fetch(url)
+  return res.ok ? res.json() : null
+}
 
 /** True when the URL is a same-site path (internal link). */
 function isInternal(url: string): boolean {
-  return url.startsWith('/')
+  return url.startsWith('/') && !url.startsWith('//') && !url.startsWith('/\\') && !url.includes('\\')
 }
 
 interface AdSlotProps {
@@ -17,6 +29,8 @@ interface AdSlotProps {
   fallback?: React.ReactNode
   /** When true the slot expands to fill its parent instead of using a fixed size */
   fluid?: boolean
+  /** Eager-load the creative — set on above-fold slots that are the LCP element */
+  priority?: boolean
 }
 
 // Only 2 banner sizes: 468x60 (horizontal) and 300x250 (square)
@@ -25,14 +39,31 @@ const sizeClasses: Record<AdSize, string> = {
   '300x250': 'w-[300px] h-[250px]'
 }
 
-// Height classes used in fluid mode — explicit height on mobile so stacked banners render
-const fluidHeightClasses: Record<AdSize, string> = {
-  '468x60': 'h-[72px] sm:h-[60px]',
-  '300x250': 'h-[250px]'
+const responsiveSizeClasses: Record<string, string> = {
+  '468x60-468x60': 'w-[468px] h-[60px]',
+  '300x250-300x250': 'w-[300px] h-[250px]',
+  '300x250-468x60': 'w-[300px] h-[250px] sm:w-[468px] sm:h-[60px]',
+  '468x60-300x250': 'w-[468px] h-[60px] sm:w-[300px] sm:h-[250px]',
 }
 
-export function AdSlot({ placementKey, className, fallback, fluid = false }: AdSlotProps) {
-  const ad = getAdByPlacement(placementKey)
+const fluidSizeClasses: Record<string, string> = {
+  '468x60-468x60': 'w-full aspect-[468/60] sm:max-w-[468px]',
+  '300x250-300x250': 'w-full aspect-[300/250] sm:max-w-[300px]',
+  '300x250-468x60': 'w-full aspect-[300/250] sm:aspect-[468/60] sm:max-w-[468px]',
+  '468x60-300x250': 'w-full aspect-[468/60] sm:aspect-[300/250] sm:max-w-[300px]',
+}
+
+function sizePair(mobile: AdSize, desktop: AdSize): string {
+  return `${mobile}-${desktop}`
+}
+
+export function AdSlot({ placementKey, className, fallback, fluid = false, priority = false }: AdSlotProps) {
+  const { data } = useSWR<{ ad: AdPlacement | null } | null>(
+    `/api/ads/${placementKey}`,
+    adFetcher,
+    { revalidateOnFocus: false, dedupingInterval: 60_000 },
+  )
+  const ad = data?.ad ?? getAdByPlacement(placementKey)
   
   // Show fallback placeholder if no ad found for this placement
   if (!ad) {
@@ -41,9 +72,12 @@ export function AdSlot({ placementKey, className, fallback, fluid = false }: AdS
     return <AdPlaceholder size="300x250" className={className} />
   }
   
+  const mobileSize = ad.mobileSize ?? ad.desktopSize
   const containerClass = fluid
-    ? cn('relative w-full sm:flex-1 sm:w-auto', fluidHeightClasses[ad.desktopSize], className)
-    : cn('relative inline-block', sizeClasses[ad.desktopSize], className)
+    ? cn('relative', fluidSizeClasses[sizePair(mobileSize, ad.desktopSize)], className)
+    : cn('relative inline-block', responsiveSizeClasses[sizePair(mobileSize, ad.desktopSize)], className)
+  const mobileImageWidth = mobileSize === '468x60' ? 468 : 300
+  const desktopImageWidth = ad.desktopSize === '468x60' ? 468 : 300
 
   return (
     <div className={containerClass}>
@@ -66,13 +100,13 @@ export function AdSlot({ placementKey, className, fallback, fluid = false }: AdS
             src={ad.imageUrl}
             alt={ad.altText}
             fill
+            priority={priority}
+            loading={priority ? undefined : 'lazy'}
             className="object-cover"
             sizes={
               fluid
-                ? '(max-width: 640px) 100vw, 640px'
-                : ad.desktopSize === '468x60'
-                  ? '468px'
-                  : '300px'
+                ? `(max-width: 640px) 100vw, ${desktopImageWidth}px`
+                : `(max-width: 640px) ${mobileImageWidth}px, ${desktopImageWidth}px`
             }
           />
         </Link>
@@ -88,13 +122,13 @@ export function AdSlot({ placementKey, className, fallback, fluid = false }: AdS
             src={ad.imageUrl}
             alt={ad.altText}
             fill
+            priority={priority}
+            loading={priority ? undefined : 'lazy'}
             className="object-cover"
             sizes={
               fluid
-                ? '(max-width: 640px) 100vw, 640px'
-                : ad.desktopSize === '468x60'
-                  ? '468px'
-                  : '300px'
+                ? `(max-width: 640px) 100vw, ${desktopImageWidth}px`
+                : `(max-width: 640px) ${mobileImageWidth}px, ${desktopImageWidth}px`
             }
           />
         </a>

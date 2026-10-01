@@ -28,6 +28,13 @@ const code = (t: string) =>
   `<p style="font-family:Menlo,Consolas,monospace;font-size:15px;
    background:#F5F5F7;border-radius:10px;padding:12px 16px;letter-spacing:0.5px;">${t}</p>`
 
+const escapeHtml = (value: string) => value
+  .replaceAll('&', '&amp;')
+  .replaceAll('<', '&lt;')
+  .replaceAll('>', '&gt;')
+  .replaceAll('"', '&quot;')
+  .replaceAll("'", '&#39;')
+
 export const TEMPLATES = {
   'broker-invitation': (d: {
     brandName: string
@@ -50,6 +57,23 @@ export const TEMPLATES = {
         p(`You will be asked to set your own password on first sign-in.
          This invitation link expires in ${d.expiresDays} days;
          your account does not.`),
+    ),
+  }),
+  'staff-invitation': (d: {
+    fullName: string
+    email: string
+    password: string
+    expiresDays: number
+    loginUrl: string
+  }) => ({
+    subject: 'Your BestForex.io staff account',
+    html: layout(
+      'Staff account created',
+      p(`Hello ${escapeHtml(d.fullName)}, your staff access is ready. Sign in with the temporary credentials below.`) +
+        p('<strong>Email</strong>') + code(escapeHtml(d.email)) +
+        p('<strong>Temporary password</strong>') + code(escapeHtml(d.password)) +
+        button(escapeHtml(d.loginUrl), 'Sign in to BestForex.io') +
+        p(`You must change this password and enroll an authenticator before staff access is enabled. This invitation expires in ${d.expiresDays} days.`),
     ),
   }),
   'brand-added': (d: { brandName: string }) => ({

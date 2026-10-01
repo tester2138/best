@@ -1,4 +1,5 @@
 import { query } from '@/lib/portal/db'
+import { requireStaff } from '@/lib/guards'
 import { LeadsClient, type Lead } from './leads-client'
 
 export const dynamic = 'force-dynamic'
@@ -12,8 +13,7 @@ interface Row {
   full_name: string
   work_email: string
   message: string | null
-  status: 'new' | 'contacted' | 'assigned' | 'dismissed'
-  ip: string | null
+  status: 'new' | 'contacted' | 'converted' | 'rejected'
   created_at: string
   brand_id: string | null
   brand_name: string | null
@@ -21,14 +21,23 @@ interface Row {
 }
 
 export default async function LeadsPage() {
+  const actor = await requireStaff('leads:read')
   const rows = await query<Row>(
-    `select c.id, c.full_name, c.work_email, c.message, c.status, c.ip, c.created_at,
+    `select c.id, c.full_name, c.work_email, c.message, c.status, c.created_at,
             c.brand_id, b.name as brand_name, b.slug as brand_slug
        from public.claim_requests c
        left join public.brands b on b.id = c.brand_id
+      where ($2::boolean or exists (
+        select 1 from public.staff_access sa
+         where sa.user_id = $1 and sa.status = 'active' and sa.scope_mode = 'all'
+      ) or exists (
+        select 1 from public.staff_brand_scopes sc
+         where sc.user_id = $1 and sc.brand_id = c.brand_id
+      ))
       order by
-        case c.status when 'new' then 0 when 'contacted' then 1 else 2 end,
+        case c.status when 'new' then 0 when 'contacted' then 1 when 'converted' then 2 else 3 end,
         c.created_at desc`,
+    [actor.id, actor.isSuperAdmin],
   )
 
   const leads: Lead[] = rows.map((r) => ({
@@ -54,7 +63,7 @@ export default async function LeadsPage() {
             : `${newCount} new · ${leads.length} total`}
         </p>
       </div>
-      <LeadsClient leads={leads} />
+      <LeadsClient leads={leads} canAssign={actor.isSuperAdmin} />
     </div>
   )
 }

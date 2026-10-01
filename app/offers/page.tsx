@@ -1,50 +1,56 @@
-'use client'
-
 import { Sparkles, ChevronRight } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
+import { Empty, EmptyDescription, EmptyHeader, EmptyTitle } from '@/components/ui/empty'
 import { OutLink } from '@/components/ui/out-link'
 import { Breadcrumbs, BreadcrumbSchema } from '@/components/layout/breadcrumbs'
 import { AdSlot } from '@/components/ads/ad-slot'
-import { offers } from '@/data/offers'
+import { getPublicOffers } from '@/lib/public-offers'
+import type { Offer } from '@/lib/types'
 import { BrokerLogo } from '@/components/brokers/broker-logo'
 import { SITE_URL } from '@/lib/site-config'
 import Link from 'next/link'
 
-const offersSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'ItemList',
-  name: 'Forex Broker Offers & Bonuses',
-  itemListElement: offers.map((offer, idx) => ({
-    '@type': 'ListItem',
-    position: idx + 1,
-    item: {
-      '@type': 'Offer',
-      name: offer.title,
-      description: offer.description,
-      category: offer.type,
-      url: `${SITE_URL}/brokers/${offer.brokerId}`,
-      ...(offer.expiresAt && { validThrough: offer.expiresAt }),
-      seller: { '@type': 'Organization', name: offer.brokerName },
-    },
-  })),
+function buildOffersSchema(offers: Offer[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Forex Broker Offers & Bonuses',
+    itemListElement: offers.map((offer, idx) => ({
+      '@type': 'ListItem',
+      position: idx + 1,
+      item: {
+        '@type': 'Offer',
+        name: offer.title,
+        description: offer.description,
+        category: offer.type,
+        url: `${SITE_URL}/brokers/${offer.brokerId}`,
+        ...(offer.expiresAt && { validThrough: offer.expiresAt }),
+        seller: { '@type': 'Organization', name: offer.brokerName },
+      },
+    })),
+  }
 }
 
-export default function OffersPage() {
+export const dynamic = 'force-dynamic'
+
+export default async function OffersPage() {
+  const offers = await getPublicOffers()
+  const offersSchema = buildOffersSchema(offers)
   return (
     <div className="bg-background">
       <BreadcrumbSchema items={[{ label: 'Offers' }]} />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(offersSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(offersSchema).replace(/</g, '\\u003c') }}
       />
       {/* Top Horizontal Banners (468x60 each) */}
       <div className="bg-secondary/30 py-3">
         <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-            <AdSlot placementKey="horizontal-1" fluid />
-            <AdSlot placementKey="horizontal-2" fluid />
+            <AdSlot placementKey="horizontal-1" fluid priority />
+            <AdSlot placementKey="horizontal-2" fluid priority />
           </div>
         </div>
       </div>
@@ -81,25 +87,35 @@ export default function OffersPage() {
           {/* Offers Grid */}
           <div className="lg:col-span-2">
             <div className="grid gap-6 sm:grid-cols-2">
-              {offers.map((offer) => (
+              {offers.length === 0 ? (
+                <Empty className="sm:col-span-2 rounded-xl border border-dashed">
+                  <EmptyHeader>
+                    <EmptyTitle>No current offers</EmptyTitle>
+                    <EmptyDescription>Check back soon for active broker promotions.</EmptyDescription>
+                  </EmptyHeader>
+                </Empty>
+              ) : offers.map((offer) => (
                 <Card key={offer.id} className="flex flex-col overflow-hidden transition-all hover:shadow-lg">
                   <div className="flex items-center gap-3 px-5 py-4 border-b border-border">
-                    <BrokerLogo name={offer.brokerName} slug={offer.brokerId} size="sm" />
+                    <BrokerLogo name={offer.brokerName} slug={offer.brokerId} logoUrl={offer.brokerLogo} size="sm" />
                     <div className="min-w-0">
                       <Link href={`/brokers/${offer.brokerId}`}>
                         <h3 className="font-semibold text-foreground hover:text-primary transition-colors truncate">
                           {offer.brokerName}
                         </h3>
                       </Link>
-                      <Badge variant="outline" className="text-xs mt-0.5">
-                        {offer.type}
-                      </Badge>
+                      <div className="mt-1 flex flex-wrap gap-1">
+                        <Badge variant="outline" className="text-xs">{offer.type}</Badge>
+                        {offer.isFeatured && <Badge variant="secondary" className="text-xs">Featured</Badge>}
+                        {offer.isExclusive && <Badge className="text-xs">Exclusive</Badge>}
+                      </div>
                     </div>
                   </div>
                   <div className="flex flex-1 flex-col gap-3 px-5 py-4">
                     <div>
                       <h4 className="font-semibold text-foreground">{offer.title}</h4>
                       <p className="mt-1.5 text-sm text-muted-foreground line-clamp-2">{offer.description}</p>
+                      {offer.code && <p className="mt-2 text-sm text-foreground">Use code: <strong className="font-mono">{offer.code}</strong></p>}
                     </div>
                     <div className="mt-auto pt-3 border-t border-border">
                       <div className="flex items-center justify-between mb-3">

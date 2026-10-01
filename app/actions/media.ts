@@ -3,6 +3,7 @@
 import { z } from 'zod'
 import sharp from 'sharp'
 import { put, del } from '@vercel/blob'
+import { getVerifiedBlobToken } from '@/lib/blob-storage-safety'
 import { requireBrandMember } from '@/lib/guards'
 import { run, Err } from '@/lib/portal/result'
 import { query, queryOne } from '@/lib/portal/db'
@@ -112,7 +113,9 @@ export async function uploadMedia(formData: FormData) {
     const webp = await pipeline.webp({ quality: 82 }).toBuffer()
 
     const path = `brands/${input.brandId}/${crypto.randomUUID()}.webp`
+    const blobToken = getVerifiedBlobToken()
     const blob = await put(path, webp, {
+      token: blobToken,
       access: 'public',
       contentType: 'image/webp',
       addRandomSuffix: false,
@@ -165,8 +168,9 @@ export async function deleteMedia(raw: unknown) {
     )
     if (!asset) throw new Err('Asset not found', 'not_found')
 
+    const blobToken = getVerifiedBlobToken()
     try {
-      await del(asset.public_url)
+      await del(asset.public_url, { token: blobToken })
     } catch {
       /* object may already be gone; proceed to remove the row */
     }

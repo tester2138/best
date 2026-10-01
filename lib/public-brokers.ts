@@ -4,6 +4,8 @@ import { unstable_cache } from 'next/cache'
 import { brokers as editorialBrokers } from '@/data/brokers'
 import { directoryCompanies as editorialDirectory } from '@/data/directory'
 import { query } from '@/lib/portal/db'
+import { applyOverrides } from '@/lib/admin-overrides'
+import { getHomepageFeaturedBrokerSlugs } from '@/lib/homepage-featured-brokers'
 import { isRetailEntityType, type DirectoryCompany, type VerificationStatus } from '@/lib/directory-types'
 import type { Broker } from '@/lib/types'
 
@@ -74,22 +76,62 @@ async function queryPublicBrandRows(): Promise<PublicBrandRow[]> {
   )
 }
 
-const getCachedPublicBrandRows = unstable_cache(queryPublicBrandRows, ['public-broker-overlay-v3'], {
+const getCachedPublicBrandRows = unstable_cache(queryPublicBrandRows, ['public-broker-overlay-v4'], {
   tags: ['broker-directory'],
   revalidate: 300,
 })
 
-async function getPublicBrandRows(): Promise<PublicBrandRow[]> {
-  // Catch outside unstable_cache: a transient Neon failure must never be
-  // persisted as an empty overlay and replace the canonical master ranking.
+interface AdminOverrideRow {
+  slug: string
+  overrides: Record<string, unknown>
+}
+
+async function queryAdminOverrides(): Promise<AdminOverrideRow[]> {
+  return query<AdminOverrideRow>(`select slug, overrides from public.admin_profile_overrides`)
+}
+
+const getCachedAdminOverrides = unstable_cache(queryAdminOverrides, ['admin-profile-overrides-v1'], {
+  tags: ['broker-directory'],
+  revalidate: 300,
+})
+
+const QUOTA_RETRY_COOLDOWN_MS = 5 * 60 * 1000
+let quotaRetryAfter = 0
+
+/**
+ * Combined overlay: brands-row placement/verification data plus admin profile
+ * overrides, both keyed by slug. A transient Neon failure must never be
+ * persisted as an empty overlay and replace the canonical master ranking, so
+ * the catch lives outside unstable_cache.
+ */
+async function getOverlayData(): Promise<{
+  rows: Map<string, PublicBrandRow>
+  overrides: Map<string, Record<string, unknown>>
+}> {
+  if (Date.now() < quotaRetryAfter) return { rows: new Map(), overrides: new Map() }
+
   try {
-    return await getCachedPublicBrandRows()
+    const [rows, overrideRows] = await Promise.all([
+      getCachedPublicBrandRows(),
+      getCachedAdminOverrides(),
+    ])
+    return {
+      rows: rowMap(rows),
+      overrides: new Map(overrideRows.map((r) => [r.slug.toLowerCase(), r.overrides])),
+    }
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err)
-    console.error(
-      `[public-brokers] brand overlay unavailable, serving static directory — ${message}`,
-    )
-    return []
+    if (message.includes('402') || message.toLowerCase().includes('quota')) {
+      quotaRetryAfter = Date.now() + QUOTA_RETRY_COOLDOWN_MS
+      console.warn(
+        `[public-brokers] Neon quota exceeded; serving static directory and retrying after ${QUOTA_RETRY_COOLDOWN_MS / 1000}s — ${message}`,
+      )
+    } else {
+      console.error(
+        `[public-brokers] brand overlay unavailable, serving static directory — ${message}`,
+      )
+    }
+    return { rows: new Map(), overrides: new Map() }
   }
 }
 
@@ -113,9 +155,10 @@ function rowMap(rows: PublicBrandRow[]): Map<string, PublicBrandRow> {
 function mergeDirectoryCompany(
   company: DirectoryCompany,
   rows: Map<string, PublicBrandRow>,
+  overrides?: Map<string, Record<string, unknown>>,
 ): DirectoryCompany {
   const row = rows.get(company.slug.toLowerCase())
-  return {
+  const merged: DirectoryCompany = {
     ...company,
     verificationStatus: statusFromRow(row, company.verificationStatus),
     isSponsored: row?.is_sponsored ?? company.isSponsored,
@@ -127,11 +170,17 @@ function mergeDirectoryCompany(
     rating: row?.rating_score != null ? Number(row.rating_score) : company.rating,
     isDuplicate: row?.is_duplicate ?? false, // DB flag; no entries are currently duplicated
   }
+  // Admin profile overrides win over catalog + brands-row content fields.
+  return overrides ? applyOverrides(merged, overrides.get(company.slug.toLowerCase())) : merged
 }
 
-function mergeBroker(broker: Broker, rows: Map<string, PublicBrandRow>): Broker {
+function mergeBroker(
+  broker: Broker,
+  rows: Map<string, PublicBrandRow>,
+  overrides?: Map<string, Record<string, unknown>>,
+): Broker {
   const row = rows.get(broker.slug.toLowerCase())
-  return {
+  const merged: Broker = {
     ...broker,
     verificationStatus: statusFromRow(row, broker.verificationStatus ?? 'unverified'),
     isSponsored: row?.is_sponsored ?? broker.isSponsored,
@@ -141,6 +190,7 @@ function mergeBroker(broker: Broker, rows: Map<string, PublicBrandRow>): Broker 
     // Apply the canonical CSV score to the broker rating
     rating: row?.rating_score != null ? Number(row.rating_score) : broker.rating,
   }
+  return overrides ? applyOverrides(merged, overrides.get(broker.slug.toLowerCase())) : merged
 }
 
 function tier(company: Pick<DirectoryCompany, 'isSponsored' | 'verificationStatus'>): number {
@@ -190,8 +240,8 @@ export function rankPublicDirectory(companies: DirectoryCompany[]): DirectoryCom
 }
 
 export async function getPublicDirectoryCompanies(): Promise<DirectoryCompany[]> {
-  const rows = rowMap(await getPublicBrandRows())
-  return editorialDirectory.map((company) => mergeDirectoryCompany(company, rows))
+  const { rows, overrides } = await getOverlayData()
+  return editorialDirectory.map((company) => mergeDirectoryCompany(company, rows, overrides))
 }
 
 export async function getRankedPublicDirectory(): Promise<DirectoryCompany[]> {
@@ -203,7 +253,18 @@ export async function getPublicCompanyBySlug(slug: string): Promise<DirectoryCom
   return companies.find((company) => company.slug === slug.toLowerCase())
 }
 
-function directoryCompanyToBroker(company: DirectoryCompany): Broker {
+/** Public catalog plus brands-row data, without admin overrides, for editor diffs. */
+export async function getPublicCompanyBaseBySlug(
+  slug: string,
+): Promise<DirectoryCompany | undefined> {
+  const normalizedSlug = slug.toLowerCase()
+  const company = editorialDirectory.find((entry) => entry.slug === normalizedSlug)
+  if (!company) return undefined
+  const { rows } = await getOverlayData()
+  return mergeDirectoryCompany(company, rows)
+}
+
+export function directoryCompanyToBroker(company: DirectoryCompany): Broker {
   return {
     id: company.id,
     slug: company.slug,
@@ -226,12 +287,15 @@ function directoryCompanyToBroker(company: DirectoryCompany): Broker {
 }
 
 export async function getPublicBrokerCatalog(): Promise<Broker[]> {
-  const rows = rowMap(await getPublicBrandRows())
+  const { rows, overrides } = await getOverlayData()
   const directoryBySlug = new Map(
-    editorialDirectory.map((company) => [company.slug, mergeDirectoryCompany(company, rows)]),
+    editorialDirectory.map((company) => [
+      company.slug,
+      mergeDirectoryCompany(company, rows, overrides),
+    ]),
   )
   const catalog = editorialBrokers.map((broker) => {
-    const merged = mergeBroker(broker, rows)
+    const merged = mergeBroker(broker, rows, overrides)
     const directoryCompany = directoryBySlug.get(broker.slug)
     return directoryCompany
       ? {
@@ -252,6 +316,22 @@ export async function getPublicBrokerCatalog(): Promise<Broker[]> {
 export async function getPublicBrokerBySlug(slug: string): Promise<Broker | undefined> {
   const catalog = await getPublicBrokerCatalog()
   return catalog.find((broker) => broker.slug === slug.toLowerCase())
+}
+
+/** Public catalog plus brands-row data, without admin overrides, for editor diffs. */
+export async function getPublicBrokerBaseBySlug(slug: string): Promise<Broker | undefined> {
+  const normalizedSlug = slug.toLowerCase()
+  const broker = editorialBrokers.find((entry) => entry.slug === normalizedSlug)
+  if (!broker) return undefined
+  const { rows } = await getOverlayData()
+  return mergeBroker(broker, rows)
+}
+
+export async function getPublicAdminProfileOverridesBySlug(
+  slug: string,
+): Promise<Record<string, unknown>> {
+  const { overrides } = await getOverlayData()
+  return overrides.get(slug.toLowerCase()) ?? {}
 }
 
 /**
@@ -355,12 +435,26 @@ export async function getPublicTopBrokers(count = 5): Promise<Broker[]> {
 }
 
 export async function getPublicFeaturedBrokers(count = 2): Promise<Broker[]> {
-  const catalog = await getPublicBrokerCatalog()
+  const [slugs, catalog] = await Promise.all([
+    getHomepageFeaturedBrokerSlugs(),
+    getPublicBrokerCatalog(),
+  ])
   const bySlug = new Map(catalog.map((broker) => [broker.slug, broker]))
-  return ['saxo-bank', 'capital-com']
+  const missingSlugs = new Set(slugs.filter((slug) => !bySlug.has(slug)))
+
+  if (missingSlugs.size > 0) {
+    const companies = await getPublicDirectoryCompanies()
+    for (const company of companies) {
+      if (missingSlugs.has(company.slug)) {
+        bySlug.set(company.slug, directoryCompanyToBroker(company))
+      }
+    }
+  }
+
+  return slugs
+    .slice(0, count)
     .flatMap((slug) => {
       const broker = bySlug.get(slug)
       return broker ? [broker] : []
     })
-    .slice(0, count)
 }

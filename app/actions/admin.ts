@@ -3,7 +3,7 @@
 import { z } from 'zod'
 import { headers } from 'next/headers'
 import { run, Err } from '@/lib/portal/result'
-import { requireAdmin } from '@/lib/guards'
+import { requireAdmin, requireStaffBrand } from '@/lib/guards'
 import { query, queryOne, withTransaction } from '@/lib/portal/db'
 import { auth } from '@/lib/auth'
 import { allowAccountCreation } from '@/lib/portal/creation-context'
@@ -85,8 +85,10 @@ const AssignInput = z.object({
   name: z.string().min(1).max(120),
   website: z.string().url().nullable().optional(),
   email: z.string().email(),
+  contactName: z.string().trim().max(120).optional().default(''),
   officialDomains: z.array(z.string().min(3)).min(1).max(10),
   overrideDomainMismatch: z.boolean().default(false),
+  claimRequestId: z.string().uuid().optional(),
 })
 
 /**
@@ -105,6 +107,23 @@ export async function assignBrand(raw: unknown) {
       })
     const input = p.data
     const email = input.email.toLowerCase()
+    const accountName = input.contactName || input.name.trim()
+    const claimRequest = input.claimRequestId
+      ? await queryOne<{ brand_id: string; slug: string; status: string }>(
+          `select c.brand_id, b.slug, c.status
+             from public.claim_requests c
+             join public.brands b on b.id = c.brand_id
+            where c.id = $1`,
+          [input.claimRequestId],
+        )
+      : null
+    if (input.claimRequestId && !claimRequest)
+      throw new Err('Claim request not found', 'not_found')
+    if (claimRequest?.slug !== undefined && claimRequest.slug !== input.slug)
+      throw new Err('This claim belongs to a different broker profile', 'validation')
+    if (claimRequest && !['new', 'contacted'].includes(claimRequest.status))
+      throw new Err('This claim has already been processed', 'validation')
+
     const domains = [...new Set(input.officialDomains.map(normalizeDomain))]
     const mailDomain = email.split('@')[1] ?? ''
     const matches = domains.some((d) => mailDomain === d || mailDomain.endsWith('.' + d))
@@ -146,7 +165,7 @@ export async function assignBrand(raw: unknown) {
       // user.create hook then provisions the profile + must_change_password.
       const created = await allowAccountCreation(async () =>
         auth.api.signUpEmail({
-          body: { email, password: defaultPassword as string, name: input.name },
+          body: { email, password: defaultPassword as string, name: accountName },
           headers: await headers(),
         }),
       )
@@ -158,7 +177,7 @@ export async function assignBrand(raw: unknown) {
         ])
     }
 
-    // 4. Membership, invitation, brand flags, content seed — one transaction.
+    // 4. Membership, invitation, brand flags, claim conversion, content seed — one transaction.
     const settings = await queryOne<{ invitation_ttl_days: number }>(
       `select invitation_ttl_days from public.portal_settings where id = true`,
     )
@@ -166,6 +185,19 @@ export async function assignBrand(raw: unknown) {
     const expiresAt = new Date(Date.now() + ttlDays * 86400000).toISOString()
 
     await withTransaction(async (client) => {
+      const lockedBrand = await client.query<{ id: string }>(
+        `select id from public.brands where id = $1 for update`,
+        [brand.id],
+      )
+      if (!lockedBrand.rowCount) throw new Err('Brand not found', 'not_found')
+
+      const lockedMembers = await client.query<{ n: string }>(
+        `select count(*)::text as n from public.brand_members where brand_id = $1`,
+        [brand.id],
+      )
+      if (Number(lockedMembers.rows[0]?.n ?? '0') > 0)
+        throw new Err('This brand already has a portal user. Revoke it first.', 'validation')
+
       await client.query(
         `insert into public.brand_members (brand_id, user_id, role)
          values ($1, $2, 'owner')
@@ -187,12 +219,25 @@ export async function assignBrand(raw: unknown) {
         [brand.id, domains],
       )
       await seedSectionsFromCatalog(client, brand.id, input.slug, admin.id)
+      if (input.claimRequestId) {
+        const converted = await client.query<{ id: string }>(
+          `update public.claim_requests
+              set status = 'converted'
+            where id = $1 and brand_id = $2 and status in ('new', 'contacted')
+            returning id`,
+          [input.claimRequestId, brand.id],
+        )
+        if (!converted.rowCount)
+          throw new Err('This claim has already been processed', 'validation')
+      }
     })
 
     await audit(admin, brand.id, 'brand.assign', email, {
       existingUser,
       domainOverridden: !matches,
     })
+    if (input.claimRequestId)
+      await audit(admin, brand.id, 'claim.converted', input.claimRequestId, { workEmail: email })
 
     // 5. Email.
     if (existingUser) {
@@ -218,7 +263,6 @@ export async function assignBrand(raw: unknown) {
  */
 export async function resendInvitation(invitationId: string) {
   return run(async () => {
-    const admin = await requireAdmin()
     const inv = await queryOne<{
       id: string
       brand_id: string
@@ -233,6 +277,7 @@ export async function resendInvitation(invitationId: string) {
       [invitationId],
     )
     if (!inv) throw new Err('Invitation not found', 'not_found')
+    const admin = await requireStaffBrand(inv.brand_id, 'brokers:manage')
     if (inv.resend_count >= 10) throw new Err('Resend limit reached', 'validation')
 
     const member = await queryOne<{ user_id: string }>(
@@ -277,9 +322,10 @@ export async function resendInvitation(invitationId: string) {
  * Remove a member's access, sign them out everywhere, and unclaim the brand
  * when no members remain (Blueprint Section 12.5).
  */
-export async function revokeMember(input: { brandId: string; userId: string }) {
+export async function revokeMember(raw: unknown) {
   return run(async () => {
-    const admin = await requireAdmin()
+    const input = z.object({ brandId: z.string().uuid(), userId: z.string().min(1) }).parse(raw)
+    const admin = await requireStaffBrand(input.brandId, 'brokers:manage')
     const brand = await queryOne<Brand>(`select * from public.brands where id = $1`, [
       input.brandId,
     ])
@@ -313,9 +359,10 @@ export async function revokeMember(input: { brandId: string; userId: string }) {
 }
 
 /** Pause / resume portal writes for a brand (Blueprint Section 12.5). */
-export async function setAccess(input: { brandId: string; access: 'active' | 'paused' }) {
+export async function setAccess(raw: unknown) {
   return run(async () => {
-    const admin = await requireAdmin()
+    const input = z.object({ brandId: z.string().uuid(), access: z.enum(['active', 'paused']) }).parse(raw)
+    const admin = await requireStaffBrand(input.brandId, 'brokers:manage')
     const brand = await queryOne<Brand>(`select * from public.brands where id = $1`, [
       input.brandId,
     ])
@@ -344,9 +391,10 @@ export async function setAccess(input: { brandId: string; access: 'active' | 'pa
 }
 
 /** Hard lock (abuse kill switch) — blocks writes, no public change. */
-export async function setLock(input: { brandId: string; locked: boolean }) {
+export async function setLock(raw: unknown) {
   return run(async () => {
-    const admin = await requireAdmin()
+    const input = z.object({ brandId: z.string().uuid(), locked: z.boolean() }).parse(raw)
+    const admin = await requireStaffBrand(input.brandId, 'brokers:manage')
     await query(`update public.brands set portal_locked = $2 where id = $1`, [
       input.brandId,
       input.locked,
@@ -357,9 +405,13 @@ export async function setLock(input: { brandId: string; locked: boolean }) {
 }
 
 /** Edit the official domains chip list (audited before/after). */
-export async function updateDomains(input: { brandId: string; domains: string[] }) {
+export async function updateDomains(raw: unknown) {
   return run(async () => {
-    const admin = await requireAdmin()
+    const input = z.object({
+      brandId: z.string().uuid(),
+      domains: z.array(z.string().trim().min(3).max(253)).max(10),
+    }).parse(raw)
+    const admin = await requireStaffBrand(input.brandId, 'brokers:manage')
     const before = await queryOne<{ official_domains: string[] }>(
       `select official_domains from public.brands where id = $1`,
       [input.brandId],

@@ -2,11 +2,12 @@
 
 import { useState, useTransition } from 'react'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
+import { Pencil } from 'lucide-react'
 import { toast } from 'sonner'
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
 import { Badge } from '@/components/ui/badge'
 import { Switch } from '@/components/ui/switch'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
@@ -29,6 +30,7 @@ import {
   revokeMember,
 } from '@/app/actions/admin'
 import type { Brand, ActionResult } from '@/types/portal'
+import { ProfileEditor, type ProfileEditorProps } from './profile/profile-client'
 
 export interface MemberInfo {
   user_id: string
@@ -72,12 +74,20 @@ export function BrandDetailClient({
   invitation,
   sections,
   activity,
+  canManage,
+  canEditContent,
+  initialTab,
+  profile,
 }: {
   brand: Brand
   member: MemberInfo | null
   invitation: InvitationInfo | null
   sections: SectionStatusRow[]
   activity: AuditRow[]
+  canManage: boolean
+  canEditContent: boolean
+  initialTab: 'overview' | 'content'
+  profile: ProfileEditorProps | null
 }) {
   const router = useRouter()
   const [pending, startTransition] = useTransition()
@@ -117,16 +127,21 @@ export function BrandDetailClient({
         </div>
       </div>
 
-      <Tabs defaultValue="overview">
+      <Tabs defaultValue={initialTab}>
         <TabsList>
           <TabsTrigger value="overview">Overview</TabsTrigger>
-          <TabsTrigger value="member">Member</TabsTrigger>
+          <TabsTrigger value="brand-information">Brand information</TabsTrigger>
+          {canManage ? <TabsTrigger value="member">Member</TabsTrigger> : null}
           <TabsTrigger value="content">Content</TabsTrigger>
           <TabsTrigger value="activity">Activity</TabsTrigger>
         </TabsList>
 
         {/* ── Overview ─────────────────────────────────────────────── */}
         <TabsContent value="overview" className="mt-4 flex flex-col gap-4">
+          {!canManage ? (
+            <Card className="p-5 text-sm text-muted-foreground">This broker is read-only for your staff role.</Card>
+          ) : (
+            <>
           <Card className="flex items-center justify-between gap-4 p-5">
             <div>
               <div className="font-medium">Portal access</div>
@@ -230,10 +245,23 @@ export function BrandDetailClient({
               </Button>
             </div>
           </Card>
+            </>
+          )}
         </TabsContent>
 
-        {/* ── Member ───────────────────────────────────────────────── */}
-        <TabsContent value="member" className="mt-4">
+        <TabsContent value="brand-information" className="mt-4">
+          {profile ? (
+            <ProfileEditor {...profile} />
+          ) : (
+            <Card className="p-5 text-sm text-muted-foreground">
+              This brand does not have a public directory profile to edit yet.
+            </Card>
+          )}
+        </TabsContent>
+
+        {/* ── Member ─────────────────────────────────────────────────── */}
+        {canManage ? <TabsContent value="member" className="mt-4">
+
           <Card className="flex flex-col gap-4 p-5">
             {!member ? (
               <p className="text-sm text-muted-foreground">
@@ -309,7 +337,7 @@ export function BrandDetailClient({
               </>
             )}
           </Card>
-        </TabsContent>
+        </TabsContent> : null}
 
         {/* ── Content ──────────────────────────────────────────────── */}
         <TabsContent value="content" className="mt-4">
@@ -322,18 +350,32 @@ export function BrandDetailClient({
                     Published {fmt(s.publishedAt)}
                   </span>
                 </div>
-                <Badge
-                  variant={
-                    s.status === 'synced'
-                      ? 'default'
-                      : s.status === 'pending_review'
-                        ? 'secondary'
-                        : 'outline'
-                  }
-                  className="capitalize"
-                >
-                  {s.status.replace('_', ' ')}
-                </Badge>
+                <div className="flex shrink-0 items-center gap-2">
+                  <Badge
+                    variant={
+                      s.status === 'synced'
+                        ? 'default'
+                        : s.status === 'pending_review'
+                          ? 'secondary'
+                          : 'outline'
+                    }
+                    className="capitalize"
+                  >
+                    {s.status.replace('_', ' ')}
+                  </Badge>
+                  {canEditContent && (
+                    <Button asChild variant="outline" size="sm">
+                      <Link
+                        href={`/admin/brands/${brand.id}/content/${s.key}`}
+                        prefetch={false}
+                        aria-label={`Edit ${s.label}`}
+                      >
+                        <Pencil data-icon="inline-start" />
+                        Edit
+                      </Link>
+                    </Button>
+                  )}
+                </div>
               </div>
             ))}
           </Card>

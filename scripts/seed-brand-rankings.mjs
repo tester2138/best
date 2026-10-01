@@ -12,21 +12,19 @@
  * only the FIRST occurrence (lowest rank number) is upserted.
  *
  * Usage:
- *   node scripts/seed-brand-rankings.mjs
+ *   VERCEL_ENV=development node scripts/seed-brand-rankings.mjs
  */
 
 import { readFileSync } from 'fs'
 import { resolve, dirname } from 'path'
 import { fileURLToPath } from 'url'
 import { neon } from '@neondatabase/serverless'
+import { resolveDatabaseTarget } from '../lib/database-safety.ts'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
-// POSTGRES_URL is injected by the v0 environment directly
-if (!process.env.POSTGRES_URL) {
-  throw new Error('POSTGRES_URL environment variable is not set')
-}
-const sql = neon(process.env.POSTGRES_URL)
+const { connectionString } = resolveDatabaseTarget()
+const sql = neon(connectionString)
 
 // ─── Parse CSV ───────────────────────────────────────────────────────────────
 

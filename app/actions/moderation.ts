@@ -2,12 +2,13 @@
 
 import { z } from 'zod'
 import { run, Err } from '@/lib/portal/result'
-import { requireAdmin } from '@/lib/guards'
+import { requireStaff, requireStaffBrand } from '@/lib/guards'
 import { query, queryOne } from '@/lib/portal/db'
 import { audit } from '@/lib/audit'
 import { revalidateBrand } from '@/lib/portal/revalidate'
 import { sendEmail } from '@/lib/email/send'
 import { del } from '@vercel/blob'
+import { getVerifiedBlobToken } from '@/lib/blob-storage-safety'
 
 /**
  * Admin moderation actions (Blueprint Sections 16.2 / 16.3).
@@ -72,8 +73,9 @@ async function loadPending(id: string): Promise<{ row: QueueRow; brand: BrandRow
 export async function approveItem(raw: unknown) {
   return run(async () => {
     const { id } = z.object({ id: z.string().uuid() }).parse(raw)
-    const admin = await requireAdmin()
+    const admin = await requireStaff('moderation:review')
     const { row, brand } = await loadPending(id)
+    await requireStaffBrand(row.brand_id, 'moderation:review')
 
     if (row.target_type === 'section') {
       // Copy payload to published + draft, mark synced, snapshot the version.
@@ -130,8 +132,9 @@ const RejectInput = z.object({
 export async function rejectItem(raw: unknown) {
   return run(async () => {
     const { id, note } = RejectInput.parse(raw)
-    const admin = await requireAdmin()
+    const admin = await requireStaff('moderation:review')
     const { row, brand } = await loadPending(id)
+    await requireStaffBrand(row.brand_id, 'moderation:review')
 
     if (row.target_type === 'section') {
       // Payload stays in draft so the member can edit and resubmit.
@@ -152,8 +155,9 @@ export async function rejectItem(raw: unknown) {
         [row.target_id],
       )
       if (asset?.public_url) {
+        const blobToken = getVerifiedBlobToken()
         try {
-          await del(asset.public_url)
+          await del(asset.public_url, { token: blobToken })
         } catch (err) {
           console.error('[v0] blob delete failed on media reject:', err)
         }
@@ -184,7 +188,7 @@ export async function rejectItem(raw: unknown) {
 
 export async function bulkApproveClean() {
   return run(async () => {
-    await requireAdmin()
+    await requireStaff('moderation:review')
     const clean = await query<{ id: string }>(
       `select id from public.moderation_queue
         where status = 'pending' and (auto_flags = '[]'::jsonb or auto_flags is null)

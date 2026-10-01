@@ -31,6 +31,7 @@ interface SectionFormProps {
   version: number
   canWrite: boolean
   publicUrl: string
+  adminMode?: boolean
 }
 
 export function SectionForm({
@@ -42,6 +43,7 @@ export function SectionForm({
   version: initialVersion,
   canWrite,
   publicUrl,
+  adminMode = false,
 }: SectionFormProps) {
   const def = SECTIONS[sectionKey]
   const {
@@ -69,7 +71,7 @@ export function SectionForm({
     async (values: Values) => {
       setSaving(true)
       setSaveState('Saving…')
-      const res = await saveDraft({ brandId, sectionKey, values, version })
+      const res = await saveDraft({ brandId, sectionKey, values, version, asAdmin: adminMode })
       setSaving(false)
       if (res.ok) {
         if (res.data) setVersion(res.data.version)
@@ -86,7 +88,7 @@ export function SectionForm({
         toast.error(res.error ?? 'Could not save')
       }
     },
-    [brandId, sectionKey, version],
+    [adminMode, brandId, sectionKey, version],
   )
 
   // Autosave: debounce 1500ms after any change.
@@ -107,7 +109,7 @@ export function SectionForm({
   const onPublish = handleSubmit(async (values) => {
     setPublishing(true)
     // Ensure the latest draft is saved first so the server publishes fresh content.
-    const saved = await saveDraft({ brandId, sectionKey, values, version })
+    const saved = await saveDraft({ brandId, sectionKey, values, version, asAdmin: adminMode })
     if (!saved.ok) {
       setPublishing(false)
       if (saved.code === 'version_conflict') setConflict(true)
@@ -116,7 +118,7 @@ export function SectionForm({
     }
     const nextVersion = saved.data?.version ?? version
     setVersion(nextVersion)
-    const res = await publishSection({ brandId, sectionKey, version: nextVersion })
+    const res = await publishSection({ brandId, sectionKey, version: nextVersion, asAdmin: adminMode })
     setPublishing(false)
     if (!res.ok) {
       if (res.code === 'version_conflict') setConflict(true)
@@ -133,7 +135,7 @@ export function SectionForm({
   })
 
   async function onDiscard() {
-    const res = await discardDraft({ brandId, sectionKey, version })
+    const res = await discardDraft({ brandId, sectionKey, version, asAdmin: adminMode })
     if (res.ok) {
       toast.success('Draft discarded')
       window.location.reload()

@@ -4,10 +4,9 @@ import { TEMPLATES, type TemplateName } from './templates'
 
 /**
  * Email sender (Blueprint Section 19.1), adapted from Resend to Brevo.
- * Transactional emails go through the Brevo HTTP API. Every attempt is logged
- * to email_log. When BREVO_API_KEY is absent (e.g. the v0 preview before the
- * key is added), the send becomes a no-op that still logs with status 'sent'
- * and a preview flag, so the assignment/publish flows work end to end.
+ * Transactional emails go through the Brevo HTTP API only in Production.
+ * Preview and Development return before contacting Brevo or writing email_log;
+ * no isolated mail sink is configured for those environments.
  */
 
 const BREVO_ENDPOINT = 'https://api.brevo.com/v3/smtp/email'
@@ -43,12 +42,12 @@ export async function sendEmail(
   to: string,
   data: Record<string, unknown>,
 ): Promise<void> {
+  if (process.env.VERCEL_ENV !== 'production') return
+
   const t = TEMPLATES[template](data as never)
   const apiKey = process.env.BREVO_API_KEY
 
-  // No key configured — log and return so the calling flow still succeeds.
   if (!apiKey) {
-    console.log(`[v0] email (preview, not sent) -> ${to} [${template}] "${t.subject}"`)
     await logEmail(to, template, 'sent', null, { preview: true })
     return
   }
@@ -85,6 +84,8 @@ export async function sendEmail(
  * Dedup uses email_log rows written in the last hour that carry this brandId.
  */
 export async function adminDigestOnce(brandId: string, brandName: string): Promise<void> {
+  if (process.env.VERCEL_ENV !== 'production') return
+
   try {
     const row = await queryOne<{ n: string }>(
       `select count(*)::text as n from public.email_log

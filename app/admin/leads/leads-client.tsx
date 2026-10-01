@@ -20,7 +20,7 @@ export interface Lead {
   fullName: string
   workEmail: string
   message: string | null
-  status: 'new' | 'contacted' | 'assigned' | 'dismissed'
+  status: 'new' | 'contacted' | 'converted' | 'rejected'
   createdAt: string
   brandName: string | null
   brandSlug: string | null
@@ -29,13 +29,19 @@ export interface Lead {
 const STATUS: Record<Lead['status'], { label: string; variant: 'default' | 'secondary' | 'outline' }> = {
   new: { label: 'New', variant: 'default' },
   contacted: { label: 'Contacted', variant: 'secondary' },
-  assigned: { label: 'Assigned', variant: 'outline' },
-  dismissed: { label: 'Dismissed', variant: 'outline' },
+  converted: { label: 'Converted', variant: 'outline' },
+  rejected: { label: 'Rejected', variant: 'outline' },
 }
 
-const NEXT: Lead['status'][] = ['new', 'contacted', 'assigned', 'dismissed']
+const NEXT: Exclude<Lead['status'], 'converted'>[] = ['new', 'contacted', 'rejected']
 
-export function LeadsClient({ leads }: { leads: Lead[] }) {
+export function LeadsClient({
+  leads,
+  canAssign,
+}: {
+  leads: Lead[]
+  canAssign: boolean
+}) {
   const router = useRouter()
   const [pending, startTransition] = useTransition()
 
@@ -95,27 +101,35 @@ export function LeadsClient({ leads }: { leads: Lead[] }) {
           </div>
 
           <div className="flex shrink-0 items-center gap-2">
-            <Button asChild variant="outline" size="sm">
-              <Link href="/admin/brands">Assign brand</Link>
-            </Button>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm" disabled={pending}>
-                  Set status
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                {NEXT.map((s) => (
-                  <DropdownMenuItem
-                    key={s}
-                    disabled={s === lead.status}
-                    onClick={() => update(lead.id, s)}
-                  >
-                    {STATUS[s].label}
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
+            {canAssign && lead.brandSlug && (lead.status === 'new' || lead.status === 'contacted') ? (
+              <Button asChild variant="outline" size="sm">
+                <Link href={`/admin/brands?claimId=${encodeURIComponent(lead.id)}`}>
+                  Review &amp; assign
+                </Link>
+              </Button>
+            ) : null}
+            {lead.status === 'converted' ? (
+              <span className="text-xs text-muted-foreground">Portal access provisioned</span>
+            ) : (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" size="sm" disabled={pending}>
+                    Set status
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  {NEXT.map((s) => (
+                    <DropdownMenuItem
+                      key={s}
+                      disabled={s === lead.status}
+                      onClick={() => update(lead.id, s)}
+                    >
+                      {STATUS[s].label}
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            )}
           </div>
         </div>
       ))}

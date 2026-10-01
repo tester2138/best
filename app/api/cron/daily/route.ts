@@ -10,6 +10,10 @@ import { sendEmail } from '@/lib/email/send'
 export const dynamic = 'force-dynamic'
 
 export async function GET(req: NextRequest) {
+  if (process.env.VERCEL_ENV !== 'production') {
+    return NextResponse.json({ ok: false }, { status: 404 })
+  }
+
   const secret = process.env.CRON_SECRET
   // Vercel Cron sends `Authorization: Bearer ${CRON_SECRET}`. When no secret is
   // configured (local dev) we allow the call through so the job is testable.

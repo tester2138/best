@@ -1,52 +1,40 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { Pool } from '@neondatabase/serverless'
+import { sql } from '@/lib/db'
+import { requireStaff } from '@/lib/guards'
 import { scheduleNewsFeedUpdate } from '@/lib/news-websub'
 import { revalidateNewsSurfaces } from '@/lib/news-revalidation'
 
 export async function POST(request: NextRequest) {
   try {
-    if (!process.env.DATABASE_URL) {
-      return NextResponse.json(
-        { error: 'DATABASE_URL not configured' },
-        { status: 500 }
-      )
-    }
-
-    const pool = new Pool({ connectionString: process.env.DATABASE_URL })
+    await requireStaff('editorial:write')
 
     const body = await request.json()
-    const { title, slug, excerpt, content, category, featured } = body
-
-    if (!title || !slug || !excerpt || !content) {
-      await pool.end()
-      return NextResponse.json(
-        { error: 'Missing required fields' },
-        { status: 400 }
-      )
+    const { title, slug, excerpt, content, category } = body
+    if (
+      typeof title !== 'string' ||
+      typeof slug !== 'string' ||
+      typeof excerpt !== 'string' ||
+      typeof content !== 'string' ||
+      !title.trim() ||
+      !slug.trim() ||
+      !excerpt.trim() ||
+      !content.trim()
+    ) {
+      return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
     }
 
-    const client = await pool.connect()
-    try {
-      const result = await client.query(
-        `INSERT INTO posts (title, slug, excerpt, content, category, published_at, created_at)
-         VALUES ($1, $2, $3, $4, $5, NOW(), NOW())
-         RETURNING *`,
-        [title, slug, excerpt, content, category || 'General']
-      )
+    const rows = await sql`
+      INSERT INTO public.posts (title, slug, excerpt, content, category, published_at, created_at)
+      VALUES (${title.trim()}, ${slug.trim()}, ${excerpt.trim()}, ${content}, ${category || 'General'}, NOW(), NOW())
+      RETURNING id, slug, title, published_at
+    `
+    const post = rows[0]
 
-      const post = result.rows[0]
-      revalidateNewsSurfaces(typeof post?.slug === 'string' ? post.slug : undefined)
-      scheduleNewsFeedUpdate()
-      return NextResponse.json({ data: post }, { status: 201 })
-    } finally {
-      await client.release()
-      await pool.end()
-    }
+    revalidateNewsSurfaces(typeof post?.slug === 'string' ? post.slug : undefined)
+    scheduleNewsFeedUpdate()
+    return NextResponse.json({ data: post }, { status: 201 })
   } catch (error) {
     console.error('[v0] Create post error:', error)
-    return NextResponse.json(
-      { error: error instanceof Error ? error.message : 'Failed to create post' },
-      { status: 500 }
-    )
+    return NextResponse.json({ error: 'Failed to create post' }, { status: 500 })
   }
 }

@@ -8,6 +8,13 @@ import {
   type StoredPostRecord,
 } from '@/lib/news-archive'
 import type { Author, Post } from '@/lib/types'
+import {
+  getEditorialAuthorOverrides,
+  getEditorialAuthorMap,
+  editorialAuthorToAuthor,
+  mergeEditorialAuthor,
+} from '@/lib/editorial-content'
+import { sanitizeEditorialHtml } from '@/lib/sanitize'
 
 function toIsoString(value: unknown): string {
   if (value instanceof Date) return value.toISOString()
@@ -41,7 +48,7 @@ export function mapRow(row: Record<string, unknown>): Post {
     slug: row.slug as string,
     title: row.title as string,
     excerpt: row.excerpt as string,
-    content: (row.content as string | null) ?? undefined,
+    content: typeof row.content === 'string' ? sanitizeEditorialHtml(row.content) : undefined,
     category: row.category as Post['category'],
     editorialType: (row.editorial_type as Post['editorialType']) ?? undefined,
     author: richAuthor ? { ...richAuthor, ...authorBase } : authorBase,
@@ -55,9 +62,11 @@ export function mapRow(row: Record<string, unknown>): Post {
     metaTitle: (row.meta_title as string | null) ?? undefined,
     metaDescription: (row.meta_description as string | null) ?? undefined,
     sourceName: (row.source_name as string | null) ?? undefined,
+    sourceUrl: (row.source_url as string | null) ?? undefined,
     tags: (row.tags as string[] | null) ?? undefined,
     relatedBrokers: (row.related_brokers as string[] | null) ?? undefined,
     linkedSources: parseLinkedSources(row.linked_sources),
+    editorNote: typeof row.editor_note === 'string' ? row.editor_note : undefined,
   }
 }
 
@@ -116,8 +125,16 @@ async function withFallback<T>(
   }
 }
 
-const getMergedVisiblePosts = cache(async (): Promise<Post[]> =>
-  withFallback(
+async function applyEditorialAuthorOverrides(posts: Post[]): Promise<Post[]> {
+  const overrides = getEditorialAuthorMap(await getEditorialAuthorOverrides())
+  return posts.map((post) => ({
+    ...post,
+    author: mergeEditorialAuthor(post.author, overrides.get(post.author.slug)),
+  }))
+}
+
+const getMergedVisiblePosts = cache(async (): Promise<Post[]> => {
+  const posts = await withFallback(
     'getVisiblePosts',
     async () => {
       // Deliberately include every status. A draft or future DB row must block
@@ -128,22 +145,23 @@ const getMergedVisiblePosts = cache(async (): Promise<Post[]> =>
           author_name, author_slug, author_avatar, author_bio, author_role,
           featured_image, image_alt_text, is_featured, status,
           published_at, updated_at, reading_time, word_count,
-          meta_title, meta_description, source_name, tags,
+          meta_title, meta_description, source_name, source_url, editor_note, tags,
           related_brokers, linked_sources
         FROM public.posts
       `
       return mergeVisiblePosts(rows.map(mapRecord), staticPosts)
     },
     staticVisiblePosts,
-  ),
-)
+  )
+  return applyEditorialAuthorOverrides(posts)
+})
 
 export async function getVisiblePosts(): Promise<Post[]> {
   return getMergedVisiblePosts()
 }
 
 export async function getPostBySlug(slug: string): Promise<Post | undefined> {
-  return withFallback(
+  const post = await withFallback(
     `getPostBySlug(${slug})`,
     async () => {
       const rows = await sql`
@@ -152,7 +170,7 @@ export async function getPostBySlug(slug: string): Promise<Post | undefined> {
           author_name, author_slug, author_avatar, author_bio, author_role,
           featured_image, image_alt_text, is_featured, status,
           published_at, updated_at, reading_time, word_count,
-          meta_title, meta_description, source_name, tags,
+          meta_title, meta_description, source_name, source_url, editor_note, tags,
           related_brokers, linked_sources
         FROM public.posts
         WHERE slug = ${slug}
@@ -163,6 +181,7 @@ export async function getPostBySlug(slug: string): Promise<Post | undefined> {
     },
     () => staticVisiblePosts().find((post) => post.slug === slug),
   )
+  return post ? (await applyEditorialAuthorOverrides([post]))[0] : undefined
 }
 
 export async function getFeaturedPosts(): Promise<Post[]> {
@@ -185,23 +204,38 @@ export async function getNewsSitemapPosts(): Promise<Post[]> {
 }
 
 export async function getRssFeedPosts(): Promise<Post[]> {
-  return withFallback(
+  const posts = await withFallback(
     'getRssFeedPosts',
     async () => {
+      // Keep every status row for visibility gates, but fetch full HTML only for
+      // the latest live feed candidates to avoid transferring the whole archive.
       const rows = await sql`
+        WITH rss_body_posts AS (
+          SELECT id
+          FROM public.posts
+          WHERE status = 'published'
+            AND published_at <= NOW()
+          ORDER BY published_at DESC, slug ASC
+          LIMIT 50
+        )
         SELECT
-          id, slug, title, excerpt, content, category, editorial_type,
-          author_name, author_slug, author_avatar, author_bio, author_role,
-          featured_image, image_alt_text, is_featured, status,
-          published_at, updated_at, reading_time, word_count,
-          meta_title, meta_description, source_name, tags,
-          related_brokers, linked_sources
-        FROM public.posts
+          post.id, post.slug, post.title, post.excerpt,
+          CASE WHEN rss_body_posts.id IS NOT NULL THEN post.content END AS content,
+          post.category, post.editorial_type,
+          post.author_name, post.author_slug, post.author_avatar,
+          post.author_bio, post.author_role,
+          post.featured_image, post.image_alt_text, post.is_featured, post.status,
+          post.published_at, post.updated_at, post.reading_time, post.word_count,
+          post.meta_title, post.meta_description, post.source_name, post.source_url, post.editor_note, post.tags,
+          post.related_brokers, post.linked_sources
+        FROM public.posts AS post
+        LEFT JOIN rss_body_posts ON rss_body_posts.id = post.id
       `
       return mergeVisiblePosts(rows.map(mapRecord), staticPosts).slice(0, 50)
     },
     () => staticVisiblePosts().slice(0, 50),
   )
+  return applyEditorialAuthorOverrides(posts)
 }
 
 export async function getNewsPosts(): Promise<Post[]> {
@@ -234,8 +268,32 @@ export async function getPostsByBrokerSlug(brokerSlug: string): Promise<Post[]> 
 }
 
 export async function getPublishedAuthors(): Promise<Author[]> {
-  const activeSlugs = new Set(
-    (await getVisiblePosts()).map((post) => post.author.slug),
-  )
-  return authors.filter((author) => activeSlugs.has(author.slug))
+  const [posts, overrides] = await Promise.all([
+    getVisiblePosts(),
+    getEditorialAuthorOverrides(),
+  ])
+  const activeSlugs = new Set(posts.map((post) => post.author.slug))
+  const authorsBySlug = new Map(authors.map((author) => [author.slug, author]))
+
+  for (const override of overrides) {
+    const existing = authorsBySlug.get(override.slug)
+    authorsBySlug.set(
+      override.slug,
+      existing ? mergeEditorialAuthor(existing, override) : editorialAuthorToAuthor(override),
+    )
+  }
+
+  return [...activeSlugs]
+    .map((slug) => authorsBySlug.get(slug))
+    .filter((author): author is Author => Boolean(author))
+    .sort((a, b) => a.name.localeCompare(b.name) || a.slug.localeCompare(b.slug))
+}
+
+export async function getAuthorBySlug(slug: string): Promise<Author | undefined> {
+  const [override, staticAuthor] = await Promise.all([
+    getEditorialAuthorOverrides().then((items) => items.find((author) => author.slug === slug)),
+    Promise.resolve(authors.find((author) => author.slug === slug)),
+  ])
+  if (staticAuthor) return mergeEditorialAuthor(staticAuthor, override)
+  return override ? editorialAuthorToAuthor(override) : undefined
 }

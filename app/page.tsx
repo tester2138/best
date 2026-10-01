@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { ArrowRight, TrendingUp, Shield, Award, Sparkles, ChevronRight, Users, Globe, BarChart3, Clock, ExternalLink, Megaphone } from 'lucide-react'
+import { ArrowRight, TrendingUp, Award, Sparkles, ChevronRight, Globe, BarChart3, Megaphone } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
@@ -11,7 +11,7 @@ import { RatingStars } from '@/components/ui/rating-stars'
 import { AdSlot } from '@/components/ads/ad-slot'
 import { ItemListSchema } from '@/components/seo/item-list-schema'
 import { getPublicFeaturedBrokers, getPublicTopBrokers } from '@/lib/public-brokers'
-import { getFeaturedOffers } from '@/data/offers'
+import { getPublicFeaturedOffers } from '@/lib/public-offers'
 import { getLatestPosts } from '@/data/posts'
 import { brokerLogoStrip } from '@/data/navigation'
 import { heroStats } from '@/data/siteStats'
@@ -31,11 +31,12 @@ export const metadata: Metadata = {
 }
 
 export default async function HomePage() {
-  const [topBrokers, featuredBrokers] = await Promise.all([
+  const [topBrokers, featuredBrokers, liveFeaturedOffers] = await Promise.all([
     getPublicTopBrokers(5),
     getPublicFeaturedBrokers(2),
+    getPublicFeaturedOffers(),
   ])
-  const featuredOffers = getFeaturedOffers().slice(0, 3)
+  const featuredOffers = liveFeaturedOffers.slice(0, 3)
   const latestPosts = await getLatestPosts(4)
 
   return (
@@ -45,8 +46,8 @@ export default async function HomePage() {
       <div className="bg-secondary/30 py-3">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-            <AdSlot placementKey="horizontal-1" fluid />
-            <AdSlot placementKey="horizontal-2" fluid />
+            <AdSlot placementKey="horizontal-1" fluid priority />
+            <AdSlot placementKey="horizontal-2" fluid priority />
           </div>
         </div>
       </div>
@@ -319,7 +320,7 @@ export default async function HomePage() {
                 )}
                 <CardContent className="p-5">
                   <div className="flex items-center gap-3 mb-4">
-                    <BrokerLogo name={offer.brokerName} slug={offer.brokerId} size="md" />
+                    <BrokerLogo name={offer.brokerName} slug={offer.brokerId} logoUrl={offer.brokerLogo} size="md" />
                     <div>
                       <h3 className="font-semibold text-foreground">{offer.brokerName}</h3>
                       <Badge variant="secondary" className="text-xs">{offer.type}</Badge>
@@ -328,6 +329,7 @@ export default async function HomePage() {
                   
                   <h4 className="font-bold text-lg text-foreground mb-2">{offer.title}</h4>
                   <p className="text-sm text-muted-foreground mb-4 line-clamp-2">{offer.description}</p>
+  {offer.code && <p className="mb-4 text-sm text-foreground">Use code: <strong className="font-mono">{offer.code}</strong></p>}
                   
                   <div className="flex items-center justify-between">
                     <span className="text-2xl font-bold text-primary">{offer.value}</span>

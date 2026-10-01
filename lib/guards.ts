@@ -3,6 +3,7 @@ import { headers } from 'next/headers'
 import { auth } from '@/lib/auth'
 import { query, queryOne } from '@/lib/portal/db'
 import { Err } from '@/lib/portal/result'
+import { isMfaSessionFresh, roleHasPermission, type StaffPermission, type StaffRole } from '@/lib/staff-permissions'
 import type { Brand } from '@/types/portal'
 
 /**
@@ -14,15 +15,15 @@ import type { Brand } from '@/types/portal'
  * brand id returned here. This is defense layer 2/3 (layer 1 is middleware).
  */
 
-const ADMIN_EMAILS = (process.env.ADMIN_EMAILS ?? '')
-  .split(',')
-  .map((s) => s.trim().toLowerCase())
-  .filter(Boolean)
-
 export interface SessionUser {
   id: string
   email: string
   name: string | null
+}
+
+export interface StaffActor extends SessionUser {
+  role: StaffRole
+  isSuperAdmin: boolean
 }
 
 /** Any authenticated user. Throws `forbidden` when there is no session. */
@@ -37,26 +38,115 @@ export async function requireUser(): Promise<SessionUser> {
 }
 
 /**
- * Admin only. Env-listed admins self-promote on first authenticated hit
- * (bootstrap), mirroring the blueprint. Non-admins get an opaque `not_found`.
+ * Require an active staff role, the permission, and a session minted after the
+ * verified TOTP factor. Better Auth withholds a session during the sign-in
+ * challenge; the timestamp check also invalidates sessions created before MFA
+ * was enabled or replaced.
  */
-export async function requireAdmin(): Promise<{ id: string; email: string }> {
-  const user = await requireUser()
-  const prof = await queryOne<{ role: string }>(
-    `select role from public.profiles where id = $1`,
-    [user.id],
-  )
-  if (prof?.role !== 'admin') {
-    if (!ADMIN_EMAILS.includes(user.email)) throw new Err('Not found', 'not_found')
-    // Bootstrap: promote the env-listed admin (and ensure a profile row).
-    await query(
-      `insert into public.profiles (id, email, full_name, role, must_change_password)
-       values ($1, $2, $3, 'admin', false)
-       on conflict (id) do update set role = 'admin'`,
-      [user.id, user.email, user.name],
-    )
+export async function requireStaff(permission: StaffPermission = 'dashboard:read'): Promise<StaffActor> {
+  const session = await auth.api.getSession({ headers: await headers() })
+  if (!session?.user) throw new Err('Not signed in', 'forbidden')
+  const user: SessionUser = {
+    id: session.user.id,
+    email: (session.user.email ?? '').toLowerCase(),
+    name: session.user.name ?? null,
   }
-  return { id: user.id, email: user.email }
+
+  const [profile, assignment, mfaState] = await Promise.all([
+    queryOne<{ role: string }>(`select role from public.profiles where id = $1`, [user.id]),
+    queryOne<{
+      role: Exclude<StaffRole, 'super_admin' | 'merchant'>
+      status: string
+      scope_mode: 'all' | 'selected'
+      invitation_expired: boolean
+    }>(
+      `select sa.role, sa.status, sa.scope_mode,
+              exists (
+                select 1 from public.staff_invitations i
+                join public.profiles p on lower(p.email) = lower(i.email)
+                 where p.id = sa.user_id
+                   and i.status in ('pending', 'expired')
+                   and i.expires_at <= now()
+              ) as invitation_expired
+         from public.staff_access sa where sa.user_id = $1`,
+      [user.id],
+    ),
+    queryOne<{
+      enabled: boolean
+      verified: boolean | null
+      factor_created_at: string | null
+    }>(
+      `select u."twoFactorEnabled" as enabled,
+              tf.verified,
+              tf."createdAt"::text as factor_created_at
+         from public."user" u
+         left join public."twoFactor" tf on tf."userId" = u.id
+        where u.id = $1`,
+      [user.id],
+    ),
+
+  ])
+
+  let role: StaffRole | null = null
+  if (profile?.role === 'admin') role = 'super_admin'
+  else if (assignment?.status === 'active') role = assignment.role
+
+  if (!role) throw new Err('Not found', 'not_found')
+  if (role !== 'super_admin' && assignment?.invitation_expired) {
+    throw new Err('Staff invitation expired. Ask a super admin to reissue it.', 'forbidden')
+  }
+  if (!mfaState?.enabled || mfaState.verified !== true) {
+    throw new Err('Multi-factor authentication is required for staff access', 'forbidden')
+  }
+  if (!isMfaSessionFresh(mfaState.enabled, mfaState.factor_created_at, session.session.createdAt)) {
+    throw new Err('Sign in again and complete multi-factor authentication', 'forbidden')
+  }
+  if (!roleHasPermission(role, permission)) throw new Err('Not found', 'not_found')
+
+  return { ...user, role, isSuperAdmin: role === 'super_admin' }
+}
+
+/** Assert that an already-authorized staff actor can access this broker. */
+export async function assertStaffBrandScope(actor: StaffActor, brandId: string): Promise<void> {
+  if (actor.isSuperAdmin) return
+  const assignment = await queryOne<{ scope_mode: 'all' | 'selected' }>(
+    `select scope_mode from public.staff_access where user_id = $1 and status = 'active'`,
+    [actor.id],
+  )
+  if (assignment?.scope_mode !== 'all') {
+    const scope = await queryOne<{ brand_id: string }>(
+      `select brand_id from public.staff_brand_scopes where user_id = $1 and brand_id = $2`,
+      [actor.id, brandId],
+    )
+    if (!scope) throw new Err('Not found', 'not_found')
+  }
+}
+
+/** Resolve a staff actor and ensure the requested broker is within their scope. */
+export async function requireStaffBrand(
+  brandId: string,
+  permission: StaffPermission,
+): Promise<StaffActor> {
+  const actor = await requireStaff(permission)
+  await assertStaffBrandScope(actor, brandId)
+  return actor
+}
+
+/** Whether a staff actor is explicitly allowed to read broker-unassigned contact submissions. */
+export async function hasGlobalStaffScope(actor: StaffActor): Promise<boolean> {
+  if (actor.isSuperAdmin) return true
+  const assignment = await queryOne<{ scope_mode: 'all' | 'selected' }>(
+    `select scope_mode from public.staff_access where user_id = $1 and status = 'active'`,
+    [actor.id],
+  )
+  return assignment?.scope_mode === 'all'
+}
+
+/** Legacy name retained for callers that explicitly require unrestricted super-admin access. */
+export async function requireAdmin(): Promise<StaffActor> {
+  const actor = await requireStaff('settings:manage')
+  if (!actor.isSuperAdmin) throw new Err('Not found', 'not_found')
+  return actor
 }
 
 /**

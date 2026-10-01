@@ -10,6 +10,10 @@ export const maxDuration = 300 // 5 minutes max execution time
  * Manually trigger news generation (for testing or manual runs)
  */
 export async function POST(request: NextRequest) {
+  if (process.env.VERCEL_ENV !== 'production') {
+    return NextResponse.json({ error: 'Unavailable in non-production environments' }, { status: 404 })
+  }
+
   try {
     // Optional: Add authentication check here
     const authHeader = request.headers.get('authorization')
@@ -59,6 +63,10 @@ export async function POST(request: NextRequest) {
  * - With `?stats=true`: returns current auto-news stats instead.
  */
 export async function GET(request: NextRequest) {
+  if (process.env.VERCEL_ENV !== 'production') {
+    return NextResponse.json({ error: 'Unavailable in non-production environments' }, { status: 404 })
+  }
+
   const { searchParams } = new URL(request.url)
 
   // Stats-only mode (for dashboards / debugging)

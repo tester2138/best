@@ -1,5 +1,7 @@
 import 'server-only'
+import { brokers } from '@/data/brokers'
 import { directoryCompanies } from '@/data/directory'
+import type { Broker } from '@/lib/types'
 import type { DirectoryCompany } from '@/lib/directory-types'
 import type { SectionKey } from '@/lib/content/registry'
 
@@ -33,33 +35,64 @@ function toEntry(c: DirectoryCompany): CatalogEntry {
   }
 }
 
+function toBrokerEntry(broker: Broker): CatalogEntry {
+  return {
+    slug: broker.slug,
+    name: broker.name,
+    website: broker.websiteUrl ?? null,
+    logoUrl: broker.logoUrl ?? null,
+    headquarters: broker.headquarters ?? null,
+    regulators: broker.regulators.map((regulator) =>
+      typeof regulator === 'string' ? regulator : regulator.authority,
+    ),
+    foundedYear: broker.foundedYear ?? null,
+  }
+}
+
+const catalogBySlug = new Map<string, CatalogEntry>()
+for (const company of directoryCompanies) {
+  if (!catalogBySlug.has(company.slug.toLowerCase())) {
+    catalogBySlug.set(company.slug.toLowerCase(), toEntry(company))
+  }
+}
+for (const broker of brokers) {
+  if (!catalogBySlug.has(broker.slug.toLowerCase())) {
+    catalogBySlug.set(broker.slug.toLowerCase(), toBrokerEntry(broker))
+  }
+}
+const catalogEntries = [...catalogBySlug.values()]
+
 /**
- * Case-insensitive prefix/substring search over the directory, capped for the
- * combobox. Matches on name or slug. Empty query returns the first `limit`.
+ * Case-insensitive prefix/substring search over both public broker catalogs,
+ * capped for the combobox. Matches on name or slug. Empty query returns the
+ * first `limit` entries.
  */
 export function searchCatalog(queryStr: string, limit = 20): CatalogEntry[] {
   const q = queryStr.trim().toLowerCase()
-  const source = directoryCompanies
-  if (!q) return source.slice(0, limit).map(toEntry)
+  if (!q) return catalogEntries.slice(0, limit)
 
-  const scored: { c: DirectoryCompany; score: number }[] = []
-  for (const c of source) {
-    const name = c.name.toLowerCase()
-    const slug = c.slug.toLowerCase()
+  const scored: { entry: CatalogEntry; score: number }[] = []
+  for (const entry of catalogEntries) {
+    const name = entry.name.toLowerCase()
+    const slug = entry.slug.toLowerCase()
     let score = -1
     if (name === q || slug === q) score = 0
     else if (name.startsWith(q) || slug.startsWith(q)) score = 1
     else if (name.includes(q) || slug.includes(q)) score = 2
-    if (score >= 0) scored.push({ c, score })
+    if (score >= 0) scored.push({ entry, score })
   }
-  scored.sort((a, b) => a.score - b.score || a.c.name.localeCompare(b.c.name))
-  return scored.slice(0, limit).map((s) => toEntry(s.c))
+  scored.sort(
+    (a, b) =>
+      a.score - b.score ||
+      a.entry.name.localeCompare(b.entry.name) ||
+      a.entry.slug.localeCompare(b.entry.slug),
+  )
+  return scored.slice(0, limit).map(({ entry }) => entry)
 }
 
-/** Look up a single catalog entry by directory slug. */
+/** Look up a single entry across both public broker catalogs. */
 export function getCatalogEntry(slug: string): CatalogEntry | null {
-  const c = directoryCompanies.find((x) => x.slug === slug)
-  return c ? toEntry(c) : null
+  return catalogBySlug.get(slug.trim().toLowerCase()) ?? null
 }
 
 /**
