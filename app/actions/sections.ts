@@ -32,13 +32,24 @@ const SaveInput = z.object({
   sectionKey: z.enum(SECTION_KEYS),
   values: z.record(z.unknown()),
   version: z.number().int().min(0), // 0 = row does not exist yet
+  asAdmin: z.boolean().default(false),
 })
 
 export async function saveDraft(raw: unknown) {
   return run(async () => {
     const input = SaveInput.parse(raw)
-    const actor = await requireBrandMember(input.brandId, { write: true })
+    const actor = input.asAdmin
+      ? await requireStaffBrand(input.brandId, 'editorial:write')
+      : await requireBrandMember(input.brandId, { write: true })
     if (!(await rateLimit('save', actor.id)).ok) throw new Err('Slow down a little', 'rate_limited')
+    const brand =
+      'brand' in actor
+        ? actor.brand
+        : await queryOne<Pick<Brand, 'official_domains'>>(
+            `select official_domains from public.brands where id = $1`,
+            [input.brandId],
+          )
+    if (!brand) throw new Err('Not found', 'not_found')
 
     const parsed = zodFor(input.sectionKey).safeParse(input.values)
     if (!parsed.success)
@@ -48,7 +59,7 @@ export async function saveDraft(raw: unknown) {
     const clean = parsed.data as Record<string, unknown>
     if (input.sectionKey === 'about' && typeof clean.body === 'string')
       clean.body = sanitizeRich(clean.body)
-    validateSectionUrls(input.sectionKey, clean, actor.brand)
+    validateSectionUrls(input.sectionKey, clean, brand)
 
     if (input.version === 0) {
       // First save: insert. A unique-violation means a concurrent insert won —
@@ -199,14 +210,17 @@ export async function publishSection(raw: unknown) {
 
 export async function discardDraft(raw: unknown) {
   return run(async () => {
-    const { brandId, sectionKey, version } = z
+    const { brandId, sectionKey, version, asAdmin } = z
       .object({
         brandId: z.string().uuid(),
         sectionKey: z.enum(SECTION_KEYS),
         version: z.number().int(),
+        asAdmin: z.boolean().default(false),
       })
       .parse(raw)
-    const actor = await requireBrandMember(brandId, { write: true })
+    const actor = asAdmin
+      ? await requireStaffBrand(brandId, 'editorial:write')
+      : await requireBrandMember(brandId, { write: true })
 
     const reverted = await queryOne<{ published: Record<string, unknown> | null }>(
       `update public.broker_page_sections
@@ -222,7 +236,7 @@ export async function discardDraft(raw: unknown) {
         where brand_id = $1 and section_key = $2`,
       [brandId, sectionKey, JSON.stringify(reverted.published)],
     )
-    await audit(actor, brandId, 'section.discard', sectionKey)
+    await audit(actor, brandId, 'section.discard', sectionKey, asAdmin ? { asAdmin: true } : {})
     return {}
   })
 }

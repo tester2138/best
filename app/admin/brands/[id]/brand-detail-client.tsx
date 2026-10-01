@@ -2,6 +2,8 @@
 
 import { useState, useTransition } from 'react'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
+import { Pencil } from 'lucide-react'
 import { toast } from 'sonner'
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -73,6 +75,8 @@ export function BrandDetailClient({
   sections,
   activity,
   canManage,
+  canEditContent,
+  initialTab,
   profile,
 }: {
   brand: Brand
@@ -81,6 +85,8 @@ export function BrandDetailClient({
   sections: SectionStatusRow[]
   activity: AuditRow[]
   canManage: boolean
+  canEditContent: boolean
+  initialTab: 'overview' | 'content'
   profile: ProfileEditorProps | null
 }) {
   const router = useRouter()
@@ -121,7 +127,7 @@ export function BrandDetailClient({
         </div>
       </div>
 
-      <Tabs defaultValue="overview">
+      <Tabs defaultValue={initialTab}>
         <TabsList>
           <TabsTrigger value="overview">Overview</TabsTrigger>
           <TabsTrigger value="brand-information">Brand information</TabsTrigger>
@@ -344,18 +350,32 @@ export function BrandDetailClient({
                     Published {fmt(s.publishedAt)}
                   </span>
                 </div>
-                <Badge
-                  variant={
-                    s.status === 'synced'
-                      ? 'default'
-                      : s.status === 'pending_review'
-                        ? 'secondary'
-                        : 'outline'
-                  }
-                  className="capitalize"
-                >
-                  {s.status.replace('_', ' ')}
-                </Badge>
+                <div className="flex shrink-0 items-center gap-2">
+                  <Badge
+                    variant={
+                      s.status === 'synced'
+                        ? 'default'
+                        : s.status === 'pending_review'
+                          ? 'secondary'
+                          : 'outline'
+                    }
+                    className="capitalize"
+                  >
+                    {s.status.replace('_', ' ')}
+                  </Badge>
+                  {canEditContent && (
+                    <Button asChild variant="outline" size="sm">
+                      <Link
+                        href={`/admin/brands/${brand.id}/content/${s.key}`}
+                        prefetch={false}
+                        aria-label={`Edit ${s.label}`}
+                      >
+                        <Pencil data-icon="inline-start" />
+                        Edit
+                      </Link>
+                    </Button>
+                  )}
+                </div>
               </div>
             ))}
           </Card>

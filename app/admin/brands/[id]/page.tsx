@@ -36,10 +36,12 @@ interface AuditRow {
 
 export default async function AdminBrandDetailPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ id: string }>
+  searchParams: Promise<{ tab?: string }>
 }) {
-  const { id } = await params
+  const [{ id }, { tab }] = await Promise.all([params, searchParams])
   const actor = await requireStaffBrand(id, 'brokers:read')
   const canManage = roleHasPermission(actor.role, 'brokers:manage')
 
@@ -153,6 +155,8 @@ export default async function AdminBrandDetailPage({
         sections={sectionStatus}
         activity={activity}
         canManage={canManage}
+        canEditContent={roleHasPermission(actor.role, 'editorial:write')}
+        initialTab={tab === 'content' ? 'content' : 'overview'}
         profile={profile}
       />
     </div>
