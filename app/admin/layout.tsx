@@ -1,10 +1,13 @@
 import type { ReactNode } from 'react'
 import Link from 'next/link'
+import { headers } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { hasGlobalStaffScope, requireStaff, type StaffActor } from '@/lib/guards'
 import { roleHasPermission, type StaffPermission } from '@/lib/staff-permissions'
 import { Err } from '@/lib/portal/result'
 import { Toaster } from '@/components/ui/sonner'
+import { isAuthSurfaceFlowPath } from '@/lib/portal/auth-routing'
+import '../business/portal-theme.css'
 
 export const metadata = {
   title: 'Admin · BestForex Portal',
@@ -34,23 +37,39 @@ const NAV: Array<{
 ]
 
 export default async function AdminLayout({ children }: { children: ReactNode }) {
+  const requestHeaders = await headers()
+  const pathname = requestHeaders.get('x-pathname') ?? requestHeaders.get('next-url') ?? '/admin'
+
+  if (isAuthSurfaceFlowPath('admin', pathname)) {
+    return (
+      <div className="portal-theme min-h-screen bg-background text-foreground">
+        {children}
+        <Toaster />
+      </div>
+    )
+  }
+
   let actor: StaffActor
   try {
     actor = await requireStaff('dashboard:read')
   } catch (error) {
     if (error instanceof Err && error.message.startsWith('Staff invitation expired')) {
-      redirect('/business/security?invitation=expired')
+      redirect('/admin/security?invitation=expired')
     }
     if (error instanceof Err && error.message.startsWith('Multi-factor')) {
-      redirect('/business/security?required=1')
+      redirect('/admin/security?required=1')
     }
     if (error instanceof Err && error.message.startsWith('Sign in again')) {
-      redirect('/business/security?reauth=1')
+      redirect('/admin/security?reauth=1')
     }
-    if (error instanceof Err && error.code === 'forbidden') {
-      redirect('/business/login?next=/admin')
+    if (error instanceof Err && error.message === 'Not signed in') {
+      const next = pathname.startsWith('/admin/') ? pathname : '/admin'
+      redirect(`/admin/login?next=${encodeURIComponent(next)}`)
     }
-    redirect('/business')
+    if (error instanceof Err && (error.code === 'forbidden' || error.code === 'not_found')) {
+      redirect('/admin/login?error=access-denied')
+    }
+    throw error
   }
 
   const globalScope = await hasGlobalStaffScope(actor)

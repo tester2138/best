@@ -1,6 +1,11 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { getSessionCookie } from 'better-auth/cookies'
+import {
+  AUTH_SURFACE_PATHS,
+  getAuthSurfaceForPath,
+  isAuthSurfaceOpenPath,
+} from '@/lib/portal/auth-routing'
 
 // Static file extensions — skip normalisation for these paths.
 const STATIC_EXT = /\.(?:ico|png|jpg|jpeg|gif|svg|webp|woff|woff2|ttf|eot|css|js|map|txt|xml|json)$/i
@@ -47,29 +52,26 @@ export function proxy(request: NextRequest) {
     return applyDeploymentRobotsHeader(NextResponse.redirect(dest, { status: 301 }))
   }
 
-  // ── Business Portal defense layer 1: session-cookie gate ─────────────────
-  // Cheap, edge-safe presence check (no DB). Unauthenticated hits to /business
-  // or /admin are bounced to /business/login with a next= param. Real role,
-  // brand-membership and must_change_password authorization run in the server
-  // layouts and server actions (layers 2-3) where the DB is available.
-  // Every business/admin response carries noindex (Blueprint Section 11.4).
-  if (pathname.startsWith('/business') || pathname.startsWith('/admin')) {
-    const res = NextResponse.next()
+  // ── Admin and business route gates ───────────────────────────────────────
+  // Keep each surface's authentication and recovery redirects within its own
+  // route namespace. The server layouts still validate the complete session
+  // and authorization state after this edge-safe cookie-presence check.
+  const authSurface = getAuthSurfaceForPath(pathname)
+  if (authSurface) {
+    const forwardedHeaders = new Headers(request.headers)
+    forwardedHeaders.set('x-pathname', pathname)
+    const res = NextResponse.next({ request: { headers: forwardedHeaders } })
     res.headers.set('X-Robots-Tag', 'noindex, nofollow')
-    // Forward pathname to the root layout so it can suppress Header/Footer.
     res.headers.set('x-pathname', pathname)
 
-    // Open auth pages. The auth layout validates the full session and redirects
-    // authenticated users; a cookie-presence check here would loop for expired
-    // or malformed cookies by bouncing between /business and /business/login.
-    const OPEN = ['/business/login', '/business/forgot-password', '/business/reset']
-    const isOpen = OPEN.some((p) => pathname === p || pathname.startsWith(p + '/'))
-    if (isOpen) return applyDeploymentRobotsHeader(res)
+    if (isAuthSurfaceOpenPath(authSurface, pathname)) {
+      return applyDeploymentRobotsHeader(res)
+    }
 
     const hasSession = getSessionCookie(request)
     if (!hasSession) {
       const loginUrl = url.clone()
-      loginUrl.pathname = '/business/login'
+      loginUrl.pathname = AUTH_SURFACE_PATHS[authSurface].login
       loginUrl.search = ''
       loginUrl.searchParams.set('next', pathname)
       return applyDeploymentRobotsHeader(NextResponse.redirect(loginUrl))

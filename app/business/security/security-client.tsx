@@ -31,12 +31,14 @@ export function SecurityClient({
   setupPending,
   sessionFresh,
   invitationExpired,
+  loginPath,
 }: {
   email: string
   mfaEnabled: boolean
   setupPending: boolean
   sessionFresh: boolean
   invitationExpired: boolean
+  loginPath: string
 }) {
   const router = useRouter()
   const [password, setPassword] = useState('')
@@ -114,7 +116,7 @@ export function SecurityClient({
   function signOutForReauthentication() {
     startTransition(async () => {
       await authClient.signOut()
-      window.location.replace('/business/login')
+      window.location.replace(loginPath)
     })
   }
 

@@ -5,8 +5,9 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
 import { requestReset } from '@/app/actions/auth'
+import type { AuthSurface } from '@/lib/portal/auth-routing'
 
-export function ForgotForm() {
+export function ForgotForm({ surface = 'business' }: { surface?: AuthSurface }) {
   const [sent, setSent] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [pending, startTransition] = useTransition()
@@ -33,6 +34,7 @@ export function ForgotForm() {
 
   return (
     <form action={onSubmit} className="mt-6 flex flex-col gap-4">
+      <input type="hidden" name="surface" value={surface} />
       <div className="flex flex-col gap-1.5">
         <Label htmlFor="email" className="text-[13px] font-medium">
           Email

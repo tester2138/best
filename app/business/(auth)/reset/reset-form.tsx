@@ -6,12 +6,19 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
 import { resetPassword } from '@/lib/auth-client'
+import { AUTH_SURFACE_PATHS, type AuthSurface } from '@/lib/portal/auth-routing'
 
 function valid(v: string) {
   return v.length >= 12 && /[a-z]/.test(v) && /[A-Z]/.test(v) && /\d/.test(v)
 }
 
-export function ResetForm({ token }: { token: string }) {
+export function ResetForm({
+  token,
+  surface = 'business',
+}: {
+  token: string
+  surface?: AuthSurface
+}) {
   const router = useRouter()
   const [pw, setPw] = useState('')
   const [confirm, setConfirm] = useState('')
@@ -35,7 +42,7 @@ export function ResetForm({ token }: { token: string }) {
         return
       }
       setDone(true)
-      setTimeout(() => router.push('/business/login'), 1200)
+      setTimeout(() => router.push(AUTH_SURFACE_PATHS[surface].login), 1200)
     })
   }
 

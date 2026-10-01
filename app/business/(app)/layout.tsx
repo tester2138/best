@@ -15,7 +15,6 @@ export default async function PortalAppLayout({ children }: { children: ReactNod
   // Forced first-login password change (Blueprint 11.4).
   if (FORCE_PASSWORD_CHANGE && ctx.profile.mustChangePassword) redirect('/business/set-password')
 
-  // Admins without a brand membership belong in the admin panel.
   if (ctx.brands.length === 0) {
     if (ctx.profile.role === 'admin') redirect('/admin')
     redirect('/business/no-access')
