@@ -23,29 +23,11 @@ async function loadAuthCrypto() {
 
 const EMAIL = 'staging-admin@bestforex.io'
 const PASSWORD = 'StagingAdmin2026!x'
-// Known base32 TOTP secret (staging only).
-const TOTP_SECRET_BASE32 = 'JBSWY3DPEHPK3PXPJBSWY3DPEHPK3PXP'
-
-function base32Decode(input: string): Buffer {
-  const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567'
-  let bits = 0
-  let value = 0
-  const out: number[] = []
-  for (const char of input.replace(/=+$/, '').toUpperCase()) {
-    const idx = alphabet.indexOf(char)
-    if (idx === -1) continue
-    value = (value << 5) | idx
-    bits += 5
-    if (bits >= 8) {
-      out.push((value >>> (bits - 8)) & 0xff)
-      bits -= 8
-    }
-  }
-  return Buffer.from(out)
-}
+// Known staging TOTP secret.
+const TOTP_SECRET = 'JBSWY3DPEHPK3PXPJBSWY3DPEHPK3PXP'
 
 function totpCode(secret: string, timeStep = Math.floor(Date.now() / 30000)): string {
-  const key = base32Decode(secret)
+  const key = Buffer.from(secret, 'utf8')
   const counter = Buffer.alloc(8)
   counter.writeUInt32BE(Math.floor(timeStep / 2 ** 32), 0)
   counter.writeUInt32BE(timeStep % 2 ** 32, 4)
@@ -56,7 +38,7 @@ function totpCode(secret: string, timeStep = Math.floor(Date.now() / 30000)): st
 }
 
 if (process.argv.includes('--code')) {
-  console.log(totpCode(TOTP_SECRET_BASE32))
+  console.log(totpCode(TOTP_SECRET))
   process.exit(0)
 }
 
@@ -70,7 +52,7 @@ async function main() {
   // BETTER_AUTH_SECRETS array is configured).
   const encryptedTotpSecret = await symmetricEncrypt({
     key: process.env.BETTER_AUTH_SECRET!,
-    data: TOTP_SECRET_BASE32,
+    data: TOTP_SECRET,
   })
   const client = await pool.connect()
   try {
@@ -122,8 +104,8 @@ async function main() {
     console.log('[v0] staging admin ready:')
     console.log('[v0]   email:', EMAIL)
     console.log('[v0]   password:', PASSWORD)
-    console.log('[v0]   totp secret:', TOTP_SECRET_BASE32)
-    console.log('[v0]   current code:', totpCode(TOTP_SECRET_BASE32))
+    console.log('[v0]   totp secret:', TOTP_SECRET)
+    console.log('[v0]   current code:', totpCode(TOTP_SECRET))
   } catch (err) {
     await client.query('rollback')
     throw err
