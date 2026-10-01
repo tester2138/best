@@ -38,6 +38,7 @@ export type AuditAction =
   | 'media.delete'
   | 'settings.update'
   | 'claim.received'
+  | 'claim.converted'
   | 'claim.status'
   | 'news.publish'
   | 'admin.news.save'

@@ -1,6 +1,7 @@
 import { directoryCompanies } from '@/data/directory'
 import { brokers } from '@/data/brokers'
-import { query } from '@/lib/portal/db'
+import { query, queryOne } from '@/lib/portal/db'
+import { getCatalogEntry } from '@/lib/catalog'
 import { hasGlobalStaffScope, requireStaff } from '@/lib/guards'
 import { roleHasPermission } from '@/lib/staff-permissions'
 import { BrandsClient, type BrandRow } from './brands-client'
@@ -15,8 +16,31 @@ for (const broker of brokers) {
   if (!catalogBySlug.has(broker.slug)) catalogBySlug.set(broker.slug, { name: broker.name })
 }
 
-export default async function AdminBrandsPage() {
+export default async function AdminBrandsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ claimId?: string }>
+}) {
   const actor = await requireStaff('brokers:read')
+  const params = await searchParams
+  const claimId = (params.claimId ?? '').trim()
+  const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(claimId)
+  const initialClaim = actor.isSuperAdmin && isUuid
+    ? await queryOne<{
+        id: string
+        full_name: string
+        work_email: string
+        slug: string
+        name: string
+        website: string | null
+      }>(
+        `select c.id::text, c.full_name, c.work_email, b.slug, b.name, b.website
+           from public.claim_requests c
+           join public.brands b on b.id = c.brand_id
+          where c.id = $1 and c.status in ('new', 'contacted')`,
+        [claimId],
+      )
+    : null
   const [databaseBrands, globalScope] = await Promise.all([
     query<BrandRow>(
       `select b.id, b.slug, b.name, b.is_claimed, b.portal_access, b.portal_locked,
@@ -43,6 +67,23 @@ export default async function AdminBrandsPage() {
     ),
     hasGlobalStaffScope(actor),
   ])
+
+  const initialAssignment = initialClaim
+    ? {
+        claimRequestId: initialClaim.id,
+        entry: getCatalogEntry(initialClaim.slug) ?? {
+          slug: initialClaim.slug,
+          name: initialClaim.name,
+          website: initialClaim.website,
+          logoUrl: null,
+          headquarters: null,
+          regulators: [],
+          foundedYear: null,
+        },
+        email: initialClaim.work_email,
+        contactName: initialClaim.full_name,
+      }
+    : null
 
   const visibleSlugs = new Set(databaseBrands.map((brand) => brand.slug))
   const catalogOnly: BrandRow[] = globalScope
@@ -84,7 +125,11 @@ export default async function AdminBrandsPage() {
           {brands.length.toLocaleString()} broker profiles, including catalog entries not yet provisioned in the portal.
         </p>
       </div>
-      <BrandsClient brands={brands} canAssign={actor.isSuperAdmin} />
+      <BrandsClient
+        brands={brands}
+        canAssign={actor.isSuperAdmin}
+        initialAssignment={initialAssignment}
+      />
     </div>
   )
 }

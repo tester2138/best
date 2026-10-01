@@ -13,7 +13,7 @@ interface Row {
   full_name: string
   work_email: string
   message: string | null
-  status: 'new' | 'contacted' | 'assigned' | 'dismissed'
+  status: 'new' | 'contacted' | 'converted' | 'rejected'
   created_at: string
   brand_id: string | null
   brand_name: string | null
@@ -35,7 +35,7 @@ export default async function LeadsPage() {
          where sc.user_id = $1 and sc.brand_id = c.brand_id
       ))
       order by
-        case c.status when 'new' then 0 when 'contacted' then 1 else 2 end,
+        case c.status when 'new' then 0 when 'contacted' then 1 when 'converted' then 2 else 3 end,
         c.created_at desc`,
     [actor.id, actor.isSuperAdmin],
   )
@@ -63,7 +63,7 @@ export default async function LeadsPage() {
             : `${newCount} new · ${leads.length} total`}
         </p>
       </div>
-      <LeadsClient leads={leads} />
+      <LeadsClient leads={leads} canAssign={actor.isSuperAdmin} />
     </div>
   )
 }

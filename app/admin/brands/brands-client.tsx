@@ -47,7 +47,14 @@ export interface BrandRow {
   is_duplicate: boolean
   has_database_record: boolean
   profile_href?: string
-  }
+}
+
+export interface InitialAssignment {
+  claimRequestId: string
+  entry: CatalogEntry
+  email: string
+  contactName: string
+}
 
 function AccessPill({ row }: { row: BrandRow }) {
   if (row.portal_locked) return <Badge variant="destructive">Locked</Badge>
@@ -55,9 +62,19 @@ function AccessPill({ row }: { row: BrandRow }) {
   return <Badge>Active</Badge>
 }
 
-export function BrandsClient({ brands, canAssign }: { brands: BrandRow[]; canAssign: boolean }) {
+export function BrandsClient({
+  brands,
+  canAssign,
+  initialAssignment = null,
+}: {
+  brands: BrandRow[]
+  canAssign: boolean
+  initialAssignment?: InitialAssignment | null
+}) {
+  const router = useRouter()
   const [q, setQ] = useState('')
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(Boolean(initialAssignment))
+  const [dialogInitial, setDialogInitial] = useState(initialAssignment)
 
   const filtered = useMemo(() => {
     const s = q.trim().toLowerCase()
@@ -66,6 +83,19 @@ export function BrandsClient({ brands, canAssign }: { brands: BrandRow[]; canAss
       (b) => b.name.toLowerCase().includes(s) || b.slug.toLowerCase().includes(s),
     )
   }, [q, brands])
+
+  function openManualAssignment() {
+    setDialogInitial(null)
+    setOpen(true)
+  }
+
+  function handleDialogOpenChange(nextOpen: boolean) {
+    setOpen(nextOpen)
+    if (!nextOpen && dialogInitial) {
+      setDialogInitial(null)
+      router.replace('/admin/brands', { scroll: false })
+    }
+  }
 
   return (
     <div className="flex flex-col gap-4">
@@ -77,7 +107,7 @@ export function BrandsClient({ brands, canAssign }: { brands: BrandRow[]; canAss
           className="max-w-xs"
           aria-label="Search brands"
         />
-        {canAssign ? <Button onClick={() => setOpen(true)}>Assign a brand</Button> : null}
+        {canAssign ? <Button onClick={openManualAssignment}>Assign a brand</Button> : null}
       </div>
 
       <div className="rounded-lg border border-border">
@@ -150,7 +180,12 @@ export function BrandsClient({ brands, canAssign }: { brands: BrandRow[]; canAss
         </Table>
       </div>
 
-      <AssignDialog open={open} onOpenChange={setOpen} />
+      <AssignDialog
+        key={dialogInitial?.claimRequestId ?? 'manual'}
+        open={open}
+        onOpenChange={handleDialogOpenChange}
+        initial={dialogInitial}
+      />
     </div>
   )
 }
@@ -167,18 +202,24 @@ function hostFromWebsite(website: string | null): string | null {
 function AssignDialog({
   open,
   onOpenChange,
+  initial,
 }: {
   open: boolean
   onOpenChange: (v: boolean) => void
+  initial: InitialAssignment | null
 }) {
   const router = useRouter()
   const [pending, startTransition] = useTransition()
 
-  const [term, setTerm] = useState('')
+  const [term, setTerm] = useState(initial?.entry.name ?? '')
   const [results, setResults] = useState<CatalogEntry[]>([])
-  const [selected, setSelected] = useState<CatalogEntry | null>(null)
-  const [email, setEmail] = useState('')
-  const [domains, setDomains] = useState<string[]>([])
+  const [selected, setSelected] = useState<CatalogEntry | null>(initial?.entry ?? null)
+  const [email, setEmail] = useState(initial?.email ?? '')
+  const [contactName, setContactName] = useState(initial?.contactName ?? '')
+  const [domains, setDomains] = useState<string[]>(() => {
+    const domain = hostFromWebsite(initial?.entry.website ?? null)
+    return domain ? [domain] : []
+  })
   const [domainInput, setDomainInput] = useState('')
   const [override, setOverride] = useState(false)
   const [mismatch, setMismatch] = useState(false)
@@ -208,6 +249,7 @@ function AssignDialog({
     setResults([])
     setSelected(null)
     setEmail('')
+    setContactName('')
     setDomains([])
     setDomainInput('')
     setOverride(false)
@@ -245,8 +287,10 @@ function AssignDialog({
         name: selected.name,
         website: selected.website,
         email: email.trim(),
+        contactName: contactName.trim() || selected.name,
         officialDomains: domains,
         overrideDomainMismatch: override,
+        claimRequestId: initial?.claimRequestId,
       })
       if (res.ok) {
         toast.success(
@@ -280,9 +324,11 @@ function AssignDialog({
     >
       <DialogContent className="sm:max-w-lg">
         <DialogHeader>
-          <DialogTitle>Assign a brand</DialogTitle>
+          <DialogTitle>{initial ? 'Complete profile claim' : 'Assign a brand'}</DialogTitle>
           <DialogDescription>
-            Search the directory, then invite a broker to manage the profile.
+            {initial
+              ? 'Confirm the representative and official email domain to provision access for this claim.'
+              : 'Search the directory, then invite a broker to manage the profile.'}
           </DialogDescription>
         </DialogHeader>
 
@@ -292,6 +338,7 @@ function AssignDialog({
             <Input
               id="catalog-search"
               value={term}
+              disabled={Boolean(initial?.claimRequestId)}
               onChange={(e) => {
                 setTerm(e.target.value)
                 setSelected(null)
@@ -322,6 +369,15 @@ function AssignDialog({
           {selected && (
             <>
               <div className="flex flex-col gap-1.5">
+                <Label htmlFor="assign-contact-name">Contact name</Label>
+                <Input
+                  id="assign-contact-name"
+                  value={contactName}
+                  onChange={(e) => setContactName(e.target.value)}
+                  placeholder="Broker representative"
+                />
+              </div>
+              <div className="flex flex-col gap-1.5">
                 <Label htmlFor="assign-email">Broker email</Label>
                 <Input
                   id="assign-email"
@@ -334,6 +390,11 @@ function AssignDialog({
 
               <div className="flex flex-col gap-1.5">
                 <Label htmlFor="assign-domain">Official domains</Label>
+                {initial ? (
+                  <p className="text-xs text-muted-foreground">
+                    Verify the organization&apos;s domain, not just the requester&apos;s email domain.
+                  </p>
+                ) : null}
                 <div className="flex gap-2">
                   <Input
                     id="assign-domain"

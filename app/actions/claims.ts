@@ -72,7 +72,7 @@ export async function submitClaim(raw: unknown) {
 
 const StatusInput = z.object({
   id: z.string().uuid(),
-  status: z.enum(['new', 'contacted', 'assigned', 'dismissed']),
+  status: z.enum(['new', 'contacted', 'rejected']),
 })
 
 export async function setClaimStatus(raw: unknown) {
@@ -84,6 +84,8 @@ export async function setClaimStatus(raw: unknown) {
       [input.id],
     )
     if (!current) throw new Err('Lead not found', 'not_found')
+    if (current.status === 'converted')
+      throw new Err('Converted claims cannot be changed from the status menu', 'validation')
     await requireStaffBrand(current.brand_id, 'leads:manage')
     const updated = await queryOne<{ id: string; status: string }>(
       `update public.claim_requests set status = $2 where id = $1 returning id, status`,
