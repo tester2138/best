@@ -42,9 +42,16 @@ export const metadata = {
   robots: { index: false, follow: false },
 }
 
-type NavigationSection = 'Overview' | 'Directory' | 'Operations' | 'Publishing' | 'System'
+type NavigationSection = 'Overview' | 'Directory' | 'Operations' | 'Growth' | 'Content studio' | 'Administration'
 
-const SECTION_ORDER: NavigationSection[] = ['Overview', 'Directory', 'Operations', 'Publishing', 'System']
+const SECTION_ORDER: NavigationSection[] = [
+  'Overview',
+  'Directory',
+  'Operations',
+  'Growth',
+  'Content studio',
+  'Administration',
+]
 
 type AdminNavItem = {
   href: string
@@ -62,20 +69,20 @@ const NAV: AdminNavItem[] = [
   { href: '/admin/moderation', label: 'Moderation', permission: 'moderation:review', section: 'Operations', icon: ShieldCheck },
   { href: '/admin/leads', label: 'Claim leads', permission: 'leads:read', section: 'Operations', icon: ClipboardCheck },
   { href: '/admin/enquiries', label: 'Merchant requests', permission: 'leads:read', section: 'Operations', icon: Mail, allScopeOnly: true },
-  { href: '/admin/offers', label: 'Offers', permission: 'brokers:manage', section: 'Operations', icon: Tag },
-  { href: '/admin/advertising', label: 'Advertising', permission: 'brokers:manage', section: 'Operations', icon: Megaphone, allScopeOnly: true },
-  { href: '/admin/site-banners', label: 'Site banners', permission: 'brokers:manage', section: 'Operations', icon: PanelTop, allScopeOnly: true },
-  { href: '/admin/content', label: 'Editorial', permission: 'editorial:read', section: 'Publishing', icon: BookOpen },
-  { href: '/admin/news', label: 'News', permission: 'editorial:read', section: 'Publishing', icon: Newspaper },
-  { href: '/admin/authors', label: 'Authors', permission: 'editorial:read', section: 'Publishing', icon: Users },
-  { href: '/admin/categories', label: 'Categories', permission: 'editorial:read', section: 'Publishing', icon: FolderOpen },
-  { href: '/admin/learning', label: 'Learn & glossary', permission: 'editorial:read', section: 'Publishing', icon: FileText },
-  { href: '/admin/sources', label: 'Sources', permission: 'editorial:read', section: 'Publishing', icon: Link2 },
-  { href: '/admin/media', label: 'Media library', permission: 'editorial:read', section: 'Publishing', icon: Image },
-  { href: '/admin/audit', label: 'Audit log', permission: 'audit:read', section: 'System', icon: ClipboardList },
-  { href: '/admin/staff', label: 'Staff & access', permission: 'staff:manage', section: 'System', icon: Users },
-  { href: '/admin/settings', label: 'Settings', permission: 'settings:manage', section: 'System', icon: Settings2 },
-  { href: '/admin/bulk-import', label: 'Bulk import', permission: 'brokers:manage', section: 'System', icon: Upload },
+  { href: '/admin/offers', label: 'Offers', permission: 'brokers:manage', section: 'Growth', icon: Tag },
+  { href: '/admin/advertising', label: 'Advertising', permission: 'brokers:manage', section: 'Growth', icon: Megaphone, allScopeOnly: true },
+  { href: '/admin/site-banners', label: 'Site banners', permission: 'brokers:manage', section: 'Growth', icon: PanelTop, allScopeOnly: true },
+  { href: '/admin/content', label: 'Editorial', permission: 'editorial:read', section: 'Content studio', icon: BookOpen },
+  { href: '/admin/news', label: 'News', permission: 'editorial:read', section: 'Content studio', icon: Newspaper },
+  { href: '/admin/authors', label: 'Authors', permission: 'editorial:read', section: 'Content studio', icon: Users },
+  { href: '/admin/categories', label: 'Categories', permission: 'editorial:read', section: 'Content studio', icon: FolderOpen },
+  { href: '/admin/learning', label: 'Learn & glossary', permission: 'editorial:read', section: 'Content studio', icon: FileText },
+  { href: '/admin/sources', label: 'Sources', permission: 'editorial:read', section: 'Content studio', icon: Link2 },
+  { href: '/admin/media', label: 'Media library', permission: 'editorial:read', section: 'Content studio', icon: Image },
+  { href: '/admin/audit', label: 'Audit log', permission: 'audit:read', section: 'Administration', icon: ClipboardList },
+  { href: '/admin/staff', label: 'Staff & access', permission: 'staff:manage', section: 'Administration', icon: Users },
+  { href: '/admin/settings', label: 'Settings', permission: 'settings:manage', section: 'Administration', icon: Settings2 },
+  { href: '/admin/bulk-import', label: 'Bulk import', permission: 'brokers:manage', section: 'Administration', icon: Upload },
 ]
 
 function isActiveNavItem(item: AdminNavItem, pathname: string) {
