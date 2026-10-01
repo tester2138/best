@@ -4,6 +4,8 @@ import { cache } from 'react'
 import { sql } from '@/lib/db'
 import { sanitizeEditorialHtml } from '@/lib/sanitize'
 import type { Author } from '@/lib/types'
+import { EDITORIAL_CONTENT_DEFAULTS } from '@/data/editorial-defaults'
+import { mergeEditorialContentEntries } from '@/lib/editorial-content-model'
 
 export type EditorialContentKind = 'learn_page' | 'glossary_term' | 'corrections_policy'
 export type EditorialContentStatus = 'draft' | 'published' | 'coming_soon'
@@ -102,6 +104,33 @@ export const getEditorialContentEntries = cache(
   },
 )
 
+export const getAdminEditorialContentEntries = cache(
+  async (kind?: EditorialContentKind): Promise<EditorialContentEntry[]> => {
+    const stored = await getEditorialContentEntries()
+    const entries = mergeEditorialContentEntries(EDITORIAL_CONTENT_DEFAULTS, stored, true)
+    return kind ? entries.filter((entry) => entry.kind === kind) : entries
+  },
+)
+
+export const getPublicEditorialContentEntries = cache(
+  async (kind?: EditorialContentKind): Promise<EditorialContentEntry[]> => {
+    const stored = await getEditorialContentEntries()
+    const entries = mergeEditorialContentEntries(EDITORIAL_CONTENT_DEFAULTS, stored, false)
+    return entries.filter(
+      (entry) => entry.status !== 'draft' && (!kind || entry.kind === kind),
+    )
+  },
+)
+
+export const getPublicEditorialContentEntry = cache(
+  async (
+    kind: EditorialContentKind,
+    slug: string,
+  ): Promise<EditorialContentEntry | undefined> => {
+    return (await getPublicEditorialContentEntries(kind)).find((entry) => entry.slug === slug)
+  },
+)
+
 export const getEditorialContentEntry = cache(
   async (
     kind: EditorialContentKind,
@@ -197,6 +226,10 @@ export function editorialContentStatusLabel(status: EditorialContentStatus): str
 
 export function getEditorialContentUrl(entry: Pick<EditorialContentEntry, 'kind' | 'slug'>): string {
   if (entry.kind === 'glossary_term') return `/learn/glossary/${entry.slug}`
-  if (entry.kind === 'learn_page') return entry.slug === 'index' ? '/learn' : `/learn/${entry.slug}`
+  if (entry.kind === 'learn_page') {
+    if (entry.slug === 'index') return '/learn'
+    if (entry.slug === 'glossary') return '/learn/glossary'
+    return `/learn/${entry.slug}`
+  }
   return '/corrections'
 }
