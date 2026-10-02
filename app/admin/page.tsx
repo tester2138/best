@@ -1,13 +1,8 @@
 import Link from 'next/link'
 import {
-  Activity,
   ArrowUpRight,
   BookOpen,
-  FileText,
-  Inbox,
-  Megaphone,
   ShieldCheck,
-  Tag,
   Users,
   type LucideIcon,
 } from 'lucide-react'
@@ -23,15 +18,6 @@ async function count(sql: string, params: unknown[] = []): Promise<number> {
   return Number(row?.n ?? '0')
 }
 
-async function optionalCount(sql: string, params: unknown[] = []): Promise<number | null> {
-  try {
-    return await count(sql, params)
-  } catch (error) {
-    console.error('[v0] optional admin dashboard metric unavailable:', error)
-    return null
-  }
-}
-
 interface AuditRow {
   id: string
   actor_email: string | null
@@ -43,17 +29,8 @@ interface AuditRow {
 export default async function AdminDashboardPage() {
   const actor = await requireStaffPage('dashboard:read')
   const globalScope = await hasGlobalStaffScope(actor)
-  const canReview = roleHasPermission(actor.role, 'moderation:review')
   const canReadLeads = roleHasPermission(actor.role, 'leads:read')
-  const canManageOffers = roleHasPermission(actor.role, 'brokers:manage')
   const canReadEditorial = roleHasPermission(actor.role, 'editorial:read')
-  const scopeClause = `($2::boolean or exists (
-    select 1 from public.staff_access sa
-     where sa.user_id = $1 and sa.status = 'active' and sa.scope_mode = 'all'
-  ) or exists (
-    select 1 from public.staff_brand_scopes sc
-     where sc.user_id = $1 and sc.brand_id = scoped.brand_id
-  ))`
   const brandScopeClause = `($2::boolean or exists (
     select 1 from public.staff_access sa
      where sa.user_id = $1 and sa.status = 'active' and sa.scope_mode = 'all'
@@ -68,22 +45,8 @@ export default async function AdminDashboardPage() {
     select 1 from public.staff_brand_scopes sc
      where sc.user_id = $1 and sc.brand_id = c.brand_id
   ))`
-  const offerScopeClause = `($2::boolean or exists (
-    select 1 from public.staff_access sa
-     where sa.user_id = $1 and sa.status = 'active' and sa.scope_mode = 'all'
-  ) or exists (
-    select 1 from public.staff_brand_scopes sc
-     where sc.user_id = $1 and sc.brand_id = b.id
-  ))`
   const scopeParams = [actor.id, actor.hasFullAccess]
-  const [drafts, claims, verificationDue, activeCampaigns, endingOffers, openEnquiries, published, recent] = await Promise.all([
-    canReview
-      ? count(
-          `select count(*)::text as n from public.broker_page_sections scoped
-            where scoped.status in ('draft', 'pending_review') and ${scopeClause}`,
-          scopeParams,
-        )
-      : Promise.resolve(0),
+  const [claims, verificationDue, published, recent] = await Promise.all([
     canReadLeads
       ? count(
           `select count(*)::text as n from public.claim_requests c
@@ -97,29 +60,6 @@ export default async function AdminDashboardPage() {
           or scoped.updated_at < now() - interval '90 days') and ${brandScopeClause}`,
       scopeParams,
     ),
-    canManageOffers && globalScope
-      ? optionalCount(
-          `select count(*)::text as n from public.ad_campaigns
-            where campaign_type = 'paid'
-              and status = 'active'
-              and (starts_at is null or starts_at <= now())
-              and (ends_at is null or ends_at >= now())`,
-        )
-      : Promise.resolve(null),
-    canManageOffers
-      ? optionalCount(
-          `select count(*)::text as n from public.admin_offers scoped
-            left join public.brands b on b.slug = scoped.broker_id
-            where scoped.status = 'active'
-              and scoped.ends_at >= now()
-              and scoped.ends_at < now() + interval '7 days'
-              and ${offerScopeClause}`,
-          scopeParams,
-        )
-      : Promise.resolve(null),
-    canReadLeads && globalScope
-      ? count(`select count(*)::text as n from public.contact_submissions where status in ('new', 'contacted')`)
-      : Promise.resolve(0),
     canReadEditorial
       ? count(`select count(*)::text as n from public.posts where status = 'published' and published_at <= now()`)
       : Promise.resolve(0),
@@ -139,23 +79,15 @@ export default async function AdminDashboardPage() {
   ])
 
   const stats = [
-    ...(canReview ? [{ label: 'Pending drafts', value: drafts, href: '/admin/moderation' }] : []),
-    ...(canReadLeads ? [{ label: 'New broker claims', value: claims, href: '/admin/leads' }] : []),
-    { label: 'Verification review due', value: verificationDue, href: '/admin/brands' },
-    ...(activeCampaigns !== null ? [{ label: 'Active paid campaigns', value: activeCampaigns, href: '/admin/advertising' }] : []),
-    ...(endingOffers !== null ? [{ label: 'Offers ending within 7 days', value: endingOffers, href: '/admin/offers' }] : []),
-    ...(canReadLeads && globalScope ? [{ label: 'Open enquiries', value: openEnquiries, href: '/admin/enquiries' }] : []),
     ...(canReadEditorial ? [{ label: 'Published content', value: published, href: '/admin/news' }] : []),
+    { label: 'Verification review due', value: verificationDue, href: '/admin/brands' },
+    ...(canReadLeads ? [{ label: 'New broker claims', value: claims, href: '/admin/leads' }] : []),
   ]
 
   const statIcons: Record<string, LucideIcon> = {
-    'Pending drafts': FileText,
-    'New broker claims': Users,
-    'Verification review due': ShieldCheck,
-    'Active paid campaigns': Megaphone,
-    'Offers ending within 7 days': Tag,
-    'Open enquiries': Inbox,
     'Published content': BookOpen,
+    'Verification review due': ShieldCheck,
+    'New broker claims': Users,
   }
 
   return (
@@ -168,7 +100,7 @@ export default async function AdminDashboardPage() {
 
       <section aria-label="Operational metrics" className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
         {stats.map((stat) => {
-          const Icon = statIcons[stat.label] ?? Activity
+          const Icon = statIcons[stat.label]
           return (
             <Link key={stat.label} href={stat.href} className="admin-metric-link">
               <Card className="admin-metric-card h-full p-5 sm:p-6">
