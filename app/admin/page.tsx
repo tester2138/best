@@ -127,6 +127,9 @@ export default async function AdminDashboardPage() {
       `select a.id::text, a.actor_email, a.action, a.target, a.created_at
          from public.audit_log a
         where ($2::boolean or exists (
+          select 1 from public.staff_access sa
+           where sa.user_id = $1 and sa.status = 'active' and sa.scope_mode = 'all'
+        ) or exists (
           select 1 from public.staff_brand_scopes sc
            where sc.user_id = $1 and sc.brand_id = a.brand_id
         ))

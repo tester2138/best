@@ -56,9 +56,11 @@ function parseRelatedTerms(value: string): string[] {
 export function EditorialContentForm({
   kind,
   entry,
+  readOnly = false,
 }: {
   kind: EditorialContentKind
   entry?: EditorialContentEntry
+  readOnly?: boolean
 }) {
   const router = useRouter()
   const [draft, setDraft] = useState(() => toDraft(entry))
@@ -75,6 +77,7 @@ export function EditorialContentForm({
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
+    if (readOnly) return
     const sortOrder = Number(draft.sortOrder)
     if (!Number.isInteger(sortOrder) || sortOrder < 0) {
       toast.error('Sort order must be a non-negative whole number.')
@@ -111,6 +114,7 @@ export function EditorialContentForm({
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-6">
       <Button asChild variant="outline" size="sm" className="self-start"><Link href="/admin/learning"><ArrowLeft data-icon="inline-start" />Back to Learn & glossary</Link></Button>
+      <fieldset disabled={readOnly} className="contents">
       <Card>
         <CardHeader>
           <CardTitle>{kind === 'glossary_term' ? 'Glossary entry' : isPolicy ? 'Corrections policy' : 'Learn page'}</CardTitle>
@@ -145,7 +149,7 @@ export function EditorialContentForm({
             <FieldLabel htmlFor="content-summary">Summary</FieldLabel>
             <Textarea id="content-summary" value={draft.summary} onChange={(event) => set('summary', event.target.value)} maxLength={800} rows={3} />
           </Field>
-          <EditorialHtmlEditor value={draft.content} onChange={(value) => set('content', value)} label="Public page content" rows={24} />
+          <EditorialHtmlEditor value={draft.content} onChange={(value) => set('content', value)} label="Public page content" rows={24} readOnly={readOnly} />
           {kind === 'glossary_term' || isStaticIndex ? (
             <Field>
               <FieldLabel htmlFor="content-related-terms">Related glossary terms</FieldLabel>
@@ -173,10 +177,13 @@ export function EditorialContentForm({
           </FieldGroup>
         </CardContent>
       </Card>
-      <div className="flex justify-end gap-3">
-        <Button asChild variant="outline"><Link href="/admin/learning">Cancel</Link></Button>
-        <Button type="submit" disabled={isPending} aria-busy={isPending}>{isPending ? 'Saving…' : entry ? 'Save page' : 'Create page'}</Button>
-      </div>
+      </fieldset>
+      {!readOnly ? (
+        <div className="flex justify-end gap-3">
+          <Button asChild variant="outline"><Link href="/admin/learning">Cancel</Link></Button>
+          <Button type="submit" disabled={isPending} aria-busy={isPending}>{isPending ? 'Saving…' : entry ? 'Save page' : 'Create page'}</Button>
+        </div>
+      ) : null}
     </form>
   )
 }

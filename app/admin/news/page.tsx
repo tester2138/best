@@ -130,11 +130,9 @@ export default async function AdminNewsPage({
                       <TableCell className="whitespace-nowrap text-muted-foreground">{formatDate(post.publishedAt)}</TableCell>
                       <TableCell className="text-right">
                         <div className="flex justify-end gap-2">
-                          {canWrite ? (
-                            <Button asChild variant="outline" size="sm">
-                              <Link href={getAdminPostListHref(post.slug)}>Edit</Link>
-                            </Button>
-                          ) : null}
+                          <Button asChild variant="outline" size="sm">
+                            <Link href={getAdminPostListHref(post.slug)}>{canWrite ? 'Edit' : 'View'}</Link>
+                          </Button>
                           {post.status === 'published' ? (
                             <Button asChild variant="ghost" size="sm">
                               <Link href={`/news/${post.slug}`} target="_blank" rel="noreferrer">Public page</Link>

@@ -95,10 +95,12 @@ export function NewsPostForm({
   post,
   categories,
   authors,
+  readOnly = false,
 }: {
   post?: AdminNewsPost
   categories: AdminCategory[]
   authors: AdminEditorialAuthor[]
+  readOnly?: boolean
 }) {
   const router = useRouter()
   const [isPending, startTransition] = useTransition()
@@ -119,6 +121,7 @@ export function NewsPostForm({
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
+    if (readOnly) return
     const invalidSourceLine = draft.linkedSourcesText
       .split(/\r?\n/)
       .find((line) => line.trim() && (!line.includes('|') || !line.slice(0, line.indexOf('|')).trim() || !line.slice(line.indexOf('|') + 1).trim()))
@@ -169,6 +172,7 @@ export function NewsPostForm({
   }
 
   function handleImageUpload(event: ChangeEvent<HTMLInputElement>) {
+    if (readOnly) return
     const input = event.currentTarget
     const file = input.files?.[0]
     if (!file) return
@@ -197,6 +201,7 @@ export function NewsPostForm({
         {post ? <Badge variant={post.status === 'published' ? 'secondary' : 'outline'}>{post.status}</Badge> : null}
       </div>
 
+      <fieldset disabled={readOnly} className="contents">
       <Card>
         <CardHeader>
           <CardTitle>Story</CardTitle>
@@ -226,7 +231,7 @@ export function NewsPostForm({
             <Textarea id="article-excerpt" value={draft.excerpt} onChange={(event) => set('excerpt', event.target.value)} maxLength={500} rows={3} required />
             <FieldDescription>A short summary used in cards, metadata fallbacks and feeds.</FieldDescription>
           </Field>
-          <EditorialHtmlEditor value={draft.content} onChange={(value) => set('content', value)} label="Article body" rows={28} />
+          <EditorialHtmlEditor value={draft.content} onChange={(value) => set('content', value)} label="Article body" rows={28} readOnly={readOnly} />
         </CardContent>
       </Card>
 
@@ -367,13 +372,16 @@ export function NewsPostForm({
           </Field>
         </CardContent>
       </Card>
+      </fieldset>
 
-      <div className="flex flex-wrap justify-end gap-3">
-        <Button asChild variant="outline"><Link href="/admin/news">Cancel</Link></Button>
-        <Button type="submit" disabled={isPending || !categories.length || !editableAuthors.length} aria-busy={isPending}>
-          {isPending ? 'Saving…' : post ? 'Save article' : 'Create article'}
-        </Button>
-      </div>
+      {!readOnly ? (
+        <div className="flex flex-wrap justify-end gap-3">
+          <Button asChild variant="outline"><Link href="/admin/news">Cancel</Link></Button>
+          <Button type="submit" disabled={isPending || !categories.length || !editableAuthors.length} aria-busy={isPending}>
+            {isPending ? 'Saving…' : post ? 'Save article' : 'Create article'}
+          </Button>
+        </div>
+      ) : null}
     </form>
   )
 }

@@ -16,11 +16,13 @@ export function RichText({
   onChange,
   onBlur,
   invalid,
+  readOnly = false,
 }: {
   value: string
   onChange: (html: string) => void
   onBlur?: () => void
   invalid?: boolean
+  readOnly?: boolean
 }) {
   const editor = useEditor({
     immediatelyRender: false,
@@ -34,6 +36,7 @@ export function RichText({
         strike: false,
       }),
     ],
+    editable: !readOnly,
     content: value || '',
     editorProps: {
       attributes: {
@@ -55,6 +58,10 @@ export function RichText({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value])
+
+  useEffect(() => {
+    editor?.setEditable(!readOnly)
+  }, [editor, readOnly])
 
   if (!editor) return null
 
@@ -85,7 +92,7 @@ export function RichText({
 
   return (
     <div className="flex flex-col gap-2">
-      <div className="flex items-center gap-1 rounded-md border bg-muted/40 p-1">
+      {!readOnly && <div className="flex items-center gap-1 rounded-md border bg-muted/40 p-1">
         <Btn
           label="Bold"
           active={editor.isActive('bold')}
@@ -114,7 +121,7 @@ export function RichText({
         >
           <ListOrdered className="h-4 w-4" />
         </Btn>
-      </div>
+      </div>}
       <EditorContent editor={editor} />
     </div>
   )

@@ -1,4 +1,4 @@
-import { notFound, redirect } from 'next/navigation'
+import { notFound } from 'next/navigation'
 import { requireStaffPage } from '@/lib/guards'
 import { roleHasPermission } from '@/lib/staff-permissions'
 import { getAdminEditorialAuthor } from '@/lib/admin-editorial'
@@ -9,15 +9,18 @@ export const dynamic = 'force-dynamic'
 
 export default async function AdminAuthorEditorPage({ params }: { params: Promise<{ slug: string }> }) {
   const actor = await requireStaffPage('editorial:read')
-  if (!roleHasPermission(actor.role, 'editorial:write')) redirect('/admin/authors')
+  const canWrite = roleHasPermission(actor.role, 'editorial:write')
   const { slug } = await params
   const author = await getAdminEditorialAuthor(slug)
   if (!author) notFound()
 
   return (
     <EditorialWorkspaceFrame active="authors">
-      <EditorialPageHeader title={`Edit ${author.name}`} description="Update the public author profile and structured-data fields." />
-      <AuthorForm author={author} />
+      <EditorialPageHeader
+        title={canWrite ? `Edit ${author.name}` : `View ${author.name}`}
+        description={canWrite ? 'Update the public author profile and structured-data fields.' : 'Read-only access to this author profile and its public attribution details.'}
+      />
+      <AuthorForm author={author} readOnly={!canWrite} />
     </EditorialWorkspaceFrame>
   )
 }

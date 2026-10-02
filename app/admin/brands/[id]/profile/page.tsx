@@ -4,7 +4,7 @@ import { brokers as editorialBrokers } from '@/data/brokers'
 import { directoryCompanies as editorialDirectory } from '@/data/directory'
 import { applyOverrides } from '@/lib/admin-overrides'
 import { getPublicBrokerBaseBySlug, getPublicCompanyBaseBySlug } from '@/lib/public-brokers'
-import { hasGlobalStaffScope, requireStaffPage, requireStaffBrandPage } from '@/lib/guards'
+import { hasAllBrokerReadScope, requireStaffPage, requireStaffBrandPage } from '@/lib/guards'
 import { roleHasPermission } from '@/lib/staff-permissions'
 import { queryOne } from '@/lib/portal/db'
 import { ProfileEditor, type PlacementState } from './profile-client'
@@ -55,7 +55,7 @@ export default async function AdminBrokerProfilePage({
   if (brandRow) await requireStaffBrandPage(brandRow.id, 'brokers:read')
   else {
     const actor = await requireStaffPage('brokers:read')
-    if (!(await hasGlobalStaffScope(actor))) notFound()
+    if (!(await hasAllBrokerReadScope(actor))) notFound()
   }
   const actor = await requireStaffPage('brokers:read')
   const canManageProfile = roleHasPermission(actor.role, 'editorial:write')

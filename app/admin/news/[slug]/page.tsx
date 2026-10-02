@@ -1,4 +1,4 @@
-import { notFound, redirect } from 'next/navigation'
+import { notFound } from 'next/navigation'
 import { requireStaffPage } from '@/lib/guards'
 import { roleHasPermission } from '@/lib/staff-permissions'
 import {
@@ -13,7 +13,7 @@ export const dynamic = 'force-dynamic'
 
 export default async function AdminNewsEditorPage({ params }: { params: Promise<{ slug: string }> }) {
   const actor = await requireStaffPage('editorial:read')
-  if (!roleHasPermission(actor.role, 'editorial:write')) redirect('/admin/news')
+  const canWrite = roleHasPermission(actor.role, 'editorial:write')
   const { slug } = await params
   const [post, categories, authors] = await Promise.all([
     getAdminNewsPost(slug),
@@ -24,8 +24,11 @@ export default async function AdminNewsEditorPage({ params }: { params: Promise<
 
   return (
     <EditorialWorkspaceFrame active="news">
-      <EditorialPageHeader title="Edit article" description="Changes update the existing article at its current public URL." />
-      <NewsPostForm post={post} categories={categories} authors={authors} />
+      <EditorialPageHeader
+        title={canWrite ? 'Edit article' : 'View article'}
+        description={canWrite ? 'Changes update the existing article at its current public URL.' : 'Read-only access to this article and its editorial metadata.'}
+      />
+      <NewsPostForm post={post} categories={categories} authors={authors} readOnly={!canWrite} />
     </EditorialWorkspaceFrame>
   )
 }

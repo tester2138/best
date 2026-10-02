@@ -72,7 +72,7 @@ export const TEMPLATES = {
       p(`Hello ${escapeHtml(d.fullName)}, your staff access is ready. Sign in with the temporary credentials below.`) +
         p('<strong>Email</strong>') + code(escapeHtml(d.email)) +
         p('<strong>Temporary password</strong>') + code(escapeHtml(d.password)) +
-        button(escapeHtml(d.loginUrl), 'Sign in to BestForex.io') +
+        button(escapeHtml(d.loginUrl), 'Sign in to the Admin Console') +
         p(`You must change this password before staff access is enabled. This invitation expires in ${d.expiresDays} days.`),
     ),
   }),

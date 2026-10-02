@@ -15,7 +15,7 @@ import { Textarea } from '@/components/ui/textarea'
 
 type CategoryDraft = { slug: string; name: string; description: string }
 
-export function CategoryForm({ category }: { category?: AdminCategory }) {
+export function CategoryForm({ category, readOnly = false }: { category?: AdminCategory; readOnly?: boolean }) {
   const router = useRouter()
   const [draft, setDraft] = useState<CategoryDraft>(() => ({
     slug: category?.slug ?? '',
@@ -35,6 +35,7 @@ export function CategoryForm({ category }: { category?: AdminCategory }) {
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
+    if (readOnly) return
     startTransition(async () => {
       const result = await saveAdminCategory({
         originalSlug: category?.slug ?? null,
@@ -55,6 +56,7 @@ export function CategoryForm({ category }: { category?: AdminCategory }) {
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-6">
       <Button asChild variant="outline" size="sm" className="self-start"><Link href="/admin/categories"><ArrowLeft data-icon="inline-start" />Back to categories</Link></Button>
+      <fieldset disabled={readOnly} className="contents">
       <Card>
         <CardHeader>
           <CardTitle>Category details</CardTitle>
@@ -78,10 +80,13 @@ export function CategoryForm({ category }: { category?: AdminCategory }) {
           </FieldGroup>
         </CardContent>
       </Card>
-      <div className="flex justify-end gap-3">
-        <Button asChild variant="outline"><Link href="/admin/categories">Cancel</Link></Button>
-        <Button type="submit" disabled={isPending} aria-busy={isPending}>{isPending ? 'Saving…' : category ? 'Save category' : 'Create category'}</Button>
-      </div>
+      </fieldset>
+      {!readOnly ? (
+        <div className="flex justify-end gap-3">
+          <Button asChild variant="outline"><Link href="/admin/categories">Cancel</Link></Button>
+          <Button type="submit" disabled={isPending} aria-busy={isPending}>{isPending ? 'Saving…' : category ? 'Save category' : 'Create category'}</Button>
+        </div>
+      ) : null}
     </form>
   )
 }

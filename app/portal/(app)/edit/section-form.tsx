@@ -147,14 +147,17 @@ export function SectionForm({
   return (
     <div className="flex flex-col gap-6">
       <form className="flex flex-col gap-5">
-        {def.fields.map((field) => (
-          <FieldControl
-            key={field.key}
-            field={field}
-            control={control}
-            error={errors[field.key]?.message as string | undefined}
-          />
-        ))}
+        <fieldset disabled={!canWrite} className="contents">
+          {def.fields.map((field) => (
+            <FieldControl
+              key={field.key}
+              field={field}
+              control={control}
+              error={errors[field.key]?.message as string | undefined}
+              readOnly={!canWrite}
+            />
+          ))}
+        </fieldset>
       </form>
 
       {canWrite && (

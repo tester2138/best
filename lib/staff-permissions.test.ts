@@ -47,9 +47,23 @@ test('Admin role can view the dashboard and manage Admin accounts only', () => {
   }
 })
 
+test('viewer can read only dashboard, broker, and editorial data', () => {
+  const viewerPermissions: StaffPermission[] = ['dashboard:read', 'brokers:read', 'editorial:read']
+  assert.equal(roleHasFullAccess('viewer'), false)
+
+  for (const permission of permissions) {
+    assert.equal(
+      roleHasPermission('viewer', permission),
+      viewerPermissions.includes(permission),
+      `viewer:${permission}`,
+    )
+  }
+})
+
 const roles: StaffRole[] = [
   'super_admin',
   'admin',
+  'viewer',
   'editor_publisher',
   'commercial_manager',
   'support_reviewer',

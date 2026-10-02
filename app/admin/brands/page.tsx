@@ -2,7 +2,7 @@ import { directoryCompanies } from '@/data/directory'
 import { brokers } from '@/data/brokers'
 import { query, queryOne } from '@/lib/portal/db'
 import { getCatalogEntry } from '@/lib/catalog'
-import { hasGlobalStaffScope, requireStaffPage } from '@/lib/guards'
+import { hasAllBrokerReadScope, requireStaffPage } from '@/lib/guards'
 import { roleHasPermission } from '@/lib/staff-permissions'
 import { BrandsClient, type BrandRow } from './brands-client'
 
@@ -41,7 +41,7 @@ export default async function AdminBrandsPage({
         [claimId],
       )
     : null
-  const [databaseBrands, globalScope] = await Promise.all([
+  const [databaseBrands, allBrokerScope] = await Promise.all([
     query<BrandRow>(
       `select b.id, b.slug, b.name, b.is_claimed, b.portal_access, b.portal_locked,
               b.renewal_date, b.verification_status, b.is_sponsored, b.is_featured,
@@ -65,7 +65,7 @@ export default async function AdminBrandsPage({
         order by b.claimed_at desc nulls last, b.name asc`,
       [actor.id, actor.hasFullAccess, roleHasPermission(actor.role, 'brokers:manage')],
     ),
-    hasGlobalStaffScope(actor),
+    hasAllBrokerReadScope(actor),
   ])
 
   const initialAssignment = initialClaim
@@ -86,7 +86,7 @@ export default async function AdminBrandsPage({
     : null
 
   const visibleSlugs = new Set(databaseBrands.map((brand) => brand.slug))
-  const catalogOnly: BrandRow[] = globalScope
+  const catalogOnly: BrandRow[] = allBrokerScope
     ? [...catalogBySlug.entries()]
         .filter(([slug]) => !visibleSlugs.has(slug))
         .map(([slug, company]): BrandRow => ({
@@ -129,6 +129,10 @@ export default async function AdminBrandsPage({
       <BrandsClient
         brands={brands}
         canAssign={actor.hasFullAccess}
+        canEditProfiles={
+          roleHasPermission(actor.role, 'editorial:write') ||
+          roleHasPermission(actor.role, 'brokers:manage')
+        }
         initialAssignment={initialAssignment}
       />
     </div>

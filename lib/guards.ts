@@ -137,9 +137,19 @@ export async function requireStaffBrand(
   return actor
 }
 
-/** Active admin staff have global access, including broker-unassigned contacts. */
+/** Active full-access staff have global access, including broker-unassigned contacts. */
 export async function hasGlobalStaffScope(actor: StaffActor): Promise<boolean> {
   return actor.hasFullAccess
+}
+
+/** Global broker visibility is separate from permission to manage Admin features. */
+export async function hasAllBrokerReadScope(actor: StaffActor): Promise<boolean> {
+  if (actor.hasFullAccess) return true
+  const assignment = await queryOne<{ scope_mode: 'all' | 'selected' }>(
+    `select scope_mode from public.staff_access where user_id = $1 and status = 'active'`,
+    [actor.id],
+  )
+  return assignment?.scope_mode === 'all'
 }
 
 /** Require an active staff account with full administrative access. */

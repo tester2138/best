@@ -12,6 +12,7 @@ import { audit } from '@/lib/audit'
 import { sendEmail } from '@/lib/email/send'
 
 const StaffRoleSchema = z.enum([
+  'viewer',
   'editor_publisher',
   'commercial_manager',
   'support_reviewer',
@@ -97,7 +98,7 @@ export async function inviteStaff(raw: unknown) {
       email,
       password,
       expiresDays,
-      loginUrl: `${process.env.NEXT_PUBLIC_SITE_URL ?? ''}/business/login`,
+      loginUrl: `${process.env.NEXT_PUBLIC_SITE_URL ?? ''}/admin/login`,
     })
     return { userId: created.user.id }
   })
@@ -273,10 +274,10 @@ export async function reissueStaffInvitation(raw: unknown) {
       email: invitation.email,
       password,
       expiresDays,
-      loginUrl: `${process.env.NEXT_PUBLIC_SITE_URL ?? ''}/business/login`,
+      loginUrl: `${process.env.NEXT_PUBLIC_SITE_URL ?? ''}/admin/login`,
     })
     return { ok: true }
   })
 }
 
-type StaffMemberRole = 'editor_publisher' | 'commercial_manager' | 'support_reviewer' | 'analyst'
+type StaffMemberRole = 'viewer' | 'editor_publisher' | 'commercial_manager' | 'support_reviewer' | 'analyst'
