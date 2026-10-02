@@ -4,12 +4,12 @@ import { AsyncLocalStorage } from 'node:async_hooks'
 /**
  * Account-creation gate.
  *
- * The portal has no public sign-up. Accounts are created only by the admin's
- * `assignBrand` action. Better Auth's sign-up endpoint is still mounted, so the
- * `user.create.before` hook (lib/auth.ts) rejects any creation that is neither
- * an ADMIN_EMAILS bootstrap nor explicitly admin-initiated. `assignBrand` wraps
- * its `signUpEmail` call in `allowAccountCreation(...)` to flip this flag for
- * the duration of that async call only.
+ * The portal has no public sign-up. Accounts are created only by protected
+ * admin actions such as `assignBrand` and Admin account management. Better
+ * Auth's sign-up endpoint is still mounted, so the `user.create.before` hook
+ * (lib/auth.ts) rejects any creation that is neither an ADMIN_EMAILS bootstrap
+ * nor explicitly admin-initiated. Provisioning actions wrap their `signUpEmail`
+ * call in `allowAccountCreation(...)` for that async call only.
  */
 const store = new AsyncLocalStorage<boolean>()
 

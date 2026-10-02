@@ -59,6 +59,8 @@ export type AuditAction =
   | 'admin.featured_brokers.update'
   | 'enquiry.status'
   | 'staff.invite'
+  | 'admin.user.create'
+  | 'admin.user.remove'
   | 'staff.access.update'
   | 'staff.active'
   | 'staff.suspended'
