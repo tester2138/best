@@ -8,10 +8,11 @@ import { sendEmail } from '@/lib/email/send'
  * Better Auth server instance (Blueprint Section 11, adapted from Supabase).
  *
  * - Email + password only. No OAuth, no public sign-up.
- * - Accounts are provisioned by the admin's `assignBrand` action (which wraps
- *   `signUpEmail` in `allowAccountCreation`). Env-listed admins may bootstrap
- *   their own account on first login. Every other sign-up is rejected by the
- *   `user.create.before` hook.
+ * - Accounts are provisioned by admin-protected actions such as `assignBrand`
+ *   and Admin account management (which wrap `signUpEmail` in
+ *   `allowAccountCreation`). Env-listed admins may bootstrap their own account
+ *   on first login. Every other sign-up is rejected by the `user.create.before`
+ *   hook.
  * - `role` and `must_change_password` are the two server-controlled truths;
  *   they live in `public.profiles` and are seeded by the `user.create.after`
  *   hook. Guards (lib/guards.ts) read them per request.

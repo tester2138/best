@@ -3,7 +3,12 @@ import { headers } from 'next/headers'
 import { auth } from '@/lib/auth'
 import { query, queryOne } from '@/lib/portal/db'
 import { Err } from '@/lib/portal/result'
-import { roleHasPermission, type StaffPermission, type StaffRole } from '@/lib/staff-permissions'
+import {
+  roleHasFullAccess,
+  roleHasPermission,
+  type StaffPermission,
+  type StaffRole,
+} from '@/lib/staff-permissions'
 import type { Brand } from '@/types/portal'
 
 /**
@@ -16,6 +21,16 @@ import type { Brand } from '@/types/portal'
  */
 
 const FORCE_PASSWORD_CHANGE = (process.env.FORCE_PASSWORD_CHANGE ?? 'true') !== 'false'
+const FULL_ACCESS_ADMIN_EMAILS = new Set(
+  (process.env.ADMIN_EMAILS ?? '')
+    .split(',')
+    .map((email) => email.trim().toLowerCase())
+    .filter(Boolean),
+)
+
+export function isConfiguredFullAccessAdmin(email: string): boolean {
+  return FULL_ACCESS_ADMIN_EMAILS.has(email.trim().toLowerCase())
+}
 
 export interface SessionUser {
   id: string
@@ -77,11 +92,14 @@ export async function requireStaff(permission: StaffPermission = 'dashboard:read
   ])
 
   let role: StaffRole | null = null
-  if (profile?.role === 'admin') role = 'super_admin'
-  else if (assignment?.status === 'active') role = assignment.role
+  if (profile?.role === 'admin') {
+    role = isConfiguredFullAccessAdmin(user.email) ? 'super_admin' : 'admin'
+  } else if (assignment?.status === 'active') {
+    role = assignment.role
+  }
 
   if (!role) throw new Err('Not found', 'not_found')
-  if (role !== 'super_admin' && assignment?.invitation_expired) {
+  if (role !== 'super_admin' && role !== 'admin' && assignment?.invitation_expired) {
     throw new Err('Staff invitation expired. Ask an administrator to reissue it.', 'forbidden')
   }
   if (FORCE_PASSWORD_CHANGE && profile?.must_change_password) {
@@ -89,7 +107,7 @@ export async function requireStaff(permission: StaffPermission = 'dashboard:read
   }
   if (!roleHasPermission(role, permission)) throw new Err('Not found', 'not_found')
 
-  return { ...user, role, hasFullAccess: true }
+  return { ...user, role, hasFullAccess: roleHasFullAccess(role) }
 }
 
 /** Apply the actor's global or explicitly assigned broker scope. */
@@ -127,6 +145,15 @@ export async function hasGlobalStaffScope(actor: StaffActor): Promise<boolean> {
 export async function requireAdmin(): Promise<StaffActor> {
   const actor = await requireStaff('settings:manage')
   if (!actor.hasFullAccess) throw new Err('Not found', 'not_found')
+  return actor
+}
+
+/** Require an Admin role or a full-access account for Admin user management. */
+export async function requireAdminRole(): Promise<StaffActor> {
+  const actor = await requireStaff('staff:manage')
+  if (actor.role !== 'admin' && !actor.hasFullAccess) {
+    throw new Err('Not found', 'not_found')
+  }
   return actor
 }
 
