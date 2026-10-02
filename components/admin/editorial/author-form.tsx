@@ -44,7 +44,7 @@ function toDraft(author?: AdminEditorialAuthor): AuthorDraft {
   }
 }
 
-export function AuthorForm({ author }: { author?: AdminEditorialAuthor }) {
+export function AuthorForm({ author, readOnly = false }: { author?: AdminEditorialAuthor; readOnly?: boolean }) {
   const router = useRouter()
   const [draft, setDraft] = useState(() => toDraft(author))
   const [slugTouched, setSlugTouched] = useState(Boolean(author))
@@ -60,6 +60,7 @@ export function AuthorForm({ author }: { author?: AdminEditorialAuthor }) {
   }
 
   function handleUpload(event: ChangeEvent<HTMLInputElement>) {
+    if (readOnly) return
     const input = event.currentTarget
     const file = input.files?.[0]
     if (!file) return
@@ -78,6 +79,7 @@ export function AuthorForm({ author }: { author?: AdminEditorialAuthor }) {
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
+    if (readOnly) return
     startTransition(async () => {
       const result = await saveAdminEditorialAuthor({
         originalSlug,
@@ -105,6 +107,7 @@ export function AuthorForm({ author }: { author?: AdminEditorialAuthor }) {
       <Button asChild variant="outline" size="sm" className="self-start">
         <Link href="/admin/authors"><ArrowLeft data-icon="inline-start" />Back to authors</Link>
       </Button>
+      <fieldset disabled={readOnly} className="contents">
       <Card>
         <CardHeader>
           <CardTitle>Author profile</CardTitle>
@@ -166,10 +169,13 @@ export function AuthorForm({ author }: { author?: AdminEditorialAuthor }) {
           </Field>
         </CardContent>
       </Card>
-      <div className="flex justify-end gap-3">
-        <Button asChild variant="outline"><Link href="/admin/authors">Cancel</Link></Button>
-        <Button type="submit" disabled={isPending} aria-busy={isPending}>{isPending ? 'Saving…' : author ? 'Save author' : 'Create author'}</Button>
-      </div>
+      </fieldset>
+      {!readOnly ? (
+        <div className="flex justify-end gap-3">
+          <Button asChild variant="outline"><Link href="/admin/authors">Cancel</Link></Button>
+          <Button type="submit" disabled={isPending} aria-busy={isPending}>{isPending ? 'Saving…' : author ? 'Save author' : 'Create author'}</Button>
+        </div>
+      ) : null}
     </form>
   )
 }

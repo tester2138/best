@@ -45,7 +45,7 @@ export default async function AdminAuthorsPage() {
                       <TableCell><Badge variant="outline">{author.isOverridden ? 'Database override' : 'Static profile'}</Badge></TableCell>
                       <TableCell className="text-right">
                         <div className="flex justify-end gap-2">
-                          {canWrite ? <Button asChild size="sm" variant="outline"><Link href={getAdminAuthorListHref(author.slug)}>Edit</Link></Button> : null}
+                          <Button asChild size="sm" variant="outline"><Link href={getAdminAuthorListHref(author.slug)}>{canWrite ? 'Edit' : 'View'}</Link></Button>
                           {counts.has(author.slug) ? <Button asChild size="sm" variant="ghost"><Link href={`/news/author/${author.slug}`} target="_blank" rel="noreferrer">Public page</Link></Button> : null}
                         </div>
                       </TableCell>

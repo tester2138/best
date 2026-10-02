@@ -6,6 +6,7 @@ import { Card } from '@/components/ui/card'
 import { getEditorialDefaults } from '@/lib/catalog'
 import { SECTION_KEYS, SECTIONS, type SectionKey } from '@/lib/content/registry'
 import { requireStaffBrandPage } from '@/lib/guards'
+import { roleHasPermission } from '@/lib/staff-permissions'
 import { queryOne } from '@/lib/portal/db'
 import { SectionForm } from '@/app/portal/(app)/edit/section-form'
 
@@ -36,7 +37,8 @@ export default async function AdminBrandSectionEditorPage({
   const { id, sectionKey } = await params
   if (!SECTION_KEYS.includes(sectionKey as SectionKey)) notFound()
 
-  await requireStaffBrandPage(id, 'editorial:write')
+  const actor = await requireStaffBrandPage(id, 'editorial:read')
+  const canWrite = roleHasPermission(actor.role, 'editorial:write')
   const brand = await queryOne<{ id: string; name: string; slug: string }>(
     `select id, name, slug from public.brands where id = $1`,
     [id],
@@ -71,7 +73,9 @@ export default async function AdminBrandSectionEditorPage({
         <p className="text-sm text-muted-foreground">Brand page content</p>
         <h1 className="text-2xl font-semibold tracking-tight">{section.title}</h1>
         <p className="text-sm text-muted-foreground">
-          Update the content shown on {brand.name}&apos;s public broker page.
+          {canWrite
+            ? `Update the content shown on ${brand.name}'s public broker page.`
+            : `Read the content shown on ${brand.name}'s public broker page.`}
         </p>
       </header>
 
@@ -90,7 +94,7 @@ export default async function AdminBrandSectionEditorPage({
           initialDraft={initialDraft}
           initialStatus={row?.status ?? 'draft'}
           version={row?.version ?? 0}
-          canWrite
+          canWrite={canWrite}
           publicUrl={`/brokers/${brand.slug}`}
           adminMode
         />

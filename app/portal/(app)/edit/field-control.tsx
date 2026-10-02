@@ -46,9 +46,10 @@ interface FieldControlProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   control: Control<any>
   error?: string
+  readOnly?: boolean
 }
 
-export function FieldControl({ field, control, error }: FieldControlProps) {
+export function FieldControl({ field, control, error, readOnly = false }: FieldControlProps) {
   return (
     <div className="flex flex-col gap-1.5">
       <div className="flex items-center justify-between">
@@ -61,7 +62,7 @@ export function FieldControl({ field, control, error }: FieldControlProps) {
       <Controller
         control={control}
         name={field.key}
-        render={({ field: f }) => <Widget def={field} value={f.value} onChange={f.onChange} onBlur={f.onBlur} invalid={!!error} />}
+        render={({ field: f }) => <Widget def={field} value={f.value} onChange={f.onChange} onBlur={f.onBlur} invalid={!!error} readOnly={readOnly} />}
       />
 
       {field.help && <p className="text-xs text-muted-foreground">{field.help}</p>}
@@ -76,6 +77,7 @@ function Widget({
   onChange,
   onBlur,
   invalid,
+  readOnly,
 }: {
   def: FieldDef
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -84,6 +86,7 @@ function Widget({
   onChange: (v: any) => void
   onBlur?: () => void
   invalid?: boolean
+  readOnly: boolean
 }) {
   switch (def.widget) {
     case 'text':
@@ -138,7 +141,7 @@ function Widget({
       const v = (value as string) ?? ''
       return (
         <div className="flex flex-col gap-1">
-          <RichText value={v} onChange={onChange} onBlur={onBlur} invalid={invalid} />
+          <RichText value={v} onChange={onChange} onBlur={onBlur} invalid={invalid} readOnly={readOnly} />
           {def.max && (
             <div className="flex justify-end">
               <LimitCounter current={plainLen(v)} max={def.max} />

@@ -1,6 +1,7 @@
 export type StaffRole =
   | 'super_admin'
   | 'admin'
+  | 'viewer'
   | 'editor_publisher'
   | 'commercial_manager'
   | 'support_reviewer'
@@ -37,13 +38,19 @@ const ADMIN_PERMISSIONS: Record<StaffPermission, true> = {
 }
 
 const ADMIN_ROLE_PERMISSIONS = new Set<StaffPermission>(['dashboard:read', 'staff:manage'])
+const VIEWER_ROLE_PERMISSIONS = new Set<StaffPermission>([
+  'dashboard:read',
+  'brokers:read',
+  'editorial:read',
+])
 
 export function roleHasPermission(role: StaffRole, permission: StaffPermission): boolean {
   if (role === 'merchant') return false
   if (role === 'admin') return ADMIN_ROLE_PERMISSIONS.has(permission)
+  if (role === 'viewer') return VIEWER_ROLE_PERMISSIONS.has(permission)
   return ADMIN_PERMISSIONS[permission]
 }
 
 export function roleHasFullAccess(role: StaffRole): boolean {
-  return role !== 'admin' && role !== 'merchant'
+  return role !== 'admin' && role !== 'merchant' && role !== 'viewer'
 }

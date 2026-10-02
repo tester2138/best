@@ -70,7 +70,7 @@ export default async function AdminLearningPage() {
                       <TableCell className="max-w-72 truncate text-sm text-muted-foreground">{getEditorialContentUrl(entry)}</TableCell>
                       <TableCell className="text-right">
                         <div className="flex justify-end gap-2">
-                          {canWrite ? <Button asChild size="sm" variant="outline"><Link href={getAdminContentListHref(entry.kind, entry.slug)}>Edit</Link></Button> : null}
+                          <Button asChild size="sm" variant="outline"><Link href={getAdminContentListHref(entry.kind, entry.slug)}>{canWrite ? 'Edit' : 'View'}</Link></Button>
                           {entry.status === 'published' ? <Button asChild size="sm" variant="ghost"><Link href={getEditorialContentUrl(entry)} target="_blank" rel="noreferrer">Public page</Link></Button> : null}
                         </div>
                       </TableCell>

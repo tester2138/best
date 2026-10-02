@@ -20,6 +20,7 @@ interface BrandOption { id: string; name: string }
 interface Invitation { id: string; email: string; role: StaffMember['role']; scope_mode: 'all' | 'selected'; status: string; expires_at: string }
 
 const STAFF_ROLE_LABELS: Record<AssignedStaffRole, string> = {
+  viewer: 'Read-only viewer',
   editor_publisher: 'Editor / publisher',
   commercial_manager: 'Commercial manager',
   support_reviewer: 'Support / reviewer',
@@ -52,7 +53,7 @@ export default async function StaffPage() {
       : user.staff_role !== null && roleHasFullAccess(user.staff_role)
     const accessLabel = isProfileAdmin
       ? isFullAccess ? 'Full access' : 'Admin'
-      : `${user.staff_role ? STAFF_ROLE_LABELS[user.staff_role] : 'Staff'} · Full access`
+      : `${user.staff_role ? STAFF_ROLE_LABELS[user.staff_role] : 'Staff'}${user.staff_role && roleHasFullAccess(user.staff_role) ? ' · Full access' : ''}`
 
     return {
       id: user.user_id,

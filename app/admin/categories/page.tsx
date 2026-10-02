@@ -42,7 +42,7 @@ export default async function AdminCategoriesPage() {
                     <TableCell><Badge variant="outline">{category.hasDatabaseRecord ? 'Database' : 'Built-in'}</Badge></TableCell>
                     <TableCell className="text-right">
                       <div className="flex justify-end gap-2">
-                        {canWrite ? <Button asChild size="sm" variant="outline"><Link href={getAdminCategoryListHref(category.slug)}>Edit</Link></Button> : null}
+                        <Button asChild size="sm" variant="outline"><Link href={getAdminCategoryListHref(category.slug)}>{canWrite ? 'Edit' : 'View'}</Link></Button>
                         {(counts.get(category.slug) ?? 0) > 0 ? <Button asChild size="sm" variant="ghost"><Link href={`/news/category/${category.slug}`} target="_blank" rel="noreferrer">Public archive</Link></Button> : null}
                       </div>
                     </TableCell>

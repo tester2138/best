@@ -66,10 +66,12 @@ function AccessPill({ row }: { row: BrandRow }) {
 export function BrandsClient({
   brands,
   canAssign,
+  canEditProfiles,
   initialAssignment = null,
 }: {
   brands: BrandRow[]
   canAssign: boolean
+  canEditProfiles: boolean
   initialAssignment?: InitialAssignment | null
 }) {
   const router = useRouter()
@@ -182,12 +184,13 @@ export function BrandsClient({
                     ? new Date(b.last_publish).toLocaleDateString('en-US', { dateStyle: 'medium' })
                     : '—'}
                 </TableCell>
-                <TableCell className="text-right">
-                  <Link
-                    href={b.profile_href ?? `/admin/brands/${b.has_database_record ? b.id : b.slug}/profile`}
-                    className="text-sm font-medium text-primary hover:underline"
-                  >
-                    Edit profile
+                  <TableCell className="text-right">
+                    <Link
+                      href={b.profile_href ?? `/admin/brands/${b.has_database_record ? b.id : b.slug}/profile`}
+                      className="text-sm font-medium text-primary hover:underline"
+                      aria-label={`${canEditProfiles ? 'Edit' : 'View'} ${b.name} profile`}
+                    >
+                    {canEditProfiles ? 'Edit profile' : 'View profile'}
                   </Link>
                 </TableCell>
               </TableRow>

@@ -23,7 +23,7 @@ export interface StaffMember {
   user_id: string
   email: string
   full_name: string | null
-  role: 'editor_publisher' | 'commercial_manager' | 'support_reviewer' | 'analyst'
+  role: 'viewer' | 'editor_publisher' | 'commercial_manager' | 'support_reviewer' | 'analyst'
   status: 'active' | 'suspended' | 'revoked'
   scope_mode: 'all' | 'selected'
   scope_brand_ids: string[]
@@ -32,6 +32,7 @@ interface BrandOption { id: string; name: string }
 interface Invitation { id: string; email: string; role: StaffMember['role']; scope_mode: 'all' | 'selected'; status: string; expires_at: string }
 
 const ROLES: { id: StaffMember['role']; label: string }[] = [
+  { id: 'viewer', label: 'Read-only viewer' },
   { id: 'editor_publisher', label: 'Editor / publisher' },
   { id: 'commercial_manager', label: 'Commercial manager' },
   { id: 'support_reviewer', label: 'Support / reviewer' },
@@ -43,7 +44,7 @@ export function StaffClient({ staff, brands, invitations, totalBrands, invitatio
   const [pending, startTransition] = useTransition()
   const [email, setEmail] = useState('')
   const [fullName, setFullName] = useState('')
-  const [role, setRole] = useState<StaffMember['role']>('analyst')
+  const [role, setRole] = useState<StaffMember['role']>('viewer')
   const [scopeMode, setScopeMode] = useState<'all' | 'selected'>('all')
   const [selected, setSelected] = useState<string[]>([])
   const [reissueTarget, setReissueTarget] = useState<Invitation | null>(null)
@@ -92,17 +93,17 @@ export function StaffClient({ staff, brands, invitations, totalBrands, invitatio
   }
   return (
     <div className="flex flex-col gap-6">
-      <div><h1 className="text-2xl font-semibold tracking-tight">Staff &amp; access</h1><p className="mt-1 text-sm text-muted-foreground">All active staff accounts have full access to every admin area and broker. Role and broker scope are reference fields. Suspensions and revocations invalidate active sessions.</p></div>
-      <Card className="p-5"><h2 className="text-lg font-semibold">Invite staff</h2><p className="mb-4 mt-1 text-sm text-muted-foreground">Invitations expire after {invitationTtlDays} {invitationTtlDays === 1 ? 'day' : 'days'}. A random temporary password is sent once; first sign-in requires changing it. All staff receive full admin access regardless of role or broker scope.</p><form onSubmit={submitInvite} className="flex flex-col gap-4">
+      <div><h1 className="text-2xl font-semibold tracking-tight">Staff &amp; access</h1><p className="mt-1 text-sm text-muted-foreground">Read-only viewers can browse broker, editorial, and dashboard data without changing records, managing staff, changing settings, or exporting data. Existing operational staff roles retain their current access. Suspensions and revocations invalidate active sessions.</p></div>
+      <Card className="p-5"><h2 className="text-lg font-semibold">Invite staff</h2><p className="mb-4 mt-1 text-sm text-muted-foreground">Invitations expire after {invitationTtlDays} {invitationTtlDays === 1 ? 'day' : 'days'}. A random temporary password is sent once; first sign-in requires changing it. Choose the least-privileged role needed.</p><form onSubmit={submitInvite} className="flex flex-col gap-4">
         <div className="grid gap-3 sm:grid-cols-2"><label className="flex flex-col gap-1.5 text-sm">Full name<Input required minLength={2} maxLength={120} value={fullName} onChange={(event) => setFullName(event.target.value)} /></label><label className="flex flex-col gap-1.5 text-sm">Work email<Input required type="email" value={email} onChange={(event) => setEmail(event.target.value)} /></label></div>
-        <div className="grid gap-3 sm:grid-cols-2"><label className="flex flex-col gap-1.5 text-sm">Staff role (reference)<select className="h-10 rounded-md border border-input bg-background px-3" value={role} onChange={(event) => setRole(event.target.value as StaffMember['role'])}>{ROLES.map((item) => <option key={item.id} value={item.id}>{item.label}</option>)}</select></label><label className="flex flex-col gap-1.5 text-sm">Broker scope (reference)<select className="h-10 rounded-md border border-input bg-background px-3" value={scopeMode} onChange={(event) => setScopeMode(event.target.value as 'all' | 'selected')}><option value="selected">Selected brokers</option><option value="all">All brokers</option></select></label></div>
+        <div className="grid gap-3 sm:grid-cols-2"><label className="flex flex-col gap-1.5 text-sm">Staff role<select className="h-10 rounded-md border border-input bg-background px-3" value={role} onChange={(event) => setRole(event.target.value as StaffMember['role'])}>{ROLES.map((item) => <option key={item.id} value={item.id}>{item.label}</option>)}</select></label><label className="flex flex-col gap-1.5 text-sm">Broker scope<select className="h-10 rounded-md border border-input bg-background px-3" value={scopeMode} onChange={(event) => setScopeMode(event.target.value as 'all' | 'selected')}><option value="selected">Selected brokers</option><option value="all">All brokers</option></select></label></div>
         {scopeMode === 'selected' && brandPicker(selected, setSelected, 'Invite broker')}
         <Button type="submit" disabled={pending || !totalBrands}>Send staff invitation</Button>
       </form></Card>
       <section className="flex flex-col gap-3"><h2 className="text-lg font-semibold">Staff accounts <span className="text-sm font-normal text-muted-foreground">{staff.length}</span></h2>{staff.length === 0 ? <Card className="p-6 text-sm text-muted-foreground">No staff accounts have been invited.</Card> : staff.map((person) => {
         const edit = edits[person.user_id]
         return <Card key={person.user_id} className="flex flex-col gap-4 p-4"><div className="flex flex-wrap items-center justify-between gap-3"><div><p className="font-medium">{person.full_name || person.email}</p><p className="text-sm text-muted-foreground">{person.email}</p></div><div className="flex gap-2"><Badge variant={person.status === 'active' ? 'secondary' : 'outline'}>{person.status}</Badge></div></div>
-          <div className="grid gap-3 sm:grid-cols-2"><label className="flex flex-col gap-1.5 text-sm">Staff role (reference)<select className="h-10 rounded-md border border-input bg-background px-3" value={edit?.role ?? person.role} onChange={(event) => updateEdit(person.user_id, { role: event.target.value as StaffMember['role'] })}>{ROLES.map((item) => <option key={item.id} value={item.id}>{item.label}</option>)}</select></label><label className="flex flex-col gap-1.5 text-sm">Broker scope (reference)<select className="h-10 rounded-md border border-input bg-background px-3" value={edit?.scopeMode ?? person.scope_mode} onChange={(event) => updateEdit(person.user_id, { scopeMode: event.target.value as 'all' | 'selected' })}><option value="selected">Selected brokers</option><option value="all">All brokers</option></select></label></div>
+          <div className="grid gap-3 sm:grid-cols-2"><label className="flex flex-col gap-1.5 text-sm">Staff role<select className="h-10 rounded-md border border-input bg-background px-3" value={edit?.role ?? person.role} onChange={(event) => updateEdit(person.user_id, { role: event.target.value as StaffMember['role'] })}>{ROLES.map((item) => <option key={item.id} value={item.id}>{item.label}</option>)}</select></label><label className="flex flex-col gap-1.5 text-sm">Broker scope<select className="h-10 rounded-md border border-input bg-background px-3" value={edit?.scopeMode ?? person.scope_mode} onChange={(event) => updateEdit(person.user_id, { scopeMode: event.target.value as 'all' | 'selected' })}><option value="selected">Selected brokers</option><option value="all">All brokers</option></select></label></div>
           {edit?.scopeMode === 'selected' && brandPicker(edit.selected, (next) => updateEdit(person.user_id, { selected: next }), person.email)}
           <div className="flex flex-wrap gap-2"><Button size="sm" disabled={pending || person.status === 'revoked'} onClick={() => save(person)}>Save role &amp; scope</Button>{person.status === 'active' ? <Button size="sm" variant="outline" disabled={pending} onClick={() => changeStatus(person, 'suspended')}>Suspend</Button> : <Button size="sm" variant="outline" disabled={pending || person.status === 'revoked'} onClick={() => changeStatus(person, 'active')}>Reactivate</Button>}{person.status !== 'revoked' && <Button size="sm" variant="destructive" disabled={pending} onClick={() => changeStatus(person, 'revoked')}>Revoke &amp; sign out</Button>}</div>
         </Card>
