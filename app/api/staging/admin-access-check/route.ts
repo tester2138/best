@@ -151,5 +151,6 @@ export async function OPTIONS() {
 }
 
 export async function HEAD(request: Request) {
-  return guard(request) ?? new NextResponse(null, { status: 204 })
+  const blocked = await guard(request)
+  return blocked ?? new NextResponse(null, { status: 204 })
 }

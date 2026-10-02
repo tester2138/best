@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation'
-import { hasGlobalStaffScope, requireStaff } from '@/lib/guards'
+import { hasGlobalStaffScope, requireStaffPage } from '@/lib/guards'
 import {
   getFallbackSiteBannerSettings,
   listSiteBannerSettings,
@@ -13,7 +13,7 @@ export const metadata = {
 }
 
 export default async function SiteBannersPage() {
-  const actor = await requireStaff('brokers:manage')
+  const actor = await requireStaffPage('brokers:manage')
   if (!(await hasGlobalStaffScope(actor))) notFound()
 
   let banners = getFallbackSiteBannerSettings()

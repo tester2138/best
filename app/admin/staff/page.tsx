@@ -1,5 +1,5 @@
 import { query, queryOne } from '@/lib/portal/db'
-import { isConfiguredFullAccessAdmin, requireAdminRole } from '@/lib/guards'
+import { isConfiguredFullAccessAdmin, requireAdminRolePage } from '@/lib/guards'
 import { roleHasFullAccess, type StaffRole } from '@/lib/staff-permissions'
 import { AdminUsersClient, type AdminAccessUser } from '@/components/admin/admin-users-client'
 import { StaffClient, type StaffMember } from './staff-client'
@@ -27,7 +27,7 @@ const STAFF_ROLE_LABELS: Record<AssignedStaffRole, string> = {
 }
 
 export default async function StaffPage() {
-  const actor = await requireAdminRole()
+  const actor = await requireAdminRolePage()
   const accessRows = await query<RawAdminAccessUser>(
     `select p.id as user_id, lower(p.email) as email, p.full_name, p.role as profile_role,
             sa.role as staff_role

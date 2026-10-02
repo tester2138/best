@@ -12,7 +12,7 @@ import {
   type LucideIcon,
 } from 'lucide-react'
 import { query, queryOne } from '@/lib/portal/db'
-import { hasGlobalStaffScope, requireStaff } from '@/lib/guards'
+import { hasGlobalStaffScope, requireStaffPage } from '@/lib/guards'
 import { roleHasPermission } from '@/lib/staff-permissions'
 import { Card } from '@/components/ui/card'
 
@@ -41,7 +41,7 @@ interface AuditRow {
 }
 
 export default async function AdminDashboardPage() {
-  const actor = await requireStaff('dashboard:read')
+  const actor = await requireStaffPage('dashboard:read')
   const globalScope = await hasGlobalStaffScope(actor)
   const canReview = roleHasPermission(actor.role, 'moderation:review')
   const canReadLeads = roleHasPermission(actor.role, 'leads:read')

@@ -1,5 +1,6 @@
 import 'server-only'
 import { headers } from 'next/headers'
+import { notFound } from 'next/navigation'
 import { auth } from '@/lib/auth'
 import { query, queryOne } from '@/lib/portal/db'
 import { Err } from '@/lib/portal/result'
@@ -155,6 +156,36 @@ export async function requireAdminRole(): Promise<StaffActor> {
     throw new Err('Not found', 'not_found')
   }
   return actor
+}
+
+async function requirePageAccess<T>(checkAccess: () => Promise<T>): Promise<T> {
+  try {
+    return await checkAccess()
+  } catch (error) {
+    if (error instanceof Err && error.code === 'not_found') notFound()
+    throw error
+  }
+}
+
+export function requireStaffPage(
+  permission: StaffPermission = 'dashboard:read',
+): Promise<StaffActor> {
+  return requirePageAccess(() => requireStaff(permission))
+}
+
+export function requireAdminPage(): Promise<StaffActor> {
+  return requirePageAccess(() => requireAdmin())
+}
+
+export function requireAdminRolePage(): Promise<StaffActor> {
+  return requirePageAccess(() => requireAdminRole())
+}
+
+export function requireStaffBrandPage(
+  brandId: string,
+  permission: StaffPermission,
+): Promise<StaffActor> {
+  return requirePageAccess(() => requireStaffBrand(brandId, permission))
 }
 
 /**

@@ -1,5 +1,5 @@
 import { notFound, redirect } from 'next/navigation'
-import { requireStaff } from '@/lib/guards'
+import { requireStaffPage } from '@/lib/guards'
 import { roleHasPermission } from '@/lib/staff-permissions'
 import {
   getAdminCategories,
@@ -12,7 +12,7 @@ import { EditorialPageHeader, EditorialWorkspaceFrame } from '@/components/admin
 export const dynamic = 'force-dynamic'
 
 export default async function AdminNewsEditorPage({ params }: { params: Promise<{ slug: string }> }) {
-  const actor = await requireStaff('editorial:read')
+  const actor = await requireStaffPage('editorial:read')
   if (!roleHasPermission(actor.role, 'editorial:write')) redirect('/admin/news')
   const { slug } = await params
   const [post, categories, authors] = await Promise.all([

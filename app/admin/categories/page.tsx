@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { requireStaff } from '@/lib/guards'
+import { requireStaffPage } from '@/lib/guards'
 import { roleHasPermission } from '@/lib/staff-permissions'
 import { getAdminCategories, getAdminNewsPosts, getAdminCategoryListHref } from '@/lib/admin-editorial'
 import { Badge } from '@/components/ui/badge'
@@ -12,7 +12,7 @@ export const dynamic = 'force-dynamic'
 export const metadata = { title: 'Categories · BestForex Admin', robots: { index: false, follow: false } }
 
 export default async function AdminCategoriesPage() {
-  const actor = await requireStaff('editorial:read')
+  const actor = await requireStaffPage('editorial:read')
   const [categories, posts] = await Promise.all([getAdminCategories(), getAdminNewsPosts()])
   const counts = new Map<string, number>()
   for (const post of posts) counts.set(String(post.category), (counts.get(String(post.category)) ?? 0) + 1)

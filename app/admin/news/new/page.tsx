@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation'
-import { requireStaff } from '@/lib/guards'
+import { requireStaffPage } from '@/lib/guards'
 import { roleHasPermission } from '@/lib/staff-permissions'
 import { getAdminCategories, getAdminEditorialAuthors } from '@/lib/admin-editorial'
 import { NewsPostForm } from '@/components/admin/editorial/news-post-form'
@@ -9,7 +9,7 @@ export const dynamic = 'force-dynamic'
 export const metadata = { title: 'New article · BestForex Admin', robots: { index: false, follow: false } }
 
 export default async function NewAdminNewsPage() {
-  const actor = await requireStaff('editorial:read')
+  const actor = await requireStaffPage('editorial:read')
   if (!roleHasPermission(actor.role, 'editorial:write')) redirect('/admin/news')
   const [categories, authors] = await Promise.all([getAdminCategories(), getAdminEditorialAuthors()])
 

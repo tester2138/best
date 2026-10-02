@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
 import { query } from '@/lib/portal/db'
-import { hasGlobalStaffScope, requireStaff } from '@/lib/guards'
+import { hasGlobalStaffScope, requireStaffPage } from '@/lib/guards'
 import { EnquiriesClient, type Enquiry } from './enquiries-client'
 
 export const dynamic = 'force-dynamic'
@@ -11,7 +11,7 @@ export default async function EnquiriesPage({
 }: {
   searchParams: Promise<{ q?: string; status?: string; intent?: string }>
 }) {
-  const actor = await requireStaff('leads:read')
+  const actor = await requireStaffPage('leads:read')
   if (!(await hasGlobalStaffScope(actor))) notFound()
   const params = await searchParams
   const term = (params.q ?? '').trim().slice(0, 100)

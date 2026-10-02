@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { query, queryOne } from '@/lib/portal/db'
-import { requireStaffBrand } from '@/lib/guards'
+import { requireStaffBrandPage } from '@/lib/guards'
 import { roleHasPermission } from '@/lib/staff-permissions'
 import { SECTION_LIST } from '@/lib/content/registry'
 import { brokers as editorialBrokers } from '@/data/brokers'
@@ -42,7 +42,7 @@ export default async function AdminBrandDetailPage({
   searchParams: Promise<{ tab?: string }>
 }) {
   const [{ id }, { tab }] = await Promise.all([params, searchParams])
-  const actor = await requireStaffBrand(id, 'brokers:read')
+  const actor = await requireStaffBrandPage(id, 'brokers:read')
   const canManage = roleHasPermission(actor.role, 'brokers:manage')
 
   const brand = await queryOne<AdminBrandRow>(`select * from public.brands where id = $1`, [id])
