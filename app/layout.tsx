@@ -132,9 +132,7 @@ export default async function RootLayout({
         {!isBusiness && <OrganizationSchema />}
         {!isBusiness && <WebSiteSchema />}
         {!isBusiness && <Header />}
-        <main className={isBusiness ? undefined : 'min-h-screen'}>
-          {children}
-        </main>
+        {isBusiness ? children : <main className="min-h-screen">{children}</main>}
         {!isBusiness && <Footer />}
         {isProductionDeployment && <Analytics />}
       </body>
