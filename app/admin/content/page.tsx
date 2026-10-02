@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { ArrowRight, BookOpen, FileText, FolderOpen, Image, Link2, Users } from 'lucide-react'
-import { requireStaff } from '@/lib/guards'
+import { requireStaffPage } from '@/lib/guards'
 import { roleHasPermission } from '@/lib/staff-permissions'
 import {
   getAdminCategories,
@@ -20,7 +20,7 @@ export const dynamic = 'force-dynamic'
 export const metadata = { title: 'Editorial · BestForex Admin', robots: { index: false, follow: false } }
 
 export default async function EditorialWorkspacePage() {
-  const actor = await requireStaff('editorial:read')
+  const actor = await requireStaffPage('editorial:read')
   const [posts, authors, categories, learningContent] = await Promise.all([
     getAdminNewsPosts(),
     getAdminEditorialAuthors(),

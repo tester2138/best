@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { requireStaff } from '@/lib/guards'
+import { requireStaffPage } from '@/lib/guards'
 import { roleHasPermission } from '@/lib/staff-permissions'
 import {
   getAdminNewsPosts,
@@ -43,7 +43,7 @@ export default async function AdminNewsPage({
 }: {
   searchParams: Promise<{ q?: string; status?: string; page?: string }>
 }) {
-  const actor = await requireStaff('editorial:read')
+  const actor = await requireStaffPage('editorial:read')
   const params = await searchParams
   const term = (params.q ?? '').trim().slice(0, 100)
   const status = ['draft', 'published', 'scheduled'].includes(params.status ?? '') ? params.status : ''

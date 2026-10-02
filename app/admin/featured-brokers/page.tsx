@@ -1,4 +1,4 @@
-import { requireAdmin } from '@/lib/guards'
+import { requireAdminPage } from '@/lib/guards'
 import {
   DEFAULT_HOMEPAGE_FEATURED_BROKER_SLUGS,
   getHomepageFeaturedBrokerOptions,
@@ -10,7 +10,7 @@ export const dynamic = 'force-dynamic'
 export const metadata = { title: 'Featured brokers · BestForex Admin' }
 
 export default async function AdminFeaturedBrokersPage() {
-  await requireAdmin()
+  await requireAdminPage()
 
   const options = getHomepageFeaturedBrokerOptions()
   const configuredSlugs = await getHomepageFeaturedBrokerSlugs()

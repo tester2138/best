@@ -4,7 +4,7 @@ import { brokers as editorialBrokers } from '@/data/brokers'
 import { directoryCompanies as editorialDirectory } from '@/data/directory'
 import { applyOverrides } from '@/lib/admin-overrides'
 import { getPublicBrokerBaseBySlug, getPublicCompanyBaseBySlug } from '@/lib/public-brokers'
-import { hasGlobalStaffScope, requireStaff, requireStaffBrand } from '@/lib/guards'
+import { hasGlobalStaffScope, requireStaffPage, requireStaffBrandPage } from '@/lib/guards'
 import { roleHasPermission } from '@/lib/staff-permissions'
 import { queryOne } from '@/lib/portal/db'
 import { ProfileEditor, type PlacementState } from './profile-client'
@@ -52,12 +52,12 @@ export default async function AdminBrokerProfilePage({
 
   // Scope: brand-scoped staff need the brand in their scope; catalog-only
   // brokers require global scope.
-  if (brandRow) await requireStaffBrand(brandRow.id, 'brokers:read')
+  if (brandRow) await requireStaffBrandPage(brandRow.id, 'brokers:read')
   else {
-    const actor = await requireStaff('brokers:read')
+    const actor = await requireStaffPage('brokers:read')
     if (!(await hasGlobalStaffScope(actor))) notFound()
   }
-  const actor = await requireStaff('brokers:read')
+  const actor = await requireStaffPage('brokers:read')
   const canManageProfile = roleHasPermission(actor.role, 'editorial:write')
   const canManagePlacement = roleHasPermission(actor.role, 'brokers:manage')
 

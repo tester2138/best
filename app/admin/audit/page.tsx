@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { query } from '@/lib/portal/db'
-import { hasGlobalStaffScope, requireStaff } from '@/lib/guards'
+import { hasGlobalStaffScope, requireStaffPage } from '@/lib/guards'
 import { roleHasPermission } from '@/lib/staff-permissions'
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -20,7 +20,7 @@ interface AuditRow {
 }
 
 export default async function AuditPage({ searchParams }: { searchParams: Promise<{ actor?: string; action?: string; from?: string; to?: string }> }) {
-  const actor = await requireStaff('audit:read')
+  const actor = await requireStaffPage('audit:read')
   const globalScope = await hasGlobalStaffScope(actor)
   const filters = await searchParams
   const actorFilter = (filters.actor ?? '').trim().slice(0, 120)

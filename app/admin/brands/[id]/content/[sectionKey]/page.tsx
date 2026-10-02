@@ -5,7 +5,7 @@ import { ArrowLeft } from 'lucide-react'
 import { Card } from '@/components/ui/card'
 import { getEditorialDefaults } from '@/lib/catalog'
 import { SECTION_KEYS, SECTIONS, type SectionKey } from '@/lib/content/registry'
-import { requireStaffBrand } from '@/lib/guards'
+import { requireStaffBrandPage } from '@/lib/guards'
 import { queryOne } from '@/lib/portal/db'
 import { SectionForm } from '@/app/portal/(app)/edit/section-form'
 
@@ -36,7 +36,7 @@ export default async function AdminBrandSectionEditorPage({
   const { id, sectionKey } = await params
   if (!SECTION_KEYS.includes(sectionKey as SectionKey)) notFound()
 
-  await requireStaffBrand(id, 'editorial:write')
+  await requireStaffBrandPage(id, 'editorial:write')
   const brand = await queryOne<{ id: string; name: string; slug: string }>(
     `select id, name, slug from public.brands where id = $1`,
     [id],

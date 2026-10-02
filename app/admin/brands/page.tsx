@@ -2,7 +2,7 @@ import { directoryCompanies } from '@/data/directory'
 import { brokers } from '@/data/brokers'
 import { query, queryOne } from '@/lib/portal/db'
 import { getCatalogEntry } from '@/lib/catalog'
-import { hasGlobalStaffScope, requireStaff } from '@/lib/guards'
+import { hasGlobalStaffScope, requireStaffPage } from '@/lib/guards'
 import { roleHasPermission } from '@/lib/staff-permissions'
 import { BrandsClient, type BrandRow } from './brands-client'
 
@@ -21,7 +21,7 @@ export default async function AdminBrandsPage({
 }: {
   searchParams: Promise<{ claimId?: string }>
 }) {
-  const actor = await requireStaff('brokers:read')
+  const actor = await requireStaffPage('brokers:read')
   const params = await searchParams
   const claimId = (params.claimId ?? '').trim()
   const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(claimId)

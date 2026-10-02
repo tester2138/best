@@ -1,5 +1,5 @@
 import { query } from '@/lib/portal/db'
-import { requireStaff } from '@/lib/guards'
+import { requireStaffPage } from '@/lib/guards'
 import { ModerationClient, type QueueItem } from './moderation-client'
 
 export const dynamic = 'force-dynamic'
@@ -26,7 +26,7 @@ interface RawRow {
 }
 
 export default async function ModerationPage() {
-  const actor = await requireStaff('moderation:review')
+  const actor = await requireStaffPage('moderation:review')
   // Pending items oldest first, each enriched with the "current live" copy so
   // the client can render a before/after diff without extra round-trips.
   const rows = await query<RawRow>(

@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { requireStaff } from '@/lib/guards'
+import { requireStaffPage } from '@/lib/guards'
 import { roleHasPermission } from '@/lib/staff-permissions'
 import { getAdminEditorialAuthors, getAdminNewsPosts, getAdminAuthorListHref } from '@/lib/admin-editorial'
 import { Badge } from '@/components/ui/badge'
@@ -12,7 +12,7 @@ export const dynamic = 'force-dynamic'
 export const metadata = { title: 'Authors · BestForex Admin', robots: { index: false, follow: false } }
 
 export default async function AdminAuthorsPage() {
-  const actor = await requireStaff('editorial:read')
+  const actor = await requireStaffPage('editorial:read')
   const [authors, posts] = await Promise.all([getAdminEditorialAuthors(), getAdminNewsPosts()])
   const counts = new Map<string, number>()
   for (const post of posts) counts.set(post.author.slug, (counts.get(post.author.slug) ?? 0) + 1)

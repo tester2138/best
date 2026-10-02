@@ -1,4 +1,4 @@
-import { hasGlobalStaffScope, requireStaff } from '@/lib/guards'
+import { hasGlobalStaffScope, requireStaffPage } from '@/lib/guards'
 import { notFound } from 'next/navigation'
 import { listAdCampaigns } from '@/lib/ad-campaigns'
 import type { AdCampaignRecord } from '@/lib/ad-campaign-types'
@@ -7,7 +7,7 @@ import { AdvertisingClient } from './advertising-client'
 export const metadata = { title: 'Advertising · BestForex Admin' }
 
 export default async function AdvertisingPage() {
-  const actor = await requireStaff('brokers:manage')
+  const actor = await requireStaffPage('brokers:manage')
   if (!(await hasGlobalStaffScope(actor))) notFound()
 
   let campaigns: AdCampaignRecord[] = []

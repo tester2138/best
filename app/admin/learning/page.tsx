@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { requireStaff } from '@/lib/guards'
+import { requireStaffPage } from '@/lib/guards'
 import { roleHasPermission } from '@/lib/staff-permissions'
 import {
   getAdminContentListHref,
@@ -23,7 +23,7 @@ export const metadata = { title: 'Learn & glossary · BestForex Admin', robots: 
 const kinds: EditorialContentKind[] = ['learn_page', 'glossary_term', 'corrections_policy']
 
 export default async function AdminLearningPage() {
-  const actor = await requireStaff('editorial:read')
+  const actor = await requireStaffPage('editorial:read')
   const entries = await getAdminEditorialContentEntries()
   const canWrite = roleHasPermission(actor.role, 'editorial:write')
   const sections = kinds.map((kind) => ({

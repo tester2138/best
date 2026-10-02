@@ -1,4 +1,4 @@
-import { requireStaff } from '@/lib/guards'
+import { requireStaffPage } from '@/lib/guards'
 import { listAdminOffers } from '@/lib/admin-offers'
 import type { AdminOfferRecord } from '@/lib/admin-offer-types'
 import { OffersClient } from './offers-client'
@@ -7,7 +7,7 @@ export const dynamic = 'force-dynamic'
 export const metadata = { title: 'Offers · BestForex Admin' }
 
 export default async function AdminOffersPage() {
-  const actor = await requireStaff('brokers:manage')
+  const actor = await requireStaffPage('brokers:manage')
 
   let offers: AdminOfferRecord[] = []
   let dbError = false

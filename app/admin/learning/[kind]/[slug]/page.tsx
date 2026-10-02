@@ -1,5 +1,5 @@
 import { notFound, redirect } from 'next/navigation'
-import { requireStaff } from '@/lib/guards'
+import { requireStaffPage } from '@/lib/guards'
 import { roleHasPermission } from '@/lib/staff-permissions'
 import {
   getAdminEditorialContentEntry,
@@ -16,7 +16,7 @@ export default async function AdminEditorialContentEditorPage({
 }: {
   params: Promise<{ kind: string; slug: string }>
 }) {
-  const actor = await requireStaff('editorial:read')
+  const actor = await requireStaffPage('editorial:read')
   if (!roleHasPermission(actor.role, 'editorial:write')) redirect('/admin/learning')
   const { kind: kindValue, slug } = await params
   const kind = getEditorialContentForAdminKind(kindValue)

@@ -1,4 +1,4 @@
-import { requireStaff } from '@/lib/guards'
+import { requireStaffPage } from '@/lib/guards'
 import { roleHasPermission } from '@/lib/staff-permissions'
 import {
   getAdminEditorialAuthors,
@@ -16,7 +16,7 @@ export const dynamic = 'force-dynamic'
 export const metadata = { title: 'Media · BestForex Admin', robots: { index: false, follow: false } }
 
 export default async function AdminMediaPage() {
-  const actor = await requireStaff('editorial:read')
+  const actor = await requireStaffPage('editorial:read')
   const [blobs, posts, authors, entries] = await Promise.all([
     getAdminEditorialMedia(),
     getAdminNewsPosts(),
