@@ -82,16 +82,16 @@ export async function POST(req: NextRequest) {
           ${post.editorialType ?? null},
           ${post.author?.name ?? null},
           ${post.author?.slug ?? null},
-          ${(post.author as any)?.avatar ?? null},
-          ${(post.author as any)?.bio ?? null},
-          ${(post.author as any)?.role ?? null},
+          ${post.author?.avatar ?? null},
+          ${post.author?.bio ?? null},
+          ${post.author?.role ?? null},
           ${post.featuredImage ?? null},
-          ${(post as any).imageAltText ?? null},
+          ${post.imageAltText ?? null},
           ${post.isFeatured ?? false},
           ${post.publishedAt},
           ${post.updatedAt ?? post.publishedAt},
           ${post.readingTime ?? null},
-          ${(post as any).wordCount ?? null},
+          ${post.wordCount ?? null},
           ${post.metaTitle ?? null},
           ${post.metaDescription ?? null},
           ${post.sourceName ?? null},
@@ -131,8 +131,12 @@ export async function POST(req: NextRequest) {
         slug: post.slug,
         op: rows[0]?.is_insert ? 'inserted' : 'updated',
       })
-    } catch (err: any) {
-      results.push({ slug: post.slug, op: 'error', detail: err.message })
+    } catch (err) {
+      results.push({
+        slug: post.slug,
+        op: 'error',
+        detail: err instanceof Error ? err.message : String(err),
+      })
     }
   }
 
