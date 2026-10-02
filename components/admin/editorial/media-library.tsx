@@ -8,6 +8,7 @@ import { toast } from 'sonner'
 import { Copy, ExternalLink } from 'lucide-react'
 import { uploadEditorialImage } from '@/app/actions/admin-editorial'
 import type { AdminEditorialMedia } from '@/lib/admin-editorial'
+import { buildAdminEditorialMediaUrl } from '@/lib/editorial-media'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -105,7 +106,7 @@ export function MediaLibrary({
           {filteredAssets.map((asset) => (
             <Card key={asset.pathname} className="overflow-hidden">
               <div className="relative aspect-video border-b border-border bg-muted">
-                <Image src={asset.url} alt={`Editorial media ${asset.pathname.split('/').pop()}`} fill sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw" className="object-contain" />
+                <Image src={buildAdminEditorialMediaUrl(asset.pathname)} alt={`Editorial media ${asset.pathname.split('/').pop()}`} fill sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw" className="object-contain" unoptimized />
               </div>
               <CardContent className="flex flex-col gap-3 p-4">
                 <div className="flex items-start justify-between gap-2">
@@ -122,7 +123,7 @@ export function MediaLibrary({
                 ) : <p className="text-xs text-muted-foreground">Not currently referenced by a managed profile or page.</p>}
                 <div className="flex flex-wrap gap-2">
                   <Button type="button" size="sm" variant="outline" onClick={() => copyUrl(asset.url)}><Copy data-icon="inline-start" />Copy URL</Button>
-                  <Button asChild size="sm" variant="ghost"><a href={asset.url} target="_blank" rel="noopener noreferrer">Open <ExternalLink data-icon="inline-end" /></a></Button>
+                  <Button asChild size="sm" variant="ghost"><a href={buildAdminEditorialMediaUrl(asset.pathname)} target="_blank" rel="noopener noreferrer">Open <ExternalLink data-icon="inline-end" /></a></Button>
                 </div>
               </CardContent>
             </Card>
