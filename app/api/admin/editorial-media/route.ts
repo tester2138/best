@@ -28,10 +28,16 @@ function imageFamily(buffer: Buffer): ImageFamily | null {
 
 function isSameOriginRequest(request: NextRequest): boolean {
   const origin = request.headers.get('origin')
-  if (!origin) return false
+  const host = request.headers.get('host')?.split(',')[0].trim().toLowerCase()
+  const protocol = (
+    request.headers.get('x-forwarded-proto')?.split(',')[0].trim() ??
+    request.nextUrl.protocol.slice(0, -1)
+  ).replace(/:$/, '').toLowerCase()
+  if (!origin || !host || !protocol) return false
 
   try {
-    return new URL(origin).origin === request.nextUrl.origin
+    const originUrl = new URL(origin)
+    return originUrl.host.toLowerCase() === host && originUrl.protocol === `${protocol}:`
   } catch {
     return false
   }
@@ -104,7 +110,7 @@ export async function POST(request: NextRequest) {
   })
 
   return NextResponse.json(result, {
-    status: result.ok ? 200 : responseStatus(result.code),
+    status: result.ok ? 200 : responseStatus(result.code ?? 'server'),
     headers: responseHeaders,
   })
 }

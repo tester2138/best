@@ -1,12 +1,8 @@
 'use server'
 
-import { randomUUID } from 'node:crypto'
 import { revalidatePath } from 'next/cache'
-import { put } from '@vercel/blob'
-import sharp from 'sharp'
 import { z } from 'zod'
 import { audit } from '@/lib/audit'
-import { getVerifiedBlobToken } from '@/lib/blob-storage-safety'
 import { requireStaff } from '@/lib/guards'
 import {
   getAdminCategories,
@@ -412,49 +408,5 @@ export async function saveAdminEditorialContent(raw: unknown) {
     await audit(actor, null, 'admin.learning.save', `${kind}:${input.slug}`, { status: input.status })
     revalidateLearningRoutes()
     return { kind, slug: input.slug, saved: true }
-  })
-}
-
-function imageFamily(buffer: Buffer): 'png' | 'jpeg' | 'webp' | null {
-  if (buffer.length < 12) return null
-  if (buffer[0] === 0x89 && buffer[1] === 0x50 && buffer[2] === 0x4e && buffer[3] === 0x47) return 'png'
-  if (buffer[0] === 0xff && buffer[1] === 0xd8 && buffer[2] === 0xff) return 'jpeg'
-  if (buffer.toString('ascii', 0, 4) === 'RIFF' && buffer.toString('ascii', 8, 12) === 'WEBP') return 'webp'
-  return null
-}
-
-export async function uploadEditorialImage(formData: FormData) {
-  return run(async () => {
-    const actor = await requireStaff('editorial:write')
-    const file = formData.get('file')
-    if (!(file instanceof File)) throw new Err('Choose an image file to upload.', 'validation')
-    if (file.size < 1 || file.size > 10 * 1024 * 1024) {
-      throw new Err('Images must be 10 MB or smaller.', 'validation')
-    }
-
-    const original = Buffer.from(await file.arrayBuffer())
-    const family = imageFamily(original)
-    if (!family || !['image/png', 'image/jpeg', 'image/webp'].includes(file.type)) {
-      throw new Err('Upload a valid PNG, JPEG, or WebP image.', 'validation')
-    }
-
-    const pipeline = sharp(original, { failOn: 'error', limitInputPixels: 40_000_000 }).rotate()
-    const metadata = await pipeline.metadata()
-    if (!metadata.width || !metadata.height) throw new Err('The image dimensions could not be read.', 'validation')
-    const optimized = await pipeline
-      .resize({ width: 2_400, height: 2_400, fit: 'inside', withoutEnlargement: true })
-      .webp({ quality: 84 })
-      .toBuffer()
-
-    const pathname = `editorial/${randomUUID()}.webp`
-    const blob = await put(pathname, optimized, {
-      token: getVerifiedBlobToken(),
-      access: 'public',
-      contentType: 'image/webp',
-      addRandomSuffix: false,
-      cacheControlMaxAge: 31_536_000,
-    })
-    await audit(actor, null, 'media.upload', pathname, { bytes: optimized.length, format: family })
-    return { url: blob.url, pathname }
   })
 }

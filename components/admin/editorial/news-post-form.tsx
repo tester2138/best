@@ -6,7 +6,8 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 import { ArrowLeft } from 'lucide-react'
-import { saveAdminNewsPost, uploadEditorialImage } from '@/app/actions/admin-editorial'
+import { saveAdminNewsPost } from '@/app/actions/admin-editorial'
+import { uploadEditorialImage } from '@/components/admin/editorial/upload-editorial-image'
 import type { AdminCategory, AdminEditorialAuthor, AdminNewsPost } from '@/lib/admin-editorial'
 import { EditorialHtmlEditor } from '@/components/admin/editorial/html-editor'
 import { Badge } from '@/components/ui/badge'
@@ -171,17 +172,15 @@ export function NewsPostForm({
     const input = event.currentTarget
     const file = input.files?.[0]
     if (!file) return
-    const formData = new FormData()
-    formData.set('file', file)
-
     startTransition(async () => {
-      const result = await uploadEditorialImage(formData)
+      const result = await uploadEditorialImage(file)
       if (!result.ok || !result.data) {
         toast.error(result.ok ? 'The image upload did not return a URL.' : result.error)
         input.value = ''
         return
       }
-      setDraft((current) => ({ ...current, featuredImage: result.data!.url }))
+      const imageUrl = result.data.url
+      setDraft((current) => ({ ...current, featuredImage: imageUrl }))
       toast.success('Image uploaded. The optimized URL is attached to this article.')
       input.value = ''
     })

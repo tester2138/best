@@ -6,7 +6,8 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 import { ArrowLeft } from 'lucide-react'
-import { saveAdminEditorialAuthor, uploadEditorialImage } from '@/app/actions/admin-editorial'
+import { saveAdminEditorialAuthor } from '@/app/actions/admin-editorial'
+import { uploadEditorialImage } from '@/components/admin/editorial/upload-editorial-image'
 import type { AdminEditorialAuthor } from '@/lib/admin-editorial'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -62,10 +63,8 @@ export function AuthorForm({ author }: { author?: AdminEditorialAuthor }) {
     const input = event.currentTarget
     const file = input.files?.[0]
     if (!file) return
-    const formData = new FormData()
-    formData.set('file', file)
     startTransition(async () => {
-      const result = await uploadEditorialImage(formData)
+      const result = await uploadEditorialImage(file)
       if (!result.ok || !result.data) {
         toast.error(result.ok ? 'The upload did not return a URL.' : result.error)
         input.value = ''
