@@ -48,9 +48,8 @@ export default async function StaffPage() {
   )
   const admins: AdminAccessUser[] = accessRows.map((user) => {
     const isProfileAdmin = user.profile_role === 'admin'
-    const isFullAccess = isProfileAdmin
-      ? isConfiguredFullAccessAdmin(user.email)
-      : user.staff_role !== null && roleHasFullAccess(user.staff_role)
+    const isFullAccess = isConfiguredFullAccessAdmin(user.email) ||
+      (user.staff_role !== null && roleHasFullAccess(user.staff_role))
     const accessLabel = isProfileAdmin
       ? isFullAccess ? 'Full access' : 'Admin'
       : `${user.staff_role ? STAFF_ROLE_LABELS[user.staff_role] : 'Staff'}${user.staff_role && roleHasFullAccess(user.staff_role) ? ' · Full access' : ''}`

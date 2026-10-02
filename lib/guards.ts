@@ -94,7 +94,10 @@ export async function requireStaff(permission: StaffPermission = 'dashboard:read
 
   let role: StaffRole | null = null
   if (profile?.role === 'admin') {
-    role = isConfiguredFullAccessAdmin(user.email) ? 'super_admin' : 'admin'
+    role = isConfiguredFullAccessAdmin(user.email) ||
+      (assignment?.status === 'active' && roleHasFullAccess(assignment.role))
+      ? 'super_admin'
+      : 'admin'
   } else if (assignment?.status === 'active') {
     role = assignment.role
   }
