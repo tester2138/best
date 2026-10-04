@@ -214,7 +214,7 @@ function Widget({
       return <StringListWidget def={def} value={value} onChange={onChange} invalid={invalid} />
 
     case 'objectList':
-      return <ObjectListWidget def={def} value={value} onChange={onChange} />
+      return <ObjectListWidget def={def} value={value} onChange={onChange} readOnly={readOnly} />
 
     default:
       return null
@@ -320,10 +320,12 @@ function ObjectListWidget({
   def,
   value,
   onChange,
+  readOnly,
 }: {
   def: FieldDef
   value: unknown
   onChange: (v: Record<string, unknown>[]) => void
+  readOnly: boolean
 }) {
   const items: Record<string, unknown>[] = Array.isArray(value) ? value : []
   const max = def.maxItems ?? 10
@@ -347,14 +349,16 @@ function ObjectListWidget({
             <span className="text-xs font-medium text-muted-foreground">
               {def.label} {i + 1}
             </span>
-            <button
-              type="button"
-              aria-label="Remove item"
-              onClick={() => removeItem(i)}
-              className="text-muted-foreground hover:text-destructive"
-            >
-              <X className="h-4 w-4" />
-            </button>
+            {!readOnly && (
+              <button
+                type="button"
+                aria-label="Remove item"
+                onClick={() => removeItem(i)}
+                className="text-muted-foreground hover:text-destructive"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            )}
           </div>
           <div className="flex flex-col gap-3">
             {children.map((child) => (
@@ -367,13 +371,14 @@ function ObjectListWidget({
                   def={child}
                   value={it[child.key]}
                   onChange={(v) => patch(i, child.key, v)}
+                  readOnly={readOnly}
                 />
               </div>
             ))}
           </div>
         </div>
       ))}
-      {items.length < max && (
+      {!readOnly && items.length < max && (
         <button
           type="button"
           onClick={addItem}
